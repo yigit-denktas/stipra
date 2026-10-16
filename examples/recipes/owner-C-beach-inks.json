@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "mode": "spot",
+  "paper": "#fbf8ed",
+  "inks": [
+    {
+      "id": "sky",
+      "name": "Marine blue",
+      "color": "#3185b3",
+      "source": "blue",
+      "gain": 0.83,
+      "gamma": 1.15
+    },
+    {
+      "id": "key",
+      "name": "Deep ink",
+      "color": "#27374c",
+      "source": "darkness",
+      "gain": 0.8,
+      "gamma": 1.2
+    }
+  ]
+}
