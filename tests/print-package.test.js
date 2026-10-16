@@ -47,6 +47,9 @@ test('2-ink ZIP contains original bytes, two unique aligned grayscale masters, r
   for(const name of files){
     const meta=Probe.inspect(await zip.file(name).async('nodebuffer'));
     assert.equal(meta.width,96);assert.equal(meta.height,64);
+    const physical=await zip.file(name).async('nodebuffer');
+    assert.equal(physical.toString('ascii',37,41),'pHYs','masters embed actual physical DPI');
+    assert.equal(physical.readUInt32BE(41),Math.round(300*1000/25.4));
   }
   assert.notDeepEqual(await zip.file(files[0]).async('nodebuffer'),await zip.file(files[2]).async('nodebuffer'));
   const pdf=await PDFDocument.load(await zip.file('report/separation-sheet.pdf').async('nodebuffer'));
