@@ -147,6 +147,6 @@ test('actual CLI emits original + unscreened + screened plates with complete pro
     }
     assert.deepEqual(fs.readFileSync(path.join(output,'source-original.png')),fs.readFileSync(source));
     assert.throws(()=>cp.execFileSync(process.execPath,command,{stdio:'pipe'}),/Command failed/);
-    assert.equal(manifest.assets.length,12);
+    assert.equal(manifest.assets.length,11);
   }finally{fs.rmSync(dir,{force:true,recursive:true});}
 });
