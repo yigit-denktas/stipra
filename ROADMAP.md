@@ -26,12 +26,12 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Real spot / CMYK **image-to-mask** separation | [#7](https://github.com/yigit-denktas/stipra/issues/7) | **Implemented — actual continuous-tone masks, edit controls, browser lab and CLI** | Done |
 | Raster dot, reverse, line and hybrid screens of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | **Implemented — Node/Chromium screen masks, real CLI and browser controls** | Done |
 | Native vector facet screening (SVG) | [#28](https://github.com/yigit-denktas/stipra/issues/28) | Planned — separate from raster screens | P1 |
-| Full-frame grayscale production plates, accurate trim and registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | Planned | **P0 — next** |
-| A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | Planned | P0 |
+| Full-frame raster plates, native scale and optional external registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | **CLI implemented; owner-image and physical validation pending** | P0 verification |
+| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **CLI generated; visual acceptance pending** | P0 verification |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
 | Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
 | Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) | Design proposal; no style engine yet | P1 · scope before implementation |
-| PNG/JPEG/WebP/true SVG/PDF/ZIP delivery | [#12](https://github.com/yigit-denktas/stipra/issues/12) | Planned | P0 |
+| Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **Functional raster ZIP; broader export matrix open** | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
 | Diagnostic HSL/coverage comparison overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) | Planned | P1; ship minimal plate diagnostics first |
@@ -54,6 +54,9 @@ The attached sample showing alternative Riso color separations is the visual ben
 [The printmaking reading room](docs/references/README.md) connects the [Dizzy Ink interactive guide](https://risograph.co.uk/), its [illustrated studio guide](https://www.dizzyink.co.uk/guide-to-risograph) and [our linked visual studies](docs/references/DIZZY-INK-VISUALS.md) as a credited external resource, with [our independent field notes](docs/references/DIZZY-INK.md) and [conditional design rules](docs/PRINT-DESIGN-RULES.md). These rules should guide #34 preset defaults and #31/#22 interaction choices: safe mask alignment, explicit ink density/overlap, print-size limits, proof-only misregistration, and paper as a separate substrate. Machine-specific 5 mm margins or feed concerns are **references, not globally calibrated Stipra thresholds**. No artwork/code/mirrored pages are redistributed. Review the rule contract before adding automated warnings or “press-ready” claims.
 
 ## First real-image acceptance fixture set
+
+The [print-package CLI contract](docs/PRINT-PACKAGE-v1.md) now describes the digital raster ZIP, aligned masters, actual output DPI and A4 report; [the private owner-photo batch script](scripts/owner-photo-batch.js) checks original source hashes before it writes any ZIP. These changes do **not** replace the visual and physical quality gate, or the remaining vector/format coverage in #12.
+
 
 The owner supplied three **private, rights-not-yet-cleared-for-redistribution** photographs (sculpture contours, complex forest installation, and gradient beach horizon). Their **exact hash/dimension metadata and per-image pass/fail criteria** live in [the owner-photo print-package acceptance specification](docs/PRINT-PACKAGE-ACCEPTANCE.md), tracked by [#39](https://github.com/yigit-denktas/stipra/issues/39). This is the common verification gate for #8 masters, #9 A4 reports, #12 ZIP exports and #13 human/physical QA. **0/3 complete packages verified** against these tests so far; existing Node/browser separation tests do not establish print-package readiness. The original photos are not committed.
 

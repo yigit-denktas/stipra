@@ -16,10 +16,13 @@
     "presets": "node bin/stipra.js presets",
     "render:prehnite": "node bin/stipra.js render --preset 01 --format png,svg --plates --out out",
     "check": "node --check src/core.js && node --check src/import/svg.js && node --check src/import/probe.js && node --check src/import/asset.js && node --check src/import/node.js && node --check bin/import.js && node --check examples/import-studio/app.js && node --check bin/scene.js && node --check bin/stipra.js && npm test",
-    "build:pages": "node scripts/build-pages.js"
+    "build:pages": "node scripts/build-pages.js",
+    "check:packages": "node --test tests/print-package.test.js"
   },
   "dependencies": {
     "skia-canvas": "^3.0.8",
-    "@xmldom/xmldom": "0.9.12"
+    "@xmldom/xmldom": "0.9.12",
+    "jszip": "^3.10.1",
+    "pdf-lib": "^1.17.1"
   }
 }

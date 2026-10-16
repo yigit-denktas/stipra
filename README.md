@@ -43,13 +43,13 @@ node bin/stipra.js separate \
   --out out/my-first-print
 ```
 
-That creates separate grayscale plates, previews, recipes and a provenance manifest without changing the original. Use a fresh output directory for each run. The [getting-started guide](docs/GETTING-STARTED.md) has CMYK, procedural art, local browser and CLI examples.
+That creates separate grayscale plates, previews, recipes and a provenance manifest without changing the original. The CLI can also generate a **[complete digital print package](docs/PRINT-PACKAGE-v1.md)** with aligned masters, an A4 report and a ZIP. Use a fresh output directory for each run. The [getting-started guide](docs/GETTING-STARTED.md) has CMYK, procedural art, local browser and CLI examples.
 
 ## Where we are
 
 **Working today:** image import, independent spot/CMYK coverage masks, adjustable raster screening, digital overprint previews, the browser lab, CLI recipes, and deterministic vector scene/plate examples. The [Prehnite](examples/prehnite-v8/) experiment is where it began.
 
-**Coming next:** physical print-size checks and aligned production masters [#8](https://github.com/yigit-denktas/stipra/issues/8), an A4 separation sheet [#9](https://github.com/yigit-denktas/stipra/issues/9), a more complete browser workspace [#22](https://github.com/yigit-denktas/stipra/issues/22), and useful, input-aware style defaults [#34](https://github.com/yigit-denktas/stipra/issues/34).
+**Next to validate:** owner-photo quality and real printer output for [#8](https://github.com/yigit-denktas/stipra/issues/8), [#9](https://github.com/yigit-denktas/stipra/issues/9) and [#12](https://github.com/yigit-denktas/stipra/issues/12); plus a more complete browser workspace [#22](https://github.com/yigit-denktas/stipra/issues/22), and useful, input-aware style defaults [#34](https://github.com/yigit-denktas/stipra/issues/34).
 
 Our previews are **digital approximations**, not guarantees of real ink color, registration, or printer calibration.
 

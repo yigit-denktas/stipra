@@ -26,6 +26,9 @@ function help(){
   '  stipra render --preset all --format png --out out',
   '  stipra render --config recipe.json --seed 42 --format svg',
   '',
+  'Print package: aligned masters, A4 inspection and ZIP:',
+  '  stipra package --input artwork.png --config examples/recipes/spot-photo.json --screen examples/recipes/screens-spot.json --dpi 300 --out out/artwork.zip',
+  '',
   'Local image import and continuous-tone separation:',
   '  stipra import --input artwork.png --out out/import',
   '  stipra separate --input artwork.png --config examples/recipes/spot-photo.json --out out/separation',
@@ -34,7 +37,7 @@ function help(){
   'Options: --preset 01..06|all, --config JSON, --seed INTEGER,',
   '         --format png,svg,jpg,webp, --scale 1..3, --plates, --out DIR',
   '',
-  'Planned for v0.9: separation sheet, compare, batch; screening implemented for raster masks.',
+  'Digital print package is implemented; physical machine validation, true-vector raster parity, compare and batch remain open.',
   ''
  ].join('\n'));
 }
@@ -92,6 +95,7 @@ async function main(){
  if(cmd==='scene'){require('./scene.js').run(process.argv.slice(3));return;}
  if(cmd==='import'){await require('./import.js').run(process.argv.slice(3));return;}
  if(cmd==='separate'){await require('./separate.js').run(process.argv.slice(3));return;}
+ if(cmd==='package'){await require('./package.js').run(process.argv.slice(3));return;}
  if(cmd==='render'){
   const preset=String(opts.preset||'01');
   if(preset==='all'&&opts.config)throw Error('--config cannot be combined with --preset all');
