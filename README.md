@@ -1,13 +1,21 @@
 <div align="center">
-  <img src="assets/stipra-header.svg" alt="stipra — a programmable printmaking studio; five layers of colorful stippling on black" width="100%" />
+
+  <h1>stipra</h1>
+
+  <p>A programmable printmaking studio.</p>
+
+  <img src="logo_for_Readme.svg" alt="Original Stipra dotmark: five rows of colored stippling dots" width="100%" />
+
+  <p><sub>Stippling + strata: dots organized into layers.</sub></p>
 
   <p><strong>Separate the inks. Keep the imperfections.</strong></p>
 
-  [![Development](https://img.shields.io/badge/status-foundation%20%2B%20v9%20planned-30343b?style=flat-square)](ROADMAP.md)
+  [![Development](https://img.shields.io/badge/status-v0.9%20in%20development-30343b?style=flat-square)](ROADMAP.md)
   [![License MIT](https://img.shields.io/badge/code-MIT-00765a?style=flat-square)](LICENSE)
   [![Node 20+](https://img.shields.io/badge/Node.js-20%2B-2157a6?style=flat-square)](package.json)
   [![Local-first](https://img.shields.io/badge/local--first-no%20API%20fees-d05754?style=flat-square)](docs/ARCHITECTURE.md)
-  [![Open issues](https://img.shields.io/github/issues/yigit-denktas/stipra?style=flat-square)](https://github.com/yigit-denktas/stipra/issues)
+  [![v0.9 issues](https://img.shields.io/badge/issues-v0.9%20backlog-424b55?style=flat-square)](https://github.com/yigit-denktas/stipra/issues)
+
 </div>
 
 ## What is Stipra?
@@ -89,12 +97,6 @@ Our first case study includes six paper/ink systems: evergreen + coral / ivory, 
 - Licenses and bundled assets are audited before distribution; do not import restrictive p5.riso code into the MIT core.
 
 Read [Architecture](docs/ARCHITECTURE.md), [Recipe v1](docs/RECIPE-v1.md), [Separation sheet specification](docs/SEPARATIONS.md), [v0.9 brief](docs/BRIEF-v9.md), and [Licensing](docs/LICENSING.md).
-
-## Original dotmark
-
-<img src="logo_for_Readme.svg" width="340" alt="Stipra dotmark: five independent rows of color" />
-
-The supplied SVG is kept intact at the repository root. The wide header derives its 175 dots from that same original artwork.
 
 ## Contributing
 
