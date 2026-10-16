@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stipra · shared scene contract demo</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background:#131719; color:#eef0e9; }
+    body { max-width:1100px; margin:2rem auto; padding:0 1.3rem; }
+    header { display:flex; flex-wrap:wrap; gap:1rem; align-items:baseline; justify-content:space-between; }
+    h1 { font-size:2rem; letter-spacing:-.04em; margin:.4rem 0; }
+    p { color:#b1b9b6; line-height:1.5; }
+    .controls { display:flex; flex-wrap:wrap; gap:1rem; align-items:end; margin:1.4rem 0; }
+    label { display:grid; gap:.4rem; font-size:.9rem; }
+    select,input,button { font:inherit; border:1px solid #49514d; color:inherit; background:#222a29; border-radius:6px; padding:.5rem; }
+    button { cursor:pointer; }
+    img { display:block; width:100%; background:#fff; border-radius:4px; }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:.85rem; line-height:1.5; }
+    #status { min-height:1.5rem; }
+  </style>
+  <script src="../../src/core.js"></script>
+</head>
+<body>
+  <header><h1>stipra / scene contract</h1><span>v1 · shared Node/browser core</span></header>
+  <p>Geometric three-ink example. Plates use the same canvas, origin and trim, regardless of solo mode. This demonstrates recipe validation and solid geometry—not image importing, halftoning, or press calibration.</p>
+  <div class="controls">
+    <label>Artwork <input type="file" id="input" accept="application/json,.json" /></label>
+    <label>Inspect <select id="mode"><option value="">Composite</option></select></label>
+    <button id="download" type="button">Download visible SVG</button>
+  </div>
+  <p id="status" role="status" aria-live="polite"></p>
+  <img id="preview" alt="Stipra artwork preview" />
+  <details><summary>Normalized recipe</summary><pre id="recipe"></pre></details>
+  <script>
+    (() => {
+      'use strict';
+      const $ = id => document.getElementById(id);
+      let scene, currentSvg, url;
+      function show(plateId) {
+        if (!scene) return;
+        currentSvg = StipraCore.renderSvg(scene, plateId ? {plateId} : {});
+        const next = URL.createObjectURL(new Blob([currentSvg], {type:'image/svg+xml'}));
+        $('preview').src = next;
+        if (url) URL.revokeObjectURL(url);
+        url = next;
+      }
+      function load(value) {
+        const parsed = JSON.parse(value);
+        scene = StipraCore.resolveRecipe(parsed);
+        $('recipe').textContent = StipraCore.canonicalRecipe(parsed);
+        $('mode').replaceChildren(new Option('Composite', ''), ...scene.plates.map(p => new Option(p.ink.name + ' · monochrome', p.id)));
+        $('status').textContent = `${scene.canvas.width} × ${scene.canvas.height} px · ${scene.plates.length} physical ink plates · solid geometry`;
+        show('');
+      }
+      $('mode').addEventListener('change', () => show($('mode').value));
+      $('input').addEventListener('change', async e => {
+        const f = e.target.files?.[0]; if (!f) return;
+        try { load(await f.text()); } catch (err) { $('status').textContent = 'Invalid recipe: ' + err.message; }
+      });
+      $('download').addEventListener('click', () => {
+        if (!currentSvg) return;
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([currentSvg], {type:'image/svg+xml'}));
+        a.download = $('mode').value ? `${$('mode').value}.svg` : 'stipra-composite.svg'; a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      });
+      fetch('../recipes/spot-shapes.json').then(r => { if (!r.ok) throw Error('sample recipe unavailable'); return r.text(); })
+        .then(load).catch(err => { $('status').textContent = err.message + ' · Serve the repository with a local HTTP server.'; });
+    })();
+  </script>
+</body>
+</html>
