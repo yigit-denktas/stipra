@@ -20,10 +20,27 @@ function printIntent(w,h,dpi,marksMm){
     trimMm:{width:Number((w*25.4/dpi).toFixed(4)),height:Number((h*25.4/dpi).toFixed(4))},
     resampled:false,registration:{x:0,y:0,rotate:0},marksMm,profile:null};
 }
-async function png(rgba,w,h){
+// PNG pHYs is physical pixel density: prevent printing software treating a master as 72 DPI.
+function physicalPNG(bytes,dpi){
+  if(!Buffer.isBuffer(bytes))bytes=Buffer.from(bytes);
+  if(bytes.toString('ascii',1,4)!=='PNG'||bytes.toString('ascii',12,16)!=='IHDR')
+    throw Error('print: expected PNG encoded by canvas');
+  const ppm=Math.round(dpi*1000/25.4),data=Buffer.alloc(9);
+  data.writeUInt32BE(ppm,0);data.writeUInt32BE(ppm,4);data[8]=1;
+  const type=Buffer.from('pHYs'),payload=Buffer.concat([type,data]);
+  let crc=0xffffffff;
+  for(const byte of payload){
+    crc^=byte;
+    for(let k=0;k<8;k++)crc=(crc>>>1)^(crc&1?0xedb88320:0);
+  }
+  const chunk=Buffer.alloc(21);
+  chunk.writeUInt32BE(9,0);payload.copy(chunk,4);chunk.writeUInt32BE((crc^0xffffffff)>>>0,17);
+  return Buffer.concat([bytes.subarray(0,33),chunk,bytes.subarray(33)]);
+}
+async function png(rgba,w,h,dpi){
   const c=new Canvas(w,h),ctx=c.getContext('2d'),data=ctx.createImageData(w,h);
   data.data.set(rgba);ctx.putImageData(data,0,0);
-  return Buffer.from(await c.toBuffer('png'));
+  return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
 function paperRGBA(w,h,hex){
   const [r,g,b]=color(hex).map(x=>Math.round(x*255)),pixels=new Uint8ClampedArray(w*h*4);
@@ -36,7 +53,7 @@ function screenConfigs(raw,ids){
   for(const id of ids)production.plates[id]={...proof.plates[id],registration:{x:0,y:0,rotate:0}};
   return {proof,production};
 }
-async function marked(pngBytes,w,h,pad){
+async function marked(pngBytes,w,h,pad,dpi){
   if(!pad)return pngBytes;
   const img=await loadImage(pngBytes),c=new Canvas(w+2*pad,h+2*pad),ctx=c.getContext('2d');
   ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,pad,pad);
@@ -46,7 +63,7 @@ async function marked(pngBytes,w,h,pad){
     ctx.beginPath();ctx.moveTo(x+sx*2,y);ctx.lineTo(x+sx*Math.max(5,pad*.6),y);
     ctx.moveTo(x,y+sy*2);ctx.lineTo(x,y+sy*Math.max(5,pad*.6));ctx.stroke();
   }
-  return Buffer.from(await c.toBuffer('png'));
+  return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
 function htmlReport(cards,meta){
   const panel=c=>'<figure><div class="image"><img alt="'+xml(c.name)+'" src="data:image/png;base64,'+
@@ -127,16 +144,16 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   };
   const ext=asset.metadata.format==='jpeg'?'jpg':asset.metadata.format;
   add('source/original.'+(ext==='svg'?'txt':ext),originalBytes);
-  const original=await png(asset.rgba,w,h),proof=await png(proofScreen.preview,w,h);
+  const original=await png(asset.rgba,w,h,dpi),proof=await png(proofScreen.preview,w,h,dpi);
   add('source/normalized.png',original);add('proof/composite.png',proof);
-  const paper=await png(paperRGBA(w,h,sep.recipe.paper),w,h);add('proof/paper.png',paper);
+  const paper=await png(paperRGBA(w,h,sep.recipe.paper),w,h,dpi);add('proof/paper.png',paper);
   const cards=[{name:'Original',bytes:original},{name:'Simulated overprint',bytes:proof},
     {name:'Paper / substrate',bytes:paper,note:'not a physical ink'}],inks=[];
   for(let i=0;i<sep.masks.length;i++){
     const ink=sep.masks[i],s=screened.masks[i],name=String(i+1).padStart(2,'0')+'-'+clean(ink.id);
-    const mono=await png(Sep.plateRGBA(ink.coverage),w,h),scr=await png(Sep.plateRGBA(s.coverage),w,h);
+    const mono=await png(Sep.plateRGBA(ink.coverage),w,h,dpi),scr=await png(Sep.plateRGBA(s.coverage),w,h,dpi);
     add('plates/ink-'+name+'.png',mono);add('screened/ink-'+name+'.png',scr);
-    if(pad)add('plates/marked-'+name+'.png',await marked(scr,w,h,pad));
+    if(pad)add('plates/marked-'+name+'.png',await marked(scr,w,h,pad,dpi));
     cards.push({name:ink.name,bytes:scr,ink:ink.color,note:'full-frame grayscale'});
     inks.push({id:ink.id,name:ink.name,color:ink.color,source:ink.source,
       meanCoverage:sep.stats.inks[i].meanCoverage,screenedMeanCoverage:screened.stats.inks[i].meanCoverage,
@@ -166,4 +183,4 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     compressionOptions:{level:6},platform:'UNIX'});
   return {zip:bytes,manifest,parts};
 }
-module.exports={generate,printIntent,validate,screenConfigs,A4};
+module.exports={generate,printIntent,validate,screenConfigs,physicalPNG,A4};
