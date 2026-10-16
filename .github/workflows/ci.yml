@@ -1,4 +1,4 @@
-name: Verify foundation
+name: Verify Stipra
 on:
   push:
     branches: [main]
@@ -14,5 +14,7 @@ jobs:
       - run: node --check examples/prehnite-v8/src/font-atlas.js
       - run: node --check examples/prehnite-v8/src/engine.js
       - run: node --check examples/prehnite-v8/app.js
+      - run: node --check src/core.js
+      - run: node --check bin/scene.js
       - run: node --check bin/stipra.js
       - run: npm test
