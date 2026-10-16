@@ -29,11 +29,12 @@ function help(){
   'Local image import and continuous-tone separation:',
   '  stipra import --input artwork.png --out out/import',
   '  stipra separate --input artwork.png --config examples/recipes/spot-photo.json --out out/separation',
+  '  stipra separate --input artwork.png --config examples/recipes/spot-photo.json --screen examples/recipes/screens-spot.json --out out/screened',
   '',
   'Options: --preset 01..06|all, --config JSON, --seed INTEGER,',
   '         --format png,svg,jpg,webp, --scale 1..3, --plates, --out DIR',
   '',
-  'Planned for v0.9: screening, separation sheet, compare, batch.',
+  'Planned for v0.9: separation sheet, compare, batch; screening implemented for raster masks.',
   ''
  ].join('\n'));
 }
