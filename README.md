@@ -128,7 +128,7 @@ The roadmap is where we track dependencies, what we've decided *not* to build, a
 
 Stipra grew out of **Prehnite Riso Studio v8**, a small procedural art experiment. We kept its working presets rather than throwing them away, then built a more general scene-and-plate contract and a separate image-import layer around it.
 
-The guiding idea is simple: **the drawing, the ink, and the paper are different things.** A misregistered plate can move without bending the shapes underneath it. Every plate should keep the same canvas, trim, and origin. A browser preview and a scripted export should agree about what is actually being printed.
+The guiding idea is simple: **the drawing, the ink, and the paper are different things.** We are also gathering real print-shop knowledge—from [Dizzy Ink's Risograph guide](https://risograph.co.uk/) and other attributed sources—to make future style presets useful instead of leaving people with dozens of poorly chosen settings. A misregistered plate can move without bending the shapes underneath it. Every plate should keep the same canvas, trim, and origin. A browser preview and a scripted export should agree about what is actually being printed.
 
 The code is split along those lines:
 
@@ -141,6 +141,7 @@ The code is split along those lines:
 | Raster screens, paper knockouts and per-ink registration | [Screening v1](docs/SCREENING-v1.md) · [Screen engine](src/screening.js) |
 | What a separation report should contain | [Separation-sheet specification](docs/SEPARATIONS.md) |
 | How the parts should eventually fit together | [Architecture](docs/ARCHITECTURE.md) · [Roadmap](ROADMAP.md) |
+| Printmaking field notes and practical design rules | [Reference reading room](docs/references/README.md) · [Printmaking rules](docs/PRINT-DESIGN-RULES.md) |
 
 Stipra isn't trying to become p5.js, and it isn't a fork of p5.riso. We can use compatible tools and established printmaking techniques without copying restrictively licensed implementations. Any future p5.js adapter would be optional, with its own licensing requirements.
 

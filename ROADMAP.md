@@ -30,6 +30,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | Planned | P0 |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
 | Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
+| Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) | Design proposal; no style engine yet | P1 · scope before implementation |
 | PNG/JPEG/WebP/true SVG/PDF/ZIP delivery | [#12](https://github.com/yigit-denktas/stipra/issues/12) | Planned | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
@@ -47,6 +48,10 @@ The attached sample showing alternative Riso color separations is the visual ben
 **Prune:** general rendering engine/plugin marketplace, reimplementing a p5.js sketch API, cloud orchestration, arbitrary AI-generated code execution, excessive Prehnite-specific gem work as a precondition for importing images, and physically calibrated Riso claims unsupported by measurements.
 
 **Use compatible existing packages where useful.** Avoid duplicating standard raster codecs, basic SVG support or PDF rendering without a demonstrated need. An optional p5.js adapter may help author procedural scenes, but Stipra is not to be marketed as a competing p5.js runtime or library in v0.9.
+
+## Printmaking references and style rules
+
+[The printmaking reading room](docs/references/README.md) curates the [Dizzy Ink Risograph Guide](https://risograph.co.uk/) as a credited external resource, with [our independent field notes](docs/references/DIZZY-INK.md) and [conditional design rules](docs/PRINT-DESIGN-RULES.md). These rules should guide #34 preset defaults and #31/#22 interaction choices: safe mask alignment, explicit ink density/overlap, print-size limits, proof-only misregistration, and paper as a separate substrate. Machine-specific 5 mm margins or feed concerns are **references, not globally calibrated Stipra thresholds**. No artwork/code/mirrored pages are redistributed. Review the rule contract before adding automated warnings or “press-ready” claims.
 
 ## Release acceptance and kill switches
 
