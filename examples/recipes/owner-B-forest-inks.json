@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "mode": "spot",
+  "paper": "#faf5e5",
+  "inks": [
+    {
+      "id": "shadow",
+      "name": "Pine black",
+      "color": "#17332d",
+      "source": "darkness",
+      "gain": 0.9,
+      "gamma": 1.1
+    },
+    {
+      "id": "fern",
+      "name": "Fern",
+      "color": "#4e8a51",
+      "source": "green",
+      "gain": 0.8,
+      "gamma": 1.25
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "color": "#aa7959",
+      "source": "red",
+      "gain": 0.55,
+      "gamma": 1.4
+    }
+  ]
+}
