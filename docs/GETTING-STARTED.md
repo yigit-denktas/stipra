@@ -1,6 +1,6 @@
-# Getting started with Stipra
+# Getting started with Stiprā
 
-Stipra is an MIT-authored local-first printmaking experiment. You can try the [browser studio](https://apps.yigitdenktas.com/stipra/) right away, or automate image separation through a Node 20+ CLI. The live studio supports image import, spot/CMYK continuous-tone separation, raster screens and digital overprint previews. It is **not** a calibrated printer RIP or an A4 production-package generator yet.
+Stiprā is an MIT-authored local-first printmaking experiment. You can try the [browser studio](https://apps.yigitdenktas.com/stipra/) right away, or automate image separation through a Node 20+ CLI. The live studio supports image import, spot/CMYK continuous-tone separation, raster screens and digital overprint previews. It is **not** a calibrated printer RIP or an A4 production-package generator yet.
 
 ## The browser
 
