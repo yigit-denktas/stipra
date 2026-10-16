@@ -107,7 +107,8 @@ async function pdfReport(cards,meta){
     const iw=img.width*scale,ih=img.height*scale;
     page.drawImage(img,{x:x+(w-iw)/2,y:y+28+(h-35-ih)/2,width:iw,height:ih});
     page.drawLine({start:{x,y:y+24},end:{x:x+w,y:y+24},thickness:.5,color:rgb(.84,.84,.82)});
-    page.drawText(card.name.replace(/[^\x20-\x7e]/g,'?'),{x:x+7,y:y+8,size:9,font:bold,color:rgb(.13,.13,.13),maxWidth:w-14});
+    page.drawText(card.name.replace(/[^\x20-\x7e]/g,'?'),{x:x+7,y:y+13,size:8.5,font:bold,color:rgb(.13,.13,.13),maxWidth:w-25});
+    if(card.note)page.drawText(card.note.replace(/[^\x20-\x7e]/g,'?'),{x:x+7,y:y+4,size:6.4,font,color:rgb(.43,.43,.43),maxWidth:w-24});
     if(card.ink){const [r,g,b]=color(card.ink);page.drawRectangle({x:x+w-21,y:y+8,width:11,height:9,color:rgb(r,g,b)});}
   }
   for(let i=0;i<Math.max(1,blocks.length);i++){
@@ -137,6 +138,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const configs=screenConfigs(screenRecipe,sep.masks.map(m=>m.id));
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
+  if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
     if(!/^[a-z0-9/_-]+\.(?:jpg|png|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
       throw Error('print: invalid or repeated path '+name);
@@ -154,7 +156,8 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     const mono=await png(Sep.plateRGBA(ink.coverage),w,h,dpi),scr=await png(Sep.plateRGBA(s.coverage),w,h,dpi);
     add('plates/ink-'+name+'.png',mono);add('screened/ink-'+name+'.png',scr);
     if(pad)add('plates/marked-'+name+'.png',await marked(scr,w,h,pad,dpi));
-    cards.push({name:ink.name,bytes:scr,ink:ink.color,note:'full-frame grayscale'});
+    const description=(screened.stats.inks[i].meanCoverage*100).toFixed(1)+'% coverage; '+s.screen.mode+' '+s.screen.pitch+'px @ '+s.screen.angle+'deg';
+    cards.push({name:ink.name,bytes:scr,ink:ink.color,note:description});
     inks.push({id:ink.id,name:ink.name,color:ink.color,source:ink.source,
       meanCoverage:sep.stats.inks[i].meanCoverage,screenedMeanCoverage:screened.stats.inks[i].meanCoverage,
       plate:'plates/ink-'+name+'.png',screened:'screened/ink-'+name+'.png',
