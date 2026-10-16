@@ -57,7 +57,7 @@
       if(!ids.has(hold.inkId))fail('recipe.blackHold.inkId','must refer to an existing spot ink');
       blackHold={inkId:hold.inkId,threshold:num(hold.threshold??0.08,'recipe.blackHold.threshold',0,0.5)};
     }
-    return {version:1,mode:config.mode,paper:color(config.paper??'#ffffff','recipe.paper'),inks,blackHold};
+    return {version:1,mode:config.mode,paper:color(config.paper??'#ffffff','recipe.paper'),inks,...(blackHold?{blackHold}:{})};
   }
   function cmyk(r,g,b){
     const k=1-Math.max(r,g,b),remaining=1-k;
