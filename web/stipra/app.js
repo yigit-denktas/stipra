@@ -33,9 +33,14 @@
   function controls(){
     const host=$('inks');host.replaceChildren();
     for(const ink of config.inks){
-      const box=document.createElement('section');box.className='ink';box.dataset.ink=ink.id;
-      const h=document.createElement('div');h.className='ink-title';h.textContent=ink.name;box.appendChild(h);
-      field(box,'Ink color',ink.color,'color',v=>ink.color=v);
+      const box=document.createElement('details');box.className='ink';box.dataset.ink=ink.id;
+      box.open=ink===config.inks[0];
+      const summary=document.createElement('summary');summary.className='ink-title';
+      const swatch=document.createElement('span');swatch.className='swatch';swatch.style.backgroundColor=ink.color;
+      swatch.setAttribute('aria-hidden','true');
+      const h=document.createElement('span');h.textContent=ink.name;
+      summary.append(swatch,h);box.appendChild(summary);
+      field(box,'Ink color',ink.color,'color',v=>{ink.color=v;swatch.style.backgroundColor=v;});
       if(config.mode==='spot'){
         field(box,'Source',ink.source,'select',v=>{
           ink.source=v;
@@ -56,8 +61,8 @@
   function screenControls(){
     const host=$('screen-inks');host.replaceChildren();
     for(const ink of config.inks){
-      const section=document.createElement('section');section.className='ink';
-      const heading=document.createElement('div');heading.className='ink-title';heading.textContent=ink.name+' screen';section.appendChild(heading);
+      const section=document.createElement('details');section.className='ink';section.open=ink===config.inks[0];
+      const heading=document.createElement('summary');heading.className='ink-title';heading.textContent=ink.name+' screen';section.appendChild(heading);
       function field(label,name,value,min,max,step){
         const wrap=document.createElement('div');wrap.className='field';
         const el=document.createElement('input'),cap=document.createElement('label');
@@ -100,8 +105,8 @@
     const ctx=c.getContext('2d'),data=ctx.createImageData(width,height);
     data.data.set(rgba);ctx.putImageData(data,0,0);return c;
   }
-  function show(name,raw,detail){
-    const figure=document.createElement('figure');figure.className='view';
+  function show(name,raw,detail,target){
+    const figure=document.createElement('figure');figure.className=target==='plates'?'view view--plate':'view view--hero';
     const img=canvas(asset.metadata.oriented.width,asset.metadata.oriented.height,raw);
     img.setAttribute('aria-label',name);figure.appendChild(img);
     const caption=document.createElement('figcaption'),strong=document.createElement('strong');
@@ -109,7 +114,9 @@
     if(detail){
       const small=document.createElement('small');small.className='muted';small.textContent=detail;caption.appendChild(small);
     }
-    figure.appendChild(caption);$('grid').appendChild(figure);return {canvas:img,name};
+    figure.appendChild(caption);
+    $(target==='plates'?'plates':'hero').appendChild(figure);
+    return {canvas:img,name};
   }
   let scheduled=false;
   function schedule(){
@@ -124,13 +131,15 @@
       const w=asset.metadata.oriented.width,h=asset.metadata.oriented.height;
       const baseline=StipraSeparation.separate({width:w,height:h,rgba:asset.rgba},config);
       result=StipraScreen.apply(baseline,screenConfig);
-      $('grid').replaceChildren();views=[];
-      views.push(show('Original',asset.rgba));
-      views.push(show('Simulated overprint',result.preview));
+      $('hero').replaceChildren();$('plates').replaceChildren();views=[];
+      $('empty-state').hidden=true;$('plates-heading').hidden=false;
+      $('plate-count').textContent=result.masks.length+' ink '+(result.masks.length===1?'plate':'plates');
+      views.push(show('Original',asset.rgba,null,'hero'));
+      views.push(show('Simulated overprint',result.preview,null,'hero'));
       for(const ink of result.masks){
         const grayscale=StipraSeparation.plateRGBA(ink.coverage);
         const percent=result.stats.inks.find(x=>x.id===ink.id).meanCoverage*100;
-        views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean ink coverage'));
+        views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates'));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
