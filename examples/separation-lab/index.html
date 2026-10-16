@@ -33,11 +33,12 @@ code{font-size:.9em}
 <script src="../../src/import/probe.js"></script>
 <script src="../../src/import/asset.js"></script>
 <script src="../../src/separation.js"></script>
+<script src="../../src/screening.js"></script>
 </head>
 <body>
 <header>
 <h1>stipra / separation lab</h1>
-<p class="intro muted">Turn one local image into actual ink-coverage masks. Adjust which parts of the image belong to each ink, inspect the grayscale plates and a simulated overprint, and save the results. This is continuous-tone separation, <strong>not yet screened or calibrated prepress</strong>.</p>
+<p class="intro muted">Turn one local image into actual ink-coverage masks. Adjust which parts of the image belong to each ink, inspect the grayscale plates and a simulated overprint, and save the results. Choose continuous-tone coverage or geometric dot, reverse, line and hybrid screens. <strong>Screening is a digital approximation, not press-calibrated prepress.</strong></p>
 </header>
 <div class="layout">
 <aside>
@@ -51,10 +52,27 @@ code{font-size:.9em}
 <select id="mode"><option value="spot">Two spot inks</option><option value="cmyk">Four-color CMYK</option></select></div>
 <div class="field"><label for="paper">Paper color (preview only)</label><input id="paper" type="color" value="#fff8ec"></div>
 <div id="inks" aria-label="Ink settings"></div>
+<div class="ink">
+<h2>Screening</h2>
+<p class="muted"><small>The paper never becomes an ink plate. Change the screen without editing the source pixels. Individual inks can use different angles and registration offsets.</small></p>
+<div class="field"><label for="screen-mode">Screen treatment</label>
+<select id="screen-mode">
+<option value="solid">Continuous tone (unscreened)</option><option value="dots">Positive dots</option>
+<option value="reverse">Reverse / paper knockouts</option><option value="lines">Line screen</option>
+<option value="hybrid">Hybrid / preserve solid marks</option><option value="paper">Paper-only / suppress ink</option>
+</select></div>
+<div class="ink-grid">
+<div class="field"><label for="screen-pitch">Dot/line pitch (px)</label><input id="screen-pitch" type="number" min="4" max="128" step="1" value="12"></div>
+<div class="field"><label for="screen-angle">Global angle (°)</label><input id="screen-angle" type="number" min="-180" max="180" step="1" value="0"></div>
+<div class="field"><label for="screen-jitter">Dot jitter (0–0.3)</label><input id="screen-jitter" type="number" min="0" max=".3" step=".01" value="0"></div>
+<div class="field"><label for="screen-seed">Screen seed</label><input id="screen-seed" type="number" min="0" max="4294967295" step="1" value="142"></div>
+</div>
+<div id="screen-inks" aria-label="Per-ink screening settings"></div>
+</div>
 </div>
 <div class="panel">
 <h2>Export</h2>
-<p class="muted">White means no ink. Darker grayscale means more ink. Every plate uses the full input dimensions and origin.</p>
+<p class="muted">White means no ink. Darker grayscale means more ink. Every plate retains the full input canvas; registration moves only the selected ink pass.</p>
 <div class="actions">
 <button id="save-preview" type="button" disabled>Preview PNG</button>
 <button id="save-plates" type="button" disabled>All plates</button>
