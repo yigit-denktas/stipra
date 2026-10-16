@@ -18,93 +18,124 @@
 
 </div>
 
-## What is Stipra?
+A picture is one thing. A print is what happens when you pull it apart.
 
-**Stipra** is a small, local-first **browser printmaking studio with an agent-safe CLI**: turn source images or procedural art into editable ink masks, inspect overprints and export aligned plates and separation reports. The comprehensive browser separation/export workflow is **planned for v0.9**, not complete. Stipra-original code is MIT-licensed, subject to documented third-party notices.
+Stipra is a small workshop for doing just that: experimenting with color, turning artwork into ink layers, and seeing how those layers come together on paper. You can make something from simple shapes or bring an image of your own. The longer-term idea is to move freely between a browser workspace and scripts, without losing control of the individual plates.
 
-*Stippling + strata*: individual marks arranged into layers, then combined into a print.
+**We're building it in the open.** The first drawing tools, vector plates, and image importer work today. The complete *image → editable separations → print package* workflow is what we're building next.
 
-**Two related but distinct jobs:**
+**[Try what's working](#try-it) · [See the plan](#where-were-going) · [Explore the code](#inside-the-workshop)**
 
-- **Create** — Procedural artwork with controllable facets, geometry, typography, print grain, spot inks, halftone dots, and registration.
-- **Separate** — Accept images or structured graphics, estimate or map independent ink plates, inspect overprints, and produce consistent prepress exports and beautiful separation sheets.
+---
 
-**Both belong to one lightweight printmaking workflow, not a new p5.js clone.** Separation and export of imported images are the immediate v0.9 priorities. A generic geometric scene/plate contract is implemented; imported-image separation is not finished. Optional p5.js integration can be considered later, but no p5.riso source will be bundled into the MIT project. An imported photograph has no recoverable original printing plates; its separations are editable estimates.
+## Try it
 
-## Start with the working case study
+There are three ways to explore Stipra right now. They are deliberately separate experiments; you don't need to understand the entire project to use one.
 
-The initial source comes from **Prehnite Riso Studio v8**, an experimental but runnable procedural lockup engine. It has six palettes, a browser editor, deterministic Node-compatible scenes, a spot-ink plate model, and SVG/raster rendering.
+### In your browser
 
-| Entry point | Status | Location |
-|---|---|---|
-| Procedural engine | Working case-study source | [examples/prehnite-v8/src/engine.js](examples/prehnite-v8/src/engine.js) |
-| Interactive browser editor | Experimental, modular; browser QA pending | [examples/prehnite-v8/index.html](examples/prehnite-v8/index.html) |
-| Preset renderer and agent CLI | Foundation integration | [bin/stipra.js](bin/stipra.js) |
-| Generic vector scene/plate v1 | **Implemented contract + SVG demo** | [Recipe contract](docs/RECIPE-v1.md) |
-| PNG/JPEG/WebP + restricted SVG import | **Local adapters + inspector** | [Image import contract](docs/IMPORT.md) |
-| Editable auto-separation / CMYK | **Planned v0.9** | [Roadmap](ROADMAP.md) |
-| A4 separation reports / full prepress | **Planned v0.9** | [Separation contract](docs/SEPARATIONS.md) |
+Clone the repository and serve it locally:
 
-To try the existing renderer, use Node 20+:
-
-~~~bash
-npm install
-npm test
-node bin/stipra.js presets
-node bin/stipra.js render --preset 01 --format png,svg,webp --plates --out out
-node bin/stipra.js render --preset all --format png --out out
-# Generic deterministic vector scene (independent of Prehnite)
-node bin/stipra.js scene --config examples/recipes/spot-shapes.json --out out/scene
-# Local file input (independent of ink separation)
-node bin/stipra.js import --input ./my-image.png --out out/import
-~~~
-
-To use the modular browser example, serve the repository locally (rather than opening its HTML through a restricted file URL):
-
-~~~bash
+```sh
+git clone https://github.com/yigit-denktas/stipra.git
+cd stipra
 python -m http.server 8080
-# open http://localhost:8080/examples/prehnite-v8/
-~~~
+```
 
-No hosted inference or paid SaaS is required. Raster CLI output uses the local open-source skia-canvas package. The renderer is for design exploration; its simulated plates are **not automatically calibrated to a particular Risograph machine**.
+Then open one of these pages:
 
-For browser-based **local image import**, open [the drag/drop inspector](examples/import-studio/index.html) from the same local HTTP server. It preserves pixels and geometry, but does not yet split images into ink masters.
+| Open | What you'll find |
+| --- | --- |
+| **[Image importer](http://localhost:8080/examples/import-studio/)** | Drop a PNG, JPEG, WebP, or supported geometric SVG. Inspect its size and metadata, preview it, and download a normalized PNG. **No color separation yet.** |
+| **[Prehnite print experiment](http://localhost:8080/examples/prehnite-v8/)** | An experimental editor with six colorways, print textures, and a working procedural renderer. This is where Stipra started, not the finished studio UI. |
+| **[Vector plates demo](http://localhost:8080/examples/scene-contract/)** | One scene viewed as a composite and as separate, aligned vector ink plates. |
 
-The generic v1 scene exports a colored composite, aligned monochrome plates, normalized JSON, and a manifest, without a raster dependency. Serve the repo over local HTTP and open [the scene contract browser demo](examples/scene-contract/index.html) to switch between the same physical plates.
+The importer runs in the browser without sending your artwork to a service. The SVG importer intentionally accepts a limited set of geometric shapes and rejects unsupported features instead of silently changing them. See [supported formats and limits](docs/IMPORT.md).
 
-## Roadmap · v0.9
+### From your terminal
 
-| Track | Intended result | Progress |
-|:--|:--|:--|
-| Foundation | Adopt and preserve Prehnite v8 renderer | Completed (#1) |
-| Geometry & paper | Preserve straight shared geometry; gem/paper realism as **nonblocking case-study polish** | Optional |
-| Image import | PNG, JPEG, WebP, restricted SVG; aspect/alpha/EXIF metadata | Implemented adapter (#6); browser QA pending |
-| Ink masks and plates | Vector scene contract exists; real spot/CMYK masks and screened production masters come next | Contract implemented (#2); [#7](https://github.com/yigit-denktas/stipra/issues/7), [#5](https://github.com/yigit-denktas/stipra/issues/5) next |
-| Separation sheets | Beautiful A4 HTML/PDF reports + individually inspectable plates | Planned |
-| Diagnostics | HSL/coverage overlays, coverage estimates, reproducible seeds | Planned |
-| Exports | SVG, PNG, JPG, WebP, PDF + production ZIP | Planned |
-| CLI & automation | Machine-readable recipes, batch jobs, reproducible manifests | Planned |
-| Quality gates | Golden images, deterministic tests, accessibility and print QA | Planned |
+With Node.js 20 or newer:
 
-See the [re-scoped, separation-first v0.9 roadmap](ROADMAP.md), [product direction #21](https://github.com/yigit-denktas/stipra/issues/21), and [v0.9 issues](https://github.com/yigit-denktas/stipra/issues). Planned does **not** mean implemented.
+```sh
+npm install
 
-## Color language
+# Explore the six existing procedural presets
+node bin/stipra.js presets
 
-Our first case study includes six paper/ink systems: evergreen + coral / ivory, midnight + ochre / natural, cobalt + pink + mint / blush, moss + dusty rose / natural, indigo + vermilion / warm gray, and black + fluorescent lime / ivory. Spot inks and substrate are modeled independently. **Paper is not a printing plate.**
+# Render a Prehnite example and its simulated plates
+node bin/stipra.js render --preset 01 --format png,svg --plates --out out/prehnite
 
-## Engineering principles
+# Render a separate, recipe-driven vector scene
+node bin/stipra.js scene --config examples/recipes/spot-shapes.json --out out/scene
 
-- One scene/plate model should power Canvas previews, true-vector SVG, CLI and physical plate exports.
-- Geometry stays straight; print imperfections belong to paper and **ink coverage**, not arbitrary vertex deformation.
-- Separations never reflow individual components: all plates share trim, scale and origin.
-- Reference segmentation is diagnostic only, never secretly substituted for procedural generation.
-- Every render records seeds, ink names, plate settings, dimensions, and output paths.
-- Licenses and bundled assets are audited before distribution; no restrictive p5.riso source, fork or mechanically rewritten code may be incorporated into the MIT release.
+# Inspect and normalize one local image
+node bin/stipra.js import --input path/to/artwork.png --out out/import
+```
 
-Read [Architecture](docs/ARCHITECTURE.md), [Image import](docs/IMPORT.md), [Recipe v1](docs/RECIPE-v1.md), [Separation sheet specification](docs/SEPARATIONS.md), [v0.9 brief](docs/BRIEF-v9.md), and [Licensing](docs/LICENSING.md).
+Each command writes local files. The scene renderer produces an SVG composite, individual SVG plates, a normalized recipe, and a manifest. The importer keeps the original bytes alongside its normalized PNG and metadata; it refuses to overwrite existing outputs, so use a new output directory when repeating an import.
 
-## Contributing
+If you're an agent or you're building a tool around Stipra, those explicit inputs and outputs are the point: artwork should be possible to inspect, revise, and reproduce without manually clicking through the same steps.
 
-Issues should be reproducible, scoped and linked to branches/PRs. See [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+## The part we're working toward
 
-Stipra is MIT-licensed; the included Inter-derived vector glyph outlines retain their separate [SIL OFL 1.1 terms](LICENSES/OFL-1.1.txt).
+Picture dropping in a photograph, choosing two or three inks, and getting to decide **which marks belong to which ink**. You could soften one plate, sharpen another, try different dots or line screens, and see the overprint change. When you're happy, you'd take away the plates *and* a sheet showing how the print was put together.
+
+That means more than giving an image a vintage color filter. The separation has to live in the actual ink-coverage masks, not just in the colors of a preview.
+
+A finished Stipra job should make it easy to see:
+
+- **The artwork** — the original alongside an honest preview of the result.
+- **The inks** — independently adjustable coverage masks, with the same dimensions and alignment.
+- **The paper** — its own surface and texture, never mistaken for an extra ink.
+- **The output** — individual masters, print settings, a separation sheet, and the recipe needed to make it again.
+
+Risograph-inspired printing is our starting point, not the limit of the layering model. Other graphic techniques can belong here when they genuinely benefit from the same separation, screening, and export workflow.
+
+## Where it stands
+
+| Ready to explore | Still in progress |
+| --- | --- |
+| Prehnite's six-colorway procedural case study | Automatic, **editable** spot-ink and CMYK separations from imported images |
+| A versioned vector scene with aligned SVG plates | Halftone, reverse-dot, and hybrid screening for real masks |
+| Local import of PNG, JPEG, WebP, and a restricted SVG subset | One cohesive browser studio for adjusting and comparing layers |
+| A basic Node CLI, manifests, and automated tests | A4 HTML/PDF separation sheets, production bundles, and full agent-driven batch workflows |
+
+These are not interchangeable checkmarks. The existing **vector** plates are real outputs of the geometric scene engine; we cannot yet take an arbitrary photograph and automatically turn it into a finished set of printing plates. Nor do we claim that a digital overprint preview is calibrated to a physical Risograph machine.
+
+### Where we're going
+
+Our [**v0.9 roadmap**](ROADMAP.md) is deliberately focused on finishing one useful journey instead of inventing another graphics platform:
+
+1. [**Separate the image**](https://github.com/yigit-denktas/stipra/issues/7) into editable spot or CMYK ink-coverage masks.
+2. [**Give the masks a screen**](https://github.com/yigit-denktas/stipra/issues/5), with controllable dots, lines, knockouts, and registration.
+3. [**Export aligned masters**](https://github.com/yigit-denktas/stipra/issues/8) and build a [**real browser workspace**](https://github.com/yigit-denktas/stipra/issues/22).
+4. [**Make the separation sheet**](https://github.com/yigit-denktas/stipra/issues/9): an A4 landscape HTML/PDF report with the composite, paper, each ink, and useful production details.
+5. [**Make it repeatable**](https://github.com/yigit-denktas/stipra/issues/11) through the CLI, finished export packages, and honest visual/print tests.
+
+The roadmap is where we track dependencies, what we've decided *not* to build, and the evidence required before calling v0.9 usable. **Three of the original fourteen implementation issues have been merged; that is an issue count, not a claim that the product is 21% finished.**
+
+## Inside the workshop
+
+Stipra grew out of **Prehnite Riso Studio v8**, a small procedural art experiment. We kept its working presets rather than throwing them away, then built a more general scene-and-plate contract and a separate image-import layer around it.
+
+The guiding idea is simple: **the drawing, the ink, and the paper are different things.** A misregistered plate can move without bending the shapes underneath it. Every plate should keep the same canvas, trim, and origin. A browser preview and a scripted export should agree about what is actually being printed.
+
+The code is split along those lines:
+
+| If you're looking for… | Start here |
+| --- | --- |
+| The procedural example | [Prehnite v8](examples/prehnite-v8/) |
+| The reusable vector scene and recipe format | [Recipe v1](docs/RECIPE-v1.md) · [Core](src/core.js) |
+| Image decoding and source metadata | [Import contract](docs/IMPORT.md) · [Source](src/import/) |
+| What a separation report should contain | [Separation-sheet specification](docs/SEPARATIONS.md) |
+| How the parts should eventually fit together | [Architecture](docs/ARCHITECTURE.md) · [Roadmap](ROADMAP.md) |
+
+Stipra isn't trying to become p5.js, and it isn't a fork of p5.riso. We can use compatible tools and established printmaking techniques without copying restrictively licensed implementations. Any future p5.js adapter would be optional, with its own licensing requirements.
+
+## Make something with us
+
+If a separation comes out wrong, a browser control is confusing, or a printed proof doesn't match its plates, we'd like to know. Small, reproducible examples are especially useful. Start with the [issues](https://github.com/yigit-denktas/stipra/issues), read [CONTRIBUTING.md](CONTRIBUTING.md), or follow the project's [agent and testing conventions](AGENTS.md).
+
+Stipra-authored source code is [MIT-licensed](LICENSE), with separate terms for some dependencies, fonts, and identity assets. The [licensing and provenance notes](docs/LICENSING.md) explain those boundaries. This is local-first software; there is no required account, cloud renderer, paid subscription, or image-generation API.
+
+**Make a mark. Choose its ink. See what happens when the layers meet.**
