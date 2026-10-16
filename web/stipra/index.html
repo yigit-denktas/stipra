@@ -5,29 +5,78 @@
 <title>Stipra · Color separation lab</title>
 <style>
 :root{font-family:system-ui,-apple-system,sans-serif;color-scheme:light dark;background:Canvas;color:CanvasText}
-*{box-sizing:border-box}body{max-width:1460px;margin:0 auto;padding:clamp(1rem,3vw,2rem)}
-h1{letter-spacing:-.06em;font-size:clamp(2rem,5vw,3.6rem);margin:.2em 0}h2{font-size:1.12rem}
-p{line-height:1.5}.muted{opacity:.7}.intro{max-width:65ch}
-.layout{display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:1.5rem;align-items:start}
-@media(max-width:830px){.layout{grid-template-columns:1fr}}
-.panel{border:1px solid #7c898a73;border-radius:12px;padding:1.1rem}
-aside{display:grid;gap:1rem}#drop{border:1.5px dashed #898a8c;border-radius:9px;padding:1.2rem;text-align:center}
-#drop.over{border-color:#2197a4;background:#2197a420}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{max-width:1580px;margin:0 auto;padding:clamp(1rem,2.4vw,2rem)}
+h1{letter-spacing:-.055em;font-size:clamp(2rem,3.5vw,3.4rem);margin:0 0 .4rem}
+h2{font-size:1.15rem;margin:0 0 .75rem}
+h3{font-size:1rem;margin:0}
+p{line-height:1.5}
+.muted{opacity:.7}
+.page-header{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,320px);align-items:start;gap:clamp(1rem,2vw,2rem);margin-bottom:clamp(1rem,2vw,1.6rem)}
+.intro{max-width:72ch;margin:.35rem 0;font-size:.96rem}
+.import-panel{min-width:0;border:1px dashed #888c8c;border-radius:10px;padding:.8rem 1rem;overflow-wrap:anywhere}
+.import-panel p{margin:.5rem 0}
+.import-panel small{font-size:.75rem}
+.import-panel.over{border-color:#2197a4;background:#2197a420}
+#file{display:block;width:100%;min-width:0;max-width:100%;font-size:.85rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,318px);gap:clamp(1rem,2vw,1.5rem);align-items:start}
+.workspace,.inspector,.panel,.view{min-width:0}
+.workspace-header{display:flex;justify-content:space-between;align-items:start;gap:1rem;flex-wrap:wrap;margin-bottom:.7rem}
+.workspace-header h2{margin:0}
+#status{margin:.2rem 0 0;min-height:1.25rem;font-size:.88rem}
+#error{color:#c34439}
+#grid{min-width:0}
+.hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.plates-heading{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin:1.5rem 0 .65rem}
+.plate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(155px,100%),1fr));gap:.75rem}
+.view{margin:0;border:1px solid #808a8970;border-radius:9px;overflow:hidden;background:Canvas}
+.view canvas{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+.view figcaption{padding:.65rem;font-size:.8rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;align-items:baseline}
+.view figcaption small{font-size:.73rem}
+.view--plate{align-self:start}
+.empty-state{border:1px dashed #808a8970;border-radius:10px;padding:clamp(2rem,6vw,5rem) 1rem;text-align:center}
+.empty-state p{margin:.3rem auto;max-width:40ch}
+#meta{display:block;font-size:.77rem;line-height:1.5;margin-top:1.25rem}
+.inspector{position:sticky;top:1rem;max-height:calc(100dvh - 2rem);overflow-y:auto;overscroll-behavior:contain;display:grid;gap:.85rem;scrollbar-gutter:stable}
+.panel{border:1px solid #7c898a73;border-radius:10px;padding:1rem}
+.panel>summary{cursor:pointer;list-style:disclosure-closed;font-size:1.08rem;font-weight:650}
+.panel[open]>summary{list-style:disclosure-open;margin-bottom:1rem}
+details.ink{border-top:1px solid #8d949755;padding:.65rem 0;margin-top:.45rem}
+details.ink>summary{cursor:pointer;display:flex;gap:.55rem;align-items:center;font-weight:600}
+details.ink[open]>summary{margin-bottom:.6rem}
+.swatch{width:13px;height:13px;flex:none;border:1px solid #8d949788;border-radius:50%}
 input,select,button{font:inherit;max-width:100%}
+input[type="range"]{display:block;width:100%}
+input[type="number"],select{width:100%;min-width:0;padding:.35rem}
+input[type="file"]::file-selector-button{margin-right:.5rem}
 button{border:1px solid #8d9497;background:Canvas;color:CanvasText;border-radius:6px;padding:.55rem .75rem;cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #228da3;outline-offset:2px}
-.field{display:grid;gap:.35rem;margin:.75rem 0}
-.ink{border-top:1px solid #8d949755;margin-top:1rem;padding-top:.75rem}
-.ink-title{display:flex;align-items:center;gap:.5rem;font-weight:600}
-.ink-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.sample{background:#fff;background-image:linear-gradient(45deg,#eee 25%,transparent 25%),linear-gradient(-45deg,#eee 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#eee 75%),linear-gradient(-45deg,transparent 75%,#eee 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
-#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1rem}
-.view{margin:0;border:1px solid #808a8970;border-radius:9px;overflow:hidden}
-.view figcaption{padding:.65rem;font-size:.85rem;display:flex;justify-content:space-between;gap:.5rem}
-.view canvas{display:block;width:100%;height:auto;object-fit:contain}
-.actions{display:flex;flex-wrap:wrap;gap:.5rem}.actions>*{flex:1}
-#status{min-height:1.4rem;font-size:.92rem}#error{color:#c34439}
-code{font-size:.9em}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #228da3;outline-offset:2px}
+.field{min-width:0;display:grid;gap:.35rem;margin:.7rem 0}
+.field>label{font-size:.85rem}
+.ink-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.actions>button{font-size:.84rem}
+.helper{margin:.4rem 0;font-size:.8rem}
+.mobile-settings{display:none}
+@media(max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .inspector{position:static;max-height:none;overflow:visible;scrollbar-gutter:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+  .inspector>.panel:first-child{grid-row:span 2}
+  .mobile-settings{display:inline-block}
+}
+@media(max-width:680px){
+  .page-header{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .plate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .inspector{grid-template-columns:minmax(0,1fr)}
+  .inspector>.panel:first-child{grid-row:auto}
+  body{padding:1rem}
+  .view figcaption{font-size:.78rem}
+}
+@media(max-width:360px){.plate-grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 <script src="../../src/import/svg.js"></script>
 <script src="../../src/import/probe.js"></script>
@@ -35,57 +84,80 @@ code{font-size:.9em}
 <script src="../../src/separation.js"></script>
 <script src="../../src/screening.js"></script>
 </head>
+
 <body>
-<header>
-<h1>stipra / separation lab</h1>
-<p class="intro muted">Turn one local image into actual ink-coverage masks. Adjust which parts of the image belong to each ink, inspect the grayscale plates and a simulated overprint, and save the results. Choose continuous-tone coverage or geometric dot, reverse, line and hybrid screens. <strong>Screening is a digital approximation, not press-calibrated prepress.</strong></p>
+<header class="page-header">
+  <div>
+    <h1>stipra / separation lab</h1>
+    <p class="intro muted">Separate an image into ink layers, adjust coverage and screens, and inspect the resulting plates. Digital preview only—not calibrated press output.</p>
+    <a class="mobile-settings" href="#inspector">Jump to ink settings ↓</a>
+  </div>
+  <div id="drop" class="import-panel">
+    <strong>Import artwork</strong>
+    <p><input id="file" type="file" accept=".png,.jpeg,.jpg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml" aria-label="Choose image for separation"></p>
+    <small class="muted">Processed locally · 16 MiB maximum · supported geometric SVG subset</small>
+  </div>
 </header>
 <div class="layout">
-<aside>
-<div class="panel">
-<div id="drop">
-<strong>Drop a file or browse</strong>
-<p><input id="file" type="file" accept=".png,.jpeg,.jpg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml" aria-label="Choose image for separation"></p>
-<small class="muted">Local processing only · maximum 16 MiB · SVG geometric subset</small>
-</div>
-<div class="field"><label for="mode">Separation mode</label>
-<select id="mode"><option value="spot">Two spot inks</option><option value="cmyk">Four-color CMYK</option></select></div>
-<div class="field"><label for="paper">Paper color (preview only)</label><input id="paper" type="color" value="#fff8ec"></div>
-<div id="inks" aria-label="Ink settings"></div>
-<div class="ink">
-<h2>Screening</h2>
-<p class="muted"><small>The paper never becomes an ink plate. Change the screen without editing the source pixels. Individual inks can use different angles and registration offsets.</small></p>
-<div class="field"><label for="screen-mode">Screen treatment</label>
-<select id="screen-mode">
-<option value="solid">Continuous tone (unscreened)</option><option value="dots">Positive dots</option>
-<option value="reverse">Reverse / paper knockouts</option><option value="lines">Line screen</option>
-<option value="hybrid">Hybrid / preserve solid marks</option><option value="paper">Paper-only / suppress ink</option>
-</select></div>
-<div class="ink-grid">
-<div class="field"><label for="screen-pitch">Dot/line pitch (px)</label><input id="screen-pitch" type="number" min="4" max="128" step="1" value="12"></div>
-<div class="field"><label for="screen-angle">Global angle (°)</label><input id="screen-angle" type="number" min="-180" max="180" step="1" value="0"></div>
-<div class="field"><label for="screen-jitter">Dot jitter (0–0.3)</label><input id="screen-jitter" type="number" min="0" max=".3" step=".01" value="0"></div>
-<div class="field"><label for="screen-seed">Screen seed</label><input id="screen-seed" type="number" min="0" max="4294967295" step="1" value="142"></div>
-</div>
-<div id="screen-inks" aria-label="Per-ink screening settings"></div>
-</div>
-</div>
-<div class="panel">
-<h2>Export</h2>
-<p class="muted">White means no ink. Darker grayscale means more ink. Every plate retains the full input canvas; registration moves only the selected ink pass.</p>
-<div class="actions">
-<button id="save-preview" type="button" disabled>Preview PNG</button>
-<button id="save-plates" type="button" disabled>All plates</button>
-<button id="save-recipe" type="button">Ink recipe JSON</button><button id="save-screen-recipe" type="button">Screen recipe JSON</button>
-</div>
-</div>
-</aside>
-<main>
-<p id="status" role="status" aria-live="polite">Choose an image to begin.</p>
-<p id="error" role="alert" hidden></p>
-<div id="grid"></div>
-<p class="muted"><small id="meta">The original is never modified. Ink color in the preview approximates overprinting; it does not model spectral absorption, substrate dot gain or a calibrated Risograph.</small></p>
-</main>
+  <main class="workspace">
+    <header class="workspace-header">
+      <div><h2>Artwork</h2><p id="status" role="status" aria-live="polite">Choose an image to begin.</p></div>
+    </header>
+    <p id="error" role="alert" hidden></p>
+    <div id="grid">
+      <div id="empty-state" class="empty-state">
+        <h3>See how the inks come apart</h3>
+        <p class="muted">Import an image to compare its original, overprint, and individual ink plates.</p>
+      </div>
+      <div id="hero" class="hero-grid" aria-label="Original and composite artwork"></div>
+      <div id="plates-heading" class="plates-heading" hidden>
+        <h3>Ink plates</h3><span id="plate-count" class="muted"></span>
+      </div>
+      <div id="plates" class="plate-grid" aria-label="Individual ink coverage plates"></div>
+    </div>
+    <small id="meta" class="muted">The original is never modified. The simulated overprint does not model spectral ink mixing, dot gain, or a calibrated Risograph.</small>
+  </main>
+  <aside id="inspector" class="inspector" aria-label="Ink and print settings">
+    <section class="panel">
+      <h2>Inks &amp; paper</h2>
+      <div class="field"><label for="mode">Separation mode</label>
+        <select id="mode"><option value="spot">Two spot inks</option><option value="cmyk">Four-color CMYK</option></select>
+      </div>
+      <div class="field"><label for="paper">Paper color (preview only)</label><input id="paper" type="color" value="#fff8ec"></div>
+      <div id="inks" aria-label="Adjust each ink"></div>
+    </section>
+    <details id="screen-settings" class="panel">
+      <summary>Screening &amp; registration</summary>
+      <p class="muted helper">Choose dot, line or reverse screens without changing source geometry. Individual inks can use different angles and offsets.</p>
+      <div class="field"><label for="screen-mode">Screen treatment</label>
+        <select id="screen-mode">
+          <option value="solid">Continuous tone (unscreened)</option>
+          <option value="dots">Positive dots</option>
+          <option value="reverse">Reverse / paper knockouts</option>
+          <option value="lines">Line screen</option>
+          <option value="hybrid">Hybrid / preserve solid marks</option>
+          <option value="paper">Paper-only / suppress ink</option>
+        </select>
+      </div>
+      <div class="ink-grid">
+        <div class="field"><label for="screen-pitch">Dot/line pitch (px)</label><input id="screen-pitch" type="number" min="4" max="128" step="1" value="12"></div>
+        <div class="field"><label for="screen-angle">Global angle (°)</label><input id="screen-angle" type="number" min="-180" max="180" step="1" value="0"></div>
+        <div class="field"><label for="screen-jitter">Dot jitter (0–0.3)</label><input id="screen-jitter" type="number" min="0" max=".3" step=".01" value="0"></div>
+        <div class="field"><label for="screen-seed">Screen seed</label><input id="screen-seed" type="number" min="0" max="4294967295" step="1" value="142"></div>
+      </div>
+      <div id="screen-inks" aria-label="Per-ink screening settings"></div>
+    </details>
+    <section class="panel">
+      <h2>Export</h2>
+      <p class="muted helper">White means no ink; darker gray means more. Every plate keeps the full input canvas.</p>
+      <div class="actions">
+        <button id="save-preview" type="button" disabled>Preview PNG</button>
+        <button id="save-plates" type="button" disabled>All plates</button>
+        <button id="save-recipe" type="button">Ink recipe JSON</button>
+        <button id="save-screen-recipe" type="button">Screen recipe JSON</button>
+      </div>
+    </section>
+  </aside>
 </div>
 <script src="app.js"></script>
 </body></html>
