@@ -8,6 +8,7 @@
 - Prehnite v8 case study: inherited MIT-authored source; keep provenance separate.
 - Inter / Inter Display-derived vector glyph outlines: **SIL Open Font License 1.1**, [notice](../LICENSES/OFL-1.1.txt); no font binaries bundled.
 - `logo_for_Readme.svg`: owner-supplied identity artwork. Do **not** presume trademark/branding permissions or external artwork rights are conferred by a code license.
+- **p5.js itself is LGPL-2.1** ([official repository](https://github.com/processing/p5.js)); it is not MIT, and embedding/distributing it requires checking LGPL obligations (notices, relinking/modification rights and bundled distribution choices). Optional p5.js compatibility does not change the license of independently authored Stipra code.
 - Current `skia-canvas` / `@xmldom/xmldom` and transitive libraries: maintain actual version/asset notices and full license report before tagged release. Some dependencies have native code or platform-specific distributions.
 - User-submitted visual references, photographs, prints and screenshots: use for private comparison; do not redistribute without rights. SVG format alone does not establish reuse permission.
 - [Jeffrey Warren's risoAtHome](https://github.com/jywarren/risoAtHome): consulted for general CMYK/registration concepts, **no source copied**.
@@ -21,7 +22,7 @@
 1. Implement standard concepts ourselves: subtractive color channel math, ink coverage maps, monochrome plates, halftone screen geometry, ordered/error-diffusion dithering, overprint approximation, print registration, raster/export handling.
 2. Base designs on **documented underlying algorithms, independent math/specifications, our product requirements, and separately licensed compatible material**. Where observing a lawfully accessible tool's *behavior* helps, document inputs/outputs in an original test specification; do not paste reference source into an AI prompt asking it to translate or rewrite it.
 3. Keep an independent implementation/provenance record per algorithm: references, design notes, authored source, fixtures and tests. Audit significant similarities and all dependency licenses before publishing. Attribution is appropriate, but **attribution alone does not grant copying permission**.
-4. Use a genuinely permissive p5.js/Canvas/SVG or raster library where helpful. Add a p5.js adapter only as a separate justified feature; no p5.riso dependency in the MIT package.
+4. Use genuinely license-compatible libraries and native Canvas/SVG where helpful. p5.js is LGPL-2.1, **not permissive MIT**; a p5.js adapter needs the relevant notices/distribution compliance review, but need not be part of Stipra's MIT-authored core. No p5.riso dependency in the MIT package.
 5. If we later want the actual p5.riso source or behavior reproduced beyond protected boundaries, seek separate permission or professional advice. Don't use a decompiler/AI rewriting system as an automatic license-laundering tool.
 
 ## Legal evidence and limits (not a legal opinion)
