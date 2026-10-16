@@ -70,7 +70,7 @@
   let scheduled=false;
   function schedule(){
     if(scheduled)return;scheduled=true;
-    requestAnimationFrame(()=>{scheduled=false;render();});
+    Promise.resolve().then(()=>{scheduled=false;render();});
   }
   function render(){
     $('paper').value=config.paper;
