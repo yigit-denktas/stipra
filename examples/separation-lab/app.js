@@ -74,7 +74,8 @@
         });
         wrap.append(cap,el);section.appendChild(wrap);
       }
-      const row=document.createElement('div');row.className='field',label=document.createElement('label'),select=document.createElement('select');
+      const row=document.createElement('div'),label=document.createElement('label'),select=document.createElement('select');
+      row.className='field';
       select.id='screen-'+ink.id+'-mode';label.htmlFor=select.id;label.textContent='Mode override';
       for(const [value,name] of [['','Use global'],['solid','Unscreened'],['dots','Dots'],['reverse','Reverse knockout'],['lines','Lines'],['hybrid','Hybrid'],['paper','Suppress ink']]){
         const option=document.createElement('option');option.value=value;option.textContent=name;select.appendChild(option);
