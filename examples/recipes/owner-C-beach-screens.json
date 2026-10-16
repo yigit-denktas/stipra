@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "seed": 42,
+  "default": {
+    "mode": "solid",
+    "pitch": 6,
+    "angle": 0,
+    "jitter": 0
+  },
+  "plates": {
+    "sky": {
+      "mode": "solid"
+    },
+    "key": {
+      "mode": "hybrid",
+      "pitch": 5,
+      "angle": 30,
+      "solidThreshold": 0.65
+    }
+  }
+}
