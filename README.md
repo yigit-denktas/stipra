@@ -20,7 +20,7 @@
 
 ## What is Stipra?
 
-**Stipra** is a local-first, programmable printmaking studio for generative artwork, halftone color separation, ink simulation, and reproducible prepress workflows.
+**Stipra** is a small, local-first **browser printmaking studio with an agent-safe CLI**: turn source images or procedural art into editable ink masks, inspect overprints and export aligned plates and separation reports. The comprehensive browser separation/export workflow is **planned for v0.9**, not complete. Stipra-original code is MIT-licensed, subject to documented third-party notices.
 
 *Stippling + strata*: individual marks arranged into layers, then combined into a print.
 
@@ -29,7 +29,7 @@
 - **Create** — Procedural artwork with controllable facets, geometry, typography, print grain, spot inks, halftone dots, and registration.
 - **Separate** — Accept images or structured graphics, estimate or map independent ink plates, inspect overprints, and produce consistent prepress exports and beautiful separation sheets.
 
-The latter is the main **v0.9 work**. A generic geometric scene/plate contract is now implemented, but imported-image separation is not finished. An imported photograph has no recoverable original printing plates; its separations are editable estimates.
+**Both belong to one lightweight printmaking workflow, not a new p5.js clone.** Separation and export of imported images are the immediate v0.9 priorities. A generic geometric scene/plate contract is implemented; imported-image separation is not finished. Optional p5.js integration can be considered later, but no p5.riso source will be bundled into the MIT project. An imported photograph has no recoverable original printing plates; its separations are editable estimates.
 
 ## Start with the working case study
 
@@ -77,16 +77,16 @@ The generic v1 scene exports a colored composite, aligned monochrome plates, nor
 | Track | Intended result | Progress |
 |:--|:--|:--|
 | Foundation | Adopt and preserve Prehnite v8 renderer | Completed (#1) |
-| Geometry & paper | Crisp shared edges, corrected proportions, clustered contamination | Planned |
+| Geometry & paper | Preserve straight shared geometry; gem/paper realism as **nonblocking case-study polish** | Optional |
 | Image import | PNG, JPEG, WebP, restricted SVG; aspect/alpha/EXIF metadata | Implemented adapter (#6); browser QA pending |
-| Ink plates | Vector spot-ink scene contract and fixed-coordinate solid plates | Contract implemented (#2); raster/CMYK planned |
+| Ink masks and plates | Vector scene contract exists; real spot/CMYK masks and screened production masters come next | Contract implemented (#2); [#7](https://github.com/yigit-denktas/stipra/issues/7), [#5](https://github.com/yigit-denktas/stipra/issues/5) next |
 | Separation sheets | Beautiful A4 HTML/PDF reports + individually inspectable plates | Planned |
 | Diagnostics | HSL/coverage overlays, coverage estimates, reproducible seeds | Planned |
 | Exports | SVG, PNG, JPG, WebP, PDF + production ZIP | Planned |
 | CLI & automation | Machine-readable recipes, batch jobs, reproducible manifests | Planned |
 | Quality gates | Golden images, deterministic tests, accessibility and print QA | Planned |
 
-See the [granular project roadmap](ROADMAP.md) and [v0.9 issues](https://github.com/yigit-denktas/stipra/issues). Planned does **not** mean implemented.
+See the [re-scoped, separation-first v0.9 roadmap](ROADMAP.md), [product direction #21](https://github.com/yigit-denktas/stipra/issues/21), and [v0.9 issues](https://github.com/yigit-denktas/stipra/issues). Planned does **not** mean implemented.
 
 ## Color language
 
@@ -99,7 +99,7 @@ Our first case study includes six paper/ink systems: evergreen + coral / ivory, 
 - Separations never reflow individual components: all plates share trim, scale and origin.
 - Reference segmentation is diagnostic only, never secretly substituted for procedural generation.
 - Every render records seeds, ink names, plate settings, dimensions, and output paths.
-- Licenses and bundled assets are audited before distribution; do not import restrictive p5.riso code into the MIT core.
+- Licenses and bundled assets are audited before distribution; no restrictive p5.riso source, fork or mechanically rewritten code may be incorporated into the MIT release.
 
 Read [Architecture](docs/ARCHITECTURE.md), [Image import](docs/IMPORT.md), [Recipe v1](docs/RECIPE-v1.md), [Separation sheet specification](docs/SEPARATIONS.md), [v0.9 brief](docs/BRIEF-v9.md), and [Licensing](docs/LICENSING.md).
 
