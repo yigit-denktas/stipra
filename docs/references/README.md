@@ -4,10 +4,13 @@ Stipra is a graphics tool, but it needs to understand the practical decisions th
 
 ## Start here
 
-**[Dizzy Ink's Risograph Print Guide](https://risograph.co.uk/)** — an unusually clear, interactive guide to physical color separation, ink density, overprinting, registration, paper margins and proofing. Curated and designed by [Dizzy Ink](https://www.dizzyink.co.uk/).
+**[Dizzy Ink's interactive Risograph Print Guide](https://risograph.co.uk/)** — an unusually clear, interactive guide to physical color separation, ink density, overprinting, registration, paper margins and proofing. Curated and designed by [Dizzy Ink](https://www.dizzyink.co.uk/).
 
-- [Field notes on the Dizzy Ink guide](DIZZY-INK.md): chapter-by-chapter reading map and what Stipra should learn, with links back to the source.
+- [Field notes on the interactive guide](DIZZY-INK.md): chapter-by-chapter reading map and what Stipra should learn, with links back to the source.
+- [Dizzy Ink's picture guide — visual studies](DIZZY-INK-VISUALS.md): four original image examples (pass files, ink overlap, full-color separation, and density swatches), linked and analyzed without reproducing their artwork.
+- [Stipra design principles](../../DESIGN.md): the short product design brief and open interface questions.
 - [Stipra printmaking design rules](../PRINT-DESIGN-RULES.md): proposed rules, UI behaviors, CLI contracts, diagnostics and release tests derived from printmaking needs. These are **our proposals**, not quotations or claims of physical validation.
+- [Dizzy Ink's studio picture guide](https://www.dizzyink.co.uk/guide-to-risograph): the beautifully illustrated overview of stencil passes, transparent ink overlays, full-color samples and a printed ink fan.
 - [v0.9 roadmap](../../ROADMAP.md): which features exist and which remain open.
 - [Styles discussion, #34](https://github.com/yigit-denktas/stipra/issues/34): where intent-based starting points should live.
 - [Interface discussion, #31](https://github.com/yigit-denktas/stipra/issues/31): art direction still requires owner review.
