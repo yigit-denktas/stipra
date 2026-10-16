@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "mode": "cmyk",
+  "paper": "#ffffff",
+  "inks": [
+    {
+      "id": "cyan",
+      "name": "Cyan",
+      "color": "#00a7d6",
+      "source": "cyan"
+    },
+    {
+      "id": "magenta",
+      "name": "Magenta",
+      "color": "#dd277f",
+      "source": "magenta"
+    },
+    {
+      "id": "yellow",
+      "name": "Yellow",
+      "color": "#f1d52f",
+      "source": "yellow"
+    },
+    {
+      "id": "black",
+      "name": "Black",
+      "color": "#161616",
+      "source": "black"
+    }
+  ]
+}
