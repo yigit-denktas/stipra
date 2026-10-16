@@ -41,7 +41,8 @@ The initial source comes from **Prehnite Riso Studio v8**, an experimental but r
 | Interactive browser editor | Experimental, modular; browser QA pending | [examples/prehnite-v8/index.html](examples/prehnite-v8/index.html) |
 | Preset renderer and agent CLI | Foundation integration | [bin/stipra.js](bin/stipra.js) |
 | Generic vector scene/plate v1 | **Implemented contract + SVG demo** | [Recipe contract](docs/RECIPE-v1.md) |
-| General image uploads / auto-separation | **Planned v0.9** | [Roadmap](ROADMAP.md) |
+| PNG/JPEG/WebP + restricted SVG import | **Local adapters + inspector** | [Image import contract](docs/IMPORT.md) |
+| Editable auto-separation / CMYK | **Planned v0.9** | [Roadmap](ROADMAP.md) |
 | A4 separation reports / full prepress | **Planned v0.9** | [Separation contract](docs/SEPARATIONS.md) |
 
 To try the existing renderer, use Node 20+:
@@ -54,6 +55,8 @@ node bin/stipra.js render --preset 01 --format png,svg,webp --plates --out out
 node bin/stipra.js render --preset all --format png --out out
 # Generic deterministic vector scene (independent of Prehnite)
 node bin/stipra.js scene --config examples/recipes/spot-shapes.json --out out/scene
+# Local file input (independent of ink separation)
+node bin/stipra.js import --input ./my-image.png --out out/import
 ~~~
 
 To use the modular browser example, serve the repository locally (rather than opening its HTML through a restricted file URL):
@@ -65,6 +68,8 @@ python -m http.server 8080
 
 No hosted inference or paid SaaS is required. Raster CLI output uses the local open-source skia-canvas package. The renderer is for design exploration; its simulated plates are **not automatically calibrated to a particular Risograph machine**.
 
+For browser-based **local image import**, open [the drag/drop inspector](examples/import-studio/index.html) from the same local HTTP server. It preserves pixels and geometry, but does not yet split images into ink masters.
+
 The generic v1 scene exports a colored composite, aligned monochrome plates, normalized JSON, and a manifest, without a raster dependency. Serve the repo over local HTTP and open [the scene contract browser demo](examples/scene-contract/index.html) to switch between the same physical plates.
 
 ## Roadmap · v0.9
@@ -73,7 +78,7 @@ The generic v1 scene exports a colored composite, aligned monochrome plates, nor
 |:--|:--|:--|
 | Foundation | Adopt and preserve Prehnite v8 renderer | Completed (#1) |
 | Geometry & paper | Crisp shared edges, corrected proportions, clustered contamination | Planned |
-| Image import | PNG, JPEG, WebP, SVG with adjustable separation modes | Planned |
+| Image import | PNG, JPEG, WebP, restricted SVG; aspect/alpha/EXIF metadata | Implemented adapter (#6); browser QA pending |
 | Ink plates | Vector spot-ink scene contract and fixed-coordinate solid plates | Contract implemented (#2); raster/CMYK planned |
 | Separation sheets | Beautiful A4 HTML/PDF reports + individually inspectable plates | Planned |
 | Diagnostics | HSL/coverage overlays, coverage estimates, reproducible seeds | Planned |
@@ -96,7 +101,7 @@ Our first case study includes six paper/ink systems: evergreen + coral / ivory, 
 - Every render records seeds, ink names, plate settings, dimensions, and output paths.
 - Licenses and bundled assets are audited before distribution; do not import restrictive p5.riso code into the MIT core.
 
-Read [Architecture](docs/ARCHITECTURE.md), [Recipe v1](docs/RECIPE-v1.md), [Separation sheet specification](docs/SEPARATIONS.md), [v0.9 brief](docs/BRIEF-v9.md), and [Licensing](docs/LICENSING.md).
+Read [Architecture](docs/ARCHITECTURE.md), [Image import](docs/IMPORT.md), [Recipe v1](docs/RECIPE-v1.md), [Separation sheet specification](docs/SEPARATIONS.md), [v0.9 brief](docs/BRIEF-v9.md), and [Licensing](docs/LICENSING.md).
 
 ## Contributing
 
