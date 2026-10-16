@@ -1,12 +1,12 @@
 <div align="center">
 
-  <h1>stipra</h1>
+  <h1>Stiprā</h1>
 
   <p>A programmable printmaking studio.</p>
 
-  <img src="logo_for_Readme.svg" alt="Original Stipra dotmark: five rows of colored stippling dots" width="100%" />
+  <img src="logo_for_Readme.svg" alt="Original Stiprā dotmark: five rows of colored stippling dots" width="100%" />
 
-  <p><sub>Stippling + strata: dots organized into layers.</sub></p>
+  <p><sub><strong>Stiprā</strong> /ˈstip.raː/ <em>adj., Latvian</em> — feminine definite form of <em>stiprs</em>, “strong.”<br/>Also shaped by <em>stippling</em> + <em>strata</em>: dots arranged in layers.</sub></p>
 
   <p><strong>Separate the inks. Keep the imperfections.</strong></p>
 
@@ -20,7 +20,9 @@
 
 A picture is one thing. A print is what happens when you pull it apart.
 
-**Stipra** is a small, open-source printmaking studio for exploring how images become layers of ink. Bring a photograph or illustration, try a spot-color separation, change what each ink prints, and see what happens when the layers meet. The same process can be driven from a browser or a command line.
+**Stiprā** is a small, open-source printmaking studio for exploring how images become layers of ink. Bring a photograph or illustration, try a spot-color separation, change what each ink prints, and see what happens when the layers meet. The same process can be driven from a browser or a command line.
+
+The name has two roots: the Latvian <em>stiprā</em> (“the strong,” feminine definite form of <em>stiprs</em>) and our original English wordplay on <em>stippling</em> and <em>strata</em>. The macron is part of the display name; the repository, URL and CLI remain `stipra` for compatibility.
 
 Riso is where we're starting. We care as much about **why** an image should be separated a certain way as how many effects we can apply to it.
 
