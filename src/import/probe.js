@@ -134,6 +134,7 @@
       let str;
       try {str=new TextDecoder('utf-8',{fatal:true}).decode(b);}
       catch {fail('unknown image signature or invalid UTF-8 SVG');}
+      if(/^(?:\ufeff)?\s*<!DOCTYPE\s+svg/i.test(str))fail('svg: DTD and external entities forbidden');
       if(!/^(?:\ufeff)?\s*(?:<\?xml\s|<svg[\s>])/.test(str))fail('unsupported image format (PNG, JPEG, WebP, structured SVG only)');
       const safe=SVG.parse(str.replace(/^\ufeff/,''),opts.DOMParserCtor);
       result={format:'svg',width:safe.width,height:safe.height,orientation:1,hasAlpha:true,
