@@ -25,23 +25,26 @@ async function run(argv){
   if(size>Probe.MAX_BYTES)throw Error('File exceeds 16 MiB input limit');
   const raw=fs.readFileSync(from);
   const {metadata,canvas}=await ingestLocalBytes(raw,path.basename(from));
-  if(path.resolve(to)===path.dirname(from)&&path.basename(from).startsWith('source-original'))
-    throw Error('Import output must not overwrite the input source');
-  fs.mkdirSync(to,{recursive:true});
   const extension=metadata.format==='jpeg'?'jpg':metadata.format;
   const original=metadata.format==='svg'?'source-original.svg.txt':'source-original.'+extension;
-  // SVG source is archived as inert text; only sanitized markup is exported as renderable SVG.
-  fs.writeFileSync(path.join(to,original),raw);
   const files=[original,'asset-normalized.png','asset-manifest.json'];
+  if(metadata.format==='svg')files.push('asset-sanitized.svg');
+  for(const name of files){
+    const target=path.resolve(to,name);
+    if(target===from)throw Error('Import output would overwrite the original input: '+name);
+    if(fs.existsSync(target))throw Error('Import output already exists (refusing overwrite): '+target);
+  }
+  fs.mkdirSync(to,{recursive:true});
+  // SVG source is archived as inert text; only sanitized markup is exported as renderable SVG.
+  fs.writeFileSync(path.join(to,original),raw,{flag:'wx'});
   if(metadata.format==='svg'){
     const safe=SVG.parse(raw.toString('utf8'),require('@xmldom/xmldom').DOMParser);
-    fs.writeFileSync(path.join(to,'asset-sanitized.svg'),safe.safeMarkup);
-    files.push('asset-sanitized.svg');
+    fs.writeFileSync(path.join(to,'asset-sanitized.svg'),safe.safeMarkup,{flag:'wx'});
   }
-  fs.writeFileSync(path.join(to,'asset-normalized.png'),await canvas.toBuffer('png'));
+  fs.writeFileSync(path.join(to,'asset-normalized.png'),await canvas.toBuffer('png'),{flag:'wx'});
   const manifest={...metadata,sha256:crypto.createHash('sha256').update(raw).digest('hex'),
     assets:files,decoder:'skia-canvas',scope:'Input preparation only; no color separations or press calibration'};
-  fs.writeFileSync(path.join(to,'asset-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
+  fs.writeFileSync(path.join(to,'asset-manifest.json'),JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});
   process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
   return manifest;
 }
