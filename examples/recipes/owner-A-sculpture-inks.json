@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "mode": "spot",
+  "paper": "#fff9f0",
+  "inks": [
+    {
+      "id": "slate",
+      "name": "Midnight slate",
+      "color": "#263849",
+      "source": "darkness",
+      "gain": 0.85,
+      "gamma": 1.1
+    },
+    {
+      "id": "ivory",
+      "name": "Ivory",
+      "color": "#d4bca1",
+      "source": "luminance",
+      "gain": 0.9,
+      "gamma": 1
+    }
+  ]
+}
