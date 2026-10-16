@@ -1,0 +1,91 @@
+{
+  "schema": "stipra-owner-fixture-metadata-v1",
+  "status": "SPECIFICATION_ONLY_NOT_EVALUATED",
+  "rights": "Owner supplied for private validation. No distribution license confirmed; source images must not be committed or bundled in public samples without explicit clearance.",
+  "target": {
+    "printDpi": 300,
+    "imageScale": "native_pixels_at_declared_dpi",
+    "inspectionSheet": {
+      "widthMm": 297,
+      "heightMm": 210,
+      "orientation": "landscape"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "A",
+      "slug": "sculpture-folds",
+      "originalFile": "1680898969919.jpg",
+      "sha256": "0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd",
+      "bytes": 33492,
+      "widthPx": 805,
+      "heightPx": 644,
+      "nativeAt300DpiMm": {
+        "width": 68.16,
+        "height": 54.53
+      },
+      "orientation": "landscape",
+      "iccEmbedded": false,
+      "dpiMetadata": null,
+      "plannedInks": 2,
+      "intent": "object contour/tonal study",
+      "risks": [
+        "concentric ridges may alias or moiré with dot screens",
+        "black background can saturate multiple inks",
+        "sculpture highlights may clip or vanish",
+        "low native pixel count limits large prints"
+      ]
+    },
+    {
+      "id": "B",
+      "slug": "forest-installation",
+      "originalFile": "SPK-Skulpturenpark-04.web_-2048x1365.jpg",
+      "sha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+      "bytes": 880248,
+      "widthPx": 2048,
+      "heightPx": 1365,
+      "nativeAt300DpiMm": {
+        "width": 173.4,
+        "height": 115.57
+      },
+      "orientation": "landscape",
+      "iccEmbedded": false,
+      "dpiMetadata": [
+        72,
+        72
+      ],
+      "plannedInks": 3,
+      "intent": "complex outdoor installation",
+      "risks": [
+        "antler outlines and distant display become hard to distinguish",
+        "dark foliage produces over-dense overprint",
+        "grass and bark merge into flat texture",
+        "JPEG 72 DPI tag should not determine physical printing size"
+      ]
+    },
+    {
+      "id": "C",
+      "slug": "beach-horizon",
+      "originalFile": "IMG_9087.jpg",
+      "sha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+      "bytes": 898480,
+      "widthPx": 1152,
+      "heightPx": 2048,
+      "nativeAt300DpiMm": {
+        "width": 97.54,
+        "height": 173.4
+      },
+      "orientation": "portrait",
+      "iccEmbedded": true,
+      "dpiMetadata": null,
+      "plannedInks": 2,
+      "intent": "minimal gradient landscape",
+      "risks": [
+        "blue-sky gradient may band or posterize",
+        "horizon line may wobble",
+        "two tiny seated figures may disappear",
+        "ICC source profile must be recorded rather than silently disregarded"
+      ]
+    }
+  ]
+}
