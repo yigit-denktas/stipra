@@ -35,7 +35,7 @@ async function run(){
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const page=process.env.STIPRA_SMOKE_PAGE||'examples/import-studio/browser-smoke.html';
- if(!/^examples\/[a-z0-9-]+\/browser-smoke\.html$/.test(page))throw Error('Invalid smoke page path');
+ if(!/^(?:examples|web)\/[a-z0-9-]+\/browser-smoke\.html$/.test(page))throw Error('Invalid smoke page path');
  const url='http://127.0.0.1:'+server.address().port+'/'+page;
  try{
    const result=await new Promise((resolve,reject)=>{
