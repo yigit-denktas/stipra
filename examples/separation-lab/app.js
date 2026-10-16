@@ -22,7 +22,7 @@
       input.value=value;
     } else {
       input.type=type;input.value=String(value);
-      if(type==='range'){input.min='0';input.max=label==='Threshold'?'0.95':'2';input.step='0.05';}
+      if(type==='range'){input.min=label==='Match radius'?'0.05':'0';input.max=label==='Threshold'?'0.95':label==='Match radius'?'1':'2';input.step='0.05';}
     }
     input.addEventListener('input',()=>{callback(type==='range'?Number(input.value):input.value);schedule();});
     div.appendChild(input);where.appendChild(div);
