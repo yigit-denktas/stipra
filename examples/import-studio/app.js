@@ -24,6 +24,9 @@
     try {
       if(file.size>StipraImportProbe.MAX_BYTES)throw Error('16 MiB file limit exceeded');
       const data=new Uint8Array(await file.arrayBuffer());
+      $('status').textContent='Validating local image metadata…';
+      const info=StipraImportProbe.inspect(data);
+      $('status').textContent='Decoding '+info.format.toUpperCase()+' image locally…';
       const prepared=await StipraImport.ingest(data,{
         canvas:(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;},
         decode
