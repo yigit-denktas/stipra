@@ -175,7 +175,14 @@
   const downloadCanvas=(view,filename)=>view.canvas.toBlob(blob=>save(blob,filename),'image/png');
   $('mode').addEventListener('change',()=>{
     config=$('mode').value==='spot'?spot():cmyk();
-    $('paper').value=config.paper;screenConfig=freshScreen();controls();screenControls();schedule();
+    $('paper').value=config.paper;screenConfig=freshScreen();
+    try{
+      controls();screenControls();
+      render(); // A mode switch is a discrete action; do not leave stale plate images queued.
+    }catch(error){
+      $('status').textContent='Failed to change separation mode.';
+      $('error').textContent=error.message;$('error').hidden=false;
+    }
   });
   $('paper').addEventListener('input',e=>{config.paper=e.target.value;schedule();});
   $('file').addEventListener('change',e=>load(e.target.files?.[0]));
