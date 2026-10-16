@@ -124,3 +124,43 @@ test('browser-global metadata and orientation contract match Node and platform d
   assert.equal(result.metadata.sourceName,'mock.png');
   assert.equal(result.rgba.length,48);
 });
+
+test('CLI imports local PNG without modifying source or overwriting existing output',()=>{
+  const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process');
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-import-'));
+  const input=path.join(dir,'sample.png'),output=path.join(dir,'output');
+  try{
+    const original=fixture(5,3).toBufferSync('png');
+    fs.writeFileSync(input,original);
+    const args=[path.join(__dirname,'../bin/stipra.js'),'import','--input',input,'--out',output];
+    const manifest=JSON.parse(cp.execFileSync(process.execPath,args,{encoding:'utf8'}));
+    assert.deepEqual(manifest.oriented,{width:5,height:3});
+    assert.equal(manifest.format,'png');
+    assert.match(manifest.sha256,/^[0-9a-f]{64}$/);
+    assert.deepEqual(fs.readFileSync(path.join(output,'source-original.png')),original);
+    const normalized=Probe.inspect(fs.readFileSync(path.join(output,'asset-normalized.png')));
+    assert.deepEqual([normalized.width,normalized.height],[5,3]);
+    assert.equal(fs.readdirSync(output).length,3);
+    assert.throws(()=>cp.execFileSync(process.execPath,args,{stdio:'pipe'}),/Command failed/);
+    assert.deepEqual(fs.readFileSync(path.join(output,'source-original.png')),original);
+    const overwriteFrom=path.join(output,'asset-normalized.png');
+    assert.throws(()=>cp.execFileSync(process.execPath,[path.join(__dirname,'../bin/stipra.js'),'import','--input',overwriteFrom,'--out',output],{stdio:'pipe'}),/Command failed/);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+test('CLI preserves safe SVG as text original and reconstructs a renderable safe subset',()=>{
+  const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process');
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-svg-'));
+  const input=path.join(dir,'sample.svg'),output=path.join(dir,'output');
+  try{
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10"><circle cx="5" cy="5" r="4" fill="#008866"/></svg>';
+    fs.writeFileSync(input,svg);
+    const manifest=JSON.parse(cp.execFileSync(process.execPath,[path.join(__dirname,'../bin/stipra.js'),'import','--input',input,'--out',output],{encoding:'utf8'}));
+    assert.deepEqual(manifest.oriented,{width:20,height:10});
+    assert.ok(manifest.assets.includes('asset-sanitized.svg'));
+    assert.equal(fs.readFileSync(path.join(output,'source-original.svg.txt'),'utf8'),svg);
+    const safe=fs.readFileSync(path.join(output,'asset-sanitized.svg'),'utf8');
+    assert.match(safe,/<circle/);assert.doesNotMatch(safe,/<script|<image|<foreignObject/i);
+    const preview=Probe.inspect(fs.readFileSync(path.join(output,'asset-normalized.png')));
+    assert.deepEqual([preview.width,preview.height],[20,10]);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
