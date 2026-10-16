@@ -22,7 +22,7 @@ A picture is one thing. A print is what happens when you pull it apart.
 
 Stipra is a small workshop for doing just that: experimenting with color, turning artwork into ink layers, and seeing how those layers come together on paper. You can make something from simple shapes or bring an image of your own. The longer-term idea is to move freely between a browser workspace and scripts, without losing control of the individual plates.
 
-**We're building it in the open.** The drawing tools, vector plates and image importer work today—and now so do **editable, continuous-tone spot and CMYK image separations**. Screening, the production report and the complete *image → print package* workflow come next.
+**We're building it in the open.** The drawing tools, vector plates, image importer, editable spot/CMYK masks **and digital ink screening** now work. The A4 separation report and complete *image → print package* workflow come next.
 
 **[Try what's working](#try-it) · [See the plan](#where-were-going) · [Explore the code](#inside-the-workshop)**
 
@@ -46,7 +46,7 @@ Then open one of these pages:
 
 | Open | What you'll find |
 | --- | --- |
-| **[Separation lab](http://localhost:8080/examples/separation-lab/)** | Drop an image, choose two spot inks or CMYK, adjust real grayscale coverage masks and inspect the overprint. Download the recipe and plate previews. **Continuous-tone, not press-calibrated.** |
+| **[Separation lab](http://localhost:8080/examples/separation-lab/)** | Drop an image, choose two spot inks or CMYK, adjust real grayscale coverage masks and inspect the overprint. Adjust screens, pitch, ink angles and registration; download real grayscale plates and both recipes. **Digital screening, not press-calibrated.** |
 | **[Image importer](http://localhost:8080/examples/import-studio/)** | Drop a PNG, JPEG, WebP, or supported geometric SVG. Inspect its size and metadata, preview it, and download a normalized PNG. |
 | **[Prehnite print experiment](http://localhost:8080/examples/prehnite-v8/)** | An experimental editor with six colorways, print textures, and a working procedural renderer. This is where Stipra started, not the finished studio UI. |
 | **[Vector plates demo](http://localhost:8080/examples/scene-contract/)** | One scene viewed as a composite and as separate, aligned vector ink plates. |
@@ -74,11 +74,14 @@ node bin/stipra.js import --input path/to/artwork.png --out out/import
 
 # Create two real editable spot-ink coverage plates from an image
 node bin/stipra.js separate --input path/to/artwork.png --config examples/recipes/spot-photo.json --out out/separation
+
+# Apply deterministic dot/reverse/hybrid screens to those real ink masks
+node bin/stipra.js separate --input path/to/artwork.png --config examples/recipes/spot-photo.json --screen examples/recipes/screens-spot.json --out out/screened
 ```
 
 Each command writes local files. The scene renderer produces an SVG composite, individual SVG plates, a normalized recipe, and a manifest. The importer keeps the original bytes alongside its normalized PNG and metadata; it refuses to overwrite existing outputs, so use a new output directory when repeating an import.
 
-The `separate` command also supports four-ink CMYK using [its sample recipe](examples/recipes/cmyk-photo.json). Each separation produces a full-resolution grayscale mask per ink, a digital color proof, the original source and a manifest. Read the [separation contract](docs/IMAGE-SEPARATION-v1.md) for exact controls and limitations.
+The `separate` command also supports four-ink CMYK using [its sample recipe](examples/recipes/cmyk-photo.json). Each separation produces a full-resolution grayscale mask per ink, a digital color proof, the original source and a manifest. Read the [separation contract](docs/IMAGE-SEPARATION-v1.md) and [screening documentation](docs/SCREENING-v1.md) for exact controls, export formats and limitations.
 
 If you're an agent or you're building a tool around Stipra, those explicit inputs and outputs are the point: artwork should be possible to inspect, revise, and reproduce without manually clicking through the same steps.
 
@@ -101,25 +104,25 @@ Risograph-inspired printing is our starting point, not the limit of the layering
 
 | Ready to explore | Still in progress |
 | --- | --- |
-| Prehnite's six-colorway procedural case study | Automatic, **editable** spot-ink and CMYK separations from imported images |
-| A versioned vector scene with aligned SVG plates | Halftone, reverse-dot, and hybrid screening for real masks |
-| Local import of PNG, JPEG, WebP, and a restricted SVG subset | Dot/line screening and press-oriented masters |
-| **Real spot-ink and CMYK continuous-tone masks**, editable in a small browser lab and CLI | One cohesive production studio, A4 separation reports, production bundles and full agent batches |
+| Prehnite's six-colorway procedural case study | A unified production-grade workspace and print-ready export package |
+| A versioned vector scene with aligned SVG plates | Native SVG **vector dot geometry** for procedural artwork (separate [#28](https://github.com/yigit-denktas/stipra/issues/28)) |
+| Local import of PNG, JPEG, WebP, and a restricted SVG subset | Production-grade registration marks and calibrated press-oriented masters |
+| **Real spot and CMYK masks with dot, line, reverse, and hybrid raster screens**; browser and CLI controls | One cohesive production studio, A4 separation reports, production bundles and full agent batches |
 | A Node CLI, normalized recipes, manifests, source provenance and tests | Physical printer calibration and advanced report/export verification |
 
-These are not interchangeable checkmarks. We **can** turn an imported photograph into individual, full-frame continuous-tone ink masks. We **cannot yet** screen those masks or turn them into a calibrated, independently verified, complete prepress package. Nor do we claim that a digital overprint preview is calibrated to a physical Risograph machine.
+These are not interchangeable checkmarks. We **can** turn an imported photograph into individual, full-frame ink masks and apply deterministic raster screening. We **cannot yet** turn them into a calibrated, independently verified, complete prepress package. Nor do we claim that a digital overprint preview is calibrated to a physical Risograph machine.
 
 ### Where we're going
 
 Our [**v0.9 roadmap**](ROADMAP.md) is deliberately focused on finishing one useful journey instead of inventing another graphics platform:
 
 1. [**Separate the image**](https://github.com/yigit-denktas/stipra/issues/7) into editable spot or CMYK ink-coverage masks. **Implemented.**
-2. [**Give the masks a screen**](https://github.com/yigit-denktas/stipra/issues/5), with controllable dots, lines, knockouts, and registration. **Next.**
+2. [**Give the masks a screen**](https://github.com/yigit-denktas/stipra/issues/5), with controllable dots, lines, knockouts, and registration. **Implemented for raster masks.**
 3. [**Export aligned masters**](https://github.com/yigit-denktas/stipra/issues/8) and build a [**real browser workspace**](https://github.com/yigit-denktas/stipra/issues/22).
 4. [**Make the separation sheet**](https://github.com/yigit-denktas/stipra/issues/9): an A4 landscape HTML/PDF report with the composite, paper, each ink, and useful production details.
 5. [**Make it repeatable**](https://github.com/yigit-denktas/stipra/issues/11) through the CLI, finished export packages, and honest visual/print tests.
 
-The roadmap is where we track dependencies, what we've decided *not* to build, and the evidence required before calling v0.9 usable. **Four of the original fourteen implementation issues are merged, including real image separation. That is an issue count, not a percentage of total engineering effort.**
+The roadmap is where we track dependencies, what we've decided *not* to build, and the evidence required before calling v0.9 usable. **Five of the original fourteen implementation issues are merged, including raster ink screening. That is an issue count, not a percentage of total engineering effort.**
 
 ## Inside the workshop
 
@@ -135,6 +138,7 @@ The code is split along those lines:
 | The reusable vector scene and recipe format | [Recipe v1](docs/RECIPE-v1.md) · [Core](src/core.js) |
 | Image decoding and source metadata | [Import contract](docs/IMPORT.md) · [Source](src/import/) |
 | Spot/CMYK coverage masks and real image-to-ink mapping | [Separation v1](docs/IMAGE-SEPARATION-v1.md) · [Engine](src/separation.js) |
+| Raster screens, paper knockouts and per-ink registration | [Screening v1](docs/SCREENING-v1.md) · [Screen engine](src/screening.js) |
 | What a separation report should contain | [Separation-sheet specification](docs/SEPARATIONS.md) |
 | How the parts should eventually fit together | [Architecture](docs/ARCHITECTURE.md) · [Roadmap](ROADMAP.md) |
 
