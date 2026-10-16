@@ -59,6 +59,19 @@ node bin/stipra.js separate \
   --out out/screened-cmyk
 ```
 
+For a **complete digital ZIP with aligned grayscale plates and an A4 HTML/PDF inspection sheet**, run:
+
+```sh
+node bin/stipra.js package \
+  --input path/to/artwork.png \
+  --config examples/recipes/spot-photo.json \
+  --screen examples/recipes/screens-spot.json \
+  --dpi 300 \
+  --out out/artwork-print.zip
+```
+
+See the [print-package guide](PRINT-PACKAGE-v1.md) for native print dimensions, marks and the private three-owner-photo batch.
+
 The separated output includes an untouched original, a normalized PNG, a composite proof, full-frame grayscale masks, and structured recipes and provenance. `--screen` adds screened versions and their own preview/recipe. All modes refuse to overwrite existing files. **Use an unused output directory for each new render**.
 
 The CLI also has the existing procedural and import utilities:
@@ -89,4 +102,4 @@ npm test
 npm run build:pages
 ```
 
-Production-size masters, A4 HTML/PDF separation sheets, automatic **Stipra Styles** and finished agent batch tooling remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
+Physical press calibration, owner-approved proof quality, automatic **Stipra Styles** and finished agent batch tooling remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
