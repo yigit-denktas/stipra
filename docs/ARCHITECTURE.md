@@ -10,6 +10,10 @@ Stipra's root CLI initially calls that case-study engine. This is a bridge, **no
 
 `src/core.js` validates v1 recipes with explicit canvas/trim/bleed, paper stock, one physical plate per named spot ink, layer geometry and transforms, clipping, registration offsets, provenance and independent per-system seeds. It returns deterministic scenes in Node and in browsers from identical source. `bin/scene.js` and the lightweight browser inspector render the same vector composite and aligned black-on-white spot-ink SVG plates. `docs/RECIPE-v1.md` defines the contract. No image decomposition, halftone dots, calibrated output or PDF report is implied by this implementation.
 
+## Implemented local image asset import (issue #6)
+
+`src/import/{svg,probe,asset,node}.js` implement format sniffing, bounded structural validation, local decoding, EXIF normalization and separate source/provenance. `bin/import.js` and `examples/import-studio` expose CLI and browser inspection. The typed output is a full-resolution oriented RGBA grid with metadata, **not** an ink plate. `docs/IMPORT.md` defines the accepted safe SVG subset and unsupported features. The v1 procedural scene schema remains unchanged; #7 will consume this explicit imported RGBA stream.
+
 ## Target modules
 
 1. **Input adapters:** raster (PNG/JPG/WebP), SVG where safely supported, procedural scene descriptions.
