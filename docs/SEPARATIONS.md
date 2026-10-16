@@ -1,6 +1,6 @@
 # Separation sheets · v0.9 contract
 
-**Implementation status:** Continuous-tone spot/CMYK ink masks (#7) and raster screening (#5) are implemented. This document still specifies **planned** A4 HTML/PDF inspection sheets (#9), press geometry and marks (#8), and the complete ZIP exporter (#12). Screens already working does not mean prepress bundles are finished. The three owner-image test cases and release gate are in [PRINT-PACKAGE-ACCEPTANCE.md](PRINT-PACKAGE-ACCEPTANCE.md).
+**Implementation status:** Continuous-tone spot/CMYK ink masks (#7) and raster screening (#5) are implemented. The [Node print-package workflow](PRINT-PACKAGE-v1.md) now produces actual aligned raster masters, optional marked derivatives, an A4 landscape HTML/PDF inspection sheet and a ZIP (#8/#9/#12); owner-photo image quality, real print validation, true-vector and further format parity are **not yet complete**. The three owner-image test cases and release gate are in [PRINT-PACKAGE-ACCEPTANCE.md](PRINT-PACKAGE-ACCEPTANCE.md).
 
 The supplied specimen demonstrates **three spot colors plus paper**, not CMYK. Stipra must allow 2–N spot inks *and* an optional CMYK recipe.
 
