@@ -29,3 +29,4 @@ jobs:
       - run: node --check bin/stipra.js
       - run: npm test
       - run: node scripts/browser-smoke.js
+      - run: STIPRA_SMOKE_PAGE=examples/separation-lab/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js
