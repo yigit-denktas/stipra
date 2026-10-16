@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stipra · Local image import</title>
+  <style>
+    :root{color-scheme:light dark;font-family:system-ui,-apple-system,sans-serif;background:Canvas;color:CanvasText}
+    body{margin:2rem auto;max-width:1100px;padding:0 1.3rem}
+    header{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;flex-wrap:wrap}
+    h1{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em;margin:.3rem 0}
+    .muted{opacity:.73;line-height:1.5}
+    #drop{border:2px dashed #718783;border-radius:10px;padding:2rem;text-align:center;background:color-mix(in srgb,CanvasText 5%,Canvas);margin:1rem 0}
+    #drop.dragging{border-color:#179c86;background:color-mix(in srgb,#179c86 12%,Canvas)}
+    input,button{font:inherit}
+    input{max-width:100%}
+    button{cursor:pointer;border:1px solid #718783;padding:.55rem .85rem;background:Canvas;color:CanvasText;border-radius:5px}
+    #result{overflow:auto;max-height:75vh;border:1px solid #7a8985;border-radius:8px;margin:1.25rem 0}
+    #result canvas{display:block;max-width:100%;height:auto}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}
+    #error{color:#bf4339}
+    [hidden]{display:none!important}
+  </style>
+  <script src="../../src/import/svg.js"></script>
+  <script src="../../src/import/probe.js"></script>
+  <script src="../../src/import/asset.js"></script>
+</head>
+<body>
+  <header><h1>stipra / import</h1><span>Local-only · asset contract v1</span></header>
+  <p class="muted">Load a PNG, JPEG, WebP or supported structured SVG. The pixel grid, alpha and orientation are preserved without cropping, tracing, changing aspect ratio or uploading anything. This is an input inspector, not a color separator.</p>
+  <section id="drop" aria-label="Image drop area">
+    <label for="file"><strong>Drop a file here, or select one.</strong></label>
+    <p><input id="file" type="file" accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml"/></p>
+    <small>Maximum 16 MiB · up to 24 million pixels · SVG uses a restricted structural allowlist</small>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+  <p id="error" role="alert" hidden></p>
+  <div id="result"></div>
+  <div id="actions" hidden>
+    <button id="save">Download normalized PNG</button>
+    <button id="metadata">Download metadata JSON</button>
+    <details><summary>Asset metadata and import warnings</summary><pre id="report"></pre></details>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

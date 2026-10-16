@@ -15,9 +15,10 @@
     "test": "node --test tests/*.test.js",
     "presets": "node bin/stipra.js presets",
     "render:prehnite": "node bin/stipra.js render --preset 01 --format png,svg --plates --out out",
-    "check": "node --check src/core.js && node --check bin/scene.js && node --check examples/prehnite-v8/src/engine.js && node --check bin/stipra.js && npm test"
+    "check": "node --check src/core.js && node --check src/import/svg.js && node --check src/import/probe.js && node --check src/import/asset.js && node --check src/import/node.js && node --check bin/import.js && node --check examples/import-studio/app.js && node --check bin/scene.js && node --check bin/stipra.js && npm test"
   },
   "dependencies": {
-    "skia-canvas": "^3.0.8"
+    "skia-canvas": "^3.0.8",
+    "@xmldom/xmldom": "0.9.12"
   }
 }
