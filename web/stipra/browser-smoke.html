@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Stipra image separation browser smoke</title></head>
+<body><output id="out">BROWSER_SEPARATION_PENDING</output><iframe id="studio" src="index.html" width="900" height="600"></iframe>
+<script>
+(async()=>{
+  const delay=t=>new Promise(resolve=>setTimeout(resolve,t));
+  async function until(predicate,label){
+    for(let k=0;k<140;k++){if(predicate())return;await delay(60);}
+    throw Error('Timed out '+label);
+  }
+  const frame=document.getElementById('studio');
+  const output=document.getElementById('out');
+  let d;
+  try{
+    await until(()=>frame.contentDocument?.getElementById('mode')&&frame.contentWindow.StipraSeparation,'lab script loading');
+    d=frame.contentDocument;
+    const el=id=>d.getElementById(id);
+    const input=document.createElement('canvas');input.width=4;input.height=2;
+    const ctx=input.getContext('2d');
+    ctx.clearRect(0,0,4,2);
+    ctx.fillStyle='#e65e4b';ctx.fillRect(1,0,1,1);
+    ctx.fillStyle='#000000';ctx.fillRect(2,0,1,1);
+    const blob=await new Promise(resolve=>input.toBlob(resolve,'image/png'));
+    const transfer=new DataTransfer();transfer.items.add(new File([blob],'test.png',{type:'image/png'}));
+    el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+    await until(()=>el('status').textContent.includes('SPOT · 4 × 2 px'),'spot PNG separation');
+    const canvases=()=>[...d.querySelectorAll('#grid canvas')];
+    if(canvases().length!==4)throw Error('spot requires source, composite and exactly two masks');
+    const grey=(c,x,y)=>c.getContext('2d').getImageData(x,y,1,1).data[0];
+    const original=canvases()[0],blue=canvases()[2],coral=canvases()[3];
+    if(original.width!==4||original.height!==2||coral.width!==4||blue.width!==4)
+      throw Error('source or mask canvas dimension mismatch');
+    if(grey(coral,1,0)!==0)throw Error('target matched spot ink is not fully covered');
+    if(grey(coral,0,0)!==255)throw Error('transparent source produced ink');
+    const strength=el('control-coral-Strength');
+    if(!strength)throw Error('coral gain control absent');
+    strength.value='0.4';
+    strength.dispatchEvent(new Event('input',{bubbles:true}));
+    await until(()=>grey(canvases()[3],1,0)>120,'real mask coverage edit');
+    if(canvases()[3].width!==4)throw Error('mask canvas changed position or width');
+
+    el('mode').value='cmyk';
+    el('mode').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>el('status').textContent.includes('CMYK · 4 × 2 px'),'CMYK mode');
+    if(canvases().length!==6)throw Error('CMYK requires 4 physical ink plates');
+    if(grey(canvases()[5],2,0)!==0)throw Error('solid black did not route to K');
+    if(grey(canvases()[2],0,0)!==255)throw Error('transparent pixel routed to cyan');
+    if(el('error').hidden!==true)throw Error('unreported separation UI error: '+el('error').textContent);
+
+    // End-to-end browser check that screening edits *the actual plate data*.
+    el('mode').value='spot';
+    el('mode').dispatchEvent(new Event('change',{bubbles:true}));
+    const illustration=document.createElement('canvas');
+    illustration.width=48;illustration.height=32;
+    const painter=illustration.getContext('2d');
+    painter.fillStyle='#999999';painter.fillRect(0,0,48,32);
+    painter.fillStyle='#e65e4b';painter.fillRect(24,0,12,32);
+    const screeningBlob=await new Promise(resolve=>illustration.toBlob(resolve,'image/png'));
+    const screeningTransfer=new DataTransfer();
+    screeningTransfer.items.add(new File([screeningBlob],'screening.png',{type:'image/png'}));
+    el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:screeningTransfer}));
+    await until(()=>el('status').textContent.includes('SPOT · 48 × 32 px'),'screening source loaded');
+    const baseline=Array.from(canvases()[2].getContext('2d').getImageData(0,0,48,32).data);
+    el('screen-mode').value='dots';el('screen-mode').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>canvases()[2].width===48 && baseline.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
+      'real screen raster mask changed');
+    const dotted=Array.from(canvases()[2].getContext('2d').getImageData(0,0,48,32).data);
+    if(!dotted.some((v,i)=>v!==baseline[i]))throw Error('Dots do not affect actual grayscale coverage');
+    el('screen-blue-x').value='4';
+    el('screen-blue-x').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>dotted.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
+      'per-ink registration shifted plate');
+    if(canvases().some(c=>c.width!==48||c.height!==32))throw Error('Screening changed plate layout');
+    document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
+  }catch(error){
+    document.body.dataset.smoke='fail';
+    output.textContent='BROWSER_SEPARATION_FAIL: '+error.message+' | status='+(d?.getElementById('status')?.textContent||'no studio')+' | error='+(d?.getElementById('error')?.textContent||'none');
+  }
+})().catch(e=>{document.body.dataset.smoke='fail';document.getElementById('out').textContent='BROWSER_SEPARATION_FAIL: '+e.message;});
+</script></body></html>
