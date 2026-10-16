@@ -14,7 +14,14 @@ jobs:
       - run: node --check examples/prehnite-v8/src/font-atlas.js
       - run: node --check examples/prehnite-v8/src/engine.js
       - run: node --check examples/prehnite-v8/app.js
+      - run: npm install --no-audit --no-fund
       - run: node --check src/core.js
+      - run: node --check src/import/svg.js
+      - run: node --check src/import/probe.js
+      - run: node --check src/import/asset.js
+      - run: node --check src/import/node.js
+      - run: node --check bin/import.js
+      - run: node --check examples/import-studio/app.js
       - run: node --check bin/scene.js
       - run: node --check bin/stipra.js
       - run: npm test
