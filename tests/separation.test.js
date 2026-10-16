@@ -9,7 +9,7 @@ const pngInfo=require('../src/import/probe.js').inspect;
 const SPOT=require('../examples/recipes/spot-photo.json');
 const CMYK=require('../examples/recipes/cmyk-photo.json');
 
-function pixels(...rgba){return {width:rgba.length/4,height:1,rgba:Uint8Array.from(rgba.flat())};}
+function pixels(...rgba){return {width:rgba.length,height:1,rgba:Uint8Array.from(rgba.flat())};}
 function plate(result,id){return result.masks.find(m=>m.id===id).coverage;}
 function sampleCanvas(){
   const c=new Canvas(4,2),ctx=c.getContext('2d');
