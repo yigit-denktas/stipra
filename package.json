@@ -2,7 +2,7 @@
   "name": "stipra",
   "version": "0.1.0",
   "private": true,
-  "description": "Local-first programmable printmaking studio (Prehnite case-study foundation)",
+  "description": "Stiprā — a programmable printmaking studio (Latvian strength; stippling + strata)",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
