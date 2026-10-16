@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const docs=['README.md','ROADMAP.md','docs/references/README.md',
-  'docs/references/DIZZY-INK.md','docs/PRINT-DESIGN-RULES.md'];
+  'docs/references/DIZZY-INK.md','docs/references/DIZZY-INK-VISUALS.md','docs/PRINT-DESIGN-RULES.md'];
 test('original Risograph field reference, research attribution and source links are present',()=>{
   const reading=fs.readFileSync(path.join(root,'docs/references/DIZZY-INK.md'),'utf8');
   const portal=fs.readFileSync(path.join(root,'docs/references/README.md'),'utf8');
@@ -38,4 +38,18 @@ test('reference docs are original linked notes, never bundled third-party websit
     assert.doesNotMatch(body,/!\[[^\]]*\]\(https?:\/\/risograph\.co\.uk/i);
     assert.doesNotMatch(body,/<(?:script|iframe|img)[\s>]/i);
   }
+});
+
+test('Dizzy Ink visual reference describes four source images without embedding third-party art',()=>{
+  const visuals=fs.readFileSync(path.join(root,'docs/references/DIZZY-INK-VISUALS.md'),'utf8');
+  const portal=fs.readFileSync(path.join(root,'docs/references/README.md'),'utf8');
+  const design=fs.readFileSync(path.join(root,'DESIGN.md'),'utf8');
+  assert.match(visuals, /https:\/\/www\.dizzyink\.co\.uk\/guide-to-risograph/);
+  for(const filename of ['How-Riso-Works1.jpg','Mixing-Inks.jpg','Full-Colour-CMYK.jpg','DizzyInk-RisoSwatch.jpg'])
+    assert.ok(visuals.includes(filename),'Missing link to original visual reference: '+filename);
+  assert.match(visuals,/not.*copy|do not.*copy|not.*reproduc|do not.*reproduc/i);
+  assert.match(portal, /\]\(DIZZY-INK-VISUALS\.md\)/);
+  assert.match(design, /\]\(docs\/references\/DIZZY-INK-VISUALS\.md\)/);
+  assert.doesNotMatch(visuals,/!\[[^\]]*]\(https?:\/\//);
+  assert.doesNotMatch(visuals,/<(?:img|iframe|script)\b/i);
 });
