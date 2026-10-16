@@ -36,9 +36,13 @@ test('README points readers to real entry points and accurately distinguishes fu
   for (const command of ['node bin/stipra.js presets', 'node bin/stipra.js render', 'node bin/stipra.js scene', 'node bin/stipra.js import']) {
     assert.ok(readme.includes(command), 'README missing working command: ' + command);
   }
-  assert.match(readme, /continuous-tone ink masks/i);
+  assert.match(readme, /real ink masks/i);
   assert.match(readme, /CMYK/i);
-  assert.match(readme, /editable.*spot.*CMYK.*separations/i);
+  assert.match(readme, /spot\/CMYK masks/i);
+  assert.match(readme, /deterministic raster screening/i);
+  assert.ok(readme.includes('node bin/stipra.js separate'));
+  assert.ok(readme.includes('docs/SCREENING-v1.md'));
+  assert.match(readme, /not press-calibrated/i);
   assert.match(readme, /complete.*print package/i);
   assert.match(readme, /\[.*roadmap.*\]\(ROADMAP\.md\)/i);
   for (const [, url] of readme.matchAll(/\]\(([^)]+)\)/g)) {
