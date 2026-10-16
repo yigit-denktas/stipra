@@ -17,6 +17,7 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: node --check src/core.js
       - run: node --check src/separation.js
+      - run: node --check src/screening.js
       - run: node --check bin/separate.js
       - run: node --check examples/separation-lab/app.js
       - run: node --check src/import/svg.js
