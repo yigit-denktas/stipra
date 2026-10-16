@@ -9,7 +9,7 @@
   const TAGS = new Set(['svg', 'g', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path']);
   const ATTRS = new Set(['width','height','viewBox','preserveAspectRatio','fill','stroke','stroke-width','stroke-linecap','stroke-linejoin','fill-rule','opacity','fill-opacity','stroke-opacity','transform','x','y','x1','y1','x2','y2','cx','cy','r','rx','ry','d','points']);
   const NUMERIC = new Set(['x','y','x1','y1','x2','y2','cx','cy','r','rx','ry','stroke-width','opacity','fill-opacity','stroke-opacity']);
-  const COLORS = /^(?:#[0-9a-f]{3,8}|none|black|white|red|green|blue|transparent)$/i;
+  const COLORS = /^(?:(?:#[0-9a-f]{3}|#[0-9a-f]{4}|#[0-9a-f]{6}|#[0-9a-f]{8})|none|black|white|red|green|blue|transparent)$/i;
   const TRANSFORM = /^(?:\s*(?:translate|scale|rotate|matrix|skewX|skewY)\s*\(\s*[-+0-9.,eE\s]+\)\s*)+$/;
   const NUMBER = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
   const esc = s => s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -52,7 +52,7 @@
         if (key==='xmlns' && depth===0 && val===NS) continue;
         if (!ATTRS.has(key) || a.prefix || (a.namespaceURI && a.namespaceURI !== null))
           fail('unsupported attribute ' + key + ' on <' + name + '>');
-        if (depth!==0 && ['width','height','viewBox','preserveAspectRatio'].includes(key)) fail(key + ' is root-only');
+        if (depth!==0 && ['viewBox','preserveAspectRatio'].includes(key)) fail(key + ' is root-only');
         let safe=val;
         if (NUMERIC.has(key)) safe=countable(val,key);
         else if (['width','height'].includes(key)) safe=countable(val.replace(/px$/,''),key,false);
