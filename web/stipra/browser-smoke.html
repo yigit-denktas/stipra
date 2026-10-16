@@ -71,6 +71,38 @@
     await until(()=>dotted.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
       'per-ink registration shifted plate');
     if(canvases().some(c=>c.width!==48||c.height!==32))throw Error('Screening changed plate layout');
+
+    // Layout regression: real screen geometry must not overflow or overlap, including
+    // the original 1339px screenshot width where the sidebar covered the artwork.
+    for(const width of [390,768,1024,1339,1440]){
+      frame.style.width=width+'px';frame.style.height='850px';
+      await delay(80);
+      const doc=frame.contentDocument,win=frame.contentWindow;
+      const view=doc.documentElement,art=doc.querySelector('.workspace'),
+        panel=doc.querySelector('#inspector'),hero=doc.getElementById('hero'),
+        plates=doc.getElementById('plates');
+      const ar=art.getBoundingClientRect(),pr=panel.getBoundingClientRect(),
+        hr=hero.getBoundingClientRect(),pl=plates.getBoundingClientRect();
+      if(view.scrollWidth>view.clientWidth+2)
+        throw Error('Horizontal page overflow at '+width+'px: '+view.scrollWidth+' > '+view.clientWidth);
+      if(width>1000 && ar.right>pr.left-8)
+        throw Error('Inspector overlaps artwork at '+width+'px');
+      if(width<=1000 && pr.top<ar.bottom-4)
+        throw Error('Mobile inspector overlaps artwork at '+width+'px');
+      if(pl.top<hr.bottom-4)throw Error('Ink plates overlap main previews at '+width+'px');
+      const previews=hero.querySelectorAll('canvas');
+      if(previews.length!==2||plates.querySelectorAll('canvas').length!==2)
+        throw Error('Gallery lost source or plates at '+width+'px');
+      if([...doc.querySelectorAll('#grid canvas')].some(c=>c.getBoundingClientRect().width>art.getBoundingClientRect().width+2))
+        throw Error('Canvas wider than workspace at '+width+'px');
+    }
+    frame.style.width='900px';
+    // Accessibility: collapsed ink settings must remain reachable and keyboard-operable.
+    const inkDetails=[...d.querySelectorAll('#inks details.ink')];
+    if(inkDetails.length!==2||inkDetails[0].open!==true||inkDetails[1].open!==false)
+      throw Error('Ink controls not progressively disclosed');
+    if(!d.querySelector('#screen-settings>summary')||!d.querySelector('#screen-settings').contains(el('screen-mode')))
+      throw Error('Advanced screening settings missing');
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
     document.body.dataset.smoke='fail';
