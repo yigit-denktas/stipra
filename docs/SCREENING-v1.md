@@ -6,7 +6,7 @@ This is **not** the print shop's calibrated RIP, spectral Riso simulation, press
 
 ## Try it
 
-Serve the repo locally and open [the separation lab](../examples/separation-lab/index.html) to change screening modes, global pitch/angle/seed, and per-ink angles and registration offsets. Download monochrome plates, the ink separation recipe, and a distinct screen recipe.
+Serve the repo locally and open [the live Stipra app](https://apps.yigitdenktas.com/stipra/) (source: [web/stipra](../web/stipra/index.html)) to change screening modes, global pitch/angle/seed, and per-ink angles and registration offsets. Download monochrome plates, the ink separation recipe, and a distinct screen recipe.
 
 ```sh
 npm install
