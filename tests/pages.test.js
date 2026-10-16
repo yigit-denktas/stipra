@@ -40,3 +40,21 @@ test('build copies exact source JS, preserves real script order and is determini
     assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/app.js']);
   }finally{fs.rmSync(out,{force:true,recursive:true});}
 });
+
+test('Stipra layout keeps one source of truth and exposes distinct artwork, plates and inspector',()=>{
+  const html=fs.readFileSync(path.join(ROOT,'web/stipra/index.html'),'utf8');
+  const js=fs.readFileSync(path.join(ROOT,'web/stipra/app.js'),'utf8');
+  assert.match(html,/id="hero"\s+class="hero-grid"/);
+  assert.match(html,/id="plates"\s+class="plate-grid"/);
+  assert.match(html,/id="inspector"\s+class="inspector"/);
+  assert.match(html,/grid-template-columns:minmax\(0,1fr\) minmax\(280px,318px\)/);
+  assert.match(html,/@media\(max-width:680px\)/);
+  assert.match(html,/max-width:100%/);
+  assert.match(js,/\$\('hero'\)\.replaceChildren\(\)/);
+  assert.match(js,/\$\('plates'\)\.replaceChildren\(\)/);
+  for(const id of ['file','mode','paper','inks','screen-inks','screen-mode','screen-pitch','screen-angle','screen-jitter','screen-seed','save-preview','save-plates','save-recipe','save-screen-recipe']){
+    assert.ok(html.includes('id="'+id+'"'),'Required control missing: '+id);
+  }
+  assert.match(html,/<details id="screen-settings"/);
+  assert.match(js,/document\.createElement\('details'\)/);
+});
