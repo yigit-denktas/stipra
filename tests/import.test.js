@@ -117,7 +117,7 @@ test('browser-global metadata and orientation contract match Node and platform d
   const nodeMeta=Probe.inspect(data),browserMeta=scope.StipraImportProbe.inspect(data);
   assert.equal(JSON.stringify(browserMeta),JSON.stringify(nodeMeta));
   const result=await Shared.ingest(data,{
-    decode:async()=>({width:4,height:3}),canvas:(w,h)=>{
+    decode:async()=>fixture(),canvas:(w,h)=>{
       const c=makeCanvas(w,h);return c;
     }
   },{sourceName:'mock.png'});
