@@ -25,3 +25,4 @@ jobs:
       - run: node --check bin/scene.js
       - run: node --check bin/stipra.js
       - run: npm test
+      - run: node scripts/browser-smoke.js
