@@ -8,15 +8,15 @@
       "name": "Pine black",
       "color": "#17332d",
       "source": "darkness",
-      "gain": 0.9,
-      "gamma": 1.1
+      "gain": 0.38,
+      "gamma": 1.6
     },
     {
       "id": "fern",
       "name": "Fern",
       "color": "#4e8a51",
       "source": "green",
-      "gain": 0.8,
+      "gain": 0.45,
       "gamma": 1.25
     },
     {
@@ -24,7 +24,7 @@
       "name": "Earth",
       "color": "#aa7959",
       "source": "red",
-      "gain": 0.55,
+      "gain": 0.22,
       "gamma": 1.4
     }
   ]
