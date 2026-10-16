@@ -30,7 +30,7 @@ Stipra is a small workshop for doing just that: experimenting with color, turnin
 
 ## Try it
 
-There are a few working experiments to explore right now. They are deliberately separate experiments; you don't need to understand the entire project to use one.
+**The Separation Lab is the public app**, built automatically for Cloudflare Pages. The remaining browser pages below are engineering examples you can still run locally; they aren't separate deployed applications.
 
 ### In your browser
 
@@ -42,16 +42,16 @@ cd stipra
 python -m http.server 8080
 ```
 
-Then open one of these pages:
+The published application lives at **[apps.yigitdenktas.com/stipra/](https://apps.yigitdenktas.com/stipra/)**. The other experiments remain available when running the repository locally:
 
 | Open | What you'll find |
 | --- | --- |
-| **[Separation lab](http://localhost:8080/examples/separation-lab/)** | Drop an image, choose two spot inks or CMYK, adjust real grayscale coverage masks and inspect the overprint. Adjust screens, pitch, ink angles and registration; download real grayscale plates and both recipes. **Digital screening, not press-calibrated.** |
+| **[Stipra app](https://apps.yigitdenktas.com/stipra/)** | Drop an image, choose two spot inks or CMYK, adjust real grayscale coverage masks and inspect the overprint. Adjust screens, pitch, ink angles and registration; download real grayscale plates and both recipes. **Digital screening, not press-calibrated.** |
 | **[Image importer](http://localhost:8080/examples/import-studio/)** | Drop a PNG, JPEG, WebP, or supported geometric SVG. Inspect its size and metadata, preview it, and download a normalized PNG. |
 | **[Prehnite print experiment](http://localhost:8080/examples/prehnite-v8/)** | An experimental editor with six colorways, print textures, and a working procedural renderer. This is where Stipra started, not the finished studio UI. |
 | **[Vector plates demo](http://localhost:8080/examples/scene-contract/)** | One scene viewed as a composite and as separate, aligned vector ink plates. |
 
-The importer runs in the browser without sending your artwork to a service. The SVG importer intentionally accepts a limited set of geometric shapes and rejects unsupported features instead of silently changing them. See [supported formats and limits](docs/IMPORT.md).
+The Stipra app is also available locally at [web/stipra/](web/stipra/index.html) when you serve the cloned repository. The importer runs in the browser without sending your artwork to a service. The SVG importer intentionally accepts a limited set of geometric shapes and rejects unsupported features instead of silently changing them. See [supported formats and limits](docs/IMPORT.md).
 
 ### From your terminal
 

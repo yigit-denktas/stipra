@@ -1,0 +1,42 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {build,SOURCES}=require('../scripts/build-pages.js');
+const ROOT=path.resolve(__dirname,'..');
+test('Cloudflare Pages build emits one self-contained app under /stipra, no duplicate production HTML',()=>{
+  const out=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-pages-'));
+  try{
+    const built=build(out);
+    assert.equal(built.app,'/stipra/');
+    const html=fs.readFileSync(path.join(out,'stipra/index.html'),'utf8');
+    const source=fs.readFileSync(path.join(ROOT,'web/stipra/index.html'),'utf8');
+    assert.ok(source.includes('screen-mode')&&html.includes('screen-mode'));
+    assert.ok(!html.includes('../../src/'),'published app must resolve its own assets');
+    for(const [,name] of SOURCES) {
+      assert.ok(html.includes('./assets/'+name),'app must reference '+name);
+      assert.ok(fs.existsSync(path.join(out,'stipra/assets',name)));
+    }
+    assert.equal(fs.existsSync(path.join(out,'stipra/browser-smoke.html')),false,'tests must not be published');
+    assert.equal(fs.existsSync(path.join(out,'examples')),false,'no duplicated demo tree');
+    assert.equal(fs.existsSync(path.join(out,'index.html')),false,'root should only redirect; no copy of the app');
+    assert.match(fs.readFileSync(path.join(out,'_redirects'),'utf8'),/\/ \/stipra\/ 302/);
+    assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/connect-src 'none'/);
+    const files=fs.readdirSync(path.join(out,'stipra'));
+    assert.deepEqual(files.sort(),['assets','index.html']);
+  }finally{fs.rmSync(out,{force:true,recursive:true});}
+});
+test('build copies exact source JS, preserves real script order and is deterministic',()=>{
+  const out=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-pages-'));
+  try{
+    const first=build(out);
+    const content=first.files.map(n=>fs.readFileSync(path.join(out,n)));
+    const second=build(out);
+    for(let i=0;i<content.length;i++)assert.deepEqual(content[i],fs.readFileSync(path.join(out,second.files[i])));
+    for(const [source,dest] of SOURCES){
+      assert.deepEqual(fs.readFileSync(path.join(ROOT,source)),fs.readFileSync(path.join(out,'stipra/assets',dest)));
+    }
+    const html=fs.readFileSync(path.join(out,'stipra/index.html'),'utf8');
+    const tags=[...html.matchAll(/<script\s+src="([^"]+)"/g)].map(m=>m[1]);
+    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/app.js']);
+  }finally{fs.rmSync(out,{force:true,recursive:true});}
+});
