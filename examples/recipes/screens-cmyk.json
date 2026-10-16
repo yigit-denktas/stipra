@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "seed": 142,
+  "default": {
+    "mode": "dots",
+    "pitch": 10,
+    "angle": 15,
+    "dotScale": 1,
+    "jitter": 0.02
+  },
+  "plates": {
+    "cyan": {
+      "angle": 15
+    },
+    "magenta": {
+      "angle": 75
+    },
+    "yellow": {
+      "angle": 0
+    },
+    "black": {
+      "mode": "hybrid",
+      "angle": 45,
+      "solidThreshold": 0.8
+    }
+  }
+}
