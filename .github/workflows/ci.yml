@@ -19,6 +19,8 @@ jobs:
       - run: node --check src/separation.js
       - run: node --check src/screening.js
       - run: node --check bin/separate.js
+      - run: node --check bin/package.js
+      - run: node --check src/print-package.js
       - run: node --check src/import/svg.js
       - run: node --check src/import/probe.js
       - run: node --check src/import/asset.js
