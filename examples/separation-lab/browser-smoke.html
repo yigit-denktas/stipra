@@ -74,7 +74,7 @@
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
     document.body.dataset.smoke='fail';
-    output.textContent='BROWSER_SEPARATION_FAIL: '+error.message+' | status='+(d?.getElementById('status')?.textContent||'no studio');
+    output.textContent='BROWSER_SEPARATION_FAIL: '+error.message+' | status='+(d?.getElementById('status')?.textContent||'no studio')+' | error='+(d?.getElementById('error')?.textContent||'none');
   }
 })().catch(e=>{document.body.dataset.smoke='fail';document.getElementById('out').textContent='BROWSER_SEPARATION_FAIL: '+e.message;});
 </script></body></html>
