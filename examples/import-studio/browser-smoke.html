@@ -15,13 +15,8 @@
         throw Error('Timed out: ' + label);
       }
       const iframe=document.getElementById('studio');
-      await new Promise((resolve,reject)=>{
-        if(iframe.contentDocument?.readyState==='complete')return resolve();
-        iframe.addEventListener('load',resolve,{once:true});
-        iframe.addEventListener('error',()=>reject(Error('Iframe failed to load')),{once:true});
-      });
+      await until(()=>iframe.contentDocument?.getElementById('file') && iframe.contentDocument?.getElementById('drop'), 'studio controls loaded');
       const doc=iframe.contentDocument;
-      if(!doc.getElementById('file') || !doc.getElementById('drop')) throw Error('Studio controls missing');
       const d=id=>doc.getElementById(id);
       function drop(file) {
         const data=new DataTransfer();
