@@ -29,7 +29,7 @@ function help(){
   'Options: --preset 01..06|all, --config JSON, --seed INTEGER,',
   '         --format png,svg,jpg,webp, --scale 1..3, --plates, --out DIR',
   '',
-  'Planned for v0.9: import, separate, sheet, compare, batch.',
+  'Planned for v0.9: image import, separate, sheet, compare, batch.',
   ''
  ].join('\n'));
 }
@@ -84,6 +84,7 @@ async function main(){
  const opts=parse(process.argv.slice(2)),cmd=opts._[0];
  if(!cmd||opts.help||cmd==='help'){help();return;}
  if(cmd==='presets'){console.log(JSON.stringify(Engine.listPresets(),null,2));return;}
+ if(cmd==='scene'){require('./scene.js').run(process.argv.slice(3));return;}
  if(cmd==='render'){
   const preset=String(opts.preset||'01');
   if(preset==='all'&&opts.config)throw Error('--config cannot be combined with --preset all');
