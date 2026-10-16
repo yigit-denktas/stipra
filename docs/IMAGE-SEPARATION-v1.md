@@ -2,7 +2,7 @@
 
 **Implemented (issue #7):** a deterministic, pure JavaScript mapping from one full-frame **oriented RGBA image** to independent **continuous-tone grayscale coverage masks** (spot inks or CMYK), plus an approximate digital overprint preview and statistics. Source: [src/separation.js](../src/separation.js). Shared unchanged between Node and the browser.
 
-This **does not** simulate halftone dots (#5), produce calibrated real-press ink recipes or replace production-export and registration/trim features (#8). The current masks use source-image pixel alignment (full canvas). Advanced screening, PDF reports and ZIP packages are forthcoming (#5, #9, #12).
+This module generates **unscreened** 8-bit image coverage. The separate [screening engine](SCREENING-v1.md) (#5) now applies dots, reverse knockouts, lines and hybrid patterns to the same full-frame masks; no calibrated real-press inks, professional trim/registration masters (#8), A4 PDF reports (#9) or ZIP packages (#12) are implied.
 
 ## See and edit in the browser
 
@@ -84,4 +84,4 @@ const result = separation.separate({width, height, rgba}, recipe);
 // separation.plateRGBA(mask.coverage): black/white grayscale PNG input
 ```
 
-Runtime invariants are exercised in [separation tests](../tests/separation.test.js): pure black, primaries, alpha, 2–8 spot and four-ink validity, real user-adjustable masks, source preservation, browser/Node parity, full-frame CLI PNGs, and refusal to overwrite existing files. Browser demo smoke tests use real Chromium on CI.
+Runtime invariants are exercised in [separation tests](../tests/separation.test.js): pure black, primaries, alpha, 2–8 spot and four-ink validity, real user-adjustable masks, source preservation, browser/Node parity, full-frame CLI PNGs, and refusal to overwrite existing files. Browser demo smoke tests use real Chromium on CI, including actual per-ink screen edits through the [screening engine](SCREENING-v1.md).

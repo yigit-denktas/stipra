@@ -12,6 +12,8 @@
     {id:'black',name:'Black',color:'#161616',source:'black'}
   ]});
   let asset=null,result=null,original=null,config=spot(),views=[];
+  const freshScreen=()=>({version:1,seed:142,default:{mode:'solid',pitch:12,angle:0,jitter:0,dotScale:1,solidThreshold:0.9},plates:{}});
+  let screenConfig=freshScreen();
   const field=(where,label,value,type,callback,options)=>{
     const div=document.createElement('div');div.className='field';
     const id='control-'+where.dataset.ink+'-'+label.replace(/\W/g,'-');
@@ -51,6 +53,48 @@
       host.appendChild(box);
     }
   }
+  function screenControls(){
+    const host=$('screen-inks');host.replaceChildren();
+    for(const ink of config.inks){
+      const section=document.createElement('section');section.className='ink';
+      const heading=document.createElement('div');heading.className='ink-title';heading.textContent=ink.name+' screen';section.appendChild(heading);
+      function field(label,name,value,min,max,step){
+        const wrap=document.createElement('div');wrap.className='field';
+        const el=document.createElement('input'),cap=document.createElement('label');
+        el.type='number';el.id='screen-'+ink.id+'-'+name;cap.htmlFor=el.id;cap.textContent=label;
+        el.value=String(value);el.min=String(min);el.max=String(max);el.step=String(step);
+        el.addEventListener('change',()=>{
+          const number=Number(el.value);
+          screenConfig.plates[ink.id]??={};
+          if(name==='x'||name==='y'||name==='rotate'){
+            screenConfig.plates[ink.id].registration??={};
+            screenConfig.plates[ink.id].registration[name]=number;
+          } else screenConfig.plates[ink.id][name]=number;
+          schedule();
+        });
+        wrap.append(cap,el);section.appendChild(wrap);
+      }
+      const row=document.createElement('div'),label=document.createElement('label'),select=document.createElement('select');
+      row.className='field';
+      select.id='screen-'+ink.id+'-mode';label.htmlFor=select.id;label.textContent='Mode override';
+      for(const [value,name] of [['','Use global'],['solid','Unscreened'],['dots','Dots'],['reverse','Reverse knockout'],['lines','Lines'],['hybrid','Hybrid'],['paper','Suppress ink']]){
+        const option=document.createElement('option');option.value=value;option.textContent=name;select.appendChild(option);
+      }
+      select.value=screenConfig.plates[ink.id]?.mode??'';
+      select.addEventListener('change',()=>{
+        screenConfig.plates[ink.id]??={};
+        if(select.value)screenConfig.plates[ink.id].mode=select.value;
+        else delete screenConfig.plates[ink.id].mode;
+        schedule();
+      });
+      row.append(label,select);section.appendChild(row);
+      const customAngle=screenConfig.plates[ink.id]?.angle??screenConfig.default.angle;
+      field('Ink angle (°)','angle',customAngle,-180,180,1);
+      field('Registration x (px)','x',screenConfig.plates[ink.id]?.registration?.x??0,-50,50,1);
+      field('Registration y (px)','y',screenConfig.plates[ink.id]?.registration?.y??0,-50,50,1);
+      host.appendChild(section);
+    }
+  }
   function canvas(width,height,rgba){
     const c=document.createElement('canvas');c.width=width;c.height=height;
     const ctx=c.getContext('2d'),data=ctx.createImageData(width,height);
@@ -78,7 +122,8 @@
     if(!asset)return;
     try{
       const w=asset.metadata.oriented.width,h=asset.metadata.oriented.height;
-      result=StipraSeparation.separate({width:w,height:h,rgba:asset.rgba},config);
+      const baseline=StipraSeparation.separate({width:w,height:h,rgba:asset.rgba},config);
+      result=StipraScreen.apply(baseline,screenConfig);
       $('grid').replaceChildren();views=[];
       views.push(show('Original',asset.rgba));
       views.push(show('Simulated overprint',result.preview));
@@ -88,7 +133,7 @@
         views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean ink coverage'));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
-      $('meta').textContent=result.warning;
+      $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
       $('save-preview').disabled=false;$('save-plates').disabled=false;
     }catch(error){
       $('error').textContent=error.message;$('error').hidden=false;
@@ -97,8 +142,8 @@
   }
   async function decode(bytes,type){
     const blob=new Blob([bytes],{type});
-    if(type!=='image/svg+xml'&&typeof createImageBitmap==='function')
-      return createImageBitmap(blob,{imageOrientation:'none'});
+    // Use one reliable browser decode path for every supported local format.
+    // Source EXIF orientation is neutralized in a temporary decoding copy.
     return new Promise((resolve,reject)=>{
       const url=URL.createObjectURL(blob),img=new Image();
       img.onload=()=>{URL.revokeObjectURL(url);resolve(img);};
@@ -131,7 +176,14 @@
   const downloadCanvas=(view,filename)=>view.canvas.toBlob(blob=>save(blob,filename),'image/png');
   $('mode').addEventListener('change',()=>{
     config=$('mode').value==='spot'?spot():cmyk();
-    $('paper').value=config.paper;controls();schedule();
+    $('paper').value=config.paper;screenConfig=freshScreen();
+    try{
+      controls();screenControls();
+      render(); // A mode switch is a discrete action; do not leave stale plate images queued.
+    }catch(error){
+      $('status').textContent='Failed to change separation mode.';
+      $('error').textContent=error.message;$('error').hidden=false;
+    }
   });
   $('paper').addEventListener('input',e=>{config.paper=e.target.value;schedule();});
   $('file').addEventListener('change',e=>load(e.target.files?.[0]));
@@ -142,5 +194,17 @@
   $('save-preview').addEventListener('click',()=>{if(result)downloadCanvas(views[1],'stipra-overprint-preview.png');});
   $('save-plates').addEventListener('click',()=>{if(result)for(let i=2;i<views.length;i++)downloadCanvas(views[i],'stipra-'+result.masks[i-2].id+'-plate.png');});
   $('save-recipe').addEventListener('click',()=>save(new Blob([JSON.stringify(StipraSeparation.validate(config),null,2)+'\n'],{type:'application/json'}),'stipra-separation-recipe.json'));
-  controls();
+  $('screen-mode').addEventListener('change',e=>{screenConfig.default.mode=e.target.value;schedule();});
+  for(const [id,key] of [['screen-pitch','pitch'],['screen-angle','angle'],['screen-jitter','jitter'],['screen-seed','seed']]){
+    $(id).addEventListener('change',e=>{
+      if(key==='seed')screenConfig.seed=Number(e.target.value);
+      else screenConfig.default[key]=Number(e.target.value);
+      schedule();
+    });
+  }
+  $('save-screen-recipe').addEventListener('click',()=>{
+    const normalized=StipraScreen.config(screenConfig,config.inks.map(i=>i.id));
+    save(new Blob([JSON.stringify(normalized,null,2)+'\n'],{type:'application/json'}),'stipra-screen-recipe.json');
+  });
+  controls();screenControls();
 })();

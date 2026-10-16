@@ -47,10 +47,34 @@
     if(grey(canvases()[2],0,0)!==255)throw Error('transparent pixel routed to cyan');
     if(el('error').hidden!==true)throw Error('unreported separation UI error: '+el('error').textContent);
 
+    // End-to-end browser check that screening edits *the actual plate data*.
+    el('mode').value='spot';
+    el('mode').dispatchEvent(new Event('change',{bubbles:true}));
+    const illustration=document.createElement('canvas');
+    illustration.width=48;illustration.height=32;
+    const painter=illustration.getContext('2d');
+    painter.fillStyle='#999999';painter.fillRect(0,0,48,32);
+    painter.fillStyle='#e65e4b';painter.fillRect(24,0,12,32);
+    const screeningBlob=await new Promise(resolve=>illustration.toBlob(resolve,'image/png'));
+    const screeningTransfer=new DataTransfer();
+    screeningTransfer.items.add(new File([screeningBlob],'screening.png',{type:'image/png'}));
+    el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:screeningTransfer}));
+    await until(()=>el('status').textContent.includes('SPOT · 48 × 32 px'),'screening source loaded');
+    const baseline=Array.from(canvases()[2].getContext('2d').getImageData(0,0,48,32).data);
+    el('screen-mode').value='dots';el('screen-mode').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>canvases()[2].width===48 && baseline.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
+      'real screen raster mask changed');
+    const dotted=Array.from(canvases()[2].getContext('2d').getImageData(0,0,48,32).data);
+    if(!dotted.some((v,i)=>v!==baseline[i]))throw Error('Dots do not affect actual grayscale coverage');
+    el('screen-blue-x').value='4';
+    el('screen-blue-x').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>dotted.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
+      'per-ink registration shifted plate');
+    if(canvases().some(c=>c.width!==48||c.height!==32))throw Error('Screening changed plate layout');
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
     document.body.dataset.smoke='fail';
-    output.textContent='BROWSER_SEPARATION_FAIL: '+error.message+' | status='+(d?.getElementById('status')?.textContent||'no studio');
+    output.textContent='BROWSER_SEPARATION_FAIL: '+error.message+' | status='+(d?.getElementById('status')?.textContent||'no studio')+' | error='+(d?.getElementById('error')?.textContent||'none');
   }
 })().catch(e=>{document.body.dataset.smoke='fail';document.getElementById('out').textContent='BROWSER_SEPARATION_FAIL: '+e.message;});
 </script></body></html>

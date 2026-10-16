@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "seed": 142,
+  "default": {
+    "mode": "dots",
+    "pitch": 12,
+    "angle": 35,
+    "dotScale": 1,
+    "jitter": 0.03,
+    "solidThreshold": 0.92,
+    "registration": {
+      "x": 0,
+      "y": 0,
+      "rotate": 0
+    }
+  },
+  "plates": {
+    "blue": {
+      "mode": "hybrid",
+      "pitch": 10,
+      "angle": 30,
+      "solidThreshold": 0.85
+    },
+    "coral": {
+      "mode": "reverse",
+      "pitch": 12,
+      "angle": -20,
+      "jitter": 0.07
+    }
+  }
+}
