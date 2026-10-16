@@ -1,10 +1,14 @@
-# Architecture · proposed
+# Architecture · implemented foundation and proposed extensions
 
 ## Current foundation
 
 The preserved Prehnite v8 source includes a browser editor and a reusable scene/plate renderer in examples/prehnite-v8/src/engine.js, plus font outlines from Inter under SIL OFL.
 
 Stipra's root CLI initially calls that case-study engine. This is a bridge, **not** the finished generalized Stipra architecture.
+
+## Implemented generic vector core (issue #2)
+
+`src/core.js` validates v1 recipes with explicit canvas/trim/bleed, paper stock, one physical plate per named spot ink, layer geometry and transforms, clipping, registration offsets, provenance and independent per-system seeds. It returns deterministic scenes in Node and in browsers from identical source. `bin/scene.js` and the lightweight browser inspector render the same vector composite and aligned black-on-white spot-ink SVG plates. `docs/RECIPE-v1.md` defines the contract. No image decomposition, halftone dots, calibrated output or PDF report is implied by this implementation.
 
 ## Target modules
 
@@ -19,7 +23,7 @@ Stipra's root CLI initially calls that case-study engine. This is a bridge, **no
 
 ## Shared contract
 
-A recipe describes canvas/trim dimensions, optional bleed/registration marks, paper, inks (one plate per ink), layers, deterministic seeds, and separation method. Both browser and CLI must interpret this same recipe.
+v1 recipes describe full pixel canvas/trim/bleed, paper, inks (one plate per ink), primitive layers, transform/clipping, registration offsets and deterministic seeds. The future raster/import separation method will extend the versioned contract explicitly. Browser and CLI use the same implemented validator/resolver.
 
 Preview compositing is a **simulation**, not a claim that RGB multiply reproduces a calibrated physical press. Ink percentages may overlap and therefore need not sum to 100.
 
