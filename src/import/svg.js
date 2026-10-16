@@ -33,7 +33,7 @@
     const Parser = DOMParserCtor || (typeof DOMParser === 'function' ? DOMParser : null);
     if (!Parser) fail('XML parser unavailable');
     let parsingError = null;
-    const parser = new Parser({errorHandler: {warning: ()=>{}, error: x => {parsingError=String(x);}, fatalError: x => {parsingError=String(x);}}});
+    const parser = new Parser({onError: (level, message) => {if (level !== 'warning') parsingError = String(message);}});
     const doc = parser.parseFromString(source, 'image/svg+xml');
     if (parsingError || !doc || !doc.documentElement || doc.getElementsByTagName('parsererror').length)
       fail('malformed XML' + (parsingError ? ': ' + parsingError : ''));
