@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 
 test('README uses the original SVG exactly once, as artwork rather than a flattened banner', () => {
   const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-  const header = readme.split('## What is Stipra?')[0];
+  const header = readme.split('\n</div>')[0];
   const original = fs.readFileSync(path.join(root, 'logo_for_Readme.svg'), 'utf8');
   const heading = header.indexOf('<h1>stipra</h1>');
   const subtitle = header.indexOf('A programmable printmaking studio.');
@@ -26,4 +26,21 @@ test('README issues badge is static and links to repository issues without GitHu
   assert.match(readme, /img\.shields\.io\/badge\/issues-v0\.9%20backlog/);
   assert.match(readme, /github\.com\/yigit-denktas\/stipra\/issues/);
   assert.doesNotMatch(readme, /img\.shields\.io\/github\/issues/);
+});
+
+
+test('README points readers to real entry points and accurately distinguishes future work', () => {
+  const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+  assert.ok(readme.indexOf('## Try it') < readme.indexOf('## Where it stands'));
+  assert.ok(readme.indexOf('## Where it stands') < readme.indexOf('## Inside the workshop'));
+  for (const command of ['node bin/stipra.js presets', 'node bin/stipra.js render', 'node bin/stipra.js scene', 'node bin/stipra.js import']) {
+    assert.ok(readme.includes(command), 'README missing working command: ' + command);
+  }
+  assert.match(readme, /No color separation yet/);
+  assert.match(readme, /editable separations.*print package/);
+  assert.match(readme, /\[.*roadmap.*\]\(ROADMAP\.md\)/i);
+  for (const [, url] of readme.matchAll(/\]\(([^)]+)\)/g)) {
+    if (/^(?:https?:|#|mailto:)/.test(url)) continue;
+    assert.ok(fs.existsSync(path.join(root, url.split('#')[0])), 'README contains a dead local link: ' + url);
+  }
 });
