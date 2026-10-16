@@ -9,7 +9,8 @@
 - Inter / Inter Display-derived vector glyph outlines: **SIL Open Font License 1.1**, [notice](../LICENSES/OFL-1.1.txt); no font binaries bundled.
 - `logo_for_Readme.svg`: owner-supplied identity artwork. Do **not** presume trademark/branding permissions or external artwork rights are conferred by a code license.
 - **p5.js itself is LGPL-2.1** ([official repository](https://github.com/processing/p5.js)); it is not MIT, and embedding/distributing it requires checking LGPL obligations (notices, relinking/modification rights and bundled distribution choices). Optional p5.js compatibility does not change the license of independently authored Stipra code.
-- Current `skia-canvas` / `@xmldom/xmldom` and transitive libraries: maintain actual version/asset notices and full license report before tagged release. Some dependencies have native code or platform-specific distributions.
+- Current `skia-canvas` / `@xmldom/xmldom` and transitive libraries: maintain actual version/asset notices and full license report before tagged release.
+- Print-package PDF uses [`pdf-lib`](https://github.com/Hopding/pdf-lib) **MIT**; ZIP uses [`JSZip`](https://github.com/Stuk/jszip) under its **MIT alternative** to the dual MIT/GPL-3 license. The application code remains MIT; dependency notices and any transitive licenses still require a tagged release audit. Some dependencies have native code or platform-specific distributions.
 - User-submitted visual references, photographs, prints and screenshots: use for private comparison; do not redistribute without rights. SVG format alone does not establish reuse permission.
 - [Jeffrey Warren's risoAtHome](https://github.com/jywarren/risoAtHome): consulted for general CMYK/registration concepts, **no source copied**.
 - [p5.riso@home](https://github.com/adrawerofthings/p5.risoAtHome): mixed code/assets and licenses; audit each component separately before considering reuse.
