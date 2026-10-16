@@ -141,8 +141,8 @@
   }
   async function decode(bytes,type){
     const blob=new Blob([bytes],{type});
-    if(type!=='image/svg+xml'&&typeof createImageBitmap==='function')
-      return createImageBitmap(blob,{imageOrientation:'none'});
+    // Use one reliable browser decode path for every supported local format.
+    // Source EXIF orientation is neutralized in a temporary decoding copy.
     return new Promise((resolve,reject)=>{
       const url=URL.createObjectURL(blob),img=new Image();
       img.onload=()=>{URL.revokeObjectURL(url);resolve(img);};
