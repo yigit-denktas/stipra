@@ -16,6 +16,10 @@ For **every issue**, record:
 
 Use branch names like feat/123-separation-sheet or fix/456-plate-offset. PR body must say Closes #123 (when applicable), list test commands and screenshots/report artifacts. Keep work traceable both forward (issue → branch → PR → commit) and backward (commit → PR → issue). Never mark a milestone complete on prose alone. Close genuine duplicates using GitHub's duplicate reason and a cross-link.
 
+## Before changing defaults or the studio UI
+
+Read [DESIGN.md](DESIGN.md) for Stipra's product principles, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.
+
 ## Technical rules
 
 - Generate render pixels procedurally; reference artwork may be used for comparison only.

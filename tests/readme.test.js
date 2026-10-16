@@ -29,24 +29,38 @@ test('README issues badge is static and links to repository issues without GitHu
 });
 
 
-test('README points readers to real entry points and accurately distinguishes future work', () => {
+test('README is a short human entry point and links to real help for people and agents', () => {
   const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-  assert.ok(readme.indexOf('## Try it') < readme.indexOf('## Where it stands'));
-  assert.ok(readme.indexOf('## Where it stands') < readme.indexOf('## Inside the workshop'));
-  for (const command of ['node bin/stipra.js presets', 'node bin/stipra.js render', 'node bin/stipra.js scene', 'node bin/stipra.js import']) {
-    assert.ok(readme.includes(command), 'README missing working command: ' + command);
-  }
-  assert.match(readme, /real ink masks/i);
-  assert.match(readme, /CMYK/i);
-  assert.match(readme, /spot\/CMYK masks/i);
-  assert.match(readme, /deterministic raster screening/i);
-  assert.ok(readme.includes('node bin/stipra.js separate'));
-  assert.ok(readme.includes('docs/SCREENING-v1.md'));
-  assert.match(readme, /not press-calibrated/i);
-  assert.match(readme, /complete.*print package/i);
-  assert.match(readme, /\[.*roadmap.*\]\(ROADMAP\.md\)/i);
-  for (const [, url] of readme.matchAll(/\]\(([^)]+)\)/g)) {
-    if (/^(?:https?:|#|mailto:)/.test(url)) continue;
-    assert.ok(fs.existsSync(path.join(root, url.split('#')[0])), 'README contains a dead local link: ' + url);
+  const guide = fs.readFileSync(path.join(root, 'docs/GETTING-STARTED.md'), 'utf8');
+  const design = fs.readFileSync(path.join(root, 'DESIGN.md'), 'utf8');
+  const roadmap = fs.readFileSync(path.join(root, 'ROADMAP.md'), 'utf8');
+
+  assert.ok(readme.length < 5500, 'intro must stay short; move implementation detail to docs');
+  assert.ok(readme.indexOf('## Try it') < readme.indexOf('## Where we are'));
+  assert.ok(readme.indexOf('## Where we are') < readme.indexOf('## Follow the work'));
+  assert.match(readme, /https:\/\/apps\.yigitdenktas\.com\/stipra\//);
+  assert.match(readme, /node bin\/stipra\.js separate/);
+  assert.ok(readme.includes('examples/recipes/spot-photo.json'));
+  assert.ok(readme.includes('examples/recipes/screens-spot.json'));
+  assert.match(readme, /spot\/CMYK|spot inks or CMYK/);
+  assert.match(readme, /digital approximations/i);
+  assert.match(readme, /5 of the original 14 issues completed \(35\.71% by issue count\)/);
+  assert.match(roadmap, /5 of the original #1–#14 tasks merged/);
+  for(const expected of ['DESIGN.md','ROADMAP.md','AGENTS.md','CONTRIBUTING.md','docs/PRINT-DESIGN-RULES.md','docs/references/README.md','docs/GETTING-STARTED.md'])
+    assert.ok(readme.includes(']('+expected+')'), 'missing navigation: '+expected);
+
+  for (const command of ['node bin/stipra.js presets', 'node bin/stipra.js render', 'node bin/stipra.js scene', 'node bin/stipra.js import', 'node bin/stipra.js separate'])
+    assert.ok(guide.includes(command), 'moved quickstart missing: '+command);
+  assert.match(design, /R01–R10|printmaking rules/i);
+  assert.match(design, /not.*implemented|proposed/i);
+  assert.match(design, /one central interactive canvas|one central|side-by-side/i);
+
+  for(const file of ['README.md','DESIGN.md','docs/GETTING-STARTED.md']){
+    const full = path.join(root, file), body = fs.readFileSync(full, 'utf8');
+    for(const [, url] of body.matchAll(/\]\(([^)]+)\)/g)){
+      if(/^(?:https?:|#|mailto:)/.test(url)) continue;
+      assert.ok(fs.existsSync(path.resolve(path.dirname(full),url.split('#')[0])),
+        'broken relative link in '+file+': '+url);
+    }
   }
 });

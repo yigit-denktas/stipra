@@ -1,6 +1,8 @@
 # Dizzy Ink guide · field notes for Stipra
 
-**Original:** [Risograph Print Guide](https://risograph.co.uk/) — designed and curated by **Dizzy Ink**, a UK print studio. **Research reviewed:** 17 October 2026. **Status:** reference and design research, *not* an implemented Stipra feature specification or reproduction of the website.
+**Original:** [Interactive Risograph Print Guide](https://risograph.co.uk/) — designed and curated by **Dizzy Ink**, a UK print studio. **Research reviewed:** 17 October 2026. **Status:** reference and design research, *not* an implemented Stipra feature specification or reproduction of the website.
+
+For the image-rich **Dizzy Ink studio guide** at a *different URL*, see [our visual analysis of its four reference images](DIZZY-INK-VISUALS.md) and the [original source](https://www.dizzyink.co.uk/guide-to-risograph).
 
 The strongest lesson is not a particular color, layout, or texture. It's that a print workflow becomes intuitive when **every control visibly refers to a physical ink layer, a sheet of paper, or a known production trade-off**. Below are Stipra-authored observations and questions. Open each original link for Dizzy Ink's artwork, diagrams and interactive demos.
 
