@@ -16,6 +16,9 @@ jobs:
       - run: node --check examples/prehnite-v8/app.js
       - run: npm install --no-audit --no-fund
       - run: node --check src/core.js
+      - run: node --check src/separation.js
+      - run: node --check bin/separate.js
+      - run: node --check examples/separation-lab/app.js
       - run: node --check src/import/svg.js
       - run: node --check src/import/probe.js
       - run: node --check src/import/asset.js
@@ -26,3 +29,4 @@ jobs:
       - run: node --check bin/stipra.js
       - run: npm test
       - run: node scripts/browser-smoke.js
+      - run: STIPRA_SMOKE_PAGE=examples/separation-lab/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js

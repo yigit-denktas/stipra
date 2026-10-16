@@ -34,7 +34,9 @@ async function run(){
    }catch{res.writeHead(404).end();}
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
- const url='http://127.0.0.1:'+server.address().port+'/examples/import-studio/browser-smoke.html';
+ const page=process.env.STIPRA_SMOKE_PAGE||'examples/import-studio/browser-smoke.html';
+ if(!/^examples\/[a-z0-9-]+\/browser-smoke\.html$/.test(page))throw Error('Invalid smoke page path');
+ const url='http://127.0.0.1:'+server.address().port+'/'+page;
  try{
    const result=await new Promise((resolve,reject)=>{
      const args=['--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run','--virtual-time-budget=12000','--dump-dom',url];
@@ -52,9 +54,9 @@ async function run(){
      });
    });
    const output=result.match(/<output id="out">([^<]*)<\/output>/)?.[1]||'output missing';
-   if(!/<body[^>]*data-smoke="pass"/.test(result)||output!=='BROWSER_SMOKE_PASS')
+   if(!/<body[^>]*data-smoke="pass"/.test(result)||output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))
      throw Error('Browser smoke failed: '+output);
-   process.stdout.write('Chromium browser import smoke: PASS (SVG drop, PNG alpha, unsafe SVG rejection)\n');
+   process.stdout.write('Chromium browser smoke: PASS ('+page+')\n');
  }finally{server.close();}
 }
 if(require.main===module)run().catch(err=>{console.error(err.message);process.exitCode=1;});

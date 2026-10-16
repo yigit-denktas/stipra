@@ -36,8 +36,10 @@ test('README points readers to real entry points and accurately distinguishes fu
   for (const command of ['node bin/stipra.js presets', 'node bin/stipra.js render', 'node bin/stipra.js scene', 'node bin/stipra.js import']) {
     assert.ok(readme.includes(command), 'README missing working command: ' + command);
   }
-  assert.match(readme, /No color separation yet/);
-  assert.match(readme, /editable separations.*print package/);
+  assert.match(readme, /continuous-tone ink masks/i);
+  assert.match(readme, /CMYK/i);
+  assert.match(readme, /editable.*spot.*CMYK.*separations/i);
+  assert.match(readme, /complete.*print package/i);
   assert.match(readme, /\[.*roadmap.*\]\(ROADMAP\.md\)/i);
   for (const [, url] of readme.matchAll(/\]\(([^)]+)\)/g)) {
     if (/^(?:https?:|#|mailto:)/.test(url)) continue;

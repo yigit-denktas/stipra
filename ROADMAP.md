@@ -23,8 +23,8 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Prehnite case-study foundation | [#1](https://github.com/yigit-denktas/stipra/issues/1) | **Merged** | Done |
 | Vector scene, ink plates and stable recipe v1 | [#2](https://github.com/yigit-denktas/stipra/issues/2) | **Merged** | Done |
 | Local PNG/JPEG/WebP and restricted SVG import | [#6](https://github.com/yigit-denktas/stipra/issues/6) | **Merged, 21 Node tests + Chromium smoke** | Done |
-| Real spot / CMYK **image-to-mask** separation | [#7](https://github.com/yigit-denktas/stipra/issues/7) | Planned | **P0 — next** |
-| Dot/native/reverse/hybrid screening of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | Planned | **P0 — after mask model** |
+| Real spot / CMYK **image-to-mask** separation | [#7](https://github.com/yigit-denktas/stipra/issues/7) | **Implemented — actual continuous-tone masks, edit controls, browser lab and CLI** | Done |
+| Dot/native/reverse/hybrid screening of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | Planned | **P0 — next** |
 | Full-frame grayscale production plates and registration | [#8](https://github.com/yigit-denktas/stipra/issues/8) | Planned | P0 |
 | A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | Planned | P0 |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
@@ -59,4 +59,4 @@ The attached sample showing alternative Riso color separations is the visual ben
 
 Stipra-original code is MIT, with individual third-party notices retained. [p5.riso](https://github.com/antiboredom/p5.riso) has a restrictive Anti-Capitalist License; it is **not** a compatible MIT implementation source for copying, vendoring, generated translation or a fork. Study unprotected concepts, standard math and documented visual behavior; create and validate **independent original implementations**. See [licensing notes](docs/LICENSING.md) and [#14](https://github.com/yigit-denktas/stipra/issues/14). Commercial redistribution requires real dependency/asset provenance review.
 
-**Current progress:** 3 of the original #1–#14 tasks merged (#1, #2, #6). This counts issue completions, **not** weighted engineering percent. No work in this scope note claims any of the remaining features are finished.
+**Current progress:** 4 of the original #1–#14 tasks merged (#1, #2, #6, #7). This counts issue completions, **not** weighted engineering percent. No work in this scope note claims any of the remaining features are finished.

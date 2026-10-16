@@ -1,5 +1,7 @@
 # Separation sheets · v0.9 contract
 
+**Implementation status:** Real source-image spot and CMYK *continuous-tone masks* exist under [#7](IMAGE-SEPARATION-v1.md). This document still specifies the **planned A4 HTML/PDF separation sheet** (#9), press masters/registration (#8) and screened ink output (#5). The grayscale mask engine does not imply any of these later deliverables are finished.
+
 The supplied specimen demonstrates **three spot colors plus paper**, not CMYK. Stipra must allow 2–N spot inks *and* an optional CMYK recipe.
 
 ## Two distinct deliverables

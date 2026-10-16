@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "mode": "spot",
+  "paper": "#fff8ec",
+  "inks": [
+    {
+      "id": "coral",
+      "name": "Coral",
+      "color": "#e65e4b",
+      "source": "match",
+      "target": "#e65e4b",
+      "tolerance": 0.38,
+      "gain": 1.2,
+      "gamma": 0.9
+    },
+    {
+      "id": "blue",
+      "name": "Deep blue",
+      "color": "#2365a5",
+      "source": "match",
+      "target": "#2365a5",
+      "tolerance": 0.5,
+      "gain": 1.15,
+      "gamma": 0.85
+    }
+  ],
+  "blackHold": {
+    "inkId": "blue",
+    "threshold": 0.07
+  }
+}
