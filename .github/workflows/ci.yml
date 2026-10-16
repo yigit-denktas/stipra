@@ -16,6 +16,8 @@ jobs:
       - run: node --check examples/prehnite-v8/app.js
       - run: npm install --no-audit --no-fund
       - run: node --check src/core.js
+      - run: node --check src/separation.js
+      - run: node --check bin/separate.js
       - run: node --check src/import/svg.js
       - run: node --check src/import/probe.js
       - run: node --check src/import/asset.js
