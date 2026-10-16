@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Stipra / Prehnite study — procedural editor v8</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="shell">
+ <header class="top"><div class="branding"><span class="brandicon">◈</span><div><div class="masthead">PREHNITE <span>RISO STUDIO</span></div><div class="sub">PROCEDURAL INK ENGINE / v8</div></div></div><div class="status"><span class="live-dot"></span> ALL LOCAL · NO MODEL CALLS</div></header>
+ <section class="intro"><div><div class="eyebrow">TYPE · INK · MATERIAL · REGISTRATION</div><h1>Build it from the <em>plates.</em></h1><p>Real dot geometry, separate ink passes, editable crystal vertices, outlined typography, and vector exports. Reference artwork is used only for diagnostics.</p></div><div class="preset-btns">
+<button data-preset="01" class="active">01 · Evergreen / Coral</button>
+<button data-preset="02">02 · Midnight / Ochre</button>
+<button data-preset="03">03 · Cobalt / Mint / Pink</button>
+<button data-preset="04">04 · Moss / Rose</button>
+<button data-preset="05">05 · Indigo / Vermilion</button>
+<button data-preset="06">06 · Black / Lime</button>
+</div></section>
+ <main class="workspace"><div class="maincol">
+ <section class="panel preview"><div class="panelhead"><span>LIVE COMPOSITE <small>2020 × 779</small></span><div class="inline-controls"><label><input type="checkbox" id="editGeometry"/> Edit crystal vertices</label><button id="reroll">New seed</button></div></div>
+ <div class="stage" id="stage"><canvas id="render" width="2020" height="779" aria-label="Live procedural Prehnite logo"></canvas><canvas id="vertices" width="2020" height="779" aria-label="Editable crystal vertex overlay"></canvas></div>
+ <div class="foot"><span><b id="dotCount">—</b> procedural ink dots</span><span>PRIMARY / ACCENT <span id="plateLegend"></span></span><span id="renderStatus">Ready</span></div></section>
+ <section class="panel diagnostics"><div class="panelhead"><span>REFERENCE ALIGNMENT <small>HSL MASKS · OVERLAP · IoU</small></span><button id="recompare" class="ghost">Recompare layers</button></div>
+ <div class="diagbody"><div class="diagintro"><p>Upload a reference or use the included target. The reference is <strong>never used to generate artwork</strong> — only to compare hue-separated ink coverage against this renderer.</p><div><input type="file" id="referenceFile" accept="image/*" aria-label="Upload reference image"/><button id="exportDiagnostics">Save diagnostic PNG</button></div></div>
+ <canvas id="diagnosticCanvas" width="2020" height="779" aria-label="Side-by-side ink plate overlay diagnostics"></canvas>
+ <div id="metrics" class="metrics">Select a reference or wait for the default target to load.</div><div class="legend-diag"><span><i class="ref-only"></i> Reference only</span><span><i class="our-only"></i> Render only</span><span><i class="overlap"></i> Overlap</span><span>Pixel IoU and 12 px coarse overlap reported separately</span></div></div></section>
+ <section class="panel exports"><div><div class="eyebrow">PRODUCTION OUTPUT</div><h2>One scene, multiple formats.</h2><p>True vector SVG contains all ink dots and outlined glyphs. PNG, JPEG and WebP are rendered from the same procedural scene; plates export independently.</p></div><div class="export-controls"><label>Raster quality <select id="exportScale"><option value="1">1× · 2020 × 779</option><option value="2" selected>2× · 4040 × 1558</option><option value="3">3× · 6060 × 2337</option></select></label><div class="export-buttons"><button data-export="png">PNG</button><button data-export="jpeg">JPG</button><button data-export="webp">WebP</button><button data-export="svg" class="accentbtn">Vector SVG</button><button id="exportPlatePrimary">Primary plate</button><button id="exportPlateAccent">Accent plate</button><button id="exportPlateThird">Third plate</button><button id="exportPlateSVG">Vector ink plates</button><button id="savePreset">Preset JSON</button><button id="loadPreset">Import JSON</button></div><input type="file" id="presetFile" accept=".json,application/json" hidden/></div></section>
+ </div><aside class="sidepanel panel"><div class="panelhead"><span>ART DIRECTION</span><button class="ghost" id="reset">Reset</button></div><div class="sideinner">
+ <div class="group"><h3>01 <span>Screen construction</span></h3>
+ <div id="mainSliders"></div></div>
+ <div class="group"><h3>02 <span>Ink palette</span></h3><div class="setting-row"><label for="paperStock">Paper stock</label><select id="paperStock"><option value="Ivory">Ivory</option><option value="Natural">Natural</option><option value="Blush">Blush</option><option value="Warm Gray">Warm Gray</option></select></div><div id="colors"></div></div>
+ <div class="group"><h3>03 <span>Facet-level controls</span></h3><p class="minor">Each facet is constructed from independent stochastic screens. Density is per-plate, not a Photoshop opacity filter.</p><div id="facets"></div></div>
+ <div class="group"><h3>04 <span>Geometry & lettering</span></h3><div class="setting-row"><label for="wordFont">Wordmark glyphs</label><select id="wordFont"><option value="display-bold">Inter Display ExtraBold</option><option value="display-black">Inter Display Black</option><option value="inter-black">Inter Black</option></select></div><div id="geometrySliders"></div><p class="minor">Drag vertices in the preview. Type is built from vector outlines, never squeezed bitmap glyphs.</p></div>
+ <div class="group"><h3>05 <span>Ink register & paper</span></h3><div id="printSliders"></div></div>
+ </div></aside></main><footer>PREHNITE RISO STUDIO v8 · Pure procedural Canvas + SVG engine · MIT code · No embedded reference artwork in exported designs</footer>
+</div>
+
+<script src="src/font-atlas.js"></script>
+<script src="src/engine.js"></script>
+<script src="app.js"></script>
+</body></html>
