@@ -59,7 +59,7 @@
         document.getElementById('out').textContent='BROWSER_SMOKE_PASS';
       } catch(err) {
         document.body.dataset.smoke='fail';
-        document.getElementById('out').textContent='BROWSER_SMOKE_FAIL: '+err.message;
+        document.getElementById('out').textContent='BROWSER_SMOKE_FAIL: '+err.message+' | status='+d('status').textContent+' | error='+d('error').textContent+' | scripts='+String(!!iframe.contentWindow.StipraImport);
       }
     })().catch(e=>{document.body.dataset.smoke='fail';document.getElementById('out').textContent='BROWSER_SMOKE_FAIL: '+e.message;});
   </script>
