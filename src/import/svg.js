@@ -34,7 +34,9 @@
     if (!Parser) fail('XML parser unavailable');
     let parsingError = null;
     const parser = new Parser({onError: (level, message) => {if (level !== 'warning') parsingError = String(message);}});
-    const doc = parser.parseFromString(source, 'image/svg+xml');
+    let doc;
+    try {doc=parser.parseFromString(source, 'image/svg+xml');}
+    catch (err) {fail('malformed XML: '+err.message);}
     if (parsingError || !doc || !doc.documentElement || doc.getElementsByTagName('parsererror').length)
       fail('malformed XML' + (parsingError ? ': ' + parsingError : ''));
     const rootEl = doc.documentElement;
