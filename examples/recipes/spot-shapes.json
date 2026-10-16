@@ -1,0 +1,605 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 960,
+    "height": 560,
+    "dpi": 300,
+    "units": "px",
+    "trim": {
+      "x": 20,
+      "y": 20,
+      "width": 920,
+      "height": 520
+    },
+    "bleed": {
+      "top": 20,
+      "right": 20,
+      "bottom": 20,
+      "left": 20
+    }
+  },
+  "substrate": {
+    "name": "Warm ivory",
+    "color": "#f4efdf"
+  },
+  "inks": [
+    {
+      "id": "forest",
+      "name": "Forest green",
+      "color": "#126b57"
+    },
+    {
+      "id": "coral",
+      "name": "Coral",
+      "color": "#e86157"
+    },
+    {
+      "id": "blue",
+      "name": "Electric blue",
+      "color": "#2858b7"
+    }
+  ],
+  "plates": [
+    {
+      "id": "forest-master",
+      "inkId": "forest",
+      "role": "key",
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "screen": {
+        "mode": "solid"
+      }
+    },
+    {
+      "id": "coral-master",
+      "inkId": "coral",
+      "role": "accent",
+      "offset": {
+        "x": 3,
+        "y": -2
+      },
+      "screen": {
+        "mode": "solid"
+      }
+    },
+    {
+      "id": "blue-master",
+      "inkId": "blue",
+      "role": "accent",
+      "offset": {
+        "x": -2,
+        "y": 2
+      },
+      "screen": {
+        "mode": "solid"
+      }
+    }
+  ],
+  "layers": [
+    {
+      "id": "forest-ribbon",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            40,
+            450
+          ],
+          [
+            320,
+            65
+          ],
+          [
+            445,
+            65
+          ],
+          [
+            165,
+            450
+          ]
+        ]
+      },
+      "coverage": 0.95
+    },
+    {
+      "id": "blue-crossbar",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "rect",
+        "x": 70,
+        "y": 190,
+        "width": 835,
+        "height": 112
+      },
+      "coverage": 0.86,
+      "transform": {
+        "rotate": -9,
+        "translateX": 0,
+        "translateY": 0
+      }
+    },
+    {
+      "id": "coral-arc",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 665,
+        "y": 283,
+        "radius": 192
+      },
+      "coverage": 0.9,
+      "clip": {
+        "x": 498,
+        "y": 95,
+        "width": 365,
+        "height": 355
+      }
+    },
+    {
+      "id": "forest-cutout",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "rect",
+        "x": 474,
+        "y": 348,
+        "width": 380,
+        "height": 75
+      },
+      "coverage": 0.83
+    },
+    {
+      "id": "dot-00-00",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 85,
+        "y": 476,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-00-01",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 167,
+        "y": 476,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-00-02",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 249,
+        "y": 476,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-00-03",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 331,
+        "y": 476,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-00-04",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 413,
+        "y": 476,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-00-05",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 495,
+        "y": 476,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-00-06",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 577,
+        "y": 476,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-00-07",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 659,
+        "y": 476,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-00-08",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 741,
+        "y": 476,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-00-09",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 823,
+        "y": 476,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-01-00",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 85,
+        "y": 494,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-01-01",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 167,
+        "y": 494,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-01-02",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 249,
+        "y": 494,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-01-03",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 331,
+        "y": 494,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-01-04",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 413,
+        "y": 494,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-01-05",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 495,
+        "y": 494,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-01-06",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 577,
+        "y": 494,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-01-07",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 659,
+        "y": 494,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-01-08",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 741,
+        "y": 494,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-01-09",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 823,
+        "y": 494,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-02-00",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 85,
+        "y": 512,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-02-01",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 167,
+        "y": 512,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-02-02",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 249,
+        "y": 512,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-02-03",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 331,
+        "y": 512,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-02-04",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 413,
+        "y": 512,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-02-05",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 495,
+        "y": 512,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-02-06",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 577,
+        "y": 512,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-02-07",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 659,
+        "y": 512,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-02-08",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 741,
+        "y": 512,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-02-09",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 823,
+        "y": 512,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-03-00",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 85,
+        "y": 530,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-03-01",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 167,
+        "y": 530,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-03-02",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 249,
+        "y": 530,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-03-03",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 331,
+        "y": 530,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-03-04",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 413,
+        "y": 530,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-03-05",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 495,
+        "y": 530,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-03-06",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 577,
+        "y": 530,
+        "radius": 4
+      },
+      "coverage": 0.7
+    },
+    {
+      "id": "dot-03-07",
+      "plateId": "coral-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 659,
+        "y": 530,
+        "radius": 6
+      },
+      "coverage": 0.7999999999999999
+    },
+    {
+      "id": "dot-03-08",
+      "plateId": "blue-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 741,
+        "y": 530,
+        "radius": 8
+      },
+      "coverage": 0.8999999999999999
+    },
+    {
+      "id": "dot-03-09",
+      "plateId": "forest-master",
+      "geometry": {
+        "kind": "circle",
+        "x": 823,
+        "y": 530,
+        "radius": 4
+      },
+      "coverage": 0.7
+    }
+  ],
+  "seeds": {
+    "geometry": 314159,
+    "screen": 271828,
+    "paper": 161803,
+    "debris": 141421
+  },
+  "provenance": {
+    "adapter": "manual-vector",
+    "source": "examples/recipes/spot-shapes.json",
+    "notes": "Three spot inks on independent fixed-origin masters; solid coverage only, not calibrated."
+  }
+}
