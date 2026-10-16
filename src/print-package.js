@@ -98,6 +98,11 @@ async function pdfReport(cards,meta){
   pdf.setTitle('Stipra - separation study');pdf.setCreator('Stipra print-package v1');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   const font=await pdf.embedFont(StandardFonts.Helvetica),bold=await pdf.embedFont(StandardFonts.HelveticaBold);
+  // Render the Latvian macron into the heading without shipping a font binary.
+  const heading=new Canvas(1000,115),hctx=heading.getContext('2d');
+  hctx.fillStyle='#252525';hctx.font='bold 61px sans-serif';
+  hctx.fillText('Stiprā / ink separation',0,78);
+  const headingImage=await pdf.embedPng(await heading.toBuffer('png'));
   const blocks=[];for(let i=2;i<cards.length;i+=4)blocks.push(cards.slice(i,i+4));
   const cache=new Map();
   async function embed(card){if(!cache.has(card.name))cache.set(card.name,await pdf.embedPng(card.bytes));return cache.get(card.name);}
@@ -113,7 +118,7 @@ async function pdfReport(cards,meta){
   }
   for(let i=0;i<Math.max(1,blocks.length);i++){
     const page=pdf.addPage(A4);page.drawRectangle({x:0,y:0,width:A4[0],height:A4[1],color:rgb(.974,.969,.956)});
-    page.drawText('STIPRA / PRINT SEPARATION',{x:28,y:550,size:19,font:bold,color:rgb(.15,.15,.15)});
+    page.drawImage(headingImage,{x:28,y:541,width:350,height:40.25});
     page.drawText(meta.width+' x '+meta.height+' px  |  '+meta.dpi+' DPI  |  '+meta.trim.width+' x '+meta.trim.height+' mm  |  '+meta.inks+' inks',
       {x:28,y:526,size:9,font,color:rgb(.36,.36,.36)});
     if(i===0){
