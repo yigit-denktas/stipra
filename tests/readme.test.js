@@ -8,11 +8,12 @@ test('README uses the original SVG exactly once, as artwork rather than a flatte
   const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
   const header = readme.split('\n</div>')[0];
   const original = fs.readFileSync(path.join(root, 'logo_for_Readme.svg'), 'utf8');
-  const heading = header.indexOf('<h1>stipra</h1>');
+  const heading = header.indexOf('<h1>Stiprā</h1>');
   const subtitle = header.indexOf('A programmable printmaking studio.');
   const image = header.indexOf('src="logo_for_Readme.svg"');
-  const explanation = header.indexOf('Stippling + strata: dots organized into layers.');
+  const explanation = header.indexOf('stippling</em> + <em>strata');
   const strapline = header.indexOf('Separate the inks. Keep the imperfections.');
+  assert.ok(header.includes('Latvian') && header.includes('stiprs') && header.includes('strong'));
   assert.ok(heading >= 0 && heading < subtitle && subtitle < image && image < explanation && explanation < strapline);
   assert.equal((readme.match(/src="logo_for_Readme\.svg"/g) || []).length, 1);
   assert.match(header, /src="logo_for_Readme\.svg"[^>]*width="100%"/);

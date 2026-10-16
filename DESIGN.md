@@ -1,4 +1,4 @@
-# Stipra design principles
+# Stiprā design principles
 
 > **The algorithm defines what's possible; design rules determine what's desirable.**
 >
@@ -6,7 +6,7 @@
 
 ## What we're making
 
-Stipra is a small printmaking studio for people and software agents. It lets artwork be understood and edited as **physical ink passes**, not just a flattened image with a fashionable color filter. Risograph-inspired printing is the first technique; anything else must earn its place by making the *same* source → layers → proof → export journey better.
+Stiprā is a small printmaking studio for people and software agents. It lets artwork be understood and edited as **physical ink passes**, not just a flattened image with a fashionable color filter. Risograph-inspired printing is the first technique; anything else must earn its place by making the *same* source → layers → proof → export journey better.
 
 The artistic reference is simple: **a beautiful print that you can take apart**. Each layer has its own marks, density, assigned ink and possible imperfections. Paper is not another ink. Those differences must exist in the data, not just the preview.
 
