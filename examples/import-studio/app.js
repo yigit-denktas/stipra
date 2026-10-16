@@ -4,11 +4,9 @@
   let latest;
   async function decode(bytes,type) {
     const blob=new Blob([bytes],{type});
-    // SVG image decode is more interoperable via HTMLImageElement in headless and regular browsers.
-    // This blob contains only strictly reconstructed, allowlisted SVG from the import probe.
-    if(type!=='image/svg+xml' && typeof createImageBitmap==='function')
-      return createImageBitmap(blob,{imageOrientation:'none'});
-    // Older browsers and safe SVG: orientation tags are neutralized in temporary bytes.
+    // Decode all local image formats through HTMLImageElement to avoid intermittent
+    // headless Chromium createImageBitmap stalls. The import contract neutralizes
+    // EXIF orientation in a temporary copy before this point.
     return new Promise((resolve,reject)=>{
       const url=URL.createObjectURL(blob),img=new Image();
       img.onload=()=>{URL.revokeObjectURL(url);resolve(img);};
