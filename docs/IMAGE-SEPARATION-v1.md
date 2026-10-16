@@ -6,7 +6,7 @@ This module generates **unscreened** 8-bit image coverage. The separate [screeni
 
 ## See and edit in the browser
 
-Serve the repo locally (`python -m http.server 8080`) and open [the separation lab](../examples/separation-lab/index.html). Drop your own PNG/JPEG/WebP or supported restricted SVG. Switch between **2 spot inks** and **CMYK**; change the ink color, spot channel/matching target, threshold and strength. Inspect the original, composited proof and full-frame monochrome plates; download the preview, masks and normalized recipe. No accounts, network or model API are required.
+Serve the repo locally (`python -m http.server 8080`) and open [the live Stipra app](https://apps.yigitdenktas.com/stipra/) (source: [web/stipra](../web/stipra/index.html)). Drop your own PNG/JPEG/WebP or supported restricted SVG. Switch between **2 spot inks** and **CMYK**; change the ink color, spot channel/matching target, threshold and strength. Inspect the original, composited proof and full-frame monochrome plates; download the preview, masks and normalized recipe. No accounts, network or model API are required.
 
 The lab is a proof of the core editable-mask model, **not yet** the integrated production studio (#22).
 
