@@ -28,7 +28,8 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Full-frame grayscale production plates and registration | [#8](https://github.com/yigit-denktas/stipra/issues/8) | Planned | P0 |
 | A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | Planned | P0 |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
-| Browser usability + PNG/JPEG/WebP/true SVG/PDF/ZIP delivery | [#12](https://github.com/yigit-denktas/stipra/issues/12) | Planned | P0 |
+| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
+| PNG/JPEG/WebP/true SVG/PDF/ZIP delivery | [#12](https://github.com/yigit-denktas/stipra/issues/12) | Planned | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
 | Diagnostic HSL/coverage comparison overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) | Planned | P1; ship minimal plate diagnostics first |
@@ -36,7 +37,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Fine paper fibers/clusters and dirt realism | [#4](https://github.com/yigit-denktas/stipra/issues/4) | Planned | **Optional style extension, nonblocking** |
 | GitHub Project/milestone administrative setup | [#17](https://github.com/yigit-denktas/stipra/issues/17) | Planned | Admin, not runtime |
 
-**New dependency ordering:** #7 needs completed #6; a grayscale continuous-tone separation is valid before optional halftoning. #5 then screens *the independently separated masks*. #8 and #9 must not invent new channel maps or change the shared pixel grid. User-facing visual tooling must not wait for #3/#4.
+**New dependency ordering:** #22 is the browser studio/UI integration issue; #7 needs completed #6; a grayscale continuous-tone separation is valid before optional halftoning. #5 then screens *the independently separated masks*. #8 and #9 must not invent new channel maps or change the shared pixel grid. User-facing visual tooling must not wait for #3/#4.
 
 ## Keep versus prune
 
