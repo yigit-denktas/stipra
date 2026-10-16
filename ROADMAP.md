@@ -1,31 +1,62 @@
-# Stipra roadmap
+# Stipra · v0.9 delivery roadmap
 
-**Baseline:** Prehnite Riso Studio v8 case-study source. **Target:** Stipra v0.9.
-**Status:** foundation merged; generic vector scene/plate v1 implemented in #2; imported-image separation and prepress remain planned.
+**Product decision:** [#21](https://github.com/yigit-denktas/stipra/issues/21) · 16 October 2026  
+**Mission:** a small, local-first, **MIT-licensed browser printmaking studio** with an **agent-safe CLI**. One artist or agent should be able to take an image or generate simple layered vector artwork, control the actual ink-separation masks, see each plate/overprint and produce aligned masters and an A4 separation inspection sheet.
 
-## Progress tracking
+Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a replacement for professional ICC/prepress calibration or a hosted publishing platform. The existing v1 scene, #6 image importer, CLI scaffolding and Prehnite v8 case study are kept. [Kuşluk #21](https://github.com/interzettel/kushluk/issues/21#issuecomment-6225189079) may consume *optional static graphics only* after a direct-tools benchmark.
 
-| Phase | Gate | Status | Issues |
-|---|---|---|---|
-| 0 — Foundation | MIT-ready source, six presets, CLI, browser demo | Completed (#1) | [#1](https://github.com/yigit-denktas/stipra/issues/1) |
-| 1 — Print simulation | Crisp geometry, paper contamination and separated ink behavior | Not started | [#3](https://github.com/yigit-denktas/stipra/issues/3), [#4](https://github.com/yigit-denktas/stipra/issues/4), [#5](https://github.com/yigit-denktas/stipra/issues/5) |
-| 2 — Separation | Generic scene implemented; imported-image separations remain open | Partial (#2 only) | [#2](https://github.com/yigit-denktas/stipra/issues/2), [#6](https://github.com/yigit-denktas/stipra/issues/6), [#7](https://github.com/yigit-denktas/stipra/issues/7), [#8](https://github.com/yigit-denktas/stipra/issues/8) |
-| 3 — Report | A4 HTML/PDF diagnostic + print sheets | Not started | [#9](https://github.com/yigit-denktas/stipra/issues/9) |
-| 4 — Delivery | CLI/agent API, batch, SVG/raster/PDF packages | Not started | [#11](https://github.com/yigit-denktas/stipra/issues/11), [#12](https://github.com/yigit-denktas/stipra/issues/12) |
-| 5 — Quality | Golden comparisons, benchmark/reference suite, accessible browser QA | Not started | [#10](https://github.com/yigit-denktas/stipra/issues/10), [#13](https://github.com/yigit-denktas/stipra/issues/13), [#14](https://github.com/yigit-denktas/stipra/issues/14) |
+## v0.9 user experience — one browser workflow
 
-**Progress is tracked by closed acceptance issues rather than speculative percentages.** All **14 numbered issues** are created; #1 covers the foundation and #2–#14 are the planned v0.9 backlog. Only verified and merged issue work counts as complete; #2 implements the generic geometric contract, not photographic separation.
+1. **Input:** drag/drop a raster or supported safe vector, or choose an existing vector/procedural example. Preserve original bytes, alpha, pixel origin, aspect, explicit trim and DPI.
+2. **Separations:** choose `2–N` actual spot-ink passes or `CMYK`. Edit thresholds, intensity/channel mapping and each **independent coverage mask**; preserve solid marks and type when selected. Paper/substrate is never an ink plate. Unlike palette recoloring, changing a separation must change printed coverage.
+3. **Screen:** apply optional controlled dots/lines/knockouts/dithering to the masks, or preserve continuous-tone/solid coverage. Keep registration independent from source geometry.
+4. **Inspect:** compare input, combined color proof, paper, and individual aligned monochrome plates. Show overprints, accurate crop and registration, coverage estimates and print-size warning.
+5. **Export:** full-frame aligned grayscale masters, tinted proof, legible **A4 landscape separation sheet (HTML and PDF)**, structured recipe/seed/source/provenance manifest and ZIP package.
+6. **Automate:** same inputs, plate masks and output settings via local CLI/batch/agent recipes with deterministic seeds, bounded cost/memory/paths and actionable errors.
 
-## v0.9 definition of success
+The attached sample showing alternative Riso color separations is the visual benchmark for distinct masks, not an asset bundled with the public code. The checked six-item acceptance benchmark is **proposed test criteria, not observed passing evidence**.
 
-A local user can upload a photo or SVG, select either a CMYK recipe or two/three chosen spot inks, adjust separations, solo each actual ink plate without reflow, export aligned monochrome plates, and generate a legible A4 landscape HTML/PDF inspection report.
+## Status and priority
 
-The report's design follows the approved specimen: full-composite header, a panel for paper stock plus one panel per actual ink, exact-position miniatures, swatches, names, estimates, alignment marks, and notes. Separate production plates must retain the *full original image origin, crop box, size and registration*.
+| Work | Issue | Status | Release priority |
+| --- | --- | --- | --- |
+| Prehnite case-study foundation | [#1](https://github.com/yigit-denktas/stipra/issues/1) | **Merged** | Done |
+| Vector scene, ink plates and stable recipe v1 | [#2](https://github.com/yigit-denktas/stipra/issues/2) | **Merged** | Done |
+| Local PNG/JPEG/WebP and restricted SVG import | [#6](https://github.com/yigit-denktas/stipra/issues/6) | **Merged, 21 Node tests + Chromium smoke** | Done |
+| Real spot / CMYK **image-to-mask** separation | [#7](https://github.com/yigit-denktas/stipra/issues/7) | Planned | **P0 — next** |
+| Dot/native/reverse/hybrid screening of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | Planned | **P0 — after mask model** |
+| Full-frame grayscale production plates and registration | [#8](https://github.com/yigit-denktas/stipra/issues/8) | Planned | P0 |
+| A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | Planned | P0 |
+| CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
+| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
+| PNG/JPEG/WebP/true SVG/PDF/ZIP delivery | [#12](https://github.com/yigit-denktas/stipra/issues/12) | Planned | P0 |
+| Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
+| Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
+| Diagnostic HSL/coverage comparison overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) | Planned | P1; ship minimal plate diagnostics first |
+| Prehnite crystal seam/proportion polish | [#3](https://github.com/yigit-denktas/stipra/issues/3) | Planned | **Case-study-only, nonblocking** |
+| Fine paper fibers/clusters and dirt realism | [#4](https://github.com/yigit-denktas/stipra/issues/4) | Planned | **Optional style extension, nonblocking** |
+| GitHub Project/milestone administrative setup | [#17](https://github.com/yigit-denktas/stipra/issues/17) | Planned | Admin, not runtime |
 
-## Non-goals
+**New dependency ordering:** #22 is the browser studio/UI integration issue; #7 needs completed #6; a grayscale continuous-tone separation is valid before optional halftoning. #5 then screens *the independently separated masks*. #8 and #9 must not invent new channel maps or change the shared pixel grid. User-facing visual tooling must not wait for #3/#4.
 
-No hosted workflow platform, paid API requirement, AI image generation for rasterization, unlicensed reference images in the distribution, or claim that simulated ink separations are press-calibrated without real-print testing.
+## Keep versus prune
 
-## Migration
+**Keep:** scene/plate geometry and deterministic provenance, original images, isolated ink coverage masks, substrate, registration, controlled imperfection, RGB/CMYK/spot modes, print report, local/browser parity, reproducible CLI, and clearly optional p5.js/Canvas integration *later* if shown useful.
 
-The Prehnite logo is a **case study**. Generic import and prepress tooling must not hard-code its wordmark, gem geometry, six presets, or paper dimensions.
+**Prune:** general rendering engine/plugin marketplace, reimplementing a p5.js sketch API, cloud orchestration, arbitrary AI-generated code execution, excessive Prehnite-specific gem work as a precondition for importing images, and physically calibrated Riso claims unsupported by measurements.
+
+**Use compatible existing packages where useful.** Avoid duplicating standard raster codecs, basic SVG support or PDF rendering without a demonstrated need. An optional p5.js adapter may help author procedural scenes, but Stipra is not to be marketed as a competing p5.js runtime or library in v0.9.
+
+## Release acceptance and kill switches
+
+**Acceptance fixture:** Given a rights-cleared full-resolution image, a novice and CLI agent independently select two spot inks, adjust coverage masks, solo/overprint with no crop/reflow, and export two exactly aligned monochrome plates, truthful manifest, A4 landscape report/PDF and self-contained ZIP. Extend test to 3+ inks and CMYK; repeat with text-heavy, transparent, edge-case and malformed inputs.
+
+**Tests:** first usable separation; fidelity and line/text retention; full-frame prepress size/trim/registration; deterministic repeatability with pinned versions; time/peak memory; physical prints on ordinary printers (and Risograph only if physically tested).
+
+**Scope gate:** If the browser+CLI workflow does not beat or materially complement direct licensed tools for that fixed fixture, **do not enlarge Stipra**. Fix or shrink the interface; publish honest limitations. If Kuşluk finds no value, it should not acquire Stipra as a mandatory dependency.
+
+## Licensing and provenance
+
+Stipra-original code is MIT, with individual third-party notices retained. [p5.riso](https://github.com/antiboredom/p5.riso) has a restrictive Anti-Capitalist License; it is **not** a compatible MIT implementation source for copying, vendoring, generated translation or a fork. Study unprotected concepts, standard math and documented visual behavior; create and validate **independent original implementations**. See [licensing notes](docs/LICENSING.md) and [#14](https://github.com/yigit-denktas/stipra/issues/14). Commercial redistribution requires real dependency/asset provenance review.
+
+**Current progress:** 3 of the original #1–#14 tasks merged (#1, #2, #6). This counts issue completions, **not** weighted engineering percent. No work in this scope note claims any of the remaining features are finished.
