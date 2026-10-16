@@ -1,0 +1,23 @@
+{
+  "name": "stipra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first programmable printmaking studio (Prehnite case-study foundation)",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "stipra": "bin/stipra.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "presets": "node bin/stipra.js presets",
+    "render:prehnite": "node bin/stipra.js render --preset 01 --format png,svg --plates --out out",
+    "check": "node --check examples/prehnite-v8/src/engine.js && node --check bin/stipra.js && npm test"
+  },
+  "dependencies": {
+    "skia-canvas": "^3.0.8"
+  }
+}

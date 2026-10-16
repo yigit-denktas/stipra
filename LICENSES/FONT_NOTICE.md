@@ -1,0 +1,1 @@
+Vector glyph paths in examples/prehnite-v8/src/font-atlas.js were derived from Inter / Inter Display under the SIL Open Font License 1.1. Copyright (c) The Inter Project Authors. The full license is included at LICENSES/OFL-1.1.txt. No font binaries are redistributed.
