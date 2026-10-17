@@ -143,7 +143,7 @@ test('report style: portrait and landscape A4, exact recipe attachments, no roun
     assert.ok(Math.abs(pdf.getPage(0).getHeight()-ph)<.03);
     assert.equal(result.manifest.report.embeddedRecipes,true);
     assert.equal(result.manifest.report.qrDestination,
-      'https://github.com/yigit-denktas/stipra/blob/main/docs/PRINT-PACKAGE-v1.md');
+      'https://apps.yigitdenktas.com/stipra/guide/');
     assert.match(pdfBytes.toString('latin1'),/EmbeddedFiles/);
     for(const name of ['inks.json','screens.json','proof-screens.json','replay.json'])
       assert.ok(pdfBytes.includes(Buffer.from(name)),'missing attached settings '+name);

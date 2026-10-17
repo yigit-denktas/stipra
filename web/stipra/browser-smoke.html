@@ -112,6 +112,15 @@
     el('style-variant').value='tonal-key';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
     await until(()=>canvases().length===4,'two-ink style applied');
     if(el('error').hidden!==true)throw Error('Style application failed: '+el('error').textContent);
+    const guideFrame=document.createElement('iframe');guideFrame.src='/dist/stipra/guide/index.html';guideFrame.style.height='844px';document.body.appendChild(guideFrame);
+    await until(()=>guideFrame.contentDocument?.title==='stiprā / from image to ink','built public guide loaded');
+    await guideFrame.contentDocument.fonts.ready;
+    for(const width of [390,768,1280]){
+      guideFrame.style.width=width+'px';await delay(80);
+      const gd=guideFrame.contentDocument;
+      if(gd.documentElement.scrollWidth>gd.documentElement.clientWidth+2)throw Error('Guide horizontal overflow at '+width+'px');
+      if(!gd.querySelector('a[href="../"]'))throw Error('Guide studio navigation missing');
+    }
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
     document.body.dataset.smoke='fail';
