@@ -30,6 +30,8 @@ Riso is where we're starting. We care as much about **why** an image should be s
 
 ## Try it
 
+For JavaScript artwork, the [experimental core API](packages/core/README.md) accepts sRGB pixels or authored ink masks. Build/install locally; it is not published to npm.
+
 The **[browser studio](https://apps.yigitdenktas.com/stipra/)** processes your images locally. Drop in a PNG, JPEG, WebP, or supported SVG; choose two spot inks or CMYK; adjust actual grayscale ink masks and their dot, line, reverse or hybrid screens. Compare the artwork with the digital overprint and the individual plates. No account or image API needed.
 
 Prefer a script? With Node.js 20+ installed:

@@ -2,6 +2,8 @@
 
 Recorded 17 October 2026 from the owner's request. This is a scoped plan, not a shipped SDK or an approved public API. [Milestone tracker #70](https://github.com/yigit-denktas/stipra/issues/70) holds the work breakdown; native GitHub milestone/Project setup remains [#17](https://github.com/yigit-denktas/stipra/issues/17).
 
+**Core implementation:** [the private local alpha](../packages/core/README.md) implements the #71 contract using the same separation/screen/Styles/diagnostics modules, with pixel and authored-mask input, ESM/CommonJS entries and TypeScript declarations. This does not complete the p5.js adapter, transparent effects, authored-layer export integration, performance/usefulness gate or registry release. Those remain in #72–#74. p5.grain will be reused when the integration needs compatible grain/texture functionality; a photo editor is outside the product scope.
+
 ## The experience
 
 An artist draws in an existing p5.js or Canvas sketch, applies Stiprā's ink/screen/paper treatment, and draws the proof back into the sketch. No manual image download and reimport is needed. Saving a frozen frame can optionally produce independent aligned ink plates, diagnostics and a versioned recipe using the same engine as the studio and CLI.

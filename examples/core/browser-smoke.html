@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Stiprā core ESM contract check</title>
+<body><output id="out">CORE_PENDING</output>
+<script src="../../src/separation.js"></script>
+<script src="../../src/screening.js"></script>
+<script src="../../src/styles.js"></script>
+<script src="../../src/export-plan.js"></script>
+<script type="module">
+import {renderImage,renderLayers,resolveStyle} from '../../packages/core/dist/index.mjs';
+const out=document.getElementById('out');
+try{
+  const width=19,height=11,rgba=new Uint8ClampedArray(width*height*4);
+  for(let i=0;i<width*height;i++)rgba.set([i%256,(i*7)%256,(i*13)%256,i%3===0?0:255],i*4);
+  const options={style:{id:'editorial-halftone',variant:'forest-depth',lpi:50},dpi:300,seed:42};
+  const a=renderImage({width,height,rgba,colorSpace:'srgb'},options);
+  const style=StipraStyles.resolve('editorial-halftone',{variant:'forest-depth',lpi:50,dpi:300,seed:42});
+  const source=StipraSeparation.separate({width,height,rgba},style.inkRecipe);
+  const direct=StipraScreen.apply(source,StipraExportPlan.screenConfigs(style.screenRecipe,source.masks.map(x=>x.id)).production);
+  if(a.plates.some((p,i)=>p.screened.some((v,j)=>v!==direct.masks[i].coverage[j])))throw Error('ESM masks differ from browser lab engine');
+  if(a.proof.rgba.some((v,i)=>v!==direct.preview[i]))throw Error('ESM proof differs');
+  const b=renderImage({width,height,rgba,colorSpace:'srgb'},options);
+  if(a.proof.rgba.some((v,i)=>v!==b.proof.rgba[i]))throw Error('Repeatability failed');
+  const ink=new Uint8Array([255,0,128,0,255,0]);
+  const c=renderLayers({width:3,height:2,paper:'#ffffff',inks:[{id:'green',name:'Green',color:'#006043',coverage:ink}]});
+  if(c.plates[0].coverage.some((v,i)=>v!==ink[i])||c.proof.rgba[1]!==96)throw Error('Authored coverage changed');
+  c.plates[0].coverage.fill(0);if(ink[0]!==255||c.plates[0].screened[0]!==255)throw Error('Output aliases input or another output');
+  if(resolveStyle('clean-linework').style.id!=='clean-linework')throw Error('Missing Styles API');
+  out.textContent='BROWSER_CORE_PASS';document.body.dataset.smoke='pass';
+}catch(error){out.textContent='BROWSER_CORE_FAIL: '+error.message;document.body.dataset.smoke='fail';}
+</script></body></html>
