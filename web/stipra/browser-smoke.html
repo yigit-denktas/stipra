@@ -17,6 +17,18 @@
     await until(()=>frame.contentDocument?.documentElement?.dataset.stipraReady==='true','lab script loading');
     d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
+    const boundaryCases=await (await fetch('/tests/fixtures/png-boundaries.json')).json(),importWindow=frame.contentWindow;
+    for(const name of ['apng','pq','hlg','displayP3','mastering','lightLevel','rotatedExif','invalidDepth','combinedSignals']){
+      const bytes=new importWindow.Uint8Array(Uint8Array.from(atob(boundaryCases[name]),c=>c.charCodeAt(0)));let rejected=false;
+      try{importWindow.StipraImportProbe.inspect(bytes);}catch{rejected=true;}
+      if(!rejected)throw Error('Browser accepted unsupported PNG '+name);
+    }
+    const precision=await importWindow.StipraImport.ingest(new importWindow.Uint8Array(Uint8Array.from(atob(boundaryCases.sdr16),c=>c.charCodeAt(0))),{
+      canvas:(w,h)=>{const c=d.createElement('canvas');c.width=w;c.height=h;return c;},
+      decode:async(bytes,type)=>createImageBitmap(new Blob([bytes],{type})),
+    });
+    if(precision.metadata.sourceEncoding.bitDepth!==16||precision.metadata.pixels.bitDepth!==8||precision.rgba.length!==8||!precision.metadata.warnings.some(x=>x.includes('16-bit')))throw Error('Browser precision declaration missing');
+
     const colorFixture=await (await fetch('/tests/fixtures/color-reference.json')).json();
     for(const [name,reference] of [['linear','reference'],['linear-jpeg','jpeg-reference']]){
       const decode=value=>Uint8Array.from(atob(colorFixture.files[value]),c=>c.charCodeAt(0));

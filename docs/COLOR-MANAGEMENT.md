@@ -30,3 +30,7 @@ The private source matches SHA-256 `f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c01
 That observation is one verified environment and source, not universal decoder equivalence. CI verifies the public non-sRGB fixtures independently. Physical ink response, paper, dot gain, gamut and printer calibration remain outside this source-color check.
 
 Primary references: [Skia Canvas image API](https://skia-canvas.org/api/image), [context readback](https://skia-canvas.org/api/context), [Pillow ImageCms](https://pillow.readthedocs.io/en/stable/reference/ImageCms.html). The installed version and committed regression evidence take precedence over claims inferred from newer documentation.
+
+## PNG source precision and newer signaling
+
+The shared probe records original PNG sample depth and warns when 16-bit input is normalized to the existing 8-bit working contract. #82 rejects animated PNG, unvalidated cICP/mastering signals, conflicting cICP/ICC and unsupported PNG EXIF orientation before decoder invocation. This bounds current claims rather than establishing an HDR conversion pipeline. See [the import boundary](IMPORT.md#png-precision-and-interpretation-boundary) and [future adapter investigation #86](https://github.com/yigit-denktas/stipra/issues/86).

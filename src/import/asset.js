@@ -28,6 +28,7 @@
        untaggedPolicy:'decoder-default; sRGB working output',pressCalibrated:false},
      provenance:{sourceRetainedSeparately:true,aspectRatioPreserved:true,positionPreserved:true}};
    if(viewBox)metadata.viewBox=viewBox;
+   if(info.sourceEncoding)metadata.sourceEncoding={...info.sourceEncoding};
    return metadata;
  }
  async function ingest(value,platform,opts={}){

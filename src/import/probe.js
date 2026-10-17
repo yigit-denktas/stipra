@@ -65,14 +65,27 @@
   }
   function png(b){
     if(b.length<33||ascii(b,12,4)!=='IHDR'||be32(b,8)!==13)fail('malformed PNG IHDR');
-    const width=be32(b,16),height=be32(b,20),colorType=b[25];valid(width,height);
-    if(![0,2,3,4,6].includes(colorType)||![1,2,4,8,16].includes(b[24]))fail('unsupported PNG bit depth/color type');
-    let p=8,icc=false,transparency=false,ended=false,dpi=null,seenIHDR=false;
+    const width=be32(b,16),height=be32(b,20),colorType=b[25],bitDepth=b[24];valid(width,height);
+    const depths={0:[1,2,4,8,16],2:[8,16],3:[1,2,4,8],4:[8,16],6:[8,16]};
+    if(!depths[colorType]?.includes(bitDepth))fail('unsupported PNG bit depth/color type');
+    let p=8,icc=false,transparency=false,ended=false,dpi=null,seenIHDR=false,cicp=null,pngExif=null,seenExif=false;
     for(let count=0;p+12<=b.length&&count<200000;count++){
       const size=be32(b,p),type=ascii(b,p+4,4);
       if(size>b.length-p-12)fail('malformed PNG chunk length');
       if(!seenIHDR&&type!=='IHDR')fail('PNG first chunk must be IHDR');
       seenIHDR=true;
+      if(type==='acTL'||type==='fcTL'||type==='fdAT')fail('animated PNG unsupported; export an explicit still frame first');
+      if(type==='cICP'){
+        if(size!==4||cicp)fail('malformed or duplicate PNG cICP');
+        cicp=[...b.subarray(p+8,p+12)];
+        if(cicp.some((v,i)=>v!==[1,13,0,1][i]))fail('PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG');
+      }
+      if(type==='mDCV'||type==='cLLI')fail('PNG mastering/light-level metadata is not validated; convert explicitly to an SDR sRGB still PNG');
+      if(type==='eXIf'){
+        if(seenExif)fail('duplicate PNG eXIf');seenExif=true;
+        pngExif=exif(b,p+8,size);
+        if(pngExif&&pngExif.orientation!==1)fail('PNG EXIF orientation is not yet normalized; export an orientation-normalized still PNG');
+      }
       if(type==='iCCP')icc=true;
       if(type==='tRNS')transparency=true;
       if(type==='pHYs'&&size===9&&b[p+16]===1){
@@ -83,8 +96,11 @@
       p+=size+12;
     }
     if(!ended)fail('PNG missing IEND');
+    if(cicp&&icc)fail('combined PNG cICP/ICC color signals are not validated; convert explicitly to an SDR sRGB still PNG');
     return {format:'png',width,height,orientation:1,hasAlpha:[4,6].includes(colorType)||transparency,
-      profile:{kind:icc?'embedded-icc':'unspecified'},dpi,warnings:[]};
+      profile:{kind:icc?'embedded-icc':'unspecified'},dpi,
+      sourceEncoding:{bitDepth,colorType,cicp,exifOrientation:pngExif?.orientation??null},
+      warnings:bitDepth>8?['PNG source has 16-bit samples; working pixels are reduced to 8-bit sRGB. Original bytes are retained separately.']:[]};
   }
   const SOF=new Set([0xC0,0xC1,0xC2,0xC3,0xC5,0xC6,0xC7,0xC9,0xCA,0xCB,0xCD,0xCE,0xCF]);
   function jpeg(b){
