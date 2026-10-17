@@ -24,7 +24,8 @@
       input.value=value;
     } else {
       input.type=type;input.value=String(value);
-      if(type==='range'){input.min=label==='Match radius'?'0.05':label==='Gamma'?'0.1':'0';input.max=label==='Threshold'?'0.95':['Match radius','Gray removal'].includes(label)?'1':label==='Gamma'?'5':'4';input.step='0.05';}
+      if(type==='range'){input.min=label==='Match radius'?'0.05':label==='Gamma'?'0.1':'0';input.max=label==='Threshold'?'0.95':['Match radius','Gray removal'].includes(label)?'1':label==='Gamma'?'5':'4';input.step='0.01';}
+      input.value=String(value);
     }
     input.addEventListener('input',()=>{callback(type==='range'?Number(input.value):input.value);styleResolution=null;schedule();});
     div.appendChild(input);where.appendChild(div);

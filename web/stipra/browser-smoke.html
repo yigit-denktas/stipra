@@ -124,6 +124,7 @@
       for(const ink of recipe.inkRecipe.inks){
         const selector=el('control-'+ink.id+'-Source');
         if(!selector||selector.value!==ink.source)throw Error('New channel not editable '+ink.id);
+        for(const [name,key] of [['Gamma','gamma'],['Strength','gain'],['Threshold','threshold']])if(Math.abs(Number(el('control-'+ink.id+'-'+name).value)-ink[key])>.00001)throw Error('Displayed setting differs from recipe '+ink.id+'/'+key);
       }
     }
     // Export through the real UI; inspect the downloaded ZIP rather than just its button.
