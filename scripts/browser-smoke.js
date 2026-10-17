@@ -41,7 +41,7 @@ async function run(){
  if(!/^(?:examples|web)\/[a-z0-9-]+\/browser-smoke\.html$/.test(page))throw Error('Invalid smoke page path');
  const url='http://127.0.0.1:'+server.address().port+'/'+page;
  try{
-   const child=spawn(bin,['--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run','--remote-debugging-pipe','about:blank'],{stdio:['ignore','ignore','pipe','pipe','pipe']});
+   const child=spawn(bin,['--headless','--no-sandbox','--disable-gpu','--enable-precise-memory-info','--disable-dev-shm-usage','--no-first-run','--remote-debugging-pipe','about:blank'],{stdio:['ignore','ignore','pipe','pipe','pipe']});
    let serial=0,pending=new Map(),buffer='',stderr='';
    const call=(method,params={},sessionId)=>new Promise((resolve,reject)=>{
      const id=++serial;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');
@@ -57,7 +57,8 @@ async function run(){
    child.on('error',failure);child.on('exit',code=>failure(Error('Chrome exited '+code+': '+stderr)));
    let timer;
    try{
-     const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Browser smoke wall-clock deadline exceeded')),60000);});
+     const timeout=page==='examples/alpha/browser-smoke.html'?180000:60000;
+     const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Browser smoke wall-clock deadline exceeded')),timeout);});
      await Promise.race([deadline,(async()=>{
        const target=await call('Target.createTarget',{url:'about:blank'});
        const {sessionId}=await call('Target.attachToTarget',{targetId:target.targetId,flatten:true});
@@ -68,6 +69,12 @@ async function run(){
          if(state.state==='fail')throw Error('Browser smoke failed: '+state.output);
          if(state.state==='pass'){
            if(state.output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))throw Error('Unexpected smoke result: '+state.output);
+           if(page==='examples/alpha/browser-smoke.html'){
+             const value=await call('Runtime.evaluate',{expression:'document.getElementById("evidence").textContent',returnByValue:true},sessionId);
+             const evidence=JSON.parse(value.result.value),dir=path.join(root,'out/alpha-validation');fs.mkdirSync(dir,{recursive:true});
+             evidence.environment.repositoryCommit=spawnSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).stdout.trim();
+             fs.writeFileSync(path.join(dir,'browser-evidence.json'),JSON.stringify(evidence,null,2)+'\n');
+           }
            break;
          }
          await new Promise(resolve=>setTimeout(resolve,100));

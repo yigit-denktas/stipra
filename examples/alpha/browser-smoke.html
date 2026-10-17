@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Stiprā measured alpha validation</title>
+<body><output id="out">ALPHA_PENDING</output><pre id="evidence" hidden></pre>
+<script src="../../node_modules/jszip/dist/jszip.min.js"></script>
+<script type="module">
+import * as Core from '/dist/stipra/sketches/assets/core.mjs';
+import * as Adapter from '/dist/stipra/sketches/assets/canvas.mjs';
+import {createDraftRenderer} from '/dist/stipra/sketches/draft.mjs';
+import * as F from './fixture.mjs';
+const pause=ms=>new Promise(r=>setTimeout(r,ms)),check=(ok,m)=>{if(!ok)throw Error(m);};
+async function until(fn,label){for(let i=0;i<500;i++){if(fn())return;await pause(60);}throw Error('Timed out '+label);}
+const hash=async b=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',b))].map(v=>v.toString(16).padStart(2,'0')).join('');
+const base64=b=>{let s='';for(let i=0;i<b.length;i+=8192)s+=String.fromCharCode(...b.subarray(i,i+8192));return btoa(s);};
+function canvas(input){const c=document.createElement('canvas');c.width=input.width;c.height=input.height;const x=c.getContext('2d'),p=x.createImageData(c.width,c.height);p.data.set(input.rgba);x.putImageData(p,0,0);return c;}
+async function fingerprint(result){return {recipe:result.recipe,plates:await Promise.all(result.plates.map(async p=>({id:p.id,coverage:await hash(p.coverage),screened:await hash(p.screened)}))),proof:await hash(result.proof.rgba)};}
+try{
+  const report={contract:'stipra-alpha-browser-v1',environment:{userAgent:navigator.userAgent,platform:navigator.platform,logicalCpus:navigator.hardwareConcurrency,deviceMemoryGiB:navigator.deviceMemory??null,displayPixelRatio:devicePixelRatio},method:{warmup:1,clock:'performance.now',memory:'Chromium JS heap before/after when available; not peak or native canvas/process memory',includes:'image cases: capture, core, drawable proof; layers: core only; input creation excluded',export:'separate cold optional-module load and warm package generation; no 60fps claim'},cases:[],parity:[]};
+  check(!performance.getEntriesByType('resource').some(r=>r.name.includes('print-export.mjs')),'eager exporter');
+  for(const spec of F.cases){
+    const input=spec.kind==='image'?F.image(spec.width,spec.height):F.layers(spec.width,spec.height,spec.inks),options=F.optionsFor(spec);
+    const source=spec.kind==='image'?{canvas:canvas(input),width:spec.width/spec.density,height:spec.height/spec.density}:null;
+    const render=()=>source?Adapter.renderCanvas(source,options):Core.renderLayers(input,options);
+    render();await pause(0);const heapBefore=performance.memory?.usedJSHeapSize??null,samples=[];let result;
+    for(let i=0;i<spec.repeats;i++){const start=performance.now();result=render();samples.push(performance.now()-start);await pause(0);}
+    report.cases.push({...spec,logical:{width:spec.width/spec.density,height:spec.height/spec.density},dpi:options.dpi,timing:F.summary(samples),heapBefore,heapAfter:performance.memory?.usedJSHeapSize??null,ownedInputOutputBytes:F.ownedBytes(input,source?result.result:result)});
+  }
+  const source=canvas(F.image(1024,768)),drafts=createDraftRenderer({options:F.imageOptions,maxEdge:256});
+  let start=performance.now(),draft=drafts.update(source,0);const draftMs=performance.now()-start;
+  start=performance.now();check(draft===drafts.update(source,0),'draft cache miss');const cacheMs=performance.now()-start;
+  check(draft.resolution.preview.width===256&&draft.resolution.resampled,'draft not bounded');
+  const expected=Core.renderImage(F.image(1024,768),F.imageOptions);source.getContext('2d').clearRect(0,0,1024,768);
+  start=performance.now();const final=draft.renderFinal(),finalMs=performance.now()-start;
+  check(JSON.stringify(await fingerprint(final.result))===JSON.stringify(await fingerprint(expected)),'final did not use original frozen pixels');
+  check(draft.renderFinal()===final,'final cache miss');
+  check(drafts.update(source,1)!==draft,'new revision did not invalidate cache');
+  const destination=document.createElement('canvas');destination.width=1024;destination.height=768;const blits=[];for(let i=0;i<20;i++){const t=performance.now();destination.getContext('2d').drawImage(draft.canvas,0,0,1024,768);blits.push(performance.now()-t);}
+  report.draft={cachedDraw:F.summary(blits),draftMs,cacheMs,finalMs,resolution:draft.resolution,finalPixels:final.result.geometry.sourcePixels,frozenFinalVerified:true};drafts.clear();
+  const variants=[['portrait-duotone','blue-pink',300],['editorial-halftone','warm-third',300],['bold-spot-poster','process-cmyk',600]];
+  const loadStart=performance.now(),Exporter=await import('/dist/stipra/sketches/assets/print-export.mjs');report.exporterLoadMs=performance.now()-loadStart;
+  for(const [family,variant,dpi] of variants){
+    const rendered=Adapter.renderCanvas(canvas(F.image()),{style:{id:family,variant,lpi:40},dpi,seed:42});
+    start=performance.now();const pkg=await Adapter.exportSnapshot(rendered,()=>Promise.resolve(Exporter));
+    report.parity.push({id:variant,kind:'image',exportMs:performance.now()-start,zipBase64:base64(pkg.bytes),expected:await fingerprint(rendered.result)});
+  }
+  for(const count of [2,3]){
+    const input=F.layers(97,61,count),options=F.optionsFor({kind:'layers',inks:count}),result=Core.renderLayers(input,options);
+    start=performance.now();const pkg=await Exporter.generateSketch({input,recipe:result.recipe,metadata:{contract:'stipra-alpha-fixture-v1',rights:'Stipra-authored procedural masks'}});
+    report.parity.push({id:'authored-'+count,kind:'layers',exportMs:performance.now()-start,zipBase64:base64(pkg.bytes),expected:await fingerprint(result)});
+  }
+  const frame=document.createElement('iframe');frame.src='/dist/stipra/index.html';document.body.append(frame);
+  await until(()=>frame.contentDocument?.documentElement.dataset.stipraReady==='true','studio ready');
+  const doc=frame.contentDocument,el=id=>doc.getElementById(id),win=frame.contentWindow;
+  const blob=await new Promise(r=>canvas(F.image()).toBlob(r,'image/png')),transfer=new DataTransfer();transfer.items.add(new File([blob],'alpha-fixture.png',{type:'image/png'}));
+  el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  await until(()=>el('status').textContent.includes('97 × 61 px'),'studio fixture');
+  el('style').value='editorial-halftone';el('style').dispatchEvent(new Event('change',{bubbles:true}));
+  el('style-dpi').value='300';el('style-lpi').value='40';
+  el('style-variant').value='warm-third';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
+  await until(()=>doc.querySelectorAll('#grid canvas').length===5,'three studio inks');
+  el('screen-seed').value='42';el('screen-seed').dispatchEvent(new Event('input',{bubbles:true}));el('screen-seed').dispatchEvent(new Event('change',{bubbles:true}));
+  let exported;const createURL=win.URL.createObjectURL.bind(win.URL),click=win.HTMLAnchorElement.prototype.click;
+  win.URL.createObjectURL=b=>{if(b.type==='application/zip')exported=b;return createURL(b);};
+  win.HTMLAnchorElement.prototype.click=function(){if(this.download==='stipra-print-package.zip')return;return click.call(this);};
+  start=performance.now();el('save-plates').click();await until(()=>exported||!el('error').hidden,'studio export');
+  check(exported,'studio export: '+el('error').textContent);
+  report.parity.push({id:'studio-warm-third',kind:'image',exportMs:performance.now()-start,zipBase64:base64(new Uint8Array(await exported.arrayBuffer())),expected:await fingerprint(Core.renderImage(F.image(),F.imageOptions))});
+  win.URL.createObjectURL=createURL;win.HTMLAnchorElement.prototype.click=click;frame.remove();
+  document.getElementById('evidence').textContent=JSON.stringify(report);document.body.dataset.smoke='pass';document.getElementById('out').textContent='BROWSER_ALPHA_PASS';
+}catch(e){document.body.dataset.smoke='fail';document.getElementById('out').textContent='BROWSER_ALPHA_FAIL: '+e.stack;}
+</script></body></html>
