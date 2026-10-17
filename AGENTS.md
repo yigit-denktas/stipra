@@ -16,6 +16,10 @@ For **every issue**, record:
 
 Use branch names like feat/123-separation-sheet or fix/456-plate-offset. PR body must say Closes #123 (when applicable), list test commands and screenshots/report artifacts. Keep work traceable both forward (issue → branch → PR → commit) and backward (commit → PR → issue). Never mark a milestone complete on prose alone. Close genuine duplicates using GitHub's duplicate reason and a cross-link.
 
+## Keep the public entry point current
+
+When a change alters capabilities, setup, examples, limitations or the next priority, update README.md in the same PR and reconcile the relevant ROADMAP.md status. Keep the README short and link detailed contracts/evidence. Distinguish implemented behavior, verified checks, proposed work and publication/physical-print acceptance. Do not retain stale fixed issue counts or claim unsupported readiness.
+
 ## Before changing defaults or the studio UI
 
 Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.md](docs/STYLES-v1.md) for the four implemented, unvalidated starting recipes, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.

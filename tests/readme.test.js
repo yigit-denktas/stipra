@@ -45,7 +45,6 @@ test('README is a short human entry point and links to real help for people and 
   assert.ok(readme.includes('examples/recipes/screens-spot.json'));
   assert.match(readme, /spot\/CMYK|spot inks or CMYK/);
   assert.match(readme, /digital approximations/i);
-  assert.match(readme, /5 of the original 14 issues completed \(35\.71% by issue count\)/);
   assert.ok(roadmap.includes('docs/CREATIVE-CODING-LIBRARY.md'), 'roadmap must link the current library scope');
   for(const expected of ['DESIGN.md','ROADMAP.md','AGENTS.md','CONTRIBUTING.md','docs/PRINT-DESIGN-RULES.md','docs/references/README.md','docs/GETTING-STARTED.md'])
     assert.ok(readme.includes(']('+expected+')'), 'missing navigation: '+expected);
