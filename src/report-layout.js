@@ -36,7 +36,7 @@ function htmlReport(cards,m){
     'footer{border-top:2px solid currentColor;margin-top:24px;padding-top:10px;font:12px Mono,monospace;overflow-wrap:anywhere}'+
     '@media(max-width:560px){main{padding:13px}.hero{grid-template-columns:1fr}.image{height:300px}header strong{font-size:26px}}'+
     '@page{size:A4 '+m.orientation+';margin:12mm}'+
-    '</style></head><body><main><header><strong>Stiprā / ink study</strong><span>'+m.width+'×'+m.height+'px · '+m.dpi+' dpi<br>'+esc(m.paper.name)+' / '+m.orientation+'</span></header>'+
+    '</style></head><body><main><header><strong>stiprā / ink study</strong><span>'+m.width+'×'+m.height+'px · '+m.dpi+' dpi<br>'+esc(m.paper.name)+' / '+m.orientation+'</span></header>'+
     '<h2>01 / original and proof</h2><section class="hero">'+cards.slice(0,2).map(image).join('')+'</section>'+
     '<h2>02 / physical ink layers + substrate</h2><section class="plates">'+cards.slice(2).map(image).join('')+'</section>'+
     '<h2>03 / exact settings</h2><table><thead><tr><th>#</th><th>Ink</th><th>Preview HEX</th><th>Channel</th><th>Screen</th><th>Coverage</th></tr></thead><tbody>'+rows+'</tbody></table>'+
@@ -50,7 +50,7 @@ function screenDescription(s,dpi){
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v4');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v5');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   const typo=m.typography||null;
   const embed=async(file,family,weight=400)=>pdf.embedFont(file?fs.readFileSync(file):truetype(family,weight));
@@ -63,7 +63,7 @@ async function pdfReport(cards,m){
   const theme=Paper.theme(m.paper,m.settings);
   const paper=await pdf.embedPng(m.reportPaperBytes||await paperBackground(m));
   const qr=await pdf.embedPng(await QR.png({style:m.qrStyle||'brand-dots',ink:theme.key,fontBytes:typo?.fontWordmark?fs.readFileSync(typo.fontWordmark):typo?.fontBold?fs.readFileSync(typo.fontBold):null}));
-  const fg=pdfColor(theme.key),audit={version:2,minTextPt:9,theme,qr:{style:m.qrStyle||'brand-dots',destination:GUIDE,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
+  const fg=pdfColor(theme.key),audit={version:3,minTextPt:9,theme,qr:{style:m.qrStyle||'brand-dots',destination:GUIDE,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
   const images=new Map();
   let page,record,y;
   const content=s=>typo?.lowercase?String(s).toLowerCase():String(s);

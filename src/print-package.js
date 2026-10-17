@@ -129,7 +129,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     report:{pdf:'report/separation-sheet.pdf',html:'report/separation-sheet.html',
       widthMm:info.orientation==='portrait'?210:297,heightMm:info.orientation==='portrait'?297:210,
       orientation:info.orientation,fonts:'IBM Plex Sans / IBM Plex Mono (SIL OFL 1.1)',
-      embeddedRecipes:true,qrDestination:Report.GUIDE,qr:{style:qrStyle,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},inspectionOnly:true,minTextPt:9,layoutVersion:4,texture:{style:reportTexture,dpi:144,simulation:true},theme:Paper.theme(stock,info.settings)},
+      embeddedRecipes:true,qrDestination:Report.GUIDE,qr:{style:qrStyle,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},inspectionOnly:true,minTextPt:9,layoutVersion:5,texture:{style:reportTexture,dpi:144,simulation:true},theme:Paper.theme(stock,info.settings)},
     files:[...parts].sort(([a],[b])=>a.localeCompare(b)).map(([name,data])=>({path:name,bytes:data.length,sha256:digest(data)})),
     uncalibrated:true,notes:['Digital RGB overprint is not a calibrated press proof.',
       'Production plates always use zero registration offset.','Native pixel dimensions are preserved; no resizing performed.']};
