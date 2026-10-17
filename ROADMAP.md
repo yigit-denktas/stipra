@@ -1,9 +1,19 @@
-# Stiprā · v0.9 delivery roadmap
+# Stiprā · delivery roadmap
 
 **Product decision:** [#21](https://github.com/yigit-denktas/stipra/issues/21) · 16 October 2026 · [Design principles](DESIGN.md) · [Getting started](docs/GETTING-STARTED.md)  
 **Mission:** a small, local-first, **MIT-licensed browser printmaking studio** with an **agent-safe CLI**. One artist or agent should be able to take an image or generate simple layered vector artwork, control the actual ink-separation masks, see each plate/overprint and produce aligned masters and an A4 separation inspection sheet.
 
 Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a replacement for professional ICC/prepress calibration or a hosted publishing platform. The existing v1 scene, #6 image importer, CLI scaffolding and Prehnite v8 case study are kept. [Kuşluk #21](https://github.com/interzettel/kushluk/issues/21#issuecomment-6225189079) may consume *optional static graphics only* after a direct-tools benchmark.
+
+## Next: trustworthy foundation, then creative coding alpha
+
+The owner wants to apply Stiprā inside existing p5.js/Canvas sketches, with optional real plate exports. [The creative coding plan](docs/CREATIVE-CODING-LIBRARY.md) and [milestone tracker #70](https://github.com/yigit-denktas/stipra/issues/70) record this direction. Keep the current browser/CLI work as the shared foundation; do not wait for every optional backlog item before a bounded alpha.
+
+1. Resolve [report/export PR #69](https://github.com/yigit-denktas/stipra/pull/69), complete the input-color contract (#44), verify shared masters/exports (#8/#12/#13), and audit shipped dependency/asset notices (#14).
+2. Implement the lean engine contract (#71), Canvas/p5 adapter (#72), artist-authored ink input (#73) and measured alpha acceptance (#74). PDF/ZIP machinery stays optional. Preserve the essential studio workflow (#22).
+3. Evaluate a separate Processing Java bridge (#75) only after the alpha demonstrates usefulness. Do not build another drawing framework.
+
+A pure-RGBA prototype can proceed while file-decoder ICC behavior is investigated. Physical-print evidence remains required for print-quality claims, not for an explicitly experimental digital effect. Additional vector formats, branding and paper realism are separate work. These are planning stages, not native GitHub milestones; #17 tracks that setup.
 
 ## v0.9 user experience — one browser workflow
 
@@ -27,12 +37,12 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Raster dot, reverse, line and hybrid screens of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | **Implemented — Node/Chromium screen masks, real CLI and browser controls** | Done |
 | Native vector facet screening (SVG) | [#28](https://github.com/yigit-denktas/stipra/issues/28) | Planned — separate from raster screens | P1 |
 | Full-frame raster plates, native scale and optional external registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | **CLI implemented; owner-image and physical validation pending** | P0 verification |
-| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Portrait/landscape A4 + paper texture, embedded recipes and QR implemented in #45 PR; owner review pending** | P0 verification |
-| CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
-| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
-| Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) · [#47](https://github.com/yigit-denktas/stipra/issues/47) | **Four shared browser/CLI starting recipes implemented; real image quality and printer validation open** | P1 evidence |
-| Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **Functional raster ZIP; broader export matrix open** | P0 |
-| Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
+| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Reports, ink-linked annotations, paper texture, embedded recipes and ink-dot QR implemented; shared browser export hardening is in open PR #69** | P0 verification |
+| CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Implemented import/separate/render/compare/batch paths; remaining issue acceptance open | P0 |
+| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Functional studio; shared export and readiness hardening in open PR #69; full #22 acceptance remains open | P0 |
+| Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) · [#47](https://github.com/yigit-denktas/stipra/issues/47) | **Four shared families plus attributed variants and forest/coast refinements merged in #64/#68; physical validation open** | P1 evidence |
+| Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **CLI raster ZIP implemented; shared browser package in open PR #69; broader format matrix open** | P0 |
+| Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Browser/export tests and calibration kit in open PR #69; physical observations not run | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
 | Quantitative ink diagnostics and future visual overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) · [#56](https://github.com/yigit-denktas/stipra/issues/56) | **Ink contribution, overlap and LPI implemented in shared browser/CLI engine**; richer visual overlays open | P1 |
 | Prehnite crystal seam/proportion polish | [#3](https://github.com/yigit-denktas/stipra/issues/3) | Planned | **Case-study-only, nonblocking** |
@@ -43,11 +53,11 @@ The attached sample showing alternative Riso color separations is the visual ben
 
 ## Keep versus prune
 
-**Keep:** scene/plate geometry and deterministic provenance, original images, isolated ink coverage masks, substrate, registration, controlled imperfection, RGB/CMYK/spot modes, print report, local/browser parity, reproducible CLI, and clearly optional p5.js/Canvas integration *later* if shown useful.
+**Keep:** scene/plate geometry and deterministic provenance, original images, isolated ink coverage masks, substrate, registration, controlled imperfection, RGB/CMYK/spot modes, print report, local/browser parity, reproducible CLI, and the bounded p5.js/Canvas alpha in #70, subject to usefulness evidence.
 
 **Prune:** general rendering engine/plugin marketplace, reimplementing a p5.js sketch API, cloud orchestration, arbitrary AI-generated code execution, excessive Prehnite-specific gem work as a precondition for importing images, and physically calibrated Riso claims unsupported by measurements.
 
-**Use compatible existing packages where useful.** Avoid duplicating standard raster codecs, basic SVG support or PDF rendering without a demonstrated need. An optional p5.js adapter may help author procedural scenes, but Stipra is not to be marketed as a competing p5.js runtime or library in v0.9.
+**Use compatible existing packages where useful.** Avoid duplicating standard raster codecs, basic SVG support or PDF rendering without a demonstrated need. A thin p5.js adapter will consume existing sketches; it must not duplicate p5.js drawing primitives or become a competing sketch runtime. See the separate creative coding alpha plan above.
 
 ## Printmaking references and style rules
 
@@ -62,7 +72,7 @@ The [three-font controlled identity study](docs/BRAND-IDENTITY-STUDY-v2.md) test
 The [print-package CLI contract](docs/PRINT-PACKAGE-v1.md) now describes the digital raster ZIP, aligned masters, actual output DPI and A4 report; [the private owner-photo batch script](scripts/owner-photo-batch.js) checks original source hashes before it writes any ZIP. These changes do **not** replace the visual and physical quality gate, or the remaining vector/format coverage in #12.
 
 
-The owner supplied three **private, rights-not-yet-cleared-for-redistribution** photographs (sculpture contours, complex forest installation, and gradient beach horizon). Their **exact hash/dimension metadata and per-image pass/fail criteria** live in [the owner-photo print-package acceptance specification](docs/PRINT-PACKAGE-ACCEPTANCE.md), tracked by [#39](https://github.com/yigit-denktas/stipra/issues/39). This is the common verification gate for #8 masters, #9 A4 reports, #12 ZIP exports and #13 human/physical QA. **0/3 complete packages verified** against these tests so far; existing Node/browser separation tests do not establish print-package readiness. The original photos are not committed.
+The owner supplied three **private, rights-not-yet-cleared-for-redistribution** photographs (sculpture contours, complex forest installation, and gradient beach horizon). Their **exact hash/dimension metadata and per-image pass/fail criteria** live in [the owner-photo print-package acceptance specification](docs/PRINT-PACKAGE-ACCEPTANCE.md), tracked by [#39](https://github.com/yigit-denktas/stipra/issues/39). This is the common verification gate for #8 masters, #9 A4 reports, #12 ZIP exports and #13 human/physical QA. Digital owner-photo packages and typography specimens have been generated and inspected; that evidence does not close the physical-print gate. See [#39](https://github.com/yigit-denktas/stipra/issues/39) and subsequent quality work [#68](https://github.com/yigit-denktas/stipra/pull/68). Keep per-criterion evidence in the acceptance record rather than inferring physical readiness from automated tests. The original photos are not committed.
 
 ## Release acceptance and kill switches
 
@@ -76,4 +86,4 @@ The owner supplied three **private, rights-not-yet-cleared-for-redistribution** 
 
 Stipra-original code is MIT, with individual third-party notices retained. [p5.riso](https://github.com/antiboredom/p5.riso) has a restrictive Anti-Capitalist License; it is **not** a compatible MIT implementation source for copying, vendoring, generated translation or a fork. Study unprotected concepts, standard math and documented visual behavior; create and validate **independent original implementations**. See [licensing notes](docs/LICENSING.md) and [#14](https://github.com/yigit-denktas/stipra/issues/14). Commercial redistribution requires real dependency/asset provenance review.
 
-**Current progress:** 5 of the original #1–#14 tasks merged (#1, #2, #5, #6, #7). This counts issue completions, **not** weighted engineering percent. No work in this scope note claims any of the remaining features are finished.
+**Status note (17 October 2026):** shared Styles (#64), attributed recipes/separation refinements (#68), report design and public guide/ink-dot QR work are merged. PR #69 remains open. The new library work is planned in #70–#75; it is not a shipped SDK. Open issues retain their remaining acceptance criteria, including physical validation.
