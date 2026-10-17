@@ -37,7 +37,9 @@ test('source bytes, profile metadata and normalization policy survive the export
   const manifest=JSON.parse(await zip.file('manifest.json').async('string'));
   assert.deepEqual(manifest.source.profile,asset.metadata.profile);
   assert.deepEqual(manifest.source.colorManagement,asset.metadata.colorManagement);
-  assert.match(await zip.file(manifest.report.fontLicense).async('string'),/SIL OPEN FONT LICENSE/i);
+  const fontNotice=await zip.file(manifest.report.fontLicense).async('string');
+  assert.match(fontNotice,/SIL OPEN FONT LICENSE/i);
+  for(const family of ['sans','mono'])assert.ok(fontNotice.includes(require('node:fs').readFileSync(require.resolve('@fontsource/ibm-plex-'+family+'/LICENSE'),'utf8')));
   const normalized=await ingestLocalBytes(await zip.file('source/normalized.png').async('nodebuffer'));
   for(const [x,y] of fixture.sampleCoordinates)assert.deepEqual(pixel(normalized,x,y),pixel(asset,x,y));
 });
