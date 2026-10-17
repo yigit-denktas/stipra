@@ -10,7 +10,7 @@ const sliderSpecs={
 };
 function setStatus(s){$('renderStatus').textContent=s;}
 function uiRange(key,label,min,max,step,unit){const wrap=document.createElement('div');wrap.className='range-field';
- const lab=document.createElement('label');lab.textContent=label;const v=document.createElement('output');v.id=key+'-value';lab.append(v);
+ const lab=document.createElement('label');lab.textContent=label;lab.htmlFor=key;const v=document.createElement('output');v.id=key+'-value';lab.append(v);
  const inp=document.createElement('input');inp.type='range';inp.min=min;inp.max=max;inp.step=step;inp.id=key;inp.value=cfg[key];
  inp.addEventListener('input',()=>{cfg[key]=Number(inp.value);v.textContent=inp.value+unit;scheduleRender();});wrap.append(lab,inp);v.textContent=cfg[key]+unit;return wrap;
 }
@@ -19,7 +19,7 @@ function buildControls(){for(const [group,items] of Object.entries(sliderSpecs))
 }const colors=$('colors');colors.replaceChildren();
  for(const role of cfg.variant==='03'?['primary','accent','third','paper']:['primary','accent','paper']){
   const row=document.createElement('div');row.className='color-row';let label=document.createElement('label');label.textContent={primary:'Main ink',accent:'Accent ink',third:'Third ink',paper:'Paper stock'}[role];
-  const block=document.createElement('span'),color=document.createElement('input'),hex=document.createElement('code');color.type='color';color.value=cfg.palette[role];hex.textContent=color.value;
+  const block=document.createElement('span'),color=document.createElement('input'),hex=document.createElement('code');color.type='color';color.id='ink-color-'+role;label.htmlFor=color.id;color.value=cfg.palette[role];hex.textContent=color.value;
   color.addEventListener('input',()=>{cfg.palette[role]=color.value;hex.textContent=color.value;updateLegend();scheduleRender();});block.append(color,hex);row.append(label,block);colors.append(row);
  }
  const facets=$('facets');facets.replaceChildren();

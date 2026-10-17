@@ -123,11 +123,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         <h3>See how the inks come apart</h3>
         <p class="muted">Import an image to compare its original, overprint, and individual ink plates.</p>
       </div>
-      <div id="hero" class="hero-grid" aria-label="Original and composite artwork"></div>
+      <div id="hero" class="hero-grid" role="group" aria-label="Original and composite artwork"></div>
       <div id="plates-heading" class="plates-heading" hidden>
         <h3>Ink plates</h3><span id="plate-count" class="muted"></span>
       </div>
-      <div id="plates" class="plate-grid" aria-label="Individual ink coverage plates"></div>
+      <div id="plates" class="plate-grid" role="group" aria-label="Individual ink coverage plates"></div>
     </div>
     <small id="meta" class="muted">The original is never modified. The simulated overprint does not model spectral ink mixing, dot gain, or a calibrated Risograph.</small>
   </main>
@@ -153,7 +153,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       </div>
       <div class="field"><label for="paper">Paper color (preview only)</label><input id="paper" type="color" value="#fff8ec"></div>
       <div class="field"><label for="ink-count">Physical ink count (manual spot recipe)</label><input id="ink-count" type="number" min="2" max="8" step="1" value="2"><small>Changing the count preserves existing passes; new passes start from editable tone coverage.</small></div>
-      <div id="inks" aria-label="Adjust each ink"></div>
+      <div id="inks" role="group" aria-label="Adjust each ink"></div>
     </section>
     <details id="screen-settings" class="panel">
       <summary>Screening &amp; registration</summary>
