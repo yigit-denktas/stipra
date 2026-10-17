@@ -10,29 +10,27 @@
 
   <p><strong>Separate the inks. Keep the imperfections.</strong></p>
 
-  [![Development](https://img.shields.io/badge/status-v0.9%20in%20development-30343b?style=flat-square)](ROADMAP.md)
-  [![License MIT](https://img.shields.io/badge/code-MIT-00765a?style=flat-square)](LICENSE)
-  [![Node 20+](https://img.shields.io/badge/Node.js-20%2B-2157a6?style=flat-square)](package.json)
-  [![Local-first](https://img.shields.io/badge/local--first-no%20API%20fees-d05754?style=flat-square)](docs/ARCHITECTURE.md)
+  [![Development](https://img.shields.io/badge/status-experimental%20alpha-30343b?style=flat-square)](ROADMAP.md)
+  [![License MIT](https://img.shields.io/badge/code-MIT-006043?style=flat-square)](LICENSE)
+  [![Node 20+](https://img.shields.io/badge/Node.js-20%2B-0D4DAD?style=flat-square)](package.json)
+  [![Local-first](https://img.shields.io/badge/local--first-no%20API%20fees-FF665D?style=flat-square)](docs/ARCHITECTURE.md)
   [![v0.9 issues](https://img.shields.io/badge/issues-v0.9%20backlog-424b55?style=flat-square)](https://github.com/yigit-denktas/stipra/issues)
 
 </div>
 
 A picture is one thing. A print is what happens when you pull it apart.
 
-**Stiprā** is a small, open-source printmaking studio for exploring how images become layers of ink. Bring a photograph or illustration, try a spot-color separation, change what each ink prints, and see what happens when the layers meet. The same process can be driven from a browser or a command line.
+**Stiprā** is a local-first printmaking studio and experimental JavaScript library. Bring a photograph, handmade illustration or Canvas/p5.js drawing; separate it into spot inks or CMYK, or supply the ink masks yourself. Inspect each pass, adjust its screen, and export aligned plates with a reproducible recipe. Keep drawing in your existing tools.
 
-The name has two roots: the Latvian <em>stiprā</em> (“the strong,” feminine definite form of <em>stiprs</em>) and our original English wordplay on <em>stippling</em> and <em>strata</em>. The macron is part of the display name; the repository, URL and CLI remain `stipra` for compatibility.
+The macron belongs to the display name; the repository, URL and CLI use `stipra`.
 
-Riso is where we're starting. We care as much about **why** an image should be separated a certain way as how many effects we can apply to it.
-
-**[Open the studio ↗](https://apps.yigitdenktas.com/stipra/) · [Getting started](docs/GETTING-STARTED.md) · [Roadmap](ROADMAP.md) · [Design principles](DESIGN.md)**
+**[Open the studio](https://apps.yigitdenktas.com/stipra/) · [Canvas/p5.js examples](https://apps.yigitdenktas.com/stipra/sketches/) · [Reproduction guide](https://apps.yigitdenktas.com/stipra/guide/) · [Getting started](docs/GETTING-STARTED.md)**
 
 ## Try it
 
-For JavaScript artwork, the [experimental core API](packages/core/README.md) accepts sRGB pixels or authored ink masks. Build/install locally; it is not published to npm.
+The **browser studio** processes supported PNG, JPEG, WebP and restricted SVG locally. Choose a shared Style or edit spot/CMYK masks, inspect the proof and individual plates, and save a print-package ZIP. No account or image API is needed. See [input limits](docs/IMPORT.md).
 
-The **[browser studio](https://apps.yigitdenktas.com/stipra/)** processes your images locally. Drop in a PNG, JPEG, WebP, or supported SVG; choose two spot inks or CMYK; adjust actual grayscale ink masks and their dot, line, reverse or hybrid screens. Compare the artwork with the digital overprint and the individual plates. No account or image API needed.
+For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā inside an existing **2D** sketch, preserves a frozen source frame, and optionally exports its aligned plates. The examples cover plain Canvas and p5 global/instance modes. Both packages are **local, unpublished alpha packages**; they are not available on npm.
 
 Prefer a script? With Node.js 20+ installed:
 
@@ -45,24 +43,24 @@ node bin/stipra.js separate \
   --out out/my-first-print
 ```
 
-That creates separate grayscale plates, previews, recipes and a provenance manifest without changing the original. The CLI can also generate a **[complete digital print package](docs/PRINT-PACKAGE-v1.md)** with aligned masters, an A4 report and a ZIP. Use a fresh output directory for each run. The [getting-started guide](docs/GETTING-STARTED.md) has CMYK, procedural art, local browser and CLI examples.
+This creates grayscale plates, previews, recipes and provenance without changing the original. The [print-package command](docs/PRINT-PACKAGE-v1.md) also produces a ZIP with aligned masters, an A4 PDF/HTML inspection report, diagnostics and normalized recipes. Use a fresh output directory for each run.
 
 ## Where we are
 
-**Working today:** image import, independent spot/CMYK coverage masks, adjustable raster screening, [four experimental Styles](docs/STYLES-v1.md), digital proofs, the browser lab, CLI recipes, and deterministic vector scene/plate examples. The [Prehnite](examples/prehnite-v8/) experiment is where it began.
+**Implemented:** local import, independent spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md), physical LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean JS core, Canvas/p5 integration and authored-ink replay. Native vector scene examples remain a separate supported path; [Prehnite](examples/prehnite-v8/) is the original case study.
 
-**Next to validate:** owner-photo quality and real printer output for [#8](https://github.com/yigit-denktas/stipra/issues/8), [#9](https://github.com/yigit-denktas/stipra/issues/9) and [#12](https://github.com/yigit-denktas/stipra/issues/12); plus a more complete browser workspace [#22](https://github.com/yigit-denktas/stipra/issues/22), and visual quality of the new styles [#34](https://github.com/yigit-denktas/stipra/issues/34).
+**Verified digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache unchanged proofs and use a bounded draft before an explicit full-resolution final. The evaluation states its tested limits.
 
-Our previews are **digital approximations**, not guarantees of real ink color, registration, or printer calibration.
+**Next candidate:** [#83, named regions → inks](https://github.com/yigit-denktas/stipra/issues/83). Preserve regions such as foreground, foliage and lettering, then map them to physical passes. [Structured-artwork research](docs/STRUCTURED-ARTWORK.md) scopes optional source-project, format and provenance adapters; those are planned, not implemented.
+
+**Still open:** [studio workflow](https://github.com/yigit-denktas/stipra/issues/22), broader format coverage, [distribution notices](docs/DEPENDENCY-AUDIT.md), independent artist evaluation and physical print tests. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
 
 ## Follow the work
 
-**v0.9 — 5 of the original 14 issues completed (35.71% by issue count).** This is a transparent backlog count, *not* a measure of engineering effort or readiness to print. Check the [roadmap](ROADMAP.md) and [open issues](https://github.com/yigit-denktas/stipra/issues) for current progress and priorities.
+The [roadmap](ROADMAP.md), [alpha tracker #70](https://github.com/yigit-denktas/stipra/issues/70) and [issues](https://github.com/yigit-denktas/stipra/issues) distinguish implementation, validation and publication. Keep original photographs and image-bearing packages private unless redistribution is authorized.
 
-We're keeping the project intentionally small: make one image-to-print workflow genuinely good before building dozens of filters. [Stipra's design brief](DESIGN.md) explains what we want the experience to feel like, while the [printmaking rules](docs/PRINT-DESIGN-RULES.md) and [research library](docs/references/README.md) keep the craft knowledge and sources out of the README.
+[Design principles](DESIGN.md) · [Printmaking rules](docs/PRINT-DESIGN-RULES.md) · [Reference library](docs/references/README.md) · [Architecture](docs/ARCHITECTURE.md)
 
-Want to help? Open an [issue](https://github.com/yigit-denktas/stipra/issues), read [CONTRIBUTING.md](CONTRIBUTING.md), or follow [AGENTS.md](AGENTS.md) if you're working through an agent. The [technical docs](docs/ARCHITECTURE.md) cover the renderer and data model.
-
-Stipra-authored code is [MIT-licensed](LICENSE), with [third-party notices and asset exceptions](docs/LICENSING.md).
+To contribute, read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md). Stiprā-authored code is [MIT-licensed](LICENSE), with [third-party notices and asset exceptions](docs/LICENSING.md).
 
 **Make a mark. Choose its ink. See what happens when the layers meet.**
