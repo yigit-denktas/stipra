@@ -26,7 +26,8 @@
     "audit:licenses": "node scripts/license-audit.js",
     "check:release-licenses": "node scripts/license-audit.js --release-check",
     "build:core": "node scripts/build-core.js",
-    "check:core-package": "node --test tests/core-package.test.js"
+    "check:core-package": "node --test tests/core-package.test.js",
+    "build:sketches": "node scripts/build-sketches.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",
@@ -43,6 +44,8 @@
   },
   "devDependencies": {
     "esbuild": "0.25.12",
+    "p5": "1.11.11",
+    "p5-v2": "npm:p5@2.2.2",
     "typescript": "5.9.3"
   }
 }
