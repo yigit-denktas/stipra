@@ -58,7 +58,7 @@ async function run(){
    child.on('error',failure);child.on('exit',code=>failure(Error('Chrome exited '+code+': '+stderr)));
    let timer;
    try{
-     const timeout=page==='examples/alpha/browser-smoke.html'?180000:60000;
+     const timeout=['examples/alpha/browser-smoke.html','examples/accessibility/browser-smoke.html'].includes(page)?180000:60000;
      const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Browser smoke wall-clock deadline exceeded')),timeout);});
      await Promise.race([deadline,(async()=>{
        const target=await call('Target.createTarget',{url:'about:blank'});
@@ -67,6 +67,10 @@ async function run(){
        for(;;){
          const response=await call('Runtime.evaluate',{expression:'JSON.stringify({state:document.body?.dataset.smoke,output:document.getElementById("out")?.textContent})',returnByValue:true},sessionId);
          const state=JSON.parse(response.result.value||'{}');
+         if(page==='examples/accessibility/browser-smoke.html'&&['pass','fail'].includes(state.state)){
+           const raw=await call('Runtime.evaluate',{expression:'document.getElementById("evidence").textContent',returnByValue:true},sessionId);
+           const dir=path.join(root,'out/accessibility');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'audit.json'),raw.result.value+'\n');
+         }
          if(state.state==='fail')throw Error('Browser smoke failed: '+state.output);
          if(state.state==='pass'){
            if(state.output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))throw Error('Unexpected smoke result: '+state.output);
