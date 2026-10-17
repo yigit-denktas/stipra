@@ -14,7 +14,7 @@
   const output=document.getElementById('out');
   let d;
   try{
-    await until(()=>frame.contentDocument?.documentElement.dataset.stipraReady==='true','lab script loading');
+    await until(()=>frame.contentDocument?.documentElement?.dataset.stipraReady==='true','lab script loading');
     d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
     const colorFixture=await (await fetch('/tests/fixtures/color-reference.json')).json();
