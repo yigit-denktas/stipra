@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Stipra image separation browser smoke</title></head>
-<body><output id="out">BROWSER_SEPARATION_PENDING</output><iframe id="studio" src="index.html" width="900" height="600"></iframe>
+<body><output id="out">BROWSER_SEPARATION_PENDING</output><iframe id="studio" src="/dist/stipra/index.html" width="900" height="600"></iframe>
 <script src="../../node_modules/jszip/dist/jszip.min.js"></script>
 <script src="../../node_modules/pdf-lib/dist/pdf-lib.min.js"></script>
 <script>
@@ -15,7 +15,7 @@
   let d;
   try{
     await until(()=>frame.contentDocument?.getElementById('mode')&&frame.contentWindow.StipraSeparation,'lab script loading');
-    d=frame.contentDocument;
+    d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
     const input=document.createElement('canvas');input.width=4;input.height=2;
     const ctx=input.getContext('2d');
@@ -142,7 +142,7 @@
     if(source.length!==(await screeningBlob.arrayBuffer()).byteLength)throw Error('Original source missing');
     const inkRecipe=JSON.parse(await zip.file('recipe/inks.json').async('string')),screens=JSON.parse(await zip.file('recipe/screens.json').async('string')),proofScreens=JSON.parse(await zip.file('recipe/proof-screens.json').async('string'));
     if(screens.plates.blue.registration.x!==0||proofScreens.plates.blue.registration.x!==2)throw Error('Proof offsets leaked into masters');
-    const expected=win.StipraScreen.apply(win.StipraSeparation.separate({width:48,height:32,rgba:painter.getImageData(0,0,48,32).data},inkRecipe),screens);
+    const expected=win.StipraScreen.apply(win.StipraSeparation.separate({width:48,height:32,rgba:new win.Uint8ClampedArray(painter.getImageData(0,0,48,32).data)},inkRecipe),screens);
     async function decoded(bytes){const image=new Image(),url=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url;});URL.revokeObjectURL(url);const c=document.createElement('canvas');c.width=image.width;c.height=image.height;const x=c.getContext('2d');x.drawImage(image,0,0);return x.getImageData(0,0,c.width,c.height).data;}
     for(const [i,ink] of manifest.inks.entries()){
       const bytes=await zip.file(ink.screened).async('uint8array'),pixels=await decoded(bytes),wanted=win.StipraSeparation.plateRGBA(expected.masks[i].coverage);

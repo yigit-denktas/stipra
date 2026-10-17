@@ -46,7 +46,6 @@ function build(outRoot=path.join(ROOT,'dist')){
   html=html.replace('../../dist/stipra/assets/print-export.js','./assets/print-export.js');
   fs.writeFileSync(path.join(stage,'index.html'),html);
   require('node:child_process').execFileSync(process.execPath,[path.join(ROOT,'scripts/build-browser-export.js'),path.join(assets,'print-export.js')]);
-  fs.copyFileSync(path.join(ROOT,'web/stipra/shared.css'),path.join(assets,'shared.css'));
   fs.copyFileSync(path.join(ROOT,'web/stipra/shared.css'),path.join(stage,'shared.css'));
   for(const [src,dst] of SOURCES){
     const data=fs.readFileSync(path.join(ROOT,src));

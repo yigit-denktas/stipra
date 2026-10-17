@@ -71,7 +71,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
-    if(!/^[a-z0-9/_-]+\.(?:jpg|png|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
+    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
       throw Error('print: invalid or repeated path '+name);
     parts.set(name,Buffer.from(data));
   };
