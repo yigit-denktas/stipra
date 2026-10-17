@@ -119,4 +119,6 @@ npm test
 npm run build:pages
 ```
 
-Physical press calibration, owner-approved proof quality, owner-approved **Stiprā Styles** and finished agent batch tooling remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
+The [CLI workflow guide](CLI-WORKFLOWS.md) covers implemented compare/batch/verify/sheet commands, JSON errors, optional proof formats and reproducible procedural evidence.
+
+Physical press calibration, owner-approved proof quality and owner-approved **Stiprā Styles** remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
