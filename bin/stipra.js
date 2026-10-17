@@ -26,6 +26,12 @@ function help(){
   '  stipra render --preset all --format png --out out',
   '  stipra render --config recipe.json --seed 42 --format svg',
   '',
+  'Shared Stiprā Styles (experimental, reproducible starting points):',
+  '  stipra styles list',
+  '  stipra styles explain portrait-duotone',
+  '  stipra styles suggest --intent editorial',
+  '  stipra package --input photo.jpg --style editorial-halftone --dpi 300 --out out/photo.zip',
+  '',
   'Print package: aligned masters, A4 inspection and ZIP:',
   '  stipra package --input artwork.png --config examples/recipes/spot-photo.json --screen examples/recipes/screens-spot.json --dpi 300 --out out/artwork.zip',
   '',
@@ -92,6 +98,14 @@ async function main(){
  const opts=parse(process.argv.slice(2)),cmd=opts._[0];
  if(!cmd||opts.help||cmd==='help'){help();return;}
  if(cmd==='presets'){console.log(JSON.stringify(Engine.listPresets(),null,2));return;}
+ if(cmd==='styles'){
+  const styles=require('../src/styles.js'),action=opts._[1]||'list';
+  if(action==='list')console.log(JSON.stringify(styles.list(),null,2));
+  else if(action==='explain')console.log(JSON.stringify(styles.explain(opts._[2]),null,2));
+  else if(action==='suggest')console.log(JSON.stringify(styles.suggest({intent:opts.intent,hasFineText:opts['fine-text']==='true'}),null,2));
+  else throw Error('Unknown styles action '+action);
+  return;
+ }
  if(cmd==='scene'){require('./scene.js').run(process.argv.slice(3));return;}
  if(cmd==='import'){await require('./import.js').run(process.argv.slice(3));return;}
  if(cmd==='separate'){await require('./separate.js').run(process.argv.slice(3));return;}

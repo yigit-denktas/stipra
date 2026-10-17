@@ -19,6 +19,7 @@ jobs:
       - run: node --check src/core.js
       - run: node --check src/separation.js
       - run: node --check src/screening.js
+      - run: node --check src/styles.js
       - run: node --check bin/separate.js
       - run: node --check bin/package.js
       - run: node --check src/print-package.js

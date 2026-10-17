@@ -183,9 +183,35 @@
     setTimeout(()=>URL.revokeObjectURL(url),4000);
   }
   const downloadCanvas=(view,filename)=>view.canvas.toBlob(blob=>save(blob,filename),'image/png');
+  function syncScreenFields(){
+    $('screen-mode').value=screenConfig.default.mode;
+    $('screen-pitch').value=String(screenConfig.default.pitch);
+    $('screen-angle').value=String(screenConfig.default.angle);
+    $('screen-jitter').value=String(screenConfig.default.jitter);
+    $('screen-seed').value=String(screenConfig.seed);
+  }
+  $('style').addEventListener('change',e=>{
+    const id=e.target.value;
+    if(!id){
+      $('style-note').textContent='Manual adjustments remain available for every ink.';
+      return;
+    }
+    try{
+      const style=StipraStyles.resolve(id,{dpi:300});
+      config=style.inkRecipe;screenConfig=style.screenRecipe;
+      $('mode').value=config.mode;$('paper').value=config.paper;
+      $('style-note').textContent=style.style.description+' · '+style.targetLpi+' LPI at 300 DPI. Digital approximation only.';
+      controls();screenControls();syncScreenFields();render();
+    }catch(error){
+      $('error').textContent=error.message;$('error').hidden=false;
+      $('style').value='';
+    }
+  });
   $('mode').addEventListener('change',()=>{
     config=$('mode').value==='spot'?spot():cmyk();
     $('paper').value=config.paper;screenConfig=freshScreen();
+    $('style').value='';$('style-note').textContent='Manual separation; choose a style to start again.';
+    syncScreenFields();
     try{
       controls();screenControls();
       render(); // A mode switch is a discrete action; do not leave stale plate images queued.
@@ -215,5 +241,5 @@
     const normalized=StipraScreen.config(screenConfig,config.inks.map(i=>i.id));
     save(new Blob([JSON.stringify(normalized,null,2)+'\n'],{type:'application/json'}),'stipra-screen-recipe.json');
   });
-  controls();screenControls();
+  controls();screenControls();syncScreenFields();
 })();

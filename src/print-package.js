@@ -66,7 +66,7 @@ async function marked(pngBytes,w,h,pad,dpi){
   }
   return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
-async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto'}){
+async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null}){
   validate(dpi,marksMm);
   if(!Buffer.isBuffer(originalBytes)||!originalBytes.length)throw Error('print: original bytes required');
   const {width:w,height:h}=asset.metadata.oriented;
@@ -112,9 +112,12 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   add('report/separation-sheet.pdf',await Report.pdfReport(cards,info));
   add('recipe/inks.json',json(sep.recipe));add('recipe/screens.json',json(configs.production));
   add('recipe/proof-screens.json',json(configs.proof));
+  if(style)add('recipe/style.json',json(style));
   const manifest={contract:'stipra-print-package-v1',displayName:'Stiprā',
     source:{...asset.metadata,sha256:info.sha},output:print,
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
+    ...(style?{style:{id:style.style.id,version:style.style.version,targetLpi:style.targetLpi,
+      effectiveLpi:style.effectiveLpi,warnings:style.warnings,recipe:'recipe/style.json'}}:{}),
     screen:{seed:configs.proof.seed,proofOnlyRegistration:true,
       productionRecipe:'recipe/screens.json',proofRecipe:'recipe/proof-screens.json'},
     report:{pdf:'report/separation-sheet.pdf',html:'report/separation-sheet.html',
