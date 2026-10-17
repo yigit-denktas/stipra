@@ -44,6 +44,7 @@ async function inspect(files,policy){
 }
 /** Builds and inspects local tarballs without installing or publishing them. Requires system tar. */
 async function check(out=path.join(ROOT,'out/distribution-audit')){
+  fs.rmSync(path.join(out,'distribution-audit.json'),{force:true});
   await require('./build-core').build();await require('./build-inputs').build();
   fs.copyFileSync(path.join(ROOT,'LICENSE'),path.join(ROOT,'packages/canvas/LICENSE'));
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-distribution-')),packages=[];

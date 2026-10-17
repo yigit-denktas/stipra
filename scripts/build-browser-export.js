@@ -3,6 +3,7 @@
 const path=require('node:path'),fs=require('node:fs'),esbuild=require('esbuild');
 const ROOT=path.resolve(__dirname,'..');
 async function build(outfile,{format='iife'}={}){
+  fs.rmSync(outfile+'.audit.json',{force:true});
   const {truetype,license}=require('../src/report-fonts.js');
   const fonts={};for(const [family,weight] of [['ibm-plex-sans',400],['ibm-plex-sans',700],['ibm-plex-mono',400]])fonts[family+weight]=truetype(family,weight).toString('base64');
   const svg=fs.readFileSync(path.join(ROOT,'logo_for_Readme.svg'),'utf8');
