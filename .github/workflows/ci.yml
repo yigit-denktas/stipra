@@ -88,6 +88,11 @@ jobs:
       - run: npm run check:alpha
       - run: npm run check:regions
       - run: npm run check:exports
+      - run: node scripts/physical-print-kit.js out/operator-print-kit
+      - uses: actions/upload-artifact@v4
+        with:
+          name: operator-print-kit
+          path: out/operator-print-kit/
       - run: npm run check:export-parity
       - uses: actions/upload-artifact@v4
         if: always()

@@ -66,13 +66,13 @@ Named-style packages now retain their authored substrate by default, matching th
 
 ## Attributed recipe variants and photographic controls
 
-The four family defaults remain stable. Six further opt-in variants add published channel-separation approaches and focused photographic treatments. See [sources, formulas and limitations](references/SEPARATION-RECIPES.md).
+The four family defaults remain stable. Seven further opt-in variants add published channel-separation approaches and focused photographic treatments. See [sources, formulas and limitations](references/SEPARATION-RECIPES.md).
 
 | Family | Added variant | Passes |
 | --- | --- | --- |
 | Portrait Duotone | `blue-pink`, `teal-orange` | 2 |
 | Bold Spot Poster | `process-cmy`, `process-cmyk` | 3 / 4 |
-| Editorial Halftone | `forest-depth`, `coast-duotone` | 2 |
+| Editorial Halftone | `forest-depth`, `forest-contrast`, `coast-duotone` | 2 |
 
 `styles explain FAMILY` lists all variant settings. The browser's Recipe variant selector uses the same catalog. `styles resolve FAMILY --variant VARIANT` records the version, references, actual masks' channel formulas and physical screens. Recipes remain editable: the lab exposes photographic tone, complementary channel density, gray removal and gamma alongside existing controls. Original recipes are unchanged; choosing a variant is explicit.
 
@@ -86,4 +86,6 @@ node bin/stipra.js package --input photo.jpg --style editorial-halftone \
 
 The package diagnostics also record source suitability measurements, with the same guidance shown in the browser: dark source density, pale tone area and mostly neutral content. These are explicit alpha-weighted RGB measurements, not a scene classifier. Browser diagnostics now show warning text and affected inks, rather than only a warning count. Guide/lab layout alignment is deferred.
 
-Reproduce private same-input reviews with `node scripts/review-shared-styles.js --sources /private/originals --out /private/new-study`. It verifies all three owner hashes before rendering, writes 48 native proofs (four defaults and eight variants on three original photos plus authored linework), corresponding grayscale plates, normalized settings and coverage/suitability diagnostics. Source and outputs must stay outside the repository. Screen pitch is calculated at 300 DPI; no artwork is cropped or resampled. Contact sheets are downscaled previews; inspect native proofs and detail crops for quality.
+Reproduce private same-input reviews with `node scripts/review-shared-styles.js --sources /private/originals --out /private/new-study`. It verifies all three owner hashes before rendering, writes 52 native proofs (four defaults and nine variants on three original photos plus authored linework), corresponding grayscale plates, normalized settings and coverage/suitability diagnostics. Source and outputs must stay outside the repository. Screen pitch is calculated at 300 DPI; no artwork is cropped or resampled. Contact sheets are downscaled previews; inspect native proofs and detail crops for quality.
+
+`forest-contrast` v1 is an additional opt-in candidate, not a replacement for `forest-depth` v1: its green photographic key uses gain 1.1 / gamma 1.3, with the same gray-removed yellow chroma pass and 50 LPI accent. The private forest review favors its stronger background anchor over the flatter open-shadow treatment. It clips more deep-key pixels, so inspect bark and foliage rather than treating contrast as a universal improvement. Four defaults and all earlier variants retain their exact settings. See [the pass-contribution study](FOREST-PASS-REVIEW.md).

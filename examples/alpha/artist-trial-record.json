@@ -1,0 +1,20 @@
+{
+  "contract": "stipra-artist-trial-v1",
+  "status": "not-performed",
+  "reviewer": null,
+  "date": null,
+  "hostAndVersion": null,
+  "packageHashes": null,
+  "inputKind": null,
+  "frame": null,
+  "recipeHash": null,
+  "elapsedMinutes": null,
+  "setupWithoutAgentHelp": null,
+  "plateAlignmentObserved": null,
+  "replayObserved": null,
+  "failuresAndConfusion": [],
+  "comparisonWithUsualWorkflow": null,
+  "worthKeeping": null,
+  "requestedChanges": [],
+  "ownerReleaseDecision": null
+}

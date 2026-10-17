@@ -12,7 +12,9 @@ async function run(out){
   ctx.fillStyle='black';for(let i=0;i<7;i++)ctx.fillRect(35,580+i*34,1100,[1,2,3,4,6,8,12][i]);
   const original=Package.physicalPNG(Buffer.from(await c.toBuffer('png')),300);fs.writeFileSync(path.join(out,'authored-print-fixture.png'),original);
   const asset=await ingestLocalBytes(original,'authored-print-fixture.png');
-  for(const variant of ['forest-depth','coast-duotone']){const style=Styles.resolve('editorial-halftone',{variant,dpi:300,seed:42});const result=await Package.generate({originalBytes:original,asset,inkRecipe:style.inkRecipe,screenRecipe:style.screenRecipe,style,dpi:300,paper:'recipe'});fs.writeFileSync(path.join(out,variant+'-print-package.zip'),result.zip);}
+  const verification=[];
+  for(const variant of ['forest-contrast','coast-duotone']){const style=Styles.resolve('editorial-halftone',{variant,dpi:300,seed:42});const result=await Package.generate({originalBytes:original,asset,inkRecipe:style.inkRecipe,screenRecipe:style.screenRecipe,style,dpi:300,paper:'recipe'});const {manifest,...checked}=await require('../src/verify-package').verify(result.zip);if(!checked.embeddedFontsVerified||checked.frame.width!==1200||checked.frame.height!==900||checked.frame.dpi!==300)throw Error('Print kit digital verification failed');verification.push({variant,...checked});fs.writeFileSync(path.join(out,variant+'-print-package.zip'),result.zip);}
+  fs.writeFileSync(path.join(out,'digital-verification.json'),JSON.stringify({physicalPrintVerified:false,packages:verification},null,2)+'\n');
   const pdf=await PDFDocument.create();pdf.registerFontkit(fontkit);const font=await pdf.embedFont(Report.truetype('ibm-plex-sans')),bold=await pdf.embedFont(Report.truetype('ibm-plex-sans',700)),mono=await pdf.embedFont(Report.truetype('ibm-plex-mono'));
   const p=pdf.addPage([841.88976,595.27559]),green=rgb(0,96/255,67/255),black=rgb(.12,.15,.13),mm=72/25.4;
   const text=(s,x,y,size=10,f=font)=>p.drawText(s,{x,y,size,font:f,color:black});

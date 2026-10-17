@@ -185,7 +185,7 @@ test('attributed variants retain versioned identity and agree in full browser an
       }
     }
   }
-  assert.equal(count,8);
+  assert.equal(count,9);
 });
 
 test('four defaults and earlier editorial variants retain their saved ink and screen recipes',()=>{
@@ -201,6 +201,11 @@ test('focused photo variants avoid clipped keys and restrict warm density in a c
   const forest=Sep.separate(input,Styles.resolve('editorial-halftone',{variant:'forest-depth'}).inkRecipe);
   assert.ok(forest.masks[0].coverage[0]<235);
   assert.ok(forest.masks[0].coverage[1]<forest.masks[0].coverage[0]);
+  const contrast=Sep.separate(input,Styles.resolve('editorial-halftone',{variant:'forest-contrast'}).inkRecipe);
+  assert.ok(contrast.masks[0].coverage[0]>forest.masks[0].coverage[0],'contrast candidate anchors the deepest shadow');
+  assert.ok(contrast.masks[0].coverage[1]<contrast.masks[0].coverage[0]);
+  assert.deepEqual(contrast.masks[1].coverage,forest.masks[1].coverage,'chroma pass is held constant');
+  assert.equal(contrast.masks[0].coverage[3],0);
   const coast=Sep.separate(input,Styles.resolve('editorial-halftone',{variant:'coast-duotone'}).inkRecipe);
   assert.ok(coast.masks[0].coverage[2]>100);
   assert.ok(coast.masks[1].coverage[2]<10);

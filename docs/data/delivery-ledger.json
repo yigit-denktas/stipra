@@ -312,11 +312,11 @@
       "issue": 17,
       "title": "Configure native Stipra v0.9 milestone and GitHub Project",
       "trackerState": "open",
-      "deliveryState": "blocked",
+      "deliveryState": "partial",
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "Native GitHub Project/milestones are not configured. Version records below are explicit planning targets; administration remains #17.",
+      "note": "Native milestone #1 has original issues #1–#14. Existing private Project #3 reused; missing #1/#2 added, Priority/Area set for all 14, stale #9 status corrected and saved priority-sorted milestone table created. Status-board view/workflow rule details remain unverified after browser connection stalled.",
       "sourceUpdatedAt": "2026-10-16T20:38:00Z"
     },
     {
@@ -426,7 +426,7 @@
         7,
         5
       ],
-      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13.",
+      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
       "sourceUpdatedAt": "2026-10-17T10:04:55Z"
     },
     {
@@ -473,7 +473,7 @@
         7,
         56
       ],
-      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending.",
+      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
       "sourceUpdatedAt": "2026-10-17T12:48:54Z"
     },
     {
@@ -529,7 +529,7 @@
         43,
         56
       ],
-      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven.",
+      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
       "sourceUpdatedAt": "2026-10-17T12:48:53Z"
     },
     {
@@ -635,7 +635,7 @@
         73,
         74
       ],
-      "note": "Core/Canvas/inputs engineering and a combined offline consumer of the exact audited tarballs are verified locally; public runtime/types and inert region replay are checked. Private 0.1.0-alpha.0 remains unpublished. Independent artist feedback and owner version/namespace/publication decision are open.",
+      "note": "Core/Canvas/inputs engineering and a combined offline consumer of the exact audited tarballs are verified locally; public runtime/types and inert region replay are checked. Private 0.1.0-alpha.0 remains unpublished. Independent artist feedback and owner version/namespace/publication decision are open. An empty artist trial record and publication handoff are prepared; npm publisher check returns ENEEDAUTH, and registry scope ownership is not established.",
       "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {
@@ -805,5 +805,46 @@
       ],
       "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot."
     }
-  ]
+  ],
+  "nativeTracking": {
+    "milestone": {
+      "number": 1,
+      "url": "https://github.com/yigit-denktas/stipra/milestone/1",
+      "issues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    "project": {
+      "number": 3,
+      "url": "https://github.com/users/yigit-denktas/projects/3",
+      "visibility": "private",
+      "reusedExisting": true
+    },
+    "backlogView": {
+      "url": "https://github.com/users/yigit-denktas/projects/3/views/6",
+      "name": "v0.9 backlog",
+      "layout": "table",
+      "sort": "Priority ascending",
+      "filter": "repo:yigit-denktas/stipra milestone:v0.9"
+    },
+    "fields": [
+      "Status",
+      "Priority",
+      "Area"
+    ],
+    "remaining": "Status-board view and detailed workflow-rule verification remain incomplete after the browser session stopped responding. A duplicated draft View 7 exists; it is not claimed as a completed status board."
+  }
 }
