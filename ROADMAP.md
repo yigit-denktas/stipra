@@ -11,7 +11,7 @@ Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a
 2. **Separations:** choose `2–N` actual spot-ink passes or `CMYK`. Edit thresholds, intensity/channel mapping and each **independent coverage mask**; preserve solid marks and type when selected. Paper/substrate is never an ink plate. Unlike palette recoloring, changing a separation must change printed coverage.
 3. **Screen:** apply optional controlled dots/lines/knockouts/dithering to the masks, or preserve continuous-tone/solid coverage. Keep registration independent from source geometry.
 4. **Inspect:** compare input, combined color proof, paper, and individual aligned monochrome plates. Show overprints, accurate crop and registration, coverage estimates and print-size warning.
-5. **Export:** full-frame aligned grayscale masters, tinted proof, legible **A4 landscape separation sheet (HTML and PDF)**, structured recipe/seed/source/provenance manifest and ZIP package.
+5. **Export:** full-frame aligned grayscale masters, tinted proof, legible **A4 portrait/landscape separation sheet (HTML and PDF)**, structured recipe/seed/source/provenance manifest and ZIP package.
 6. **Automate:** same inputs, plate masks and output settings via local CLI/batch/agent recipes with deterministic seeds, bounded cost/memory/paths and actionable errors.
 
 The attached sample showing alternative Riso color separations is the visual benchmark for distinct masks, not an asset bundled with the public code. The checked six-item acceptance benchmark is **proposed test criteria, not observed passing evidence**.
@@ -30,7 +30,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Portrait/landscape A4 + paper texture, embedded recipes and QR implemented in #45 PR; owner review pending** | P0 verification |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
 | Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
-| Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) | Design proposal; no style engine yet | P1 · scope before implementation |
+| Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) · [#47](https://github.com/yigit-denktas/stipra/issues/47) | **Four shared browser/CLI starting recipes implemented; real image quality and printer validation open** | P1 evidence |
 | Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **Functional raster ZIP; broader export matrix open** | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
