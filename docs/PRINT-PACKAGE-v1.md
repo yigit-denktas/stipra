@@ -111,3 +111,21 @@ node scripts/review-owner-reports.js \
 ```
 
 This refuses source or output locations inside the repository and checks all three original photo hashes before rendering. It uses the canonical Node importer and print-package engine, not the separate Python comparison renderer. Import/ICC differences remain tracked in #44; this report change does not claim to resolve them. These are A4 production inspection reports, separate from the square/landscape/portrait typography study in #55.
+
+## Ink-linked report annotations and simulated stocks
+
+Report annotation text and rules use the darkest readable ink from the actual resolved separation. Where all chosen inks are too pale, a contrasting neutral key keeps technical labels readable. Colored bars, rectangular frames, stock labels and small sheet guides are presentation annotations; the wordmark stays lowercase `stiprā`. Sheet guides are not production registration marks.
+
+The background combines seeded micrograin, short fibres and sparse colored speckles drawn from the selected ink palette. The PDF texture raster uses **144 pixels per physical inch** for consistent dot/fibre scale across A4 orientations. This is a procedural material simulation, not a scanned stock or a calibrated press prediction. No extra graphics library is used beyond the existing Canvas renderer.
+
+Paper options are `rag` (Warm Rag), `chalk` (Cool Chalk), `linen` (Natural Linen), `clay` (Soft Clay), `rose` (Rose Pulp), `sage` (Sage Stock), and `mist` (Blue Mist). The additional paper colors are supporting materials, not changes to the four Stiprā brand swatches. Automatic paper selection keeps its existing decisions; the new stocks are explicit choices.
+
+```sh
+node bin/stipra.js package --input artwork.jpg \
+  --config inks.json --screen screens.json \
+  --paper rose --report-texture speckled --out private-print.zip
+```
+
+`--report-texture` accepts `speckled` (default), `fibre`, or `none`. It changes only report presentation. Source bytes, normalized separation/screen recipes, proof pixels and physical ink plates are unaffected by the texture setting. By contrast, choosing a different `--paper` intentionally changes the simulated substrate color and records it in the ink recipe.
+
+Generate a photo-free stock preview with `node scripts/review-paper-stocks.js /private/new-paper-stocks.png`. Private owner-photo PDF review still uses `scripts/review-owner-reports.js`. Do not commit the reference screenshot, owner photographs or image-bearing PDFs.
