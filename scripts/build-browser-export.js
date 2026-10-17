@@ -6,7 +6,7 @@ async function build(outfile,{format='iife'}={}){
   const {truetype,license}=require('../src/report-fonts.js');
   const fonts={};for(const [family,weight] of [['ibm-plex-sans',400],['ibm-plex-sans',700],['ibm-plex-mono',400]])fonts[family+weight]=truetype(family,weight).toString('base64');
   const svg=fs.readFileSync(path.join(ROOT,'logo_for_Readme.svg'),'utf8');
-  const result=await esbuild.build({metafile:true,legalComments:'linked',entryPoints:[path.join(ROOT,format==='esm'?'src/browser/export-entry.mjs':'src/browser/export.js')],outfile,bundle:true,platform:'browser',format,...(format==='iife'?{globalName:'StipraExport'}:{}),minify:true,
+  const result=await esbuild.build({absWorkingDir:ROOT,metafile:true,legalComments:'linked',entryPoints:[path.join(ROOT,format==='esm'?'src/browser/export-entry.mjs':'src/browser/export.js')],outfile,bundle:true,platform:'browser',format,...(format==='iife'?{globalName:'StipraExport'}:{}),minify:true,
     inject:[path.join(ROOT,'src/browser/buffer.js')],define:{__dirname:'"/"'},plugins:[{name:'export-platform',setup(api){
       api.onResolve({filter:/^(?:node:(?:fs|path|crypto)|skia-canvas|\.\/report-fonts\.js)$/},args=>({path:args.path,namespace:'export-platform'}));
       api.onLoad({filter:/.*/,namespace:'export-platform'},args=>{
@@ -32,6 +32,23 @@ async function build(outfile,{format='iife'}={}){
       '\nAuthor: '+JSON.stringify(pkg.author)+'\nContributors: '+JSON.stringify(pkg.contributors)+'\nRepository: '+JSON.stringify(pkg.repository));
   }
   fs.writeFileSync(path.join(path.dirname(outfile),'export-dependency-notices.txt'),notices.join('\n\n---\n\n'));
+  const {hash,verifyArtifacts}=require('./artifact-evidence');
+  const inputs=Object.keys(result.metafile.inputs).sort().map(name=>{
+    if(!name.includes('node_modules/'))return {path:name};
+    const bytes=fs.readFileSync(path.resolve(ROOT,name));
+    return {path:name,bytes:bytes.length,sha256:hash(bytes)};
+  });
+  if(inputs.some(x=>/node_modules\/(?:skia-canvas|fonteditor-core)\//.test(x.path)))throw Error('Native/WASM dependency entered the browser exporter');
+  const reviewed=verifyArtifacts(),included=reviewed.filter(x=>inputs.some(i=>i.path==='node_modules/'+x.package+'/'+x.artifact));
+  if(!included.some(x=>x.package==='@pdf-lib/fontkit'))throw Error('Browser fontkit entry has no artifact identity record');
+  const outputs=[...Object.keys(result.metafile.outputs).map(name=>path.resolve(ROOT,name)),path.join(path.dirname(outfile),'export-dependency-notices.txt')]
+    .map(file=>{const bytes=fs.readFileSync(file);return {path:path.basename(file),bytes:bytes.length,sha256:hash(bytes)};});
+  const evidence={contract:'stipra-browser-export-audit-v1',status:'review-required',buildTool:'esbuild/'+esbuild.version,
+    packages:[...roots].sort().map(dir=>{const pkg=JSON.parse(fs.readFileSync(path.join(dir,'package.json')));return {name:pkg.name,version:pkg.version};}),
+    inputs,outputs,artifactEvidence:included,findings:included.map(x=>({package:x.package,kind:'prebundled-review'})),
+    scope:'Browser PDF/ZIP exporter only; excludes host p5, site fonts, native CLI and owner artwork. Hash identity does not clear prebundled notices.'};
+  fs.writeFileSync(outfile+'.audit.json',JSON.stringify(evidence,null,2)+'\n');
+  return evidence;
 }
 
 if(require.main===module)build(process.argv[2]).catch(e=>{console.error(e.message);process.exitCode=1;});

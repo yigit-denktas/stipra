@@ -32,7 +32,8 @@
     "check:alpha": "STIPRA_SMOKE_PAGE=examples/alpha/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_ALPHA_PASS node scripts/browser-smoke.js && node scripts/verify-alpha-parity.js",
     "build:inputs": "node scripts/build-inputs.js",
     "check:provenance": "node scripts/check-provenance.js",
-    "check:regions": "STIPRA_SMOKE_PAGE=examples/regions/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_REGIONS_PASS node scripts/browser-smoke.js && node scripts/verify-region-parity.js"
+    "check:regions": "STIPRA_SMOKE_PAGE=examples/regions/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_REGIONS_PASS node scripts/browser-smoke.js && node scripts/verify-region-parity.js",
+    "check:distribution": "node scripts/check-distribution.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",

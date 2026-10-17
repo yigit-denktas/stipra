@@ -52,6 +52,7 @@ function audit(out){
   findings.push({package:'fonteditor-core',kind:'wasm-transitive-review',detail:'Node package includes woff2/woff2.wasm. Audit its embedded WOFF2/Brotli provenance before bundling that dependency tree. The static site embeds generated fonts, not this WASM.'});
   findings.push({package:'@pdf-lib/fontkit',kind:'prebundled-review',detail:'Retained published MIT, embedded Node/base64 and Google Apache notices plus full Apache terms. The published 1.1.1 artifact has no source map/gitHead and upstream default source still declares 1.1.0; exact component versions/attributions remain unverified. Do not infer a complete inventory from npm runtime dependencies.'});
   const report={contract:'stipra-dependency-audit-v1',lockSha256:hash(lockBytes),scope:'installed production npm dependency graph; static bundle subset has its own emitted notices',
+    artifactEvidence:require('./artifact-evidence').verifyArtifacts(),
     status:findings.length?'review-required':'checked',packages,findings,
     excluded:['Owner artwork and brand permissions are separate from code licensing.','Paper Mono is build-fetched with a separate OFL/provenance record.','p5.js is an optional separately hosted LGPL development dependency; p5.grain is not installed. Core/Canvas/inputs packages exclude the heavy export/native/WASM dependencies.']};
   fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'dependency-audit.json'),JSON.stringify(report,null,2)+'\n');

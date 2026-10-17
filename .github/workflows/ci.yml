@@ -41,6 +41,11 @@ jobs:
       - run: node --test tests/type-proofs.test.js
       - run: npm test
       - run: npm run audit:licenses
+      - run: npm run check:distribution
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-distribution-audit
+          path: out/distribution-audit/
       - uses: actions/upload-artifact@v4
         with:
           name: core-package-report

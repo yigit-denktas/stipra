@@ -309,7 +309,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Two incomplete MIT notices supplemented with original attribution and pinned terms. Three native/WASM/prebundle provenance findings remain; broad release gate stays closed.",
+      "note": "Two incomplete MIT notices supplemented. Actual lean tarballs and browser-export inputs/outputs have scoped artifact checks; upstream identity hashes fail on drift. Three native/WASM/prebundle provenance findings remain; broad release gate stays closed.",
       "sourceUpdatedAt": "2026-10-17T13:49:38Z"
     },
     {

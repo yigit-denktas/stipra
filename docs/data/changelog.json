@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Check distributed artifact boundaries",
+      "status": "Unreleased",
+      "issues": [
+        14
+      ],
+      "changes": [
+        "Inspect the three private library tarballs, MIT notices and static imports without publishing them.",
+        "Record browser-export input/output hashes and notices; reject changed reviewed upstream artifacts.",
+        "Keep the three unresolved binary/prebundle provenance findings and the publication decision open."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Studio inspection and delivery map",
       "status": "Unreleased",
       "issues": [
