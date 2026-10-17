@@ -67,6 +67,7 @@ node bin/stipra.js package \
   --config examples/recipes/spot-photo.json \
   --screen examples/recipes/screens-spot.json \
   --dpi 300 \
+  --paper auto \
   --out out/artwork-print.zip
 ```
 

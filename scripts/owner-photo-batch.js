@@ -8,7 +8,7 @@ const dataset=require('../tests/fixtures/owner-photo-fixtures.json');
 const kind={A:'sculpture',B:'forest',C:'beach'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 async function run(argv){
-  const out={},opts=new Set(['--sources','--out','--dpi','--marks-mm']);
+  const out={},opts=new Set(['--sources','--out','--dpi','--marks-mm','--paper']);
   for(let i=0;i<argv.length;i++){
     const key=argv[i],value=argv[i+1];
     if(!opts.has(key)||!value||key in out||value.startsWith('--'))
@@ -36,7 +36,7 @@ async function run(argv){
     const asset=await ingestLocalBytes(bytes,f.originalFile);
     if(asset.metadata.oriented.width!==f.widthPx||asset.metadata.oriented.height!==f.heightPx)
       throw Error('Unexpected image geometry for '+f.id);
-    const p=await Prepress.generate({originalBytes:bytes,asset,inkRecipe:read('inks'),screenRecipe:read('screens'),dpi,marksMm});
+    const p=await Prepress.generate({originalBytes:bytes,asset,inkRecipe:read('inks'),screenRecipe:read('screens'),dpi,marksMm,paper:out['--paper']||'auto'});
     if(p.manifest.inks.length!==f.plannedInks)throw Error('Unexpected ink count for '+f.id);
     fs.writeFileSync(output,p.zip,{flag:'wx'});
     completed.push({fixture:f.id,filename:output,bytes:p.zip.length,sourceSha256:f.sha256,

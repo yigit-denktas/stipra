@@ -5,7 +5,7 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const Probe=require('../src/import/probe.js'),{ingestLocalBytes}=require('../src/import/node.js');
 const Prepress=require('../src/print-package.js');
 function args(argv){
-  const o={},names=['--input','--config','--screen','--out','--dpi','--marks-mm','--expected-sha256'];
+  const o={},names=['--input','--config','--screen','--out','--dpi','--marks-mm','--expected-sha256','--paper'];
   for(let i=0;i<argv.length;i++){
     const name=argv[i],value=argv[i+1];
     if(!names.includes(name)||!value||value.startsWith('--')||name in o)
@@ -34,14 +34,14 @@ async function run(argv){
   const marksMm=opts['--marks-mm']===undefined?0:Number(opts['--marks-mm']);
   Prepress.validate(dpi,marksMm);
   const asset=await ingestLocalBytes(bytes,path.basename(inputPath));
-  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm});
+  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper:opts['--paper']||'auto'});
   fs.mkdirSync(path.dirname(out),{recursive:true});
   try{fs.writeFileSync(out,result.zip,{flag:'wx'});}
   catch(e){if(fs.existsSync(out))try{fs.unlinkSync(out)}catch{};throw e;}
   const summary={status:'DIGITAL_PACKAGE_GENERATED_NOT_PHYSICALLY_VALIDATED',path:out,
     bytes:result.zip.length,sourceSHA256:sourceHash,sourceDimensions:result.manifest.output.sourcePixels,
     printSizeMm:result.manifest.output.trimMm,inkCount:result.manifest.inks.length,
-    assets:result.manifest.files.length+1,report:result.manifest.report};
+    assets:result.manifest.files.length+1,paper:result.manifest.paperSelection,report:result.manifest.report};
   process.stdout.write(JSON.stringify(summary,null,2)+'\n');
   return summary;
 }
