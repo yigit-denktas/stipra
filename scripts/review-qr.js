@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const {PDFDocument,rgb}=require('pdf-lib'),fontkit=require('@pdf-lib/fontkit');
+const {PDFDocument,rgb}=require('pdf-lib'),fontkit=require('fontkit');
 const {Canvas,loadImage}=require('skia-canvas');
 const QR=require('../src/report-qr.js'),{truetype}=require('../src/report-fonts.js');
 async function run(out){

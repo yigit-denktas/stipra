@@ -1,5 +1,5 @@
 'use strict';
-const fs=require('node:fs'),path=require('node:path'),QRCode=require('qrcode'),fontkit=require('@pdf-lib/fontkit');
+const fs=require('node:fs'),path=require('node:path'),QRCode=require('qrcode'),fontkit=require('fontkit');
 const {Canvas,loadImage}=require('skia-canvas'),{truetype}=require('./report-fonts.js');
 const GUIDE='https://apps.yigitdenktas.com/stipra/guide/';
 const STYLES=['brand-square','brand-dots','ink-dots'];

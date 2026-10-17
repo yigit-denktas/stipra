@@ -143,3 +143,5 @@ The canonical report QR opens the [public reproduction guide](https://apps.yigit
 ## Optional proof derivatives and verification
 
 [CLI workflows](CLI-WORKFLOWS.md) document compare/batch/verify/sheet and the optional `exports` settings accepted by image/authored package writers. Added derivative paths and hashes are listed in the existing manifest. Native continuous/screened PNG masters retain their frame and DPI; optional sampled-run SVG masters are explicitly labeled. There is no reconstructed analytic geometry or invented bleed. Existing ZIP consumers may ignore the additive `exports` metadata. Authored replay preserves those settings when present.
+
+Report layout v7 uses the pinned original complete Plex TTF files and records three source-font SHA-256 identities in `report.fontAssets`. The package verifier checks those identities against the actual embedded TrueType streams (bounded inflation), not just the font labels. Legacy reports remain inspectable and return `embeddedFontsVerified: false`; this is separate from ink-master validity. Prepare the verified font cache once with `npm run prepare:fonts` before offline report generation.

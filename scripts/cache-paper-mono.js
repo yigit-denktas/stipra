@@ -6,7 +6,7 @@
 const fs=require('node:fs'),path=require('node:path'),https=require('node:https'),crypto=require('node:crypto');
 const DEST=path.resolve(__dirname,'../.cache/stipra-paper-mono');
 const BASE='https://raw.githubusercontent.com/paper-design/paper-mono/v1.000/fonts/ttf/';
-const PLEX='https://raw.githubusercontent.com/IBM/plex/master/packages/';
+const PLEX='https://raw.githubusercontent.com/IBM/plex/71f558992315a12ca1f06a2215d57962a1992162/packages/';
 const FONTS={
   regular:{name:'PaperMono-Regular.ttf',blob:'6af3a5d15a6b0219005404fabe71fc1fb16541ae'},
   extraBold:{name:'PaperMono-ExtraBold.ttf',blob:'fbc6ee5851529c3e0e6fd83ad92d6cc83f70f383'},

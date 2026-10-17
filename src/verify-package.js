@@ -1,5 +1,5 @@
 'use strict';
-const {openArchive}=require('./archive'),{loadImage,Canvas}=require('skia-canvas'),{PDFDocument}=require('pdf-lib');
+const {openArchive}=require('./archive'),{loadImage,Canvas}=require('skia-canvas'),{PDFDocument,PDFDict,PDFName,PDFRawStream}=require('pdf-lib');
 const hash=bytes=>require('node:crypto').createHash('sha256').update(bytes).digest('hex');
 function frame(w,h){if(!Number.isSafeInteger(w)||!Number.isSafeInteger(h)||w<1||h<1||w>20000||h>20000||w*h>24000000)throw Error('Package frame exceeds bounds');}
 function density(bytes,dpi){
@@ -74,6 +74,21 @@ async function verify(bytes){
   const pdf=await PDFDocument.load(await read(report.pdf));
   if(pdf.getPageCount()<2||pdf.getPageCount()>16)throw Error('Unexpected inspection page count');
   for(const page of pdf.getPages())if(Math.abs(page.getWidth()-report.widthMm*72/25.4)>.02||Math.abs(page.getHeight()-report.heightMm*72/25.4)>.02)throw Error('Inspection PDF geometry mismatch');
+  let embeddedFontsVerified=false;
+  if(report.layoutVersion>=7){
+    const declared=report.fontAssets;
+    if(!Array.isArray(declared)||declared.length!==3||declared.some(x=>!/^[a-f0-9]{64}$/.test(x.sha256))||new Set(declared.map(x=>x.sha256)).size!==3)throw Error('Missing or duplicate report font identities');
+    const embedded=[];
+    for(const [,object] of pdf.context.enumerateIndirectObjects()){
+      if(!(object instanceof PDFDict)||!object.has(PDFName.of('FontFile2')))continue;
+      const stream=pdf.context.lookup(object.get(PDFName.of('FontFile2')));
+      if(!(stream instanceof PDFRawStream)||stream.dict.get(PDFName.of('Filter'))?.toString()!=='/FlateDecode')throw Error('Unsupported report font stream');
+      embedded.push(hash(require('node:zlib').inflateSync(stream.contents,{maxOutputLength:2000000})));
+      if(embedded.length>3)throw Error('Unexpected extra report font');
+    }
+    if(JSON.stringify(embedded.sort())!==JSON.stringify(declared.map(x=>x.sha256).sort()))throw Error('Embedded report font hashes do not match manifest');
+    embeddedFontsVerified=true;
+  }
   const proofExports=manifest.exports?.proofs??[];
   if(manifest.exports){const spec=require('./proof-exports').settings(manifest.exports.settings,w,h);if(proofExports.length!==spec.formats.length||new Set(proofExports.map(p=>p.format)).size!==proofExports.length||proofExports.some(p=>!spec.formats.includes(p.format)||p.scale!==spec.scale||p.path!=='exports/proof.'+p.format))throw Error('Derivative list does not match export settings');}
   for(const item of proofExports){
@@ -89,7 +104,7 @@ async function verify(bytes){
     }
   }
   return {contract:'stipra-package-verification-v1',status:'VERIFIED_DIGITAL_NOT_PHYSICALLY_VALIDATED',packageSha256:hash(bytes),
-    sourceSha256:manifest.source.sha256,files:files.size,inspectionPages:pdf.getPageCount(),frame:{width:w,height:h,origin:{x:0,y:0},dpi:output.dpi},inks:inks.length,
+    sourceSha256:manifest.source.sha256,files:files.size,inspectionPages:pdf.getPageCount(),embeddedFontsVerified,frame:{width:w,height:h,origin:{x:0,y:0},dpi:output.dpi},inks:inks.length,
     checks:['file-set, byte lengths and SHA-256','native trim and physical DPI','opaque grayscale masters and measured coverage','zero production registration','marked trim pixel identity','inspection PDF geometry','declared derivative codecs and dimensions'],
     warnings:['Byte hashes are integrity checks, not proof of origin or ownership.','RGB proof and sampled SVG paths are not calibrated physical press output.'],manifest};
 }

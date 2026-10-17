@@ -15,6 +15,7 @@ jobs:
       - run: node --check examples/prehnite-v8/src/engine.js
       - run: node --check examples/prehnite-v8/app.js
       - run: npm install --no-audit --no-fund
+      - run: npm run prepare:paper-mono
       - run: node --check scripts/generate-stipra-mark.js
       - run: node --check src/core.js
       - run: node --check src/separation.js
@@ -41,6 +42,11 @@ jobs:
       - run: node --test tests/type-proofs.test.js
       - run: npm test
       - run: npm run audit:licenses
+      - run: npm run check:browser-distribution
+      - uses: actions/upload-artifact@v4
+        with:
+          name: browser-export-distribution
+          path: out/browser-distribution/
       - run: npm run check:library-candidate
       - run: npm run check:goldens
       - uses: actions/upload-artifact@v4

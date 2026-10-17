@@ -27,8 +27,9 @@ async function build(outfile,{format='iife'}={}){
   }
   const notices=[];
   for(const dir of [...roots].sort()){
-    const {pkg,declared,sources}=require('./license-audit.js').notices(dir);
-    if(!sources.length||!declared)throw Error('Missing bundled dependency notice: '+pkg.name);
+    const {notices:readNotices,completeTerms}=require('./license-audit.js');
+    const {pkg,declared,sources}=readNotices(dir);
+    if(!sources.length||!declared||!completeTerms(sources))throw Error('Missing or incomplete bundled dependency notice: '+pkg.name);
     notices.push(pkg.name+' '+pkg.version+' / '+declared+'\n'+sources.map(x=>'Source: '+x.name+'\n'+x.text).join('\n')+
       '\nAuthor: '+JSON.stringify(pkg.author)+'\nContributors: '+JSON.stringify(pkg.contributors)+'\nRepository: '+JSON.stringify(pkg.repository));
   }
@@ -41,13 +42,16 @@ async function build(outfile,{format='iife'}={}){
   });
   if(inputs.some(x=>/node_modules\/(?:skia-canvas|fonteditor-core)\//.test(x.path)))throw Error('Native/WASM dependency entered the browser exporter');
   const reviewed=verifyArtifacts(),included=reviewed.filter(x=>inputs.some(i=>i.path==='node_modules/'+x.package+'/'+x.artifact));
-  if(!included.some(x=>x.package==='@pdf-lib/fontkit'))throw Error('Browser fontkit entry has no artifact identity record');
+  const fontkitSource=require('./fontkit-evidence').verify();
+  const fontkitInputs=inputs.filter(x=>x.path.startsWith('node_modules/fontkit/dist/'));
+  if(!fontkitInputs.length||fontkitInputs.some(x=>!fontkitSource.modules.some(m=>'node_modules/fontkit/'+m.path===x.path&&m.sha256===x.sha256)))throw Error('Browser fontkit entry has no source inventory');
+  if(inputs.some(x=>/node_modules\/brotli\/(?:enc|build|compress)/.test(x.path)))throw Error('Unused compiled Brotli encoder entered the browser exporter');
   const outputs=[...Object.keys(result.metafile.outputs).map(name=>path.resolve(ROOT,name)),path.join(path.dirname(outfile),'export-dependency-notices.txt')]
     .map(file=>{const bytes=fs.readFileSync(file);return {path:path.basename(file),bytes:bytes.length,sha256:hash(bytes)};});
-  const evidence={contract:'stipra-browser-export-audit-v1',status:'review-required',buildTool:'esbuild/'+esbuild.version,
+  const evidence={contract:'stipra-browser-export-audit-v1',status:included.length?'review-required':'checked',buildTool:'esbuild/'+esbuild.version,
     packages:[...roots].sort().map(dir=>{const pkg=JSON.parse(fs.readFileSync(path.join(dir,'package.json')));return {name:pkg.name,version:pkg.version};}),
-    inputs,outputs,artifactEvidence:included,findings:included.map(x=>({package:x.package,kind:'prebundled-review'})),
-    scope:'Browser PDF/ZIP exporter only; excludes host p5, site fonts, native CLI and owner artwork. Hash identity does not clear prebundled notices.'};
+    inputs,outputs,artifactEvidence:included,fontkitSource,findings:included.map(x=>({package:x.package,kind:'prebundled-review'})),
+    scope:'Browser PDF/ZIP exporter only; excludes host p5, site fonts, native CLI, unused Brotli encoder and owner artwork. Own Fontkit sources/maps and actual resolved module notices checked.'};
   fs.writeFileSync(outfile+'.audit.json',JSON.stringify(evidence,null,2)+'\n');
   return evidence;
 }

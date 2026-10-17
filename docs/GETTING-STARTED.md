@@ -32,6 +32,7 @@ Install the dependencies with Node.js 20+:
 
 ```sh
 npm install
+npm run prepare:fonts
 ```
 
 Separate an image into **two independent spot-ink masks**:

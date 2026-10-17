@@ -22,6 +22,39 @@
       "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
       "basis": "Published package expressly declares MIT; retain its original attribution and the complete referenced MIT terms. This supplement is not a new license grant.",
       "source": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt"
+    },
+    {
+      "name": "brotli",
+      "version": "1.3.3",
+      "publishedEvidence": "readme.md",
+      "publishedSha256": "8a8bac543fccf52a64708ff3315ca2be90e3e4c270634df1e4e4b51f0ee9c5d7",
+      "copyright": "Author: Devon Govett <devongovett@gmail.com> (published package.json); Google decoder copyright is retained separately.",
+      "terms": "MIT-terms.txt",
+      "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+      "basis": "Published package explicitly declares MIT; retain complete referenced terms and separately retained Google Apache-2.0 decoder notices. Not a new grant or invented copyright line.",
+      "source": "https://github.com/devongovett/brotli.js/blob/4011e59a5c35bb602f3e97f114727aa662f795f7/readme.md"
+    },
+    {
+      "name": "fontkit",
+      "version": "2.0.4",
+      "publishedEvidence": "README.md",
+      "publishedSha256": "8a1cf12d8ae7277f047c3000af7677927f2da9243627223ba5715d40df4979d6",
+      "copyright": "Author: Devon Govett <devongovett@gmail.com> (published package.json).",
+      "terms": "MIT-terms.txt",
+      "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+      "basis": "Published README and package metadata explicitly declare MIT; retain the original declaration, author metadata and complete referenced terms. This is not a new grant or invented copyright line.",
+      "source": "https://github.com/foliojs/fontkit"
+    },
+    {
+      "name": "dfa",
+      "version": "1.2.0",
+      "publishedEvidence": "README.md",
+      "publishedSha256": "30bd445925aa53205ff7f9afa6a43e21358fab656e471df6e028431aefc426c7",
+      "copyright": "Author: Devon Govett <devongovett@gmail.com> (published package.json).",
+      "terms": "MIT-terms.txt",
+      "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+      "basis": "Published README and package metadata explicitly declare MIT; retain the original declaration, author metadata and complete referenced terms. This is not a new grant or invented copyright line.",
+      "source": "https://github.com/devongovett/dfa"
     }
   ]
 }

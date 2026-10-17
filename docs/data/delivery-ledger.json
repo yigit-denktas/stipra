@@ -114,7 +114,7 @@
     }
   ],
   "nextSequence": [
-    "Resolve #14’s three upstream native/WASM/prebundle provenance gaps for the export artifacts intended for distribution.",
+    "Resolve #14’s remaining native Skia binary inventory before distributing a bundled native executable; browser exporter and lean-library scopes have separate checked reports.",
     "Complete #13’s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
     "Make #70’s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
     "Keep #75 Java research, #28 analytic vector screens and identity/paper extensions optional."
@@ -305,7 +305,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Two incomplete notices resolved. Exact tarballs pass import/notice and isolated consumer checks; source recheck records the WOFF2 install-tag/activate-latest ambiguity. Three upstream binary/prebundle inventories remain unresolved; broad release gate stays closed.",
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains.",
       "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {

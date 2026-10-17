@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Replace opaque font artifacts in PDF exports",
+      "status": "Unreleased",
+      "issues": [
+        14
+      ],
+      "changes": [
+        "Replace @pdf-lib/fontkit with exact source-mapped Fontkit 2.0.4 and separately inventoried dependencies.",
+        "Remove fonteditor and its unused WOFF2 WASM; read the existing pinned original Plex TTFs directly.",
+        "Require complete retained browser-export notices and reject unused compiled Brotli encoder code. One native Skia inventory finding remains; no bundled native executable is released."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Saved artwork acceptance and an isolated library candidate",
       "status": "Unreleased",
       "issues": [
