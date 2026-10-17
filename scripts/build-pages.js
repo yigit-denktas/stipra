@@ -14,6 +14,7 @@ const SOURCES=[
   ['src/separation.js','separation.js'],
   ['src/screening.js','screening.js'],
   ['src/styles.js','styles.js'],
+  ['src/export-plan.js','export-plan.js'],
   ['src/plate-diagnostics.js','plate-diagnostics.js']
 ];
 const REWRITE={
@@ -23,6 +24,7 @@ const REWRITE={
   '../../src/separation.js':'./assets/separation.js',
   '../../src/screening.js':'./assets/screening.js',
   '../../src/styles.js':'./assets/styles.js',
+  '../../src/export-plan.js':'./assets/export-plan.js',
   '../../src/plate-diagnostics.js':'./assets/plate-diagnostics.js',
   'src="app.js"':'src="./assets/app.js"'
 };
@@ -41,7 +43,11 @@ function build(outRoot=path.join(ROOT,'dist')){
   const scriptTags=[...html.matchAll(/<script\s+src="([^"]+)"/g)].map(x=>x[1]);
   if(scriptTags.length!==SOURCES.length||scriptTags.some(src=>!src.startsWith('./assets/')))
     throw Error('Pages build must resolve all scripts within /stipra/assets/');
+  html=html.replace('../../dist/stipra/assets/print-export.js','./assets/print-export.js');
   fs.writeFileSync(path.join(stage,'index.html'),html);
+  require('node:child_process').execFileSync(process.execPath,[path.join(ROOT,'scripts/build-browser-export.js'),path.join(assets,'print-export.js')]);
+  fs.copyFileSync(path.join(ROOT,'web/stipra/shared.css'),path.join(assets,'shared.css'));
+  fs.copyFileSync(path.join(ROOT,'web/stipra/shared.css'),path.join(stage,'shared.css'));
   for(const [src,dst] of SOURCES){
     const data=fs.readFileSync(path.join(ROOT,src));
     fs.writeFileSync(path.join(assets,dst),data);

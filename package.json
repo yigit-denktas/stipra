@@ -2,7 +2,7 @@
   "name": "stipra",
   "version": "0.1.0",
   "private": true,
-  "description": "Stipr\u0101 \u2014 a programmable printmaking studio (Latvian strength; stippling + strata)",
+  "description": "Stiprā — a programmable printmaking studio (Latvian strength; stippling + strata)",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
@@ -25,14 +25,19 @@
     "build:github-pages": "npm run build:pages && node scripts/build-github-pages.js"
   },
   "dependencies": {
-    "skia-canvas": "^3.0.8",
+    "@fontsource/ibm-plex-mono": "^5.2.6",
+    "@fontsource/ibm-plex-sans": "^5.2.6",
+    "@noble/hashes": "1.8.0",
+    "@pdf-lib/fontkit": "^1.1.1",
     "@xmldom/xmldom": "0.9.12",
+    "buffer": "6.0.3",
+    "fonteditor-core": "^2.6.3",
     "jszip": "^3.10.1",
     "pdf-lib": "^1.17.1",
-    "@pdf-lib/fontkit": "^1.1.1",
-    "@fontsource/ibm-plex-sans": "^5.2.6",
-    "@fontsource/ibm-plex-mono": "^5.2.6",
     "qrcode": "^1.5.4",
-    "fonteditor-core": "^2.6.3"
+    "skia-canvas": "^3.0.8"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
   }
 }
