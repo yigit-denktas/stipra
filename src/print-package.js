@@ -76,7 +76,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const sep=Sep.separate({width:w,height:h,rgba:asset.rgba},effectiveRecipe);
   const configs=screenConfigs(screenRecipe,sep.masks.map(m=>m.id));
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
-  const plateDiagnostics=Diagnostics.inspect(screened,{dpi});
+  const plateDiagnostics=Diagnostics.inspect(screened,{dpi,input:{width:w,height:h,rgba:asset.rgba}});
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{

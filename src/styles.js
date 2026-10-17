@@ -71,14 +71,68 @@
         {id:'warm',name:'Coral neutral-material accent',color:'#ff665d',source:'match',target:'#a3a3a3',tolerance:.14,threshold:.3,gain:.5,gamma:1.4}],
       screen:{default:{mode:'dots',angle:22,jitter:0,dotScale:1},plates:{key:{mode:'solid'},accent:{angle:-15},warm:{angle:45}}}}
   };
+  const REFERENCES={
+    'dizzy-profiles':{title:'Dizzy Ink / Risograph profiles',url:'https://risograph.co.uk/04-risograph-profiles'},
+    'exploriso-channels':{title:'Exploriso / Ad hoc separation of colour channels',url:'https://en.exploriso.info/exploriso/colour/separations/ad-hoc-separation-of-colour-channels/'},
+    'exploriso-gcr':{title:'Exploriso / Custom CMYK and GCR',url:'https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/'},
+    'ambi-process':{title:'Ambipress / CMYK simulation and ink swatches',url:'https://www.ambi-press.com/guia/'}
+  };
+  const VARIANTS={
+    'portrait-duotone':{
+      'blue-pink':{version:1,name:'Blue / fluorescent pink',references:['dizzy-profiles','exploriso-channels','ambi-process'],
+        description:'Complementary channel duotone: blue carries red-channel density; pink carries green-channel density. Independent gray removal reduces neutral overlap.',
+        goodFor:['photographic duotones','cool scenes with warm accents'],avoid:['accurate skin reproduction','fluorescent ink prediction','neutral shadows without overlap review'],paper:'#fffaf0',lpi:45,
+        inks:[{id:'blue',name:'Blue / screen approximation',color:'#0078bf',source:'cyan-density',grayRemoval:.15,gain:.9,gamma:1},
+          {id:'pink',name:'Fluorescent pink / screen approximation',color:'#ff48b0',source:'magenta-density',grayRemoval:.65,gain:.75,gamma:1.1}],
+        screen:{default:{mode:'dots',angle:15,jitter:0,dotScale:1},plates:{blue:{angle:15},pink:{angle:75}}}},
+      'teal-orange':{version:1,name:'Teal / orange',references:['dizzy-profiles','exploriso-channels','ambi-process'],
+        description:'Cool red-channel density against warm blue-channel density. A two-channel interpretation of the published teal/orange pairing, not an imported ICC profile.',
+        goodFor:['warm/cool landscapes','two-pass photographic posters'],avoid:['neutral color fidelity','assuming preview colors match physical inks'],paper:'#fffaf0',lpi:45,
+        inks:[{id:'teal',name:'Light teal / screen approximation',color:'#009da5',source:'cyan-density',grayRemoval:.15,gain:.95,gamma:1},
+          {id:'orange',name:'Fluorescent orange / screen approximation',color:'#ff7477',source:'yellow-density',grayRemoval:.6,gain:.75,gamma:1.1}],
+        screen:{default:{mode:'dots',angle:15,jitter:0,dotScale:1},plates:{teal:{angle:15},orange:{angle:75}}}}
+    },
+    'editorial-halftone':{...EDITORIAL_VARIANTS,
+      'forest-depth':{version:1,name:'Open shadows / two inks',references:['exploriso-gcr'],
+        description:'An unclipped photographic green key opens dark texture; a gray-removed yellow pass colors foliage without filling neutral bark. Compare with the earlier tonal key.',
+        goodFor:['dense documentary landscapes','textured objects with dark backgrounds'],avoid:['neutral color fidelity','assuming lower coverage alone proves depth'],paper:'#f5eee2',lpi:50,
+        inks:[{id:'key',name:'Green photographic key',color:'#006043',source:'tone',gain:.92,gamma:1.05},
+          {id:'accent',name:'Golden yellow chroma',color:'#e2a523',source:'yellow-density',grayRemoval:1,gain:.65,gamma:1.05}],
+        screen:{default:{mode:'dots',angle:22,jitter:0,dotScale:1},plates:{key:{mode:'solid'},accent:{angle:-15}}}},
+      'coast-duotone':{version:1,name:'Cool atmosphere / two inks',references:['dizzy-profiles','exploriso-gcr'],
+        description:'A blue red-channel-density pass retains pale cool atmosphere; a partially gray-removed coral pass warms material while leaving neutral shadows largely to blue.',
+        goodFor:['blue skies and water','cool landscapes with small warm details'],avoid:['exact color reproduction','uniform warm scenes','tiny figures without a detail review'],paper:'#faf8f2',lpi:50,
+        inks:[{id:'blue',name:'Stiprā blue atmosphere',color:'#0d4dad',source:'cyan-density',grayRemoval:0,gain:.95,gamma:.95},
+          {id:'warm',name:'Stiprā coral chroma',color:'#ff665d',source:'yellow-density',grayRemoval:.65,gain:.65,gamma:1.2}],
+        screen:{default:{mode:'dots',angle:15,jitter:0,dotScale:1},plates:{blue:{mode:'solid'},warm:{angle:75}}}}
+    },
+    'bold-spot-poster':{
+      'process-cmy':{version:1,name:'Faux process / three inks',references:['exploriso-channels','ambi-process'],
+        description:'Unnormalized complementary RGB densities assigned blue, fluorescent pink and yellow. Neutral shadows require all three passes; inspect their overlap.',
+        goodFor:['full-color illustrations','three-pass photo experiments'],avoid:['neutral dense shadows','calibrated CMYK expectations'],paper:'#fffdf5',lpi:45,
+        inks:[{id:'blue',name:'Blue / screen approximation',color:'#0078bf',source:'cyan-density',gain:.9,gamma:1},
+          {id:'pink',name:'Fluorescent pink / screen approximation',color:'#ff48b0',source:'magenta-density',gain:.85,gamma:1},
+          {id:'yellow',name:'Yellow / screen approximation',color:'#ffe800',source:'yellow-density',gain:.9,gamma:1}],
+        screen:{default:{mode:'dots',angle:15,jitter:0,dotScale:1},plates:{blue:{angle:15},pink:{angle:75},yellow:{angle:0}}}},
+      'process-cmyk':{version:1,name:'Faux process / four inks',references:['ambi-process','exploriso-gcr'],
+        description:'Blue, fluorescent pink, yellow and a separate black key. Full gray removal reduces neutral overlap; this is simple RGB arithmetic, not a calibrated CMYK conversion.',
+        goodFor:['photographs needing a distinct black key','four-pass illustrations'],avoid:['assuming an extra ink is always useful','ICC or fluorescent color accuracy'],paper:'#fffdf5',lpi:45,
+        inks:[{id:'blue',name:'Blue / screen approximation',color:'#0078bf',source:'cyan-density',grayRemoval:1,gain:.9,gamma:1},
+          {id:'pink',name:'Fluorescent pink / screen approximation',color:'#ff48b0',source:'magenta-density',grayRemoval:1,gain:.85,gamma:1},
+          {id:'yellow',name:'Yellow / screen approximation',color:'#ffe800',source:'yellow-density',grayRemoval:1,gain:.9,gamma:1},
+          {id:'key',name:'Black key',color:'#000000',source:'black',gain:.9,gamma:1}],
+        screen:{default:{mode:'dots',angle:15,jitter:0,dotScale:1},plates:{blue:{angle:15},pink:{angle:75},yellow:{angle:0},key:{angle:45}}}}
+    }
+  };
   const byId=new Map(CATALOG.map(x=>[x.id,x]));
   const clone=o=>JSON.parse(JSON.stringify(o));
   const fail=msg=>{throw new TypeError('styles: '+msg);};
   function get(id){const style=byId.get(id);if(!style)fail('unknown style '+String(id));return style;}
   function list(){return CATALOG.map(x=>({id:x.id,name:x.name,version:x.version,intent:x.intent,
     description:x.description,goodFor:[...x.goodFor],avoid:[...x.avoid],lpi:x.lpi,
+    variants:Object.entries(VARIANTS[x.id]??{}).map(([id,v])=>({id,name:v.name,version:v.version})),
     inks:x.inks.map(y=>({id:y.id,name:y.name,color:y.color}))}));}
-  function explain(id){return {...clone(get(id)),variants:id==='editorial-halftone'?clone(EDITORIAL_VARIANTS):{}};}
+  function explain(id){return {...clone(get(id)),variants:clone(VARIANTS[id]??{}),references:clone(REFERENCES)};}
   const number=(x,lo,hi,name)=>{if(typeof x!=='number'||!Number.isFinite(x)||x<lo||x>hi)fail(name+' must be '+lo+'..'+hi);return x;};
   function resolve(id,options={}){
     if(!options||Array.isArray(options)||typeof options!=='object')fail('options expected an object');
@@ -86,8 +140,8 @@
     for(const key of Object.keys(options))if(!allowed.includes(key))fail('unknown option '+key);
     const base=get(id),variant=options.variant??'default';
     if(typeof variant!=='string')fail('variant must be a string');
-    if(variant!=='default'&&(id!=='editorial-halftone'||!Object.prototype.hasOwnProperty.call(EDITORIAL_VARIANTS,variant)))fail('unknown variant '+variant+' for '+id);
-    const style=variant==='default'?base:{...base,...EDITORIAL_VARIANTS[variant]},dpi=number(options.dpi??300,72,1200,'dpi');
+    if(variant!=='default'&&!Object.prototype.hasOwnProperty.call(VARIANTS[id]??{},variant))fail('unknown variant '+variant+' for '+id);
+    const style=variant==='default'?base:{...base,...VARIANTS[id][variant]},dpi=number(options.dpi??300,72,1200,'dpi');
     const screening=options.screening??'authored';
     if(!['authored','unscreened'].includes(screening))fail('screening must be authored or unscreened');
     const lpi=number(options.lpi??style.lpi,5,150,'lpi');
@@ -114,7 +168,8 @@
       inkRecipe.inks.map(ink=>ink.id));
     return {contract:'stipra-style-resolution-v1',
       style:{id:style.id,name:style.name,version:base.version,variant,variantVersion:variant==='default'?null:style.version,intent:style.intent,
-        goodFor:[...style.goodFor],avoid:[...style.avoid],description:style.description},
+        goodFor:[...style.goodFor],avoid:[...style.avoid],description:style.description,references:(style.references??[]).map(key=>({...REFERENCES[key],id:key})),
+        calibration:'experimental RGB approximation; no external profiles or artwork included'},
       dpi,seed,screening,targetLpi:lpi,effectiveLpi:screening==='unscreened'?null:Number((dpi/pitch).toFixed(5)),
       strength,inkRecipe,screenRecipe,
       physicalScreens:inkRecipe.inks.map(ink=>{

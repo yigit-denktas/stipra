@@ -130,7 +130,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
           <option value="bold-spot-poster">Bold Spot Poster</option>
           <option value="clean-linework">Clean Linework</option>
         </select>
-        <label for="style-variant">Editorial treatment</label>
+        <label for="style-variant">Recipe variant</label>
         <select id="style-variant" disabled><option value="default">Original starting recipe</option><option value="tonal-key">Tonal key / two inks</option><option value="warm-third">Tonal key / selective third ink</option></select>
         <label for="style-dpi">Print resolution (DPI)</label><input id="style-dpi" type="number" min="72" max="1200" value="300">
         <label for="style-lpi">Screen frequency (LPI, blank uses recipe)</label><input id="style-lpi" type="number" min="5" max="150" placeholder="Recipe default">
@@ -138,7 +138,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         <small id="style-note" class="muted">Choose an intent, then refine the individual ink plates. Changing starting-style controls reapplies the recipe and replaces manual edits.</small>
       </div>
       <div class="field"><label for="mode">Separation mode</label>
-        <select id="mode"><option value="spot">Two spot inks</option><option value="cmyk">Four-color CMYK</option></select>
+        <select id="mode"><option value="spot">Spot inks</option><option value="cmyk">Four-color CMYK</option></select>
       </div>
       <div class="field"><label for="paper">Paper color (preview only)</label><input id="paper" type="color" value="#fff8ec"></div>
       <div id="inks" aria-label="Adjust each ink"></div>

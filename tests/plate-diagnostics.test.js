@@ -75,3 +75,18 @@ test('same dependency-free implementation and metrics in browser UMD and Node',(
   const native=Diagnostics.inspect(input),client=browser.StipraDiagnostics.inspect(input);
   assert.equal(JSON.stringify(native),JSON.stringify(client));
 });
+
+test('suitability measures the source, excludes transparency and offers explicit nonsemantic advice',()=>{
+  const input={width:4,height:1,rgba:Uint8ClampedArray.from([0,0,0,255,255,255,255,255,0,255,0,0,128,128,128,255])};
+  const d=Diagnostics.suitability(input);
+  assert.equal(d.visiblePixelWeight,3);assert.equal(d.shadowFraction,.333333);
+  assert.equal(d.highlightFraction,.333333);assert.equal(d.nearNeutralFraction,1);
+  assert.equal(d.tonalRange,1);assert.equal(d.guidance.length,3);
+  assert.match(d.measurement,/no semantic/);
+  assert.deepEqual(Diagnostics.inspect(make([0,100,255,0],[0,0,0,0]),{input}).suitability,d);
+  assert.throws(()=>Diagnostics.inspect(make([0],[0]),{input}),/source grid/);
+  const transparent={width:1,height:1,rgba:Uint8Array.of(0,0,0,0)};
+  assert.equal(Diagnostics.suitability(transparent).tonalRange,0);
+  assert.match(Diagnostics.suitability(transparent).guidance[0],/transparent/);
+  assert.throws(()=>Diagnostics.suitability({width:1,height:1,rgba:[]}),/RGBA/);
+});

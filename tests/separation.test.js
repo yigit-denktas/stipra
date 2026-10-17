@@ -127,3 +127,17 @@ test('real CLI writes full-frame source, masks, preview and manifest; rejects ov
     assert.equal(four.source.oriented.width,4);
   }finally{fs.rmSync(dir,{force:true,recursive:true});}
 });
+
+test('photographic tone opens encoded midtones and density channels remove gray without normalizing chroma',()=>{
+  const recipe={version:1,mode:'spot',paper:'#ffffff',inks:[
+    {id:'tone',name:'Tone',color:'#006043',source:'tone'},
+    {id:'chroma',name:'Yellow chroma',color:'#e2a523',source:'yellow-density',grayRemoval:1}]};
+  const result=Separation.separate(pixels([128,128,128,255],[51,153,26,255],[0,0,0,255],[255,255,255,255],[51,153,26,0]),recipe);
+  assert.deepEqual(Array.from(plate(result,'tone')),[127,133,255,0,0]);
+  assert.deepEqual(Array.from(plate(result,'chroma')),[0,127,0,0,0]);
+  const raw={...recipe,inks:recipe.inks.map(i=>i.id==='chroma'?{...i,grayRemoval:0}:i)};
+  assert.deepEqual(Array.from(plate(Separation.separate(pixels([128,128,128,255],[0,0,0,255]),raw),'chroma')),[127,255]);
+  for(const grayRemoval of [-1,2,NaN,'1'])assert.throws(()=>Separation.validate({...recipe,inks:[recipe.inks[0],{...recipe.inks[1],grayRemoval}]}),/grayRemoval/);
+  assert.throws(()=>Separation.validate({...recipe,inks:[{...recipe.inks[0],grayRemoval:1},recipe.inks[1]]}),/only valid/);
+  assert.deepEqual(Separation.validate(Separation.validate(recipe)),Separation.validate(recipe));
+});

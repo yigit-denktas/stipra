@@ -22,15 +22,15 @@ async function run(argv){
   const bytes=Buffer.from(await fixture.toBuffer('png')),asset=await ingestLocalBytes(bytes,'authored-linework.png');inputs.push({id:'type',input:{width:720,height:480,rgba:asset.rgba},sourceSha256:sha(bytes)});
   fs.mkdirSync(opts['--out']);fs.writeFileSync(path.join(opts['--out'],'authored-linework.png'),bytes);const records=[];
   for(const item of inputs){
-    const {width:w,height:h}=item.input,dpi=300,cases=Styles.list().map(s=>({id:s.id,variant:'default'}));
-    cases.push({id:'editorial-halftone',variant:'tonal-key'},{id:'editorial-halftone',variant:'warm-third'});
+    const {width:w,height:h}=item.input,dpi=300,cases=Styles.list().flatMap(s=>['default',...Object.keys(Styles.explain(s.id).variants)].map(variant=>({id:s.id,variant})));
     fs.writeFileSync(path.join(opts['--out'],item.id+'-source.png'),await png(item.input.rgba,w,h));
-    const thumbW=340,thumbH=Math.round(thumbW*h/w),sheet=new Canvas(3*(thumbW+16)+16,2*(thumbH+55)+16),draw=sheet.getContext('2d');draw.fillStyle='#f5eee2';draw.fillRect(0,0,sheet.width,sheet.height);
+    const thumbW=340,thumbH=Math.round(thumbW*h/w),sheet=new Canvas(3*(thumbW+16)+16,Math.ceil(cases.length/3)*(thumbH+55)+16),draw=sheet.getContext('2d');draw.fillStyle='#f5eee2';draw.fillRect(0,0,sheet.width,sheet.height);
     for(const [index,c] of cases.entries()){
       const style=Styles.resolve(c.id,{variant:c.variant,dpi,seed:42});
       const sep=Sep.separate(item.input,style.inkRecipe),screened=Screen.apply(sep,style.screenRecipe),proof=await png(screened.preview,w,h),name=item.id+'-'+c.id+'-'+c.variant;
       fs.writeFileSync(path.join(opts['--out'],name+'.png'),proof);
-      records.push({fixture:item.id,sourceSha256:item.sourceSha256,style,diagnostics:Diagnostics.inspect(screened,{dpi}),proofSha256:sha(proof),file:name+'.png'});
+      for(const mask of screened.masks)fs.writeFileSync(path.join(opts['--out'],name+'-plate-'+mask.id+'.png'),await png(Sep.plateRGBA(mask.coverage),w,h));
+      records.push({fixture:item.id,sourceSha256:item.sourceSha256,style,diagnostics:Diagnostics.inspect(screened,{dpi,input:item.input}),proofSha256:sha(proof),file:name+'.png'});
       const x=16+(index%3)*(thumbW+16),y=16+Math.floor(index/3)*(thumbH+55);draw.fillStyle='#20251f';draw.font='14px sans-serif';draw.fillText(c.id+' / '+c.variant,x,y+15);draw.drawImage(await loadImage(proof),x,y+25,thumbW,thumbH);
     }
     fs.writeFileSync(path.join(opts['--out'],item.id+'-styles.png'),Buffer.from(await sheet.toBuffer('png')));

@@ -39,3 +39,7 @@ console.log(result.plates, result.pairs, result.warnings);
 ```
 
 Run `node --test tests/plate-diagnostics.test.js` or `npm test`. The browser uses `window.StipraDiagnostics` from the same UMD source; there is no second hand-maintained formula.
+
+## Source suitability
+
+`inspect(result, {dpi, input})` optionally includes the output of `suitability({width,height,rgba})`. The source grid must equal the mask grid. Transparent pixels are excluded; fractional alpha weights the counts. Encoded tone below 0.25, above 0.85, RGB chroma below 0.04, and the visible tonal range are recorded with the thresholds. Source advice uses more than 25% shadow/highlight area or more than 90% near-neutral area. These are disclosed editorial heuristics, not classifiers or press safety limits. No pixels are altered. The browser and package export use this same implementation.

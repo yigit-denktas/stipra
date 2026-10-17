@@ -24,7 +24,7 @@
       input.value=value;
     } else {
       input.type=type;input.value=String(value);
-      if(type==='range'){input.min=label==='Match radius'?'0.05':'0';input.max=label==='Threshold'?'0.95':label==='Match radius'?'1':'2';input.step='0.05';}
+      if(type==='range'){input.min=label==='Match radius'?'0.05':label==='Gamma'?'0.1':'0';input.max=label==='Threshold'?'0.95':['Match radius','Gray removal'].includes(label)?'1':label==='Gamma'?'5':'4';input.step='0.05';}
     }
     input.addEventListener('input',()=>{callback(type==='range'?Number(input.value):input.value);schedule();});
     div.appendChild(input);where.appendChild(div);
@@ -46,8 +46,10 @@
           ink.source=v;
           if(v==='match'){ink.target=ink.target||ink.color;ink.tolerance=ink.tolerance||0.45;}
           else {delete ink.target;delete ink.tolerance;}
+          if(!v.endsWith('-density'))delete ink.grayRemoval;
           controls();
-        },[['darkness','Darkness'],['luminance','Brightness'],['red','Red channel'],['green','Green channel'],['blue','Blue channel'],['match','Match a color'],['cyan','CMYK cyan'],['magenta','CMYK magenta'],['yellow','CMYK yellow'],['black','CMYK black']]);
+        },[['tone','Photographic tone'],['cyan-density','Red-channel ink density'],['magenta-density','Green-channel ink density'],['yellow-density','Blue-channel ink density'],['darkness','Darkness'],['luminance','Brightness'],['red','Red channel'],['green','Green channel'],['blue','Blue channel'],['match','Match a color'],['cyan','CMYK cyan'],['magenta','CMYK magenta'],['yellow','CMYK yellow'],['black','CMYK black']]);
+        if(ink.source.endsWith('-density'))field(box,'Gray removal',ink.grayRemoval??0,'range',v=>ink.grayRemoval=Math.min(1,v));
         if(ink.source==='match'){
           field(box,'Match color',ink.target,'color',v=>ink.target=v);
           field(box,'Match radius',ink.tolerance,'range',v=>ink.tolerance=Math.max(0.05,v));
@@ -55,6 +57,7 @@
       }
       field(box,'Threshold',ink.threshold||0,'range',v=>ink.threshold=v);
       field(box,'Strength',ink.gain??1,'range',v=>ink.gain=v);
+      field(box,'Gamma',ink.gamma??1,'range',v=>ink.gamma=Math.max(.1,v));
       host.appendChild(box);
     }
   }
@@ -142,14 +145,15 @@
         views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates'));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
-      const diagnostics=StipraDiagnostics.inspect(result,{dpi:Number($('style-dpi').value)});
+      const diagnostics=StipraDiagnostics.inspect(result,{dpi:Number($('style-dpi').value),input:{width:w,height:h,rgba:asset.rgba}});
       const overlap=(diagnostics.overall.overlapTwoPlusFraction*100).toFixed(1);
       const freqs=diagnostics.plates.filter(p=>p.screen?.effectiveLpi!==null&&p.screen?.effectiveLpi!==undefined)
         .map(p=>p.id+': '+p.screen.effectiveLpi.toFixed(1)+' lpi');
       $('diagnostics').textContent='ink overlap: '+overlap+'% of pixels at ≥25% per ink · '+
         (freqs.length?freqs.join(' / '):'solid coverage')+
         (diagnostics.warnings.length?' · '+diagnostics.warnings.length+' review note(s)':'')+
-        ' · advisory, not press calibrated';
+        ' · advisory, not press calibrated. '+diagnostics.suitability.guidance.join(' ')+
+        (diagnostics.warnings.length?' '+diagnostics.warnings.map(w=>w.inkIds.join('/')+': '+w.message).join(' '):'');
       $('diagnostics').hidden=false;
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
       $('save-preview').disabled=false;$('save-plates').disabled=false;
@@ -200,10 +204,16 @@
     $('screen-jitter').value=String(screenConfig.default.jitter);
     $('screen-seed').value=String(screenConfig.seed);
   }
-  function applyStyle(){
+  function applyStyle(event){
     const id=$('style').value;
-    $('style-variant').disabled=id!=='editorial-halftone';
-    if(id!=='editorial-halftone')$('style-variant').value='default';
+    if(event?.target.id==='style') {
+      const variants=id?StipraStyles.explain(id).variants:{};
+      const select=$('style-variant');select.replaceChildren();
+      for(const [value,name] of [['default','Original starting recipe'],...Object.entries(variants).map(([key,v])=>[key,v.name])]){
+        const option=document.createElement('option');option.value=value;option.textContent=name;select.appendChild(option);
+      }
+      select.disabled=Object.keys(variants).length===0;
+    }
     if(!id){
       $('style-note').textContent='Manual adjustments remain available for every ink.';
       return;

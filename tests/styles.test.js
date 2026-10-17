@@ -139,20 +139,70 @@ test('package CLI rejects detached style controls and accepts physical variant s
   const parsed=args(['--input','x.png','--style','editorial-halftone','--out','x.zip','--style-variant','tonal-key','--lpi','40']);
   assert.equal(parsed['--style-variant'],'tonal-key');assert.equal(parsed['--lpi'],'40');
 });
-test('real package CLI retains style paper, source and browser-equivalent proof pixels',async()=>{
+test('real package CLI preserves default and new variant recipes, source and browser-equivalent proof pixels',async()=>{
   const os=require('node:os'),{Canvas,loadImage}=require('skia-canvas'),JSZip=require('jszip');
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-style-parity-'));
   try{
     const c=new Canvas(48,48),ctx=c.getContext('2d');ctx.fillStyle='#a3a3a3';ctx.fillRect(0,0,48,48);
+    ctx.fillStyle='#2876bc';ctx.fillRect(0,0,24,48);
     const original=Buffer.from(await c.toBuffer('png')),file=path.join(dir,'input.png'),out=path.join(dir,'result.zip');fs.writeFileSync(file,original);
-    cp.execFileSync(process.execPath,[path.join(ROOT,'bin/stipra.js'),'package','--input',file,'--style','editorial-halftone','--style-variant','warm-third','--dpi','600','--lpi','50','--seed','42','--out',out]);
+    const pixels=ctx.getImageData(0,0,48,48).data;
+    for(const [id,variant] of [['editorial-halftone','warm-third'],['editorial-halftone','forest-depth'],['editorial-halftone','coast-duotone'],['portrait-duotone','blue-pink'],['bold-spot-poster','process-cmyk']]){
+    cp.execFileSync(process.execPath,[path.join(ROOT,'bin/stipra.js'),'package','--input',file,'--style',id,'--style-variant',variant,'--dpi','600','--lpi','50','--seed','42','--out',out]);
     const zip=await JSZip.loadAsync(fs.readFileSync(out)),manifest=JSON.parse(await zip.file('manifest.json').async('string'));
-    const style=Styles.resolve('editorial-halftone',{variant:'warm-third',dpi:600,lpi:50,seed:42});
-    assert.equal(manifest.paper,style.inkRecipe.paper);assert.equal(manifest.style.variant,'warm-third');
+    const style=Styles.resolve(id,{variant,dpi:600,lpi:50,seed:42});
+    assert.equal(manifest.paper,style.inkRecipe.paper);assert.equal(manifest.style.variant,variant);
     assert.deepEqual(await zip.file('source/original.png').async('nodebuffer'),original);
     assert.deepEqual(JSON.parse(await zip.file('recipe/style.json').async('string')),style);
-    const expected=Screen.apply(Sep.separate({width:48,height:48,rgba:ctx.getImageData(0,0,48,48).data},style.inkRecipe),style.screenRecipe);
+    const expected=Screen.apply(Sep.separate({width:48,height:48,rgba:pixels},style.inkRecipe),style.screenRecipe);
     const decoded=await loadImage(await zip.file('proof/composite.png').async('nodebuffer'));ctx.drawImage(decoded,0,0);
     assert.deepEqual(ctx.getImageData(0,0,48,48).data,expected.preview);
+    assert.ok(JSON.parse(await zip.file('report/diagnostics.json').async('string')).suitability);
+    fs.unlinkSync(out);
+    }
   }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('attributed variants retain versioned identity and agree in full browser and Node engines',()=>{
+  const context=vm.createContext({Uint8Array,Uint8ClampedArray,Float64Array,Math,Set,Map,TypeError});
+  for(const name of ['separation','screening','styles'])vm.runInContext(fs.readFileSync(path.join(ROOT,'src',name+'.js'),'utf8'),context);
+  const input=pixels(24,24);input.rgba[3]=0;
+  let count=0;
+  for(const id of EXPECTED){
+    for(const variant of Object.keys(Styles.explain(id).variants)){
+      count++;
+      for(const dpi of [150,300,600]){
+        const opts={variant,dpi,seed:42,lpi:35};
+        const node=Styles.resolve(id,opts),browser=context.StipraStyles.resolve(id,opts);
+        assert.equal(JSON.stringify(node),JSON.stringify(browser));
+        const a=Screen.apply(Sep.separate(input,node.inkRecipe),node.screenRecipe);
+        const b=context.StipraScreen.apply(context.StipraSeparation.separate(input,browser.inkRecipe),browser.screenRecipe);
+        assert.deepEqual(Array.from(a.preview),Array.from(b.preview));
+        a.masks.forEach((m,i)=>{assert.deepEqual(Array.from(m.coverage),Array.from(b.masks[i].coverage));assert.equal(m.coverage[0],0);});
+        assert.ok(node.style.variantVersion>=1);
+        assert.ok(node.physicalScreens.filter(p=>p.mode!=='solid').every(p=>Math.abs(p.effectiveLpi-35)<.001));
+        if(!['tonal-key','warm-third'].includes(variant))assert.ok(node.style.references.every(ref=>/^https:\/\//.test(ref.url))&&node.style.references.length>0);
+      }
+    }
+  }
+  assert.equal(count,8);
+});
+
+test('four defaults and earlier editorial variants retain their saved ink and screen recipes',()=>{
+  const baseline=require('./fixtures/style-v1-baselines.json'),crypto=require('node:crypto');
+  for(const row of baseline.records){
+    const r=Styles.resolve(row.id,{variant:row.variant,dpi:baseline.dpi,seed:baseline.seed});
+    assert.equal(crypto.createHash('sha256').update(JSON.stringify({inkRecipe:r.inkRecipe,screenRecipe:r.screenRecipe})).digest('hex'),row.sha256,row.id+'/'+row.variant);
+  }
+});
+
+test('focused photo variants avoid clipped keys and restrict warm density in a cool sky',()=>{
+  const input={width:4,height:1,rgba:Uint8Array.from([10,20,10,255,30,50,30,255,90,150,220,255,255,255,255,255])};
+  const forest=Sep.separate(input,Styles.resolve('editorial-halftone',{variant:'forest-depth'}).inkRecipe);
+  assert.ok(forest.masks[0].coverage[0]<235);
+  assert.ok(forest.masks[0].coverage[1]<forest.masks[0].coverage[0]);
+  const coast=Sep.separate(input,Styles.resolve('editorial-halftone',{variant:'coast-duotone'}).inkRecipe);
+  assert.ok(coast.masks[0].coverage[2]>100);
+  assert.ok(coast.masks[1].coverage[2]<10);
+  assert.ok(coast.masks.every(p=>p.coverage[3]===0));
 });
