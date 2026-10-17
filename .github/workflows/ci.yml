@@ -34,7 +34,10 @@ jobs:
       - run: node --check bin/scene.js
       - run: node --check bin/stipra.js
       - run: node --check web/stipra/app.js
+      - run: node --check scripts/cache-paper-mono.js
+      - run: node --check scripts/build-type-specimens.js
       - run: npm run build:pages
+      - run: node --test tests/type-proofs.test.js
       - run: npm test
       - run: node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=web/stipra/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js

@@ -4,6 +4,12 @@
 
 The previous logo looked like a halftone illustration vaguely suggesting S: fragmented negative space, conflicting dot sizes, excessive right-side dark/coral weight, and a silhouette dependent on its palette. Instead of patching the colors, this study rebuilds the **form first** and makes the screen a reproducible print system.
 
+## Full lowercase wordmarks — new owner-requested direction
+
+The owner rejected the standalone S as the primary identity and requested a direct comparison of **real IBM Plex** versus **real Paper Mono** for the lowercase **stiprā** wordmark and matched A4 PDFs, without image generation. See the [live typographic specimens](https://apps.yigitdenktas.com/stipra/typography/) and [source scripts](../scripts/build-type-specimens.js). Both fonts are SIL OFL 1.1, with source attribution recorded in [licensing](LICENSING.md).
+
+The S studies below remain historical/secondary exploration only; **they are not a recommended primary logo**. Original README dotmark is unchanged.
+
 ## See the new candidates
 
 | Variant | Live vector preview | What is being tested |
@@ -41,6 +47,6 @@ Evaluate at **24, 48, 96 and 480 pixels**, with one ink and two inks, on white a
 
 ## Current decision
 
-The old overprint ribbon candidate is rejected as the leading direction due to the owner's balance feedback. The new **C + B** candidate is *the recommended study*, not a brand approval. Do not replace the user-provided `logo_for_Readme.svg` unless the owner selects an alternative.
+The old overprint ribbon candidate is rejected as the leading direction due to the owner's balance feedback. The new C + B candidate is a *superseded symbol exploration*, not a brand approval. The active direction is wordmark-first in IBM Plex and Paper Mono. Do not replace the user-provided `logo_for_Readme.svg` unless the owner selects an alternative.
 
 Related: [#46 brand](https://github.com/yigit-denktas/stipra/issues/46), [#31 UI identity](https://github.com/yigit-denktas/stipra/issues/31), [#34 Styles](https://github.com/yigit-denktas/stipra/issues/34). No Dizzy Ink or other third-party artwork is copied; this geometry is original MIT-authored output.

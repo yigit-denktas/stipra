@@ -12,7 +12,7 @@ const pdfColor=hex=>rgb(...color(hex));
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=v=>Number(v).toFixed(1);
 const fontFile=(family,weight)=>fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-latin-'+weight+'-normal.woff'));
-const truetype=(family)=>Buffer.from(createFont(fontFile(family,400),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))}).write({type:'ttf'}));
+const truetype=(family,weight=400)=>Buffer.from(createFont(fontFile(family,weight),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))}).write({type:'ttf'}));
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
 function htmlReport(cards,m){
   const font=fontFile('ibm-plex-sans',400).toString('base64'),mono=fontFile('ibm-plex-mono',400).toString('base64');
@@ -40,16 +40,23 @@ function htmlReport(cards,m){
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('Stiprā / ink study');pdf.setCreator('Stiprā report-layout v2');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v2');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
-  const regular=await pdf.embedFont(truetype('ibm-plex-sans'));
-  const mono=await pdf.embedFont(truetype('ibm-plex-mono'));
+  // Specimen typography is opt-in: production PDFs retain the existing defaults.
+  const typo=m.typography||null;
+  const usePaperMono=typo?.id==='paper-mono';
+  const regular=await pdf.embedFont(typo?.fontRegular?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
+  const mono=await pdf.embedFont(typo?.fontMono?fs.readFileSync(typo.fontMono):truetype('ibm-plex-mono'));
+  const display=await pdf.embedFont(typo?.fontBold?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
   const dims=A4[m.orientation],[W,H]=dims,margin=29,cw=W-2*margin;
   const [page,...unused]=[pdf.addPage(dims)],paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
   const fg=rgb(.14,.17,.15);
   page.drawImage(paper,{x:0,y:0,width:W,height:H});
   const line=(y,x=margin,w=cw,thickness=.6)=>page.drawLine({start:{x,y},end:{x:x+w,y},thickness,color:fg});
-  const put=(s,x,y,size=9,font=regular)=>page.drawText(String(s),{x,y,size,font,color:fg});
+  const put=(s,x,y,size=9,font=regular)=>{
+    const content=typo?.lowercase?String(s).toLowerCase():String(s);
+    page.drawText(content,{x,y,size,font,color:fg});
+  };
   function fitText(s,font,size,max){let value=String(s);while(value.length>3&&font.widthOfTextAtSize(value,size)>max)value=value.slice(0,-2)+'…';return value;}
   const imgs=new Map();
   async function drawImage(c,x,y,w,h){
@@ -61,8 +68,8 @@ async function pdfReport(cards,m){
   }
   const portrait=m.orientation==='portrait';
   put('PRINT STUDY    /    '+m.orientation.toUpperCase()+' A4',margin,H-29,8,mono);
-  put('Stiprā',margin,H-69,32,regular);
-  put('/ ink separation',margin+104,H-65,18,regular);
+  put('stiprā',margin,H-69,usePaperMono?29:32,typo?display:regular);
+  put('/ ink separation',margin+(usePaperMono?155:104),H-65,usePaperMono?12:18,regular);
   put(fitText(m.name,mono,8,cw*.68),margin,H-88,8,mono);
   put(m.width+' × '+m.height+' px  /  '+m.dpi+' DPI  /  '+m.trim.width+' × '+m.trim.height+' mm',margin,H-102,8,mono);
   put(m.paper.name.toUpperCase()+'   /   '+m.settings.length+' INKS  /  SEED '+m.seed,margin,H-114,7.5,mono);
@@ -105,7 +112,7 @@ async function pdfReport(cards,m){
   if(sample.length>4){
     const continuation=pdf.addPage(dims);
     continuation.drawImage(paper,{x:0,y:0,width:W,height:H});
-    continuation.drawText('STIPRĀ / MORE PLATES',{x:margin,y:H-65,size:22,font:regular,color:fg});
+    continuation.drawText(typo?.lowercase?'stiprā / more plates':'stiprā / more plates',{x:margin,y:H-65,size:22,font:display,color:fg});
     for(let i=4;i<sample.length;i++){
       const c=sample[i],px=margin+((i-4)%2)*(cw/2),py=H-150-Math.floor((i-4)/2)*230;
       if(!imgs.has(c.name))imgs.set(c.name,await pdf.embedPng(c.bytes));
