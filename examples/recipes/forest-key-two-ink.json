@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "mode": "spot",
+  "paper": "#f5eee2",
+  "inks": [
+    {"id":"green","name":"green key","color":"#006043","source":"black","gain":1.15,"gamma":1.1},
+    {"id":"golden-yellow","name":"golden yellow","color":"#e2a523","source":"yellow","gain":0.45,"gamma":1.15}
+  ]
+}
