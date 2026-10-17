@@ -53,7 +53,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Structured inputs:** named regions → physical inks and opt-in frozen source projects are implemented locally (#83/#84). [Try the region example](https://apps.yigitdenktas.com/stipra/regions/). [Contracts and evidence](docs/STRUCTURED-INPUTS.md) cover replay, the bounded OpenRaster/auxiliary pilots and local C2PA feasibility (#85/#86); native Apple/EXR and browser credentials remain deferred.
 
-**Still open:** broader formats, three [distribution findings](docs/DEPENDENCY-AUDIT.md), independent artist evaluation and physical prints. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
+**Still open:** broader formats, three [distribution findings and artifact checks](docs/DEPENDENCY-AUDIT.md), independent artist evaluation and physical prints. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
 
 ## Follow the work
 

@@ -15,6 +15,17 @@
       "distribution": "review-required"
     },
     {
+      "package": "@pdf-lib/fontkit",
+      "version": "1.1.1",
+      "artifact": "dist/fontkit.es.js",
+      "bytes": 1249783,
+      "sha256": "62ad9c769e6a7a9028b0c711504908f0a231955b39619aaabd56dd4eabe800be",
+      "gitBlobSha1": "2711b07413d1eb095487d4fddc7273f4afc1d82b",
+      "source": "https://github.com/Hopding/fontkit",
+      "finding": "Alternate ES module shipped in the upstream package. The current browser exporter selects UMD, as recorded by its build input report. Exact prebundled component inventory remains unverified.",
+      "distribution": "review-required"
+    },
+    {
       "package": "skia-canvas",
       "version": "3.0.8",
       "artifact": "lib/skia.node",
@@ -23,7 +34,12 @@
       "gitBlobSha1": "1092d0c80dda52575db21ced2d46908a8467cebe",
       "source": "https://github.com/samizdatco/skia-canvas/tree/v3.0.8",
       "finding": "Locally installed Linux x64 native artifact; source tag/Cargo.lock and published compressed platform digest identify upstream evidence, not a verified transitive notice inventory.",
-      "distribution": "review-required"
+      "distribution": "review-required",
+      "platform": {
+        "os": "linux",
+        "arch": "x64",
+        "libc": "glibc"
+      }
     },
     {
       "package": "fonteditor-core",
@@ -42,5 +58,14 @@
     "https://github.com/samizdatco/skia-canvas/blob/v3.0.8/.github/workflows/build.yml",
     "https://github.com/kekee000/fonteditor-core/blob/04c47400895f11d857ca83f5725c0c3c0dd552a5/woff2src/build.sh",
     "https://github.com/Hopding/fontkit/blob/master/rollup.config.js"
-  ]
+  ],
+  "investigation": {
+    "fontkitSourceCommit": "72b8e42bd6a398d496a63a6d483eabeed43861fb",
+    "skiaSourceCommit": "042312a3f40b660b1d7dc0beba541486171bc5cc",
+    "observations": [
+      "The fontkit source checkout includes yarn.lock and build recipes but no published-artifact build map. The source commit is an investigated candidate, not an attestation for npm 1.1.1.",
+      "The WOFF2 build instructions clone google/woff2 recursively without a pinned revision; the published WASM source match does not pin those compiler inputs.",
+      "Skia v3.0.8 build workflows use stable Rust and moving build containers. Cargo.lock is useful evidence but is not an inventory of the downloaded platform binary."
+    ]
+  }
 }
