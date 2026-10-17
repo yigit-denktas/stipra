@@ -57,6 +57,7 @@ try{
   el('style-variant').value='warm-third';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
   await until(()=>doc.querySelectorAll('#grid canvas').length===5,'three studio inks');
   el('screen-seed').value='42';el('screen-seed').dispatchEvent(new Event('input',{bubbles:true}));el('screen-seed').dispatchEvent(new Event('change',{bubbles:true}));
+  await until(()=>el('meta').textContent.includes('Screen seed 42.'),'studio seed rendered');
   let exported;const createURL=win.URL.createObjectURL.bind(win.URL),click=win.HTMLAnchorElement.prototype.click;
   win.URL.createObjectURL=b=>{if(b.type==='application/zip')exported=b;return createURL(b);};
   win.HTMLAnchorElement.prototype.click=function(){if(this.download==='stipra-print-package.zip')return;return click.call(this);};

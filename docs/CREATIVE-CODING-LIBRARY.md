@@ -58,3 +58,7 @@ No API names or npm package names are fixed here. No new drawing API, general fr
 ## Processing is a separate host
 
 [Processing Java](https://processing.org/environment/) runs in a different environment from p5.js. A browser JavaScript package cannot simply be imported into a Java sketch. Research a frame/file-to-CLI route first, then a local bridge if demand and latency justify it. That handoff must be described as offline processing unless an interactive path is actually demonstrated. Do not commit to a Java port or maintain a second rendering engine in the alpha.
+
+## Alpha acceptance evidence
+
+[Measured creative coding evaluation](CREATIVE-CODING-ALPHA.md) records #74 performance, memory/bundle limitations, browser/Node/CLI plate parity and the documented existing-tool comparison. Independent artist preference, unsupported browsers/renderers, full export distribution notices and physical print calibration remain separate. Core/adapter packages stay private until a publication decision.

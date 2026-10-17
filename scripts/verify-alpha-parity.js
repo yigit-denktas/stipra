@@ -14,11 +14,16 @@ async function verifyPackage(bytes,expected){
   for(const [i,ink] of manifest.inks.entries()){
     assert.equal(ink.id,expected.plates[i].id);
     for(const [file,wanted] of [[ink.plate,expected.plates[i].coverage],[ink.screened,expected.plates[i].screened]]){
+      const png=await zip.file(file).async('nodebuffer'),physical=[];
+      for(let at=8;at<png.length;at+=12+png.readUInt32BE(at))if(png.toString('ascii',at+4,at+8)==='pHYs')physical.push([png.readUInt32BE(at+8),png.readUInt32BE(at+12),png[at+16]]);
+      const ppm=Math.round(expected.recipe.dpi*1000/25.4);assert.deepEqual(physical,[[ppm,ppm,1]],'missing or wrong physical density');
       const asset=await decoded(zip,file);assert.deepEqual(asset.metadata.oriented,expected.geometry.sourcePixels);
       const coverage=Uint8Array.from({length:asset.rgba.length/4},(_,p)=>255-asset.rgba[p*4]);assert.deepEqual(coverage,wanted,file);
       for(let p=0;p<asset.rgba.length;p+=4)assert.ok(asset.rgba[p]===asset.rgba[p+1]&&asset.rgba[p]===asset.rgba[p+2]&&asset.rgba[p+3]===255,'non-grayscale master');
     }
   }
+  assert.ok(zip.file(manifest.diagnostics.path));
+  if(manifest.style){const style=JSON.parse(await zip.file(manifest.style.recipe).async('string'));assert.equal(style.style.version,manifest.style.version);assert.deepEqual(style.inkRecipe,expected.recipe.inks);}
   const proof=await decoded(zip,'proof/composite.png');assert.deepEqual(proof.rgba,expected.proof.rgba);
   for(const entry of manifest.files)assert.equal(hash(await zip.file(entry.path).async('nodebuffer')),entry.sha256,entry.path);
   assert.ok(zip.file('recipe/inks.json'));assert.ok(zip.file('report/separation-sheet.pdf'));assert.ok(manifest.source.sha256);

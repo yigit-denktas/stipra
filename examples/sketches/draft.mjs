@@ -8,7 +8,7 @@ export function createDraftRenderer({options,maxEdge=384}){
       if(!['number','string'].includes(typeof revision)||typeof revision==='number'&&!Number.isFinite(revision))throw Error('Supply an explicit frame/revision token');
       if(cached&&source===priorSource&&revision===priorRevision)return cached;
       const shot=captureCanvas(source),{width,height}=shot.input;
-      const owner=(source.canvas??source.elt??source).ownerDocument??document;
+      const owner=(source.canvas??source.elt??source.drawingContext?.canvas??source).ownerDocument??document;
       const frozen=owner.createElement('canvas');frozen.width=width;frozen.height=height;
       const ctx=frozen.getContext('2d'),pixels=ctx.createImageData(width,height);pixels.data.set(shot.input.rgba);ctx.putImageData(pixels,0,0);
       const scale=Math.min(1,maxEdge/Math.max(width,height)),small=owner.createElement('canvas');

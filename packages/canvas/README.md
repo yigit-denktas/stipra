@@ -77,3 +77,7 @@ The script checks the source descriptor and reconstructed coverage hashes before
 The adapter is ESM plus TypeScript declarations and MIT text. It is private/unpublished. Clean offline installation installs only adapter and core. Browser CI exercises p5 **1.11.11** and **2.2.2** at density 1/2, real p5 global/instance examples, changing frames, alpha, state preservation, actual tainted canvas rejection and optional image/authored exports. Other versions/renderers are not claimed tested.
 
 The hosted examples use an unmodified, replaceable p5.js 1.11.11 script. Its full LGPL-2.1 text, upstream source tag and replacement instructions are served beside it. p5 is separate from the MIT core/adapter tarballs. The optional full export distribution retains the broader application's unresolved #14 notice/native/WASM audit findings; this work does not declare them cleared.
+
+## Performance and acceptance
+
+See [the measured alpha evaluation](../../docs/CREATIVE-CODING-ALPHA.md) for declared sizes, compatibility, memory limits, export parity and the existing-tool comparison. Rendering is synchronous; cache unchanged proofs and use a bounded draft with an explicit full-resolution final. The optional [draft example](../../examples/sketches/draft.mjs) freezes the original frame, labels draft resampling and never exports the reduced buffer. It is an example helper, not part of this package API.

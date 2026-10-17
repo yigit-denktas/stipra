@@ -23,4 +23,6 @@ test('export parity validator rejects a package with a contaminated production m
   const {verifyPackage}=require('../scripts/verify-alpha-parity');await verifyPackage(pkg.zip,expected);
   const zip=await JSZip.loadAsync(pkg.zip),ink=pkg.manifest.inks[0];zip.file(ink.screened,await zip.file(ink.plate).async('nodebuffer'));
   await assert.rejects(verifyPackage(await zip.generateAsync({type:'nodebuffer'}),expected));
+  const wrongDpi=await JSZip.loadAsync(pkg.zip);wrongDpi.file(ink.screened,Package.physicalPNG(await wrongDpi.file(ink.screened).async('nodebuffer'),600));
+  await assert.rejects(verifyPackage(await wrongDpi.generateAsync({type:'nodebuffer'}),expected),/physical density/);
 });
