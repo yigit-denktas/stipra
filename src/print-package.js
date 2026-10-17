@@ -2,7 +2,7 @@
 'use strict';
 const crypto=require('node:crypto'),{Canvas,loadImage}=require('skia-canvas');
 const JSZip=require('jszip');
-const Report=require('./report-layout.js'),Paper=require('./report-paper.js');
+const Report=require('./report-layout.js'),Paper=require('./report-paper.js'),Diagnostics=require('./plate-diagnostics.js');
 const Sep=require('./separation.js'),Screen=require('./screening.js');
 const A4=[841.88976,595.27559],FIXED=new Date('2000-01-01T00:00:00Z');
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -75,6 +75,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const sep=Sep.separate({width:w,height:h,rgba:asset.rgba},effectiveRecipe);
   const configs=screenConfigs(screenRecipe,sep.masks.map(m=>m.id));
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
+  const plateDiagnostics=Diagnostics.inspect(screened,{dpi});
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
@@ -112,10 +113,13 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   add('report/separation-sheet.pdf',await Report.pdfReport(cards,info));
   add('recipe/inks.json',json(sep.recipe));add('recipe/screens.json',json(configs.production));
   add('recipe/proof-screens.json',json(configs.proof));
+  add('report/diagnostics.json',json(plateDiagnostics));
   if(style)add('recipe/style.json',json(style));
   const manifest={contract:'stipra-print-package-v1',displayName:'Stiprā',
     source:{...asset.metadata,sha256:info.sha},output:print,
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
+    diagnostics:{path:'report/diagnostics.json',contract:plateDiagnostics.contract,
+      warnings:plateDiagnostics.warnings.length,reviewRequired:plateDiagnostics.warnings.length>0},
     ...(style?{style:{id:style.style.id,version:style.style.version,targetLpi:style.targetLpi,
       effectiveLpi:style.effectiveLpi,warnings:style.warnings,recipe:'recipe/style.json'}}:{}),
     screen:{seed:configs.proof.seed,proofOnlyRegistration:true,
