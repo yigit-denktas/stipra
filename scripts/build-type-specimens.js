@@ -58,7 +58,7 @@ async function generate(outRoot){
   const dir=path.resolve(outRoot,OUT);fs.mkdirSync(dir,{recursive:true});
   const sample=makeSource(),outputs=[];
   for(const id of ['ibm-plex','paper-mono']){
-    const font=id==='ibm-plex'?plexFont():fs.readFileSync(fonts.extraBold);
+    const font=fs.readFileSync(id==='ibm-plex'?fonts.plexBold:fonts.extraBold);
     for(const mode of ['plain','two-ink']){
       const filename=id+'-'+mode+'.svg',data=wordmarkSvg(font,{accent:mode==='two-ink'});
       fs.writeFileSync(path.join(dir,filename),data);outputs.push(filename);
@@ -79,7 +79,10 @@ async function generate(outRoot){
         {name:'vermilion ink',source:'magenta',color:ACCENT,mode:'dots',pitch:7.2,angle:-35,coverage:.28}
       ],inkRecipe:{version:1,mode:'spot',paper:PAPER},
       screenRecipe:{version:1,seed:142},proofRecipe:{version:1,seed:142},
-      typography:{id,lowercase:true,...(id==='paper-mono'?{fontRegular:fonts.regular,fontBold:fonts.extraBold}:{})}
+      typography:{id,lowercase:true,
+        fontRegular:id==='paper-mono'?fonts.regular:fonts.plexRegular,
+        fontBold:id==='paper-mono'?fonts.extraBold:fonts.plexBold,
+        fontMono:id==='paper-mono'?fonts.regular:fonts.plexMono}
     });
     const pdfname=id+'-print-study.pdf';fs.writeFileSync(path.join(dir,pdfname),pdf);
     outputs.push(pdfname);
