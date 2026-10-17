@@ -51,4 +51,5 @@
   $('file').addEventListener('change',e=>load(e.target.files?.[0]));
   $('save').addEventListener('click',()=>{if(latest)latest.canvas.toBlob(blob=>blob&&save(blob,'stipra-normalized.png'),'image/png');});
   $('metadata').addEventListener('click',()=>{if(latest)save(new Blob([JSON.stringify(latest.metadata,null,2)+'\n'],{type:'application/json'}),'stipra-import.json');});
+  document.documentElement.dataset.stipraReady='true';
 })();

@@ -14,7 +14,7 @@
   const output=document.getElementById('out');
   let d;
   try{
-    await until(()=>frame.contentDocument?.getElementById('mode')&&frame.contentWindow.StipraSeparation,'lab script loading');
+    await until(()=>frame.contentDocument?.documentElement.dataset.stipraReady==='true','lab script loading');
     d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
     const input=document.createElement('canvas');input.width=4;input.height=2;
