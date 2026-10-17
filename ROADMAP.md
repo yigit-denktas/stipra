@@ -9,7 +9,7 @@ Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a
 
 The owner wants to apply Stiprā inside existing p5.js/Canvas sketches, with optional real plate exports. [The creative coding plan](docs/CREATIVE-CODING-LIBRARY.md) and [milestone tracker #70](https://github.com/yigit-denktas/stipra/issues/70) record this direction. Keep the current browser/CLI work as the shared foundation; do not wait for every optional backlog item before a bounded alpha.
 
-1. Land the reviewed [report/export PR #69] (merged)(https://github.com/yigit-denktas/stipra/pull/69), complete the input-color contract (#44), verify shared masters/exports (#8/#12/#13), and audit shipped dependency/asset notices (#14).
+1. The reviewed [report/export PR #69](https://github.com/yigit-denktas/stipra/pull/69) is merged; next, complete the input-color contract (#44), verify shared masters/exports (#8/#12/#13), and audit shipped dependency/asset notices (#14).
 2. Implement the lean engine contract (#71), Canvas/p5 adapter (#72), artist-authored ink input (#73) and measured alpha acceptance (#74). PDF/ZIP machinery stays optional. Preserve the essential studio workflow (#22).
 3. Evaluate a separate Processing Java bridge (#75) only after the alpha demonstrates usefulness. Do not build another drawing framework.
 
