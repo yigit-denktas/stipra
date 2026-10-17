@@ -17,7 +17,7 @@ function chrome(){
  throw Error('Chrome/Chromium executable not found; set CHROME_BIN (this smoke test must run in a real browser)');
 }
 function contentType(name){
- if(name.endsWith('.js'))return 'text/javascript; charset=utf-8';
+ if(name.endsWith('.js')||name.endsWith('.mjs'))return 'text/javascript; charset=utf-8';
  if(name.endsWith('.html'))return 'text/html; charset=utf-8';
  return 'application/octet-stream';
 }
