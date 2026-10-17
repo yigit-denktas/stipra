@@ -45,9 +45,9 @@ async function pdfReport(cards,m){
   // Specimen typography is opt-in: production PDFs retain the existing defaults.
   const typo=m.typography||null;
   const usePaperMono=typo?.id==='paper-mono';
-  const regular=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
-  const mono=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-mono'));
-  const display=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
+  const regular=await pdf.embedFont(typo?.fontRegular?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
+  const mono=await pdf.embedFont(typo?.fontMono?fs.readFileSync(typo.fontMono):truetype('ibm-plex-mono'));
+  const display=await pdf.embedFont(typo?.fontBold?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
   const dims=A4[m.orientation],[W,H]=dims,margin=29,cw=W-2*margin;
   const [page,...unused]=[pdf.addPage(dims)],paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
   const fg=rgb(.14,.17,.15);
