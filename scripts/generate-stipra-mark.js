@@ -20,7 +20,7 @@ const CURVES=[
   [[131,153],[103,235],[373,227],[351,320]],
   [[351,320],[326,420],[185,428],[118,364]]
 ];
-const SHIFT={x:7,y:-12};
+const SHIFT={x:-6,y:-6};
 const round=n=>Number(n.toFixed(4));
 function cubic(p,t){
   const u=1-t;
@@ -131,7 +131,7 @@ function generate(directory){
   const dir=path.resolve(directory),scenes=Object.fromEntries(
     ['silhouette','matrix','density','overprint'].map(k=>[k,Core.resolveRecipe(sceneRecipe(k))]));
   const b=balance(dotGrid('density'));
-  if(Math.abs(b.centerX-240)>12||Math.abs(b.centerY-240)>12||b.leftRightRatio<.88||b.leftRightRatio>1.12)
+  if(Math.abs(b.centerX-240)>12||Math.abs(b.centerY-240)>12||b.leftRightRatio<.90||b.leftRightRatio>1.10)
     throw Error('Stiprā mark fails balance gate: '+JSON.stringify(b));
   const composite=Core.renderSvg(scenes.overprint);
   const outputs={
