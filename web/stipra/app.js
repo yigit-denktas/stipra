@@ -101,6 +101,9 @@
       row.append(label,select);section.appendChild(row);
       const customAngle=screenConfig.plates[ink.id]?.angle??screenConfig.default.angle;
       field('Ink angle (°)','angle',customAngle,-180,180,1);
+      field('Ink pitch (px)','pitch',screenConfig.plates[ink.id]?.pitch??screenConfig.default.pitch,4,128,.01);
+      field('Mark scale','dotScale',screenConfig.plates[ink.id]?.dotScale??screenConfig.default.dotScale,.1,2,.01);
+      field('Hybrid solid threshold','solidThreshold',screenConfig.plates[ink.id]?.solidThreshold??screenConfig.default.solidThreshold,.01,1,.01);
       field('Registration x (px)','x',screenConfig.plates[ink.id]?.registration?.x??0,-50,50,1);
       field('Registration y (px)','y',screenConfig.plates[ink.id]?.registration?.y??0,-50,50,1);
       host.appendChild(section);
@@ -238,6 +241,7 @@
     $('screen-angle').value=String(screenConfig.default.angle);
     $('screen-jitter').value=String(screenConfig.default.jitter);
     $('screen-seed').value=String(screenConfig.seed);
+    $('screen-dot-scale').value=String(screenConfig.default.dotScale);$('screen-solid-threshold').value=String(screenConfig.default.solidThreshold);
   }
   function applyStyle(event){
     const id=$('style').value;
@@ -326,13 +330,13 @@
     finally{exportBusy=false;$('save-plates').disabled=!renderValid;$('save-plates').textContent='Print package ZIP';}
   });
   $('save-recipe').addEventListener('click',()=>save(new Blob([JSON.stringify(StipraSeparation.validate(config),null,2)+'\n'],{type:'application/json'}),'stipra-separation-recipe.json'));
-  $('screen-mode').addEventListener('change',e=>{styleResolution=null;screenConfig.default.mode=e.target.value;schedule();});
-  for(const [id,key] of [['screen-pitch','pitch'],['screen-angle','angle'],['screen-jitter','jitter'],['screen-seed','seed']]){
+  $('screen-mode').addEventListener('change',e=>{styleResolution=null;screenConfig.default.mode=e.target.value;screenControls();schedule();});
+  for(const [id,key] of [['screen-pitch','pitch'],['screen-angle','angle'],['screen-jitter','jitter'],['screen-dot-scale','dotScale'],['screen-solid-threshold','solidThreshold'],['screen-seed','seed']]){
     $(id).addEventListener('change',e=>{
       styleResolution=null;
       if(key==='seed')screenConfig.seed=Number(e.target.value);
       else screenConfig.default[key]=Number(e.target.value);
-      schedule();
+      screenControls();schedule();
     });
   }
   $('save-screen-recipe').addEventListener('click',()=>{
