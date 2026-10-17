@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Stiprā region parity</title><body><output id="out">PENDING</output><pre id="evidence" hidden></pre><script type="module">
+import * as I from '/dist/stipra/sketches/assets/inputs.mjs';
+import * as Core from '/dist/stipra/sketches/assets/core.mjs';
+import {captureRegions} from '/dist/stipra/sketches/assets/regions-canvas.mjs';
+import {generateSketch} from '/dist/stipra/sketches/assets/print-export.mjs';
+import {forest,mapping,options} from './fixture.mjs';
+const check=(x,m)=>{if(!x)throw Error(m);},hash=async b=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',b))].map(v=>v.toString(16).padStart(2,'0')).join('');
+const base64=b=>{let s='';for(let i=0;i<b.length;i+=8192)s+=String.fromCharCode(...b.subarray(i,i+8192));return btoa(s);};
+try{
+  const evidence={contract:'stipra-regions-browser-v1',userAgent:navigator.userAgent,cases:[]};
+  for(const count of [2,3]){
+    const source=forest(97,61),captured=captureRegions({regions:source.regions.map(r=>{const c=document.createElement('canvas');c.width=source.width;c.height=source.height;const x=c.getContext('2d'),p=x.createImageData(c.width,c.height);for(let i=0;i<r.coverage.length;i++)p.data.set([0,0,0,r.coverage[i]],i*4);x.putImageData(p,0,0);return {...r,source:{canvas:c,width:c.width/2,height:c.height/2},polarity:'alpha'};})});
+    const mapped=I.mapRegions(captured,mapping(count)),result=Core.renderLayers(mapped.input,options),project=I.regionProject(captured,mapped.recipe);
+    const pkg=await generateSketch({input:mapped.input,recipe:result.recipe,metadata:{contract:'stipra-region-example-v1'},sourceProject:project});
+    check(pkg.manifest.sourceProject.artifacts===4,'Missing project');
+    evidence.cases.push({count,zipBase64:base64(pkg.bytes),proof:await hash(result.proof.rgba),plates:await Promise.all(result.plates.map(async p=>({id:p.id,coverage:await hash(p.coverage),screened:await hash(p.screened)})))});
+  }
+  const frame=document.createElement('iframe');frame.src='/dist/stipra/regions/index.html';document.body.append(frame);
+  await new Promise((resolve,reject)=>{let i=0;const tick=()=>{if(frame.contentDocument?.documentElement.dataset.stipraRegionsReady==='true')resolve();else if(i++>200)reject(Error('Public region demo did not render'));else setTimeout(tick,50);};tick();});
+  frame.contentDocument.getElementById('inks').value='2';frame.contentDocument.getElementById('inks').dispatchEvent(new Event('change'));check(frame.contentDocument.querySelectorAll('#plates figure').length===2,'Two-ink UI mapping');
+  document.getElementById('evidence').textContent=JSON.stringify(evidence);document.body.dataset.smoke='pass';document.getElementById('out').textContent='BROWSER_REGIONS_PASS';
+}catch(e){document.body.dataset.smoke='fail';document.getElementById('out').textContent=e.stack;}
+</script></body></html>

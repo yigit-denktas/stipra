@@ -59,6 +59,14 @@ jobs:
       - run: STIPRA_SMOKE_PAGE=web/stipra/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js
       - run: npm run benchmark:alpha
       - run: npm run check:alpha
+      - run: npm run check:regions
+      - run: python3 scripts/setup-provenance-tool.py .cache/c2patool
+      - run: C2PATOOL="$PWD/.cache/c2patool" npm run check:provenance
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: structured-input-evidence
+          path: out/structured-inputs/
       - uses: actions/upload-artifact@v4
         if: always()
         with:

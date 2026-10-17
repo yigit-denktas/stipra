@@ -5,10 +5,7 @@ const {ingestLocalBytes}=require('../src/import/node'),Package=require('../src/p
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 /** Reconstructs authored masks from a package snapshot and checks their recorded hashes. */
 async function readSnapshot(bytes){
-  const zip=await JSZip.loadAsync(bytes),read=async name=>{
-    const file=zip.file(name);if(!file)throw Error('Missing package entry '+name);
-    return file.async('nodebuffer');
-  };
+  const archive=await require('../src/archive').openArchive(bytes),read=name=>archive.read(name);
   const manifest=JSON.parse(await read('manifest.json')),descriptorBytes=await read('source/original.json'),source=JSON.parse(descriptorBytes);
   if(manifest.mode!=='authored'||source.contract!=='stipra-authored-source-v1'||hash(descriptorBytes)!==manifest.source.sha256)throw Error('Invalid authored snapshot descriptor');
   const inks=[];
@@ -21,7 +18,8 @@ async function readSnapshot(bytes){
     if(hash(coverage)!==ink.coverageSha256)throw Error('Source coverage hash mismatch: '+ink.id);
     inks.push({id:ink.id,name:ink.name,color:ink.color,coverage});
   }
-  return {input:{width:source.width,height:source.height,paper:source.paper,inks},
+  const sourceProject=await require('../src/source-project-reader').readProject(archive,manifest,source.width,source.height);
+  return {sourceProject,input:{width:source.width,height:source.height,paper:source.paper,inks},
     screenRecipe:JSON.parse(await read('recipe/proof-screens.json')),dpi:manifest.output.dpi,marksMm:manifest.output.marksMm,
     paper:manifest.paperSelection.id,reportTexture:manifest.report.texture.style,qrStyle:manifest.report.qr.style,
     captureMetadata:manifest.source.provenance.capture??null};

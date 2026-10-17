@@ -6,11 +6,12 @@ async function generate(options){
   return {bytes:new Uint8Array(result.zip),manifest:result.manifest};
 }
 /** Generates an optional package from an already captured frame and its normalized recipe. */
-async function generateSketch({input,recipe,metadata}){
+async function generateSketch({input,recipe,metadata,sourceProject}){
   if(!recipe||recipe.version!==1||!['image','layers'].includes(recipe.kind))throw Error('Sketch export requires a normalized core recipe');
+  sourceProject=require('../source-project').freezeProject(sourceProject,input.width,input.height);
   const dpi=recipe.dpi;
   if(recipe.kind==='layers'){
-    const result=await Package.generateLayers({input,screenRecipe:recipe.proofScreens,dpi,captureMetadata:metadata});
+    const result=await Package.generateLayers({input,screenRecipe:recipe.proofScreens,dpi,captureMetadata:metadata,sourceProject});
     return {bytes:new Uint8Array(result.zip),manifest:result.manifest};
   }
   const {Canvas}=require('./adapters.js'),canvas=new Canvas(input.width,input.height),ctx=canvas.getContext('2d'),pixels=ctx.createImageData(input.width,input.height);
@@ -21,6 +22,6 @@ async function generateSketch({input,recipe,metadata}){
     profile:{kind:'unspecified'},pixels:{channels:'RGBA',bitDepth:8,colorSpace:'srgb',orientationApplied:true},
     colorManagement:{policy:'stipra-srgb-v1',decoder:'canvas-capture',workingSpace:'srgb',pressCalibrated:false},
     provenance:{representation:'owned Canvas pixel snapshot; no original file bytes implied',capture:metadata},warnings:[]}};
-  return generate({originalBytes,asset,inkRecipe:recipe.inks,screenRecipe:recipe.proofScreens,dpi,paper:'recipe',style:recipe.style});
+  return generate({originalBytes,asset,inkRecipe:recipe.inks,screenRecipe:recipe.proofScreens,dpi,paper:'recipe',style:recipe.style,sourceProject});
 }
 module.exports={generate,generateSketch,physicalPNG:(bytes,dpi)=>new Uint8Array(Package.physicalPNG(Buffer.from(bytes),dpi))};

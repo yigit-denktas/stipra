@@ -23,7 +23,7 @@ export interface CanvasRender {
 }
 /** The optional exporter contract; PDF/ZIP implementations are not imported by the adapter. */
 export interface SketchExporter {
-  generateSketch(options: {input: ImageInput | LayersInput; recipe: RenderResult['recipe']; metadata: CaptureMetadata}): Promise<{bytes: Uint8Array; manifest: Record<string, unknown>}>;
+  generateSketch(options: {input: ImageInput | LayersInput; recipe: RenderResult['recipe']; metadata: CaptureMetadata; sourceProject?: unknown}): Promise<{bytes: Uint8Array; manifest: Record<string, unknown>}>;
 }
 /** Captures a 2D frame as owned sRGB pixels, retaining density metadata. */
 export function captureCanvas(source: CanvasSource): ImageCapture;
@@ -36,4 +36,4 @@ export function renderCanvasLayers(input: CanvasLayers, options?: LayerOptions, 
 /** Draws in logical coordinates, retaining destination state and rejecting source feedback. */
 export function drawProof(rendered: CanvasRender, target: CanvasSource, placement?: {x?: number; y?: number; width?: number; height?: number}): void;
 /** Freezes the frame and settings before awaiting an explicit optional exporter loader. */
-export function exportSnapshot(rendered: CanvasRender, loadExporter: () => Promise<SketchExporter>): Promise<{bytes: Uint8Array; manifest: Record<string, unknown>}>;
+export function exportSnapshot(rendered: CanvasRender, loadExporter: () => Promise<SketchExporter>, options?: {sourceProject?: unknown}): Promise<{bytes: Uint8Array; manifest: Record<string, unknown>}>;
