@@ -57,6 +57,11 @@ jobs:
       - run: STIPRA_SMOKE_PAGE=examples/core/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_CORE_PASS node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=examples/sketches/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SKETCH_PASS node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=web/stipra/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: studio-workflow-and-site-review
+          path: out/workflow-validation/
       - run: npm run benchmark:alpha
       - run: npm run check:alpha
       - run: npm run check:regions

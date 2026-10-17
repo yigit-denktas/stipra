@@ -1,0 +1,27 @@
+{
+  "contract": "stipra-notice-supplements-v1",
+  "packages": [
+    {
+      "name": "dijkstrajs",
+      "version": "1.0.3",
+      "publishedEvidence": "LICENSE.md",
+      "publishedSha256": "c46324e45a005413535a6fb7a97e9eacd3cc6bf30335b7d5c10b8ee3af9e60c2",
+      "copyright": "Copyright (C) 2008 Wyatt Baldwin <self@wyattbaldwin.com>",
+      "terms": "MIT-terms.txt",
+      "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+      "basis": "Published package expressly declares MIT; retain its original attribution and the complete referenced MIT terms. This supplement is not a new license grant.",
+      "source": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt"
+    },
+    {
+      "name": "string-split-by",
+      "version": "1.0.0",
+      "publishedEvidence": "readme.md",
+      "publishedSha256": "cfb9fa8129e7e5b1b545fc5d6360c1be6e42ec01c61e29ae25c12e72344421d1",
+      "copyright": "Copyright 2018 Dmitry Yv",
+      "terms": "MIT-terms.txt",
+      "termsSha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+      "basis": "Published package expressly declares MIT; retain its original attribution and the complete referenced MIT terms. This supplement is not a new license grant.",
+      "source": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt"
+    }
+  ]
+}

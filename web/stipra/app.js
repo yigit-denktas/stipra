@@ -13,7 +13,8 @@
   ]});
   let asset=null,result=null,original=null,config=spot(),views=[],styleResolution=null,renderValid=false,loadVersion=0;
   const freshScreen=()=>({version:1,seed:142,default:{mode:'solid',pitch:12,angle:0,jitter:0,dotScale:1,solidThreshold:0.9},plates:{}});
-  let screenConfig=freshScreen();
+  let screenConfig=freshScreen(),exportBusy=false;
+  const inspection={solo:null,muted:new Set()};
   const field=(where,label,value,type,callback,options)=>{
     const div=document.createElement('div');div.className='field';
     const id='control-'+where.dataset.ink+'-'+label.replace(/\W/g,'-');
@@ -61,6 +62,7 @@
       field(box,'Gamma',ink.gamma??1,'range',v=>ink.gamma=Math.max(.1,v));
       host.appendChild(box);
     }
+    inspectionControls();
   }
   function screenControls(){
     const host=$('screen-inks');host.replaceChildren();
@@ -104,13 +106,36 @@
       host.appendChild(section);
     }
   }
+  function inspectionControls(){
+    const ids=new Set(config.inks.map(x=>x.id));
+    if(!ids.has(inspection.solo))inspection.solo=null;
+    inspection.muted=new Set([...inspection.muted].filter(id=>ids.has(id)));
+    const host=$('ink-visibility');host.replaceChildren();
+    for(const ink of config.inks){
+      const row=document.createElement('div');row.className='ink-visibility';
+      const solo=document.createElement('button');solo.type='button';solo.id='solo-'+ink.id;
+      solo.textContent='Solo '+ink.name;solo.setAttribute('aria-pressed',String(inspection.solo===ink.id));
+      solo.onclick=()=>{inspection.solo=inspection.solo===ink.id?null:ink.id;if(inspection.solo)inspection.muted.delete(ink.id);inspectionControls();inspectProof();$('solo-'+ink.id).focus();};
+      const label=document.createElement('label'),mute=document.createElement('input');mute.type='checkbox';mute.id='mute-'+ink.id;mute.checked=inspection.muted.has(ink.id);
+      mute.onchange=()=>{if(mute.checked)inspection.muted.add(ink.id);else inspection.muted.delete(ink.id);inspectProof();};label.append(mute,document.createTextNode(' Mute '+ink.name));row.append(solo,label);host.append(row);
+    }
+    $('ink-count').value=String(config.inks.length);$('ink-count').disabled=config.mode==='cmyk';
+  }
+  function inspectProof(){
+    if(!result||!views[1])return;
+    const pixels=StipraInspection.preview(result,config.paper,{solo:inspection.solo,muted:[...inspection.muted],substrate:$('proof-paper').checked,paperOnly:$('paper-only').checked});
+    const ctx=views[1].canvas.getContext('2d'),data=ctx.createImageData(result.width,result.height);data.data.set(pixels);ctx.putImageData(data,0,0);
+    views[1].canvas.setAttribute('aria-label',$('paper-only').checked?'Paper only':inspection.solo?'Solo ink inspection':'Simulated overprint inspection');
+    $('grid').classList.toggle('native-pixels',$('view-zoom').value==='native');
+    const title=views[1].canvas.parentElement.querySelector('figcaption strong');if(title)title.textContent=$('paper-only').checked?'Paper only':inspection.solo?'Solo ink inspection':inspection.muted.size?'Muted ink inspection':'Simulated overprint';
+  }
   function canvas(width,height,rgba){
     const c=document.createElement('canvas');c.width=width;c.height=height;
     const ctx=c.getContext('2d'),data=ctx.createImageData(width,height);
     data.data.set(rgba);ctx.putImageData(data,0,0);return c;
   }
   function show(name,raw,detail,target){
-    const figure=document.createElement('figure');figure.className=target==='plates'?'view view--plate':'view view--hero';
+    const figure=document.createElement('figure');figure.tabIndex=0;figure.className=target==='plates'?'view view--plate':'view view--hero';
     const img=canvas(asset.metadata.oriented.width,asset.metadata.oriented.height,raw);
     img.setAttribute('aria-label',name);figure.appendChild(img);
     const caption=document.createElement('figcaption'),strong=document.createElement('strong');
@@ -133,6 +158,8 @@
     $('save-preview').disabled=true;$('save-plates').disabled=true;
     if(!asset)return;
     try{
+      const geometry=StipraExportPlan.printIntent(asset.metadata.oriented.width,asset.metadata.oriented.height,Number($('style-dpi').value),Number($('marks-mm').value));
+      $('print-geometry').textContent=geometry.trimMm.width.toFixed(2)+' × '+geometry.trimMm.height.toFixed(2)+' mm native trim at '+geometry.dpi+' DPI; origin 0,0; '+geometry.marksMm+' mm optional marks outside trim. No bleed is invented; no machine printable-area profile selected.';
       const w=asset.metadata.oriented.width,h=asset.metadata.oriented.height;
       const baseline=StipraSeparation.separate({width:w,height:h,rgba:asset.rgba},config);
       result=StipraScreen.apply(baseline,screenConfig);
@@ -158,7 +185,8 @@
         (diagnostics.warnings.length?' '+diagnostics.warnings.map(w=>w.inkIds.join('/')+': '+w.message).join(' '):'');
       $('diagnostics').hidden=false;
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
-      renderValid=true;$('save-preview').disabled=false;$('save-plates').disabled=false;
+      inspectionControls();inspectProof();$('inspection').disabled=false;
+      renderValid=true;$('save-preview').disabled=false;$('save-plates').disabled=exportBusy;
     }catch(error){
       $('diagnostics').hidden=true;
       $('error').textContent=error.message;$('error').hidden=false;
@@ -179,7 +207,7 @@
   async function load(file){
     if(!file)return;
     const version=++loadVersion;
-    $('status').textContent='Loading your image locally…';$('error').hidden=true;
+    $('status').textContent='Loading your image locally…';$('error').hidden=true;$('drop').setAttribute('aria-busy','true');
     try{
       if(file.size>StipraImportProbe.MAX_BYTES)throw Error('16 MiB file limit exceeded');
       const bytes=new Uint8Array(await file.arrayBuffer());
@@ -194,7 +222,7 @@
       if(version!==loadVersion)return;
       $('error').textContent=error.message;$('error').hidden=false;
       $('status').textContent='Import rejected; existing separation retained.';
-    }
+    }finally{if(version===loadVersion)$('drop').setAttribute('aria-busy','false');}
   }
   function save(blob,filename){
     if(!blob)return;
@@ -232,7 +260,7 @@
       controls();screenControls();syncScreenFields();render();
     }catch(error){
       $('error').textContent=error.message;$('error').hidden=false;
-      $('style').value='';
+      $('style').value='';renderValid=false;$('save-preview').disabled=true;$('save-plates').disabled=true;
     }
   }
   for(const id of ['style','style-variant','style-dpi','style-lpi','style-screening'])$(id).addEventListener('change',applyStyle);
@@ -248,6 +276,17 @@
       $('status').textContent='Failed to change separation mode.';
       $('error').textContent=error.message;$('error').hidden=false;
     }
+  });
+  for(const id of ['proof-paper','paper-only','view-zoom'])$(id).addEventListener('change',inspectProof);
+  $('reset-inspection').onclick=()=>{inspection.solo=null;inspection.muted.clear();$('paper-only').checked=false;inspectionControls();inspectProof();};
+  $('marks-mm').addEventListener('change',schedule);
+  $('ink-count').addEventListener('change',()=>{
+    const count=Number($('ink-count').value);
+    if(config.mode!=='spot'||!Number.isInteger(count)||count<2||count>8){$('error').textContent='Choose 2–8 spot inks.';$('error').hidden=false;$('ink-count').value=String(config.inks.length);return;}
+    const colors=['#006043','#ff665d','#0d4dad','#e2a523'];
+    config.inks=config.inks.slice(0,count);
+    while(config.inks.length<count){const n=config.inks.length+1;let id='ink-'+n;while(config.inks.some(x=>x.id===id))id+='x';config.inks.push({id,name:'Ink '+n,color:colors[(n-1)%colors.length],source:'tone',gain:.5,gamma:1,threshold:0});}
+    screenConfig.plates=Object.fromEntries(Object.entries(screenConfig.plates).filter(([id])=>config.inks.some(x=>x.id===id)));styleResolution=null;$('style').value='';controls();screenControls();inspectionControls();render();
   });
   $('paper').addEventListener('input',e=>{styleResolution=null;config.paper=e.target.value;schedule();});
   $('file').addEventListener('change',e=>load(e.target.files?.[0]));
@@ -266,22 +305,24 @@
   }
   async function packageExport(){
     if(!asset||!renderValid)throw Error('Import artwork and resolve invalid settings before exporting.');
-    const snapshot={originalBytes:original.slice(),asset,inkRecipe:StipraSeparation.validate(config),screenRecipe:StipraScreen.config(screenConfig,config.inks.map(i=>i.id)),dpi:Number($('style-dpi').value),marksMm:0,paper:'recipe'};
+    const snapshot={originalBytes:original.slice(),asset,inkRecipe:StipraSeparation.validate(config),screenRecipe:StipraScreen.config(screenConfig,config.inks.map(i=>i.id)),dpi:Number($('style-dpi').value),marksMm:Number($('marks-mm').value),paper:'recipe'};
     if(styleResolution)snapshot.style={...styleResolution,inkRecipe:snapshot.inkRecipe,screenRecipe:snapshot.screenRecipe};
     return (await exporter()).generate(snapshot);
   }
   $('save-preview').addEventListener('click',async()=>{
     if(!renderValid)return;
-    try{const lib=await exporter(),blob=await new Promise(resolve=>views[1].canvas.toBlob(resolve,'image/png'));
-      save(new Blob([lib.physicalPNG(new Uint8Array(await blob.arrayBuffer()),Number($('style-dpi').value))],{type:'image/png'}),'stipra-overprint-preview.png');
+    const dpi=Number($('style-dpi').value),proof=canvas(result.width,result.height,result.preview);
+    const pending=new Promise(resolve=>proof.toBlob(resolve,'image/png'));
+    try{const lib=await exporter(),blob=await pending;
+      save(new Blob([lib.physicalPNG(new Uint8Array(await blob.arrayBuffer()),dpi)],{type:'image/png'}),'stipra-overprint-preview.png');
     }catch(error){$('error').textContent=error.message;$('error').hidden=false;}
   });
   $('save-plates').addEventListener('click',async()=>{
-    if(!renderValid)return;
+    if(!renderValid||exportBusy)return;exportBusy=true;
     $('save-plates').disabled=true;$('save-plates').textContent='Preparing package…';
     try{const exported=await packageExport();save(new Blob([exported.bytes],{type:'application/zip'}),'stipra-print-package.zip');$('status').textContent='Print package saved locally. Print masters at 100%; inspect the PDF before printing.';}
     catch(error){$('error').textContent=error.message;$('error').hidden=false;}
-    finally{$('save-plates').disabled=!renderValid;$('save-plates').textContent='Print package ZIP';}
+    finally{exportBusy=false;$('save-plates').disabled=!renderValid;$('save-plates').textContent='Print package ZIP';}
   });
   $('save-recipe').addEventListener('click',()=>save(new Blob([JSON.stringify(StipraSeparation.validate(config),null,2)+'\n'],{type:'application/json'}),'stipra-separation-recipe.json'));
   $('screen-mode').addEventListener('change',e=>{styleResolution=null;screenConfig.default.mode=e.target.value;schedule();});
@@ -297,6 +338,6 @@
     const normalized=StipraExportPlan.screenConfigs(screenConfig,config.inks.map(i=>i.id)).production;
     save(new Blob([JSON.stringify(normalized,null,2)+'\n'],{type:'application/json'}),'stipra-screen-recipe.json');
   });
-  controls();screenControls();syncScreenFields();
+  controls();screenControls();inspectionControls();syncScreenFields();
   document.documentElement.dataset.stipraReady='true';
 })();

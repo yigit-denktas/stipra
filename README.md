@@ -18,8 +18,6 @@
 
 </div>
 
-A picture is one thing. A print is what happens when you pull it apart.
-
 **Stiprā** is a local-first printmaking studio and experimental JavaScript library. Bring a photograph, handmade illustration or Canvas/p5.js drawing; separate it into spot inks or CMYK, or supply the ink masks yourself. Inspect each pass, adjust its screen, and export aligned plates with a reproducible recipe. Keep drawing in your existing tools.
 
 The macron belongs to the display name; the repository, URL and CLI use `stipra`.
@@ -30,7 +28,7 @@ The macron belongs to the display name; the repository, URL and CLI use `stipra`
 
 The **browser studio** processes supported PNG, JPEG, WebP and restricted SVG locally. Choose a shared Style or edit spot/CMYK masks, inspect the proof and individual plates, and save a print-package ZIP. No account or image API is needed. See [input limits](docs/IMPORT.md).
 
-For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā inside an existing **2D** sketch, preserves a frozen source frame, and optionally exports its aligned plates. The examples cover plain Canvas and p5 global/instance modes. Both packages are **local, unpublished alpha packages**; they are not available on npm.
+For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā inside an existing **2D** sketch, preserves a frozen source frame, and optionally exports its aligned plates. These are **local, unpublished alpha packages**.
 
 Prefer a script? With Node.js 20+ installed:
 
@@ -49,11 +47,13 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Implemented:** local import, independent spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md), physical LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean JS core, Canvas/p5 integration and authored-ink replay. Native vector scene examples remain a separate supported path; [Prehnite](examples/prehnite-v8/) is the original case study.
 
-**Verified digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache unchanged proofs and use a bounded draft before an explicit full-resolution final. The evaluation states its tested limits.
+**Verified digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts before full-resolution finals.
+
+**Delivery:** [Dependency/version map](https://apps.yigitdenktas.com/stipra/roadmap/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, solo/mute/paper, native pixel zoom and print geometry.
 
 **Structured inputs:** named regions → physical inks and opt-in frozen source projects are implemented locally (#83/#84). [Try the region example](https://apps.yigitdenktas.com/stipra/regions/). [Contracts and evidence](docs/STRUCTURED-INPUTS.md) cover replay, the bounded OpenRaster/auxiliary pilots and local C2PA feasibility (#85/#86); native Apple/EXR and browser credentials remain deferred.
 
-**Still open:** [studio workflow](https://github.com/yigit-denktas/stipra/issues/22), broader format coverage, [distribution notices](docs/DEPENDENCY-AUDIT.md), independent artist evaluation and physical print tests. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
+**Still open:** broader formats, three [distribution findings](docs/DEPENDENCY-AUDIT.md), independent artist evaluation and physical prints. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
 
 ## Follow the work
 

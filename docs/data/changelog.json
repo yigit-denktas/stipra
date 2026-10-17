@@ -1,0 +1,120 @@
+{
+  "contract": "stipra-changelog-v1",
+  "releaseStatus": "Development changes on main; no npm package release or version tag is announced here.",
+  "entries": [
+    {
+      "date": "2026-10-17",
+      "title": "Studio inspection and delivery map",
+      "status": "Unreleased",
+      "issues": [
+        22,
+        14,
+        90
+      ],
+      "changes": [
+        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
+        "One dependency/version ledger, public changelog, sitemap and shared site navigation."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Keep source regions through export",
+      "status": "Merged development",
+      "prs": [
+        89
+      ],
+      "issues": [
+        83,
+        84,
+        85,
+        86
+      ],
+      "changes": [
+        "Named regions map to physical inks with explicit fractional overlap rules.",
+        "Optional inert source projects preserve raw region masks, recipes, hashes and browser/CLI replay.",
+        "Bounded OpenRaster/auxiliary pilots and real offline C2PA feasibility; native codecs and browser credential integration remain deferred."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Measured Canvas/p5.js alpha",
+      "status": "Merged development",
+      "prs": [
+        78,
+        79,
+        80
+      ],
+      "issues": [
+        71,
+        72,
+        73,
+        74
+      ],
+      "changes": [
+        "Dependency-free local core, optional Canvas adapter and existing p5.js examples.",
+        "Artist-authored layers, lazy exports and frozen-frame replay.",
+        "Measured performance and six browser/Node/CLI parity cases. Packages remain private and unpublished."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Color boundaries and structured-artwork research",
+      "status": "Merged development",
+      "prs": [
+        77,
+        87,
+        88
+      ],
+      "issues": [
+        44,
+        81,
+        82
+      ],
+      "changes": [
+        "Normalized color/profile handling, reference checks and explicit source precision metadata.",
+        "Reject unvalidated PNG interpretation signals before decoding.",
+        "Current README, source-linked architecture and artifact-specific licensing inventory."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Shared Styles and separation quality",
+      "status": "Merged development",
+      "prs": [
+        64,
+        68,
+        69
+      ],
+      "issues": [
+        43,
+        47
+      ],
+      "changes": [
+        "Versioned browser/CLI recipes with physical LPI, suitability and overlap/contribution diagnostics.",
+        "Attributed channel-separation variants and focused forest/coast treatments.",
+        "Broader format, artistic acceptance and physical print gates remain open."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Editorial reports, public guide and ink-dot QR",
+      "status": "Merged development",
+      "prs": [
+        63,
+        66,
+        67
+      ],
+      "issues": [
+        60,
+        62,
+        65
+      ],
+      "changes": [
+        "Readable ink-linked annotations, simulated paper texture and embedded reproduction recipes.",
+        "Public guide with primary and GitHub Pages hosting; branded ink-dot QR links to public instructions.",
+        "Typography and original palette retained; identity remains provisional and owner photographs stay private."
+      ]
+    }
+  ]
+}

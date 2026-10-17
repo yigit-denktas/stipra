@@ -1,0 +1,13 @@
+# Studio workflow acceptance
+
+The image-input workspace implements import → choose shared style → edit physical ink masks → inspect → export. It remains a local experimental printmaking tool; artistic approval, authored-layer import UI, machine profiles and physical press calibration are separate work.
+
+Import PNG/JPEG/WebP or the supported geometric SVG subset, respecting the existing byte/pixel/color boundaries. Rejected files leave the previous separation intact. The UI shows loading and validation errors; no uploaded script is executed and no image processing request leaves the browser.
+
+Choose a shared starting Style or a manual spot/CMYK recipe. Spot mode supports 2–8 physical inks; increasing the count preserves existing passes and adds explicitly editable tone-based passes. Paper stays outside the ink array. Per-ink source, threshold, strength and gamma edit actual continuous coverage; screening then creates real plates. Angles, pitch, seed, jitter, density settings and proof registration use the same validated engine as the CLI. Shared Styles resolve physical LPI; manual pitch remains explicitly pixels, with effective LPI reported.
+
+Solo/mute and paper-only/transparent-substrate controls affect the inspection canvas only. Individual grayscale plates and package exports retain all configured inks. The full proof PNG also exports the complete configured treatment, not a transient solo view. `All inks` resets inspection. These controls use labeled checkboxes and pressed-state buttons; solo preserves keyboard focus. Native pixel zoom means one artwork pixel per CSS pixel, not calibrated physical print size. Fitted and native views preserve the original aspect and never change the source/plate grid.
+
+Print geometry shows native trim in millimeters at the selected DPI, origin 0,0 and optional registration-mark border. No bleed or machine-safe area is invented. Marked masters add their border outside the common trim; unmarked masters retain exact native dimensions. The A4 PDF/HTML reports are inspection sheets, not resized print masters. Source/profile metadata, recipes, all passes, hashes and font notices travel in the ZIP; proof offsets remain outside production registration.
+
+Browser acceptance uses actual dropped procedural artwork and checks color boundaries, real mask edits, solo/reset/paper/zoom, 8-ink setup, responsive layouts at 390/768/1024/1339/1440 pixels, accessible labels/disclosure/focus, shared variants, export pixels/hashes/density/marked geometry and PDF recipe attachments. Existing alpha checks compare browser exports with Node and CLI. Processing stays under `connect-src 'none'`; local script/font loads are separately served app assets. No physical-print result is claimed.

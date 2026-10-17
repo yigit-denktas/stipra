@@ -9,7 +9,7 @@ Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a
 
 The [library direction](docs/CREATIVE-CODING-LIBRARY.md) now has an implemented local alpha. The lean core (#71), Canvas/p5 adapter (#72), authored-ink export (#73) and measured engineering evaluation (#74) are merged in #78/#79/#80. [Alpha evidence](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility and browser/Node/CLI parity. Packages remain local/unpublished; [tracker #70](https://github.com/yigit-denktas/stipra/issues/70) remains open for owner acceptance and the publication decision.
 
-The normalized color contract/reference tests (#44) and bounded PNG interpretation fix (#82) are implemented. Full export distribution still has five notice/provenance findings (#14); broader format and physical-print acceptance (#8/#12/#13) remain open. Preserve the essential studio workflow (#22).
+The normalized color contract/reference tests (#44) and bounded PNG interpretation fix (#82) are implemented. Full export distribution still has three notice/provenance findings (#14); broader format and physical-print acceptance (#8/#12/#13) remain open. Preserve the essential studio workflow (#22).
 
 Named-region mapping (#83) and opt-in inert source projects (#84) are implemented locally, with a public procedural example and browser/CLI replay checks. [Structured-input contracts](docs/STRUCTURED-INPUTS.md) record local C2PA feasibility (#85) and OpenRaster/auxiliary pilots (#86), including justified native/browser deferrals. This is additional post-alpha scope; packages remain unpublished. The Processing Java bridge (#75) remains a separate feasibility task. Do not build another drawing framework.
 
@@ -26,6 +26,12 @@ Physical-print evidence gates print-quality claims, not evaluation of the experi
 
 The attached sample showing alternative Riso color separations is the visual benchmark for distinct masks, not an asset bundled with the public code. The checked six-item acceptance benchmark is **proposed test criteria, not observed passing evidence**.
 
+## Consolidated dependencies and version targets
+
+[Public delivery map](https://apps.yigitdenktas.com/stipra/roadmap/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/) · [Source ledger](docs/data/delivery-ledger.json). The ledger covers every task, prerequisites, downstream work, optional scope, conditional version gates and parked branches. It preserves the original #1–#14 denominator; #83–#86 remain additional scope.
+
+`main` is canonical. #89 is merged; the studio/audit/navigation follow-through uses `feat/22-studio-and-release-map`. The old #46 identity branch remains parked with four unique commits; it is not an approved identity or safe bulk merge. Native GitHub milestone/Project setup remains #17. Library alpha, studio RC/final and style recipe versions have distinct exit evidence; these targets are not published tags.
+
 ## Status and priority
 
 | Work | Issue | Status | Release priority |
@@ -39,11 +45,11 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Full-frame raster plates, native scale and optional external registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | **CLI implemented; owner-image and physical validation pending** | P0 verification |
 | A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Reports, ink-linked annotations, paper texture, embedded recipes and ink-dot QR implemented; shared browser export hardening is in merged PR #69** | P0 verification |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Implemented import/separate/package/scene/render paths; top-level compare/batch commands remain planned | P0 |
-| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Functional studio; shared export and readiness hardening in merged PR #69; full #22 acceptance remains open | P0 |
+| Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Image workflow implemented with 2–8 passes, solo/mute/paper inspection, native pixel zoom, print geometry and shared marked export; see docs/STUDIO-WORKFLOW.md for acceptance | P0 |
 | Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) · [#47](https://github.com/yigit-denktas/stipra/issues/47) | **Four shared families plus attributed variants and forest/coast refinements merged in #64/#68; physical validation open** | P1 evidence |
 | Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **CLI raster ZIP implemented; shared browser package in merged PR #69; broader format matrix open** | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Browser/export tests and calibration kit in merged PR #69; physical observations not run | P0 release gate |
-| Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Inventory and retained notices implemented; five distribution findings remain open | P0 release gate |
+| Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Inventory and retained notices implemented; two notice-completeness fixes retained; three binary/prebundle provenance findings remain | P0 release gate |
 | Quantitative ink diagnostics and future visual overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) · [#56](https://github.com/yigit-denktas/stipra/issues/56) | **Ink contribution, overlap and LPI implemented in shared browser/CLI engine**; richer visual overlays open | P1 |
 | Prehnite crystal seam/proportion polish | [#3](https://github.com/yigit-denktas/stipra/issues/3) | Planned | **Case-study-only, nonblocking** |
 | Fine paper fibers/clusters and dirt realism | [#4](https://github.com/yigit-denktas/stipra/issues/4) | Planned | **Optional style extension, nonblocking** |

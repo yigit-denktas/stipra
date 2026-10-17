@@ -15,7 +15,8 @@ const SOURCES=[
   ['src/screening.js','screening.js'],
   ['src/styles.js','styles.js'],
   ['src/export-plan.js','export-plan.js'],
-  ['src/plate-diagnostics.js','plate-diagnostics.js']
+  ['src/plate-diagnostics.js','plate-diagnostics.js'],
+  ['src/inspection.js','inspection.js']
 ];
 const REWRITE={
   '../../src/import/svg.js':'./assets/svg.js',
@@ -26,6 +27,7 @@ const REWRITE={
   '../../src/styles.js':'./assets/styles.js',
   '../../src/export-plan.js':'./assets/export-plan.js',
   '../../src/plate-diagnostics.js':'./assets/plate-diagnostics.js',
+  '../../src/inspection.js':'./assets/inspection.js',
   'src="app.js"':'src="./assets/app.js"'
 };
 function build(outRoot=path.join(ROOT,'dist')){
@@ -60,6 +62,7 @@ function build(outRoot=path.join(ROOT,'dist')){
   for(const family of ['sans','mono'])fs.copyFileSync(require.resolve('@fontsource/ibm-plex-'+family+'/LICENSE'),path.join(assets,'IBM-Plex-'+family+'-OFL.txt'));
   // Owner-review candidate: build from Stiprā scene geometry, not a committed bitmap.
   const brand=generateMark(path.join(stage,'brand'));
+  require('./build-site-info.js').build(stage);
   // Relative subpath deployment; / can be reserved for other apps later.
   fs.writeFileSync(path.join(target,'_redirects'),'/ /stipra/ 302\n');
   // No arbitrary JS from uploaded SVGs; no third-party connections.
