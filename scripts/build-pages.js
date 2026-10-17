@@ -5,6 +5,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 const ROOT=path.resolve(__dirname,'..');
+const {generate:generateMark}=require('./generate-stipra-mark.js');
 const SOURCES=[
   ['web/stipra/app.js','app.js'],
   ['src/import/svg.js','svg.js'],
@@ -41,12 +42,16 @@ function build(outRoot=path.join(ROOT,'dist')){
     const data=fs.readFileSync(path.join(ROOT,src));
     fs.writeFileSync(path.join(assets,dst),data);
   }
+  // Owner-review candidate: build from Stiprā scene geometry, not a committed bitmap.
+  const brand=generateMark(path.join(stage,'brand'));
   // Relative subpath deployment; / can be reserved for other apps later.
   fs.writeFileSync(path.join(target,'_redirects'),'/ /stipra/ 302\n');
   // No arbitrary JS from uploaded SVGs; no third-party connections.
   fs.writeFileSync(path.join(target,'_headers'),
     '/stipra/*\n  Content-Security-Policy: default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' blob: data:; connect-src \'none\'; object-src \'none\'; frame-ancestors \'self\'; base-uri \'none\'; form-action \'none\'\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n');
-  const generated=[path.join(stage,'index.html'),...SOURCES.map(([,dst])=>path.join(assets,dst))];
+  const generated=[path.join(stage,'index.html'),...SOURCES.map(([,dst])=>path.join(assets,dst)),
+    ...brand.manifest.files.map(file=>path.join(stage,'brand',file.name)),
+    path.join(stage,'brand/stipra-mark.manifest.json')];
   if(generated.some(file=>!fs.statSync(file).size))throw Error('Pages build emitted an empty file');
   return {dir:target,app:'/stipra/',files:generated.map(f=>path.relative(target,f))};
 }
