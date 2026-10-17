@@ -19,7 +19,7 @@ async function readSnapshot(bytes){
     inks.push({id:ink.id,name:ink.name,color:ink.color,coverage});
   }
   const sourceProject=await require('../src/source-project-reader').readProject(archive,manifest,source.width,source.height);
-  return {sourceProject,input:{width:source.width,height:source.height,paper:source.paper,inks},
+  return {...(manifest.exports?{exports:manifest.exports.settings}:{}),sourceProject,input:{width:source.width,height:source.height,paper:source.paper,inks},
     screenRecipe:JSON.parse(await read('recipe/proof-screens.json')),dpi:manifest.output.dpi,marksMm:manifest.output.marksMm,
     paper:manifest.paperSelection.id,reportTexture:manifest.report.texture.style,qrStyle:manifest.report.qr.style,
     captureMetadata:manifest.source.provenance.capture??null};

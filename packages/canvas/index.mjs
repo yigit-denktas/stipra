@@ -115,7 +115,8 @@ export async function exportSnapshot(rendered,loadExporter,options={}){
   const input=shot.kind==='image'?{...raw,rgba:raw.rgba.slice()}:{...raw,inks:raw.inks.map(x=>({...x,coverage:x.coverage.slice()}))};
   const recipe=JSON.parse(JSON.stringify(rendered.result.recipe)),metadata=JSON.parse(JSON.stringify(shot.metadata));
   const sourceProject=options.sourceProject==null?null:structuredClone(options.sourceProject);
+  const exportOptions=options.exports==null?undefined:structuredClone(options.exports);
   const exporter=await loadExporter();
   if(typeof exporter.generateSketch!=='function')fail('invalid-exporter','loaded module must expose generateSketch');
-  return exporter.generateSketch({input,recipe,metadata,sourceProject});
+  return exporter.generateSketch({input,recipe,metadata,sourceProject,exports:exportOptions});
 }

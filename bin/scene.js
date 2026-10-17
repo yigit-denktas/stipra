@@ -4,7 +4,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const core = require('../src/core.js');
-function run(argv) {
+function run(argv,{quiet=false}={}) {
   const opts = {};
   for (let i = 0; i < argv.length; i++) {
     if (!['--config', '--out'].includes(argv[i]) || !argv[i+1] || argv[i+1].startsWith('--'))
@@ -18,14 +18,16 @@ function run(argv) {
   const out = path.resolve(opts['--out'] || 'out');
   fs.mkdirSync(out, {recursive: true});
   const assets = ['scene-composite.svg', ...scene.plates.map(p => `${p.id}-plate.svg`), 'recipe.normalized.json'];
-  fs.writeFileSync(path.join(out, assets[0]), core.renderSvg(scene));
-  scene.plates.forEach((p, i) => fs.writeFileSync(path.join(out, assets[i+1]), core.renderSvg(scene, {plateId:p.id})));
-  fs.writeFileSync(path.join(out, 'recipe.normalized.json'), core.canonicalRecipe(recipe));
+  const pending=new Map([[assets[0],core.renderSvg(scene)]]);
+  scene.plates.forEach((p, i) => pending.set(assets[i+1],core.renderSvg(scene, {plateId:p.id})));
+  pending.set('recipe.normalized.json',core.canonicalRecipe(recipe));
   const manifest = {generator:'stipra/scene-v1', sceneVersion:scene.version, canvas:scene.canvas,
     substrate:scene.substrate, inks:scene.plates.map(p => ({plateId:p.id, inkId:p.inkId, color:p.ink.color, role:p.role, offset:p.offset})),
     seeds:scene.seeds, provenance:scene.provenance, assets, notice:'Uncalibrated solid vector preview; no raster image import or halftone screening.'};
-  fs.writeFileSync(path.join(out, 'manifest.json'), JSON.stringify(manifest,null,2)+'\n');
-  process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
+  pending.set('manifest.json',JSON.stringify(manifest,null,2)+'\n');
+  for(const [name,data]of pending)if(fs.existsSync(path.join(out,name))&&!fs.readFileSync(path.join(out,name)).equals(Buffer.from(data)))throw Error('Refusing to overwrite changed scene output: '+name);
+  for(const [name,data]of pending)if(!fs.existsSync(path.join(out,name)))fs.writeFileSync(path.join(out,name),data,{flag:'wx'});
+  if(!quiet)process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
   return manifest;
 }
 if (require.main === module) {

@@ -50,7 +50,7 @@ function screenDescription(s,dpi){
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v5');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v6');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   const typo=m.typography||null;
   const embed=async(file,family,weight=400)=>pdf.embedFont(file?fs.readFileSync(file):truetype(family,weight));
@@ -114,11 +114,11 @@ async function pdfReport(cards,m){
   function ensure(height,section='recipe / continued'){
     if(y-height<94)newPage(section);
   }
-  function block(s,{size=10,font=regular,width=cw,leading=13}={}){
+  function block(s,{size=10,font=regular,width=cw,leading=13,after=6}={}){
     const lines=wrap(s,font,size,width);
     ensure(lines.length*leading+6);
     for(const value of lines){put(value,margin,y,size,font);y-=leading;}
-    y-=6;
+    y-=after;
   }
   async function image(c,x,bottom,width,height){
     const key=require('node:crypto').createHash('sha256').update(c.bytes).digest('hex');
@@ -168,8 +168,8 @@ async function pdfReport(cards,m){
     ensure(names.length*14+44);
     rule(y+10);
     for(const name of names){put(name,margin,y,11,display);y-=14;}
-    block(s.color+' / '+s.source+(ink&&Number.isFinite(ink.gain)&&Number.isFinite(ink.gamma)?' / gain '+ink.gain+' / gamma '+ink.gamma:''),{font:mono,size:9,leading:12});
-    block(screenDescription(s,m.dpi)+' / '+fmt(s.coverage*100)+'% nominal coverage',{font:mono,size:9,leading:12});
+    block(s.color+' / '+s.source+(ink&&Number.isFinite(ink.gain)&&Number.isFinite(ink.gamma)?' / gain '+ink.gain+' / gamma '+ink.gamma:''),{font:mono,size:9,leading:12,after:2});
+    block(screenDescription(s,m.dpi)+' / '+fmt(s.coverage*100)+'% nominal coverage',{font:mono,size:9,leading:12,after:2});
   }
   ensure(110,'provenance / replay');
   block('source SHA-256',{font:display,size:11});

@@ -4,6 +4,23 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Compare, batch, export and verify",
+      "status": "Unreleased",
+      "issues": [
+        8,
+        11,
+        12,
+        13
+      ],
+      "changes": [
+        "Controlled same-source comparisons and bounded local batch plans with structured JSON results, fresh outputs and per-job verification.",
+        "Optional PNG/JPG/WebP proofs at explicit scales and sampled-path SVG plates, with native master geometry and DPI preserved.",
+        "Saved 2/3/4-ink mask goldens and real browser/Node derivative parity evidence; physical acceptance, upstream audit and publication remain separate.",
+        "Compact report recipe rows keep four-ink diagnostics on the provenance page at the existing minimum text size."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Check distributed artifact boundaries",
       "status": "Unreleased",
       "issues": [
