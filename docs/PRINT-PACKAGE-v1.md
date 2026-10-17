@@ -69,6 +69,10 @@ Repeat the per-ink paths for each real physical pass; the ZIP always includes a 
 - Screen pitch is currently specified **in pixels**. A recipe at a different physical DPI changes effective LPI; that is **not** a calibrated halftone screen. There is no ICC conversion, measured dot gain, paper/press characterization, trapping or hardware print verification.
 - The source's embedded ICC/probe metadata and assumptions remain in the manifest, but original JPEG ICC profiles are **not** necessarily color-managed into a measured physical spot-ink simulation. Keep originals.
 
+### Plate diagnostics and editorial review
+
+The package includes [`report/diagnostics.json`](PLATE-DIAGNOSTICS-v1.md), containing mean ink contribution, per-pair overlap, heavily combined nominal coverage, and the **effective LPI of each screened ink at the chosen output DPI**. The same read-only math powers a small browser report. Advisory warnings flag low contribution and dense/overlapping passes: **not** validated machine safety limits or a substitute for viewing real output.
+
 ### Quality and verification
 
 ```sh
@@ -87,3 +91,41 @@ For large files, rendering can consume substantial time and memory: decoded sour
 This feature uses the **same** Stiprā separation/screening modules as the browser preview. For packaging and PDF structure it reuses [JSZip](https://stuk.github.io/jszip/) under its **MIT alternative** and [pdf-lib](https://pdf-lib.js.org/) under MIT, not another custom ZIP/PDF codec or any p5.riso source. See [project licensing notes](LICENSING.md) and [architecture](ARCHITECTURE.md).
 
 **Decision:** pass the three owner-image digital validation gates and real printer checks before describing Stiprā output as “press ready.”
+
+
+## Report typography and pagination
+
+The canonical report uses IBM Plex Sans Bold for the provisional wordmark and headings, Plex Sans Regular for prose and labels, and Plex Mono Regular for measurements. Technical PDF text is at least 9pt. Latin Extended glyphs, including `ā`, are merged from the authentic font subsets; no font substitution or fabricated lettering is used. This report choice does not approve a final brand identity.
+
+PDFs separate the source/proof/plates from recipe and provenance pages. Additional plates and long settings continue onto further pages instead of shrinking type. All 2–8 physical ink passes are retained. Paper is described as the substrate, not another physical pass. Inspection thumbnails preserve aspect ratio and are explicitly distinguished from full-resolution production masters.
+
+Every page links its QR to the public reproduction guide. The complete source SHA-256, normalized recipe attachments, actual DPI, master dimensions and effective LPI are retained. Solid passes state **screen off**. Available coverage/overlap warnings from `src/plate-diagnostics.js` appear in both report formats; these are editorial diagnostics, not press safety limits. The PDF also embeds `report-layout.json`, an audit of text sizes, coordinates and image rectangles.
+
+To regenerate private production reports from the frozen #55 comparison recipes:
+
+```sh
+node scripts/review-owner-reports.js \
+  --sources /private/originals \
+  --recipes /private/prior-comparison-output \
+  --out /private/new-report-review
+```
+
+This refuses source or output locations inside the repository and checks all three original photo hashes before rendering. It uses the canonical Node importer and print-package engine, not the separate Python comparison renderer. Import/ICC differences remain tracked in #44; this report change does not claim to resolve them. These are A4 production inspection reports, separate from the square/landscape/portrait typography study in #55.
+
+## Ink-linked report annotations and simulated stocks
+
+Report annotation text and rules use the darkest readable ink from the actual resolved separation. Where all chosen inks are too pale, a contrasting neutral key keeps technical labels readable. Colored bars, rectangular frames, stock labels and small sheet guides are presentation annotations; the wordmark stays lowercase `stiprā`. Sheet guides are not production registration marks.
+
+The background combines seeded micrograin, short fibres and sparse colored speckles drawn from the selected ink palette. The PDF texture raster uses **144 pixels per physical inch** for consistent dot/fibre scale across A4 orientations. This is a procedural material simulation, not a scanned stock or a calibrated press prediction. No extra graphics library is used beyond the existing Canvas renderer.
+
+Paper options are `rag` (Warm Rag), `chalk` (Cool Chalk), `linen` (Natural Linen), `clay` (Soft Clay), `rose` (Rose Pulp), `sage` (Sage Stock), and `mist` (Blue Mist). The additional paper colors are supporting materials, not changes to the four Stiprā brand swatches. Automatic paper selection keeps its existing decisions; the new stocks are explicit choices.
+
+```sh
+node bin/stipra.js package --input artwork.jpg \
+  --config inks.json --screen screens.json \
+  --paper rose --report-texture speckled --out private-print.zip
+```
+
+`--report-texture` accepts `speckled` (default), `fibre`, or `none`. It changes only report presentation. Source bytes, normalized separation/screen recipes, proof pixels and physical ink plates are unaffected by the texture setting. By contrast, choosing a different `--paper` intentionally changes the simulated substrate color and records it in the ink recipe.
+
+Generate a photo-free stock preview with `node scripts/review-paper-stocks.js /private/new-paper-stocks.png`. Private owner-photo PDF review still uses `scripts/review-owner-reports.js`. Do not commit the reference screenshot, owner photographs or image-bearing PDFs.

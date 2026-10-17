@@ -13,7 +13,8 @@ const SOURCES=[
   ['src/import/asset.js','asset.js'],
   ['src/separation.js','separation.js'],
   ['src/screening.js','screening.js'],
-  ['src/styles.js','styles.js']
+  ['src/styles.js','styles.js'],
+  ['src/plate-diagnostics.js','plate-diagnostics.js']
 ];
 const REWRITE={
   '../../src/import/svg.js':'./assets/svg.js',
@@ -22,6 +23,7 @@ const REWRITE={
   '../../src/separation.js':'./assets/separation.js',
   '../../src/screening.js':'./assets/screening.js',
   '../../src/styles.js':'./assets/styles.js',
+  '../../src/plate-diagnostics.js':'./assets/plate-diagnostics.js',
   'src="app.js"':'src="./assets/app.js"'
 };
 function build(outRoot=path.join(ROOT,'dist')){

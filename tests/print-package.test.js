@@ -53,7 +53,7 @@ test('2-ink ZIP contains original bytes, two unique aligned grayscale masters, r
   }
   assert.notDeepEqual(await zip.file(files[0]).async('nodebuffer'),await zip.file(files[2]).async('nodebuffer'));
   const pdf=await PDFDocument.load(await zip.file('report/separation-sheet.pdf').async('nodebuffer'));
-  assert.equal(pdf.getPageCount(),1);
+  assert.ok(pdf.getPageCount()>=2);
   assert.ok(Math.abs(pdf.getPage(0).getWidth()-841.89)<.02);
   assert.ok(Math.abs(pdf.getPage(0).getHeight()-595.28)<.02);
   const html=(await zip.file('report/separation-sheet.html').async('string'));
@@ -176,4 +176,22 @@ test('paper source heuristic is deterministic, documented and has explicit overr
   assert.equal(Paper.select(px,'#abcdef','recipe').hex,'#abcdef');
   assert.equal(Paper.select(px,'#ffffff','rag').id,'rag');
   assert.throws(()=>Paper.select(px,'#ffffff','random'),/paper/);
+});
+
+test('print ZIP exposes exact, auditable diagnostic JSON and manifest pointer',async()=>{
+  const bytes=sample(),result=await prepare(bytes,recipe('B'),screen('B'));
+  const zip=await JSZip.loadAsync(result.zip);
+  const filename='report/diagnostics.json';
+  assert.equal(result.manifest.diagnostics.path,filename);
+  const raw=await zip.file(filename).async('nodebuffer'),data=JSON.parse(raw.toString('utf8'));
+  assert.equal(data.contract,'stipra-plate-diagnostics-v1');
+  assert.equal(data.plates.length,3);
+  assert.equal(data.pairs.length,3);
+  assert.equal(data.dpi,300);
+  assert.equal(data.overall.overlapTwoPlusFraction>=0,true);
+  assert.equal(data.overall.overlapTwoPlusFraction<=1,true);
+  assert.ok(data.plates.every(x=>x.screen&&x.screen.pitchPx>0));
+  assert.equal(data.warnings.length,result.manifest.diagnostics.warnings);
+  assert.deepEqual(result.manifest.files.find(f=>f.path===filename).sha256,hash(raw));
+  assert.deepEqual(await zip.file('source/original.png').async('nodebuffer'),bytes);
 });

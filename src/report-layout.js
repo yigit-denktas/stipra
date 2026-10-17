@@ -11,120 +11,194 @@ const color=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
 const pdfColor=hex=>rgb(...color(hex));
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=v=>Number(v).toFixed(1);
-const fontFile=(family,weight)=>fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-latin-'+weight+'-normal.woff'));
-const truetype=(family,weight=400)=>Buffer.from(createFont(fontFile(family,weight),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))}).write({type:'ttf'}));
+function truetype(family,weight=400){
+  const read=subset=>createFont(fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-'+subset+'-'+weight+'-normal.woff')),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))});
+  const base=read('latin'),extra=read('latin-ext').compound2simple();
+  const supported=new Set(base.get().glyf.flatMap(g=>g.unicode||[]));
+  extra.get().glyf=extra.get().glyf.filter(g=>g.unicode?.some(c=>!supported.has(c)));
+  for(const g of extra.get().glyf)g.unicode=g.unicode.filter(c=>!supported.has(c));
+  base.merge(extra,{scale:true});
+  return Buffer.from(base.write({type:'ttf'}));
+}
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
+async function paperBackground(m){
+  const [width,height]=A4[m.orientation],theme=Paper.theme(m.paper,m.settings);
+  return Paper.tile(m.paper,m.seed,{width:Math.ceil(width*2),height:Math.ceil(height*2),inks:theme.inks,style:m.reportTexture||'speckled'});
+}
 function htmlReport(cards,m){
-  const font=fontFile('ibm-plex-sans',400).toString('base64'),mono=fontFile('ibm-plex-mono',400).toString('base64');
+  const theme=Paper.theme(m.paper,m.settings),background=m.reportPaperBytes?'url(data:image/png;base64,'+m.reportPaperBytes.toString('base64')+')':'none';
+  const font=truetype('ibm-plex-sans',400).toString('base64'),mono=truetype('ibm-plex-mono',400).toString('base64'),bold=truetype('ibm-plex-sans',700).toString('base64');
   const image=c=>'<figure><div class="image"><img alt="'+esc(c.name)+'" src="data:image/png;base64,'+c.bytes.toString('base64')+'"></div><figcaption>'+esc(c.name)+'<small>'+esc(c.note||'')+'</small></figcaption></figure>';
-  const rows=m.settings.map((s,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td><td>'+esc(s.name)+'</td><td>'+esc(s.color)+'</td><td>'+esc(s.source)+'</td><td>'+esc(s.mode)+' / '+s.pitch+'px / '+s.angle+'°</td><td>'+fmt(s.coverage*100)+'%</td></tr>').join('');
+  const rows=m.settings.map((s,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td><td>'+esc(s.name)+'</td><td>'+esc(s.color)+'</td><td>'+esc(s.source)+'</td><td>'+esc(screenDescription(s,m.dpi))+'</td><td>'+fmt(s.coverage*100)+'%</td></tr>').join('');
+  const diagnostic=m.diagnostics?'<h2>04 / coverage and overlap</h2><p>Two-plus overlap '+fmt(m.diagnostics.overall.overlapTwoPlusFraction*100)+'%. Editorial guidance, not press safety limits.</p><ul>'+m.diagnostics.warnings.map(w=>'<li>'+esc(w.code)+' ['+esc(w.inkIds.join(', '))+']: '+esc(w.message)+'</li>').join('')+'</ul>':'';
   return Buffer.from('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stiprā / ink study</title><style>'+
-    '@font-face{font-family:Plex;src:url(data:font/woff;base64,'+font+')}@font-face{font-family:Mono;src:url(data:font/woff;base64,'+mono+')}'+
-    '*{box-sizing:border-box}body{margin:0;background:'+m.paper.hex+';color:#222722;font:14px Plex,sans-serif}main{max-width:1180px;padding:26px;margin:auto}'+
-    'header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #26312c;padding-bottom:12px}'+
-    'header strong{font-size:38px;letter-spacing:-.06em}header span{font:11px Mono,monospace;text-align:right}h2{font:11px Mono,monospace;text-transform:uppercase;letter-spacing:.12em;margin:20px 0 9px}'+
+    '@font-face{font-family:Plex;src:url(data:font/ttf;base64,'+font+')}@font-face{font-family:Mono;src:url(data:font/ttf;base64,'+mono+')}'+
+    '@font-face{font-family:Plex;font-weight:700;src:url(data:font/ttf;base64,'+bold+')}'+
+    '*{box-sizing:border-box}body{margin:0;background:'+m.paper.hex+';color:'+theme.key+';background-image:'+background+';background-size:100% auto;font:15px Plex,sans-serif}main{max-width:1180px;padding:26px;margin:auto}'+
+    'header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid currentColor;padding-bottom:12px}'+
+    'header strong{font-size:38px;letter-spacing:-.06em}header span{font:13px Mono,monospace;text-align:right}h2{font:13px Mono,monospace;text-transform:uppercase;letter-spacing:.12em;margin:20px 0 9px}'+
     '.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.plates{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}'+
-    'figure{margin:0;min-width:0;border-bottom:1px solid #3b413d;padding-bottom:6px}.image{display:grid;place-items:center;height:'+(m.orientation==='portrait'?'420px':'290px')+'}'+
-    'figure img{max-width:100%;max-height:100%;object-fit:contain}.plates .image{height:148px}figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font:11px Mono,monospace}'+
-    'small{color:#565e57}table{border-collapse:collapse;width:100%;font:11px Mono,monospace}td,th{border-top:1px solid #737d76;text-align:left;padding:8px}'+
-    'footer{border-top:2px solid #26312c;margin-top:24px;padding-top:10px;font:10px Mono,monospace;overflow-wrap:anywhere}'+
+    'figure{break-inside:avoid;margin:0;min-width:0;border-bottom:1px solid currentColor;padding-bottom:6px}.image{display:grid;place-items:center;height:'+(m.orientation==='portrait'?'420px':'290px')+'}'+
+    'figure img{max-width:100%;max-height:100%;object-fit:contain}.plates .image{height:148px}figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font:13px Mono,monospace}'+
+    'small{color:#565e57}table{border-collapse:collapse;width:100%;font:13px Mono,monospace}td,th{border-top:1px solid currentColor;text-align:left;padding:8px}'+
+    'footer{border-top:2px solid currentColor;margin-top:24px;padding-top:10px;font:12px Mono,monospace;overflow-wrap:anywhere}'+
     '@media(max-width:560px){main{padding:13px}.hero{grid-template-columns:1fr}.image{height:300px}header strong{font-size:26px}}'+
     '@page{size:A4 '+m.orientation+';margin:12mm}'+
     '</style></head><body><main><header><strong>Stiprā / ink study</strong><span>'+m.width+'×'+m.height+'px · '+m.dpi+' dpi<br>'+esc(m.paper.name)+' / '+m.orientation+'</span></header>'+
     '<h2>01 / original and proof</h2><section class="hero">'+cards.slice(0,2).map(image).join('')+'</section>'+
     '<h2>02 / physical ink layers + substrate</h2><section class="plates">'+cards.slice(2).map(image).join('')+'</section>'+
     '<h2>03 / exact settings</h2><table><thead><tr><th>#</th><th>Ink</th><th>Preview HEX</th><th>Channel</th><th>Screen</th><th>Coverage</th></tr></thead><tbody>'+rows+'</tbody></table>'+
-    '<footer>Source SHA-256 '+m.sha+' · '+m.trim.width+' × '+m.trim.height+'mm · seed '+m.seed+
+    diagnostic+'<footer>Source SHA-256 '+m.sha+' · '+m.trim.width+' × '+m.trim.height+'mm · seed '+m.seed+
     '<p>Digital approximation; not press calibrated. Exact recipe files are in the ZIP and embedded in the PDF. Reproduction requires lawful access to the original image.</p></footer></main></body></html>');
+}
+function screenDescription(s,dpi){
+  return ['solid','paper'].includes(s.mode)?s.mode+' / screen off':
+    s.mode+' / '+fmt(dpi/s.pitch)+' LPI / '+s.pitch+' px / '+s.angle+'°';
 }
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v2');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v4');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
-  // Specimen typography is opt-in: production PDFs retain the existing defaults.
   const typo=m.typography||null;
-  const usePaperMono=typo?.id==='paper-mono';
-  const regular=await pdf.embedFont(typo?.fontRegular?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
-  const mono=await pdf.embedFont(typo?.fontMono?fs.readFileSync(typo.fontMono):truetype('ibm-plex-mono'));
-  const display=await pdf.embedFont(typo?.fontBold?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
-  const dims=A4[m.orientation],[W,H]=dims,margin=29,cw=W-2*margin;
-  const [page,...unused]=[pdf.addPage(dims)],paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
-  const fg=rgb(.14,.17,.15);
-  page.drawImage(paper,{x:0,y:0,width:W,height:H});
-  const line=(y,x=margin,w=cw,thickness=.6)=>page.drawLine({start:{x,y},end:{x:x+w,y},thickness,color:fg});
-  const put=(s,x,y,size=9,font=regular)=>{
-    const content=typo?.lowercase?String(s).toLowerCase():String(s);
-    page.drawText(content,{x,y,size,font,color:fg});
-  };
-  function fitText(s,font,size,max){let value=String(s);while(value.length>3&&font.widthOfTextAtSize(value,size)>max)value=value.slice(0,-2)+'…';return value;}
-  const imgs=new Map();
-  async function drawImage(c,x,y,w,h){
-    if(!imgs.has(c.name))imgs.set(c.name,await pdf.embedPng(c.bytes));
-    const image=imgs.get(c.name),scale=Math.min(w/image.width,h/image.height);
-    const iw=image.width*scale,ih=image.height*scale;
-    page.drawImage(image,{x:x+(w-iw)/2,y:y+(h-ih)/2,width:iw,height:ih});
-    return {width:iw,height:ih};
+  const embed=async(file,family,weight=400)=>pdf.embedFont(file?fs.readFileSync(file):truetype(family,weight));
+  const regular=await embed(typo?.fontRegular,'ibm-plex-sans');
+  const mono=await embed(typo?.fontMono,'ibm-plex-mono');
+  const display=await embed(typo?.fontBold,'ibm-plex-sans',700);
+  const label=typo?.fontLabel?await embed(typo.fontLabel):regular;
+  const wordmark=typo?.fontWordmark?await embed(typo.fontWordmark):display;
+  const dims=A4[m.orientation],[W,H]=dims,margin=34,cw=W-2*margin;
+  const theme=Paper.theme(m.paper,m.settings);
+  const paper=await pdf.embedPng(m.reportPaperBytes||await paperBackground(m));
+  const qr=await pdf.embedPng(await QRCode.toBuffer(GUIDE,{margin:4,width:320,errorCorrectionLevel:'M'}));
+  const fg=pdfColor(theme.key),audit={version:2,minTextPt:9,theme,texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
+  const images=new Map();
+  let page,record,y;
+  const content=s=>typo?.lowercase?String(s).toLowerCase():String(s);
+  function put(s,x,baseline,size=10,font=regular,ink=fg){
+    const text=content(s),width=font.widthOfTextAtSize(text,size);
+    if(size<9||x<margin-.1||x+width>W-margin+.1||baseline<margin||baseline+size>H-margin+.1)
+      throw Error('report text exceeds page bounds: '+text);
+    page.drawText(text,{x,y:baseline,size,font,color:ink});
+    record.text.push({text,x,y:baseline,width,size,font:font.name});
   }
-  const portrait=m.orientation==='portrait';
-  put('PRINT STUDY    /    '+m.orientation.toUpperCase()+' A4',margin,H-29,8,mono);
-  put('stiprā',margin,H-69,usePaperMono?29:32,typo?display:regular);
-  put('/ ink separation',margin+(usePaperMono?155:104),H-65,usePaperMono?12:18,regular);
-  put(fitText(m.name,mono,8,cw*.68),margin,H-88,8,mono);
-  put(m.width+' × '+m.height+' px  /  '+m.dpi+' DPI  /  '+m.trim.width+' × '+m.trim.height+' mm',margin,H-102,8,mono);
-  put(m.paper.name.toUpperCase()+'   /   '+m.settings.length+' INKS  /  SEED '+m.seed,margin,H-114,7.5,mono);
-  line(H-123,margin,cw,1.25);
-  const yLabel=H-139,gap=14,half=(cw-gap)/2;
-  put('01  SOURCE',margin,yLabel,8,mono);
-  put('02  DIGITAL OVERPRINT',margin+half+gap,yLabel,8,mono);
-  const heroHeight=portrait?350:165,heroY=yLabel-10-heroHeight;
-  await drawImage(cards[0],margin,heroY,half,heroHeight);
-  await drawImage(cards[1],margin+half+gap,heroY,half,heroHeight);
-  line(heroY-5,margin,half);line(heroY-5,margin+half+gap,half);
-  const plateLabel=heroY-24;
-  put('03  INDIVIDUAL PLATES / PAPER IS NOT AN INK',margin,plateLabel,8,mono);
-  const sample=cards.slice(2),count=Math.min(4,sample.length),g=11,w=(cw-(count-1)*g)/count;
-  const height=portrait?120:80,bottom=plateLabel-11-height;
-  for(let i=0;i<count;i++){
-    const c=sample[i],x=margin+i*(w+g);
-    await drawImage(c,x,bottom+14,w,height-17);
-    line(bottom+11,x,w);
-    put(fitText(c.name,regular,7.5,w-14),x,bottom+1,7.5,regular);
-    if(c.ink)page.drawRectangle({x:x+w-7,y:bottom+2,width:7,height:7,color:rgb(...color(c.ink))});
+  function rule(baseline,weight=.6){
+    page.drawLine({start:{x:margin,y:baseline},end:{x:W-margin,y:baseline},thickness:weight,color:fg});
   }
-  const recipeLabel=bottom-19;
-  put('04  THE RECIPE / EACH PASS IN ORDER',margin,recipeLabel,8,mono);
-  line(recipeLabel-6);
-  const rows=m.settings;
-  for(let i=0;i<rows.length;i++){
-    const s=rows[i],y=recipeLabel-18-i*12;
-    const note=(i+1).toString().padStart(2,'0')+' '+s.name.slice(0,13).padEnd(13)+' '+s.color+'  '+s.mode+' '+s.pitch+'px @ '+s.angle+'°  '+fmt(s.coverage*100)+'%';
-    put(fitText(note,mono,7.2,cw-70),margin,y,7.2,mono);
-  }
-  const footerY=portrait?92:64;
-  line(footerY+14,margin,cw,1.25);
-  put('SOURCE SHA256 '+m.sha.slice(0,32),margin,footerY,7.2,mono);
-  put('REPRODUCE / recipes embedded in PDF and saved in ZIP',margin,footerY-14,7.5,mono);
-  put('Digital approximation only. Original image required.',margin,footerY-28,7.5,regular);
-  const qr=await pdf.embedPng(await QRCode.toBuffer(GUIDE,{margin:0,width:256,errorCorrectionLevel:'M'}));
-  const qs=portrait?65:57;
-  page.drawImage(qr,{x:W-margin-qs,y:footerY-37,width:qs,height:qs});
-  if(sample.length>4){
-    const continuation=pdf.addPage(dims);
-    continuation.drawImage(paper,{x:0,y:0,width:W,height:H});
-    continuation.drawText(typo?.lowercase?'stiprā / more plates':'stiprā / more plates',{x:margin,y:H-65,size:22,font:display,color:fg});
-    for(let i=4;i<sample.length;i++){
-      const c=sample[i],px=margin+((i-4)%2)*(cw/2),py=H-150-Math.floor((i-4)/2)*230;
-      if(!imgs.has(c.name))imgs.set(c.name,await pdf.embedPng(c.bytes));
-      const im=imgs.get(c.name),scale=Math.min(190/im.width,175/im.height);
-      continuation.drawImage(im,{x:px,y:py-170,width:im.width*scale,height:im.height*scale});
-      continuation.drawText(fitText(c.name,regular,10,cw/2-20),{x:px,y:py-185,size:10,font:regular,color:fg});
+  function wrap(s,font,size,width){
+    const lines=[];let row='';
+    for(const token of content(s).split(/\s+/)){
+      if(row&&font.widthOfTextAtSize(row+' '+token,size)>width){lines.push(row);row='';}
+      for(const char of token){
+        if(font.widthOfTextAtSize(row+char,size)>width){lines.push(row);row='';}
+        row+=char;
+      }
+      row+=' ';
     }
+    if(row.trim())lines.push(row.trimEnd());
+    return lines;
   }
-  // PDF remains a self-contained *recipe* record, not a copy of the owner's source photo.
+  function newPage(section){
+    page=pdf.addPage(dims);record={section,text:[],images:[]};audit.pages.push(record);
+    page.drawImage(paper,{x:0,y:0,width:W,height:H});
+    put('stiprā',margin,H-65,30,wordmark);
+    const titleX=margin+wordmark.widthOfTextAtSize('stiprā',30)+22;
+    put(section,titleX,H-62,12,regular);
+    put('SEPARATION SHEET / '+m.orientation.toUpperCase()+' A4',margin,H-88,9,mono);
+    for(const [x,cy] of [[17,H-17],[W-17,H-17],[17,17],[W-17,17]]){
+      page.drawLine({start:{x:x-5,y:cy},end:{x:x+5,y:cy},thickness:.5,color:fg,opacity:.7});
+      page.drawLine({start:{x,y:cy-5},end:{x,y:cy+5},thickness:.5,color:fg,opacity:.7});
+    }
+    const stockLabel=m.paper.name.toUpperCase()+' / '+m.settings.length+' INKS';
+    put(stockLabel,W-margin-mono.widthOfTextAtSize(content(stockLabel),9),H-88,9,mono);
+    rule(H-100,1.2);y=H-122;
+    page.drawLine({start:{x:margin,y:57},end:{x:W-margin-72,y:57},thickness:.6,color:fg});
+    page.drawImage(qr,{x:W-margin-54,y:18,width:54,height:54});
+    const {PDFName,PDFString}=require('pdf-lib');
+    const annotation=pdf.context.register(pdf.context.obj({Type:'Annot',Subtype:'Link',Rect:[W-margin-54,18,W-margin,72],Border:[0,0,0],A:{S:PDFName.of('URI'),URI:PDFString.of(GUIDE)}}));
+    page.node.set(PDFName.of('Annots'),pdf.context.obj([annotation]));
+    put('simulated paper / uncalibrated proof / original required for replay',margin,42,9,regular);
+  }
+  function ensure(height,section='recipe / continued'){
+    if(y-height<76)newPage(section);
+  }
+  function block(s,{size=10,font=regular,width=cw,leading=13}={}){
+    const lines=wrap(s,font,size,width);
+    ensure(lines.length*leading+6);
+    for(const value of lines){put(value,margin,y,size,font);y-=leading;}
+    y-=6;
+  }
+  async function image(c,x,bottom,width,height){
+    const key=require('node:crypto').createHash('sha256').update(c.bytes).digest('hex');
+    if(!images.has(key))images.set(key,await pdf.embedPng(c.bytes));
+    const im=images.get(key),scale=Math.min(width/im.width,height/im.height);
+    const iw=im.width*scale,ih=im.height*scale,px=x+(width-iw)/2,py=bottom+(height-ih)/2;
+    page.drawImage(im,{x:px,y:py,width:iw,height:ih});
+    page.drawRectangle({x:px,y:py,width:iw,height:ih,borderWidth:.6,borderColor:c.ink?pdfColor(c.ink):fg,borderOpacity:.7});
+    record.images.push({name:c.name,sha256:key,x:px,y:py,width:iw,height:ih,sourceWidth:im.width,sourceHeight:im.height});
+  }
+  newPage('source / proof / plates');
+  const gap=18,half=(cw-gap)/2,portrait=m.orientation==='portrait';
+  function banner(title,x,baseline,width){
+    page.drawRectangle({x:x-2,y:baseline-4,width:width+4,height:18,color:fg});
+    put(title,x+4,baseline+1,9,mono,pdfColor(m.paper.hex));
+  }
+  banner('01 / SOURCE PHOTOGRAPH',margin,y,half);
+  banner('02 / DIGITAL OVERPRINT',margin+half+gap,y,half);
+  const heroH=portrait?330:198,heroBottom=y-12-heroH;
+  await image(cards[0],margin,heroBottom,half,heroH);
+  await image(cards[1],margin+half+gap,heroBottom,half,heroH);
+  y=heroBottom-18;
+  put('inspection thumbnails / full frame / not at master scale',margin,y,9,regular);y-=23;
+  const plates=cards.slice(2).filter(c=>c.ink);
+  for(let offset=0;offset<plates.length;offset+=4){
+    if(offset)newPage('individual ink plates / continued');
+    put('03 / individual grayscale ink plates',margin,y,11,display);y-=16;
+    const row=plates.slice(offset,offset+4),g=14,w=(cw-(row.length-1)*g)/row.length;
+    const ph=offset?Math.min(300,y-150):Math.max(65,Math.min(portrait?210:120,y-122));
+    for(let i=0;i<row.length;i++){
+      const x=margin+i*(w+g),c=row[i];
+      await image(c,x,y-ph,w,ph);
+      const names=wrap(c.name,label,9,w-15);
+      for(let j=0;j<Math.min(3,names.length);j++)put(names[j],x,y-ph-14-j*12,9,label);
+      page.drawRectangle({x:x+w-9,y:y-ph-15,width:8,height:8,color:pdfColor(c.ink)});
+    }
+    y-=ph+55;
+  }
+  if(y>100)put('paper: '+m.paper.name+' / '+m.paper.hex+' / substrate, not an ink',margin,86,9,regular);
+  newPage('recipe / provenance');
+  block(m.name,{font:regular,size:11,leading:14});
+  block(m.width+' × '+m.height+' px / '+Number(m.dpi).toFixed(2)+' DPI / master '+fmt(m.trim.width)+' × '+fmt(m.trim.height)+' mm',{font:mono,size:9});
+  block('paper '+m.paper.name+' '+m.paper.hex+' / seed '+m.seed,{font:regular});
+  for(let i=0;i<m.settings.length;i++){
+    const s=m.settings[i],ink=m.inkRecipe?.inks?.[i];
+    const names=wrap(String(i+1).padStart(2,'0')+' / '+s.name,display,11,cw-20);
+    ensure(names.length*14+44);
+    rule(y+10);
+    for(const name of names){put(name,margin,y,11,display);y-=14;}
+    block(s.color+' / '+s.source+(ink?' / gain '+ink.gain+' / gamma '+ink.gamma:''),{font:mono,size:9,leading:12});
+    block(screenDescription(s,m.dpi)+' / '+fmt(s.coverage*100)+'% nominal coverage',{font:mono,size:9,leading:12});
+  }
+  ensure(110,'provenance / replay');
+  block('source SHA-256',{font:display,size:11});
+  block(m.sha,{font:mono,size:9});
+  block('Print masters at 100%. These report images are inspection thumbnails. Production plates retain full dimensions and zero registration.',{size:10});
+  block('Recipes are embedded in this PDF and saved in the export ZIP. Reproduction requires authorized possession of the original photograph.',{size:10});
+  if(m.diagnostics){
+    const d=m.diagnostics;
+    ensure(60,'diagnostics / continued');
+    block('coverage / overlap diagnostics',{font:display,size:11});
+    block('two-plus overlap '+fmt(d.overall.overlapTwoPlusFraction*100)+'% / three-plus '+fmt(d.overall.overlapThreePlusFraction*100)+'%',{font:mono,size:9});
+    for(const warning of d.warnings)
+      block(warning.code+' ['+warning.inkIds.join(', ')+']: '+warning.message,{size:10});
+    block('Editorial diagnostics, not printer safety limits or aesthetic approval.',{size:10});
+  }
   for(const [name,recipe] of [['inks.json',m.inkRecipe],['screens.json',m.screenRecipe],['proof-screens.json',m.proofRecipe],['replay.json',{
-    sourceSHA256:m.sha,sourceName:m.name,paper:m.paper,dpi:m.dpi,trimMm:m.trim,guide:GUIDE}]])
+    sourceSHA256:m.sha,sourceName:m.name,paper:m.paper,dpi:m.dpi,trimMm:m.trim,guide:GUIDE}],['report-layout.json',audit],['diagnostics.json',m.diagnostics]]){
+    if(recipe===undefined)continue;
     await pdf.attach(Buffer.from(JSON.stringify(recipe,null,2)),name,{mimeType:'application/json',description:'Stiprā reproduction settings'});
+  }
   return Buffer.from(await pdf.save({useObjectStreams:false}));
 }
-module.exports={A4,orientation,htmlReport,pdfReport,GUIDE};
+
+module.exports={A4,orientation,htmlReport,pdfReport,screenDescription,truetype,paperBackground,GUIDE};

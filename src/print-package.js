@@ -2,7 +2,7 @@
 'use strict';
 const crypto=require('node:crypto'),{Canvas,loadImage}=require('skia-canvas');
 const JSZip=require('jszip');
-const Report=require('./report-layout.js'),Paper=require('./report-paper.js');
+const Report=require('./report-layout.js'),Paper=require('./report-paper.js'),Diagnostics=require('./plate-diagnostics.js');
 const Sep=require('./separation.js'),Screen=require('./screening.js');
 const A4=[841.88976,595.27559],FIXED=new Date('2000-01-01T00:00:00Z');
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -66,8 +66,8 @@ async function marked(pngBytes,w,h,pad,dpi){
   }
   return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
-async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null}){
-  validate(dpi,marksMm);
+async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled'}){
+  validate(dpi,marksMm);Paper.textureStyle(reportTexture);
   if(!Buffer.isBuffer(originalBytes)||!originalBytes.length)throw Error('print: original bytes required');
   const {width:w,height:h}=asset.metadata.oriented;
   const stock=Paper.select(asset.rgba,inkRecipe.paper||'#ffffff',paper);
@@ -75,6 +75,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const sep=Sep.separate({width:w,height:h,rgba:asset.rgba},effectiveRecipe);
   const configs=screenConfigs(screenRecipe,sep.masks.map(m=>m.id));
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
+  const plateDiagnostics=Diagnostics.inspect(screened,{dpi});
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
@@ -101,21 +102,25 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
       plate:'plates/ink-'+name+'.png',screened:'screened/ink-'+name+'.png',
       marked:pad?'plates/marked-'+name+'.png':null,registration:{x:0,y:0,rotate:0}});
   }
-  const info={width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
+  const info={reportTexture,width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
     sha:digest(originalBytes),name:asset.metadata.sourceName,paper:stock,
     orientation:Report.orientation(w,h),inkRecipe:sep.recipe,
-    screenRecipe:configs.production,proofRecipe:configs.proof,
+    screenRecipe:configs.production,proofRecipe:configs.proof,diagnostics:plateDiagnostics,
     settings:inks.map((ink,i)=>({name:ink.name,color:ink.color,source:ink.source,
       coverage:ink.screenedMeanCoverage,mode:screened.masks[i].screen.mode,
       pitch:screened.masks[i].screen.pitch,angle:screened.masks[i].screen.angle}))};
+  info.reportPaperBytes=await Report.paperBackground(info);
   add('report/separation-sheet.html',Report.htmlReport(cards,info));
   add('report/separation-sheet.pdf',await Report.pdfReport(cards,info));
   add('recipe/inks.json',json(sep.recipe));add('recipe/screens.json',json(configs.production));
   add('recipe/proof-screens.json',json(configs.proof));
+  add('report/diagnostics.json',json(plateDiagnostics));
   if(style)add('recipe/style.json',json(style));
   const manifest={contract:'stipra-print-package-v1',displayName:'Stiprā',
     source:{...asset.metadata,sha256:info.sha},output:print,
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
+    diagnostics:{path:'report/diagnostics.json',contract:plateDiagnostics.contract,
+      warnings:plateDiagnostics.warnings.length,reviewRequired:plateDiagnostics.warnings.length>0},
     ...(style?{style:{id:style.style.id,version:style.style.version,targetLpi:style.targetLpi,
       effectiveLpi:style.effectiveLpi,warnings:style.warnings,recipe:'recipe/style.json'}}:{}),
     screen:{seed:configs.proof.seed,proofOnlyRegistration:true,
@@ -123,7 +128,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     report:{pdf:'report/separation-sheet.pdf',html:'report/separation-sheet.html',
       widthMm:info.orientation==='portrait'?210:297,heightMm:info.orientation==='portrait'?297:210,
       orientation:info.orientation,fonts:'IBM Plex Sans / IBM Plex Mono (SIL OFL 1.1)',
-      embeddedRecipes:true,qrDestination:Report.GUIDE,inspectionOnly:true},
+      embeddedRecipes:true,qrDestination:Report.GUIDE,inspectionOnly:true,minTextPt:9,layoutVersion:4,texture:{style:reportTexture,dpi:144,simulation:true},theme:Paper.theme(stock,info.settings)},
     files:[...parts].sort(([a],[b])=>a.localeCompare(b)).map(([name,data])=>({path:name,bytes:data.length,sha256:digest(data)})),
     uncalibrated:true,notes:['Digital RGB overprint is not a calibrated press proof.',
       'Production plates always use zero registration offset.','Native pixel dimensions are preserved; no resizing performed.']};

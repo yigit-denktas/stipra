@@ -2,6 +2,8 @@
 
 This comparison is provisional. The owner has not approved a replacement logo or brand typeface. The original `logo_for_Readme.svg` remains byte-identical.
 
+This is the original controlled, single-weight typography study, retained for reproducibility. The canonical print-package reports now use the separate editorial hierarchy and ink-linked paper treatment documented in `docs/PRINT-PACKAGE-v1.md` (#61 and #63). This study does not replace that report renderer. Its finalist recommendations are provisional historical observations; the later three-contender identity study (#59) also retains Paper Mono Regular and SemiBold for consideration.
+
 ## Designer's evaluation
 
 The four-wordmark sheet compares **IBM Plex Sans Bold**, **IBM Plex Mono Bold**, **Paper Mono Regular**, and **Paper Mono ExtraBold**. Each reads `stiprā` with the actual U+0101 glyph. The large samples share a measured 66px x-height and baseline; native glyph advances are preserved, with no manual tracking or artificial bolding. The smaller samples use 24, 48 and 96px em sizes. Vector paths come directly from the verified font glyphs. These are visual comparisons, not a user study or physical press test.

@@ -4,6 +4,10 @@
 
 The previous logo looked like a halftone illustration vaguely suggesting S: fragmented negative space, conflicting dot sizes, excessive right-side dark/coral weight, and a silhouette dependent on its palette. Instead of patching the colors, this study rebuilds the **form first** and makes the screen a reproducible print system.
 
+## Current wordmark study / real full typefaces
+
+After the owner and an independent reviewer questioned the Regular/ExtraBold tradeoff and whole-letter coral accent, the [controlled three-way study](BRAND-IDENTITY-STUDY-v2.md) adds authentic Paper Mono **SemiBold**, plus a macron-only coral treatment and an explicit relationship to the untouched original five-row dotmark. [Review the generated comparison](https://apps.yigitdenktas.com/stipra/identity/). No choice has been approved. This supersedes the earlier standalone S priority.
+
 ## Full lowercase wordmarks — new owner-requested direction
 
 The owner rejected the standalone S as the primary identity and requested a direct comparison of **real IBM Plex** versus **real Paper Mono** for the lowercase **stiprā** wordmark and matched A4 PDFs, without image generation. See the [live typographic specimens](https://apps.yigitdenktas.com/stipra/typography/) and [source scripts](../scripts/build-type-specimens.js). Both fonts are SIL OFL 1.1, with source attribution recorded in [licensing](LICENSING.md).

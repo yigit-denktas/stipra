@@ -34,7 +34,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Print-package ZIP (PNG/PDF/HTML/recipes/hashes); remaining generic format parity | [#12](https://github.com/yigit-denktas/stipra/issues/12) | **Functional raster ZIP; broader export matrix open** | P0 |
 | Golden art, browser accessibility and print QA | [#13](https://github.com/yigit-denktas/stipra/issues/13) | Partial import tests | P0 release gate |
 | Component provenance and commercial-compatible licensing | [#14](https://github.com/yigit-denktas/stipra/issues/14) | Planned | P0 release gate |
-| Diagnostic HSL/coverage comparison overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) | Planned | P1; ship minimal plate diagnostics first |
+| Quantitative ink diagnostics and future visual overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) · [#56](https://github.com/yigit-denktas/stipra/issues/56) | **Ink contribution, overlap and LPI implemented in shared browser/CLI engine**; richer visual overlays open | P1 |
 | Prehnite crystal seam/proportion polish | [#3](https://github.com/yigit-denktas/stipra/issues/3) | Planned | **Case-study-only, nonblocking** |
 | Fine paper fibers/clusters and dirt realism | [#4](https://github.com/yigit-denktas/stipra/issues/4) | Planned | **Optional style extension, nonblocking** |
 | GitHub Project/milestone administrative setup | [#17](https://github.com/yigit-denktas/stipra/issues/17) | Planned | Admin, not runtime |
@@ -52,6 +52,10 @@ The attached sample showing alternative Riso color separations is the visual ben
 ## Printmaking references and style rules
 
 [The printmaking reading room](docs/references/README.md) connects the [Dizzy Ink interactive guide](https://risograph.co.uk/), its [illustrated studio guide](https://www.dizzyink.co.uk/guide-to-risograph) and [our linked visual studies](docs/references/DIZZY-INK-VISUALS.md) as a credited external resource, with [our independent field notes](docs/references/DIZZY-INK.md) and [conditional design rules](docs/PRINT-DESIGN-RULES.md). These rules should guide #34 preset defaults and #31/#22 interaction choices: safe mask alignment, explicit ink density/overlap, print-size limits, proof-only misregistration, and paper as a separate substrate. Machine-specific 5 mm margins or feed concerns are **references, not globally calibrated Stipra thresholds**. No artwork/code/mirrored pages are redistributed. Review the rule contract before adding automated warnings or “press-ready” claims.
+
+## Identity research and actionable ink diagnostics
+
+The [three-font controlled identity study](docs/BRAND-IDENTITY-STUDY-v2.md) tests IBM Plex Sans Bold, Paper Mono Regular and the *actual* Paper Mono SemiBold, including macron-only coral and original-dotmark integration. No final logo has been approved; the original README SVG remains intact. The [shared plate diagnostics](docs/PLATE-DIAGNOSTICS-v1.md) expose per-ink coverage, pair overlap and effective LPI through browser and print ZIP. Both enable better judgment; neither implies visual or physical acceptance.
 
 ## First real-image acceptance fixture set
 
