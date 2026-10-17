@@ -142,9 +142,19 @@
         views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates'));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
+      const diagnostics=StipraDiagnostics.inspect(result,{dpi:300});
+      const overlap=(diagnostics.overall.overlapTwoPlusFraction*100).toFixed(1);
+      const freqs=diagnostics.plates.filter(p=>p.screen?.effectiveLpi!==null&&p.screen?.effectiveLpi!==undefined)
+        .map(p=>p.id+': '+p.screen.effectiveLpi.toFixed(1)+' lpi');
+      $('diagnostics').textContent='ink overlap: '+overlap+'% of pixels at ≥25% per ink · '+
+        (freqs.length?freqs.join(' / '):'solid coverage')+
+        (diagnostics.warnings.length?' · '+diagnostics.warnings.length+' review note(s)':'')+
+        ' · advisory, not press calibrated';
+      $('diagnostics').hidden=false;
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
       $('save-preview').disabled=false;$('save-plates').disabled=false;
     }catch(error){
+      $('diagnostics').hidden=true;
       $('error').textContent=error.message;$('error').hidden=false;
       $('status').textContent='Separation settings rejected; previous artwork is unchanged.';
     }
