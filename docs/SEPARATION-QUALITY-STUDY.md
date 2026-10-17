@@ -31,7 +31,7 @@ Two inks remain the preferred candidate. The retained `warm-third` treatment's s
 
 The `tonal-key` family reduced the sky to nearly bare paper. Complementary red-channel density assigned blue retains the cool sky gradient and cloud contours. A first experiment used green-channel chroma for coral, which warmed the blue sky too much; the accepted candidate instead uses blue-channel density with partial gray removal. The coral pass now remains restrained and contributes to material tone. Both seated figures remain visible in the native crop. Clouds, horizon and figures were reviewed separately.
 
-This is a cool duotone, not faithful color reproduction: sea becomes stronger blue, pebbles remain cooler than the original, and fine screened coral is visible in the foreground. Source ICC policy and physical ink/paper color are still unverified. Keep the recipe opt-in.
+This is a cool duotone, not faithful color reproduction: sea becomes stronger blue, pebbles remain cooler than the original, and fine screened coral is visible in the foreground. Canonical source ICC handling now has its own implemented/tested #44 policy; physical ink/paper color is still unverified. Keep the recipe opt-in.
 
 ### Sculpture and authored linework
 
@@ -48,4 +48,6 @@ node scripts/review-separation-quality.js --sources /private/originals --out /pr
 
 Use new output directories. The scripts refuse overwrites and repository-local source/output paths. The focus manifest records source metadata, native geometry, print dimensions, source/proof/plate hashes, recipes, screening, coverage and source suitability. The matrix records the same shared style resolutions and full-frame proofs. Pixel-size detail regions are recorded in the focus manifest; changing them changes only the inspection crops, never the artwork or masters.
 
-Release gates still open: owner visual acceptance, physical print evaluation, ICC import policy, broader style evidence and small-detail print limits. No style is declared press-ready on a software test pass.
+Release gates still open: owner visual acceptance, physical print evaluation, broader style evidence and small-detail print limits. Source color handling follows the documented canonical import contract; it does not calibrate ink. No style is declared press-ready on a software test pass.
+
+The current [pass-contribution review](FOREST-PASS-REVIEW.md) adds an opt-in `forest-contrast` candidate and a controlled two-versus-three-pass removal test. Earlier recipes remain unchanged.

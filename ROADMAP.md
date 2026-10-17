@@ -13,7 +13,7 @@ The normalized color contract/reference tests (#44) and bounded PNG interpretati
 
 Named-region mapping (#83) and opt-in inert source projects (#84) are implemented locally, with a public procedural example and browser/CLI replay checks. [Structured-input contracts](docs/STRUCTURED-INPUTS.md) record local C2PA feasibility (#85) and OpenRaster/auxiliary pilots (#86), including justified native/browser deferrals. This is additional post-alpha scope; packages remain unpublished. The Processing Java bridge (#75) remains a separate feasibility task. Do not build another drawing framework.
 
-Physical-print evidence gates print-quality claims, not evaluation of the experimental digital effect. Additional vector formats, branding and paper realism remain separate. These workstreams are planning text, not native GitHub milestones; #17 tracks that setup.
+Physical-print evidence gates print-quality claims, not evaluation of the experimental digital effect. Additional vector formats, branding and paper realism remain separate. These workstreams are planning targets. Native v0.9 tracking is linked below; #17 retains the remaining administration checks.
 
 ## v0.9 user experience — one browser workflow
 
@@ -30,7 +30,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 
 [Public delivery map](https://apps.yigitdenktas.com/stipra/roadmap/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/) · [Source ledger](docs/data/delivery-ledger.json). The ledger covers every task, prerequisites, downstream work, optional scope, conditional version gates and parked branches. It preserves the original #1–#14 denominator; #83–#86 remain additional scope.
 
-`main` is canonical. #89 is merged; the studio/audit/navigation follow-through uses `feat/22-studio-and-release-map`. The old #46 identity branch remains parked with four unique commits; it is not an approved identity or safe bulk merge. Native GitHub milestone/Project setup remains #17. Library alpha, studio RC/final and style recipe versions have distinct exit evidence; these targets are not published tags.
+`main` is canonical. #89 is merged; the studio/audit/navigation follow-through uses `feat/22-studio-and-release-map`. The old #46 identity branch remains parked with four unique commits; it is not an approved identity or safe bulk merge. Native milestone/Project tracking is configured below; #17 retains board/workflow verification. Library alpha, studio RC/final and style recipe versions have distinct exit evidence; these targets are not published tags.
 
 ## Status and priority
 
@@ -53,7 +53,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Quantitative ink diagnostics and future visual overlays | [#10](https://github.com/yigit-denktas/stipra/issues/10) · [#56](https://github.com/yigit-denktas/stipra/issues/56) | **Ink contribution, overlap and LPI implemented in shared browser/CLI engine**; richer visual overlays open | P1 |
 | Prehnite crystal seam/proportion polish | [#3](https://github.com/yigit-denktas/stipra/issues/3) | Planned | **Case-study-only, nonblocking** |
 | Fine paper fibers/clusters and dirt realism | [#4](https://github.com/yigit-denktas/stipra/issues/4) | Planned | **Optional style extension, nonblocking** |
-| GitHub Project/milestone administrative setup | [#17](https://github.com/yigit-denktas/stipra/issues/17) | Planned | Admin, not runtime |
+| GitHub Project/milestone administrative setup | [#17](https://github.com/yigit-denktas/stipra/issues/17) | Partially configured | Admin, not runtime |
 
 **New dependency ordering:** #22 is the browser studio/UI integration issue; #7 needs completed #6; a grayscale continuous-tone separation is valid before optional halftoning. Raster screening #5 now operates on #7's independently separated masks. True SVG dot geometry is separately tracked in #28. #8 and #9 must not invent new channel maps or change the shared pixel grid. User-facing visual tooling must not wait for #3/#4.
 
@@ -101,3 +101,7 @@ Stipra-original code is MIT, with individual third-party notices retained. [p5.r
 **Remaining acceptance (#13/#14/#70):** [The candidate contract](docs/RELEASE-CANDIDATE.md) adds saved six-colorway native vector/plate goldens, paper-independent generic master checks, an isolated offline consumer of the exact three audited tarballs, and a physical-observation record validator. Legacy geometry, actual print observations, independent artist review, the native Skia inventory and the publication decision stay open. No npm publication or version tag is implied.
 
 **Acceptance expansion (#13):** Prehnite supports opt-in independently seeded substrate without changing saved defaults. Straight shared-edge geometry is tested at zero softness. A six-page real Chromium axe audit supplements existing interaction tests; manual keyboard/screen-reader and physical evidence remain separate.
+
+**Native tracking (#17):** [Studio v0.9 milestone](https://github.com/yigit-denktas/stipra/milestone/1) holds original issues #1–#14. Existing [private Project #3](https://github.com/users/yigit-denktas/projects/3) is reused; all 14 have Priority/Area values and [a saved priority-sorted table](https://github.com/users/yigit-denktas/projects/3/views/6). Status-board and detailed workflow-rule verification remain incomplete after the browser session stalled. No access settings changed.
+
+**Quality and release handoff:** [Forest pass review](docs/FOREST-PASS-REVIEW.md) adds opt-in forest-contrast v1 and retains every earlier recipe. [Artist trial](docs/ARTIST-TRIAL.md) is prepared, not performed. CI supplies a photo-free operator kit with digital verification. npm reports ENEEDAUTH; no registry publisher/scope or package release is claimed.

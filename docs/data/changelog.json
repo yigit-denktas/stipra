@@ -4,6 +4,24 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Controlled forest review and concrete release handoff",
+      "status": "Unreleased",
+      "issues": [
+        13,
+        17,
+        34,
+        43,
+        47,
+        70
+      ],
+      "changes": [
+        "Add opt-in forest-contrast v1 after a private same-source two-/three-pass contribution study; all earlier recipes remain unchanged.",
+        "Upload a verified photo-free operator kit in CI; prepare an empty artist trial record and record the missing npm publisher access.",
+        "Create native v0.9 milestone, assign original issues, reconcile the existing private Project and Priority/Area values; remaining status-board/workflow verification is explicit."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Broader accessibility and geometry acceptance",
       "status": "Unreleased",
       "issues": [
