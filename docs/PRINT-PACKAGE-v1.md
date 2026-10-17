@@ -1,6 +1,6 @@
 # Stiprā print package · CLI v1
 
-**Status:** a real Node CLI implementation of aligned **raster** ink masters, a landscape A4 HTML/PDF inspection sheet and a single ZIP with provenance. Physical press calibration and owner image *visual approval* remain open. [See the three-image release gate](PRINT-PACKAGE-ACCEPTANCE.md).
+**Status:** a real Node CLI implementation of aligned **raster** ink masters, an orientation-aware A4 HTML/PDF inspection sheet and a single ZIP with provenance. Physical press calibration and owner image *visual approval* remain open. [See the three-image release gate](PRINT-PACKAGE-ACCEPTANCE.md).
 
 ## One print from one local photograph
 
@@ -46,7 +46,7 @@ plates/ink-01-<id>.png           unscreened grayscale, source frame
 screened/ink-01-<id>.png         zero-shift screened grayscale master
 plates/marked-01-<id>.png        optional derivative with registration marks outside trim
 report/separation-sheet.html     readable responsive reference sheet
-report/separation-sheet.pdf      landscape A4 (297 × 210 mm)
+report/separation-sheet.pdf      A4; portrait for tall sources, landscape otherwise
 recipe/inks.json                normalized spot or CMYK separation
 recipe/screens.json             nominally aligned production-screening recipe
 recipe/proof-screens.json       optional simulated offsets in proof only
@@ -60,6 +60,7 @@ Repeat the per-ink paths for each real physical pass; the ZIP always includes a 
 - `--dpi 300` (accepted 72–1200): declares the print scale; `trimMm` is derived from the **unchanged native pixel grid**. The exporter embeds corresponding PNG `pHYs` pixels-per-metre metadata so print software can interpret the scale. It **does not upscale**.
 - `--marks-mm 5` adds extra white margin around the print rectangle and crosshair registration marks **outside the trim**, in *separately named marked masters*. The default `0` omits those derivatives. Unmarked masters always remain the source size.
 - `recipe/screens.json` forces **zero production registration shift** for all plates. `recipe/proof-screens.json` retains artist-specified simulated offsets for the composite only. This prevents decorative registration defects being silently baked into print masters.
+- The PDF switches A4 orientation with the artwork (portrait photographs no longer sit in wide empty landscape slots). It uses flat IBM Plex typography, subtle procedural paper texture and QR linking to public CLI guidance. The PDF also embeds exact normalized ink/screen/proof JSON as downloadable PDF attachments. Its visible settings include screen angle/pitch, seed, per-ink coverage and source fingerprint. The paper stock is selected deterministically from sampled source colors, or override with `--paper recipe|rag|chalk|linen|clay`.
 - The A4 PDF/HTML is an **inspection sheet**, not a stencil master or native-size paper sheet. The images inside report cards are intentionally fitted for comparison. Their source geometry/aspect ratio must remain unchanged and actual native dimensions are labeled.
 - Screen pitch is currently specified **in pixels**. A recipe at a different physical DPI changes effective LPI; that is **not** a calibrated halftone screen. There is no ICC conversion, measured dot gain, paper/press characterization, trapping or hardware print verification.
 - The source's embedded ICC/probe metadata and assumptions remain in the manifest, but original JPEG ICC profiles are **not** necessarily color-managed into a measured physical spot-ink simulation. Keep originals.
