@@ -31,6 +31,10 @@ The CLI ZIP preserves the resolved ink and screening recipes, style ID/version, 
 
 **No AI portrait detection.** `styles suggest --intent …` only ranks suggestions based on **the explicit intent provided by a person or agent**. Unsupported or missing intent falls back to an editorial-first exploration order; it does not inspect the photograph.
 
+## Compare the actual ink contribution
+
+[Plate diagnostics v1](PLATE-DIAGNOSTICS-v1.md) records per-plate average coverage, per-pair overlap and effective screen frequency in LPI. Warnings are **editorial prompts**: a third ink with little coverage should justify its own pass, and a dense green key needs visual scrutiny. No numeric diagnostic alone proves forest depth or small-line readability.
+
 ## Physical constraints and reproducibility
 
 Each preset records target halftone frequency in **LPI**. The shared resolver calculates raster pitch in pixels from `dpi / lpi` while enforcing current screen limits of 4–128 px, and warns if clamping changes effective LPI. A screen is still a deterministic **digital geometric approximation**, not measured Risograph dot gain or a press RIP.
