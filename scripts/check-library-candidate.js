@@ -56,7 +56,7 @@ renderLayers(mapRegions(regions,{version:1,paper:'#ffffff',inks:[{id:'green',nam
       packages:audit.packages.map(({name,version,tarball})=>({name,version,tarball})),installed,
       checks:{...checks,offlineInstall:true,lifecycleScriptsDisabled:true,typescriptPublicExports:true},
       gates:{registryPublished:false,ownerPublicationDecision:'pending',independentArtistTrial:'not-performed',physicalPrintValidation:'not-performed',
-        broadExportDistribution:'review-required: fontkit, native Skia and fonteditor WASM are excluded from these tarballs, not cleared'},
+        broadExportDistribution:'Native Skia inventory remains review-required. Browser exporter uses the separately checked source-mapped Fontkit replacement; fonteditor is removed. All remain outside these lean tarballs.'},
       scope:'Exact tarballs only. Canvas fixture tests capture/region mapping, not browser rendering; real Chromium/p5 checks are separate CI evidence.'};
     fs.writeFileSync(path.join(out,'library-candidate.json'),JSON.stringify(report,null,2)+'\n');return report;
   }finally{fs.rmSync(temp,{recursive:true,force:true});}

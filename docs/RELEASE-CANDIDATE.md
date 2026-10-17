@@ -11,7 +11,7 @@ npm run audit:licenses
 npm run check:release-licenses
 ```
 
-The final command deliberately exits 1 while the three upstream findings remain. A successful inventory or lean-library check does not override it.
+The final command deliberately exits 1 while the remaining native finding remain. A successful inventory or lean-library check does not override it.
 
 ## Saved artwork acceptance — #13
 
@@ -36,10 +36,10 @@ The consumer imports package names through their public export maps, including `
 | Intended artifact | Verified here | Remaining gate |
 | --- | --- | --- |
 | Private core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Owner publication scope/version and independent artist usefulness review |
-| Browser PDF/ZIP exporter | Actual bundled fontkit UMD identity, emitted input/output hashes and notices | Exact fontkit prebundle component attribution/build map |
-| Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices; fonteditor WOFF2/Brotli build provenance; fontkit inventory |
+| Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
+| Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
 | Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
 
-The three provenance gaps remain open. Their concrete resolution is an attributable component/build inventory tied to the measured shipped bytes, or a separately reviewed replacement build. The lean packages exclude those artifacts; exclusion does not clear the artifacts themselves. [Dependency evidence](DEPENDENCY-AUDIT.md) records the pinned primary sources and the WOFF2 toolchain ambiguity.
+One native provenance gap remains open. Fonteditor is removed; source-mapped Fontkit replaces the old opaque bundle. [Dependency evidence](DEPENDENCY-AUDIT.md) records the exact replacement and native boundary. Old retired artifacts are not retrospectively cleared.
 
 The next publication decision is bounded: whether to publish the three lean packages as an experimental digital library, at an explicitly selected version and registry namespace, after reviewing the candidate and artist task. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.

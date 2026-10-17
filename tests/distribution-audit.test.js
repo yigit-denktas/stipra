@@ -35,8 +35,10 @@ test('browser exporter evidence identifies actual bundled artifacts and emitted 
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-export-audit-'));
   try{
     const file=path.join(temp,'export.mjs'),report=await require('../scripts/build-browser-export').build(file,{format:'esm'});
-    assert.equal(report.status,'review-required');assert.equal(report.artifactEvidence.length,1);
-    assert.equal(report.artifactEvidence[0].artifact,'dist/fontkit.umd.js');assert.equal(report.findings[0].kind,'prebundled-review');
+    assert.equal(report.status,'checked');assert.equal(report.artifactEvidence.length,0);
+    assert.equal(report.fontkitSource.status,'source-inventory-checked');assert.equal(report.findings.length,0);
+    assert.ok(report.inputs.some(x=>x.path==='node_modules/fontkit/dist/browser.cjs'));
+    assert.ok(!report.inputs.some(x=>/node_modules\/brotli\/(enc|build|compress)/.test(x.path)));
     assert.ok(!report.packages.some(x=>['skia-canvas','fonteditor-core'].includes(x.name)));
     assert.ok(report.inputs.every(x=>!path.isAbsolute(x.path)));
     for(const item of report.outputs)assert.equal(hash(fs.readFileSync(path.join(temp,item.path))),item.sha256);

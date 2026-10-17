@@ -2,7 +2,8 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'..'),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
-const ALLOWED=new Set(['MIT','ISC','BSD-2-Clause','BSD-3-Clause','Apache-2.0','Zlib','OFL-1.1','0BSD','CC0-1.0','(MIT AND Zlib)']);
+const ALLOWED=new Set(['MIT','ISC','BSD-2-Clause','BSD-3-Clause','Apache-2.0','Zlib','OFL-1.1','0BSD','CC0-1.0','(MIT AND Zlib)','MIT AND Apache-2.0']);
+const completeTerms=sources=>sources.some(x=>/Permission is hereby granted|Redistribution and use|SIL OPEN FONT LICENSE|Apache License|ISC License|Permission to use, copy/i.test(x.text));
 function notices(dir){
   const pkg=JSON.parse(fs.readFileSync(path.join(dir,'package.json'),'utf8'));
   const files=fs.readdirSync(dir).filter(n=>/^(?:licen[cs]e|copying|notice)(?:[.-]|$)/i.test(n)&&fs.statSync(path.join(dir,n)).isFile());
@@ -18,6 +19,14 @@ function notices(dir){
     const blocks=[...(source.match(/(?:[ \t]*\/\/[^\n]*\n){2,}/g)||[]),...(source.match(/\/\*[\s\S]*?\*\//g)||[])].filter(b=>/Copyright|Permission is hereby|Licensed under/i.test(b));
     blocks.forEach((text,i)=>sources.push({name:name+'#notice-'+(i+1),text}));
     sources.push({name:'Stipra retained Apache-2.0 terms for embedded Google/Brotli notices',text:fs.readFileSync(path.join(ROOT,'licenses/third-party/Apache-2.0.txt'),'utf8')});
+  }
+  if(pkg.name==='brotli'){
+    for(const name of fs.readdirSync(path.join(dir,'dec')).filter(x=>x.endsWith('.js')).sort()){
+      const file='dec/'+name,text=fs.readFileSync(path.join(dir,file),'utf8');
+      const blocks=(text.match(/\/\*[\s\S]*?\*\//g)||[]).filter(x=>/Copyright|Licensed under|Permission is hereby/i.test(x));
+      blocks.forEach((text,i)=>sources.push({name:file+'#notice-'+(i+1),text}));
+    }
+    sources.push({name:'Stipra retained Apache-2.0 terms for Google Brotli decoder',text:fs.readFileSync(path.join(ROOT,'licenses/third-party/Apache-2.0.txt'),'utf8')});
   }
   const supplements=JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/supplements.json'),'utf8')).packages;
   const supplement=supplements.find(x=>x.name===pkg.name&&x.version===pkg.version);
@@ -39,20 +48,19 @@ function audit(out){
     if(!fs.existsSync(dir))throw Error('Audit requires installed runtime dependency '+name);
     const n=notices(dir);
     if(n.pkg.version!==item.version)throw Error('Installed version differs from lock: '+name);
-    const selected=n.declared==='(MIT OR GPL-3.0-or-later)'?'MIT':n.declared;
+    const selected=n.pkg.name==='brotli'?'MIT AND Apache-2.0':n.declared==='(MIT OR GPL-3.0-or-later)'?'MIT':n.declared;
     if(!ALLOWED.has(selected))findings.push({package:n.pkg.name,kind:'license-review',detail:'Unreviewed license expression: '+selected});
     if(!n.sources.length)throw Error('No license evidence: '+name);
-    const fullTerms=n.sources.some(x=>/Permission is hereby granted|Redistribution and use|SIL OPEN FONT LICENSE|Apache License|ISC License|Permission to use, copy/i.test(x.text));
+    const fullTerms=completeTerms(n.sources);
     if(!fullTerms)findings.push({package:n.pkg.name,kind:'incomplete-notice',detail:'Published package supplies a declaration but incomplete license terms/attribution.'});
     packages.push({path:name,name:n.pkg.name,version:item.version,integrity:item.integrity,declared:n.declared,selected,
       evidence:n.sources.map(x=>({path:x.name,sha256:hash(x.text)})),fullTerms});
     texts.push(n.pkg.name+' '+item.version+' / '+selected+'\n'+n.sources.map(x=>'Source: '+x.name+'\n'+x.text).join('\n'));
   }
   findings.push({package:'skia-canvas',kind:'native-transitive-review',detail:'The npm MIT wrapper notice does not inventory the downloaded native binary and its Rust/Skia/codec dependencies. Verify platform-specific native notices before redistributing a bundled executable.'});
-  findings.push({package:'fonteditor-core',kind:'wasm-transitive-review',detail:'Node package includes woff2/woff2.wasm. Audit its embedded WOFF2/Brotli provenance before bundling that dependency tree. The static site embeds generated fonts, not this WASM.'});
-  findings.push({package:'@pdf-lib/fontkit',kind:'prebundled-review',detail:'Retained published MIT, embedded Node/base64 and Google Apache notices plus full Apache terms. The published 1.1.1 artifact has no source map/gitHead and upstream default source still declares 1.1.0; exact component versions/attributions remain unverified. Do not infer a complete inventory from npm runtime dependencies.'});
+  const fontkitSource=require('./fontkit-evidence').verify();
   const report={contract:'stipra-dependency-audit-v1',lockSha256:hash(lockBytes),scope:'installed production npm dependency graph; static bundle subset has its own emitted notices',
-    artifactEvidence:require('./artifact-evidence').verifyArtifacts(),
+    artifactEvidence:require('./artifact-evidence').verifyArtifacts(),fontkitSource,
     status:findings.length?'review-required':'checked',packages,findings,
     excluded:['Owner artwork and brand permissions are separate from code licensing.','Paper Mono is build-fetched with a separate OFL/provenance record.','p5.js is an optional separately hosted LGPL development dependency; p5.grain is not installed. Core/Canvas/inputs packages exclude the heavy export/native/WASM dependencies.']};
   fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'dependency-audit.json'),JSON.stringify(report,null,2)+'\n');
@@ -66,4 +74,4 @@ if(require.main===module){
     if(process.argv.includes('--release-check')&&report.findings.length)process.exitCode=1;
   }catch(e){console.error(e.message);process.exitCode=1;}
 }
-module.exports={audit,notices};
+module.exports={audit,notices,completeTerms};

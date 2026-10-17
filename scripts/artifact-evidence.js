@@ -6,7 +6,7 @@ function platform(){
   return {os:process.platform,arch:process.arch,libc:process.platform==='linux'?(process.report.getReport().header.glibcVersionRuntime?'glibc':'musl'):null};
 }
 /** Verifies recorded artifact bytes without treating a hash match as provenance clearance. */
-function verifyArtifacts(root=ROOT,records=JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/artifact-review.json'))).records){
+function verifyArtifacts(root=ROOT,records=JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/artifact-review.json'))).records.filter(x=>!x.retired)){
   const host=platform(),evidence=[];
   for(const record of records){
     const pkgDir=path.join(root,'node_modules',record.package),pkg=JSON.parse(fs.readFileSync(path.join(pkgDir,'package.json')));

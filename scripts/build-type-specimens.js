@@ -4,8 +4,7 @@
  * Neither font files nor owner photographs are included in public artifacts.
  */
 'use strict';
-const fs=require('node:fs'),path=require('node:path'),fontkit=require('@pdf-lib/fontkit');
-const zlib=require('node:zlib'),{createFont}=require('fonteditor-core');
+const fs=require('node:fs'),path=require('node:path'),fontkit=require('fontkit');
 const {Canvas}=require('skia-canvas');
 const {prepare}=require('./cache-paper-mono.js');
 const Report=require('../src/report-layout.js');
@@ -14,10 +13,7 @@ const W=1200,H=420,WORD='stiprā';
 const FONTLABELS={'ibm-plex':'ibm plex','paper-mono':'paper mono'};
 const MAIN='#222825',ACCENT='#e7604c',PAPER='#f4eddf';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function plexFont(){
-  const data=fs.readFileSync(require.resolve('@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff'));
-  return Buffer.from(createFont(data,{type:'woff',inflate:b=>zlib.inflateSync(Buffer.from(b))}).write({type:'ttf'}));
-}
+function plexFont(){return Report.truetype('ibm-plex-sans',700);}
 function actualSvgPath(glyph){
   const part=glyph.path.toSVG();
   // fontkit path.toSVG() returns either serialized SVG path markup or path commands.

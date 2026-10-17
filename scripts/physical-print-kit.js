@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const {Canvas}=require('skia-canvas'),{PDFDocument,rgb}=require('pdf-lib'),fontkit=require('@pdf-lib/fontkit');
+const {Canvas}=require('skia-canvas'),{PDFDocument,rgb}=require('pdf-lib'),fontkit=require('fontkit');
 const Package=require('../src/print-package'),Styles=require('../src/styles'),Report=require('../src/report-layout'),{ingestLocalBytes}=require('../src/import/node');
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 async function run(out){

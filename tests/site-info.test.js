@@ -7,7 +7,7 @@ test('delivery ledger preserves original denominator and rejects dependency gaps
   const cycle=structuredClone(ledger);cycle.tasks[0].dependsOn=[2];assert.throws(()=>Info.validate(cycle),/cycle/);
   for(const id of [3,4,10,17,28,31,46,57,75])assert.equal(ledger.tasks.find(t=>t.issue===id).optional,true);
   for(const id of [83,84,85,86])assert.equal(ledger.tasks.find(t=>t.issue===id).trackerState,'closed');
-  assert.ok(ledger.tasks.find(t=>t.issue===14).note.includes('Three'));
+  assert.ok(ledger.tasks.find(t=>t.issue===14).note.includes('one native'));
 });
 test('information pages and all navigation use valid relative destinations on either host',()=>{
   const stage=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-site-info-'));

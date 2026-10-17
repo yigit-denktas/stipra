@@ -1,7 +1,7 @@
 /* Stiprā editorial PDF + HTML inspection sheets. Original MIT layout. */
 'use strict';
 const fs=require('node:fs'),{PDFDocument,rgb}=require('pdf-lib');
-const fontkit=require('@pdf-lib/fontkit');
+const fontkit=require('fontkit');
 const {truetype}=require('./report-fonts.js');
 const QR=require('./report-qr.js');
 const Paper=require('./report-paper.js');
@@ -50,7 +50,7 @@ function screenDescription(s,dpi){
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v6');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v7');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   const typo=m.typography||null;
   const embed=async(file,family,weight=400)=>pdf.embedFont(file?fs.readFileSync(file):truetype(family,weight));

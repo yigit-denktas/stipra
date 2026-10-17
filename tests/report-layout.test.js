@@ -62,7 +62,7 @@ test('screen labels expose physical LPI for dots and mark unscreened passes off'
 });
 
 test('default embedded Plex fonts contain actual outlined lowercase macron glyphs',()=>{
-  const fontkit=require('@pdf-lib/fontkit');
+  const fontkit=require('fontkit');
   for(const [family,weight] of [['ibm-plex-sans',400],['ibm-plex-sans',700],['ibm-plex-mono',400]]){
     const font=fontkit.create(Report.truetype(family,weight)),glyph=font.glyphForCodePoint(0x101);
     assert.ok(glyph.id>0);assert.ok(glyph.path.commands.length>0);

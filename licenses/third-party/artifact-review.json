@@ -12,7 +12,9 @@
       "gitBlobSha1": "c18af0e3cfce5893cc0012cc3a4e2b69c78d4c95",
       "source": "https://github.com/Hopding/fontkit",
       "finding": "Published package 1.1.1 has no source map or gitHead; upstream default package.json is 1.1.0. Preserve extracted MIT/Node/base64 and Google Apache notices, but exact prebundled versions remain unverified.",
-      "distribution": "review-required"
+      "distribution": "review-required",
+      "retired": true,
+      "resolution": "Removed from installed dependencies; historical finding is not a clearance of these old bytes."
     },
     {
       "package": "@pdf-lib/fontkit",
@@ -23,7 +25,9 @@
       "gitBlobSha1": "2711b07413d1eb095487d4fddc7273f4afc1d82b",
       "source": "https://github.com/Hopding/fontkit",
       "finding": "Alternate ES module shipped in the upstream package. The current browser exporter selects UMD, as recorded by its build input report. Exact prebundled component inventory remains unverified.",
-      "distribution": "review-required"
+      "distribution": "review-required",
+      "retired": true,
+      "resolution": "Removed from installed dependencies; historical finding is not a clearance of these old bytes."
     },
     {
       "package": "skia-canvas",
@@ -50,7 +54,9 @@
       "gitBlobSha1": "7f31f44add4f1abb0712c0d9756b41228e864761",
       "source": "https://github.com/kekee000/fonteditor-core/tree/04c47400895f11d857ca83f5725c0c3c0dd552a5/woff2src",
       "finding": "Published WASM matches Git blob 7f31f44add4f1abb0712c0d9756b41228e864761. Build lists Google WOFF2/Brotli files, but exact source revisions/toolchain/component notices are incomplete.",
-      "distribution": "review-required"
+      "distribution": "review-required",
+      "retired": true,
+      "resolution": "Removed from installed dependencies; historical finding is not a clearance of these old bytes."
     }
   ],
   "sources": [

@@ -4,7 +4,7 @@
  * SIL OFL inputs used at build time; no binary font files are published.
  */
 'use strict';
-const fs=require('node:fs'),path=require('node:path'),fontkit=require('@pdf-lib/fontkit');
+const fs=require('node:fs'),path=require('node:path'),fontkit=require('fontkit');
 const {prepare}=require('./cache-paper-mono.js');
 const ROOT=path.resolve(__dirname,'..'),WORD='stiprā';
 const CANDIDATES=[

@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const fs=require('node:fs'),path=require('node:path'),fontkit=require('@pdf-lib/fontkit');
+const fs=require('node:fs'),path=require('node:path'),fontkit=require('fontkit');
 const {PDFDocument}=require('pdf-lib');
 const {DEST,FONTS,gitBlobHash}=require('../scripts/cache-paper-mono.js');
 const ROOT=path.resolve(__dirname,'..');
