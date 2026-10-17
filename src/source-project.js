@@ -23,6 +23,8 @@ function freezeProject(raw,width,height){
   });
   if(!Array.isArray(raw.relationships)||raw.relationships.length>128)V.fail('declare bounded project relationships');
   const relationships=raw.relationships.map(r=>{V.object(r,['from','to','kind'],'relationship');if(!ids.has(r.from)||!ids.has(r.to))V.fail('relationship references unknown artifact');V.id(r.kind);return {...r};});
+  const metadata={version:1,frame,artifacts:artifacts.map(({bytes,...a})=>a),relationships};
+  if(new TextEncoder().encode(JSON.stringify(metadata)).length>96*1024)V.fail('project metadata exceeds 96 KiB');
   return {version:1,frame,artifacts,relationships};
 }
 module.exports={freezeProject};

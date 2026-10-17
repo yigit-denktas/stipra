@@ -20,6 +20,7 @@ test('regions remain independent from inks; overlap is explicit and fractional',
 test('region projects preserve mapping and raw coverage without executing sources',()=>{
   const s=source(),m=mapping('over'),p=regionProject(s,m);assert.deepEqual(replayRegions(p).input,mapRegions(s,m).input);
   s.regions[0].coverage.fill(0);assert.equal(replayRegions(p).input.inks[0].coverage[0],192);
+  p.artifacts[1].bytes=Buffer.from(p.artifacts[1].bytes);
   const frozen=freezeProject(p,2,1);p.artifacts[1].bytes.fill(0);assert.equal(frozen.artifacts[1].bytes[0],128);
   assert.throws(()=>freezeProject({...frozen,frame:{...frozen.frame,width:3}},2,1),/frame/);
   assert.throws(()=>freezeProject({...frozen,artifacts:[...frozen.artifacts,frozen.artifacts[0]]},2,1),/duplicate/);

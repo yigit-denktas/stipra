@@ -19,7 +19,9 @@ async function importOpenRaster(bytes,{layers,provenance}){
   for(const spec of layers){
     V.object(spec,['index','id','polarity'],'selected layer');V.id(spec.id);
     if(!Number.isInteger(spec.index)||spec.index<0||spec.index>=nodes.length||selected.has(spec.index))throw Error('Invalid selected layer index');selected.add(spec.index);
-    const layer=nodes[spec.index],blend=layer.getAttribute('composite-op')||'svg:src-over';if(blend!=='svg:src-over')throw Error('Unsupported blend '+blend);
+    const layer=nodes[spec.index];
+    if(children(layer).length||Array.from(layer.attributes).some(a=>!['name','src','x','y','opacity','visibility','composite-op','selected'].includes(a.name)))throw Error('Unsupported layer extension');
+    const blend=layer.getAttribute('composite-op')||'svg:src-over';if(blend!=='svg:src-over')throw Error('Unsupported blend '+blend);
     if((layer.getAttribute('visibility')||'visible')!=='visible')throw Error('Selected layer is hidden');
     const x=layer.hasAttribute('x')?Number(layer.getAttribute('x')):0,y=layer.hasAttribute('y')?Number(layer.getAttribute('y')):0,opacity=layer.hasAttribute('opacity')?Number(layer.getAttribute('opacity')):1;
     if(![x,y].every(Number.isSafeInteger)||!Number.isFinite(opacity)||opacity<0||opacity>1)throw Error('Invalid layer geometry/opacity');

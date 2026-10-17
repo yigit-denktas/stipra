@@ -7,8 +7,9 @@ function regionProject(source,mapping){
   if(source.regions.length>31)throw Error('Source projects support at most 31 region artifacts');
   const artifactId=i=>'region-'+String(i+1).padStart(2,'0');
   const description={contract:'stipra-region-source-v1',width:source.width,height:source.height,regions:mapped.regions.map((r,i)=>({...r,artifactId:artifactId(i)})),mapping:mapped.recipe};
+  const descriptorBytes=encode(description);if(descriptorBytes.length>65536)throw Error('Region descriptor exceeds 64 KiB');
   return {version:1,frame:{width:source.width,height:source.height,origin:{x:0,y:0},transform:[1,0,0,1,0,0]},
-    artifacts:[{id:'region-map',name:'regions.json',role:'parameters',mediaType:'application/json',bytes:encode(description)},
+    artifacts:[{id:'region-map',name:'regions.json',role:'parameters',mediaType:'application/json',bytes:descriptorBytes},
       ...source.regions.map((r,i)=>({id:artifactId(i),name:r.id+'.coverage',role:'region-coverage',mediaType:'application/octet-stream',bytes:new Uint8Array(r.coverage),provenance:r.provenance}))],
     relationships:source.regions.map((r,i)=>({from:'region-map',to:artifactId(i),kind:'maps'}))};
 }
