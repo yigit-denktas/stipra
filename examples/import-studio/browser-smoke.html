@@ -15,7 +15,7 @@
         throw Error('Timed out: ' + label);
       }
       const iframe=document.getElementById('studio');
-      await until(()=>iframe.contentDocument?.documentElement.dataset.stipraReady==='true', 'studio controls loaded');
+      await until(()=>iframe.contentDocument?.documentElement?.dataset.stipraReady==='true', 'studio controls loaded');
       const doc=iframe.contentDocument;
       const d=id=>doc.getElementById(id);
       function drop(file) {

@@ -46,7 +46,7 @@ test('README is a short human entry point and links to real help for people and 
   assert.match(readme, /spot\/CMYK|spot inks or CMYK/);
   assert.match(readme, /digital approximations/i);
   assert.match(readme, /5 of the original 14 issues completed \(35\.71% by issue count\)/);
-  assert.match(roadmap, /5 of the original #1–#14 tasks merged/);
+  assert.ok(roadmap.includes('docs/CREATIVE-CODING-LIBRARY.md'), 'roadmap must link the current library scope');
   for(const expected of ['DESIGN.md','ROADMAP.md','AGENTS.md','CONTRIBUTING.md','docs/PRINT-DESIGN-RULES.md','docs/references/README.md','docs/GETTING-STARTED.md'])
     assert.ok(readme.includes(']('+expected+')'), 'missing navigation: '+expected);
 
@@ -56,7 +56,7 @@ test('README is a short human entry point and links to real help for people and 
   assert.match(design, /not.*implemented|proposed/i);
   assert.match(design, /one central interactive canvas|one central|side-by-side/i);
 
-  for(const file of ['README.md','DESIGN.md','docs/GETTING-STARTED.md']){
+  for(const file of ['README.md','DESIGN.md','ROADMAP.md','docs/GETTING-STARTED.md','docs/CREATIVE-CODING-LIBRARY.md']){
     const full = path.join(root, file), body = fs.readFileSync(full, 'utf8');
     for(const [, url] of body.matchAll(/\]\(([^)]+)\)/g)){
       if(/^(?:https?:|#|mailto:)/.test(url)) continue;
