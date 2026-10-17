@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Build the real browser application for Cloudflare Pages. No generated site in Git.
+/* Build the browser app and public guide for static hosting. No generated site in Git.
  * Keep one source page at web/stipra; publish only the paths under dist/stipra.
  */
 'use strict';
@@ -46,6 +46,12 @@ function build(outRoot=path.join(ROOT,'dist')){
     const data=fs.readFileSync(path.join(ROOT,src));
     fs.writeFileSync(path.join(assets,dst),data);
   }
+  const guide=path.join(stage,'guide');fs.mkdirSync(guide,{recursive:true});
+  fs.copyFileSync(path.join(ROOT,'web/stipra/guide.html'),path.join(guide,'index.html'));
+  const {truetype}=require('../src/report-fonts.js');
+  for(const [name,family,weight] of [['plex-regular','ibm-plex-sans',400],['plex-bold','ibm-plex-sans',700],['plex-mono','ibm-plex-mono',400]])
+    fs.writeFileSync(path.join(assets,name+'.ttf'),truetype(family,weight));
+  for(const family of ['sans','mono'])fs.copyFileSync(require.resolve('@fontsource/ibm-plex-'+family+'/LICENSE'),path.join(assets,'IBM-Plex-'+family+'-OFL.txt'));
   // Owner-review candidate: build from Stiprā scene geometry, not a committed bitmap.
   const brand=generateMark(path.join(stage,'brand'));
   // Relative subpath deployment; / can be reserved for other apps later.
@@ -53,7 +59,7 @@ function build(outRoot=path.join(ROOT,'dist')){
   // No arbitrary JS from uploaded SVGs; no third-party connections.
   fs.writeFileSync(path.join(target,'_headers'),
     '/stipra/*\n  Content-Security-Policy: default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' blob: data:; connect-src \'none\'; object-src \'none\'; frame-ancestors \'self\'; base-uri \'none\'; form-action \'none\'\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n');
-  const generated=[path.join(stage,'index.html'),...SOURCES.map(([,dst])=>path.join(assets,dst)),
+  const generated=[path.join(guide,'index.html'),...['plex-regular','plex-bold','plex-mono'].map(n=>path.join(assets,n+'.ttf')),path.join(stage,'index.html'),...SOURCES.map(([,dst])=>path.join(assets,dst)),
     ...brand.manifest.files.map(file=>path.join(stage,'brand',file.name)),
     path.join(stage,'brand/stipra-mark.manifest.json')];
   if(generated.some(file=>!fs.statSync(file).size))throw Error('Pages build emitted an empty file');

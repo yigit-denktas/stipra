@@ -2,7 +2,7 @@
   "name": "stipra",
   "version": "0.1.0",
   "private": true,
-  "description": "Stiprā — a programmable printmaking studio (Latvian strength; stippling + strata)",
+  "description": "Stipr\u0101 \u2014 a programmable printmaking studio (Latvian strength; stippling + strata)",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
@@ -21,7 +21,8 @@
     "build:mark": "node scripts/generate-stipra-mark.js",
     "build:type-proofs": "node scripts/build-type-specimens.js dist/stipra",
     "prepare:paper-mono": "node scripts/cache-paper-mono.js",
-    "build:identity": "node scripts/build-identity-study.js dist/stipra/identity"
+    "build:identity": "node scripts/build-identity-study.js dist/stipra/identity",
+    "build:github-pages": "npm run build:pages && node scripts/build-github-pages.js"
   },
   "dependencies": {
     "skia-canvas": "^3.0.8",

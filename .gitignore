@@ -8,3 +8,6 @@ coverage/
 
 # downloaded, hash-verified OFL typefaces; never commit font binaries
 .cache/
+
+# alternate static host staging
+dist-github/
