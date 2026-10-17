@@ -1,0 +1,26 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {audit,notices}=require('../scripts/license-audit');
+test('dependency audit preserves alternative licenses and exposes actual distribution gaps',()=>{
+  const out=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-licenses-'));
+  try{
+    const report=audit(out);
+    assert.equal(report.status,'review-required');
+    assert.equal(report.packages.find(x=>x.name==='jszip').selected,'MIT');
+    assert.equal(report.packages.find(x=>x.name==='fonteditor-core').declared,'MIT');
+    assert.ok(report.findings.some(x=>x.kind==='native-transitive-review'));
+    assert.ok(report.findings.some(x=>x.kind==='incomplete-notice'));
+    assert.ok(!report.packages.some(x=>/p5\.riso/.test(x.name)));
+    const text=fs.readFileSync(path.join(out,'THIRD-PARTY-NOTICES.txt'),'utf8');
+    assert.match(text,/Copyright Joyent/);assert.match(text,/SIL OPEN FONT LICENSE/i);
+    const run=require('node:child_process').spawnSync(process.execPath,[path.join(__dirname,'../scripts/license-audit.js'),'--release-check'],{encoding:'utf8'});
+    assert.equal(run.status,1,'a completed inventory must not claim release clearance while findings remain');
+  }finally{fs.rmSync(out,{recursive:true,force:true});}
+});
+test('missing notice evidence is not silently invented from the license name',()=>{
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-no-notice-'));
+  try{
+    fs.writeFileSync(path.join(dir,'package.json'),JSON.stringify({name:'test-missing-notice',version:'1.0.0',license:'MIT'}));
+    assert.equal(notices(dir).sources.length,0);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

@@ -9,4 +9,6 @@ function truetype(family,weight=400){
   base.merge(extra,{scale:true});
   return Buffer.from(base.write({type:'ttf'}));
 }
-module.exports={truetype};
+const license=()=>['sans','mono'].map(family=>'IBM Plex '+family+'\n'+
+  fs.readFileSync(require.resolve('@fontsource/ibm-plex-'+family+'/LICENSE'),'utf8')).join('\n\n---\n\n');
+module.exports={truetype,license};
