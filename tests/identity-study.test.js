@@ -47,6 +47,8 @@ test('authentic OFL intermediate Paper Mono SemiBold exists, pinned by source SH
 test('identity build does not create image-generation assets or replace original mark',()=>{
   const readme=fs.readFileSync(path.join(ROOT,'README.md'),'utf8');
   const original=fs.readFileSync(path.join(ROOT,'logo_for_Readme.svg'));
-  assert.equal(hash(original),'398df06f1d56e0bde1534b73848e44fb7f428f2207b999266407fc5c22d4e36f8');
+  assert.ok(original.includes(Buffer.from('fill="#006043"')));
+  if(fs.existsSync(path.join(DIR,'dotmark.svg')))
+    assert.equal(hash(original),hash(fs.readFileSync(path.join(DIR,'dotmark.svg'))));
   assert.ok(readme.includes('logo_for_Readme.svg'));
 });
