@@ -22,7 +22,7 @@ test('Cloudflare Pages build emits one self-contained app under /stipra, no dupl
     assert.match(fs.readFileSync(path.join(out,'_redirects'),'utf8'),/\/ \/stipra\/ 302/);
     assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/connect-src 'none'/);
     const files=fs.readdirSync(path.join(out,'stipra'));
-    assert.deepEqual(files.sort(),['assets','brand','guide','index.html']);
+    assert.deepEqual(files.sort(),['assets','brand','guide','index.html','shared.css']);
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark.svg')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-teal.svg')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-coral.svg')));
@@ -43,7 +43,7 @@ test('build copies exact source JS, preserves real script order and is determini
     }
     const html=fs.readFileSync(path.join(out,'stipra/index.html'),'utf8');
     const tags=[...html.matchAll(/<script\s+src="([^"]+)"/g)].map(m=>m[1]);
-    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/styles.js','./assets/plate-diagnostics.js','./assets/app.js']);
+    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/styles.js','./assets/export-plan.js','./assets/plate-diagnostics.js','./assets/app.js']);
   }finally{fs.rmSync(out,{force:true,recursive:true});}
 });
 

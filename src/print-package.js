@@ -10,17 +10,7 @@ const json=x=>Buffer.from(JSON.stringify(x,null,2)+'\n');
 const color=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
 const clean=x=>String(x).replace(/[^a-z0-9_-]/gi,'-');
 const xml=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function validate(dpi,marksMm){
-  if(!Number.isFinite(dpi)||dpi<72||dpi>1200)throw Error('print: DPI must be between 72 and 1200');
-  if(!Number.isFinite(marksMm)||marksMm<0||marksMm>15)throw Error('print: marks-mm must be 0..15');
-}
-function printIntent(w,h,dpi,marksMm){
-  validate(dpi,marksMm);
-  return {dpi,sourcePixels:{width:w,height:h},origin:{x:0,y:0},
-    trimPixels:{x:0,y:0,width:w,height:h},
-    trimMm:{width:Number((w*25.4/dpi).toFixed(4)),height:Number((h*25.4/dpi).toFixed(4))},
-    resampled:false,registration:{x:0,y:0,rotate:0},marksMm,profile:null};
-}
+const {validate,printIntent,screenConfigs}=require('./export-plan.js');
 // PNG pHYs is physical pixel density: prevent printing software treating a master as 72 DPI.
 function physicalPNG(bytes,dpi){
   if(!Buffer.isBuffer(bytes))bytes=Buffer.from(bytes);
@@ -36,7 +26,14 @@ function physicalPNG(bytes,dpi){
   }
   const chunk=Buffer.alloc(21);
   chunk.writeUInt32BE(9,0);payload.copy(chunk,4);chunk.writeUInt32BE((crc^0xffffffff)>>>0,17);
-  return Buffer.concat([bytes.subarray(0,33),chunk,bytes.subarray(33)]);
+  const chunks=[bytes.subarray(0,33),chunk];
+  for(let at=33;at<bytes.length;){
+    if(at+12>bytes.length)throw Error('print: truncated PNG chunk');
+    const end=at+12+bytes.readUInt32BE(at);if(end>bytes.length)throw Error('print: invalid PNG chunk length');
+    if(bytes.toString('ascii',at+4,at+8)!=='pHYs')chunks.push(bytes.subarray(at,end));
+    at=end;
+  }
+  return Buffer.concat(chunks);
 }
 async function png(rgba,w,h,dpi){
   const c=new Canvas(w,h),ctx=c.getContext('2d'),data=ctx.createImageData(w,h);
@@ -47,12 +44,6 @@ function paperRGBA(w,h,hex){
   const [r,g,b]=color(hex).map(x=>Math.round(x*255)),pixels=new Uint8ClampedArray(w*h*4);
   for(let i=0;i<pixels.length;i+=4){pixels[i]=r;pixels[i+1]=g;pixels[i+2]=b;pixels[i+3]=255;}
   return pixels;
-}
-function screenConfigs(raw,ids){
-  const proof=Screen.config(raw||{version:1},ids);
-  const production={version:1,seed:proof.seed,default:{...proof.default,registration:{x:0,y:0,rotate:0}},plates:{}};
-  for(const id of ids)production.plates[id]={...proof.plates[id],registration:{x:0,y:0,rotate:0}};
-  return {proof,production};
 }
 async function marked(pngBytes,w,h,pad,dpi){
   if(!pad)return pngBytes;
@@ -80,7 +71,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
-    if(!/^[a-z0-9/_-]+\.(?:jpg|png|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
+    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
       throw Error('print: invalid or repeated path '+name);
     parts.set(name,Buffer.from(data));
   };

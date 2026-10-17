@@ -11,7 +11,7 @@
     {id:'yellow',name:'Yellow',color:'#f1d52f',source:'yellow'},
     {id:'black',name:'Black',color:'#161616',source:'black'}
   ]});
-  let asset=null,result=null,original=null,config=spot(),views=[];
+  let asset=null,result=null,original=null,config=spot(),views=[],styleResolution=null,renderValid=false,loadVersion=0;
   const freshScreen=()=>({version:1,seed:142,default:{mode:'solid',pitch:12,angle:0,jitter:0,dotScale:1,solidThreshold:0.9},plates:{}});
   let screenConfig=freshScreen();
   const field=(where,label,value,type,callback,options)=>{
@@ -24,9 +24,10 @@
       input.value=value;
     } else {
       input.type=type;input.value=String(value);
-      if(type==='range'){input.min=label==='Match radius'?'0.05':label==='Gamma'?'0.1':'0';input.max=label==='Threshold'?'0.95':['Match radius','Gray removal'].includes(label)?'1':label==='Gamma'?'5':'4';input.step='0.05';}
+      if(type==='range'){input.min=label==='Match radius'?'0.05':label==='Gamma'?'0.1':'0';input.max=label==='Threshold'?'0.95':['Match radius','Gray removal'].includes(label)?'1':label==='Gamma'?'5':'4';input.step='0.01';}
+      input.value=String(value);
     }
-    input.addEventListener('input',()=>{callback(type==='range'?Number(input.value):input.value);schedule();});
+    input.addEventListener('input',()=>{callback(type==='range'?Number(input.value):input.value);styleResolution=null;schedule();});
     div.appendChild(input);where.appendChild(div);
     return div;
   };
@@ -73,7 +74,7 @@
         el.value=String(value);el.min=String(min);el.max=String(max);el.step=String(step);
         el.addEventListener('change',()=>{
           const number=Number(el.value);
-          screenConfig.plates[ink.id]??={};
+          styleResolution=null;screenConfig.plates[ink.id]??={};
           if(name==='x'||name==='y'||name==='rotate'){
             screenConfig.plates[ink.id].registration??={};
             screenConfig.plates[ink.id].registration[name]=number;
@@ -90,7 +91,7 @@
       }
       select.value=screenConfig.plates[ink.id]?.mode??'';
       select.addEventListener('change',()=>{
-        screenConfig.plates[ink.id]??={};
+        styleResolution=null;screenConfig.plates[ink.id]??={};
         if(select.value)screenConfig.plates[ink.id].mode=select.value;
         else delete screenConfig.plates[ink.id].mode;
         schedule();
@@ -128,7 +129,8 @@
   }
   function render(){
     $('paper').value=config.paper;
-    $('error').hidden=true;
+    $('error').hidden=true;renderValid=false;
+    $('save-preview').disabled=true;$('save-plates').disabled=true;
     if(!asset)return;
     try{
       const w=asset.metadata.oriented.width,h=asset.metadata.oriented.height;
@@ -156,7 +158,7 @@
         (diagnostics.warnings.length?' '+diagnostics.warnings.map(w=>w.inkIds.join('/')+': '+w.message).join(' '):'');
       $('diagnostics').hidden=false;
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
-      $('save-preview').disabled=false;$('save-plates').disabled=false;
+      renderValid=true;$('save-preview').disabled=false;$('save-plates').disabled=false;
     }catch(error){
       $('diagnostics').hidden=true;
       $('error').textContent=error.message;$('error').hidden=false;
@@ -176,6 +178,7 @@
   }
   async function load(file){
     if(!file)return;
+    const version=++loadVersion;
     $('status').textContent='Loading your image locally…';$('error').hidden=true;
     try{
       if(file.size>StipraImportProbe.MAX_BYTES)throw Error('16 MiB file limit exceeded');
@@ -184,8 +187,10 @@
         canvas:(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;},
         decode
       },{sourceName:file.name});
+      if(version!==loadVersion)return;
       asset=imported;original=bytes;render();
     }catch(error){
+      if(version!==loadVersion)return;
       $('error').textContent=error.message;$('error').hidden=false;
       $('status').textContent='Import rejected; existing separation retained.';
     }
@@ -215,12 +220,12 @@
       select.disabled=Object.keys(variants).length===0;
     }
     if(!id){
-      $('style-note').textContent='Manual adjustments remain available for every ink.';
-      return;
+      styleResolution=null;$('style-note').textContent='Manual adjustments remain available for every ink.';
+      render();return;
     }
     try{
       const style=StipraStyles.resolve(id,{dpi:Number($('style-dpi').value),variant:$('style-variant').value,screening:$('style-screening').value,...($('style-lpi').value?{lpi:Number($('style-lpi').value)}:{})});
-      config=style.inkRecipe;screenConfig=style.screenRecipe;
+      config=style.inkRecipe;screenConfig=style.screenRecipe;styleResolution=style;
       $('mode').value=config.mode;$('paper').value=config.paper;
       $('style-note').textContent=style.style.description+' Suitable: '+style.style.goodFor.join(', ')+'. Avoid: '+style.style.avoid.join('; ')+'. '+style.physicalScreens.map(p=>p.id+': '+(p.effectiveLpi===null?'unscreened':p.effectiveLpi+' LPI')).join(' · ')+' at '+style.dpi+' DPI. '+style.warnings.join(' ');
       controls();screenControls();syncScreenFields();render();
@@ -231,7 +236,7 @@
   }
   for(const id of ['style','style-variant','style-dpi','style-lpi','style-screening'])$(id).addEventListener('change',applyStyle);
   $('mode').addEventListener('change',()=>{
-    config=$('mode').value==='spot'?spot():cmyk();
+    styleResolution=null;config=$('mode').value==='spot'?spot():cmyk();
     $('paper').value=config.paper;screenConfig=freshScreen();
     $('style').value='';$('style-note').textContent='Manual separation; choose a style to start again.';
     syncScreenFields();
@@ -243,26 +248,54 @@
       $('error').textContent=error.message;$('error').hidden=false;
     }
   });
-  $('paper').addEventListener('input',e=>{config.paper=e.target.value;schedule();});
+  $('paper').addEventListener('input',e=>{styleResolution=null;config.paper=e.target.value;schedule();});
   $('file').addEventListener('change',e=>load(e.target.files?.[0]));
   const drop=$('drop');
   for(const name of ['dragenter','dragover'])drop.addEventListener(name,e=>{e.preventDefault();drop.classList.add('over');});
   for(const name of ['dragleave','drop'])drop.addEventListener(name,e=>{e.preventDefault();drop.classList.remove('over');});
   drop.addEventListener('drop',e=>{if(e.dataTransfer.files.length)load(e.dataTransfer.files[0]);});
-  $('save-preview').addEventListener('click',()=>{if(result)downloadCanvas(views[1],'stipra-overprint-preview.png');});
-  $('save-plates').addEventListener('click',()=>{if(result)for(let i=2;i<views.length;i++)downloadCanvas(views[i],'stipra-'+result.masks[i-2].id+'-plate.png');});
+  let exportLibrary;
+  function exporter(){
+    if(!exportLibrary)exportLibrary=new Promise((resolve,reject)=>{
+      if(window.StipraExport)return resolve(window.StipraExport);
+      const script=document.createElement('script');script.src=document.documentElement.dataset.exportScript;
+      script.onload=()=>resolve(window.StipraExport);script.onerror=()=>{exportLibrary=null;reject(Error('Export tools could not load. Reconnect to load the app assets, then retry.'));};document.head.appendChild(script);
+    });
+    return exportLibrary;
+  }
+  async function packageExport(){
+    if(!asset||!renderValid)throw Error('Import artwork and resolve invalid settings before exporting.');
+    const snapshot={originalBytes:original.slice(),asset,inkRecipe:StipraSeparation.validate(config),screenRecipe:StipraScreen.config(screenConfig,config.inks.map(i=>i.id)),dpi:Number($('style-dpi').value),marksMm:0,paper:'recipe'};
+    if(styleResolution)snapshot.style={...styleResolution,inkRecipe:snapshot.inkRecipe,screenRecipe:snapshot.screenRecipe};
+    return (await exporter()).generate(snapshot);
+  }
+  $('save-preview').addEventListener('click',async()=>{
+    if(!renderValid)return;
+    try{const lib=await exporter(),blob=await new Promise(resolve=>views[1].canvas.toBlob(resolve,'image/png'));
+      save(new Blob([lib.physicalPNG(new Uint8Array(await blob.arrayBuffer()),Number($('style-dpi').value))],{type:'image/png'}),'stipra-overprint-preview.png');
+    }catch(error){$('error').textContent=error.message;$('error').hidden=false;}
+  });
+  $('save-plates').addEventListener('click',async()=>{
+    if(!renderValid)return;
+    $('save-plates').disabled=true;$('save-plates').textContent='Preparing package…';
+    try{const exported=await packageExport();save(new Blob([exported.bytes],{type:'application/zip'}),'stipra-print-package.zip');$('status').textContent='Print package saved locally. Print masters at 100%; inspect the PDF before printing.';}
+    catch(error){$('error').textContent=error.message;$('error').hidden=false;}
+    finally{$('save-plates').disabled=!renderValid;$('save-plates').textContent='Print package ZIP';}
+  });
   $('save-recipe').addEventListener('click',()=>save(new Blob([JSON.stringify(StipraSeparation.validate(config),null,2)+'\n'],{type:'application/json'}),'stipra-separation-recipe.json'));
-  $('screen-mode').addEventListener('change',e=>{screenConfig.default.mode=e.target.value;schedule();});
+  $('screen-mode').addEventListener('change',e=>{styleResolution=null;screenConfig.default.mode=e.target.value;schedule();});
   for(const [id,key] of [['screen-pitch','pitch'],['screen-angle','angle'],['screen-jitter','jitter'],['screen-seed','seed']]){
     $(id).addEventListener('change',e=>{
+      styleResolution=null;
       if(key==='seed')screenConfig.seed=Number(e.target.value);
       else screenConfig.default[key]=Number(e.target.value);
       schedule();
     });
   }
   $('save-screen-recipe').addEventListener('click',()=>{
-    const normalized=StipraScreen.config(screenConfig,config.inks.map(i=>i.id));
+    const normalized=StipraExportPlan.screenConfigs(screenConfig,config.inks.map(i=>i.id)).production;
     save(new Blob([JSON.stringify(normalized,null,2)+'\n'],{type:'application/json'}),'stipra-screen-recipe.json');
   });
   controls();screenControls();syncScreenFields();
+  document.documentElement.dataset.stipraReady='true';
 })();
