@@ -42,7 +42,7 @@ async function run(){
  const url='http://127.0.0.1:'+server.address().port+'/'+page;
  try{
    const child=spawn(bin,['--headless','--no-sandbox','--disable-gpu','--enable-precise-memory-info','--disable-dev-shm-usage','--no-first-run','--remote-debugging-pipe','about:blank'],{stdio:['ignore','ignore','pipe','pipe','pipe']});
-   let serial=0,pending=new Map(),buffer='',stderr='';
+   let serial=0,pending=new Map(),buffer='',stderr='';const externalRequests=[];
    const call=(method,params={},sessionId)=>new Promise((resolve,reject)=>{
      const id=++serial;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');
    });
@@ -50,7 +50,8 @@ async function run(){
    child.stdio[4].on('data',data=>{
      buffer+=data.toString();let at;
      while((at=buffer.indexOf('\0'))>=0){const raw=buffer.slice(0,at);buffer=buffer.slice(at+1);if(!raw)continue;
-       const message=JSON.parse(raw),item=pending.get(message.id);if(item){pending.delete(message.id);message.error?item.reject(Error(message.error.message)):item.resolve(message.result);}
+       const message=JSON.parse(raw),item=pending.get(message.id);
+       if(message.method==='Network.requestWillBeSent'){const requested=message.params.request.url;if(/^https?:/.test(requested)&&new URL(requested).origin!==new URL(url).origin)externalRequests.push(requested);}if(item){pending.delete(message.id);message.error?item.reject(Error(message.error.message)):item.resolve(message.result);}
      }
    });
    const failure=error=>{for(const item of pending.values())item.reject(error);pending.clear();};
@@ -62,7 +63,7 @@ async function run(){
      await Promise.race([deadline,(async()=>{
        const target=await call('Target.createTarget',{url:'about:blank'});
        const {sessionId}=await call('Target.attachToTarget',{targetId:target.targetId,flatten:true});
-       await call('Page.enable',{},sessionId);await call('Page.navigate',{url},sessionId);
+       await call('Page.enable',{},sessionId);await call('Network.enable',{},sessionId);await call('Page.navigate',{url},sessionId);
        for(;;){
          const response=await call('Runtime.evaluate',{expression:'JSON.stringify({state:document.body?.dataset.smoke,output:document.getElementById("out")?.textContent})',returnByValue:true},sessionId);
          const state=JSON.parse(response.result.value||'{}');
@@ -81,6 +82,22 @@ async function run(){
                const mobile=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'regions-mobile.png'),Buffer.from(mobile.data,'base64'));
              }
              fs.writeFileSync(path.join(dir,'browser-evidence.json'),JSON.stringify(evidence,null,2)+'\n');
+           }
+           if(page==='web/stipra/browser-smoke.html'){
+             if(externalRequests.length)throw Error('Unexpected external processing request');
+             const dir=path.join(root,'out/workflow-validation');fs.mkdirSync(dir,{recursive:true});
+             fs.writeFileSync(path.join(dir,'browser-checks.json'),JSON.stringify({contract:'stipra-workflow-browser-v1',externalRequests:externalRequests.length,checks:['import and color policy','mask edits','solo/mute/paper/native zoom','2–8 ink setup','keyboard focus and labels','responsive workspace and information pages','marked export pixels, hashes, density and PDF recipes']},null,2)+'\n');
+             for(const [name,route]of [['studio','index.html'],['roadmap','roadmap/index.html'],['changelog','changelog/index.html'],['sitemap','sitemap/index.html']]){
+               await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false},sessionId);
+               await call('Page.navigate',{url:url.replace('/web/stipra/browser-smoke.html','/dist/stipra/'+route)},sessionId);
+               await new Promise(resolve=>setTimeout(resolve,1000));
+               if(name==='studio')await call('Runtime.evaluate',{expression:`(async()=>{const canvas=document.createElement('canvas');canvas.width=480;canvas.height=320;const ctx=canvas.getContext('2d');ctx.fillStyle='#006043';ctx.fillRect(30,30,280,220);ctx.fillStyle='#ff665d';ctx.fillRect(180,120,230,140);const blob=await new Promise(r=>canvas.toBlob(r));const transfer=new DataTransfer();transfer.items.add(new File([blob],'procedural-workflow.png',{type:'image/png'}));document.getElementById('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));})()`,awaitPromise:true},sessionId);
+               await new Promise(resolve=>setTimeout(resolve,500));
+               for(const width of [1280,390]){
+                 await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width===390},sessionId);await new Promise(resolve=>setTimeout(resolve,150));
+                 const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,name+'-'+width+'.png'),Buffer.from(shot.data,'base64'));
+               }
+             }
            }
            break;
          }

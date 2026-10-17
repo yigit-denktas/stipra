@@ -1,0 +1,815 @@
+{
+  "contract": "stipra-delivery-ledger-v1",
+  "updatedAt": "2026-10-17",
+  "repository": "https://github.com/yigit-denktas/stipra",
+  "primary": "https://apps.yigitdenktas.com/stipra/",
+  "mirror": "https://yigit-denktas.github.io/stipra/",
+  "policy": "Versions below are conditional targets, not published tags. Implementation, issue closure and acceptance are separate. Prerequisites refer to the named capability; broader unfinished work in an umbrella issue need not block a working subset.",
+  "originalV09Issues": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "milestones": [
+    {
+      "id": "local-alpha",
+      "version": "Library 0.1.0-alpha.0",
+      "state": "implemented-local",
+      "tasks": [
+        71,
+        72,
+        73,
+        74,
+        83,
+        84,
+        85,
+        86
+      ],
+      "exit": "Core/Canvas/inputs build and examples work with deterministic browser/Node/CLI evidence. #85/#86 mean bounded research decisions and pilots. Packages remain private; no public version tag."
+    },
+    {
+      "id": "published-alpha",
+      "version": "Library 0.1.0-alpha.1 (proposed)",
+      "state": "target",
+      "tasks": [
+        70,
+        14
+      ],
+      "exit": "Owner accepts the alpha/usefulness evidence and approves publication; package contents/types/install/size pass, with a notice audit for each artifact actually shipped. Native/WASM full-export findings are not silently transferred to the dependency-free core. No physical-quality claim."
+    },
+    {
+      "id": "studio-rc",
+      "version": "Studio v0.9-rc.1 (target)",
+      "state": "target",
+      "tasks": [
+        8,
+        9,
+        11,
+        12,
+        22
+      ],
+      "exit": "The bounded browser/CLI workflow, full-frame raster masters and reports pass release acceptance; compare/batch and the promised format matrix are completed or an owner-approved scope change is recorded. Candidate status remains explicit where audits/print checks are open."
+    },
+    {
+      "id": "studio-v09",
+      "version": "Studio v0.9 (target)",
+      "state": "target",
+      "tasks": [
+        13,
+        14
+      ],
+      "exit": "Close the RC acceptance plus representative physical-print observations and notices/provenance for the shipped export artifacts. Do not call an untested effect press-calibrated. #3/#4/#10 remain optional case-study/expanded diagnostics; they still count in the original 14-issue backlog."
+    },
+    {
+      "id": "styles-quality",
+      "version": "Style recipe revisions (independent versions)",
+      "state": "target",
+      "tasks": [
+        43,
+        47,
+        34
+      ],
+      "exit": "Owner/artist reviews and intended-size physical tests justify each changed mask recipe. Increment the affected family/variant version; do not silently alter saved recipes."
+    },
+    {
+      "id": "extensions",
+      "version": "Later optional capabilities (no version promised)",
+      "state": "optional",
+      "tasks": [
+        28,
+        75,
+        46,
+        57,
+        31
+      ],
+      "exit": "Each extension needs a concrete workflow, appropriate evidence and its own approval. Identity experiments, Java hosting, vector geometry and cosmetic work do not block the small JS alpha."
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "status": "integration",
+      "note": "Canonical reviewed history. #89 merged at 40968a16858694836740929c3583da3f430695e7; #91 consolidates studio/audit/site work into this same history."
+    },
+    {
+      "name": "feat/22-studio-and-release-map",
+      "status": "integration-record",
+      "note": "PR #91 carries #22, the #14 notice fixes and #90 to main after review. This is one integration record, not a separate ongoing product roadmap."
+    },
+    {
+      "name": "feat/46-stipra-engine-generated-mark",
+      "status": "parked",
+      "note": "Four unique commits, 49 behind main at commit 40968a1 (#89). Historical inkmark assets/build script remain for #46 owner review; do not bulk merge or delete unapproved work."
+    }
+  ],
+  "nextSequence": [
+    "Resolve #14’s three exact native/WASM/prebundle evidence gaps for the export artifacts intended for distribution.",
+    "Complete #11 compare/batch and #12 export matrix; reconcile #8/#9 acceptance using the implemented raster/report capabilities.",
+    "Collect #13 physical observations and #43/#47 artistic acceptance, then version only the recipes justified by that evidence.",
+    "Decide #70 lean-library publication after owner/artist feedback and artifact-specific package/notice checks.",
+    "Keep #28 vector and #75 Java-host research optional; identity work remains subject to owner review."
+  ],
+  "tasks": [
+    {
+      "issue": 1,
+      "title": "Adopt Prehnite v8 as Stipra's executable case study",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T20:18:34Z"
+    },
+    {
+      "issue": 2,
+      "title": "Define generic scene, plate and deterministic recipe schema",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        1
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T20:35:35Z"
+    },
+    {
+      "issue": 3,
+      "title": "Crisp contours, shared facet seams and calibrated gem proportions",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": true,
+      "dependsOn": [
+        2
+      ],
+      "note": "Optional case-study geometry; does not block the image studio.",
+      "sourceUpdatedAt": "2026-10-16T21:41:56Z"
+    },
+    {
+      "issue": 4,
+      "title": "Clustered contamination, fibers and separately seeded ink debris",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": true,
+      "dependsOn": [
+        2
+      ],
+      "note": "Optional paper realism; current report speckle is a simulation, not scanned stock.",
+      "sourceUpdatedAt": "2026-10-16T21:42:04Z"
+    },
+    {
+      "issue": 5,
+      "title": "Dot-native, reverse, hybrid and overprint screening with real plate masks",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        2
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T22:25:07Z"
+    },
+    {
+      "issue": 6,
+      "title": "Accept PNG, JPEG, WebP and structured SVG without disturbing layout",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        1
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T21:10:53Z"
+    },
+    {
+      "issue": 7,
+      "title": "Editable spot-ink and CMYK image decomposition",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        6
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T22:05:01Z"
+    },
+    {
+      "issue": 8,
+      "title": "Full-frame aligned monochrome ink masters and registration metadata",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        7,
+        5
+      ],
+      "note": "Aligned raster masters, hashes and external marks implemented. True-vector plate scope remains with #28/#12; physical checks remain #13.",
+      "sourceUpdatedAt": "2026-10-16T23:57:55Z"
+    },
+    {
+      "issue": 9,
+      "title": "A4 landscape print-separation sheet in HTML and PDF",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        8
+      ],
+      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12.",
+      "sourceUpdatedAt": "2026-10-17T16:18:17Z"
+    },
+    {
+      "issue": 10,
+      "title": "Reference HSL/coverage masks, registration overlays and per-layer metrics",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": true,
+      "dependsOn": [
+        8
+      ],
+      "note": "Advanced reference segmentation/overlays are optional, explicitly nonblocking for CLI and exports.",
+      "sourceUpdatedAt": "2026-10-16T21:42:00Z"
+    },
+    {
+      "issue": 11,
+      "title": "Agent-safe import, separate, sheet, compare and batch commands",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "note": "Import/separate/package/scene/render implemented. Top-level compare/batch and their bounded audit trails remain.",
+      "sourceUpdatedAt": "2026-10-16T21:42:05Z"
+    },
+    {
+      "issue": 12,
+      "title": "Reproducible PNG, JPG, WebP, pure SVG, PDF and plate bundles",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        8,
+        9
+      ],
+      "note": "Native PNG plates/proof/PDF/HTML/recipe ZIP implemented with parity. Broader JPG/WebP/vector/scaled export matrix remains.",
+      "sourceUpdatedAt": "2026-10-17T13:47:53Z"
+    },
+    {
+      "issue": 13,
+      "title": "Golden images, browser accessibility and physical print validation plan",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        22
+      ],
+      "note": "Automated masks, browser/parity tests, uploaded reports and physical check kit exist; physical observations and complete golden matrix remain.",
+      "sourceUpdatedAt": "2026-10-17T13:15:48Z"
+    },
+    {
+      "issue": 14,
+      "title": "Dependency license audit and CMYK versus spot-ink design notes",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        1
+      ],
+      "note": "Two incomplete MIT notices supplemented with original attribution and pinned terms. Three native/WASM/prebundle provenance findings remain; broad release gate stays closed.",
+      "sourceUpdatedAt": "2026-10-17T13:49:38Z"
+    },
+    {
+      "issue": 17,
+      "title": "Configure native Stipra v0.9 milestone and GitHub Project",
+      "trackerState": "open",
+      "deliveryState": "blocked",
+      "track": "delivery",
+      "optional": true,
+      "dependsOn": [],
+      "note": "Native GitHub Project/milestones are not configured. Version records below are explicit planning targets; administration remains #17.",
+      "sourceUpdatedAt": "2026-10-16T20:38:00Z"
+    },
+    {
+      "issue": 18,
+      "title": "Restore original SVG dotmark and native README typography",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "identity",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T20:46:18Z"
+    },
+    {
+      "issue": 21,
+      "title": "Scope Stipra v0.9 as an MIT browser printmaking studio, not a p5.js clone",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T21:43:43Z"
+    },
+    {
+      "issue": 22,
+      "title": "Browser workspace for editable separations, plates and A4 export",
+      "trackerState": "open",
+      "deliveryState": "implemented",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        6,
+        7,
+        5
+      ],
+      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim.",
+      "sourceUpdatedAt": "2026-10-17T13:15:50Z"
+    },
+    {
+      "issue": 24,
+      "title": "Rewrite README around Stipra's user experience and honest v0.9 roadmap",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "delivery",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T21:51:24Z"
+    },
+    {
+      "issue": 28,
+      "title": "Dot-native SVG facets and analytic vector mask parity",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": true,
+      "dependsOn": [
+        2,
+        5
+      ],
+      "note": "Optional true-vector dot geometry and analytic facet parity. Required only for declaring that vector capability complete.",
+      "sourceUpdatedAt": "2026-10-16T22:20:24Z"
+    },
+    {
+      "issue": 29,
+      "title": "Publish Separation Lab on apps.yigitdenktas.com/stipra via Cloudflare Pages",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "delivery",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T22:38:11Z"
+    },
+    {
+      "issue": 31,
+      "title": "Redesign hosted Stipra workspace after owner review",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "studio",
+      "optional": true,
+      "dependsOn": [
+        22
+      ],
+      "note": "Existing workspace and guide share tokens. Final workspace art direction remains owner-reviewed; not a blocker for the lean API.",
+      "sourceUpdatedAt": "2026-10-17T13:15:49Z"
+    },
+    {
+      "issue": 32,
+      "title": "Fix overlapping sidebar and artwork hierarchy on deployed Separation Lab",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T22:45:30Z"
+    },
+    {
+      "issue": 34,
+      "title": "Opinionated, input-aware Risograph presets for browser and agent CLI",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        7,
+        5
+      ],
+      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13.",
+      "sourceUpdatedAt": "2026-10-17T10:04:55Z"
+    },
+    {
+      "issue": 35,
+      "title": "Curate Dizzy Ink's Risograph guide into Stipra print/design knowledge",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T22:58:41Z"
+    },
+    {
+      "issue": 37,
+      "title": "Short human README, Stipra design principles and Dizzy Ink image study",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "delivery",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T23:07:26Z"
+    },
+    {
+      "issue": 39,
+      "title": "Owner photographs A/B/C — first complete print package validation",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-16T23:20:18Z"
+    },
+    {
+      "issue": 43,
+      "title": "Preserve forest depth and justify each ink pass",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        7,
+        56
+      ],
+      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending.",
+      "sourceUpdatedAt": "2026-10-17T12:48:54Z"
+    },
+    {
+      "issue": 44,
+      "title": "Preserve and verify embedded ICC conversion policy for beach fixture C",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        6
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T13:52:32Z"
+    },
+    {
+      "issue": 45,
+      "title": "Editorial print sheets v2: ratio-aware layouts, IBM Plex, paper grain, and embedded recipe",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        8,
+        9
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T10:22:18Z"
+    },
+    {
+      "issue": 46,
+      "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "identity",
+      "optional": true,
+      "dependsOn": [
+        2,
+        5
+      ],
+      "note": "Generated candidates exist. Historical branch is parked, diverged from main; do not bulk-merge it as an identity approval.",
+      "sourceUpdatedAt": "2026-10-17T10:06:47Z"
+    },
+    {
+      "issue": 47,
+      "title": "Make the four starter print styles actual shared recipes, with image suitability tests",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        34,
+        43,
+        56
+      ],
+      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven.",
+      "sourceUpdatedAt": "2026-10-17T12:48:53Z"
+    },
+    {
+      "issue": 52,
+      "title": "Real IBM Plex vs Paper Mono lowercase wordmark and A4 PDF proofs",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "identity",
+      "optional": false,
+      "dependsOn": [],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T02:14:29Z"
+    },
+    {
+      "issue": 54,
+      "title": "Real Stiprā palette + four authentic wordmarks + three owner-photo comparison PDFs",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "identity",
+      "optional": false,
+      "dependsOn": [
+        52
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T11:07:50Z"
+    },
+    {
+      "issue": 56,
+      "title": "Shared ink contribution, overlap and effective LPI diagnostics",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        7,
+        5
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T09:57:10Z"
+    },
+    {
+      "issue": 57,
+      "title": "Three-contender wordmark, macron-only accent and original dotmark cohesion",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "identity",
+      "optional": true,
+      "dependsOn": [
+        54
+      ],
+      "note": "Genuine shaped wordmark study exists; owner chooses the final identity. Original README SVG unchanged.",
+      "sourceUpdatedAt": "2026-10-17T10:06:45Z"
+    },
+    {
+      "issue": 60,
+      "title": "Readable editorial hierarchy and complete physical-screen settings",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        45
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T10:28:56Z"
+    },
+    {
+      "issue": 62,
+      "title": "Ink-linked annotations and deterministic speckled paper",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        60
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T11:05:24Z"
+    },
+    {
+      "issue": 65,
+      "title": "Public reproduction guide, dual Pages build and branded QR specimens",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "delivery",
+      "optional": false,
+      "dependsOn": [
+        62
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T12:13:12Z"
+    },
+    {
+      "issue": 70,
+      "title": "Creative coding alpha: sketch → ink proof → reproducible plates",
+      "trackerState": "open",
+      "deliveryState": "review",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        71,
+        72,
+        73,
+        74
+      ],
+      "note": "Engineering #71–#74 complete. Owner/artist usefulness and artifact-specific publication decision remain; no registry release.",
+      "sourceUpdatedAt": "2026-10-17T15:16:55Z"
+    },
+    {
+      "issue": 71,
+      "title": "Define the lean JavaScript engine contract and package boundary",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        7,
+        5
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T14:12:28Z"
+    },
+    {
+      "issue": 72,
+      "title": "Apply Stiprā treatments inside existing Canvas and p5.js sketches",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        71
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T14:41:42Z"
+    },
+    {
+      "issue": 73,
+      "title": "Accept artist-authored ink layers without reverse-separating the composite",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        71,
+        72
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T14:41:43Z"
+    },
+    {
+      "issue": 74,
+      "title": "Validate creative coding alpha: performance, exports and usefulness",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        71,
+        72,
+        73
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T15:03:08Z"
+    },
+    {
+      "issue": 75,
+      "title": "Evaluate a Processing Java bridge after the JavaScript alpha",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "library",
+      "optional": true,
+      "dependsOn": [
+        74
+      ],
+      "note": "Optional Processing Java host feasibility after useful JS integration; no alpha prerequisite.",
+      "sourceUpdatedAt": "2026-10-17T13:22:37Z"
+    },
+    {
+      "issue": 81,
+      "title": "Preserve structured artwork without expanding the print core",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        74
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T15:16:52Z"
+    },
+    {
+      "issue": 82,
+      "title": "Declare PNG precision and reject unvalidated image signals before decoding",
+      "trackerState": "closed",
+      "deliveryState": "complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        6,
+        44
+      ],
+      "note": "Closed implementation/research record; see the linked issue for exact scope.",
+      "sourceUpdatedAt": "2026-10-17T15:16:54Z"
+    },
+    {
+      "issue": 83,
+      "title": "Map named artwork regions to physical ink coverage",
+      "trackerState": "closed",
+      "deliveryState": "implemented",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        71,
+        81
+      ],
+      "note": "Named same-frame regions map to physical inks; real browser/Node/CLI replay in #89.",
+      "sourceUpdatedAt": "2026-10-17T15:53:24Z"
+    },
+    {
+      "issue": 84,
+      "title": "Preserve optional source-project sidecars in reproducible packages",
+      "trackerState": "closed",
+      "deliveryState": "implemented",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        73,
+        83
+      ],
+      "note": "Opt-in inert source files, raw masks, recipe mapping, hashes and bounded archive replay in #89.",
+      "sourceUpdatedAt": "2026-10-17T15:53:25Z"
+    },
+    {
+      "issue": 85,
+      "title": "Add optional local provenance validation through established C2PA tools",
+      "trackerState": "closed",
+      "deliveryState": "research-complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        81
+      ],
+      "note": "Five real offline c2patool cases tested. Browser C2PA deferred after measured size/offline/license evaluation; no homemade crypto.",
+      "sourceUpdatedAt": "2026-10-17T15:53:26Z"
+    },
+    {
+      "issue": 86,
+      "title": "Evaluate layered and auxiliary-pass interchange adapters",
+      "trackerState": "closed",
+      "deliveryState": "research-complete",
+      "track": "library",
+      "optional": false,
+      "dependsOn": [
+        81,
+        83
+      ],
+      "note": "Selected-layer OpenRaster and explicit numeric mask pilots tested. Native Apple/EXR/Cryptomatte extraction remains host-side/deferred.",
+      "sourceUpdatedAt": "2026-10-17T15:53:27Z"
+    },
+    {
+      "issue": 90,
+      "title": "Unify delivery dependencies, version targets, changelog and site navigation",
+      "trackerState": "open",
+      "deliveryState": "implemented",
+      "track": "delivery",
+      "optional": false,
+      "dependsOn": [
+        22,
+        83,
+        84,
+        85,
+        86
+      ],
+      "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot.",
+      "sourceUpdatedAt": "2026-10-17T15:57:35Z"
+    }
+  ]
+}

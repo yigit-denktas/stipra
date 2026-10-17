@@ -1,0 +1,46 @@
+{
+  "contract": "stipra-artifact-review-v1",
+  "reviewedAt": "2026-10-17",
+  "environment": "Linux x64, installed npm graph; no external binary committed",
+  "records": [
+    {
+      "package": "@pdf-lib/fontkit",
+      "version": "1.1.1",
+      "artifact": "dist/fontkit.umd.js",
+      "bytes": 1506282,
+      "sha256": "d60739f02b41b636ee0cc2fb79ba589958144f9240e585dbc19e6a3b08d82825",
+      "gitBlobSha1": "c18af0e3cfce5893cc0012cc3a4e2b69c78d4c95",
+      "source": "https://github.com/Hopding/fontkit",
+      "finding": "Published package 1.1.1 has no source map or gitHead; upstream default package.json is 1.1.0. Preserve extracted MIT/Node/base64 and Google Apache notices, but exact prebundled versions remain unverified.",
+      "distribution": "review-required"
+    },
+    {
+      "package": "skia-canvas",
+      "version": "3.0.8",
+      "artifact": "lib/skia.node",
+      "bytes": 30457832,
+      "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9",
+      "gitBlobSha1": "1092d0c80dda52575db21ced2d46908a8467cebe",
+      "source": "https://github.com/samizdatco/skia-canvas/tree/v3.0.8",
+      "finding": "Locally installed Linux x64 native artifact; source tag/Cargo.lock and published compressed platform digest identify upstream evidence, not a verified transitive notice inventory.",
+      "distribution": "review-required"
+    },
+    {
+      "package": "fonteditor-core",
+      "version": "2.6.3",
+      "artifact": "woff2/woff2.wasm",
+      "bytes": 727190,
+      "sha256": "afda7e08349046612a019713c8f3baae52ee9d064c712919af020cd2634dddd6",
+      "gitBlobSha1": "7f31f44add4f1abb0712c0d9756b41228e864761",
+      "source": "https://github.com/kekee000/fonteditor-core/tree/04c47400895f11d857ca83f5725c0c3c0dd552a5/woff2src",
+      "finding": "Published WASM matches Git blob 7f31f44add4f1abb0712c0d9756b41228e864761. Build lists Google WOFF2/Brotli files, but exact source revisions/toolchain/component notices are incomplete.",
+      "distribution": "review-required"
+    }
+  ],
+  "sources": [
+    "https://github.com/samizdatco/skia-canvas/blob/v3.0.8/Cargo.lock",
+    "https://github.com/samizdatco/skia-canvas/blob/v3.0.8/.github/workflows/build.yml",
+    "https://github.com/kekee000/fonteditor-core/blob/04c47400895f11d857ca83f5725c0c3c0dd552a5/woff2src/build.sh",
+    "https://github.com/Hopding/fontkit/blob/master/rollup.config.js"
+  ]
+}

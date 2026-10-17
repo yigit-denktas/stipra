@@ -30,7 +30,7 @@ A grayscale plate describes how much of an ink prints at each pixel. The ink's n
 
 In our current pixel contract, 0 means no coverage and 255 means maximum; grayscale printing masters use the inverse convention (white means none, black means full). Keep every plate aligned to the same source and paper dimensions. Never silently resize one pass.
 
-**Two legitimate inputs:** (a) full-color source → generated separation masks, and (b) grayscale plates already made by an artist → assigned inks and proofing. Both are implemented in the pixel SDK; authored canvases and replay are documented in the [Canvas adapter](packages/canvas/README.md). The studio does not yet have an authored-layer import UI. Named source regions and their mapping to inks remain [proposed adapter work](docs/STRUCTURED-ARTWORK.md).
+**Two legitimate inputs:** (a) full-color source → generated separation masks, and (b) grayscale plates already made by an artist → assigned inks and proofing. Both are implemented in the pixel SDK; authored canvases and replay are documented in the [Canvas adapter](packages/canvas/README.md). The studio does not yet have an authored-layer import UI. Named source regions and their mapping to inks are implemented in the [optional inputs adapter](docs/STRUCTURED-INPUTS.md).
 
 ### 4. Ink overlaps create the language
 

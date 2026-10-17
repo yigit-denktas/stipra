@@ -15,8 +15,18 @@ function notices(dir){
   // Prebundled fontkit includes a Node-derived notice that package metadata omits.
   if(pkg.name==='@pdf-lib/fontkit'){
     const name='dist/fontkit.umd.js',source=fs.readFileSync(path.join(dir,name),'utf8');
-    const blocks=(source.match(/(?:[ \t]*\/\/[^\n]*\n){2,}/g)||[]).filter(b=>/Copyright|Permission is hereby|licen[cs]e/i.test(b));
+    const blocks=[...(source.match(/(?:[ \t]*\/\/[^\n]*\n){2,}/g)||[]),...(source.match(/\/\*[\s\S]*?\*\//g)||[])].filter(b=>/Copyright|Permission is hereby|Licensed under/i.test(b));
     blocks.forEach((text,i)=>sources.push({name:name+'#notice-'+(i+1),text}));
+    sources.push({name:'Stipra retained Apache-2.0 terms for embedded Google/Brotli notices',text:fs.readFileSync(path.join(ROOT,'licenses/third-party/Apache-2.0.txt'),'utf8')});
+  }
+  const supplements=JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/supplements.json'),'utf8')).packages;
+  const supplement=supplements.find(x=>x.name===pkg.name&&x.version===pkg.version);
+  if(supplement){
+    const original=fs.readFileSync(path.join(dir,supplement.publishedEvidence));
+    if(hash(original)!==supplement.publishedSha256)throw Error('Published notice changed for '+pkg.name);
+    const terms=fs.readFileSync(path.join(ROOT,'licenses/third-party',supplement.terms),'utf8');
+    if(hash(terms)!==supplement.termsSha256)throw Error('Supplement terms changed for '+pkg.name);
+    sources.push({name:'Stipra supplement: '+supplement.terms,text:supplement.copyright+'\n'+supplement.basis+'\nSource: '+supplement.source+'\n\n'+terms});
   }
   const declared=pkg.license||pkg.licenses?.map(x=>x.type).join(' OR ')||null;
   return {pkg,declared,sources};
@@ -40,10 +50,10 @@ function audit(out){
   }
   findings.push({package:'skia-canvas',kind:'native-transitive-review',detail:'The npm MIT wrapper notice does not inventory the downloaded native binary and its Rust/Skia/codec dependencies. Verify platform-specific native notices before redistributing a bundled executable.'});
   findings.push({package:'fonteditor-core',kind:'wasm-transitive-review',detail:'Node package includes woff2/woff2.wasm. Audit its embedded WOFF2/Brotli provenance before bundling that dependency tree. The static site embeds generated fonts, not this WASM.'});
-  findings.push({package:'@pdf-lib/fontkit',kind:'prebundled-review',detail:'Preserved the published declaration and embedded Node notice; npm metadata is not a complete inventory of code prebundled into this package. Complete upstream component attribution before declaring redistribution cleared.'});
+  findings.push({package:'@pdf-lib/fontkit',kind:'prebundled-review',detail:'Retained published MIT, embedded Node/base64 and Google Apache notices plus full Apache terms. The published 1.1.1 artifact has no source map/gitHead and upstream default source still declares 1.1.0; exact component versions/attributions remain unverified. Do not infer a complete inventory from npm runtime dependencies.'});
   const report={contract:'stipra-dependency-audit-v1',lockSha256:hash(lockBytes),scope:'installed production npm dependency graph; static bundle subset has its own emitted notices',
     status:findings.length?'review-required':'checked',packages,findings,
-    excluded:['Owner artwork and brand permissions are separate from code licensing.','Paper Mono is build-fetched with a separate OFL/provenance record.','p5.js and p5.grain are not installed runtime dependencies; any future adapter needs its own distribution review.']};
+    excluded:['Owner artwork and brand permissions are separate from code licensing.','Paper Mono is build-fetched with a separate OFL/provenance record.','p5.js is an optional separately hosted LGPL development dependency; p5.grain is not installed. Core/Canvas/inputs packages exclude the heavy export/native/WASM dependencies.']};
   fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'dependency-audit.json'),JSON.stringify(report,null,2)+'\n');
   fs.writeFileSync(path.join(out,'THIRD-PARTY-NOTICES.txt'),texts.join('\n\n---\n\n'));
   return report;

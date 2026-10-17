@@ -70,6 +70,25 @@
     await until(()=>grey(canvases()[3],1,0)>120,'real mask coverage edit');
     if(canvases()[3].width!==4)throw Error('mask canvas changed position or width');
 
+    const full=Array.from(canvases()[1].getContext('2d').getImageData(0,0,4,2).data);
+    el('solo-blue').click();
+    if(el('solo-blue').getAttribute('aria-pressed')!=='true'||d.activeElement!==el('solo-blue'))throw Error('Solo button lost keyboard focus/state');
+    el('reset-inspection').click();
+    if(!full.every((v,i)=>v===canvases()[1].getContext('2d').getImageData(0,0,4,2).data[i]))throw Error('Reset did not restore full proof');
+    el('proof-paper').checked=false;el('proof-paper').dispatchEvent(new Event('change'));
+    if(canvases()[1].getContext('2d').getImageData(0,0,1,1).data[3]!==0)throw Error('Paper toggle did not expose empty source');
+    el('proof-paper').checked=true;el('proof-paper').dispatchEvent(new Event('change'));
+    el('paper-only').checked=true;el('paper-only').dispatchEvent(new Event('change'));
+    const stock=canvases()[1].getContext('2d').getImageData(0,0,4,2).data;
+    if(stock[0]!==stock[4]||stock[1]!==stock[5])throw Error('Paper-only view contains ink');
+    el('reset-inspection').click();
+    el('view-zoom').value='native';el('view-zoom').dispatchEvent(new Event('change'));
+    if(!el('grid').classList.contains('native-pixels'))throw Error('Native pixel view unavailable');
+    el('view-zoom').value='fit';el('view-zoom').dispatchEvent(new Event('change'));
+    el('ink-count').value='8';el('ink-count').dispatchEvent(new Event('change'));
+    if(canvases().length!==10||el('plate-count').textContent!=='8 ink plates')throw Error('Manual eight-ink setup failed');
+    el('ink-count').value='2';el('ink-count').dispatchEvent(new Event('change'));
+    if(canvases().length!==4||!el('print-geometry').textContent.includes('origin 0,0'))throw Error('Ink count/frame controls failed');
     el('mode').value='cmyk';
     el('mode').dispatchEvent(new Event('change',{bubbles:true}));
     await until(()=>el('status').textContent.includes('CMYK · 4 × 2 px'),'CMYK mode');
@@ -97,6 +116,11 @@
       'real screen raster mask changed');
     const dotted=Array.from(canvases()[2].getContext('2d').getImageData(0,0,48,32).data);
     if(!dotted.some((v,i)=>v!==baseline[i]))throw Error('Dots do not affect actual grayscale coverage');
+    if(!el('screen-dot-scale')||!el('screen-solid-threshold')||!el('screen-blue-pitch'))throw Error('Supported screen settings inaccessible');
+    el('screen-blue-dotScale').value='0.6';el('screen-blue-dotScale').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>dotted.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),'mark scale changed actual coverage');
+    el('screen-blue-dotScale').value='1';el('screen-blue-dotScale').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>dotted.every((v,i)=>v===canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),'mark scale repeatability');
     el('screen-blue-x').value='4';
     el('screen-blue-x').dispatchEvent(new Event('change',{bubbles:true}));
     await until(()=>dotted.some((v,i)=>v!==canvases()[2].getContext('2d').getImageData(0,0,48,32).data[i]),
@@ -162,11 +186,14 @@
     win.URL.createObjectURL=blob=>{if(blob.type==='application/zip')exportedBlob=blob;return createURL(blob);};
     win.HTMLAnchorElement.prototype.click=function(){if(this.download==='stipra-print-package.zip')return;return click.call(this);};
     el('screen-blue-x').value='2';el('screen-blue-x').dispatchEvent(new Event('change',{bubbles:true}));
+    el('marks-mm').value='2';el('marks-mm').dispatchEvent(new Event('change'));
+    el('mute-blue').checked=true;el('mute-blue').dispatchEvent(new Event('change'));
     await delay(10);el('save-plates').click();
     await until(()=>exportedBlob||!el('error').hidden,'browser print package');
     if(!exportedBlob)throw Error('Export failed: '+el('error').textContent);
     const zip=await JSZip.loadAsync(await exportedBlob.arrayBuffer());
     const manifest=JSON.parse(await zip.file('manifest.json').async('string'));
+    if(manifest.output.marksMm!==2||manifest.inks.length!==2||!manifest.inks.every(i=>i.marked&&zip.file(i.marked)))throw Error('Inspection mute or mark geometry changed export incorrectly');
     if(manifest.source.colorManagement.policy!=='stipra-srgb-v1')throw Error('Missing browser color policy');
     if(!(await zip.file(manifest.report.fontLicense).async('string')).includes('SIL OPEN FONT LICENSE'))throw Error('Missing embedded font license');
     if(manifest.contract!=='stipra-print-package-v1'||manifest.output.sourcePixels.width!==48||manifest.output.sourcePixels.height!==32)throw Error('Browser package geometry/contract differs');
@@ -196,6 +223,14 @@
       const gd=guideFrame.contentDocument;
       if(gd.documentElement.scrollWidth>gd.documentElement.clientWidth+2)throw Error('Guide horizontal overflow at '+width+'px');
       if(!gd.querySelector('a[href="../"]'))throw Error('Guide studio navigation missing');
+    }
+    if(!d.querySelector('meta[http-equiv="Content-Security-Policy"]').content.includes("connect-src 'none'"))throw Error('Local processing CSP missing');
+    for(const route of ['roadmap','changelog','sitemap']){
+      const info=document.createElement('iframe');info.src='/dist/stipra/'+route+'/index.html';document.body.append(info);
+      await until(()=>info.contentDocument?.title==='stiprā / '+({roadmap:'Roadmap',changelog:'Changelog',sitemap:'Site map'}[route]),route+' loaded');
+      await info.contentDocument.fonts.ready;
+      for(const width of [390,768,1280]){info.style.width=width+'px';await delay(80);const idoc=info.contentDocument;if(idoc.documentElement.scrollWidth>idoc.documentElement.clientWidth+2)throw Error(route+' horizontal overflow at '+width+' / '+JSON.stringify([...idoc.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>idoc.documentElement.clientWidth+2).slice(0,4).map(e=>({tag:e.tagName,text:e.textContent.slice(0,70),right:e.getBoundingClientRect().right}))));if(idoc.querySelectorAll('nav.site-nav a').length!==7)throw Error('Missing shared destinations');}
+      info.remove();
     }
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
