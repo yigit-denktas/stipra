@@ -62,8 +62,8 @@ async function pdfReport(cards,m){
   const dims=A4[m.orientation],[W,H]=dims,margin=34,cw=W-2*margin;
   const theme=Paper.theme(m.paper,m.settings);
   const paper=await pdf.embedPng(m.reportPaperBytes||await paperBackground(m));
-  const qr=await pdf.embedPng(await QR.png({style:m.qrStyle||'brand-dots',ink:theme.key,fontBytes:typo?.fontWordmark?fs.readFileSync(typo.fontWordmark):typo?.fontBold?fs.readFileSync(typo.fontBold):null}));
-  const fg=pdfColor(theme.key),audit={version:3,minTextPt:9,theme,qr:{style:m.qrStyle||'brand-dots',destination:GUIDE,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
+  const qr=await pdf.embedPng(await QR.png({style:m.qrStyle||'ink-dots',ink:theme.key,fontBytes:typo?.fontWordmark?fs.readFileSync(typo.fontWordmark):typo?.fontBold?fs.readFileSync(typo.fontBold):null}));
+  const fg=pdfColor(theme.key),audit={version:3,minTextPt:9,theme,qr:{style:m.qrStyle||'ink-dots',destination:GUIDE,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
   const images=new Map();
   let page,record,y;
   const content=s=>typo?.lowercase?String(s).toLowerCase():String(s);

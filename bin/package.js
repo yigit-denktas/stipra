@@ -41,7 +41,7 @@ async function run(argv){
   const marksMm=opts['--marks-mm']===undefined?0:Number(opts['--marks-mm']);
   Prepress.validate(dpi,marksMm);
   const asset=await ingestLocalBytes(bytes,path.basename(inputPath));
-  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper:opts['--paper']||(style?'recipe':'auto'),style,reportTexture:opts['--report-texture']||'speckled',qrStyle:opts['--qr-style']||'brand-dots'});
+  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper:opts['--paper']||(style?'recipe':'auto'),style,reportTexture:opts['--report-texture']||'speckled',qrStyle:opts['--qr-style']||'ink-dots'});
   fs.mkdirSync(path.dirname(out),{recursive:true});
   try{fs.writeFileSync(out,result.zip,{flag:'wx'});}
   catch(e){if(fs.existsSync(out))try{fs.unlinkSync(out)}catch{};throw e;}
