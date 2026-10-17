@@ -69,7 +69,9 @@ test('3-ink landscape and 2-ink portrait synthetic fixtures preserve native aspe
     assert.equal(result.manifest.output.resampled,false);
     assert.equal(result.manifest.inks.length,count);
     assert.ok(result.manifest.inks.every(i=>i.registration.x===0&&i.registration.rotate===0));
-    assert.equal(result.manifest.report.orientation,'landscape');
+    assert.equal(result.manifest.report.orientation,h>w?'portrait':'landscape');
+    assert.equal(result.manifest.report.widthMm,h>w?210:297);
+    assert.equal(result.manifest.report.heightMm,h>w?297:210);
     const zip=await JSZip.loadAsync(result.zip);
     for(const ink of result.manifest.inks){
       const p=Probe.inspect(await zip.file(ink.screened).async('nodebuffer'));
@@ -127,4 +129,51 @@ test('CLI export writes one non-overwriting complete ZIP and refuses mismatched 
       '--expected-sha256','0'.repeat(64),'--out',path.join(tmp,'bad.zip')],{stdio:'pipe'}),/Command failed/);
     assert.equal(fs.existsSync(path.join(tmp,'bad.zip')),false);
   }finally{fs.rmSync(tmp,{recursive:true,force:true});}
+});
+
+test('report style: portrait and landscape A4, exact recipe attachments, no rounded cards',async()=>{
+  const configs=[['A',140,90,'landscape',841.89,595.28],['C',90,160,'portrait',595.28,841.89]];
+  for(const [id,w,h,expected,pw,ph] of configs){
+    const result=await prepare(sample(w,h),recipe(id),screen(id));
+    const archive=await JSZip.loadAsync(result.zip);
+    const pdfBytes=await archive.file('report/separation-sheet.pdf').async('nodebuffer');
+    const pdf=await PDFDocument.load(pdfBytes);
+    assert.equal(result.manifest.report.orientation,expected);
+    assert.ok(Math.abs(pdf.getPage(0).getWidth()-pw)<.03);
+    assert.ok(Math.abs(pdf.getPage(0).getHeight()-ph)<.03);
+    assert.equal(result.manifest.report.embeddedRecipes,true);
+    assert.equal(result.manifest.report.qrDestination,
+      'https://github.com/yigit-denktas/stipra/blob/main/docs/PRINT-PACKAGE-v1.md');
+    assert.match(pdfBytes.toString('latin1'),/EmbeddedFiles/);
+    for(const name of ['inks.json','screens.json','proof-screens.json','replay.json'])
+      assert.ok(pdfBytes.includes(Buffer.from(name)),'missing attached settings '+name);
+    const html=await archive.file('report/separation-sheet.html').async('string');
+    assert.ok(html.includes('IBM')===false || html.includes('Plex'));
+    assert.doesNotMatch(html,/border-radius/);
+    assert.match(html,new RegExp('size:A4 '+expected));
+    assert.equal(result.manifest.paperSelection.id!==undefined,true);
+  }
+});
+test('paper suggestions change report substrate but never production ink geometry or original bytes',async()=>{
+  const data=sample(),i=recipe('A'),screens=screen('A');
+  const warm=await prepare(data,i,screens,{paper:'linen'});
+  const cold=await prepare(data,i,screens,{paper:'chalk'});
+  const wp=await JSZip.loadAsync(warm.zip),cp=await JSZip.loadAsync(cold.zip);
+  assert.equal(warm.manifest.paperSelection.id,'linen');
+  assert.equal(cold.manifest.paperSelection.id,'chalk');
+  assert.notDeepEqual(await wp.file('proof/paper.png').async('nodebuffer'),
+    await cp.file('proof/paper.png').async('nodebuffer'));
+  assert.deepEqual(await wp.file('source/original.png').async('nodebuffer'),data);
+  for(let k=0;k<warm.manifest.inks.length;k++){
+    const wi=warm.manifest.inks[k],ci=cold.manifest.inks[k];
+    assert.deepEqual(await wp.file(wi.plate).async('nodebuffer'),await cp.file(ci.plate).async('nodebuffer'));
+    assert.deepEqual(await wp.file(wi.screened).async('nodebuffer'),await cp.file(ci.screened).async('nodebuffer'));
+  }
+});
+test('paper source heuristic is deterministic, documented and has explicit overrides',()=>{
+  const Paper=require('../src/report-paper.js'),px=new Uint8ClampedArray([30,100,220,255,30,70,240,255]);
+  assert.deepEqual(Paper.select(px,'#ffffff','auto'),Paper.select(px,'#ffffff','auto'));
+  assert.equal(Paper.select(px,'#abcdef','recipe').hex,'#abcdef');
+  assert.equal(Paper.select(px,'#ffffff','rag').id,'rag');
+  assert.throws(()=>Paper.select(px,'#ffffff','random'),/paper/);
 });
