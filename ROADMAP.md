@@ -27,7 +27,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Raster dot, reverse, line and hybrid screens of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | **Implemented — Node/Chromium screen masks, real CLI and browser controls** | Done |
 | Native vector facet screening (SVG) | [#28](https://github.com/yigit-denktas/stipra/issues/28) | Planned — separate from raster screens | P1 |
 | Full-frame raster plates, native scale and optional external registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | **CLI implemented; owner-image and physical validation pending** | P0 verification |
-| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **CLI generated; visual acceptance pending** | P0 verification |
+| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Portrait/landscape A4 + paper texture, embedded recipes and QR implemented in #45 PR; owner review pending** | P0 verification |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Partial foundation | P0 |
 | Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Planned | P0 |
 | Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) | Design proposal; no style engine yet | P1 · scope before implementation |
