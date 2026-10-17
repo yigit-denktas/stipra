@@ -2,6 +2,7 @@
 'use strict';
 const fs=require('node:fs'),{PDFDocument,rgb}=require('pdf-lib');
 const fontkit=require('@pdf-lib/fontkit'),QRCode=require('qrcode');
+const {createFont}=require('fonteditor-core');const zlib=require('node:zlib');
 const Paper=require('./report-paper.js');
 const A4={landscape:[841.88976,595.27559],portrait:[595.27559,841.88976]};
 const FIXED=new Date('2000-01-01T00:00:00Z');
@@ -11,6 +12,7 @@ const pdfColor=hex=>rgb(...color(hex));
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=v=>Number(v).toFixed(1);
 const fontFile=(family,weight)=>fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-latin-'+weight+'-normal.woff'));
+const truetype=(family)=>Buffer.from(createFont(fontFile(family,400),{type:'woff',inflate:zlib.inflateSync}).write({type:'ttf'}));
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
 function htmlReport(cards,m){
   const font=fontFile('ibm-plex-sans',400).toString('base64'),mono=fontFile('ibm-plex-mono',400).toString('base64');
@@ -40,8 +42,8 @@ async function pdfReport(cards,m){
   pdf.registerFontkit(fontkit);
   pdf.setTitle('Stiprā / ink study');pdf.setCreator('Stiprā report-layout v2');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
-  const regular=await pdf.embedFont(fontFile('ibm-plex-sans',400));
-  const mono=await pdf.embedFont(fontFile('ibm-plex-mono',400));
+  const regular=await pdf.embedFont(truetype('ibm-plex-sans'));
+  const mono=await pdf.embedFont(truetype('ibm-plex-mono'));
   const dims=A4[m.orientation],[W,H]=dims,margin=29,cw=W-2*margin;
   const [page,...unused]=[pdf.addPage(dims)],paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
   const fg=rgb(.14,.17,.15);
