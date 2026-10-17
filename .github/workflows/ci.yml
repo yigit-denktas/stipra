@@ -15,6 +15,7 @@ jobs:
       - run: node --check examples/prehnite-v8/src/engine.js
       - run: node --check examples/prehnite-v8/app.js
       - run: npm install --no-audit --no-fund
+      - run: node --check scripts/generate-stipra-mark.js
       - run: node --check src/core.js
       - run: node --check src/separation.js
       - run: node --check src/screening.js
