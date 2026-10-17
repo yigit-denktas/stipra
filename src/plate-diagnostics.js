@@ -27,7 +27,7 @@
     const {width,height,masks}=result,pixels=width*height,opts=options(settings);
     const ids=new Set();
     for(const mask of masks){
-      if(!mask||typeof mask.id!=='string'||ids.has(mask.id)||!(mask.coverage instanceof Uint8Array)||
+      if(!mask||typeof mask.id!=='string'||ids.has(mask.id)||Object.prototype.toString.call(mask.coverage)!=='[object Uint8Array]'||
         mask.coverage.length!==pixels)fail('unique masks must be full-frame Uint8Array');
       ids.add(mask.id);
     }
