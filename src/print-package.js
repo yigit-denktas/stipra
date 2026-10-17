@@ -86,9 +86,9 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   add('source/original.'+(ext==='svg'?'txt':ext),originalBytes);
   const original=await png(asset.rgba,w,h,dpi),proof=await png(proofScreen.preview,w,h,dpi);
   add('source/normalized.png',original);add('proof/composite.png',proof);
-  const paper=await png(paperRGBA(w,h,sep.recipe.paper),w,h,dpi);add('proof/paper.png',paper);
+  const paperImage=await png(paperRGBA(w,h,sep.recipe.paper),w,h,dpi);add('proof/paper.png',paperImage);
   const cards=[{name:'Original',bytes:original},{name:'Simulated overprint',bytes:proof},
-    {name:'Paper / substrate',bytes:paper,note:'not a physical ink'}],inks=[];
+    {name:'Paper / substrate',bytes:paperImage,note:'not a physical ink'}],inks=[];
   for(let i=0;i<sep.masks.length;i++){
     const ink=sep.masks[i],s=screened.masks[i],name=String(i+1).padStart(2,'0')+'-'+clean(ink.id);
     const mono=await png(Sep.plateRGBA(ink.coverage),w,h,dpi),scr=await png(Sep.plateRGBA(s.coverage),w,h,dpi);
