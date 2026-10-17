@@ -43,7 +43,7 @@ test('build copies exact source JS, preserves real script order and is determini
     }
     const html=fs.readFileSync(path.join(out,'stipra/index.html'),'utf8');
     const tags=[...html.matchAll(/<script\s+src="([^"]+)"/g)].map(m=>m[1]);
-    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/styles.js','./assets/app.js']);
+    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/styles.js','./assets/plate-diagnostics.js','./assets/app.js']);
   }finally{fs.rmSync(out,{force:true,recursive:true});}
 });
 
@@ -53,6 +53,8 @@ test('Stipra layout keeps one source of truth and exposes distinct artwork, plat
   assert.match(html,/id="hero"\s+class="hero-grid"/);
   assert.match(html,/id="plates"\s+class="plate-grid"/);
   assert.match(html,/id="inspector"\s+class="inspector"/);
+  assert.match(html,/id="diagnostics"/);
+  assert.match(js,/StipraDiagnostics\.inspect/);
   assert.match(html,/grid-template-columns:minmax\(0,1fr\) minmax\(280px,318px\)/);
   assert.match(html,/@media\(max-width:680px\)/);
   assert.match(html,/max-width:100%/);
