@@ -70,14 +70,14 @@ async function pdfReport(cards,m){
   const yLabel=H-139,gap=14,half=(cw-gap)/2;
   put('01  SOURCE',margin,yLabel,8,mono);
   put('02  DIGITAL OVERPRINT',margin+half+gap,yLabel,8,mono);
-  const heroHeight=portrait?370:182,heroY=yLabel-10-heroHeight;
+  const heroHeight=portrait?350:165,heroY=yLabel-10-heroHeight;
   await drawImage(cards[0],margin,heroY,half,heroHeight);
   await drawImage(cards[1],margin+half+gap,heroY,half,heroHeight);
   line(heroY-5,margin,half);line(heroY-5,margin+half+gap,half);
   const plateLabel=heroY-24;
   put('03  INDIVIDUAL PLATES / PAPER IS NOT AN INK',margin,plateLabel,8,mono);
   const sample=cards.slice(2),count=Math.min(4,sample.length),g=11,w=(cw-(count-1)*g)/count;
-  const height=portrait?146:90,bottom=plateLabel-11-height;
+  const height=portrait?120:80,bottom=plateLabel-11-height;
   for(let i=0;i<count;i++){
     const c=sample[i],x=margin+i*(w+g);
     await drawImage(c,x,bottom+14,w,height-17);
