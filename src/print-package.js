@@ -2,6 +2,7 @@
 'use strict';
 const crypto=require('node:crypto'),{Canvas,loadImage}=require('skia-canvas');
 const JSZip=require('jszip');
+const {freezeProject}=require('./source-project');
 const Report=require('./report-layout.js'),Paper=require('./report-paper.js'),Diagnostics=require('./plate-diagnostics.js'),QR=require('./report-qr.js');
 const Sep=require('./separation.js'),Screen=require('./screening.js');
 const A4=[841.88976,595.27559],FIXED=new Date('2000-01-01T00:00:00Z');
@@ -57,7 +58,7 @@ async function marked(pngBytes,w,h,pad,dpi){
   }
   return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
-async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots',authored=null}){
+async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots',authored=null,sourceProject=null}){
   validate(dpi,marksMm);Paper.textureStyle(reportTexture);
   if(!QR.STYLES.includes(qrStyle))throw Error('print: unknown QR style');
   if(!Buffer.isBuffer(originalBytes)||!originalBytes.length)throw Error('print: original bytes required');
@@ -71,7 +72,7 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
-    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|txt|json|html|pdf)$/i.test(name)||name.includes('..')||parts.has(name))
+    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|txt|json|html|pdf|bin)$/i.test(name)||name.includes('..')||parts.has(name))
       throw Error('print: invalid or repeated path '+name);
     parts.set(name,Buffer.from(data));
   };
@@ -111,7 +112,17 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   add('report/diagnostics.json',json(plateDiagnostics));
   add('licenses/IBM-Plex-OFL.txt',require('./report-fonts.js').license());
   if(style)add('recipe/style.json',json(style));
-  const manifest={contract:'stipra-print-package-v1',displayName:'Stiprā',
+  let project=null;
+  if(sourceProject){
+    const artifacts=sourceProject.artifacts.map(({bytes,...a})=>{
+      const path='source/project/files/'+a.id+'.bin';add(path,bytes);return {...a,path,bytes:bytes.length,sha256:digest(bytes)};
+    });
+    const descriptor={contract:'stipra-source-project-v1',version:1,frame:sourceProject.frame,artifacts,relationships:sourceProject.relationships,
+      snapshotSha256:info.sha,execution:'inert; never automatically execute source artifacts',origin:'caller-declared; byte hashes do not authenticate origin'};
+    const bytes=json(descriptor);add('source/project.json',bytes);
+    project={path:'source/project.json',sha256:digest(bytes),artifacts:artifacts.length};
+  }
+  const manifest={...(project?{sourceProject:project}:{}),contract:'stipra-print-package-v1',displayName:'Stiprā',
     source:{...asset.metadata,sha256:info.sha},output:print,
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
     diagnostics:{path:'report/diagnostics.json',contract:plateDiagnostics.contract,
@@ -136,17 +147,19 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   return {zip:bytes,manifest,parts};
 }
 /** Generates the shared image-input package without accepting precomputed mask overrides. */
-function generate({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle}){
-  return build({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle});
+function generate({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject}){
+  sourceProject=freezeProject(sourceProject,asset.metadata.oriented.width,asset.metadata.oriented.height);
+  return build({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject});
 }
 /**
  * Archives authored coverages and uses the same proof/master/report writer as image inputs.
  * @param options - The full-frame layer input, screen recipe and optional output settings.
  * @returns The package with lossless source masks, normalized recipes and aligned masters.
  */
-async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='recipe',reportTexture='speckled',qrStyle='ink-dots',captureMetadata=null}){
+async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='recipe',reportTexture='speckled',qrStyle='ink-dots',captureMetadata=null,sourceProject=null}){
   const {renderLayers}=require('./sdk/index.js');
   const source=renderLayers(input,{dpi}),{width,height}=source.proof;
+  sourceProject=freezeProject(sourceProject,width,height);
   const descriptor={contract:'stipra-authored-source-v1',width,height,paper:source.recipe.inks.paper,
     polarity:'print grayscale: white means no ink, black means full ink',
     inks:source.plates.map((ink,i)=>({id:ink.id,name:ink.name,color:ink.color,
@@ -159,6 +172,6 @@ async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='
     masks:source.plates.map(x=>({id:x.id,name:x.name,color:x.color,coverage:x.coverage,source:'authored'})),
     stats:{inks:source.diagnostics.plates.map(x=>({id:x.id,meanCoverage:x.meanCoverage}))}};
   return build({originalBytes,asset:{metadata,rgba:source.proof.rgba},inkRecipe:source.recipe.inks,screenRecipe,dpi,marksMm,paper,reportTexture,qrStyle,
-    authored:{separated,descriptor}});
+    authored:{separated,descriptor},sourceProject});
 }
 module.exports={generate,generateLayers,printIntent,validate,screenConfigs,physicalPNG,A4};

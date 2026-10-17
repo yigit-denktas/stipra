@@ -109,12 +109,13 @@ export function drawProof(rendered,target,placement={}){
  * @param loadExporter - The explicit async loader for Stiprā's optional export module.
  * @returns The aligned package bytes and manifest.
  */
-export async function exportSnapshot(rendered,loadExporter){
+export async function exportSnapshot(rendered,loadExporter,options={}){
   if(typeof loadExporter!=='function')fail('missing-exporter','provide an explicit optional exporter loader');
   const shot=rendered.capture,raw=shot.input;
   const input=shot.kind==='image'?{...raw,rgba:raw.rgba.slice()}:{...raw,inks:raw.inks.map(x=>({...x,coverage:x.coverage.slice()}))};
   const recipe=JSON.parse(JSON.stringify(rendered.result.recipe)),metadata=JSON.parse(JSON.stringify(shot.metadata));
+  const sourceProject=options.sourceProject==null?null:structuredClone(options.sourceProject);
   const exporter=await loadExporter();
   if(typeof exporter.generateSketch!=='function')fail('invalid-exporter','loaded module must expose generateSketch');
-  return exporter.generateSketch({input,recipe,metadata});
+  return exporter.generateSketch({input,recipe,metadata,sourceProject});
 }

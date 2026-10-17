@@ -1,6 +1,6 @@
 # Preserve construction data before estimating it
 
-Research and architecture decision, 17 October 2026. Parent #81; follow-ups #82–#86. This note evaluates an owner-supplied discussion using primary specifications and the current implementation. The private discussion and owner artwork are not redistributed here.
+Research and architecture decision, 17 October 2026. Implementation/feasibility follow-through: [structured inputs](STRUCTURED-INPUTS.md). Parent #81; follow-ups #82–#86. This note evaluates an owner-supplied discussion using primary specifications and the current implementation. The private discussion and owner artwork are not redistributed here.
 
 Stiprā should accept what the artist already knows, then make explicit ink decisions. Keep drawing, scene creation, capture and model inference in the existing host. The lean core continues to consume normalized pixels or final per-ink coverage; optional adapters interpret richer source material.
 
@@ -74,10 +74,10 @@ Source-project attachments must be explicitly selected, bounded and hashed; neve
 | Work | Status / exit evidence |
 | --- | --- |
 | #82: PNG interpretation | Implemented in this change; original procedural fixtures verify precision metadata and pre-decode rejection in Node/browser |
-| #83: named regions → inks | Next candidate: same-frame masks, explicit combination rules, three-ink procedural forest and replay tests; no inference/codecs |
+| #83: named regions → inks | Implemented local alpha: same-frame masks, explicit combination rules, three-ink procedural forest and replay tests; no inference/codecs |
 | #84: source-project sidecars | Optional package extension; explicit attachments, hashes, relationships, privacy and no automatic execution |
-| #85: provenance validation | Deferred optional local adapter; reuse CAI tools after license/size/offline review and signed/tampered fixtures |
-| #86: layered/auxiliary formats | Deferred feasibility: OpenRaster subset, host-side Apple/OpenEXR extraction, source alignment, precision and color reference tests |
+| #85: provenance validation | Completed local c2patool pilot and size/license/offline evaluation; browser adapter deferred |
+| #86: layered/auxiliary formats | Completed bounded feasibility: OpenRaster subset, host-side Apple/OpenEXR extraction, source alignment, precision and color reference tests |
 | #75 / #28 / #12 | Reuse existing Processing, vector and broad interchange work rather than duplicating it |
 
 Native HEIC/RAW/EXR/PSD editing, full scene graphs, depth estimation, automatic segmentation, AI-origin classifiers and a new drawing IDE are outside this decision. No new dependencies, codecs, image generation or core API fields are added. An optional adapter earns implementation through a real artwork and a reproducible test, not through the number of formats it advertises.
