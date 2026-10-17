@@ -53,7 +53,7 @@ test('2-ink ZIP contains original bytes, two unique aligned grayscale masters, r
   }
   assert.notDeepEqual(await zip.file(files[0]).async('nodebuffer'),await zip.file(files[2]).async('nodebuffer'));
   const pdf=await PDFDocument.load(await zip.file('report/separation-sheet.pdf').async('nodebuffer'));
-  assert.equal(pdf.getPageCount(),1);
+  assert.ok(pdf.getPageCount()>=2);
   assert.ok(Math.abs(pdf.getPage(0).getWidth()-841.89)<.02);
   assert.ok(Math.abs(pdf.getPage(0).getHeight()-595.28)<.02);
   const html=(await zip.file('report/separation-sheet.html').async('string'));

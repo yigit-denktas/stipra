@@ -91,3 +91,23 @@ For large files, rendering can consume substantial time and memory: decoded sour
 This feature uses the **same** Stiprā separation/screening modules as the browser preview. For packaging and PDF structure it reuses [JSZip](https://stuk.github.io/jszip/) under its **MIT alternative** and [pdf-lib](https://pdf-lib.js.org/) under MIT, not another custom ZIP/PDF codec or any p5.riso source. See [project licensing notes](LICENSING.md) and [architecture](ARCHITECTURE.md).
 
 **Decision:** pass the three owner-image digital validation gates and real printer checks before describing Stiprā output as “press ready.”
+
+
+## Report typography and pagination
+
+The canonical report uses IBM Plex Sans Bold for the provisional wordmark and headings, Plex Sans Regular for prose and labels, and Plex Mono Regular for measurements. Technical PDF text is at least 9pt. Latin Extended glyphs, including `ā`, are merged from the authentic font subsets; no font substitution or fabricated lettering is used. This report choice does not approve a final brand identity.
+
+PDFs separate the source/proof/plates from recipe and provenance pages. Additional plates and long settings continue onto further pages instead of shrinking type. All 2–8 physical ink passes are retained. Paper is described as the substrate, not another physical pass. Inspection thumbnails preserve aspect ratio and are explicitly distinguished from full-resolution production masters.
+
+Every page links its QR to the public reproduction guide. The complete source SHA-256, normalized recipe attachments, actual DPI, master dimensions and effective LPI are retained. Solid passes state **screen off**. Available coverage/overlap warnings from `src/plate-diagnostics.js` appear in both report formats; these are editorial diagnostics, not press safety limits. The PDF also embeds `report-layout.json`, an audit of text sizes, coordinates and image rectangles.
+
+To regenerate private production reports from the frozen #55 comparison recipes:
+
+```sh
+node scripts/review-owner-reports.js \
+  --sources /private/originals \
+  --recipes /private/prior-comparison-output \
+  --out /private/new-report-review
+```
+
+This refuses source or output locations inside the repository and checks all three original photo hashes before rendering. It uses the canonical Node importer and print-package engine, not the separate Python comparison renderer. Import/ICC differences remain tracked in #44; this report change does not claim to resolve them. These are A4 production inspection reports, separate from the square/landscape/portrait typography study in #55.

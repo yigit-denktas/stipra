@@ -105,7 +105,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
   const info={width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
     sha:digest(originalBytes),name:asset.metadata.sourceName,paper:stock,
     orientation:Report.orientation(w,h),inkRecipe:sep.recipe,
-    screenRecipe:configs.production,proofRecipe:configs.proof,
+    screenRecipe:configs.production,proofRecipe:configs.proof,diagnostics:plateDiagnostics,
     settings:inks.map((ink,i)=>({name:ink.name,color:ink.color,source:ink.source,
       coverage:ink.screenedMeanCoverage,mode:screened.masks[i].screen.mode,
       pitch:screened.masks[i].screen.pitch,angle:screened.masks[i].screen.angle}))};
@@ -127,7 +127,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     report:{pdf:'report/separation-sheet.pdf',html:'report/separation-sheet.html',
       widthMm:info.orientation==='portrait'?210:297,heightMm:info.orientation==='portrait'?297:210,
       orientation:info.orientation,fonts:'IBM Plex Sans / IBM Plex Mono (SIL OFL 1.1)',
-      embeddedRecipes:true,qrDestination:Report.GUIDE,inspectionOnly:true},
+      embeddedRecipes:true,qrDestination:Report.GUIDE,inspectionOnly:true,minTextPt:9,layoutVersion:3},
     files:[...parts].sort(([a],[b])=>a.localeCompare(b)).map(([name,data])=>({path:name,bytes:data.length,sha256:digest(data)})),
     uncalibrated:true,notes:['Digital RGB overprint is not a calibrated press proof.',
       'Production plates always use zero registration offset.','Native pixel dimensions are preserved; no resizing performed.']};
