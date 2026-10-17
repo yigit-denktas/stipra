@@ -83,6 +83,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 <script src="../../src/import/asset.js"></script>
 <script src="../../src/separation.js"></script>
 <script src="../../src/screening.js"></script>
+<script src="../../src/styles.js"></script>
 </head>
 
 <body>
@@ -120,6 +121,15 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
   <aside id="inspector" class="inspector" aria-label="Ink and print settings">
     <section class="panel">
       <h2>Inks &amp; paper</h2>
+      <div class="field"><label for="style">Starting style (experimental)</label>
+        <select id="style"><option value="">Manual separation</option>
+          <option value="portrait-duotone">Portrait Duotone</option>
+          <option value="editorial-halftone">Editorial Halftone</option>
+          <option value="bold-spot-poster">Bold Spot Poster</option>
+          <option value="clean-linework">Clean Linework</option>
+        </select>
+        <small id="style-note" class="muted">Choose an intent, then refine the individual ink plates.</small>
+      </div>
       <div class="field"><label for="mode">Separation mode</label>
         <select id="mode"><option value="spot">Two spot inks</option><option value="cmyk">Four-color CMYK</option></select>
       </div>
@@ -140,7 +150,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         </select>
       </div>
       <div class="ink-grid">
-        <div class="field"><label for="screen-pitch">Dot/line pitch (px)</label><input id="screen-pitch" type="number" min="4" max="128" step="1" value="12"></div>
+        <div class="field"><label for="screen-pitch">Dot/line pitch (px)</label><input id="screen-pitch" type="number" min="4" max="128" step=".01" value="12"></div>
         <div class="field"><label for="screen-angle">Global angle (°)</label><input id="screen-angle" type="number" min="-180" max="180" step="1" value="0"></div>
         <div class="field"><label for="screen-jitter">Dot jitter (0–0.3)</label><input id="screen-jitter" type="number" min="0" max=".3" step=".01" value="0"></div>
         <div class="field"><label for="screen-seed">Screen seed</label><input id="screen-seed" type="number" min="0" max="4294967295" step="1" value="142"></div>
