@@ -2,7 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const Info=require('../scripts/build-site-info'),ledger=require('../docs/data/delivery-ledger.json');
 test('delivery ledger preserves original denominator and rejects dependency gaps/cycles',()=>{
-  assert.equal(Info.validate().originalClosed,5);
+  assert.equal(Info.validate().originalClosed,6);
   const missing=structuredClone(ledger);missing.tasks[0].dependsOn=[999];assert.throws(()=>Info.validate(missing),/Missing prerequisite/);
   const cycle=structuredClone(ledger);cycle.tasks[0].dependsOn=[2];assert.throws(()=>Info.validate(cycle),/cycle/);
   for(const id of [3,4,10,17,28,31,46,57,75])assert.equal(ledger.tasks.find(t=>t.issue===id).optional,true);
@@ -19,6 +19,6 @@ test('information pages and all navigation use valid relative destinations on ei
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
     const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
-    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/Opens:/);assert.match(roadmap,/5\/14/);
+    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/Opens:/);assert.match(roadmap,/6\/14/);
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });

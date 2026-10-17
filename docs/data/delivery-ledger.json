@@ -227,15 +227,15 @@
     {
       "issue": 9,
       "title": "A4 landscape print-separation sheet in HTML and PDF",
-      "trackerState": "open",
-      "deliveryState": "implemented-awaiting-acceptance",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         8
       ],
-      "note": "Reports and shared writer implemented and visually reviewed. Reconcile final acceptance separately from the broader #8 vector issue.",
-      "sourceUpdatedAt": "2026-10-17T10:22:16Z"
+      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12.",
+      "sourceUpdatedAt": "2026-10-17T16:18:17Z"
     },
     {
       "issue": 10,
