@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "dpi": 300,
+  "marksMm": 0,
+  "paper": "rag",
+  "exports": {"formats": ["png", "jpg", "webp", "svg"], "scale": 1, "alpha": "paper", "vectorPlates": true},
+  "variants": [
+    {"id": "tonal-key", "style": "editorial-halftone", "styleVariant": "tonal-key", "seed": 142},
+    {"id": "warm-third", "style": "editorial-halftone", "styleVariant": "warm-third", "seed": 142}
+  ]
+}

@@ -70,9 +70,9 @@ async function run(){
          if(state.state==='fail')throw Error('Browser smoke failed: '+state.output);
          if(state.state==='pass'){
            if(state.output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))throw Error('Unexpected smoke result: '+state.output);
-           if(['examples/alpha/browser-smoke.html','examples/regions/browser-smoke.html'].includes(page)){
+           if(['examples/alpha/browser-smoke.html','examples/regions/browser-smoke.html','examples/export-validation/browser-smoke.html'].includes(page)){
              const value=await call('Runtime.evaluate',{expression:'document.getElementById("evidence").textContent',returnByValue:true},sessionId);
-             const evidence=JSON.parse(value.result.value),dir=path.join(root,page==='examples/regions/browser-smoke.html'?'out/structured-inputs':'out/alpha-validation');fs.mkdirSync(dir,{recursive:true});
+             const evidence=JSON.parse(value.result.value),dir=path.join(root,page==='examples/regions/browser-smoke.html'?'out/structured-inputs':page==='examples/export-validation/browser-smoke.html'?'out/export-workflow':'out/alpha-validation');fs.mkdirSync(dir,{recursive:true});
              if(evidence.environment)evidence.environment.repositoryCommit=spawnSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).stdout.trim();
              if(page==='examples/regions/browser-smoke.html'){
                await call('Page.navigate',{url:url.replace('/examples/regions/browser-smoke.html','/dist/stipra/regions/index.html')},sessionId);
@@ -80,6 +80,13 @@ async function run(){
                const screenshot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'regions-desktop.png'),Buffer.from(screenshot.data,'base64'));
                await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true},sessionId);
                const mobile=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'regions-mobile.png'),Buffer.from(mobile.data,'base64'));
+             }
+             if(page==='examples/export-validation/browser-smoke.html'){
+               await call('Page.navigate',{url:url.replace('/examples/export-validation/browser-smoke.html','/out/export-workflow/compare/index.html')},sessionId);
+               await new Promise(resolve=>setTimeout(resolve,500));
+               const desktop=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'comparison-desktop.png'),Buffer.from(desktop.data,'base64'));
+               await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true},sessionId);
+               const mobile=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'comparison-mobile.png'),Buffer.from(mobile.data,'base64'));
              }
              fs.writeFileSync(path.join(dir,'browser-evidence.json'),JSON.stringify(evidence,null,2)+'\n');
            }

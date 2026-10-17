@@ -48,9 +48,11 @@ test('authored canvas polarity, alpha and mismatched frames are explicit',()=>{
 test('snapshot export freezes source and recipes before awaiting a lazy loader',async()=>{
   const a=canvas(),ctx=a.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,4,3);
   const rendered=adapter.renderCanvas(a,{style:{id:'clean-linework'},seed:42});let release,called=0;
-  const exported=adapter.exportSnapshot(rendered,()=>{called++;return new Promise(resolve=>{release=resolve;});});
+  const options={exports:{formats:['png'],scale:2,alpha:'source',vectorPlates:true}};
+  const exported=adapter.exportSnapshot(rendered,()=>{called++;return new Promise(resolve=>{release=resolve;});},options);
+  options.exports.formats[0]='jpg';options.exports.scale=3;
   rendered.capture.input.rgba.fill(0);rendered.result.recipe.dpi=600;ctx.clearRect(0,0,4,3);
-  release({generateSketch:async data=>{assert.equal(data.input.rgba[3],255);assert.equal(data.recipe.dpi,300);return {bytes:new Uint8Array([1]),manifest:{}};}});
+  release({generateSketch:async data=>{assert.equal(data.input.rgba[3],255);assert.equal(data.recipe.dpi,300);assert.deepEqual(data.exports.formats,['png']);assert.equal(data.exports.scale,2);return {bytes:new Uint8Array([1]),manifest:{}};}});
   assert.equal((await exported).bytes[0],1);assert.equal(called,1);
 });
 test('WEBGL, tainted and unsupported-color canvases fail with actionable errors',()=>{

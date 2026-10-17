@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Stiprā export parity</title><body><output id="out">PENDING</output><pre id="evidence" hidden></pre><script type="module">
+import {generate} from '/dist/stipra/sketches/assets/print-export.mjs';
+import {artwork,recipe,screen} from '../workflows/fixture.mjs';
+const base64=b=>{let text='';for(let i=0;i<b.length;i+=8192)text+=String.fromCharCode(...b.subarray(i,i+8192));return btoa(text);};
+try{
+  const evidence={contract:'stipra-browser-proof-exports-v1',userAgent:navigator.userAgent,cases:[]};
+  for(const count of [2,3,4]){
+    const input=artwork(count===3?33:49,count===3?49:33),canvas=document.createElement('canvas');canvas.width=input.width;canvas.height=input.height;
+    const ctx=canvas.getContext('2d'),p=ctx.createImageData(input.width,input.height);p.data.set(input.rgba);ctx.putImageData(p,0,0);
+    const originalBytes=new Uint8Array(await (await new Promise(resolve=>canvas.toBlob(resolve,'image/png'))).arrayBuffer());
+    const rgba=ctx.getImageData(0,0,input.width,input.height).data;
+    const asset={rgba,metadata:{contract:'stipra-import-v1',format:'png',sourceName:'procedural.png',oriented:{width:input.width,height:input.height},intrinsic:{width:input.width,height:input.height},alpha:true,pixels:{colorSpace:'srgb',bitDepth:8},profile:{kind:'unspecified'}}};
+    const result=await generate({originalBytes,asset,inkRecipe:recipe(count),screenRecipe:screen,dpi:300,paper:'recipe',exports:{formats:['png','jpg','webp','svg'],scale:count-1,alpha:'source',vectorPlates:true}});
+    if(result.manifest.exports.proofs.length!==4)throw Error('Missing proof formats');
+    evidence.cases.push({count,zipBase64:base64(result.bytes)});
+  }
+  document.getElementById('evidence').textContent=JSON.stringify(evidence);document.body.dataset.smoke='pass';document.getElementById('out').textContent='BROWSER_EXPORTS_PASS';
+}catch(e){document.body.dataset.smoke='fail';document.getElementById('out').textContent=e.stack;}
+</script></body></html>

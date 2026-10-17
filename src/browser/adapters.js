@@ -3,7 +3,12 @@ const {Buffer}=require('buffer/'),{sha256}=require('@noble/hashes/sha256');
 class Canvas {
   constructor(width,height){
     const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
-    canvas.toBuffer=async()=>Buffer.from(await (await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('PNG encoding failed')),'image/png'))).arrayBuffer());
+    canvas.toBuffer=async(format='png',options={})=>{
+      const mime={png:'image/png',jpg:'image/jpeg',webp:'image/webp'}[format];
+      if(!mime)throw Error('Unsupported browser encoder '+format);
+      const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b&&b.type===mime?resolve(b):reject(Error('Requested browser encoder unavailable: '+format)),mime,options.quality??.92));
+      return Buffer.from(await blob.arrayBuffer());
+    };
     return canvas;
   }
 }

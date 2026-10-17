@@ -81,3 +81,5 @@ The hosted examples use an unmodified, replaceable p5.js 1.11.11 script. Its ful
 ## Performance and acceptance
 
 See [the measured alpha evaluation](../../docs/CREATIVE-CODING-ALPHA.md) for declared sizes, compatibility, memory limits, export parity and the existing-tool comparison. Rendering is synchronous; cache unchanged proofs and use a bounded draft with an explicit full-resolution final. The optional [draft example](../../examples/sketches/draft.mjs) freezes the original frame, labels draft resampling and never exports the reduced buffer. It is an example helper, not part of this package API.
+
+Optional package derivatives can be requested with `exportSnapshot(rendered, loadExporter, {exports: {formats: ["png", "jpg", "webp", "svg"], scale: 2, alpha: "paper", vectorPlates: true}})`. Settings are frozen before loading; codecs remain in the optional exporter. Native masters stay unchanged. SVG derivatives are sampled run paths, and JPG/WebP are lossy. See [the export contract](../../docs/CLI-WORKFLOWS.md).

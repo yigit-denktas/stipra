@@ -8,6 +8,7 @@
   function printIntent(w,h,dpi,marksMm){
     validate(dpi,marksMm);
     return {dpi,sourcePixels:{width:w,height:h},origin:{x:0,y:0},trimPixels:{x:0,y:0,width:w,height:h},
+      bleedMm:{top:0,right:0,bottom:0,left:0},bleedGenerated:false,
       trimMm:{width:Number((w*25.4/dpi).toFixed(4)),height:Number((h*25.4/dpi).toFixed(4))},resampled:false,registration:{x:0,y:0,rotate:0},marksMm,profile:null};
   }
   function screenConfigs(raw,ids){

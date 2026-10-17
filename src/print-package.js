@@ -58,8 +58,9 @@ async function marked(pngBytes,w,h,pad,dpi){
   }
   return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
-async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots',authored=null,sourceProject=null}){
+async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots',authored=null,sourceProject=null,exports:exportOptions=null}){
   validate(dpi,marksMm);Paper.textureStyle(reportTexture);
+  if(authored&&exportOptions?.alpha==='source')throw Error('Authored layers have no single source alpha; use paper');
   if(!QR.STYLES.includes(qrStyle))throw Error('print: unknown QR style');
   if(!Buffer.isBuffer(originalBytes)||!originalBytes.length)throw Error('print: original bytes required');
   const {width:w,height:h}=asset.metadata.oriented;
@@ -70,9 +71,10 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
   const plateDiagnostics=Diagnostics.inspect(screened,{dpi,...(authored?{}:{input:{width:w,height:h,rgba:asset.rgba}})});
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
+  if((w+2*pad)*(h+2*pad)>24000000||w+2*pad>20000||h+2*pad>20000)throw Error('Marked sheet exceeds 24 MP / 20000 px budget');
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
-    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|txt|json|html|pdf|bin)$/i.test(name)||name.includes('..')||parts.has(name))
+    if(!/^[a-z0-9/_-]+\.(?:jpg|png|webp|svg|txt|json|html|pdf|bin)$/i.test(name)||name.includes('..')||parts.has(name))
       throw Error('print: invalid or repeated path '+name);
     parts.set(name,Buffer.from(data));
   };
@@ -80,6 +82,8 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   add('source/original.'+(authored?'json':ext==='svg'?'txt':ext),originalBytes);
   if(authored)for(let i=0;i<sep.masks.length;i++)add(authored.descriptor.inks[i].path,
     await png(Sep.plateRGBA(sep.masks[i].coverage),w,h,dpi));
+  const derivatives=exportOptions?await require('./proof-exports').generate({rgba:proofScreen.preview,sourceRGBA:asset.rgba,width:w,height:h,paper:sep.recipe.paper,dpi,options:exportOptions,physicalPNG}):null;
+  if(derivatives)for(const file of derivatives.files)add(file.path,file.bytes);
   const original=await png(asset.rgba,w,h,dpi),proof=await png(proofScreen.preview,w,h,dpi);
   add('source/normalized.png',original);add('proof/composite.png',proof);
   const paperImage=await png(paperRGBA(w,h,sep.recipe.paper),w,h,dpi);add('proof/paper.png',paperImage);
@@ -89,13 +93,18 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
     const ink=sep.masks[i],s=screened.masks[i],name=String(i+1).padStart(2,'0')+'-'+clean(ink.id);
     const mono=await png(Sep.plateRGBA(ink.coverage),w,h,dpi),scr=await png(Sep.plateRGBA(s.coverage),w,h,dpi);
     add('plates/ink-'+name+'.png',mono);add('screened/ink-'+name+'.png',scr);
+    let vector=null;
+    if(derivatives?.settings.vectorPlates){
+      vector='screened/ink-'+name+'.svg';
+      add(vector,require('./vector-samples').svgSamples(Sep.plateRGBA(s.coverage),w,h,{dpi}).text);
+    }
     if(pad)add('plates/marked-'+name+'.png',await marked(scr,w,h,pad,dpi));
     const description=(screened.stats.inks[i].meanCoverage*100).toFixed(1)+'% coverage; '+s.screen.mode+' '+s.screen.pitch+'px @ '+s.screen.angle+'deg';
     cards.push({name:ink.name,bytes:scr,ink:ink.color,note:description});
     inks.push({id:ink.id,name:ink.name,color:ink.color,source:authored?'authored':ink.source,
       meanCoverage:sep.stats.inks[i].meanCoverage,screenedMeanCoverage:screened.stats.inks[i].meanCoverage,
       plate:'plates/ink-'+name+'.png',screened:'screened/ink-'+name+'.png',
-      marked:pad?'plates/marked-'+name+'.png':null,registration:{x:0,y:0,rotate:0}});
+      ...(vector?{vector,vectorRepresentation:'sampled-pixel-run-paths'}:{}),marked:pad?'plates/marked-'+name+'.png':null,registration:{x:0,y:0,rotate:0}});
   }
   const info={reportTexture,qrStyle,sourceKind:authored?'authored':'image',width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
     sha:digest(originalBytes),name:asset.metadata.sourceName,paper:stock,
@@ -124,6 +133,7 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
   }
   const manifest={...(project?{sourceProject:project}:{}),contract:'stipra-print-package-v1',displayName:'Stiprā',
     source:{...asset.metadata,sha256:info.sha},output:print,
+    ...(derivatives?{exports:{settings:derivatives.settings,proofs:derivatives.metadata,masters:'native-frame, zero registration; no derivative scale applied'}}:{}),
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
     diagnostics:{path:'report/diagnostics.json',contract:plateDiagnostics.contract,
       warnings:plateDiagnostics.warnings.length,reviewRequired:plateDiagnostics.warnings.length>0},
@@ -137,26 +147,28 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
       fontLicense:'licenses/IBM-Plex-OFL.txt',embeddedRecipes:true,qrDestination:Report.GUIDE,qr:{style:qrStyle,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},inspectionOnly:true,minTextPt:9,layoutVersion:5,texture:{style:reportTexture,dpi:144,simulation:true},theme:Paper.theme(stock,info.settings)},
     files:[...parts].sort(([a],[b])=>a.localeCompare(b)).map(([name,data])=>({path:name,bytes:data.length,sha256:digest(data)})),
     uncalibrated:true,notes:['Digital RGB overprint is not a calibrated press proof.',
-      'Production plates always use zero registration offset.','Native pixel dimensions are preserved; no resizing performed.']};
+      'Production plates always use zero registration offset.',derivatives?'Native masters are preserved; proof derivative scaling is declared in exports metadata.':'Native pixel dimensions are preserved; no resizing performed.']};
   add('manifest.json',json(manifest));
+  if(parts.size>256||[...parts.values()].some(b=>b.length>64*1024*1024)||[...parts.values()].reduce((n,b)=>n+b.length,0)>256*1024*1024)throw Error('Print package exceeds bounded archive limits');
   const zip=new JSZip();
   for(const [name,data] of [...parts].sort(([a],[b])=>a.localeCompare(b)))
     zip.file(name,data,{date:FIXED,createFolders:false,compression:'DEFLATE'});
   const bytes=await zip.generateAsync({type:'nodebuffer',compression:'DEFLATE',
     compressionOptions:{level:6},platform:'UNIX'});
+  if(bytes.length>64*1024*1024)throw Error('Print ZIP exceeds 64 MiB archive limit');
   return {zip:bytes,manifest,parts};
 }
 /** Generates the shared image-input package without accepting precomputed mask overrides. */
-function generate({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject}){
+function generate({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject,exports:exportOptions}){
   sourceProject=freezeProject(sourceProject,asset.metadata.oriented.width,asset.metadata.oriented.height);
-  return build({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject});
+  return build({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle,sourceProject,exports:exportOptions});
 }
 /**
  * Archives authored coverages and uses the same proof/master/report writer as image inputs.
  * @param options - The full-frame layer input, screen recipe and optional output settings.
  * @returns The package with lossless source masks, normalized recipes and aligned masters.
  */
-async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='recipe',reportTexture='speckled',qrStyle='ink-dots',captureMetadata=null,sourceProject=null}){
+async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='recipe',reportTexture='speckled',qrStyle='ink-dots',captureMetadata=null,sourceProject=null,exports:exportOptions=null}){
   const {renderLayers}=require('./sdk/index.js');
   const source=renderLayers(input,{dpi}),{width,height}=source.proof;
   sourceProject=freezeProject(sourceProject,width,height);
@@ -172,6 +184,6 @@ async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='
     masks:source.plates.map(x=>({id:x.id,name:x.name,color:x.color,coverage:x.coverage,source:'authored'})),
     stats:{inks:source.diagnostics.plates.map(x=>({id:x.id,meanCoverage:x.meanCoverage}))}};
   return build({originalBytes,asset:{metadata,rgba:source.proof.rgba},inkRecipe:source.recipe.inks,screenRecipe,dpi,marksMm,paper,reportTexture,qrStyle,
-    authored:{separated,descriptor},sourceProject});
+    authored:{separated,descriptor},sourceProject,exports:exportOptions});
 }
 module.exports={generate,generateLayers,printIntent,validate,screenConfigs,physicalPNG,A4};

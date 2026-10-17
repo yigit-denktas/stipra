@@ -114,11 +114,10 @@
     }
   ],
   "nextSequence": [
-    "Resolve #14’s three exact native/WASM/prebundle evidence gaps for the export artifacts intended for distribution.",
-    "Complete #11 compare/batch and #12 export matrix; reconcile #8/#9 acceptance using the implemented raster/report capabilities.",
-    "Collect #13 physical observations and #43/#47 artistic acceptance, then version only the recipes justified by that evidence.",
-    "Decide #70 lean-library publication after owner/artist feedback and artifact-specific package/notice checks.",
-    "Keep #28 vector and #75 Java-host research optional; identity work remains subject to owner review."
+    "Resolve #14’s three upstream native/WASM/prebundle provenance gaps for the export artifacts intended for distribution.",
+    "Complete #13’s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
+    "Make #70’s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
+    "Keep #75 Java research, #28 analytic vector screens and identity/paper extensions optional."
   ],
   "tasks": [
     {
@@ -213,16 +212,15 @@
     {
       "issue": 8,
       "title": "Full-frame aligned monochrome ink masters and registration metadata",
-      "trackerState": "open",
-      "deliveryState": "partial",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         7,
         5
       ],
-      "note": "Aligned raster masters, hashes and external marks implemented. True-vector plate scope remains with #28/#12; physical checks remain #13.",
-      "sourceUpdatedAt": "2026-10-16T23:57:55Z"
+      "note": "Native grayscale PNG masters and optional pure sampled-run SVG paths have verified frame, DPI, coverage and zero registration. Marked PNGs preserve trim pixels; bleed is explicitly zero. Analytic screen geometry remains the separate optional #28. Closure is delivered by the CLI/export integration merge."
     },
     {
       "issue": 9,
@@ -253,8 +251,8 @@
     {
       "issue": 11,
       "title": "Agent-safe import, separate, sheet, compare and batch commands",
-      "trackerState": "open",
-      "deliveryState": "partial",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
@@ -263,22 +261,20 @@
         8,
         9
       ],
-      "note": "Import/separate/package/scene/render implemented. Top-level compare/batch and their bounded audit trails remain.",
-      "sourceUpdatedAt": "2026-10-16T21:42:05Z"
+      "note": "Local compare/batch/verify/sheet and existing commands share the writer and versioned JSON results/errors. Inert bounded plans, reproducible packages, explicit partial failures and fresh output paths are covered by CLI tests. Closure is delivered by the CLI/export integration merge."
     },
     {
       "issue": 12,
       "title": "Reproducible PNG, JPG, WebP, pure SVG, PDF and plate bundles",
-      "trackerState": "open",
-      "deliveryState": "partial",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         8,
         9
       ],
-      "note": "Native PNG plates/proof/PDF/HTML/recipe ZIP implemented with parity. Broader JPG/WebP/vector/scaled export matrix remains.",
-      "sourceUpdatedAt": "2026-10-17T13:47:53Z"
+      "note": "PNG/JPG/WebP proof exports at scales 1/2/3, sampled-path SVG proofs/plates, A4 PDF reports and ZIPs are verified with 2/3/4 inks and odd frames. Lossy encoder bytes may vary; native masters remain unchanged. Closure is delivered by the CLI/export integration merge."
     },
     {
       "issue": 13,
@@ -296,7 +292,7 @@
         12,
         22
       ],
-      "note": "Automated masks, browser/parity tests, uploaded reports and physical check kit exist; physical observations and complete golden matrix remain.",
+      "note": "Software evidence now includes the CLI workflow, 2/3/4-ink saved mask hashes, odd square/portrait/landscape frames, derivative format/scale checks and real browser parity. Broader physical/golden acceptance remains open; no press calibration is claimed.",
       "sourceUpdatedAt": "2026-10-17T13:15:48Z"
     },
     {
@@ -348,8 +344,8 @@
     {
       "issue": 22,
       "title": "Browser workspace for editable separations, plates and A4 export",
-      "trackerState": "open",
-      "deliveryState": "implemented",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
@@ -357,8 +353,7 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim.",
-      "sourceUpdatedAt": "2026-10-17T13:15:50Z"
+      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim."
     },
     {
       "issue": 24,
@@ -797,8 +792,8 @@
     {
       "issue": 90,
       "title": "Unify delivery dependencies, version targets, changelog and site navigation",
-      "trackerState": "open",
-      "deliveryState": "implemented",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "delivery",
       "optional": false,
       "dependsOn": [
@@ -808,8 +803,7 @@
         85,
         86
       ],
-      "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot.",
-      "sourceUpdatedAt": "2026-10-17T15:57:35Z"
+      "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot."
     }
   ]
 }

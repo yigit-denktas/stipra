@@ -24,7 +24,7 @@ async function png(rgba,width,height){
   pixels.data.set(rgba);ctx.putImageData(pixels,0,0);
   return c.toBuffer('png');
 }
-async function run(argv){
+async function run(argv,{quiet=false}={}){
   const opts=args(argv),inputPath=path.resolve(opts['--input']),configPath=path.resolve(opts['--config']);
   const out=path.resolve(opts['--out']||'out/separation');
   if(fs.statSync(inputPath).size>Probe.MAX_BYTES)throw Error('16 MiB input file budget exceeded');
@@ -78,7 +78,7 @@ async function run(argv){
       write('screened-'+screened.masks[i].id+'-plate.png',assets[3+separated.masks.length+i]);
   }
   write('separation-manifest.json',JSON.stringify(manifest,null,2)+'\n');
-  process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
+  if(!quiet)process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
   return manifest;
 }
 if(require.main===module)run(process.argv.slice(2)).catch(e=>{console.error('stipra separate: '+e.message);process.exitCode=1;});

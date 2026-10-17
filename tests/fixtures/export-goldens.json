@@ -1,0 +1,53 @@
+{
+  "2": [
+    {
+      "id": "key",
+      "continuous": "ebb2e5158a89008343876ebcbca4ac0357fb1b8fe0ad9a3a66e8bc470dd5fd44",
+      "screened": "b6a8272eb6aade0dd67a63d5215afd6531cf1b09c4d570bcaeaeb76507191a48"
+    },
+    {
+      "id": "warm",
+      "continuous": "de6682b5cb77cf6c7ef1dba72a3887ebadc8773edbed97d4497d201877c6e00a",
+      "screened": "107397aa597ee1c5636ac27c74e6ff1f9531fe32eba2c600bbc5ab89e5c47723"
+    }
+  ],
+  "3": [
+    {
+      "id": "key",
+      "continuous": "a7232598b4bd7b3c83207bbe5284b600f7d58fd3bd1ba77795502bd070a9f5c7",
+      "screened": "b24e9f9cbab9bc5f960f6ed8b31ef11b5594dde33c0d7e22ce84380ce8d2c5c0"
+    },
+    {
+      "id": "warm",
+      "continuous": "fd9f47fd5eba45a6398649dc39b6148d3bf582fc4017f4fa18231270bdea5a9b",
+      "screened": "9fdf1b2b2c31edb0816e46eec9f06e74edf7ff29d4a9eb53651e85fa7f1be640"
+    },
+    {
+      "id": "blue",
+      "continuous": "8849a3cf98ca88062d3b8835ee295708976b24fe3200e083632884c4f2fd160d",
+      "screened": "52fdd2638c379526e46bae40b4a02cf7d6311daef8870e0d75f0263bbad3dcd6"
+    }
+  ],
+  "4": [
+    {
+      "id": "cyan",
+      "continuous": "46d0abe61a60e3d7114661c5da2abd220f435d478364f46fc5b52d0bb1d79328",
+      "screened": "e201f00eae39f08e17ff5e9ba1dd5b19b489f48882beb1992e837228b08ec8dc"
+    },
+    {
+      "id": "magenta",
+      "continuous": "cdcd7a8700c45ab5aae9c8337268399d22d1ef22a493311b0be0eb2576f5ccd4",
+      "screened": "ce58e2861fa883a3b785f5752923c93d2d146b732a313901c61b8778ed38981d"
+    },
+    {
+      "id": "yellow",
+      "continuous": "863b33304805f91704bc27de2c1f907c3968c390b3413136b5096586832178b1",
+      "screened": "fd975ba84306a90a831fc8b835cf89c1f6893e0ccb7737fb659508145498704b"
+    },
+    {
+      "id": "black",
+      "continuous": "effa360950d43ca89bb5d1264c3ee2ec9852a07f6c40d4f8143b51e8bb341167",
+      "screened": "8044dbf29bd6e6472f520ee4dc3e634bea1201571857fb39169aaf1befeaa16c"
+    }
+  ]
+}

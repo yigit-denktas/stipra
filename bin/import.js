@@ -18,7 +18,7 @@ function args(argv){
   if(!out['--input'])throw Error('Missing --input FILE');
   return out;
 }
-async function run(argv){
+async function run(argv,{quiet=false}={}){
   const opts=args(argv);
   const from=path.resolve(opts['--input']),to=path.resolve(opts['--out']||'out/import');
   const size=fs.statSync(from).size;
@@ -45,7 +45,7 @@ async function run(argv){
   const manifest={...metadata,sha256:crypto.createHash('sha256').update(raw).digest('hex'),
     assets:files,decoder:'skia-canvas',scope:'Input preparation only; no color separations or press calibration'};
   fs.writeFileSync(path.join(to,'asset-manifest.json'),JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});
-  process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
+  if(!quiet)process.stdout.write(JSON.stringify(manifest,null,2)+'\n');
   return manifest;
 }
 if(require.main===module)run(process.argv.slice(2)).catch(e=>{console.error('stipra import: '+e.message);process.exitCode=1;});

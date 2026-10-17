@@ -35,3 +35,7 @@ PDF reports use `pdf-lib` with separately licensed embedded fonts; ZIPs use JSZi
 Named object/region masks, depth, disparity, normals and source-project code are different kinds of data. The proposed adapters in [STRUCTURED-ARTWORK](STRUCTURED-ARTWORK.md) would map supported regions into final ink coverage and optionally preserve declared source relationships beside the current snapshot. These are not core fields or implemented native HEIF/RAW/EXR/OpenRaster/C2PA support.
 
 Keep format parsing, precision/tone mapping, metadata validation, inference and authoring runtimes outside the lean core. Reuse compatible host libraries and standards where they solve a demonstrated task. No restricted p5.riso source is included or rewritten; dependency and asset licenses remain separate from Stiprā's MIT code license.
+
+## CLI orchestration and derivative formats
+
+`bin/workflow.js` resolves bounded inert plans and runs the existing package writer sequentially. `src/verify-package.js` checks integrity, measured grayscale coverage and print geometry through the bounded archive reader. `src/proof-exports.js` produces optional proof derivatives; `src/vector-samples.js` preserves sampled pixels as run paths without bitmap embedding or analytic reconstruction. These modules remain outside the lean core. See [CLI workflows](CLI-WORKFLOWS.md).
