@@ -12,6 +12,7 @@ const FONTS={
   extraBold:{name:'PaperMono-ExtraBold.ttf',blob:'fbc6ee5851529c3e0e6fd83ad92d6cc83f70f383'},
   plexRegular:{name:'IBMPlexSans-Regular.ttf',blob:'bd6817d5202895da5ac4fad88de3da71e652881a',url:PLEX+'plex-sans/fonts/complete/ttf/IBMPlexSans-Regular.ttf'},
   plexBold:{name:'IBMPlexSans-Bold.ttf',blob:'1d66b1a2e96d5e33d6f5fa8e81e76b4e5621d240',url:PLEX+'plex-sans/fonts/complete/ttf/IBMPlexSans-Bold.ttf'},
+  plexMonoBold:{name:'IBMPlexMono-Bold.ttf',blob:'9a168d21d5f8a951fa1940cf4703926fcccc5ee0',url:PLEX+'plex-mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf'},
   plexMono:{name:'IBMPlexMono-Regular.ttf',blob:'4254c37f20ba57e829a3315fdc91cda4e63589f5',url:PLEX+'plex-mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf'}
 };
 function gitBlobHash(bytes){

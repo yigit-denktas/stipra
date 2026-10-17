@@ -41,3 +41,8 @@ jobs:
       - run: npm test
       - run: node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=web/stipra/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r scripts/type-comparison-requirements.txt
+      - run: python -m unittest discover -s tests -p type_comparison_test.py -v
