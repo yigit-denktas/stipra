@@ -30,6 +30,7 @@ function help(){
   '  stipra styles list',
   '  stipra styles explain portrait-duotone',
   '  stipra styles suggest --intent editorial',
+  '  stipra styles resolve editorial-halftone --variant tonal-key --dpi 300 --lpi 50 --seed 42',
   '  stipra package --input photo.jpg --style editorial-halftone --dpi 300 --out out/photo.zip',
   '',
   'Print package: aligned masters, A4 inspection and ZIP:',
@@ -102,6 +103,7 @@ async function main(){
   const styles=require('../src/styles.js'),action=opts._[1]||'list';
   if(action==='list')console.log(JSON.stringify(styles.list(),null,2));
   else if(action==='explain')console.log(JSON.stringify(styles.explain(opts._[2]),null,2));
+  else if(action==='resolve')console.log(JSON.stringify(styles.resolve(opts._[2],{dpi:Number(opts.dpi??300),seed:Number(opts.seed??142),variant:opts.variant??'default',screening:opts.screening??'authored',...(opts.lpi?{lpi:Number(opts.lpi)}:{})}),null,2));
   else if(action==='suggest')console.log(JSON.stringify(styles.suggest({intent:opts.intent,hasFineText:opts['fine-text']==='true'}),null,2));
   else throw Error('Unknown styles action '+action);
   return;

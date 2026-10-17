@@ -103,6 +103,15 @@
       throw Error('Ink controls not progressively disclosed');
     if(!d.querySelector('#screen-settings>summary')||!d.querySelector('#screen-settings').contains(el('screen-mode')))
       throw Error('Advanced screening settings missing');
+    el('style').value='editorial-halftone';el('style').dispatchEvent(new Event('change',{bubbles:true}));
+    el('style-dpi').value='600';el('style-lpi').value='50';
+    el('style-variant').value='warm-third';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>canvases().length===5,'three-ink style applied');
+    if(Number(el('screen-pitch').value)!==12)throw Error('Physical LPI did not resolve at 600 DPI');
+    if(!el('style-note').textContent.includes('Suitable:'))throw Error('Style suitability guidance missing');
+    el('style-variant').value='tonal-key';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
+    await until(()=>canvases().length===4,'two-ink style applied');
+    if(el('error').hidden!==true)throw Error('Style application failed: '+el('error').textContent);
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';
   }catch(error){
     document.body.dataset.smoke='fail';

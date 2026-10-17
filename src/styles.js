@@ -52,6 +52,25 @@
       screen:{default:{mode:'solid',angle:0,jitter:0,dotScale:1},
         plates:{key:{mode:'solid'},accent:{mode:'dots',angle:45}}}}
   ];
+  const EDITORIAL_VARIANTS={
+    'tonal-key':{version:1,name:'Tonal key / two inks',
+      description:'A continuous-tone green key carries structure; yellow adds a screened chromatic pass without filling neutral shadows.',
+      goodFor:['documentary landscapes','textured objects with a usable RGB shadow range'],
+      avoid:['neutral color reproduction','fine pale details without a print-size review'],
+      paper:'#f5eee2',lpi:50,
+      inks:[{id:'key',name:'Green tonal key',color:'#006043',source:'black',gain:1.15,gamma:1.1},
+        {id:'accent',name:'Golden yellow',color:'#e2a523',source:'yellow',gain:.45,gamma:1.15}],
+      screen:{default:{mode:'dots',angle:22,jitter:0,dotScale:1},plates:{key:{mode:'solid'},accent:{angle:-15}}}},
+    'warm-third':{version:1,name:'Tonal key / selective third ink',
+      description:'The same green key and yellow pass, plus a localized neutral-material mask tinted coral. Compare with two inks before accepting the extra pass.',
+      goodFor:['neutral bark or stone amid saturated vegetation','editorial scenes with localized warm material'],
+      avoid:['scenes without neutral material','skin-tone fidelity','assuming a third ink automatically adds depth'],
+      paper:'#f5eee2',lpi:50,
+      inks:[{id:'key',name:'Green tonal key',color:'#006043',source:'black',gain:1.15,gamma:1.1},
+        {id:'accent',name:'Golden yellow',color:'#e2a523',source:'yellow',gain:.45,gamma:1.15},
+        {id:'warm',name:'Coral neutral-material accent',color:'#ff665d',source:'match',target:'#a3a3a3',tolerance:.14,threshold:.3,gain:.5,gamma:1.4}],
+      screen:{default:{mode:'dots',angle:22,jitter:0,dotScale:1},plates:{key:{mode:'solid'},accent:{angle:-15},warm:{angle:45}}}}
+  };
   const byId=new Map(CATALOG.map(x=>[x.id,x]));
   const clone=o=>JSON.parse(JSON.stringify(o));
   const fail=msg=>{throw new TypeError('styles: '+msg);};
@@ -59,13 +78,19 @@
   function list(){return CATALOG.map(x=>({id:x.id,name:x.name,version:x.version,intent:x.intent,
     description:x.description,goodFor:[...x.goodFor],avoid:[...x.avoid],lpi:x.lpi,
     inks:x.inks.map(y=>({id:y.id,name:y.name,color:y.color}))}));}
-  function explain(id){return clone(get(id));}
+  function explain(id){return {...clone(get(id)),variants:id==='editorial-halftone'?clone(EDITORIAL_VARIANTS):{}};}
   const number=(x,lo,hi,name)=>{if(typeof x!=='number'||!Number.isFinite(x)||x<lo||x>hi)fail(name+' must be '+lo+'..'+hi);return x;};
   function resolve(id,options={}){
     if(!options||Array.isArray(options)||typeof options!=='object')fail('options expected an object');
-    const allowed=['dpi','seed','paper','strength','colors'];
+    const allowed=['dpi','seed','paper','strength','colors','variant','lpi','screening'];
     for(const key of Object.keys(options))if(!allowed.includes(key))fail('unknown option '+key);
-    const style=get(id),dpi=number(options.dpi??300,72,1200,'dpi');
+    const base=get(id),variant=options.variant??'default';
+    if(typeof variant!=='string')fail('variant must be a string');
+    if(variant!=='default'&&(id!=='editorial-halftone'||!Object.prototype.hasOwnProperty.call(EDITORIAL_VARIANTS,variant)))fail('unknown variant '+variant+' for '+id);
+    const style=variant==='default'?base:{...base,...EDITORIAL_VARIANTS[variant]},dpi=number(options.dpi??300,72,1200,'dpi');
+    const screening=options.screening??'authored';
+    if(!['authored','unscreened'].includes(screening))fail('screening must be authored or unscreened');
+    const lpi=number(options.lpi??style.lpi,5,150,'lpi');
     const seed=number(options.seed??142,0,4294967295,'seed');
     if(!Number.isSafeInteger(seed))fail('seed must be integer');
     const strength=number(options.strength??1,.1,2,'strength');
@@ -79,18 +104,24 @@
     const warnings=['Digital spot-color overprint is not spectrally calibrated; printing may differ.',
       'This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing.'];
     // A halftone recipe is physically oriented: pitch is derived from output DPI.
-    const nativePitch=dpi/style.lpi,clampedPitch=Math.min(128,Math.max(4,nativePitch));
-    if(clampedPitch!==nativePitch)warnings.push('Requested LPI exceeds current raster screen pitch bounds at selected DPI; effective LPI differs.');
+    const nativePitch=dpi/lpi,clampedPitch=Math.min(128,Math.max(4,nativePitch));
+    if(screening==='authored'&&clampedPitch!==nativePitch)warnings.push('Requested LPI exceeds current raster screen pitch bounds at selected DPI; effective LPI differs.');
     const pitch=Number(clampedPitch.toFixed(5));
     const {default:main,plates}=style.screen;
-    const screenRecipe=Screen.config({version:1,seed,default:{...main,pitch},
-      plates:Object.fromEntries(Object.entries(plates).map(([plate,settings])=>[plate,{...settings,pitch}]))},
+    const treatment=settings=>screening==='unscreened'?{...settings,mode:'solid'}:settings;
+    const screenRecipe=Screen.config({version:1,seed,default:{...treatment(main),pitch},
+      plates:Object.fromEntries(Object.entries(plates).map(([plate,settings])=>[plate,{...treatment(settings),pitch}]))},
       inkRecipe.inks.map(ink=>ink.id));
     return {contract:'stipra-style-resolution-v1',
-      style:{id:style.id,name:style.name,version:style.version,intent:style.intent,
+      style:{id:style.id,name:style.name,version:base.version,variant,variantVersion:variant==='default'?null:style.version,intent:style.intent,
         goodFor:[...style.goodFor],avoid:[...style.avoid],description:style.description},
-      dpi,seed,targetLpi:style.lpi,effectiveLpi:Number((dpi/pitch).toFixed(5)),
-      strength,inkRecipe,screenRecipe,warnings};
+      dpi,seed,screening,targetLpi:lpi,effectiveLpi:screening==='unscreened'?null:Number((dpi/pitch).toFixed(5)),
+      strength,inkRecipe,screenRecipe,
+      physicalScreens:inkRecipe.inks.map(ink=>{
+        const p=screenRecipe.plates[ink.id],screened=!['solid','paper'].includes(p.mode);
+        return {id:ink.id,mode:p.mode,targetLpi:screened?lpi:null,
+          effectiveLpi:screened?Number((dpi/p.pitch).toFixed(5)):null,pitchPx:screened?p.pitch:null};
+      }),warnings};
   }
   function suggest(options={}){
     const intent=options.intent??'unspecified';

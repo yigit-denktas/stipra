@@ -121,7 +121,7 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
     diagnostics:{path:'report/diagnostics.json',contract:plateDiagnostics.contract,
       warnings:plateDiagnostics.warnings.length,reviewRequired:plateDiagnostics.warnings.length>0},
-    ...(style?{style:{id:style.style.id,version:style.style.version,targetLpi:style.targetLpi,
+    ...(style?{style:{id:style.style.id,version:style.style.version,variant:style.style.variant,variantVersion:style.style.variantVersion,physicalScreens:style.physicalScreens,targetLpi:style.targetLpi,
       effectiveLpi:style.effectiveLpi,warnings:style.warnings,recipe:'recipe/style.json'}}:{}),
     screen:{seed:configs.proof.seed,proofOnlyRegistration:true,
       productionRecipe:'recipe/screens.json',proofRecipe:'recipe/proof-screens.json'},

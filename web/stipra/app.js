@@ -142,7 +142,7 @@
         views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates'));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
-      const diagnostics=StipraDiagnostics.inspect(result,{dpi:300});
+      const diagnostics=StipraDiagnostics.inspect(result,{dpi:Number($('style-dpi').value)});
       const overlap=(diagnostics.overall.overlapTwoPlusFraction*100).toFixed(1);
       const freqs=diagnostics.plates.filter(p=>p.screen?.effectiveLpi!==null&&p.screen?.effectiveLpi!==undefined)
         .map(p=>p.id+': '+p.screen.effectiveLpi.toFixed(1)+' lpi');
@@ -200,23 +200,26 @@
     $('screen-jitter').value=String(screenConfig.default.jitter);
     $('screen-seed').value=String(screenConfig.seed);
   }
-  $('style').addEventListener('change',e=>{
-    const id=e.target.value;
+  function applyStyle(){
+    const id=$('style').value;
+    $('style-variant').disabled=id!=='editorial-halftone';
+    if(id!=='editorial-halftone')$('style-variant').value='default';
     if(!id){
       $('style-note').textContent='Manual adjustments remain available for every ink.';
       return;
     }
     try{
-      const style=StipraStyles.resolve(id,{dpi:300});
+      const style=StipraStyles.resolve(id,{dpi:Number($('style-dpi').value),variant:$('style-variant').value,screening:$('style-screening').value,...($('style-lpi').value?{lpi:Number($('style-lpi').value)}:{})});
       config=style.inkRecipe;screenConfig=style.screenRecipe;
       $('mode').value=config.mode;$('paper').value=config.paper;
-      $('style-note').textContent=style.style.description+' · '+style.targetLpi+' LPI at 300 DPI. Digital approximation only.';
+      $('style-note').textContent=style.style.description+' Suitable: '+style.style.goodFor.join(', ')+'. Avoid: '+style.style.avoid.join('; ')+'. '+style.physicalScreens.map(p=>p.id+': '+(p.effectiveLpi===null?'unscreened':p.effectiveLpi+' LPI')).join(' · ')+' at '+style.dpi+' DPI. '+style.warnings.join(' ');
       controls();screenControls();syncScreenFields();render();
     }catch(error){
       $('error').textContent=error.message;$('error').hidden=false;
       $('style').value='';
     }
-  });
+  }
+  for(const id of ['style','style-variant','style-dpi','style-lpi','style-screening'])$(id).addEventListener('change',applyStyle);
   $('mode').addEventListener('change',()=>{
     config=$('mode').value==='spot'?spot():cmyk();
     $('paper').value=config.paper;screenConfig=freshScreen();
