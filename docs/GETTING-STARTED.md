@@ -1,6 +1,6 @@
 # Getting started with Stiprā
 
-Stiprā is an MIT-authored local-first printmaking experiment. You can try the [browser studio](https://apps.yigitdenktas.com/stipra/) right away, or automate image separation through a Node 20+ CLI. The live studio supports image import, spot/CMYK continuous-tone separation, raster screens and digital overprint previews. It is **not** a calibrated printer RIP or an A4 production-package generator yet.
+Stiprā is an MIT-authored local-first printmaking experiment. You can try the [browser studio](https://apps.yigitdenktas.com/stipra/) right away, or automate image separation through a Node 20+ CLI. The live studio supports image import, spot/CMYK continuous-tone separation, raster screens and digital overprint previews. It is **not** a calibrated printer RIP. The CLI can create an A4 *inspection report*, aligned raster masters and a ZIP, but not a hardware-certified plate.
 
 ## The browser
 
@@ -21,6 +21,10 @@ Other **engineering examples**, not separate deployed applications:
 - [Image importer](../examples/import-studio/): local probing, EXIF orientation and supported geometric SVGs.
 - [Prehnite v8](../examples/prehnite-v8/): the six-colorway procedural print study that started the project.
 - [Vector scene](../examples/scene-contract/): composite SVG and fixed-coordinate ink plate geometry.
+
+## Starting styles
+
+Four [experimental Stiprā Styles](STYLES-v1.md) are now available in the browser and through the same JavaScript recipe resolver used by the CLI. Choose Portrait Duotone, Editorial Halftone, Bold Spot Poster or Clean Linework, then refine the masks manually. These are not automatically selected by image recognition or print-calibrated.
 
 ## The CLI
 
@@ -73,6 +77,18 @@ node bin/stipra.js package \
 
 See the [print-package guide](PRINT-PACKAGE-v1.md) for native print dimensions, marks and the private three-owner-photo batch.
 
+For an opinionated starting point and an embedded style recipe:
+
+```sh
+node bin/stipra.js styles list
+node bin/stipra.js styles explain portrait-duotone
+node bin/stipra.js package \
+  --input path/to/artwork.png \
+  --style portrait-duotone \
+  --dpi 300 \
+  --out out/portrait.zip
+```
+
 The separated output includes an untouched original, a normalized PNG, a composite proof, full-frame grayscale masks, and structured recipes and provenance. `--screen` adds screened versions and their own preview/recipe. All modes refuse to overwrite existing files. **Use an unused output directory for each new render**.
 
 The CLI also has the existing procedural and import utilities:
@@ -103,4 +119,4 @@ npm test
 npm run build:pages
 ```
 
-Physical press calibration, owner-approved proof quality, automatic **Stipra Styles** and finished agent batch tooling remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
+Physical press calibration, owner-approved proof quality, owner-approved **Stiprā Styles** and finished agent batch tooling remain on the [roadmap](../ROADMAP.md). Physical printing requires additional real-machine tests and appropriately rights-cleared source images.
