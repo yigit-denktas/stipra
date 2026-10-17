@@ -17,7 +17,7 @@ async function run(){
   const cli=args=>{const result=JSON.parse(cp.execFileSync(process.execPath,[path.join(ROOT,'bin/stipra.js'),...args,'--json'],{cwd:ROOT,encoding:'utf8',maxBuffer:1024*1024}));assert.equal(result.status,'ok');return result.result;};
   const batch=cli(['batch','--config',plan,'--out',path.join(OUT,'batch')]);
   const comparison=cli(['compare','--input',path.join(OUT,'procedural-2.png'),'--config',path.join(ROOT,'examples/workflows/compare.json'),'--out',path.join(OUT,'compare')]);
-  for(const job of batch.jobs){const v=cli(['verify','--input',path.join(OUT,'batch',job.package)]);assert.equal(v.packageSha256,job.packageSha256);}
+  for(const job of batch.jobs){const v=cli(['verify','--input',path.join(OUT,'batch',job.package)]);assert.equal(v.packageSha256,job.packageSha256);assert.equal(v.inspectionPages,2,'Compact procedural fixture should not orphan diagnostics');}
   cli(['sheet','--input',path.join(OUT,'batch',batch.jobs[0].package),'--out',path.join(OUT,'sheet')]);
   const report={contract:'stipra-export-workflow-evidence-v1',source:'Original procedural fixture; no owner artwork',batch,comparison,
     matrix:{inkCounts:[2,3,4],formats:['png','jpg','webp','svg','pdf','zip'],proofScales:[1,2,3],aspectRatios:['square','portrait','landscape'],alpha:'source with explicit JPEG paper flattening',masters:'native zero-registration grayscale; optional sampled-run SVG'},

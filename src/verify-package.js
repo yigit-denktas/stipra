@@ -67,7 +67,8 @@ async function verify(bytes){
     }else if(ink.marked)throw Error('Unexpected marked master');
   }
   const report=manifest.report;if(report?.inspectionOnly!==true||!files.has(report.pdf)||!files.has(report.html))throw Error('Missing inspection report');
-  if(report.widthMm!==(h>w?210:297)||report.heightMm!==(h>w?297:210)||report.orientation!==(h>w?'portrait':'landscape'))throw Error('Expected A4 inspection orientation');
+  const orientation=require('./report-layout').orientation(w,h),portrait=orientation==='portrait';
+  if(report.widthMm!==(portrait?210:297)||report.heightMm!==(portrait?297:210)||report.orientation!==orientation)throw Error('Expected A4 inspection orientation');
   const pdf=await PDFDocument.load(await read(report.pdf));
   if(pdf.getPageCount()<2||pdf.getPageCount()>16)throw Error('Unexpected inspection page count');
   for(const page of pdf.getPages())if(Math.abs(page.getWidth()-report.widthMm*72/25.4)>.02||Math.abs(page.getHeight()-report.heightMm*72/25.4)>.02)throw Error('Inspection PDF geometry mismatch');
@@ -86,7 +87,7 @@ async function verify(bytes){
     }
   }
   return {contract:'stipra-package-verification-v1',status:'VERIFIED_DIGITAL_NOT_PHYSICALLY_VALIDATED',packageSha256:hash(bytes),
-    sourceSha256:manifest.source.sha256,files:files.size,frame:{width:w,height:h,origin:{x:0,y:0},dpi:output.dpi},inks:inks.length,
+    sourceSha256:manifest.source.sha256,files:files.size,inspectionPages:pdf.getPageCount(),frame:{width:w,height:h,origin:{x:0,y:0},dpi:output.dpi},inks:inks.length,
     checks:['file-set, byte lengths and SHA-256','native trim and physical DPI','opaque grayscale masters and measured coverage','zero production registration','marked trim pixel identity','inspection PDF geometry','declared derivative codecs and dimensions'],
     warnings:['Byte hashes are integrity checks, not proof of origin or ownership.','RGB proof and sampled SVG paths are not calibrated physical press output.'],manifest};
 }

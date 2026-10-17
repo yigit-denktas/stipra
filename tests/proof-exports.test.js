@@ -20,13 +20,13 @@ test('2/3/4 ink odd-size fixtures match saved engine goldens and decoded vector 
   }
 });
 test('optional proof formats preserve native masters and expose lossy/alpha/scale semantics',async()=>{
-  const F=await fixture(),input=F.artwork(49,33),c=new Canvas(input.width,input.height),ctx=c.getContext('2d'),p=ctx.createImageData(input.width,input.height);p.data.set(input.rgba);ctx.putImageData(p,0,0);
+  const F=await fixture(),input=F.artwork(49,50),c=new Canvas(input.width,input.height),ctx=c.getContext('2d'),p=ctx.createImageData(input.width,input.height);p.data.set(input.rgba);ctx.putImageData(p,0,0);
   const originalBytes=c.toBufferSync('png'),asset=await require('../src/import/node').ingestLocalBytes(originalBytes,'procedural.png'),base={originalBytes,asset,inkRecipe:F.recipe(2),screenRecipe:F.screen,dpi:300,marksMm:2,paper:'recipe'};
   const a=await Print.generate(base),b=await Print.generate({...base,exports:{formats:['png','jpg','webp','svg'],scale:2,alpha:'source',vectorPlates:true}});
   for(const ink of a.manifest.inks)for(const name of [ink.plate,ink.screened,ink.marked])assert.deepEqual(a.parts.get(name),b.parts.get(name));
   for(const name of ['proof/composite.png','report/separation-sheet.pdf'])assert.deepEqual(a.parts.get(name),b.parts.get(name));
   const v=await require('../src/verify-package').verify(b.zip);assert.equal(v.inks,2);
-  const png=await decode(b.parts.get('exports/proof.png'),98,66),jpg=await decode(b.parts.get('exports/proof.jpg'),98,66);assert.equal(png[3],0);assert.equal(jpg[3],255);
+  const png=await decode(b.parts.get('exports/proof.png'),98,100),jpg=await decode(b.parts.get('exports/proof.jpg'),98,100);assert.equal(png[3],0);assert.equal(jpg[3],255);
   assert.equal(b.manifest.exports.proofs.find(x=>x.format==='jpg').alpha,'flattened-to-paper');
   assert.equal(b.manifest.exports.proofs.find(x=>x.format==='png').effectiveDpi,600);
 });

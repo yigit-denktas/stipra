@@ -77,7 +77,7 @@ node bin/stipra.js package --input artwork.png --style editorial-halftone --dpi 
 | JPG proof | Lossy quality 0.92, source alpha flattened onto the selected paper |
 | WebP proof | Lossy quality 0.92, source-alpha or opaque paper; encoder bytes may vary |
 | SVG proof / optional screened SVG plates | Pure vector run paths representing sampled pixel values; no embedded bitmap |
-| PDF / HTML | Existing A4 inspection reports; their layout is unchanged |
+| PDF / HTML | A4 inspection reports; compact recipe spacing avoids orphan diagnostics without shrinking text |
 | ZIP | Source, recipes, diagnostics, native PNG masters, report, optional derivatives and hashes |
 
 Proof scales 1, 2 and 3 use explicit nearest-neighbor pixel replication. Their effective DPI increases by the same factor, so the intended physical trim stays the same. This is not new image detail or a changed physical screen frequency. PNG records density and SVG records physical millimeters; JPEG/WebP density metadata is not guaranteed, so use the package's physical manifest. All derivatives have the same 24 megapixel / 20,000 px output budget. Optional derivatives do not change the canonical proof, masters or inspection report.
