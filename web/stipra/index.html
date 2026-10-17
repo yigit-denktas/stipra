@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-export-script="../../dist/stipra/assets/print-export.js">
 <head>
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stiprā · Color separation lab</title>
@@ -78,21 +78,24 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 @media(max-width:360px){.plate-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+<link rel="stylesheet" href="shared.css">
 <script src="../../src/import/svg.js"></script>
 <script src="../../src/import/probe.js"></script>
 <script src="../../src/import/asset.js"></script>
 <script src="../../src/separation.js"></script>
 <script src="../../src/screening.js"></script>
 <script src="../../src/styles.js"></script>
+<script src="../../src/export-plan.js"></script>
 <script src="../../src/plate-diagnostics.js"></script>
 </head>
 
-<body>
+<body class="lab">
+<div class="ink-line"></div>
 <header class="page-header">
   <div>
-    <h1>Stiprā / separation lab</h1>
+    <a class="wordmark" href="./">stiprā</a><p class="eyebrow">A programmable printmaking studio / separation lab</p><h1>One image. Separate ink passes.</h1>
     <p class="intro muted">Separate an image into ink layers, adjust coverage and screens, and inspect the resulting plates. Digital preview only—not calibrated press output.</p>
-    <a href="./guide/">Read the printmaking guide</a> · <a class="mobile-settings" href="#inspector">Jump to ink settings ↓</a>
+    <a class="guide-link" href="./guide/">Read the printmaking guide</a> · <a class="mobile-settings" href="#inspector">Jump to ink settings ↓</a>
   </div>
   <div id="drop" class="import-panel">
     <strong>Import artwork</strong>
@@ -166,15 +169,16 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
     </details>
     <section class="panel">
       <h2>Export</h2>
-      <p class="muted helper">White means no ink; darker gray means more. Every plate keeps the full input canvas.</p>
+      <p class="muted helper">The ZIP contains aligned masters, a proof, PDF and HTML reports, original bytes and exact recipes. Proof offsets stay out of production plates.</p>
       <div class="actions">
         <button id="save-preview" type="button" disabled>Preview PNG</button>
-        <button id="save-plates" type="button" disabled>All plates</button>
+        <button id="save-plates" type="button" disabled>Print package ZIP</button>
         <button id="save-recipe" type="button">Ink recipe JSON</button>
         <button id="save-screen-recipe" type="button">Screen recipe JSON</button>
       </div>
     </section>
   </aside>
 </div>
+<footer>stiprā / local-first printmaking · <a href="./guide/">Field guide</a> · <a href="https://github.com/yigit-denktas/stipra">Source and licenses</a> · <a href="./assets/export-dependency-notices.txt">Export dependency notices</a><br>Digital approximation. Physical print acceptance remains unverified.</footer>
 <script src="app.js"></script>
 </body></html>

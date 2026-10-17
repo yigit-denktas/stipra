@@ -38,24 +38,39 @@ async function run(){
  if(!/^(?:examples|web)\/[a-z0-9-]+\/browser-smoke\.html$/.test(page))throw Error('Invalid smoke page path');
  const url='http://127.0.0.1:'+server.address().port+'/'+page;
  try{
-   const result=await new Promise((resolve,reject)=>{
-     const args=['--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run','--virtual-time-budget=12000','--dump-dom',url];
-     const child=spawn(bin,args,{stdio:['ignore','pipe','pipe']});
-     let stdout='',stderr='',timedOut=false;
-     const timeout=setTimeout(()=>{timedOut=true;child.kill('SIGKILL');},45000);
-     child.stdout.on('data',data=>{stdout+=data.toString();});
-     child.stderr.on('data',data=>{stderr+=data.toString();});
-     child.on('error',err=>{clearTimeout(timeout);reject(err);});
-     child.on('close',code=>{
-       clearTimeout(timeout);
-       if(timedOut)return reject(Error('Browser smoke timed out'));
-       if(code!==0)return reject(Error('Chrome failed (exit '+code+'): '+stderr.slice(-2500)));
-       resolve(stdout);
-     });
+   const child=spawn(bin,['--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run','--remote-debugging-pipe','about:blank'],{stdio:['ignore','ignore','pipe','pipe','pipe']});
+   let serial=0,pending=new Map(),buffer='',stderr='';
+   const call=(method,params={},sessionId)=>new Promise((resolve,reject)=>{
+     const id=++serial;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');
    });
-   const output=result.match(/<output id="out">([^<]*)<\/output>/)?.[1]||'output missing';
-   if(!/<body[^>]*data-smoke="pass"/.test(result)||output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))
-     throw Error('Browser smoke failed: '+output);
+   child.stderr.on('data',data=>{stderr=(stderr+data).slice(-2500);});
+   child.stdio[4].on('data',data=>{
+     buffer+=data.toString();let at;
+     while((at=buffer.indexOf('\0'))>=0){const raw=buffer.slice(0,at);buffer=buffer.slice(at+1);if(!raw)continue;
+       const message=JSON.parse(raw),item=pending.get(message.id);if(item){pending.delete(message.id);message.error?item.reject(Error(message.error.message)):item.resolve(message.result);}
+     }
+   });
+   const failure=error=>{for(const item of pending.values())item.reject(error);pending.clear();};
+   child.on('error',failure);child.on('exit',code=>failure(Error('Chrome exited '+code+': '+stderr)));
+   let timer;
+   try{
+     const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Browser smoke wall-clock deadline exceeded')),60000);});
+     await Promise.race([deadline,(async()=>{
+       const target=await call('Target.createTarget',{url:'about:blank'});
+       const {sessionId}=await call('Target.attachToTarget',{targetId:target.targetId,flatten:true});
+       await call('Page.enable',{},sessionId);await call('Page.navigate',{url},sessionId);
+       for(;;){
+         const response=await call('Runtime.evaluate',{expression:'JSON.stringify({state:document.body?.dataset.smoke,output:document.getElementById("out")?.textContent})',returnByValue:true},sessionId);
+         const state=JSON.parse(response.result.value||'{}');
+         if(state.state==='fail')throw Error('Browser smoke failed: '+state.output);
+         if(state.state==='pass'){
+           if(state.output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))throw Error('Unexpected smoke result: '+state.output);
+           break;
+         }
+         await new Promise(resolve=>setTimeout(resolve,100));
+       }
+     })()]);
+   }finally{clearTimeout(timer);child.kill('SIGKILL');}
    process.stdout.write('Chromium browser smoke: PASS ('+page+')\n');
  }finally{server.close();}
 }

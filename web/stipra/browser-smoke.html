@@ -1,19 +1,21 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Stipra image separation browser smoke</title></head>
-<body><output id="out">BROWSER_SEPARATION_PENDING</output><iframe id="studio" src="index.html" width="900" height="600"></iframe>
+<body><output id="out">BROWSER_SEPARATION_PENDING</output><iframe id="studio" src="/dist/stipra/index.html" width="900" height="600"></iframe>
+<script src="../../node_modules/jszip/dist/jszip.min.js"></script>
+<script src="../../node_modules/pdf-lib/dist/pdf-lib.min.js"></script>
 <script>
 (async()=>{
   const delay=t=>new Promise(resolve=>setTimeout(resolve,t));
   async function until(predicate,label){
-    for(let k=0;k<140;k++){if(predicate())return;await delay(60);}
+    for(let k=0;k<450;k++){if(predicate())return;await delay(60);}
     throw Error('Timed out '+label);
   }
   const frame=document.getElementById('studio');
   const output=document.getElementById('out');
   let d;
   try{
-    await until(()=>frame.contentDocument?.getElementById('mode')&&frame.contentWindow.StipraSeparation,'lab script loading');
-    d=frame.contentDocument;
+    await until(()=>frame.contentDocument?.documentElement.dataset.stipraReady==='true','lab script loading');
+    d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
     const input=document.createElement('canvas');input.width=4;input.height=2;
     const ctx=input.getContext('2d');
@@ -122,8 +124,39 @@
       for(const ink of recipe.inkRecipe.inks){
         const selector=el('control-'+ink.id+'-Source');
         if(!selector||selector.value!==ink.source)throw Error('New channel not editable '+ink.id);
+        for(const [name,key] of [['Gamma','gamma'],['Strength','gain'],['Threshold','threshold']])if(Math.abs(Number(el('control-'+ink.id+'-'+name).value)-ink[key])>.00001)throw Error('Displayed setting differs from recipe '+ink.id+'/'+key);
       }
     }
+    // Export through the real UI; inspect the downloaded ZIP rather than just its button.
+    let exportedBlob;
+    const win=frame.contentWindow,createURL=win.URL.createObjectURL.bind(win.URL),click=win.HTMLAnchorElement.prototype.click;
+    win.URL.createObjectURL=blob=>{if(blob.type==='application/zip')exportedBlob=blob;return createURL(blob);};
+    win.HTMLAnchorElement.prototype.click=function(){if(this.download==='stipra-print-package.zip')return;return click.call(this);};
+    el('screen-blue-x').value='2';el('screen-blue-x').dispatchEvent(new Event('change',{bubbles:true}));
+    await delay(10);el('save-plates').click();
+    await until(()=>exportedBlob||!el('error').hidden,'browser print package');
+    if(!exportedBlob)throw Error('Export failed: '+el('error').textContent);
+    const zip=await JSZip.loadAsync(await exportedBlob.arrayBuffer());
+    const manifest=JSON.parse(await zip.file('manifest.json').async('string'));
+    if(manifest.contract!=='stipra-print-package-v1'||manifest.output.sourcePixels.width!==48||manifest.output.sourcePixels.height!==32)throw Error('Browser package geometry/contract differs');
+    const source=await zip.file('source/original.png').async('uint8array');
+    if(source.length!==(await screeningBlob.arrayBuffer()).byteLength)throw Error('Original source missing');
+    const inkRecipe=JSON.parse(await zip.file('recipe/inks.json').async('string')),screens=JSON.parse(await zip.file('recipe/screens.json').async('string')),proofScreens=JSON.parse(await zip.file('recipe/proof-screens.json').async('string'));
+    if(screens.plates.blue.registration.x!==0||proofScreens.plates.blue.registration.x!==2)throw Error('Proof offsets leaked into masters');
+    const expected=win.StipraScreen.apply(win.StipraSeparation.separate({width:48,height:32,rgba:new win.Uint8ClampedArray(painter.getImageData(0,0,48,32).data)},inkRecipe),screens);
+    async function decoded(bytes){const image=new Image(),url=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url;});URL.revokeObjectURL(url);const c=document.createElement('canvas');c.width=image.width;c.height=image.height;const x=c.getContext('2d');x.drawImage(image,0,0);return x.getImageData(0,0,c.width,c.height).data;}
+    for(const [i,ink] of manifest.inks.entries()){
+      const bytes=await zip.file(ink.screened).async('uint8array'),pixels=await decoded(bytes),wanted=win.StipraSeparation.plateRGBA(expected.masks[i].coverage);
+      if(!pixels.every((v,index)=>v===wanted[index]))throw Error('Exported master pixels differ from shared engine');
+      const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);let count=0;
+      for(let at=8;at<bytes.length;at+=12+view.getUint32(at)){if(String.fromCharCode(...bytes.slice(at+4,at+8))==='pHYs'){count++;if(view.getUint32(at+8)!==Math.round(600*1000/25.4))throw Error('Wrong export DPI');}}
+      if(count!==1)throw Error('PNG physical density missing or duplicated');
+    }
+    for(const file of manifest.files){const bytes=await zip.file(file.path).async('uint8array');const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');if(hash!==file.sha256)throw Error('Package hash mismatch '+file.path);}
+    const pdf=await PDFLib.PDFDocument.load(await zip.file('report/separation-sheet.pdf').async('uint8array'));
+    if(pdf.getPageCount()<2||!zip.file('report/separation-sheet.html'))throw Error('Inspection reports missing');
+    if(!pdf.catalog.has(PDFLib.PDFName.of('Names')))throw Error('PDF recipe attachments missing');
+    win.URL.createObjectURL=createURL;win.HTMLAnchorElement.prototype.click=click;
     const guideFrame=document.createElement('iframe');guideFrame.src='/dist/stipra/guide/index.html';guideFrame.style.height='844px';document.body.appendChild(guideFrame);
     await until(()=>guideFrame.contentDocument?.title==='stiprā / from image to ink','built public guide loaded');
     await guideFrame.contentDocument.fonts.ready;

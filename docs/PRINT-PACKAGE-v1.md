@@ -2,6 +2,8 @@
 
 **Status:** a real Node CLI implementation of aligned **raster** ink masters, an orientation-aware A4 HTML/PDF inspection sheet and a single ZIP with provenance. Physical press calibration and owner image *visual approval* remain open. [See the three-image release gate](PRINT-PACKAGE-ACCEPTANCE.md).
 
+The browser now offers **Print package ZIP** using this same package/report pipeline. See [browser parity and limits](STUDIO-EXPORT.md).
+
 ## Named Styles as starting recipes
 
 The same Stiprā style resolver works in browser and Node. For a bundled candidate, use `node bin/stipra.js package --input artwork.png --style editorial-halftone --dpi 300 --out artwork.zip`. This stores the **resolved** style and normalized ink/screen recipes in the ZIP. Use `--config` and `--screen` instead if you need exact hand-authored masks and screen settings; the CLI intentionally rejects mixing `--style` with a separate `--screen`. Four styles are [documented here](STYLES-v1.md). They are **not** printer-certified presets.
