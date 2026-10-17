@@ -36,32 +36,6 @@ function pathPoints(){
     }
   return pts;
 }
-function polygon(){
-  const pts=pathPoints(),left=[],right=[];
-  for(let i=0;i<pts.length;i++){
-    const prev=pts[Math.max(0,i-1)],next=pts[Math.min(pts.length-1,i+1)];
-    const angle=Math.atan2(next[1]-prev[1],next[0]-prev[0]);
-    const normal=[-Math.sin(angle),Math.cos(angle)];
-    left.push([pts[i][0]+RIBBON_RADIUS*normal[0],pts[i][1]+RIBBON_RADIUS*normal[1]]);
-    right.push([pts[i][0]-RIBBON_RADIUS*normal[0],pts[i][1]-RIBBON_RADIUS*normal[1]]);
-  }
-  function cap(center,tangent,start,finish){
-    const list=[];
-    for(let i=0;i<=28;i++){
-      const a=tangent+start+(finish-start)*i/28;
-      list.push([center[0]+RIBBON_RADIUS*Math.cos(a),center[1]+RIBBON_RADIUS*Math.sin(a)]);
-    }
-    return list;
-  }
-  function tangent(index,other){
-    const a=pts[index],b=pts[other];
-    return Math.atan2(b[1]-a[1],b[0]-a[0]);
-  }
-  // Round caps, no graphical noise. The S must stand alone before any dots.
-  const tail=cap(pts[pts.length-1],tangent(pts.length-2,pts.length-1),Math.PI/2,-Math.PI/2);
-  const head=cap(pts[0],tangent(0,1),-Math.PI/2,Math.PI/2);
-  return [...left,...tail,...right.reverse(),...head].map(pair=>pair.map(round));
-}
 function dotGrid(variant='density'){
   if(!['matrix','density','overprint'].includes(variant))
     throw new Error('mark: unknown variant '+variant);
@@ -77,7 +51,7 @@ function dotGrid(variant='density'){
     if(distance>RIBBON_RADIUS-1.5)continue;
     const edge=Math.min(1,(RIBBON_RADIUS-distance)/6);
     const centerWeight=Math.max(0,1-Math.pow((x-240)/210,2));
-    const radius=variant==='matrix'?4.1*edge:
+    const radius=variant==='matrix'?3.0*edge:
       (2.45+1.9*centerWeight)*edge;
     if(radius<.6)continue;
     dots.push({x:round(x),y:round(y),radius:round(Math.min(STEP*.45,radius)),
@@ -103,7 +77,14 @@ function sceneRecipe(variant='overprint'){
     inks=twoInk?[COLORS.teal,COLORS.coral]:[COLORS.dark];
   const layers=[];
   if(stencil){
-    layers.push({id:'silhouette',plateId:'dark-master',geometry:{kind:'polygon',points:polygon()},coverage:1});
+    // The actual solid silhouette is the geometric union of overlapping
+    // fixed-width discs sampled along the S stroke. Unlike a naive offset
+    // polygon, this construction has no cusps or self-intersecting joins.
+    const skeleton=pathPoints();
+    for(let i=0;i<skeleton.length;i+=2)
+      layers.push({id:'solid-'+String(i).padStart(4,'0'),plateId:'dark-master',
+        geometry:{kind:'circle',x:round(skeleton[i][0]),y:round(skeleton[i][1]),
+          radius:RIBBON_RADIUS},coverage:1});
   }else{
     for(const [i,dot] of dotGrid(variant).entries()){
       const plates=twoInk?(dot.t<.42?['teal']:dot.t>.58?['coral']:['teal','coral']):['dark'];
@@ -165,4 +146,4 @@ if(require.main===module){
   process.stdout.write(JSON.stringify(generate(arg||path.join(__dirname,'../dist/brand')),null,2)+'\n');
 }
 module.exports={NAME,VERSION,CANVAS,COLORS,CURVES,makeRecipe,sceneRecipe,
-  generate,dotGrid,balance,polygon,marks};
+  generate,dotGrid,balance,pathPoints,marks};
