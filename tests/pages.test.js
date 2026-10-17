@@ -24,9 +24,11 @@ test('Cloudflare Pages build emits one self-contained app under /stipra, no dupl
     const files=fs.readdirSync(path.join(out,'stipra'));
     assert.deepEqual(files.sort(),['assets','brand','index.html']);
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark.svg')));
-    assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-blue.svg')));
+    assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-teal.svg')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-coral.svg')));
-    assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-key.svg')));
+    assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-silhouette.svg')));
+    for(const variant of ['matrix','density','overprint'])
+      assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-'+variant+'.svg')));
   }finally{fs.rmSync(out,{force:true,recursive:true});}
 });
 test('build copies exact source JS, preserves real script order and is deterministic',()=>{
