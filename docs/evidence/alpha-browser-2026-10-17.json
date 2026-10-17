@@ -1,0 +1,1899 @@
+{
+  "contract": "stipra-alpha-browser-v1",
+  "environment": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "platform": "Linux x86_64",
+    "logicalCpus": 4,
+    "deviceMemoryGiB": 16,
+    "displayPixelRatio": 1,
+    "repositoryCommit": "cbf9094358590be9dd6b6f5ff4a0e3d37838ef83"
+  },
+  "method": {
+    "warmup": 1,
+    "clock": "performance.now",
+    "memory": "Chromium JS heap before/after when available; not peak or native canvas/process memory",
+    "includes": "image cases: capture, core, drawable proof; layers: core only; input creation excluded",
+    "export": "separate cold optional-module load and warm package generation; no 60fps claim"
+  },
+  "cases": [
+    {
+      "id": "preview-256-2inks",
+      "width": 256,
+      "height": 192,
+      "kind": "layers",
+      "inks": 2,
+      "density": 1,
+      "repeats": 5,
+      "logical": {
+        "width": 256,
+        "height": 192
+      },
+      "dpi": 300,
+      "timing": {
+        "samplesMs": [
+          19.20000000001164,
+          17.90000000000873,
+          13.900000000008731,
+          13.900000000008731,
+          13.80000000000291
+        ],
+        "minimumMs": 13.80000000000291,
+        "medianMs": 13.900000000008731,
+        "maximumMs": 19.20000000001164
+      },
+      "heapBefore": 2836437,
+      "heapAfter": 8848937,
+      "ownedInputOutputBytes": 491520
+    },
+    {
+      "id": "preview-256-3inks",
+      "width": 256,
+      "height": 192,
+      "kind": "image",
+      "inks": 3,
+      "density": 1,
+      "repeats": 5,
+      "logical": {
+        "width": 256,
+        "height": 192
+      },
+      "dpi": 300,
+      "timing": {
+        "samplesMs": [
+          45.79999999998836,
+          32.19999999999709,
+          33.90000000000873,
+          43.20000000001164,
+          45.80000000000291
+        ],
+        "minimumMs": 32.19999999999709,
+        "medianMs": 43.20000000001164,
+        "maximumMs": 45.80000000000291
+      },
+      "heapBefore": 10919485,
+      "heapAfter": 20871937,
+      "ownedInputOutputBytes": 688128
+    },
+    {
+      "id": "density2-512-3inks",
+      "width": 512,
+      "height": 384,
+      "kind": "image",
+      "inks": 3,
+      "density": 2,
+      "repeats": 5,
+      "logical": {
+        "width": 256,
+        "height": 192
+      },
+      "dpi": 300,
+      "timing": {
+        "samplesMs": [
+          125.40000000000873,
+          125.60000000000582,
+          118.59999999999127,
+          113.60000000000582,
+          113.39999999999418
+        ],
+        "minimumMs": 113.39999999999418,
+        "medianMs": 118.59999999999127,
+        "maximumMs": 125.60000000000582
+      },
+      "heapBefore": 29631513,
+      "heapAfter": 67010613,
+      "ownedInputOutputBytes": 2752512
+    },
+    {
+      "id": "final-1024-3inks",
+      "width": 1024,
+      "height": 768,
+      "kind": "image",
+      "inks": 3,
+      "density": 1,
+      "repeats": 3,
+      "logical": {
+        "width": 1024,
+        "height": 768
+      },
+      "dpi": 300,
+      "timing": {
+        "samplesMs": [
+          447.6000000000058,
+          453.79999999998836,
+          514.6000000000058
+        ],
+        "minimumMs": 447.6000000000058,
+        "medianMs": 453.79999999998836,
+        "maximumMs": 514.6000000000058
+      },
+      "heapBefore": 34459869,
+      "heapAfter": 44187941,
+      "ownedInputOutputBytes": 11010048
+    },
+    {
+      "id": "final-a4-2inks",
+      "width": 2480,
+      "height": 3508,
+      "kind": "layers",
+      "inks": 2,
+      "density": 1,
+      "repeats": 1,
+      "logical": {
+        "width": 2480,
+        "height": 3508
+      },
+      "dpi": 300,
+      "timing": {
+        "samplesMs": [
+          2224.5
+        ],
+        "minimumMs": 2224.5,
+        "medianMs": 2224.5,
+        "maximumMs": 2224.5
+      },
+      "heapBefore": 226859141,
+      "heapAfter": 226506181,
+      "ownedInputOutputBytes": 86998400
+    }
+  ],
+  "parity": [
+    {
+      "id": "blue-pink",
+      "kind": "image",
+      "exportMs": 677.3000000000029,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "image",
+          "dpi": 300,
+          "inks": {
+            "version": 1,
+            "mode": "spot",
+            "paper": "#fffaf0",
+            "inks": [
+              {
+                "id": "blue",
+                "name": "Blue / screen approximation",
+                "color": "#0078bf",
+                "source": "cyan-density",
+                "grayRemoval": 0.15,
+                "threshold": 0,
+                "gain": 0.9,
+                "gamma": 1,
+                "invert": false
+              },
+              {
+                "id": "pink",
+                "name": "Fluorescent pink / screen approximation",
+                "color": "#ff48b0",
+                "source": "magenta-density",
+                "grayRemoval": 0.65,
+                "threshold": 0,
+                "gain": 0.75,
+                "gamma": 1.1,
+                "invert": false
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "blue": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "pink": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 75,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "blue": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "pink": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 75,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": {
+            "contract": "stipra-style-resolution-v1",
+            "style": {
+              "id": "portrait-duotone",
+              "name": "Blue / fluorescent pink",
+              "version": 1,
+              "variant": "blue-pink",
+              "variantVersion": 1,
+              "intent": "tonal portrait or object study",
+              "goodFor": [
+                "photographic duotones",
+                "cool scenes with warm accents"
+              ],
+              "avoid": [
+                "accurate skin reproduction",
+                "fluorescent ink prediction",
+                "neutral shadows without overlap review"
+              ],
+              "description": "Complementary channel duotone: blue carries red-channel density; pink carries green-channel density. Independent gray removal reduces neutral overlap.",
+              "references": [
+                {
+                  "title": "Dizzy Ink / Risograph profiles",
+                  "url": "https://risograph.co.uk/04-risograph-profiles",
+                  "id": "dizzy-profiles"
+                },
+                {
+                  "title": "Exploriso / Ad hoc separation of colour channels",
+                  "url": "https://en.exploriso.info/exploriso/colour/separations/ad-hoc-separation-of-colour-channels/",
+                  "id": "exploriso-channels"
+                },
+                {
+                  "title": "Ambipress / CMYK simulation and ink swatches",
+                  "url": "https://www.ambi-press.com/guia/",
+                  "id": "ambi-process"
+                }
+              ],
+              "calibration": "experimental RGB approximation; no external profiles or artwork included"
+            },
+            "dpi": 300,
+            "seed": 42,
+            "screening": "authored",
+            "targetLpi": 40,
+            "effectiveLpi": 40,
+            "strength": 1,
+            "inkRecipe": {
+              "version": 1,
+              "mode": "spot",
+              "paper": "#fffaf0",
+              "inks": [
+                {
+                  "id": "blue",
+                  "name": "Blue / screen approximation",
+                  "color": "#0078bf",
+                  "source": "cyan-density",
+                  "grayRemoval": 0.15,
+                  "threshold": 0,
+                  "gain": 0.9,
+                  "gamma": 1,
+                  "invert": false
+                },
+                {
+                  "id": "pink",
+                  "name": "Fluorescent pink / screen approximation",
+                  "color": "#ff48b0",
+                  "source": "magenta-density",
+                  "grayRemoval": 0.65,
+                  "threshold": 0,
+                  "gain": 0.75,
+                  "gamma": 1.1,
+                  "invert": false
+                }
+              ]
+            },
+            "screenRecipe": {
+              "version": 1,
+              "seed": 42,
+              "default": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "plates": {
+                "blue": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": 15,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "pink": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": 75,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                }
+              }
+            },
+            "physicalScreens": [
+              {
+                "id": "blue",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              },
+              {
+                "id": "pink",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              }
+            ],
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ]
+          }
+        },
+        "plates": [
+          {
+            "id": "blue",
+            "coverage": "5bf5e1030d446dd1befa9ecf7d20622f664dc40940752b41bfc66d583c8ac56a",
+            "screened": "b7ea60b40b8f3574371d1d42ce59f748a37bb2dcdee15b533f7c88cb40ab2e3f"
+          },
+          {
+            "id": "pink",
+            "coverage": "d641e4b6ac17dca9ec4a50f1251c2391cc06b99252816a20752002d3f01a444a",
+            "screened": "31894b3cfdf6951b2d759a3ddf51d77bff9a699c0c816c6dc715671885ddf424"
+          }
+        ],
+        "proof": "8138e753cbba41fee894fab1af66a0bf9e050db4bb789a3678cb4242d9aca8c1"
+      }
+    },
+    {
+      "id": "warm-third",
+      "kind": "image",
+      "exportMs": 548.5,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "image",
+          "dpi": 300,
+          "inks": {
+            "version": 1,
+            "mode": "spot",
+            "paper": "#f5eee2",
+            "inks": [
+              {
+                "id": "key",
+                "name": "Green tonal key",
+                "color": "#006043",
+                "source": "black",
+                "threshold": 0,
+                "gain": 1.15,
+                "gamma": 1.1,
+                "invert": false
+              },
+              {
+                "id": "accent",
+                "name": "Golden yellow",
+                "color": "#e2a523",
+                "source": "yellow",
+                "threshold": 0,
+                "gain": 0.45,
+                "gamma": 1.15,
+                "invert": false
+              },
+              {
+                "id": "warm",
+                "name": "Coral neutral-material accent",
+                "color": "#ff665d",
+                "source": "match",
+                "target": "#a3a3a3",
+                "tolerance": 0.14,
+                "threshold": 0.3,
+                "gain": 0.5,
+                "gamma": 1.4,
+                "invert": false
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "key": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "accent": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": -15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "warm": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "key": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "accent": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": -15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "warm": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": {
+            "contract": "stipra-style-resolution-v1",
+            "style": {
+              "id": "editorial-halftone",
+              "name": "Tonal key / selective third ink",
+              "version": 1,
+              "variant": "warm-third",
+              "variantVersion": 1,
+              "intent": "newspaper photo or editorial illustration",
+              "goodFor": [
+                "neutral bark or stone amid saturated vegetation",
+                "editorial scenes with localized warm material"
+              ],
+              "avoid": [
+                "scenes without neutral material",
+                "skin-tone fidelity",
+                "assuming a third ink automatically adds depth"
+              ],
+              "description": "The same green key and yellow pass, plus a localized neutral-material mask tinted coral. Compare with two inks before accepting the extra pass.",
+              "references": [],
+              "calibration": "experimental RGB approximation; no external profiles or artwork included"
+            },
+            "dpi": 300,
+            "seed": 42,
+            "screening": "authored",
+            "targetLpi": 40,
+            "effectiveLpi": 40,
+            "strength": 1,
+            "inkRecipe": {
+              "version": 1,
+              "mode": "spot",
+              "paper": "#f5eee2",
+              "inks": [
+                {
+                  "id": "key",
+                  "name": "Green tonal key",
+                  "color": "#006043",
+                  "source": "black",
+                  "threshold": 0,
+                  "gain": 1.15,
+                  "gamma": 1.1,
+                  "invert": false
+                },
+                {
+                  "id": "accent",
+                  "name": "Golden yellow",
+                  "color": "#e2a523",
+                  "source": "yellow",
+                  "threshold": 0,
+                  "gain": 0.45,
+                  "gamma": 1.15,
+                  "invert": false
+                },
+                {
+                  "id": "warm",
+                  "name": "Coral neutral-material accent",
+                  "color": "#ff665d",
+                  "source": "match",
+                  "target": "#a3a3a3",
+                  "tolerance": 0.14,
+                  "threshold": 0.3,
+                  "gain": 0.5,
+                  "gamma": 1.4,
+                  "invert": false
+                }
+              ]
+            },
+            "screenRecipe": {
+              "version": 1,
+              "seed": 42,
+              "default": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "plates": {
+                "key": {
+                  "mode": "solid",
+                  "pitch": 7.5,
+                  "angle": 22,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "accent": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": -15,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "warm": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": 45,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                }
+              }
+            },
+            "physicalScreens": [
+              {
+                "id": "key",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "accent",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              },
+              {
+                "id": "warm",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              }
+            ],
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ]
+          }
+        },
+        "plates": [
+          {
+            "id": "key",
+            "coverage": "c5a86ffcb226b3a5303985e848c416272348992767b9f5124c98206dffa06867",
+            "screened": "c5a86ffcb226b3a5303985e848c416272348992767b9f5124c98206dffa06867"
+          },
+          {
+            "id": "accent",
+            "coverage": "c2430ca77556cd70f0ce7f6acf367892883ffa2fc569369fe93f20d06dc12b5e",
+            "screened": "70e0e3ddcc1cdf11da86c6bf8efde89305923857f93dc9405c048b4caeba7369"
+          },
+          {
+            "id": "warm",
+            "coverage": "41b69e3c7be44808141165f0269ea51594ea5169eee80a75aef0ff017a026f92",
+            "screened": "196cb177d69a071fb4569692863eb008728d2e89d6bc0b740b2de991c7ee520f"
+          }
+        ],
+        "proof": "b078aa7047094f5d063aa78e52af8b601981c41df97e9a58c21a62ff2d5d37e2"
+      }
+    },
+    {
+      "id": "process-cmyk",
+      "kind": "image",
+      "exportMs": 566.3000000000029,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "image",
+          "dpi": 600,
+          "inks": {
+            "version": 1,
+            "mode": "spot",
+            "paper": "#fffdf5",
+            "inks": [
+              {
+                "id": "blue",
+                "name": "Blue / screen approximation",
+                "color": "#0078bf",
+                "source": "cyan-density",
+                "grayRemoval": 1,
+                "threshold": 0,
+                "gain": 0.9,
+                "gamma": 1,
+                "invert": false
+              },
+              {
+                "id": "pink",
+                "name": "Fluorescent pink / screen approximation",
+                "color": "#ff48b0",
+                "source": "magenta-density",
+                "grayRemoval": 1,
+                "threshold": 0,
+                "gain": 0.85,
+                "gamma": 1,
+                "invert": false
+              },
+              {
+                "id": "yellow",
+                "name": "Yellow / screen approximation",
+                "color": "#ffe800",
+                "source": "yellow-density",
+                "grayRemoval": 1,
+                "threshold": 0,
+                "gain": 0.9,
+                "gamma": 1,
+                "invert": false
+              },
+              {
+                "id": "key",
+                "name": "Black key",
+                "color": "#000000",
+                "source": "black",
+                "threshold": 0,
+                "gain": 0.9,
+                "gamma": 1,
+                "invert": false
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 15,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "blue": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "pink": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 75,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "yellow": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 0,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "key": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 15,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "blue": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "pink": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 75,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "yellow": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 0,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "key": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": {
+            "contract": "stipra-style-resolution-v1",
+            "style": {
+              "id": "bold-spot-poster",
+              "name": "Faux process / four inks",
+              "version": 1,
+              "variant": "process-cmyk",
+              "variantVersion": 1,
+              "intent": "bold photographic poster or flat collage",
+              "goodFor": [
+                "photographs needing a distinct black key",
+                "four-pass illustrations"
+              ],
+              "avoid": [
+                "assuming an extra ink is always useful",
+                "ICC or fluorescent color accuracy"
+              ],
+              "description": "Blue, fluorescent pink, yellow and a separate black key. Full gray removal reduces neutral overlap; this is simple RGB arithmetic, not a calibrated CMYK conversion.",
+              "references": [
+                {
+                  "title": "Ambipress / CMYK simulation and ink swatches",
+                  "url": "https://www.ambi-press.com/guia/",
+                  "id": "ambi-process"
+                },
+                {
+                  "title": "Exploriso / Custom CMYK and GCR",
+                  "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+                  "id": "exploriso-gcr"
+                }
+              ],
+              "calibration": "experimental RGB approximation; no external profiles or artwork included"
+            },
+            "dpi": 600,
+            "seed": 42,
+            "screening": "authored",
+            "targetLpi": 40,
+            "effectiveLpi": 40,
+            "strength": 1,
+            "inkRecipe": {
+              "version": 1,
+              "mode": "spot",
+              "paper": "#fffdf5",
+              "inks": [
+                {
+                  "id": "blue",
+                  "name": "Blue / screen approximation",
+                  "color": "#0078bf",
+                  "source": "cyan-density",
+                  "grayRemoval": 1,
+                  "threshold": 0,
+                  "gain": 0.9,
+                  "gamma": 1,
+                  "invert": false
+                },
+                {
+                  "id": "pink",
+                  "name": "Fluorescent pink / screen approximation",
+                  "color": "#ff48b0",
+                  "source": "magenta-density",
+                  "grayRemoval": 1,
+                  "threshold": 0,
+                  "gain": 0.85,
+                  "gamma": 1,
+                  "invert": false
+                },
+                {
+                  "id": "yellow",
+                  "name": "Yellow / screen approximation",
+                  "color": "#ffe800",
+                  "source": "yellow-density",
+                  "grayRemoval": 1,
+                  "threshold": 0,
+                  "gain": 0.9,
+                  "gamma": 1,
+                  "invert": false
+                },
+                {
+                  "id": "key",
+                  "name": "Black key",
+                  "color": "#000000",
+                  "source": "black",
+                  "threshold": 0,
+                  "gain": 0.9,
+                  "gamma": 1,
+                  "invert": false
+                }
+              ]
+            },
+            "screenRecipe": {
+              "version": 1,
+              "seed": 42,
+              "default": {
+                "mode": "dots",
+                "pitch": 15,
+                "angle": 15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "plates": {
+                "blue": {
+                  "mode": "dots",
+                  "pitch": 15,
+                  "angle": 15,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "pink": {
+                  "mode": "dots",
+                  "pitch": 15,
+                  "angle": 75,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "yellow": {
+                  "mode": "dots",
+                  "pitch": 15,
+                  "angle": 0,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "key": {
+                  "mode": "dots",
+                  "pitch": 15,
+                  "angle": 45,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                }
+              }
+            },
+            "physicalScreens": [
+              {
+                "id": "blue",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 15
+              },
+              {
+                "id": "pink",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 15
+              },
+              {
+                "id": "yellow",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 15
+              },
+              {
+                "id": "key",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 15
+              }
+            ],
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ]
+          }
+        },
+        "plates": [
+          {
+            "id": "blue",
+            "coverage": "67b4c64e67df7ff76e61e0d46782161dc77a8c1e7708779b733fcf824c8dce31",
+            "screened": "c0b52626dccadb062697b47152fc4be16a64fe79e897b34a387af77440a395f8"
+          },
+          {
+            "id": "pink",
+            "coverage": "58b22dad6da9baee607ebfd56e17bd002c0e2a88898b411f49e8d55d19127c63",
+            "screened": "854b6539b72d2564d65444ab8496e3c4c80d0adeb03926cb550c51b67c28c7f8"
+          },
+          {
+            "id": "yellow",
+            "coverage": "df0c1a0f10eca04cb0858169f02e09c2eef647cf84fbaa07a2a91afe8a8a3220",
+            "screened": "0b8380d134cb2120ed5a131acbefeb6addb8130fb1b0764915abc0dd1237fbf3"
+          },
+          {
+            "id": "key",
+            "coverage": "09f0b273684515d17039714a2de206600f6b7ff02d392038df3cbe6ddca20fac",
+            "screened": "90530b8e72f37643f639787d183ec755b2dfe0e6fc399d6190aa5c9e3a054422"
+          }
+        ],
+        "proof": "ea089b8a2b6021dc142f183e18f15c242d7191ce01007b50a4f26239c9d6fb51"
+      }
+    },
+    {
+      "id": "authored-2",
+      "kind": "layers",
+      "exportMs": 535.8000000000029,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "layers",
+          "dpi": 300,
+          "inks": {
+            "version": 1,
+            "mode": "authored",
+            "paper": "#f5eee2",
+            "inks": [
+              {
+                "id": "shape",
+                "name": "shape",
+                "color": "#006043"
+              },
+              {
+                "id": "counterform",
+                "name": "counterform",
+                "color": "#ff665d"
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 23,
+              "dotScale": 1,
+              "jitter": 0.1,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "shape": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "counterform": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 23,
+              "dotScale": 1,
+              "jitter": 0.1,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 2,
+                "y": -1,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "shape": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 2,
+                  "y": -1,
+                  "rotate": 0
+                }
+              },
+              "counterform": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 2,
+                  "y": -1,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": null
+        },
+        "plates": [
+          {
+            "id": "shape",
+            "coverage": "28edcbb41052e899cfcc21f247d01b75daed5aa8123fff951c4f04c56b5d419f",
+            "screened": "a3f847e4b664cc05e7a1a0880e09c3360da7a3ab3e6e7a8f7746a6554c161f41"
+          },
+          {
+            "id": "counterform",
+            "coverage": "e5aefb1e73260230742aaeef06e0892b3c13644a2e5e0db20cb0a4389f84d1f6",
+            "screened": "7abb1f6111617b1e35b06b01da75d224f6b1e85310f5e17372d9e9c976b6cef4"
+          }
+        ],
+        "proof": "18f538759c0d74ae3fbee978e55682a16b500040cf5f2f776fee32c945f16b89"
+      }
+    },
+    {
+      "id": "authored-3",
+      "kind": "layers",
+      "exportMs": 612.6999999999971,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "layers",
+          "dpi": 300,
+          "inks": {
+            "version": 1,
+            "mode": "authored",
+            "paper": "#f5eee2",
+            "inks": [
+              {
+                "id": "shape",
+                "name": "shape",
+                "color": "#006043"
+              },
+              {
+                "id": "counterform",
+                "name": "counterform",
+                "color": "#ff665d"
+              },
+              {
+                "id": "lettering",
+                "name": "lettering",
+                "color": "#0d4dad"
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 23,
+              "dotScale": 1,
+              "jitter": 0.1,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "shape": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "counterform": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "lettering": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 23,
+              "dotScale": 1,
+              "jitter": 0.1,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 2,
+                "y": -1,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "shape": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 2,
+                  "y": -1,
+                  "rotate": 0
+                }
+              },
+              "counterform": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 2,
+                  "y": -1,
+                  "rotate": 0
+                }
+              },
+              "lettering": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 23,
+                "dotScale": 1,
+                "jitter": 0.1,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 2,
+                  "y": -1,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": null
+        },
+        "plates": [
+          {
+            "id": "shape",
+            "coverage": "28edcbb41052e899cfcc21f247d01b75daed5aa8123fff951c4f04c56b5d419f",
+            "screened": "a3f847e4b664cc05e7a1a0880e09c3360da7a3ab3e6e7a8f7746a6554c161f41"
+          },
+          {
+            "id": "counterform",
+            "coverage": "e5aefb1e73260230742aaeef06e0892b3c13644a2e5e0db20cb0a4389f84d1f6",
+            "screened": "7abb1f6111617b1e35b06b01da75d224f6b1e85310f5e17372d9e9c976b6cef4"
+          },
+          {
+            "id": "lettering",
+            "coverage": "cc24f89fb46090d423012fde52dac4eed76de31d6d8356f5b4ab45f69e236842",
+            "screened": "cc24f89fb46090d423012fde52dac4eed76de31d6d8356f5b4ab45f69e236842"
+          }
+        ],
+        "proof": "cc2978cccd290edeaa35673294564792f31de816b82cd202dd609b88f4799af6"
+      }
+    },
+    {
+      "id": "studio-warm-third",
+      "kind": "image",
+      "exportMs": 804.3000000000029,
+      "expected": {
+        "recipe": {
+          "version": 1,
+          "kind": "image",
+          "dpi": 300,
+          "inks": {
+            "version": 1,
+            "mode": "spot",
+            "paper": "#f5eee2",
+            "inks": [
+              {
+                "id": "key",
+                "name": "Green tonal key",
+                "color": "#006043",
+                "source": "black",
+                "threshold": 0,
+                "gain": 1.15,
+                "gamma": 1.1,
+                "invert": false
+              },
+              {
+                "id": "accent",
+                "name": "Golden yellow",
+                "color": "#e2a523",
+                "source": "yellow",
+                "threshold": 0,
+                "gain": 0.45,
+                "gamma": 1.15,
+                "invert": false
+              },
+              {
+                "id": "warm",
+                "name": "Coral neutral-material accent",
+                "color": "#ff665d",
+                "source": "match",
+                "target": "#a3a3a3",
+                "tolerance": 0.14,
+                "threshold": 0.3,
+                "gain": 0.5,
+                "gamma": 1.4,
+                "invert": false
+              }
+            ]
+          },
+          "screens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "key": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "accent": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": -15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "warm": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "proofScreens": {
+            "version": 1,
+            "seed": 42,
+            "default": {
+              "mode": "dots",
+              "pitch": 7.5,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "plates": {
+              "key": {
+                "mode": "solid",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "accent": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": -15,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "warm": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 45,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              }
+            }
+          },
+          "style": {
+            "contract": "stipra-style-resolution-v1",
+            "style": {
+              "id": "editorial-halftone",
+              "name": "Tonal key / selective third ink",
+              "version": 1,
+              "variant": "warm-third",
+              "variantVersion": 1,
+              "intent": "newspaper photo or editorial illustration",
+              "goodFor": [
+                "neutral bark or stone amid saturated vegetation",
+                "editorial scenes with localized warm material"
+              ],
+              "avoid": [
+                "scenes without neutral material",
+                "skin-tone fidelity",
+                "assuming a third ink automatically adds depth"
+              ],
+              "description": "The same green key and yellow pass, plus a localized neutral-material mask tinted coral. Compare with two inks before accepting the extra pass.",
+              "references": [],
+              "calibration": "experimental RGB approximation; no external profiles or artwork included"
+            },
+            "dpi": 300,
+            "seed": 42,
+            "screening": "authored",
+            "targetLpi": 40,
+            "effectiveLpi": 40,
+            "strength": 1,
+            "inkRecipe": {
+              "version": 1,
+              "mode": "spot",
+              "paper": "#f5eee2",
+              "inks": [
+                {
+                  "id": "key",
+                  "name": "Green tonal key",
+                  "color": "#006043",
+                  "source": "black",
+                  "threshold": 0,
+                  "gain": 1.15,
+                  "gamma": 1.1,
+                  "invert": false
+                },
+                {
+                  "id": "accent",
+                  "name": "Golden yellow",
+                  "color": "#e2a523",
+                  "source": "yellow",
+                  "threshold": 0,
+                  "gain": 0.45,
+                  "gamma": 1.15,
+                  "invert": false
+                },
+                {
+                  "id": "warm",
+                  "name": "Coral neutral-material accent",
+                  "color": "#ff665d",
+                  "source": "match",
+                  "target": "#a3a3a3",
+                  "tolerance": 0.14,
+                  "threshold": 0.3,
+                  "gain": 0.5,
+                  "gamma": 1.4,
+                  "invert": false
+                }
+              ]
+            },
+            "screenRecipe": {
+              "version": 1,
+              "seed": 42,
+              "default": {
+                "mode": "dots",
+                "pitch": 7.5,
+                "angle": 22,
+                "dotScale": 1,
+                "jitter": 0,
+                "solidThreshold": 0.9,
+                "registration": {
+                  "x": 0,
+                  "y": 0,
+                  "rotate": 0
+                }
+              },
+              "plates": {
+                "key": {
+                  "mode": "solid",
+                  "pitch": 7.5,
+                  "angle": 22,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "accent": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": -15,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                },
+                "warm": {
+                  "mode": "dots",
+                  "pitch": 7.5,
+                  "angle": 45,
+                  "dotScale": 1,
+                  "jitter": 0,
+                  "solidThreshold": 0.9,
+                  "registration": {
+                    "x": 0,
+                    "y": 0,
+                    "rotate": 0
+                  }
+                }
+              }
+            },
+            "physicalScreens": [
+              {
+                "id": "key",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "accent",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              },
+              {
+                "id": "warm",
+                "mode": "dots",
+                "targetLpi": 40,
+                "effectiveLpi": 40,
+                "pitchPx": 7.5
+              }
+            ],
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ]
+          }
+        },
+        "plates": [
+          {
+            "id": "key",
+            "coverage": "c5a86ffcb226b3a5303985e848c416272348992767b9f5124c98206dffa06867",
+            "screened": "c5a86ffcb226b3a5303985e848c416272348992767b9f5124c98206dffa06867"
+          },
+          {
+            "id": "accent",
+            "coverage": "c2430ca77556cd70f0ce7f6acf367892883ffa2fc569369fe93f20d06dc12b5e",
+            "screened": "70e0e3ddcc1cdf11da86c6bf8efde89305923857f93dc9405c048b4caeba7369"
+          },
+          {
+            "id": "warm",
+            "coverage": "41b69e3c7be44808141165f0269ea51594ea5169eee80a75aef0ff017a026f92",
+            "screened": "196cb177d69a071fb4569692863eb008728d2e89d6bc0b740b2de991c7ee520f"
+          }
+        ],
+        "proof": "b078aa7047094f5d063aa78e52af8b601981c41df97e9a58c21a62ff2d5d37e2"
+      }
+    }
+  ],
+  "draft": {
+    "cachedDraw": {
+      "samplesMs": [
+        1.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "minimumMs": 0,
+      "medianMs": 0,
+      "maximumMs": 1.5
+    },
+    "draftMs": 42.89999999999418,
+    "cacheMs": 0.10000000000582077,
+    "finalMs": 465.3000000000029,
+    "resolution": {
+      "kind": "draft",
+      "source": {
+        "width": 1024,
+        "height": 768
+      },
+      "preview": {
+        "width": 256,
+        "height": 192
+      },
+      "resampled": true,
+      "screenScale": "pixel-pattern approximation; inspect final for physical screening"
+    },
+    "finalPixels": {
+      "width": 1024,
+      "height": 768
+    },
+    "frozenFinalVerified": true
+  },
+  "exporterLoadMs": 109.39999999999418,
+  "evidence": {
+    "run": "https://github.com/yigit-denktas/stipra/actions/runs/39042755610",
+    "head": "0aeb8b9a16066be9e1de8746dfff6b17442e9764",
+    "mode": "GitHub Actions headless Chromium; software-rendered; not a user-device or visual-preference study"
+  }
+}

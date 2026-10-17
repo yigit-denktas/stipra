@@ -27,7 +27,9 @@
     "check:release-licenses": "node scripts/license-audit.js --release-check",
     "build:core": "node scripts/build-core.js",
     "check:core-package": "node --test tests/core-package.test.js",
-    "build:sketches": "node scripts/build-sketches.js"
+    "build:sketches": "node scripts/build-sketches.js",
+    "benchmark:alpha": "node scripts/benchmark-alpha.js",
+    "check:alpha": "STIPRA_SMOKE_PAGE=examples/alpha/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_ALPHA_PASS node scripts/browser-smoke.js && node scripts/verify-alpha-parity.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",

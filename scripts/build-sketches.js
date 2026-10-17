@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),ROOT=path.resolve(__dirnam
 async function build(target=path.join(ROOT,'dist/stipra/sketches')){
   await require('./build-core.js').build();
   const out=path.resolve(target),assets=path.join(out,'assets');fs.mkdirSync(assets,{recursive:true});
-  for(const name of ['index.html','global.html','instance.html','vanilla.mjs','global.mjs','instance.mjs','ui.mjs','sketches.css'])
+  for(const name of ['index.html','global.html','instance.html','vanilla.mjs','global.mjs','instance.mjs','ui.mjs','draft.mjs','sketches.css'])
     fs.copyFileSync(path.join(ROOT,'examples/sketches',name),path.join(out,name));
   fs.copyFileSync(path.join(ROOT,'packages/core/dist/index.mjs'),path.join(assets,'core.mjs'));
   const adapter=fs.readFileSync(path.join(ROOT,'packages/canvas/index.mjs'),'utf8');
