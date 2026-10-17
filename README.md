@@ -55,7 +55,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Still open:** physical and artistic acceptance, three [distribution findings and artifact checks](docs/DEPENDENCY-AUDIT.md), and publication approval. Previews are **digital approximations**; software checks do not establish real ink color or printer calibration. Packages remain unpublished, and the brand direction is provisional.
+**Acceptance:** [Saved goldens, exact-tarball consumers and release gates](docs/RELEASE-CANDIDATE.md). Physical/artist review, three [provenance findings](docs/DEPENDENCY-AUDIT.md) and publication remain open. Previews are **digital approximations**. Packages are unpublished; branding is provisional.
 
 ## Follow the work
 

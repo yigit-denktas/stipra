@@ -292,8 +292,8 @@
         12,
         22
       ],
-      "note": "Software evidence now includes the CLI workflow, 2/3/4-ink saved mask hashes, odd square/portrait/landscape frames, derivative format/scale checks and real browser parity. Broader physical/golden acceptance remains open; no press calibration is claimed.",
-      "sourceUpdatedAt": "2026-10-17T13:15:48Z"
+      "note": "Saved six-colorway native vector/plate goldens and generic 2/3/4-ink mask goldens; real browser/export evidence and paper-independent generic masters. Physical record validation cannot authenticate printing. Legacy straight-edge/shared-seed redesign and wider human accessibility/physical acceptance remain open.",
+      "sourceUpdatedAt": "2026-10-17T20:17:26Z"
     },
     {
       "issue": 14,
@@ -305,8 +305,8 @@
       "dependsOn": [
         1
       ],
-      "note": "Two incomplete MIT notices supplemented. Actual lean tarballs and browser-export inputs/outputs have scoped artifact checks; upstream identity hashes fail on drift. Three native/WASM/prebundle provenance findings remain; broad release gate stays closed.",
-      "sourceUpdatedAt": "2026-10-17T13:49:38Z"
+      "note": "Two incomplete notices resolved. Exact tarballs pass import/notice and isolated consumer checks; source recheck records the WOFF2 install-tag/activate-latest ambiguity. Three upstream binary/prebundle inventories remain unresolved; broad release gate stays closed.",
+      "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {
       "issue": 17,
@@ -635,8 +635,8 @@
         73,
         74
       ],
-      "note": "Engineering #71–#74 complete. Owner/artist usefulness and artifact-specific publication decision remain; no registry release.",
-      "sourceUpdatedAt": "2026-10-17T15:16:55Z"
+      "note": "Core/Canvas/inputs engineering and a combined offline consumer of the exact audited tarballs are verified locally; public runtime/types and inert region replay are checked. Private 0.1.0-alpha.0 remains unpublished. Independent artist feedback and owner version/namespace/publication decision are open.",
+      "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {
       "issue": 71,

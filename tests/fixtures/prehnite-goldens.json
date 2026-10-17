@@ -1,0 +1,124 @@
+{
+  "contract": "stipra-prehnite-goldens-v1",
+  "scope": "Exact native vector serialization; not rasterizer, artistic or physical acceptance.",
+  "scenes": [
+    {
+      "id": "01",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3351673,
+          "sha256": "8c154accb454a91abbaccef973ead659ece1ca25b4a403891b44a6d2bee2c859"
+        },
+        "primary-master.svg": {
+          "bytes": 542942,
+          "sha256": "30416d7b645c57f9bb5a16d1137e1b7f47e54fba1341c1087df64a0d523c1136"
+        },
+        "accent-master.svg": {
+          "bytes": 299453,
+          "sha256": "e9a27e163c0659407ba8be3af2a7d7a0e40912ec113b1a381ad889bd15256a1d"
+        }
+      }
+    },
+    {
+      "id": "02",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3357440,
+          "sha256": "10a632e65ac0f796cc8b0418ddc08b32a3ab0fb87451a81771a0312ed0614129"
+        },
+        "primary-master.svg": {
+          "bytes": 551400,
+          "sha256": "ec782fe3d94d21620bbec2c3fe97ad47346781584c90d566cb2df952ee84032c"
+        },
+        "accent-master.svg": {
+          "bytes": 296781,
+          "sha256": "f73f683427bf1417b65f46b9492cd3fbf19d123a388ae3084c580116c4124f58"
+        }
+      }
+    },
+    {
+      "id": "03",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3402571,
+          "sha256": "b224115b71a54721ee49c2c28ae254f455d19e813cd33b906ba2a9f7a0346423"
+        },
+        "primary-master.svg": {
+          "bytes": 521561,
+          "sha256": "4854e031ce9c05e3bb9194cecd3c7551e9a8a484724b616f2a545d23a8d7aeb6"
+        },
+        "accent-master.svg": {
+          "bytes": 303643,
+          "sha256": "d6873ad93534275c1dfa69a8de757efe9894429a7a4141c444c434e119950fc6"
+        },
+        "third-master.svg": {
+          "bytes": 117132,
+          "sha256": "22ace9b5872239f2f0700ce4ea70c980b72bcc95e6383b5916ab875bf889e229"
+        }
+      }
+    },
+    {
+      "id": "04",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3353541,
+          "sha256": "854e78bc5731e774e343f0b12a288bfae3ca9b545990dc3fa8a5dec59dab2ed1"
+        },
+        "primary-master.svg": {
+          "bytes": 546376,
+          "sha256": "ef4e349dcfc54c7a98c6375a431082f3068b2448fe0f47b7a370687248155fdd"
+        },
+        "accent-master.svg": {
+          "bytes": 298098,
+          "sha256": "004ea771308283c68fbc677d0dff56eb12b65f67ab4b84ae6efe0ea1185169a8"
+        }
+      }
+    },
+    {
+      "id": "05",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3357627,
+          "sha256": "7aa717371bfc30f9472ad8ba2388033a84a342e58735dcfcd7bafab6ec989cb6"
+        },
+        "primary-master.svg": {
+          "bytes": 548786,
+          "sha256": "16e9abf605a2532492a5e3234920c9f884a652c7303fe71d272ab4980401a6a7"
+        },
+        "accent-master.svg": {
+          "bytes": 299650,
+          "sha256": "25945293185fbaf460cc6c7cc5c1f327af916a378e183a87dbc0fc4706a5e9f5"
+        }
+      }
+    },
+    {
+      "id": "06",
+      "width": 2020,
+      "height": 779,
+      "files": {
+        "composite.svg": {
+          "bytes": 3360482,
+          "sha256": "28edb7599060ad382003be6e29d5de1048ec248cc26cf7d1940fdb76d50c5130"
+        },
+        "primary-master.svg": {
+          "bytes": 552205,
+          "sha256": "60bf39e4cf8916e2934b813822e3ad822b02387020e172a27de5791b93e6bf7c"
+        },
+        "accent-master.svg": {
+          "bytes": 299452,
+          "sha256": "5c21ec8e3efd3eec6badf81fdc561c36f83f304466a6c8dc67b8ca300be28ad1"
+        }
+      }
+    }
+  ]
+}

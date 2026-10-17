@@ -4,6 +4,21 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Saved artwork acceptance and an isolated library candidate",
+      "status": "Unreleased",
+      "issues": [
+        13,
+        14,
+        70
+      ],
+      "changes": [
+        "Saved vector baselines for six original Prehnite colorways and every active ink master, with procedural review artifacts.",
+        "Install the exact audited core/Canvas/inputs tarballs together offline; verify public runtime/types and region-to-core replay.",
+        "Validate completed print-observation records without asserting physical authenticity; keep three provenance gaps and publication decisions explicit."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Compare, batch, export and verify",
       "status": "Unreleased",
       "issues": [
