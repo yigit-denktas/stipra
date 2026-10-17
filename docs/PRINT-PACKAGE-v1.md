@@ -69,6 +69,10 @@ Repeat the per-ink paths for each real physical pass; the ZIP always includes a 
 - Screen pitch is currently specified **in pixels**. A recipe at a different physical DPI changes effective LPI; that is **not** a calibrated halftone screen. There is no ICC conversion, measured dot gain, paper/press characterization, trapping or hardware print verification.
 - The source's embedded ICC/probe metadata and assumptions remain in the manifest, but original JPEG ICC profiles are **not** necessarily color-managed into a measured physical spot-ink simulation. Keep originals.
 
+### Plate diagnostics and editorial review
+
+The package includes [`report/diagnostics.json`](PLATE-DIAGNOSTICS-v1.md), containing mean ink contribution, per-pair overlap, heavily combined nominal coverage, and the **effective LPI of each screened ink at the chosen output DPI**. The same read-only math powers a small browser report. Advisory warnings flag low contribution and dense/overlapping passes: **not** validated machine safety limits or a substitute for viewing real output.
+
 ### Quality and verification
 
 ```sh
