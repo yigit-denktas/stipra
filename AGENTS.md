@@ -18,7 +18,7 @@ Use branch names like feat/123-separation-sheet or fix/456-plate-offset. PR body
 
 ## Before changing defaults or the studio UI
 
-Read [DESIGN.md](DESIGN.md) for Stipra's product principles, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.
+Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.md](docs/STYLES-v1.md) for the four implemented, unvalidated starting recipes, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.
 
 ## Technical rules
 
