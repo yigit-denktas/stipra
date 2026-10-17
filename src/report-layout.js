@@ -12,7 +12,7 @@ const pdfColor=hex=>rgb(...color(hex));
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=v=>Number(v).toFixed(1);
 const fontFile=(family,weight)=>fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-latin-'+weight+'-normal.woff'));
-const truetype=(family)=>Buffer.from(createFont(fontFile(family,400),{type:'woff',inflate:zlib.inflateSync}).write({type:'ttf'}));
+const truetype=(family)=>Buffer.from(createFont(fontFile(family,400),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))}).write({type:'ttf'}));
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
 function htmlReport(cards,m){
   const font=fontFile('ibm-plex-sans',400).toString('base64'),mono=fontFile('ibm-plex-mono',400).toString('base64');
