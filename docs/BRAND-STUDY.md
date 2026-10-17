@@ -19,7 +19,7 @@ The [two spot-ink masters](https://apps.yigitdenktas.com/stipra/brand/stipra-mar
 
 ## Construction rules
 
-1. **Solid S first.** Three cubic Bézier segments describe one continuous centerline. A constant-width band of 82 coordinate units and round caps yields the silhouette polygon. No random noise, accidental fragments or color rules are involved.
+1. **Solid S first.** Three cubic Bézier segments describe one continuous centerline. A constant-width band of 82 coordinate units is sampled into strongly overlapping geometric circles, producing a smooth round-capped solid silhouette **without offset-polygon cusps**. No random noise, accidental fragments or color rules are involved.
 2. **One fixed dot matrix.** Lattice pitch **11.8 coordinate units**, identical dot centers in all variants. No stochastic speckling, per-color scatter or offset. The interior is clipped to the *actual path-distance bound*; dot radii reduce smoothly at the outline.
 3. **Quantified optical balance.** Sum circle areas (πr²) to measure the printed mark's centroid and left/right mass. The generator rejects candidate output if the centroid drifts more than 12 units from the canvas center or left/right ink area differs by over 10%. That diagnostic is *not* a substitute for a designer's eye.
 4. **Color follows the letter.** The spot assignment follows *progress along the S's centerline*, not raw canvas x-position. Teal prints through the upper portion, coral through the lower; only the middle **42–58%** ribbon interval belongs to **both** physical inks. There is no decorative third-black dot pass: darks appear through meaningful ink overlap.
