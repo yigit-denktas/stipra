@@ -112,6 +112,18 @@
     el('style-variant').value='tonal-key';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
     await until(()=>canvases().length===4,'two-ink style applied');
     if(el('error').hidden!==true)throw Error('Style application failed: '+el('error').textContent);
+    for(const [family,variant,count] of [['portrait-duotone','blue-pink',4],['portrait-duotone','teal-orange',4],['bold-spot-poster','process-cmy',5],['bold-spot-poster','process-cmyk',6],['editorial-halftone','forest-depth',4],['editorial-halftone','coast-duotone',4]]){
+      el('style').value=family;el('style').dispatchEvent(new Event('change',{bubbles:true}));
+      el('style-variant').value=variant;el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
+      await until(()=>canvases().length===count,variant+' applied');
+      if(el('style-variant').value!==variant||el('style-variant').disabled)throw Error('Missing shared variant '+variant);
+      if(!el('style-note').textContent.includes('Suitable:'))throw Error('Missing variant guidance');
+      const recipe=frame.contentWindow.StipraStyles.resolve(family,{variant,dpi:600,lpi:50});
+      for(const ink of recipe.inkRecipe.inks){
+        const selector=el('control-'+ink.id+'-Source');
+        if(!selector||selector.value!==ink.source)throw Error('New channel not editable '+ink.id);
+      }
+    }
     const guideFrame=document.createElement('iframe');guideFrame.src='/dist/stipra/guide/index.html';guideFrame.style.height='844px';document.body.appendChild(guideFrame);
     await until(()=>guideFrame.contentDocument?.title==='stiprā / from image to ink','built public guide loaded');
     await guideFrame.contentDocument.fonts.ready;

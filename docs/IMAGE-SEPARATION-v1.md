@@ -85,3 +85,7 @@ const result = separation.separate({width, height, rgba}, recipe);
 ```
 
 Runtime invariants are exercised in [separation tests](../tests/separation.test.js): pure black, primaries, alpha, 2–8 spot and four-ink validity, real user-adjustable masks, source preservation, browser/Node parity, full-frame CLI PNGs, and refusal to overwrite existing files. Browser demo smoke tests use real Chromium on CI, including actual per-ink screen edits through the [screening engine](SCREENING-v1.md).
+
+### Additive photographic channel sources
+
+Spot mode additionally accepts `tone`, `cyan-density`, `magenta-density` and `yellow-density`. `tone = 1 - (.2126 R + .7152 G + .0722 B)` uses encoded RGB, while the existing `darkness` remains based on linear-light luminance. Density sources use `max(0, 1 - channel - grayRemoval * K)` for R, G or B respectively, with `K = 1 - max(R,G,B)`. `grayRemoval` is 0..1, defaults to 0, and is rejected on other sources. The existing normalized CMYK formula and every old recipe remain unchanged. See [recipe research](references/SEPARATION-RECIPES.md).

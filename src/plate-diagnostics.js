@@ -19,7 +19,26 @@
         fail(key+' must be between 0 and 1');
     return result;
   }
-  function inspect(result,{dpi=300,settings={}}={}){
+  function suitability(input){
+    if(!input||!Number.isSafeInteger(input.width)||!Number.isSafeInteger(input.height)||input.width<1||input.height<1||input.width*input.height>24000000||
+      !['[object Uint8Array]','[object Uint8ClampedArray]'].includes(Object.prototype.toString.call(input.rgba))||input.rgba.length!==input.width*input.height*4)fail('expected full-frame source RGBA');
+    let weight=0,shadows=0,highlights=0,neutral=0,min=1,max=0;
+    for(let q=0;q<input.rgba.length;q+=4){
+      const a=input.rgba[q+3]/255;if(!a)continue;
+      const r=input.rgba[q]/255,g=input.rgba[q+1]/255,b=input.rgba[q+2]/255,t=.2126*r+.7152*g+.0722*b;
+      weight+=a;shadows+=a*(t<.25);highlights+=a*(t>.85);neutral+=a*(Math.max(r,g,b)-Math.min(r,g,b)<.04);
+      min=Math.min(min,t);max=Math.max(max,t);
+    }
+    const ratio=n=>round(weight?n/weight:0);
+    return {measurement:'alpha-weighted encoded RGB tone; no semantic classification',visiblePixelWeight:round(weight),
+      shadowFraction:ratio(shadows),highlightFraction:ratio(highlights),nearNeutralFraction:ratio(neutral),
+      tonalRange:round(weight?max-min:0),thresholds:{shadowBelow:.25,highlightAbove:.85,neutralChromaBelow:.04},
+      guidance:[...(weight&&shadows/weight>.25?['Dark source: compare an open-shadow key and inspect texture before adding ink.']:[]),
+        ...(weight&&highlights/weight>.25?['Many pale tones: inspect unscreened proof and fine detail at print size.']:[]),
+        ...(weight&&neutral/weight>.9?['Mostly neutral source: gray-removed color passes may contribute little; compare a tonal duotone.']:[]),
+        ...(!weight?['Fully transparent source: no printable image area.']:[])]};
+  }
+  function inspect(result,{dpi=300,settings={},input=null}={}){
     if(!result||!Number.isSafeInteger(result.width)||!Number.isSafeInteger(result.height)||
         result.width<1||result.height<1||!Array.isArray(result.masks)||
         result.masks.length<1||result.masks.length>8)fail('expected full-frame masks');
@@ -72,7 +91,8 @@
       pairs.push({inks:[masks[i].id,masks[j].id],
         overlapFraction:round(pairCounts[i][j]/pixels)});
     pairs.sort((a,b)=>b.overlapFraction-a.overlapFraction||a.inks.join('/').localeCompare(b.inks.join('/')));
-    const diagnostics={contract:'stipra-plate-diagnostics-v1',width,height,dpi,
+    if(input&&(input.width!==width||input.height!==height))fail('source grid must match masks');
+    const diagnostics={...(input?{suitability:suitability(input)}:{}),contract:'stipra-plate-diagnostics-v1',width,height,dpi,
       measurement:'nominal raster coverage, additive and uncalibrated',
       thresholds:{...opts,heavyCombinedCoverage:1.8,solidPlateCoverage:217/255},
       overall:{inkedFraction:round(inkedPixels/pixels),meanAdditiveCoverage:round(inkSum/pixels),
@@ -93,5 +113,5 @@
         message:'Multiple inks overlap across a large area. Inspect contrast and physical overprinting.'});
     return diagnostics;
   }
-  return {inspect,options};
+  return {inspect,options,suitability};
 });

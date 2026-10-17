@@ -8,7 +8,7 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   'use strict';
   const ID=/^[a-z][a-z0-9_-]{0,63}$/, HEX=/^#[0-9a-f]{6}$/i;
-  const SOURCES=new Set(['red','green','blue','luminance','darkness','match','cyan','magenta','yellow','black']);
+  const SOURCES=new Set(['red','green','blue','luminance','darkness','match','cyan','magenta','yellow','black','tone','cyan-density','magenta-density','yellow-density']);
   const clamp=n=>Math.min(1,Math.max(0,n));
   const fail=(where,why)=>{throw new TypeError('separation.'+where+': '+why);};
   function shape(o,name,keys){
@@ -33,7 +33,7 @@
     const ids=new Set();
     const inks=config.inks.map((raw,i)=>{
       const p='recipe.inks['+i+']';
-      shape(raw,p,['id','name','color','source','target','tolerance','threshold','gain','gamma','invert']);
+      shape(raw,p,['id','name','color','source','target','tolerance','threshold','gain','gamma','invert','grayRemoval']);
       if(typeof raw.id!=='string'||!ID.test(raw.id)||ids.has(raw.id))fail(p+'.id','expected unique lowercase ink id');
       ids.add(raw.id);
       if(typeof raw.name!=='string'||!raw.name.trim()||raw.name.length>100)fail(p+'.name','expected nonempty name (max 100)');
@@ -42,7 +42,10 @@
       if(expected&&source!==expected)fail(p+'.source','CMYK order must be cyan, magenta, yellow, black');
       if(source==='match'&&raw.target===undefined)fail(p+'.target','match requires a literal target color');
       if(source!=='match'&&(raw.target!==undefined||raw.tolerance!==undefined))fail(p,'target and tolerance are only valid for match source');
+      const density=source.endsWith('-density');
+      if(raw.grayRemoval!==undefined&&!density)fail(p+'.grayRemoval','only valid for density sources');
       return {id:raw.id,name:raw.name.trim(),color:color(raw.color,p+'.color'),source,
+        ...(density?{grayRemoval:num(raw.grayRemoval??0,p+'.grayRemoval',0,1)}:{}),
         ...(source==='match'?{target:color(raw.target,p+'.target'),tolerance:num(raw.tolerance??0.6,p+'.tolerance',0.01,1)}:{}),
         threshold:num(raw.threshold??0,p+'.threshold',0,0.99),
         gain:num(raw.gain??1,p+'.gain',0,4),
@@ -72,6 +75,10 @@
   }
   function sourceValue(ink,r,g,b,lum,cmykChannels){
     switch(ink.source){
+      case 'tone':return 1-(.2126*r+.7152*g+.0722*b);
+      case 'cyan-density':return clamp(1-r-ink.grayRemoval*cmykChannels[3]);
+      case 'magenta-density':return clamp(1-g-ink.grayRemoval*cmykChannels[3]);
+      case 'yellow-density':return clamp(1-b-ink.grayRemoval*cmykChannels[3]);
       case 'red':return r;
       case 'green':return g;
       case 'blue':return b;

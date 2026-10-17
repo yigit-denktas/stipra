@@ -1,0 +1,37 @@
+{
+  "sourceCommit": "e32cb6006e5da8f57a11ae0634d29bdf81f662c5",
+  "dpi": 300,
+  "seed": 42,
+  "records": [
+    {
+      "id": "portrait-duotone",
+      "variant": "default",
+      "sha256": "538a06d5332408eb081ecb743aaa7946f539540e8a31c1aeeb15455a07cc8d9b"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "default",
+      "sha256": "9c48e898d240dbbfa2fc85b9759d13feffb0a67aa979e025b917901a05571b55"
+    },
+    {
+      "id": "bold-spot-poster",
+      "variant": "default",
+      "sha256": "8853e460d6c7fc4e886f58b19b77d83dc0b4eb613d5492919cdadf513d53a81e"
+    },
+    {
+      "id": "clean-linework",
+      "variant": "default",
+      "sha256": "9cf443a1d8ce7baaaa25bb19731e7fd79ee42b60aa8c36a75210439fff5c4afa"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "tonal-key",
+      "sha256": "82a707dd432d80cdf41a439e3b5fc331d420fe0da8af7f68f72a110c3edce051"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "warm-third",
+      "sha256": "e8f0668aef14d1f81620dc93ada44dcf9d1ce8380bda4976e930e8114b5a10df"
+    }
+  ]
+}
