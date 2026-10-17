@@ -19,6 +19,9 @@ function chrome(){
 function contentType(name){
  if(name.endsWith('.js')||name.endsWith('.mjs'))return 'text/javascript; charset=utf-8';
  if(name.endsWith('.html'))return 'text/html; charset=utf-8';
+ if(name.endsWith('.css'))return 'text/css; charset=utf-8';
+ if(name.endsWith('.json'))return 'application/json; charset=utf-8';
+ if(name.endsWith('.svg'))return 'image/svg+xml';
  return 'application/octet-stream';
 }
 async function run(){

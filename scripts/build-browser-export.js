@@ -2,11 +2,11 @@
 'use strict';
 const path=require('node:path'),fs=require('node:fs'),esbuild=require('esbuild');
 const ROOT=path.resolve(__dirname,'..');
-async function build(outfile){
+async function build(outfile,{format='iife'}={}){
   const {truetype,license}=require('../src/report-fonts.js');
   const fonts={};for(const [family,weight] of [['ibm-plex-sans',400],['ibm-plex-sans',700],['ibm-plex-mono',400]])fonts[family+weight]=truetype(family,weight).toString('base64');
   const svg=fs.readFileSync(path.join(ROOT,'logo_for_Readme.svg'),'utf8');
-  const result=await esbuild.build({metafile:true,legalComments:'linked',entryPoints:[path.join(ROOT,'src/browser/export.js')],outfile,bundle:true,platform:'browser',format:'iife',globalName:'StipraExport',minify:true,
+  const result=await esbuild.build({metafile:true,legalComments:'linked',entryPoints:[path.join(ROOT,format==='esm'?'src/browser/export-entry.mjs':'src/browser/export.js')],outfile,bundle:true,platform:'browser',format,...(format==='iife'?{globalName:'StipraExport'}:{}),minify:true,
     inject:[path.join(ROOT,'src/browser/buffer.js')],define:{__dirname:'"/"'},plugins:[{name:'export-platform',setup(api){
       api.onResolve({filter:/^(?:node:(?:fs|path|crypto)|skia-canvas|\.\/report-fonts\.js)$/},args=>({path:args.path,namespace:'export-platform'}));
       api.onLoad({filter:/.*/,namespace:'export-platform'},args=>{

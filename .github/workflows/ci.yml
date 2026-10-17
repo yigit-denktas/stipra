@@ -47,10 +47,15 @@ jobs:
           path: out/core-package/
       - uses: actions/upload-artifact@v4
         with:
+          name: canvas-package-report
+          path: out/canvas-package/
+      - uses: actions/upload-artifact@v4
+        with:
           name: dependency-audit
           path: out/license-audit/
       - run: node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=examples/core/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_CORE_PASS node scripts/browser-smoke.js
+      - run: STIPRA_SMOKE_PAGE=examples/sketches/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SKETCH_PASS node scripts/browser-smoke.js
       - run: STIPRA_SMOKE_PAGE=web/stipra/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_SEPARATION_PASS node scripts/browser-smoke.js
       - uses: actions/setup-python@v5
         with:

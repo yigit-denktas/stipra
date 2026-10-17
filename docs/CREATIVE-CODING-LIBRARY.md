@@ -2,7 +2,7 @@
 
 Recorded 17 October 2026 from the owner's request. This is a scoped plan, not a shipped SDK or an approved public API. [Milestone tracker #70](https://github.com/yigit-denktas/stipra/issues/70) holds the work breakdown; native GitHub milestone/Project setup remains [#17](https://github.com/yigit-denktas/stipra/issues/17).
 
-**Core implementation:** [the private local alpha](../packages/core/README.md) implements the #71 contract using the same separation/screen/Styles/diagnostics modules, with pixel and authored-mask input, ESM/CommonJS entries and TypeScript declarations. This does not complete the p5.js adapter, transparent effects, authored-layer export integration, performance/usefulness gate or registry release. Those remain in #72–#74. p5.grain will be reused when the integration needs compatible grain/texture functionality; a photo editor is outside the product scope.
+**Core implementation:** [the private local alpha](../packages/core/README.md) implements the #71 contract using the same separation/screen/Styles/diagnostics modules, with pixel and authored-mask input, ESM/CommonJS entries and TypeScript declarations. The Canvas/p5 2D adapter and authored-layer export integration are documented in [the adapter guide](../packages/canvas/README.md) for #72/#73. The broader performance/usefulness gate, calibrated print validation, GPU renderers and registry release remain separate. p5.grain will be reused when the integration needs compatible grain/texture functionality; a photo editor is outside the product scope.
 
 ## The experience
 

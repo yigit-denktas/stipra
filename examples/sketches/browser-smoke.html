@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Stiprā Canvas/p5 integration smoke</title></head>
+<body><output id="out">SKETCH_PENDING</output><div id="hosts"></div>
+<script src="../../node_modules/jszip/dist/jszip.min.js"></script>
+<script type="module">
+import {captureCanvas,captureLayers,renderCanvas,renderCanvasLayers,drawProof,exportSnapshot} from '/dist/stipra/sketches/assets/canvas.mjs';
+const out=document.getElementById('out'),pause=ms=>new Promise(r=>setTimeout(r,ms));
+async function until(fn,label){for(let i=0;i<500;i++){if(fn())return;await pause(60);}throw Error('Timed out '+label);}
+const check=(ok,message)=>{if(!ok)throw Error(message);};
+function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.append(s);});}
+try{
+  check(!performance.getEntriesByType('resource').some(x=>x.name.includes('print-export.mjs')),'export loaded before request');
+  for(const version of ['p5','p5-v2']){
+    await loadScript('/node_modules/'+version+'/lib/p5.min.js');
+    for(const density of [1,2])await new Promise((resolve,reject)=>{
+      new p5(p=>{p.setup=()=>{try{
+        p.pixelDensity(density);p.createCanvas(32,24);p.noLoop();
+        const art=p.createGraphics(32,24);art.pixelDensity(density);art.clear();art.noStroke();art.fill(0,128);art.rect(3,2,17,15);
+        p.randomSeed(177);const first=p.random();p.noiseSeed(177);const noiseBefore=p.noise(.2,.3);
+        const captured=captureCanvas(art),result=renderCanvas(art,{style:{id:'clean-linework'},seed:42});
+        const second=p.random();check(p.noise(.2,.3)===noiseBefore,'noise state changed');p.randomSeed(177);check(p.random()===first&&p.random()===second,'random state changed');
+        check(captured.input.width===32*density&&captured.input.height===24*density,'backing dimensions changed');
+        check(captured.metadata.logical.width===32&&captured.metadata.pixelDensity.x===density,'density metadata wrong');
+        check(result.canvas.getContext('2d').getImageData(0,0,1,1).data[3]===0,'alpha lost');
+        const before=captureCanvas(art).input.rgba.join(',');drawProof(result,p);check(captureCanvas(art).input.rgba.join(',')===before,'source painted over');
+        let feedback=false;try{drawProof(result,art);}catch(e){feedback=e.code==='feedback-target';}check(feedback,'feedback target accepted');
+        art.clear();art.fill(255,0,0);art.rect(0,0,32,24);
+        check(renderCanvas(art,{style:{id:'clean-linework'},seed:42}).capture.input.rgba.join(',')!==captured.input.rgba.join(','),'changing draw frame not captured');
+        art.remove();p.remove();resolve();
+      }catch(e){p.remove();reject(e);}};},document.getElementById('hosts'));
+    });
+  }
+  const canvas=document.createElement('canvas');canvas.width=12;canvas.height=8;const ctx=canvas.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(1,1,7,5);
+  const layers={paper:'#f5eee2',inks:[{id:'green',name:'Green',color:'#006043',source:canvas,polarity:'alpha'},{id:'coral',name:'Coral',color:'#ff665d',source:canvas,polarity:'alpha'}]};
+  const rendered=renderCanvasLayers(layers,{dpi:300,seed:42,screenRecipe:{version:1,seed:42,default:{mode:'solid',registration:{x:1}}}});
+  let loadCount=0;const pending=exportSnapshot(rendered,async()=>{loadCount++;await pause(15);return import('/dist/stipra/sketches/assets/print-export.mjs');});
+  ctx.clearRect(0,0,12,8);rendered.capture.input.inks[0].coverage.fill(0);
+  const pkg=await pending;check(loadCount===1,'export loader called repeatedly');
+  const zip=await JSZip.loadAsync(pkg.bytes),manifest=JSON.parse(await zip.file('manifest.json').async('string'));
+  check(manifest.mode==='authored'&&manifest.inks.length===2,'authored export contract wrong');
+  const descriptor=JSON.parse(await zip.file('source/original.json').async('string'));
+  for(let i=0;i<manifest.inks.length;i++){
+    const data=await zip.file(manifest.inks[i].screened).async('uint8array'),bitmap=await createImageBitmap(new Blob([data]));
+    const plate=document.createElement('canvas');plate.width=12;plate.height=8;plate.getContext('2d').drawImage(bitmap,0,0);
+    const pixels=plate.getContext('2d').getImageData(0,0,12,8).data;
+    check(pixels[(1*12+1)*4]===0&&pixels[0]===255,'master moved or exported a later frame');
+    check(descriptor.inks[i].coverageSha256.length===64,'source coverage hash absent');
+  }
+  const imageSource=document.createElement('canvas');imageSource.width=12;imageSource.height=8;imageSource.getContext('2d').fillRect(0,0,12,8);
+  const image=renderCanvas(imageSource,{style:{id:'clean-linework'},seed:42});
+  const imagePackage=await exportSnapshot(image,()=>import('/dist/stipra/sketches/assets/print-export.mjs'));
+  check(imagePackage.manifest.mode==='spot'&&imagePackage.manifest.source.provenance.capture.backing.width===12,'flattened sketch export failed');
+  const taint=document.createElement('canvas');taint.width=8;taint.height=8;const remote=new Image();
+  await new Promise((resolve,reject)=>{remote.onload=resolve;remote.onerror=()=>reject(Error('cross-origin fixture did not load'));remote.src=location.origin.replace('127.0.0.1','localhost')+'/examples/sketches/test-source.svg';});
+  taint.getContext('2d').drawImage(remote,0,0);let blocked=false;try{captureCanvas(taint);}catch(e){blocked=e.code==='tainted-canvas';}check(blocked,'actual tainted canvas was accepted');
+  for(const page of ['index.html','global.html','instance.html']){
+    const frame=document.createElement('iframe');frame.src='/dist/stipra/sketches/'+page;frame.width=900;frame.height=1000;document.body.append(frame);
+    await until(()=>frame.contentDocument?.documentElement?.dataset.stipraSketchReady==='true',page+' ready');
+    const doc=frame.contentDocument;check(doc.querySelector('#proof canvas')?.width>0,'example proof missing');
+    const before=doc.documentElement.dataset.frame;doc.getElementById('next').click();await until(()=>doc.documentElement.dataset.frame!==before,page+' next frame');
+    check(!frame.contentWindow.performance.getEntriesByType('resource').some(x=>x.name.includes('print-export.mjs')),'example eagerly loads export');
+    frame.width=390;await pause(80);check(doc.documentElement.scrollWidth<=doc.documentElement.clientWidth+2,'mobile example overflow');
+    frame.remove();
+  }
+  out.textContent='BROWSER_SKETCH_PASS';document.body.dataset.smoke='pass';
+}catch(e){out.textContent='BROWSER_SKETCH_FAIL: '+e.message;document.body.dataset.smoke='fail';}
+</script></body></html>

@@ -41,7 +41,7 @@ function htmlReport(cards,m){
     '<h2>02 / physical ink layers + substrate</h2><section class="plates">'+cards.slice(2).map(image).join('')+'</section>'+
     '<h2>03 / exact settings</h2><table><thead><tr><th>#</th><th>Ink</th><th>Preview HEX</th><th>Channel</th><th>Screen</th><th>Coverage</th></tr></thead><tbody>'+rows+'</tbody></table>'+
     diagnostic+'<footer>Source SHA-256 '+m.sha+' · '+m.trim.width+' × '+m.trim.height+'mm · seed '+m.seed+
-    '<p>Digital approximation; not press calibrated. Exact recipe files are in the ZIP and embedded in the PDF. Reproduction requires lawful access to the original image.</p></footer></main></body></html>');
+    '<p>Digital approximation; not press calibrated. Exact recipe files are in the ZIP and embedded in the PDF. Replay uses the archived source snapshot; private artwork requires authorization.</p></footer></main></body></html>');
 }
 function screenDescription(s,dpi){
   return ['solid','paper'].includes(s.mode)?s.mode+' / screen off':
@@ -109,7 +109,7 @@ async function pdfReport(cards,m){
     const {PDFName,PDFString}=require('pdf-lib');
     const annotation=pdf.context.register(pdf.context.obj({Type:'Annot',Subtype:'Link',Rect:[W-margin-72,10,W-margin,82],Border:[0,0,0],A:{S:PDFName.of('URI'),URI:PDFString.of(GUIDE)}}));
     page.node.set(PDFName.of('Annots'),pdf.context.obj([annotation]));
-    put('simulated paper / uncalibrated proof / original required for replay',margin,42,9,regular);
+    put('simulated paper / uncalibrated proof / source snapshot required for replay',margin,42,9,regular);
   }
   function ensure(height,section='recipe / continued'){
     if(y-height<94)newPage(section);
@@ -135,7 +135,7 @@ async function pdfReport(cards,m){
     page.drawRectangle({x:x-2,y:baseline-4,width:width+4,height:18,color:fg});
     put(title,x+4,baseline+1,9,mono,pdfColor(m.paper.hex));
   }
-  banner('01 / SOURCE PHOTOGRAPH',margin,y,half);
+  banner(m.sourceKind==='authored'?'01 / AUTHORED COMPOSITE':'01 / SOURCE ARTWORK',margin,y,half);
   banner('02 / DIGITAL OVERPRINT',margin+half+gap,y,half);
   const heroH=portrait?330:198,heroBottom=y-12-heroH;
   await image(cards[0],margin,heroBottom,half,heroH);
@@ -168,14 +168,14 @@ async function pdfReport(cards,m){
     ensure(names.length*14+44);
     rule(y+10);
     for(const name of names){put(name,margin,y,11,display);y-=14;}
-    block(s.color+' / '+s.source+(ink?' / gain '+ink.gain+' / gamma '+ink.gamma:''),{font:mono,size:9,leading:12});
+    block(s.color+' / '+s.source+(ink&&Number.isFinite(ink.gain)&&Number.isFinite(ink.gamma)?' / gain '+ink.gain+' / gamma '+ink.gamma:''),{font:mono,size:9,leading:12});
     block(screenDescription(s,m.dpi)+' / '+fmt(s.coverage*100)+'% nominal coverage',{font:mono,size:9,leading:12});
   }
   ensure(110,'provenance / replay');
   block('source SHA-256',{font:display,size:11});
   block(m.sha,{font:mono,size:9});
   block('Print masters at 100%. These report images are inspection thumbnails. Production plates retain full dimensions and zero registration.',{size:10});
-  block('Recipes are embedded in this PDF and saved in the export ZIP. Reproduction requires authorized possession of the original photograph.',{size:10});
+  block('Recipes are embedded in this PDF and saved in the export ZIP. Replay uses the archived source snapshot. Private artwork requires authorization.',{size:10});
   if(m.diagnostics){
     const d=m.diagnostics;
     ensure(60,'diagnostics / continued');

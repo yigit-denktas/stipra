@@ -22,7 +22,9 @@ test('Cloudflare Pages build emits one self-contained app under /stipra, no dupl
     assert.match(fs.readFileSync(path.join(out,'_redirects'),'utf8'),/\/ \/stipra\/ 302/);
     assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/connect-src 'none'/);
     const files=fs.readdirSync(path.join(out,'stipra'));
-    assert.deepEqual(files.sort(),['assets','brand','guide','index.html','shared.css']);
+    assert.deepEqual(files.sort(),['assets','brand','guide','index.html','shared.css','sketches']);
+    assert.ok(fs.existsSync(path.join(out,'stipra/sketches/assets/p5-LGPL-2.1.txt')));
+    assert.ok(fs.existsSync(path.join(out,'stipra/sketches/assets/print-export.mjs')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark.svg')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-teal.svg')));
     assert.ok(fs.existsSync(path.join(out,'stipra/brand/stipra-mark-coral.svg')));

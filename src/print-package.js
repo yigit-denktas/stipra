@@ -57,17 +57,17 @@ async function marked(pngBytes,w,h,pad,dpi){
   }
   return physicalPNG(Buffer.from(await c.toBuffer('png')),dpi);
 }
-async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots'}){
+async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,marksMm=0,paper='auto',style=null,reportTexture='speckled',qrStyle='ink-dots',authored=null}){
   validate(dpi,marksMm);Paper.textureStyle(reportTexture);
   if(!QR.STYLES.includes(qrStyle))throw Error('print: unknown QR style');
   if(!Buffer.isBuffer(originalBytes)||!originalBytes.length)throw Error('print: original bytes required');
   const {width:w,height:h}=asset.metadata.oriented;
   const stock=Paper.select(asset.rgba,inkRecipe.paper||'#ffffff',paper);
   const effectiveRecipe={...inkRecipe,paper:stock.hex};
-  const sep=Sep.separate({width:w,height:h,rgba:asset.rgba},effectiveRecipe);
+  const sep=authored?{...authored.separated,recipe:effectiveRecipe}:Sep.separate({width:w,height:h,rgba:asset.rgba},effectiveRecipe);
   const configs=screenConfigs(screenRecipe,sep.masks.map(m=>m.id));
   const screened=Screen.apply(sep,configs.production),proofScreen=Screen.apply(sep,configs.proof);
-  const plateDiagnostics=Diagnostics.inspect(screened,{dpi,input:{width:w,height:h,rgba:asset.rgba}});
+  const plateDiagnostics=Diagnostics.inspect(screened,{dpi,...(authored?{}:{input:{width:w,height:h,rgba:asset.rgba}})});
   const print=printIntent(w,h,dpi,marksMm),pad=Math.round(dpi*marksMm/25.4);
   if(pad)print.markedPixels={width:w+2*pad,height:h+2*pad,trimOrigin:{x:pad,y:pad}};
   const parts=new Map(),add=(name,data)=>{
@@ -76,11 +76,13 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     parts.set(name,Buffer.from(data));
   };
   const ext=asset.metadata.format==='jpeg'?'jpg':asset.metadata.format;
-  add('source/original.'+(ext==='svg'?'txt':ext),originalBytes);
+  add('source/original.'+(authored?'json':ext==='svg'?'txt':ext),originalBytes);
+  if(authored)for(let i=0;i<sep.masks.length;i++)add(authored.descriptor.inks[i].path,
+    await png(Sep.plateRGBA(sep.masks[i].coverage),w,h,dpi));
   const original=await png(asset.rgba,w,h,dpi),proof=await png(proofScreen.preview,w,h,dpi);
   add('source/normalized.png',original);add('proof/composite.png',proof);
   const paperImage=await png(paperRGBA(w,h,sep.recipe.paper),w,h,dpi);add('proof/paper.png',paperImage);
-  const cards=[{name:'Original',bytes:original},{name:'Simulated overprint',bytes:proof},
+  const cards=[{name:authored?'Authored composite':'Original',bytes:original},{name:'Simulated overprint',bytes:proof},
     {name:'Paper / substrate',bytes:paperImage,note:'not a physical ink'}],inks=[];
   for(let i=0;i<sep.masks.length;i++){
     const ink=sep.masks[i],s=screened.masks[i],name=String(i+1).padStart(2,'0')+'-'+clean(ink.id);
@@ -89,12 +91,12 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     if(pad)add('plates/marked-'+name+'.png',await marked(scr,w,h,pad,dpi));
     const description=(screened.stats.inks[i].meanCoverage*100).toFixed(1)+'% coverage; '+s.screen.mode+' '+s.screen.pitch+'px @ '+s.screen.angle+'deg';
     cards.push({name:ink.name,bytes:scr,ink:ink.color,note:description});
-    inks.push({id:ink.id,name:ink.name,color:ink.color,source:ink.source,
+    inks.push({id:ink.id,name:ink.name,color:ink.color,source:authored?'authored':ink.source,
       meanCoverage:sep.stats.inks[i].meanCoverage,screenedMeanCoverage:screened.stats.inks[i].meanCoverage,
       plate:'plates/ink-'+name+'.png',screened:'screened/ink-'+name+'.png',
       marked:pad?'plates/marked-'+name+'.png':null,registration:{x:0,y:0,rotate:0}});
   }
-  const info={reportTexture,qrStyle,width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
+  const info={reportTexture,qrStyle,sourceKind:authored?'authored':'image',width:w,height:h,trim:print.trimMm,dpi,inks:inks.length,seed:configs.proof.seed,
     sha:digest(originalBytes),name:asset.metadata.sourceName,paper:stock,
     orientation:Report.orientation(w,h),inkRecipe:sep.recipe,
     screenRecipe:configs.production,proofRecipe:configs.proof,diagnostics:plateDiagnostics,
@@ -133,4 +135,30 @@ async function generate({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300
     compressionOptions:{level:6},platform:'UNIX'});
   return {zip:bytes,manifest,parts};
 }
-module.exports={generate,printIntent,validate,screenConfigs,physicalPNG,A4};
+/** Generates the shared image-input package without accepting precomputed mask overrides. */
+function generate({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle}){
+  return build({originalBytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper,style,reportTexture,qrStyle});
+}
+/**
+ * Archives authored coverages and uses the same proof/master/report writer as image inputs.
+ * @param options - The full-frame layer input, screen recipe and optional output settings.
+ * @returns The package with lossless source masks, normalized recipes and aligned masters.
+ */
+async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='recipe',reportTexture='speckled',qrStyle='ink-dots',captureMetadata=null}){
+  const {renderLayers}=require('./sdk/index.js');
+  const source=renderLayers(input,{dpi}),{width,height}=source.proof;
+  const descriptor={contract:'stipra-authored-source-v1',width,height,paper:source.recipe.inks.paper,
+    polarity:'print grayscale: white means no ink, black means full ink',
+    inks:source.plates.map((ink,i)=>({id:ink.id,name:ink.name,color:ink.color,
+      path:'source/layers/ink-'+String(i+1).padStart(2,'0')+'-'+clean(ink.id)+'.png',coverageSha256:digest(ink.coverage)}))};
+  const originalBytes=json(descriptor),metadata={contract:'stipra-import-v1',format:'authored-layers',sourceName:'Authored ink layers',
+    intrinsic:{width,height},oriented:{width,height},orientation:1,alpha:false,
+    profile:{kind:'not-applicable'},pixels:{channels:'RGBA',bitDepth:8,colorSpace:'srgb',orientationApplied:true},
+    provenance:{representation:'owned coverage snapshot; no original file bytes implied',sourceLayers:'source/original.json',...(captureMetadata?{capture:captureMetadata}:{})},warnings:[]};
+  const separated={width,height,recipe:source.recipe.inks,
+    masks:source.plates.map(x=>({id:x.id,name:x.name,color:x.color,coverage:x.coverage,source:'authored'})),
+    stats:{inks:source.diagnostics.plates.map(x=>({id:x.id,meanCoverage:x.meanCoverage}))}};
+  return build({originalBytes,asset:{metadata,rgba:source.proof.rgba},inkRecipe:source.recipe.inks,screenRecipe,dpi,marksMm,paper,reportTexture,qrStyle,
+    authored:{separated,descriptor}});
+}
+module.exports={generate,generateLayers,printIntent,validate,screenConfigs,physicalPNG,A4};
