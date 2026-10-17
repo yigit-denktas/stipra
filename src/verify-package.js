@@ -51,7 +51,7 @@ async function verify(bytes){
       if(!files.has(ink[key]))throw Error('Missing ink master');
       const data=await read(ink[key]);density(data,output.dpi);const rgba=await pixels(data,w,h);let sum=0;
       for(let p=0;p<rgba.length;p+=4){if(rgba[p]!==rgba[p+1]||rgba[p]!==rgba[p+2]||rgba[p+3]!==255)throw Error('Master must be opaque grayscale');sum+=255-rgba[p];}
-      if(!Number.isFinite(ink[mean])||Math.abs(sum/(255*w*h)-ink[mean])>1e-8)throw Error('Master coverage statistic mismatch');
+      if(!Number.isFinite(ink[mean])||Math.abs(sum/(255*w*h)-ink[mean])>(manifest.mode==='authored'?5.1e-7:1e-8))throw Error('Master coverage statistic mismatch');
       if(key==='screened')screened=rgba;
     }
     if(ink.vector){

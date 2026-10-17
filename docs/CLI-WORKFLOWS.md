@@ -56,7 +56,7 @@ Each successful job creates its ZIP, lossless source/proof PNGs and verification
 - Exit 1: partial/failed job set, or an I/O error such as an existing/missing path.
 - Exit 2: invalid request, unsupported input or another uncaught validation/processing error.
 
-Do not treat an `ok` workflow status as press calibration. `verify` returns `VERIFIED_DIGITAL_NOT_PHYSICALLY_VALIDATED` after checking all file hashes, complete file set, source identity, native trim/DPI, opaque grayscale plates, measured coverage, unique master paths, matching ink assignments, zero production registration, unchanged marked trim pixels, A4 PDF geometry and declared derivative formats/dimensions. It is an integrity/geometry check, not authentication or a fresh independent artistic assessment.
+Do not treat an `ok` workflow status as press calibration. `verify` returns `VERIFIED_DIGITAL_NOT_PHYSICALLY_VALIDATED` after checking all file hashes, complete file set, source identity, native trim/DPI, opaque grayscale plates, measured coverage, unique master paths, matching ink assignments, zero production registration, unchanged marked trim pixels, A4 PDF geometry and declared derivative formats/dimensions. Older authored packages report coverage to six decimals; verification accepts that precision, while new packages record the exact byte-derived mean. It is an integrity/geometry check, not authentication or a fresh independent artistic assessment.
 
 `sheet` verifies an existing print ZIP, then extracts its already embedded PDF/HTML report. It does not reflow artwork or render arbitrary source code.
 

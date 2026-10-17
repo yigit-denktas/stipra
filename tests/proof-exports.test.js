@@ -30,3 +30,15 @@ test('optional proof formats preserve native masters and expose lossy/alpha/scal
   assert.equal(b.manifest.exports.proofs.find(x=>x.format==='jpg').alpha,'flattened-to-paper');
   assert.equal(b.manifest.exports.proofs.find(x=>x.format==='png').effectiveDpi,600);
 });
+
+test('authored derivatives replay byte-exactly and legacy six-decimal coverage remains verifiable',async()=>{
+  const input={width:17,height:11,paper:'#f5eee2',inks:[{id:'green',name:'Green',color:'#006043',coverage:Uint8Array.from({length:187},(_,i)=>i%3?128:255)},{id:'coral',name:'Coral',color:'#FF665D',coverage:Uint8Array.from({length:187},(_,i)=>i%5?0:192)}]};
+  const a=await Print.generateLayers({input,exports:{formats:['png','svg'],scale:2,alpha:'paper',vectorPlates:true}});
+  const verifier=require('../src/verify-package'),v=await verifier.verify(a.zip),snapshot=await require('../scripts/reproduce-layers').readSnapshot(a.zip),b=await Print.generateLayers(snapshot);
+  assert.equal(v.inks,2);assert.deepEqual(a.zip,b.zip);
+  assert.equal(a.manifest.inks[0].meanCoverage,input.inks[0].coverage.reduce((n,v)=>n+v,0)/(255*187));
+  const zip=await require('jszip').loadAsync(a.zip),legacy=JSON.parse(await zip.file('manifest.json').async('string'));
+  legacy.inks.forEach(ink=>{ink.meanCoverage=Number(ink.meanCoverage.toFixed(6));});zip.file('manifest.json',JSON.stringify(legacy));
+  assert.equal((await verifier.verify(await zip.generateAsync({type:'nodebuffer'}))).inks,2);
+  await assert.rejects(Print.generateLayers({input,exports:{alpha:'source'}}),/no single source alpha/);
+});

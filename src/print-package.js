@@ -182,7 +182,7 @@ async function generateLayers({input,screenRecipe=null,dpi=300,marksMm=0,paper='
     provenance:{representation:'owned coverage snapshot; no original file bytes implied',sourceLayers:'source/original.json',...(captureMetadata?{capture:captureMetadata}:{})},warnings:[]};
   const separated={width,height,recipe:source.recipe.inks,
     masks:source.plates.map(x=>({id:x.id,name:x.name,color:x.color,coverage:x.coverage,source:'authored'})),
-    stats:{inks:source.diagnostics.plates.map(x=>({id:x.id,meanCoverage:x.meanCoverage}))}};
+    stats:{inks:source.plates.map(x=>({id:x.id,meanCoverage:x.coverage.reduce((sum,value)=>sum+value,0)/(255*width*height)}))}};
   return build({originalBytes,asset:{metadata,rgba:source.proof.rgba},inkRecipe:source.recipe.inks,screenRecipe,dpi,marksMm,paper,reportTexture,qrStyle,
     authored:{separated,descriptor},sourceProject,exports:exportOptions});
 }
