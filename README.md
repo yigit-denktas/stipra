@@ -47,9 +47,9 @@ That creates separate grayscale plates, previews, recipes and a provenance manif
 
 ## Where we are
 
-**Working today:** image import, independent spot/CMYK coverage masks, adjustable raster screening, digital overprint previews, the browser lab, CLI recipes, and deterministic vector scene/plate examples. The [Prehnite](examples/prehnite-v8/) experiment is where it began.
+**Working today:** image import, independent spot/CMYK coverage masks, adjustable raster screening, [four experimental Styles](docs/STYLES-v1.md), digital proofs, the browser lab, CLI recipes, and deterministic vector scene/plate examples. The [Prehnite](examples/prehnite-v8/) experiment is where it began.
 
-**Next to validate:** owner-photo quality and real printer output for [#8](https://github.com/yigit-denktas/stipra/issues/8), [#9](https://github.com/yigit-denktas/stipra/issues/9) and [#12](https://github.com/yigit-denktas/stipra/issues/12); plus a more complete browser workspace [#22](https://github.com/yigit-denktas/stipra/issues/22), and useful, input-aware style defaults [#34](https://github.com/yigit-denktas/stipra/issues/34).
+**Next to validate:** owner-photo quality and real printer output for [#8](https://github.com/yigit-denktas/stipra/issues/8), [#9](https://github.com/yigit-denktas/stipra/issues/9) and [#12](https://github.com/yigit-denktas/stipra/issues/12); plus a more complete browser workspace [#22](https://github.com/yigit-denktas/stipra/issues/22), and visual quality of the new styles [#34](https://github.com/yigit-denktas/stipra/issues/34).
 
 Our previews are **digital approximations**, not guarantees of real ink color, registration, or printer calibration.
 
