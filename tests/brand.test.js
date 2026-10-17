@@ -3,15 +3,18 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto');
 const Brand=require('../scripts/generate-stipra-mark.js'),Core=require('../src/core.js');
 const ROOT=path.resolve(__dirname,'..'),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
-test('black geometry exists independently of any color and is built from a single continuous Bézier-derived polygon',()=>{
+test('black geometry exists independently of any color as a continuous round-capped Bézier stroke',()=>{
   const s=Brand.sceneRecipe('silhouette'),resolved=Core.resolveRecipe(s);
   assert.equal(resolved.plates.length,1);
-  assert.equal(s.layers.length,1);
-  assert.equal(s.layers[0].geometry.kind,'polygon');
-  const points=s.layers[0].geometry.points;
-  assert.ok(points.length>400&&points.length<2048,'silhouette is a real smooth closed outline');
-  for(const [x,y] of points)assert.ok(x>25&&x<455&&y>25&&y<455,'no overflow at poster/icon size');
-  assert.match(Core.renderSvg(resolved),/<polygon /);
+  assert.ok(s.layers.length>150&&s.layers.length<220,'dense, continuous geometric stroke');
+  assert.ok(s.layers.every(x=>x.geometry.kind==='circle'&&x.geometry.radius===41));
+  const centers=s.layers.map(x=>[x.geometry.x,x.geometry.y]);
+  for(const [x,y] of centers)assert.ok(x>25&&x<455&&y>25&&y<455,'no overflow');
+  for(let i=1;i<centers.length;i++){
+    const d=Math.hypot(centers[i][0]-centers[i-1][0],centers[i][1]-centers[i-1][1]);
+    assert.ok(d<10,'ribbon discs must overlap substantially without notches or accidental holes');
+  }
+  assert.match(Core.renderSvg(resolved),/<circle /);
   assert.match(Core.renderSvg(resolved),/fill="#222825"/);
 });
 test('a rigorously aligned matrix and density variant share exact coordinates, without random speckles',()=>{
