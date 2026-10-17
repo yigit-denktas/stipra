@@ -224,7 +224,7 @@
       const info=document.createElement('iframe');info.src='/dist/stipra/'+route+'/index.html';document.body.append(info);
       await until(()=>info.contentDocument?.title==='stiprā / '+({roadmap:'Roadmap',changelog:'Changelog',sitemap:'Site map'}[route]),route+' loaded');
       await info.contentDocument.fonts.ready;
-      for(const width of [390,768,1280]){info.style.width=width+'px';await delay(80);const idoc=info.contentDocument;if(idoc.documentElement.scrollWidth>idoc.documentElement.clientWidth+2)throw Error(route+' horizontal overflow at '+width);if(idoc.querySelectorAll('nav.site-nav a').length!==7)throw Error('Missing shared destinations');}
+      for(const width of [390,768,1280]){info.style.width=width+'px';await delay(80);const idoc=info.contentDocument;if(idoc.documentElement.scrollWidth>idoc.documentElement.clientWidth+2)throw Error(route+' horizontal overflow at '+width+' / '+JSON.stringify([...idoc.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>idoc.documentElement.clientWidth+2).slice(0,4).map(e=>({tag:e.tagName,text:e.textContent.slice(0,70),right:e.getBoundingClientRect().right}))));if(idoc.querySelectorAll('nav.site-nav a').length!==7)throw Error('Missing shared destinations');}
       info.remove();
     }
     document.body.dataset.smoke='pass';output.textContent='BROWSER_SEPARATION_PASS';

@@ -123,7 +123,8 @@
   }
   function inspectProof(){
     if(!result||!views[1])return;
-    const pixels=StipraInspection.preview(result,config.paper,{solo:inspection.solo,muted:[...inspection.muted],substrate:$('proof-paper').checked,paperOnly:$('paper-only').checked});
+    const full=inspection.solo===null&&inspection.muted.size===0&&$('proof-paper').checked&&!$('paper-only').checked;
+    const pixels=full?result.preview:StipraInspection.preview(result,config.paper,{solo:inspection.solo,muted:[...inspection.muted],substrate:$('proof-paper').checked,paperOnly:$('paper-only').checked});
     const ctx=views[1].canvas.getContext('2d'),data=ctx.createImageData(result.width,result.height);data.data.set(pixels);ctx.putImageData(data,0,0);
     views[1].canvas.setAttribute('aria-label',$('paper-only').checked?'Paper only':inspection.solo?'Solo ink inspection':'Simulated overprint inspection');
     $('grid').classList.toggle('native-pixels',$('view-zoom').value==='native');
