@@ -1,0 +1,26 @@
+{
+  "contract": "stipra-upstream-source-review-v1",
+  "checkedAt": "2026-10-17",
+  "status": "three-findings-remain-open",
+  "scope": "Pinned upstream source observations, not attestations or compiled-artifact clearance.",
+  "sources": [
+    {
+      "repository": "Hopding/fontkit",
+      "url": "https://github.com/Hopding/fontkit/blob/72b8e42bd6a398d496a63a6d483eabeed43861fb/package.json",
+      "gitBlobSha1": "a93e43c6cf2d6914f47584f90bf0b061e7d72c17",
+      "observation": "Investigated source package declares 1.1.0, while the installed published artifact is 1.1.1; this source commit is not proven as its build source."
+    },
+    {
+      "repository": "kekee000/fonteditor-core",
+      "url": "https://github.com/kekee000/fonteditor-core/blob/04c47400895f11d857ca83f5725c0c3c0dd552a5/woff2src/Readme.md",
+      "gitBlobSha1": "b848d1dbcbec74b46e9a7ebc521a02f85750e438",
+      "observation": "Instructions install Emscripten 1.38.48 but activate latest, and clone google/woff2 recursively without a pinned revision. Compiler and source inputs of the published WASM remain unverified."
+    },
+    {
+      "repository": "samizdatco/skia-canvas",
+      "url": "https://github.com/samizdatco/skia-canvas/blob/042312a3f40b660b1d7dc0beba541486171bc5cc/.github/workflows/build.yml",
+      "gitBlobSha1": "97274a57613d2d638eb35f5a073736a749c9a0f7",
+      "observation": "Workflow uses moving stable Rust/build containers and a source-tag-derived rust-skia checkout; this is not a component/notice inventory tied to the downloaded native binary."
+    }
+  ]
+}

@@ -41,7 +41,12 @@ jobs:
       - run: node --test tests/type-proofs.test.js
       - run: npm test
       - run: npm run audit:licenses
-      - run: npm run check:distribution
+      - run: npm run check:library-candidate
+      - run: npm run check:goldens
+      - uses: actions/upload-artifact@v4
+        with:
+          name: procedural-acceptance-goldens
+          path: out/acceptance-goldens/
       - uses: actions/upload-artifact@v4
         with:
           name: lean-distribution-audit
