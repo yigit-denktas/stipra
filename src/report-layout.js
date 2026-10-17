@@ -135,7 +135,7 @@ async function pdfReport(cards,m){
     page.drawRectangle({x:x-2,y:baseline-4,width:width+4,height:18,color:fg});
     put(title,x+4,baseline+1,9,mono,pdfColor(m.paper.hex));
   }
-  banner('01 / SOURCE PHOTOGRAPH',margin,y,half);
+  banner(m.sourceKind==='authored'?'01 / AUTHORED COMPOSITE':'01 / SOURCE ARTWORK',margin,y,half);
   banner('02 / DIGITAL OVERPRINT',margin+half+gap,y,half);
   const heroH=portrait?330:198,heroBottom=y-12-heroH;
   await image(cards[0],margin,heroBottom,half,heroH);

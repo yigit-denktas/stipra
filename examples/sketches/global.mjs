@@ -7,6 +7,6 @@ window.setup=()=>{
 };
 window.draw=()=>{
   const ctx=art.drawingContext;ctx.save();ctx.setTransform(2,0,0,2,0,0);imageArt(ctx,288,216,frame);ctx.restore();
-  const rendered=renderCanvas(art,{style:{id:'editorial-halftone',variant:'blue-pink',lpi:40},dpi:600,seed:42});
+  const rendered=renderCanvas(art,{style:{id:'portrait-duotone',variant:'blue-pink',lpi:40},dpi:600,seed:42});
   clear();drawProof(rendered,main);show(rendered,art.canvas,frame);
 };
