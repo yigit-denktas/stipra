@@ -17,12 +17,15 @@
    if(!matrix)throw Error('import: invalid orientation');
    ctx.transform(...matrix);
  }
- function publicMetadata(info, sourceName){
+ function publicMetadata(info, sourceName, decoder='platform-unspecified'){
    const {format,width,height,displayWidth,displayHeight,orientation,hasAlpha,profile,dpi,layout,sourceBytes,warnings,viewBox}=info;
    const metadata={contract:'stipra-import-v1',format,sourceName:sourceName||'unnamed',
      intrinsic:{width,height},oriented:{width:displayWidth,height:displayHeight},orientation,
      alpha:hasAlpha,profile,dpi,layout,sourceBytes,warnings:[...warnings],
      pixels:{channels:'RGBA',bitDepth:8,colorSpace:'srgb',orientationApplied:true},
+     colorManagement:{policy:'stipra-srgb-v1',decoder,workingSpace:'srgb',
+       sourceProfile:profile.kind,conversion:'decoder-managed-to-srgb',
+       untaggedPolicy:'decoder-default; sRGB working output',pressCalibrated:false},
      provenance:{sourceRetainedSeparately:true,aspectRatioPreserved:true,positionPreserved:true}};
    if(viewBox)metadata.viewBox=viewBox;
    return metadata;
@@ -36,14 +39,15 @@
    const actualWidth=bitmap.width, actualHeight=bitmap.height;
    if(actualWidth!==info.width||actualHeight!==info.height)
      throw Error(`import: decoder dimensions ${actualWidth}×${actualHeight} differ from probed ${info.width}×${info.height}; refusing implicit transform`);
-   const canvas=platform.canvas(info.displayWidth,info.displayHeight),ctx=canvas.getContext('2d');
+   const canvas=platform.canvas(info.displayWidth,info.displayHeight),ctx=canvas.getContext('2d',{colorSpace:'srgb'});
    orient(ctx,info);
    ctx.drawImage(bitmap,0,0,info.width,info.height);
-   const pixels=ctx.getImageData(0,0,info.displayWidth,info.displayHeight);
+   const pixels=ctx.getImageData(0,0,info.displayWidth,info.displayHeight,{colorSpace:'srgb'});
+   if(pixels.colorSpace&&pixels.colorSpace!=='srgb')throw Error('import: decoder did not return sRGB pixels');
    if(pixels.width!==info.displayWidth||pixels.height!==info.displayHeight||pixels.data.length!==info.displayWidth*info.displayHeight*4)
      throw Error('import: decoder yielded unexpected RGBA dimensions');
    if(typeof bitmap.close==='function')bitmap.close();
-   return {metadata:publicMetadata(info,opts.sourceName),rgba:pixels.data,canvas};
+   return {metadata:publicMetadata(info,opts.sourceName,platform.decoder),rgba:pixels.data,canvas};
  }
  return {ingest,publicMetadata,orient,mime};
 });

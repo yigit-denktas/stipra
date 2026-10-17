@@ -9,4 +9,5 @@ function truetype(family,weight=400){
   base.merge(extra,{scale:true});
   return Buffer.from(base.write({type:'ttf'}));
 }
-module.exports={truetype};
+const license=()=>fs.readFileSync(require.resolve('@fontsource/ibm-plex-sans/LICENSE'),'utf8');
+module.exports={truetype,license};

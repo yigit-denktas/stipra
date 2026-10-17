@@ -184,6 +184,7 @@
       if(file.size>StipraImportProbe.MAX_BYTES)throw Error('16 MiB file limit exceeded');
       const bytes=new Uint8Array(await file.arrayBuffer());
       const imported=await StipraImport.ingest(bytes,{
+        decoder:'browser-native-image/canvas-srgb',
         canvas:(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;},
         decode
       },{sourceName:file.name});

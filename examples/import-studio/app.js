@@ -29,6 +29,7 @@
       const info=StipraImportProbe.inspect(data);
       $('status').textContent='Decoding '+info.format.toUpperCase()+' image locally…';
       const prepared=await StipraImport.ingest(data,{
+        decoder:'browser-native-image/canvas-srgb',
         canvas:(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;},
         decode
       },{sourceName:file.name});

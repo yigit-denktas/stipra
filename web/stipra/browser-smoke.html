@@ -17,6 +17,23 @@
     await until(()=>frame.contentDocument?.documentElement.dataset.stipraReady==='true','lab script loading');
     d=frame.contentDocument;await d.fonts.ready;
     const el=id=>d.getElementById(id);
+    const colorFixture=await (await fetch('/tests/fixtures/color-reference.json')).json();
+    for(const [name,reference] of [['linear','reference'],['linear-jpeg','jpeg-reference']]){
+      const decode=value=>Uint8Array.from(atob(colorFixture.files[value]),c=>c.charCodeAt(0));
+      const bitmap=async value=>createImageBitmap(new Blob([decode(value)]));
+      const expectedCanvas=document.createElement('canvas');expectedCanvas.width=96;expectedCanvas.height=16;
+      expectedCanvas.getContext('2d',{colorSpace:'srgb'}).drawImage(await bitmap(reference),0,0);
+      const referencePixels=expectedCanvas.getContext('2d').getImageData(0,0,96,16,{colorSpace:'srgb'}).data;
+      const colorTransfer=new DataTransfer();colorTransfer.items.add(new File([decode(name)],name+'.'+(name.includes('jpeg')?'jpg':'png')));
+      el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:colorTransfer}));
+      await until(()=>el('status').textContent.includes('96 × 16 px'),'profiled source '+name);
+      const actual=d.querySelector('#grid canvas').getContext('2d').getImageData(0,0,96,16,{colorSpace:'srgb'}).data;
+      for(const [x,y] of colorFixture.sampleCoordinates)for(let c=0;c<3;c++){
+        const offset=(y*96+x)*4+c;
+        if(Math.abs(actual[offset]-referencePixels[offset])>colorFixture.tolerance8bit)throw Error('Browser ICC reference mismatch: '+name);
+      }
+      if(actual[(8*96+8)*4]<90)throw Error('Browser ignored non-sRGB profile');
+    }
     const input=document.createElement('canvas');input.width=4;input.height=2;
     const ctx=input.getContext('2d');
     ctx.clearRect(0,0,4,2);
@@ -138,6 +155,8 @@
     if(!exportedBlob)throw Error('Export failed: '+el('error').textContent);
     const zip=await JSZip.loadAsync(await exportedBlob.arrayBuffer());
     const manifest=JSON.parse(await zip.file('manifest.json').async('string'));
+    if(manifest.source.colorManagement.policy!=='stipra-srgb-v1')throw Error('Missing browser color policy');
+    if(!(await zip.file(manifest.report.fontLicense).async('string')).includes('SIL OPEN FONT LICENSE'))throw Error('Missing embedded font license');
     if(manifest.contract!=='stipra-print-package-v1'||manifest.output.sourcePixels.width!==48||manifest.output.sourcePixels.height!==32)throw Error('Browser package geometry/contract differs');
     const source=await zip.file('source/original.png').async('uint8array');
     if(source.length!==(await screeningBlob.arrayBuffer()).byteLength)throw Error('Original source missing');

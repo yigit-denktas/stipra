@@ -2,6 +2,8 @@
 
 **Policy, 16 October 2026.** Stipra-authored core, browser UI, Node CLI, algorithms, schemas and examples are released under **MIT**, subject to individual component/asset exceptions. **MIT on our repository does not relicense dependencies, third-party source, media, logos or fonts.** See [issue #14](https://github.com/yigit-denktas/stipra/issues/14) for the unresolved release audit.
 
+**Audit update, 17 October 2026:** [the reproducible dependency inventory](DEPENDENCY-AUDIT.md) records the locked production graph, retained notices and concrete remaining distribution gates. `npm run check:release-licenses` intentionally fails while those findings remain. p5.grain's actual upstream license is MIT; evaluate compatible reuse rather than replacing it solely on licensing grounds. It is not currently a dependency.
+
 ## Existing project assets and libraries
 
 - Stipra-original source: **MIT**, [repository LICENSE](../LICENSE).
