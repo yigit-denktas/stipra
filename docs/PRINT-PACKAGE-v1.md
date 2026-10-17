@@ -129,3 +129,11 @@ node bin/stipra.js package --input artwork.jpg \
 `--report-texture` accepts `speckled` (default), `fibre`, or `none`. It changes only report presentation. Source bytes, normalized separation/screen recipes, proof pixels and physical ink plates are unaffected by the texture setting. By contrast, choosing a different `--paper` intentionally changes the simulated substrate color and records it in the ink recipe.
 
 Generate a photo-free stock preview with `node scripts/review-paper-stocks.js /private/new-paper-stocks.png`. Private owner-photo PDF review still uses `scripts/review-owner-reports.js`. Do not commit the reference screenshot, owner photographs or image-bearing PDFs.
+
+### Branded QR codes and public instructions
+
+The canonical report QR opens the [public reproduction guide](https://apps.yigitdenktas.com/stipra/guide/), not a private job or raw Markdown file. It uses the actual lowercase `stiprā` wordmark, shaped from the report wordmark font, with a coral macron. The original SVG palette is checked before rendering.
+
+`--qr-style brand-dots` is the default; `brand-square` and `ink-dots` are explicit alternatives. The last uses the report's readable theme ink, falling back to original green for pale colors. The QR has high error correction, a four-module clear margin and a clean white field, printed at 25.4 mm square. It is presentation only and never changes production masks. Named colors remain screen approximations.
+
+`node scripts/review-qr.js /private/new-qr-review` creates a photo-free PDF/SVG/PNG comparison at 20, 25.4 and 32 mm. Install `zxing-cpp==2.3.0` and Pillow, plus Poppler's `pdftoppm`, then run `python scripts/verify-qr.py /private/new-qr-review`. It decodes actual PDF boxes at 150/300/600 DPI in color and grayscale. Passing these digital tests does not replace a phone scan of a physical print.

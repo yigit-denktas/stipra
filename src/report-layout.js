@@ -1,25 +1,17 @@
 /* Stiprā editorial PDF + HTML inspection sheets. Original MIT layout. */
 'use strict';
 const fs=require('node:fs'),{PDFDocument,rgb}=require('pdf-lib');
-const fontkit=require('@pdf-lib/fontkit'),QRCode=require('qrcode');
-const {createFont}=require('fonteditor-core');const zlib=require('node:zlib');
+const fontkit=require('@pdf-lib/fontkit');
+const {truetype}=require('./report-fonts.js');
+const QR=require('./report-qr.js');
 const Paper=require('./report-paper.js');
 const A4={landscape:[841.88976,595.27559],portrait:[595.27559,841.88976]};
 const FIXED=new Date('2000-01-01T00:00:00Z');
-const GUIDE='https://github.com/yigit-denktas/stipra/blob/main/docs/PRINT-PACKAGE-v1.md';
+const GUIDE=QR.GUIDE;
 const color=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
 const pdfColor=hex=>rgb(...color(hex));
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=v=>Number(v).toFixed(1);
-function truetype(family,weight=400){
-  const read=subset=>createFont(fs.readFileSync(require.resolve('@fontsource/'+family+'/files/'+family+'-'+subset+'-'+weight+'-normal.woff')),{type:'woff',inflate:bytes=>zlib.inflateSync(Buffer.from(bytes))});
-  const base=read('latin'),extra=read('latin-ext').compound2simple();
-  const supported=new Set(base.get().glyf.flatMap(g=>g.unicode||[]));
-  extra.get().glyf=extra.get().glyf.filter(g=>g.unicode?.some(c=>!supported.has(c)));
-  for(const g of extra.get().glyf)g.unicode=g.unicode.filter(c=>!supported.has(c));
-  base.merge(extra,{scale:true});
-  return Buffer.from(base.write({type:'ttf'}));
-}
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
 async function paperBackground(m){
   const [width,height]=A4[m.orientation],theme=Paper.theme(m.paper,m.settings);
@@ -70,8 +62,8 @@ async function pdfReport(cards,m){
   const dims=A4[m.orientation],[W,H]=dims,margin=34,cw=W-2*margin;
   const theme=Paper.theme(m.paper,m.settings);
   const paper=await pdf.embedPng(m.reportPaperBytes||await paperBackground(m));
-  const qr=await pdf.embedPng(await QRCode.toBuffer(GUIDE,{margin:4,width:320,errorCorrectionLevel:'M'}));
-  const fg=pdfColor(theme.key),audit={version:2,minTextPt:9,theme,texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
+  const qr=await pdf.embedPng(await QR.png({style:m.qrStyle||'brand-dots',ink:theme.key,fontBytes:typo?.fontWordmark?fs.readFileSync(typo.fontWordmark):typo?.fontBold?fs.readFileSync(typo.fontBold):null}));
+  const fg=pdfColor(theme.key),audit={version:2,minTextPt:9,theme,qr:{style:m.qrStyle||'brand-dots',destination:GUIDE,sizeMm:25.4,errorCorrection:'H',quietZoneModules:4},texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
   const images=new Map();
   let page,record,y;
   const content=s=>typo?.lowercase?String(s).toLowerCase():String(s);
@@ -112,15 +104,15 @@ async function pdfReport(cards,m){
     const stockLabel=m.paper.name.toUpperCase()+' / '+m.settings.length+' INKS';
     put(stockLabel,W-margin-mono.widthOfTextAtSize(content(stockLabel),9),H-88,9,mono);
     rule(H-100,1.2);y=H-122;
-    page.drawLine({start:{x:margin,y:57},end:{x:W-margin-72,y:57},thickness:.6,color:fg});
-    page.drawImage(qr,{x:W-margin-54,y:18,width:54,height:54});
+    page.drawLine({start:{x:margin,y:57},end:{x:W-margin-94,y:57},thickness:.6,color:fg});
+    page.drawImage(qr,{x:W-margin-72,y:10,width:72,height:72});
     const {PDFName,PDFString}=require('pdf-lib');
-    const annotation=pdf.context.register(pdf.context.obj({Type:'Annot',Subtype:'Link',Rect:[W-margin-54,18,W-margin,72],Border:[0,0,0],A:{S:PDFName.of('URI'),URI:PDFString.of(GUIDE)}}));
+    const annotation=pdf.context.register(pdf.context.obj({Type:'Annot',Subtype:'Link',Rect:[W-margin-72,10,W-margin,82],Border:[0,0,0],A:{S:PDFName.of('URI'),URI:PDFString.of(GUIDE)}}));
     page.node.set(PDFName.of('Annots'),pdf.context.obj([annotation]));
     put('simulated paper / uncalibrated proof / original required for replay',margin,42,9,regular);
   }
   function ensure(height,section='recipe / continued'){
-    if(y-height<76)newPage(section);
+    if(y-height<94)newPage(section);
   }
   function block(s,{size=10,font=regular,width=cw,leading=13}={}){
     const lines=wrap(s,font,size,width);
