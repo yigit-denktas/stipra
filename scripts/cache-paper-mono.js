@@ -6,9 +6,13 @@
 const fs=require('node:fs'),path=require('node:path'),https=require('node:https'),crypto=require('node:crypto');
 const DEST=path.resolve(__dirname,'../.cache/stipra-paper-mono');
 const BASE='https://raw.githubusercontent.com/paper-design/paper-mono/v1.000/fonts/ttf/';
+const PLEX='https://raw.githubusercontent.com/IBM/plex/master/packages/';
 const FONTS={
   regular:{name:'PaperMono-Regular.ttf',blob:'6af3a5d15a6b0219005404fabe71fc1fb16541ae'},
-  extraBold:{name:'PaperMono-ExtraBold.ttf',blob:'fbc6ee5851529c3e0e6fd83ad92d6cc83f70f383'}
+  extraBold:{name:'PaperMono-ExtraBold.ttf',blob:'fbc6ee5851529c3e0e6fd83ad92d6cc83f70f383'},
+  plexRegular:{name:'IBMPlexSans-Regular.ttf',blob:'bd6817d5202895da5ac4fad88de3da71e652881a',url:PLEX+'plex-sans/fonts/complete/ttf/IBMPlexSans-Regular.ttf'},
+  plexBold:{name:'IBMPlexSans-Bold.ttf',blob:'1d66b1a2e96d5e33d6f5fa8e81e76b4e5621d240',url:PLEX+'plex-sans/fonts/complete/ttf/IBMPlexSans-Bold.ttf'},
+  plexMono:{name:'IBMPlexMono-Regular.ttf',blob:'4254c37f20ba57e829a3315fdc91cda4e63589f5',url:PLEX+'plex-mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf'}
 };
 function gitBlobHash(bytes){
   return crypto.createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0')).update(bytes).digest('hex');
@@ -39,8 +43,8 @@ async function prepare(){
     const dest=path.join(DEST,font.name);
     let contents=fs.existsSync(dest)?fs.readFileSync(dest):null;
     if(!contents||gitBlobHash(contents)!==font.blob){
-      contents=await get(BASE+font.name);
-      if(gitBlobHash(contents)!==font.blob)throw Error('paper mono: v1.000 source blob does not match pinned SHA for '+font.name);
+      contents=await get(font.url||BASE+font.name);
+      if(gitBlobHash(contents)!==font.blob)throw Error('typefaces: upstream source blob does not match pinned SHA for '+font.name);
       fs.writeFileSync(dest+'.tmp',contents);fs.renameSync(dest+'.tmp',dest);
     }
     files[key]=dest;
