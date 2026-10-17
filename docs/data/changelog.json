@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-17",
+      "title": "Broader accessibility and geometry acceptance",
+      "status": "Unreleased",
+      "issues": [
+        13
+      ],
+      "changes": [
+        "Audit six real pages with development-only axe in Chromium and retain incomplete/manual checks.",
+        "Allow an explicit independent Prehnite paperSeed while preserving every default golden.",
+        "Verify straight shared edges at zero softness and unchanged native plates across paper seeds."
+      ]
+    },
+    {
+      "date": "2026-10-17",
       "title": "Replace opaque font artifacts in PDF exports",
       "status": "Unreleased",
       "issues": [

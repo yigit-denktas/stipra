@@ -122,7 +122,7 @@ function typography(text,kind,box,tracking,fontKey='display-black',yScale=1){
   const g=glyphs[chars[i]];if(g.d)res.push({d:g.d,x,y,s:scale,sy:yScale});x+=(g.a+tracking)*scale;
  }return res;
 }
-function paperScene(c){const rand=rng(c.seed+919),grain=c.paperGrain/100;const flecks=[],fibers=[],clouds=[];
+function paperScene(c){const rand=rng(c.paperSeed??(c.seed+919)),grain=c.paperGrain/100;const flecks=[],fibers=[],clouds=[];
  for(let i=0;i<Math.round(grain*27000);i++){
   const x=rand()*W,y=rand()*H,r=.12+rand()*1.0;flecks.push([x,y,r,rand()]);
  }
@@ -254,6 +254,7 @@ function validate(input){if(!input||!paletteNames.includes(input.variant))throw 
   crystalScale:[60,140],crystalX:[-180,180],crystalY:[-140,140],outlineWidth:[0,9],printWear:[0,150],wordHeight:[.9,1.18]};
  for(const [key,range] of Object.entries(bounds))if(Number.isFinite(input[key]))c[key]=clamp(Number(input[key]),...range);
  if(Number.isSafeInteger(input.seed))c.seed=clamp(input.seed,1,2147483647);
+ if(Number.isSafeInteger(input.paperSeed))c.paperSeed=clamp(input.paperSeed,1,2147483647);
  if(['display-bold','display-black','inter-black'].includes(input.wordFont))c.wordFont=input.wordFont;
  if(stockNames.includes(input.paperStock))c.paperStock=input.paperStock;
  for(const key of ['primary','accent','third','paper'])if(/^#[0-9a-f]{6}$/i.test(input.palette?.[key]||''))c.palette[key]=input.palette[key];

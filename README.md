@@ -48,7 +48,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Implemented:** local import, spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md), LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean core, Canvas/p5 integration and authored-ink replay. [Prehnite](examples/prehnite-v8/) and native vector scenes remain separate paths.
 
-**Verified digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts before full-resolution finals.
+**Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts.
 
 **Delivery:** [Dependency/version map](https://apps.yigitdenktas.com/stipra/roadmap/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, solo/mute/paper, native pixel zoom and print geometry.
 

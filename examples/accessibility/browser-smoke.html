@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Stiprā accessibility acceptance</title>
+<h1>Accessibility acceptance</h1><pre id="out">Running</pre><script id="evidence" type="application/json"></script>
+<script>
+(async()=>{
+  const routes=['dist/stipra/index.html','examples/import-studio/index.html','examples/prehnite-v8/index.html','dist/stipra/guide/index.html','dist/stipra/sketches/index.html','dist/stipra/regions/index.html'];
+  const evidence={contract:'stipra-accessibility-acceptance-v1',tool:'axe-core/4.10.3',routes:[],limits:['Automated WCAG A/AA checks only; human keyboard/screen-reader and physical-print acceptance remain separate.']};
+  let failed=false;
+  try{
+    for(const route of routes){
+      const frame=document.createElement('iframe');frame.title=route;frame.width=1280;frame.height=1000;
+      const ready=new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=reject;});frame.src='/'+route;document.body.append(frame);await ready;
+      const doc=frame.contentDocument;if(!doc?.body||!doc.querySelector('h1'))throw Error('Missing page: '+route);
+      await doc.fonts.ready;
+      const script=doc.createElement('script');script.src='/node_modules/axe-core/axe.min.js';
+      const injected=new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=reject;});doc.head.append(script);await injected;
+      const result=await frame.contentWindow.axe.run(doc,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
+      evidence.routes.push({route,passes:result.passes.length,incomplete:result.incomplete.map(x=>({id:x.id,nodes:x.nodes.map(n=>n.target)})),violations:result.violations.map(x=>({id:x.id,impact:x.impact,help:x.help,nodes:x.nodes.map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))}))});
+      failed ||= result.violations.length>0;frame.remove();
+    }
+  }catch(error){failed=true;evidence.error=error.stack||String(error);}
+  document.getElementById('evidence').textContent=JSON.stringify(evidence);
+  document.getElementById('out').textContent=failed?JSON.stringify(evidence):'BROWSER_ACCESSIBILITY_PASS';document.body.dataset.smoke=failed?'fail':'pass';
+})();
+</script></html>

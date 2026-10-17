@@ -2,7 +2,7 @@
   "name": "stipra",
   "version": "0.1.0",
   "private": true,
-  "description": "Stipr\u0101 \u2014 a programmable printmaking studio (Latvian strength; stippling + strata)",
+  "description": "Stiprā — a programmable printmaking studio (Latvian strength; stippling + strata)",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
@@ -40,7 +40,8 @@
     "check:library-candidate": "node scripts/check-library-candidate.js",
     "check:print-observations": "node scripts/check-print-observations.js",
     "prepare:fonts": "node scripts/cache-paper-mono.js",
-    "check:browser-distribution": "node scripts/build-browser-export.js out/browser-distribution/export.mjs"
+    "check:browser-distribution": "node scripts/build-browser-export.js out/browser-distribution/export.mjs",
+    "check:accessibility": "STIPRA_SMOKE_PAGE=examples/accessibility/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_ACCESSIBILITY_PASS node scripts/browser-smoke.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",
@@ -55,6 +56,7 @@
     "skia-canvas": "^3.0.8"
   },
   "devDependencies": {
+    "axe-core": "4.10.3",
     "esbuild": "0.25.12",
     "p5": "1.11.11",
     "p5-v2": "npm:p5@2.2.2",
