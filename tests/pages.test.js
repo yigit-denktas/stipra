@@ -41,7 +41,7 @@ test('build copies exact source JS, preserves real script order and is determini
     }
     const html=fs.readFileSync(path.join(out,'stipra/index.html'),'utf8');
     const tags=[...html.matchAll(/<script\s+src="([^"]+)"/g)].map(m=>m[1]);
-    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/app.js']);
+    assert.deepEqual(tags,['./assets/svg.js','./assets/probe.js','./assets/asset.js','./assets/separation.js','./assets/screening.js','./assets/styles.js','./assets/app.js']);
   }finally{fs.rmSync(out,{force:true,recursive:true});}
 });
 
