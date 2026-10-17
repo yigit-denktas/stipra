@@ -32,6 +32,8 @@ async function verify(bytes){
   if(source.length!==1||hash(await read(source[0]))!==manifest.source?.sha256)throw Error('Original source hash mismatch');
   const output=manifest.output,w=output?.sourcePixels?.width,h=output?.sourcePixels?.height;frame(w,h);
   require('./export-plan').validate(output.dpi,output.marksMm);
+  if(!output.registration||['x','y','rotate'].some(key=>output.registration[key]!==0))throw Error('Output production registration must be zero');
+  if(output.bleedGenerated===true||output.bleedMm&&Object.values(output.bleedMm).some(value=>value!==0))throw Error('Unsupported generated bleed');
   if(output.resampled!==false||output.origin?.x!==0||output.origin?.y!==0||output.trimPixels?.x!==0||output.trimPixels?.y!==0||output.trimPixels?.width!==w||output.trimPixels?.height!==h||manifest.source?.oriented?.width!==w||manifest.source?.oriented?.height!==h)throw Error('Source/trim origin or dimensions mismatch');
   for(const [key,size]of [['width',w],['height',h]])if(!Number.isFinite(output.trimMm?.[key])||Math.abs(output.trimMm[key]-size*25.4/output.dpi)>.00011)throw Error('Physical trim mismatch');
   const inks=manifest.inks;if(!Array.isArray(inks)||inks.length<1||inks.length>8||new Set(inks.map(x=>x.id)).size!==inks.length)throw Error('Invalid ink list');

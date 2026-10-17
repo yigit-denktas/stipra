@@ -51,12 +51,14 @@ test('verification rejects byte tampering, unlisted entries and false master met
   try{
     const out=path.join(dir,'batch'),r=cli(['batch','--config',plan(dir,'jobs.json',{version:1,jobs:[{id:'base',input:'source.png',style:'clean-linework'}]}),'--out',out]);assert.equal(r.status,0,r.stdout);
     const bytes=fs.readFileSync(path.join(out,'base.zip'));
-    for(const kind of ['bytes','unlisted','coverage','origin']){
+    for(const kind of ['bytes','unlisted','coverage','origin','registration','bleed']){
       const zip=await JSZip.loadAsync(bytes),m=JSON.parse(await zip.file('manifest.json').async('string'));
       if(kind==='bytes')zip.file(m.inks[0].plate,Buffer.from('bad'));
       if(kind==='unlisted')zip.file('unexpected.bin',Buffer.from([1]));
       if(kind==='coverage')m.inks[0].meanCoverage=.123456;
       if(kind==='origin')m.output.origin.x=1;
+      if(kind==='registration')m.output.registration.x=1;
+      if(kind==='bleed')m.output.bleedMm.left=3;
       zip.file('manifest.json',JSON.stringify(m));await assert.rejects(()=>verifyZip(zip));
     }
   }finally{fs.rmSync(dir,{recursive:true,force:true});}
