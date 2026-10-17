@@ -4,7 +4,7 @@
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
-  "policy": "Targets are conditional planning records, not published tags or native GitHub milestone IDs. Tracker closure, implementation and release acceptance are distinct. Dependency arrows refer to the named capability; an open umbrella can already supply an implemented prerequisite facet.",
+  "policy": "Versions below are conditional targets, not published tags. Implementation, issue closure and acceptance are separate. Prerequisites refer to the named capability; broader unfinished work in an umbrella issue need not block a working subset.",
   "originalV09Issues": [
     1,
     2,
@@ -114,11 +114,11 @@
     }
   ],
   "nextSequence": [
-    "Finish and verify #22 inspection/setup/export acceptance.",
-    "Retain the two notice fixes; keep #14 open for the three exact native/WASM/prebundle evidence gaps.",
-    "Land #90 navigation/changelog/dependency map and consolidate reviewed work on main.",
-    "Complete #11 compare/batch and #12 export matrix; resolve #8/#9 acceptance using their implemented facets.",
-    "Collect #13 physical observations and #43/#47 artistic acceptance. Decide #70 publication separately."
+    "Resolve #14’s three exact native/WASM/prebundle evidence gaps for the export artifacts intended for distribution.",
+    "Complete #11 compare/batch and #12 export matrix; reconcile #8/#9 acceptance using the implemented raster/report capabilities.",
+    "Collect #13 physical observations and #43/#47 artistic acceptance, then version only the recipes justified by that evidence.",
+    "Decide #70 lean-library publication after owner/artist feedback and artifact-specific package/notice checks.",
+    "Keep #28 vector and #75 Java-host research optional; identity work remains subject to owner review."
   ],
   "tasks": [
     {
@@ -320,7 +320,7 @@
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "No native milestone/Project creation capability in this connector. Planning milestones below are explicit source records, not fabricated GitHub IDs.",
+      "note": "Native GitHub Project/milestones are not configured. Version records below are explicit planning targets; administration remains #17.",
       "sourceUpdatedAt": "2026-10-16T20:38:00Z"
     },
     {
