@@ -26,7 +26,7 @@ function wordmark(bytes,x,y,width,height,color,accent){
     paths.push('</g>');pen+=p.xAdvance;
   });return paths.join('');
 }
-function svg({style='brand-dots',ink='#006043',fontBytes=null,url=GUIDE}={}){
+function svg({style='ink-dots',ink='#006043',fontBytes=null,url=GUIDE}={}){
   if(!STYLES.includes(style))throw Error('unknown QR style');
   if(!/^#[0-9a-f]{6}$/i.test(ink))throw Error('QR ink must be #RRGGBB');
   if(url!==GUIDE)throw Error('QR destination must be the public reproduction guide');
