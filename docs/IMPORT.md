@@ -1,6 +1,6 @@
 # Stipra image import · v0.9 input contract
 
-**Implemented in issue #6:** local PNG, JPEG, WebP and a *restricted* geometric SVG subset can be probed, decoded to a common oriented RGBA pixel grid, inspected in a browser and exported via CLI. This is **not** yet color separation (#7), halftone screening (#5), full prepress plates (#8), or report generation (#9).
+**Implemented in issue #6:** local PNG, JPEG, WebP and a *restricted* geometric SVG subset can be probed, decoded to a common oriented RGBA pixel grid, inspected in a browser and exported via CLI. This module performs input interpretation. Separation, screening and print-package reports are implemented separately; see [the current architecture](ARCHITECTURE.md).
 
 ## Running
 
@@ -37,3 +37,11 @@ CLI output (no image upload, API calls or cloud services):
 `src/import/asset.js` exposes `ingest(bytes, platform, options)` returning `{metadata, rgba, canvas}`. These RGBA bytes and origin metadata will be handed explicitly to #7. The generic vector-only `src/core.js` recipe **remains v1 and unchanged**; image assets are not disguised as vector shapes. For a future scene contract with image-backed content, add an explicit versioned schema and migration.
 
 Test with `npm test` (including synthetic transparent PNG, EXIF-oriented JPEG, alpha WebP, safe/hostile SVG, invalid dimensions, byte budgets, malformed inputs, and shared Node/browser-global probing). This is a software test, not a claim of physical printing calibration. Browser drag/drop still requires visual acceptance in target browsers before marking production-ready.
+
+## PNG precision and interpretation boundary
+
+`sourceEncoding.bitDepth` records the PNG source sample depth separately from `pixels.bitDepth: 8`. A 16-bit source produces an explicit precision-reduction warning; preserving original bytes does not preserve those samples in the working buffer.
+
+APNG is rejected until an explicit frame-selection contract exists. Unvalidated cICP, mastering/light-level signals and combined cICP/ICC are rejected before decoding. The only accepted cICP tuple is full-range sRGB `[1,13,0,1]`. This conservative boundary is not complete HDR detection; ICC-only SDR interpretation retains its existing reference tests. Nonidentity PNG eXIf orientation is rejected until a tested normalization path exists; identity orientation is accepted without rewriting the chunk. Authors can provide an orientation-normalized SDR sRGB still from their chosen tool.
+
+The source can contain other metadata that Stiprā has not inspected. Unknown provenance is not verified provenance. [Structured-artwork research](STRUCTURED-ARTWORK.md) and #83–#86 scope richer input adapters; no automatic source reconstruction or third-party upload is implemented.

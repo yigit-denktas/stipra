@@ -1,42 +1,37 @@
-# Architecture · implemented foundation and proposed extensions
+# Architecture: implemented paths and optional extensions
 
-## Current foundation
+Updated 17 October 2026. [Structured-artwork decision](STRUCTURED-ARTWORK.md) records the next boundary; [measured alpha evidence](CREATIVE-CODING-ALPHA.md) records runtime and export limits. This describes implemented behavior unless explicitly marked proposed.
 
-The preserved Prehnite v8 source includes a browser editor and a reusable scene/plate renderer in examples/prehnite-v8/src/engine.js, plus font outlines from Inter under SIL OFL.
+## Two rendering paths
 
-Stipra's root CLI initially calls that case-study engine. This is a bridge, **not** the finished generalized Stipra architecture.
+**Native vector scenes:** `src/core.js` validates procedural v1 geometry/ink recipes. `bin/scene.js` emits vector scenes and per-ink SVGs from that contract. This retains the supported primitives and transforms. It is distinct from the pixel separation SDK; arbitrary imported SVG is not converted into this schema. See [RECIPE-v1](RECIPE-v1.md).
 
-## Implemented generic vector core (issue #2)
+**Pixels and authored coverage:** `src/sdk/index.js` exposes `renderImage` and `renderLayers` through `@stipra/core`. It wraps the shared separation, screening, Styles, diagnostics and physical export-plan modules. Its input is explicit 8-bit sRGB straight-alpha RGBA or one to eight same-frame 8-bit ink masks. Its owned results include continuous coverage, screened production masks, proof pixels, normalized recipes and diagnostics. The core has no runtime dependencies, DOM, native codecs, fonts, PDF or ZIP imports.
 
-`src/core.js` validates v1 recipes with explicit canvas/trim/bleed, paper stock, one physical plate per named spot ink, layer geometry and transforms, clipping, registration offsets, provenance and independent per-system seeds. It returns deterministic scenes in Node and in browsers from identical source. `bin/scene.js` and the lightweight browser inspector render the same vector composite and aligned black-on-white spot-ink SVG plates. `docs/RECIPE-v1.md` defines the contract. No image decomposition, halftone dots, calibrated output or PDF report is implied by this implementation.
+The preserved Prehnite v8 case study remains behind the legacy `render`/`presets` commands. It is not the implementation of the general pixel SDK.
 
-## Implemented local image asset import (issue #6)
+## Input interpretation stays outside the lean core
 
-`src/import/{svg,probe,asset,node}.js` implement format sniffing, bounded structural validation, local decoding, EXIF normalization and separate source/provenance. `bin/import.js` and `examples/import-studio` expose CLI and browser inspection. The typed output is a full-resolution oriented RGBA grid with metadata, **not** an ink plate. `docs/IMPORT.md` defines the accepted safe SVG subset and unsupported features. The v1 procedural scene schema remains unchanged; #7 will consume this explicit imported RGBA stream.
+`src/import/{svg,probe,asset,node}.js` validates supported PNG/JPEG/WebP and a restricted SVG subset, decodes locally, normalizes supported orientation and requests 8-bit sRGB pixels. Original bytes remain separate. Restricted SVG is reconstructed safely and rasterized for the image path; its original is retained as inert text. See [IMPORT](IMPORT.md) and [color policy](COLOR-MANAGEMENT.md).
 
-## Target modules
+`@stipra/canvas` captures existing 2D Canvas/p5 sources and authored ink canvases. It records backing/logical dimensions, explicit polarity and alpha behavior, leaves host RNG/drawing state alone, and returns a separate drawable proof. Source snapshots remain owned and exports freeze before loading optional dependencies. WEBGL/WebGPU are unsupported. The bounded draft helper is an example, not a new package API. See [adapter contract](../packages/canvas/README.md).
 
-1. **Input adapters:** raster (PNG/JPG/WebP), SVG where safely supported, procedural scene descriptions.
-2. **Scene/geometry:** stable coordinates, shared facet edges, geometry independent of distress.
-3. **Separation strategy:** CMYK decomposition OR N user-defined spot inks, adjustable plate masks, preview overprints.
-4. **Print model:** independent ink channels, dot screens (positive/reverse/hybrid), coverage controls, plate registration.
-5. **Substrate model:** stock tones, procedural fibers, contamination, independent seeds; physical paper effects are never serialized as a printable plate.
-6. **Export:** SVG, PNG/JPG/WebP, aligned grayscale masters, consistent manifests and registration metadata.
-7. **Diagnostic renderer:** color-space masks for reference approximation, recolored discrepancy overlays, bbox and coverage/IoU metrics.
-8. **Report:** HTML/CSS print layout for A4; PDF via local headless browser; production masters kept separate.
+The browser studio is an image-input host. Authored ink input exists in the SDK/adapter/package writer, not a completed studio layer-import UI.
 
-## Shared contract
+## Shared production semantics
 
-v1 recipes describe full pixel canvas/trim/bleed, paper, inks (one plate per ink), primitive layers, transform/clipping, registration offsets and deterministic seeds. The future raster/import separation method will extend the versioned contract explicitly. Browser and CLI use the same implemented validator/resolver.
+`src/separation.js` creates continuous-tone coverage from pixels. `src/screening.js` applies explicit screen settings to coverage. `src/styles.js` resolves versioned styles, including physical LPI/DPI. `src/plate-diagnostics.js` measures coverage/overlap and gives contextual guidance. `src/export-plan.js` keeps dimensions and physical origin explicit and removes simulated proof registration from raster production masks.
 
-Preview compositing is a **simulation**, not a claim that RGB multiply reproduces a calibrated physical press. Ink percentages may overlap and therefore need not sum to 100.
+Paper and proof effects remain separate from production ink coverage. The proof uses an uncalibrated RGB approximation. No physical print calibration is implied by passing the software tests. Raster recipe/coverage parity does not imply arbitrary source-decoder or native-vector parity.
 
-## CLI contract, stages
+## Heavy export is optional
 
-- Available now: presets, case-study render and plates (from Prehnite).
-- Planned: import, separate, sheet, compare, batch, export/profile.
-- Planned reports: machine-readable JSON and A4 landscape HTML/PDF.
+`src/print-package.js` is the shared image/authored package writer. It preserves the original file or canonical authored snapshot, normalized recipes, source hashes, aligned continuous/screened raster masters, digital proof, diagnostics and reports. `src/browser/export.js` adapts it to browser byte/Canvas APIs; `bin/package.js` and `scripts/reproduce-layers.js` use it through the CLI. Node and browser share production mask/geometry semantics.
 
-## Boundary
+PDF reports use `pdf-lib` with separately licensed embedded fonts; ZIPs use JSZip. PDF/ZIP/font/native-codec code is outside lean core and Canvas adapter imports. Browser hosts load the exporter only on an explicit export action. Reports are inspection documents, not the full-resolution production masters. See [package contract](PRINT-PACKAGE-v1.md), [alpha parity](CREATIVE-CODING-ALPHA.md) and the unresolved [distribution audit](DEPENDENCY-AUDIT.md).
 
-The original p5.riso library has an Anti-Capitalist License. Study public algorithms and principles, but do not copy restricted source into the MIT engine. Attribute ideas; assess dependencies and assets separately.
+## Proposed source-informed adapters
+
+Named object/region masks, depth, disparity, normals and source-project code are different kinds of data. The proposed adapters in [STRUCTURED-ARTWORK](STRUCTURED-ARTWORK.md) would map supported regions into final ink coverage and optionally preserve declared source relationships beside the current snapshot. These are not core fields or implemented native HEIF/RAW/EXR/OpenRaster/C2PA support.
+
+Keep format parsing, precision/tone mapping, metadata validation, inference and authoring runtimes outside the lean core. Reuse compatible host libraries and standards where they solve a demonstrated task. No restricted p5.riso source is included or rewritten; dependency and asset licenses remain separate from Stiprā's MIT code license.

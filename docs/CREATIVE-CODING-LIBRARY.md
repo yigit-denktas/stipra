@@ -62,3 +62,7 @@ No API names or npm package names are fixed here. No new drawing API, general fr
 ## Alpha acceptance evidence
 
 [Measured creative coding evaluation](CREATIVE-CODING-ALPHA.md) records #74 performance, memory/bundle limitations, browser/Node/CLI plate parity and the documented existing-tool comparison. Independent artist preference, unsupported browsers/renderers, full export distribution notices and physical print calibration remain separate. Core/adapter packages stay private until a publication decision.
+
+## Preserve structure when it exists
+
+[Structured-artwork research](STRUCTURED-ARTWORK.md) distinguishes source regions, depth/disparity, opacity and physical ink masks. #83–#86 record optional mapping, source-sidecar and format/provenance adapters. Keep their decoding, inference and source-project handling outside the lean core. Existing authored-ink support is the foundation; this is not a new scene editor or drawing runtime.
