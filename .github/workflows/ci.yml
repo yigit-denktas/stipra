@@ -21,6 +21,8 @@ jobs:
       - run: node --check bin/separate.js
       - run: node --check bin/package.js
       - run: node --check src/print-package.js
+      - run: node --check src/report-paper.js
+      - run: node --check src/report-layout.js
       - run: node --check src/import/svg.js
       - run: node --check src/import/probe.js
       - run: node --check src/import/asset.js
