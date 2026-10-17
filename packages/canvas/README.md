@@ -7,7 +7,7 @@ import {renderCanvas, drawProof, exportSnapshot} from '@stipra/canvas';
 
 // Within your sketch: art is a separate p5.Graphics source, p is the destination.
 const proof = renderCanvas(art, {
-  style: {id: 'editorial-halftone', variant: 'blue-pink', lpi: 40},
+  style: {id: 'portrait-duotone', variant: 'blue-pink', lpi: 40},
   dpi: 300,
   seed: 42,
 });
