@@ -28,6 +28,19 @@ def verify(directory):
                     if not decoded or decoded.text != record['guide']:
                         raise AssertionError(f"QR decode failed: {case['style']} / {case['mm']} mm / {dpi} DPI / {mode}")
                     results.append({'style': case['style'], 'mm': case['mm'], 'dpi': dpi, 'mode': mode, 'decoded': decoded.text})
+    for dpi in (150, 300):
+        with tempfile.TemporaryDirectory(prefix='stipra-qr-report-') as tmp:
+            prefix = Path(tmp) / 'report'
+            subprocess.run(['pdftoppm', '-r', str(dpi), '-png', str(directory / 'stipra-qr-report.pdf'), str(prefix)], check=True, capture_output=True)
+            for pagefile in sorted(Path(tmp).glob('report-*.png')):
+                page = Image.open(pagefile).convert('RGB')
+                scale = dpi / 72
+                left, top = (841.88976 - 34 - 72) * scale, (595.27559 - 10 - 72) * scale
+                image = page.crop((round(left), round(top), round(left + 72 * scale), round(top + 72 * scale)))
+                decoded = zxingcpp.read_barcode(image)
+                if not decoded or decoded.text != record['guide']:
+                    raise AssertionError(f'Actual report QR decode failed: {pagefile.name} at {dpi} DPI')
+                results.append({'reportPage': pagefile.name, 'dpi': dpi, 'decoded': decoded.text})
     return results
 
 

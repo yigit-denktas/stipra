@@ -24,6 +24,16 @@ async function run(out){
   text('Vector wordmark: IBM Plex Sans Bold / real lowercase ā',34,54,10);text('High error correction / four-module quiet zone / scan tests required',34,38,10);
   const bytes=await pdf.save({useObjectStreams:false});fs.writeFileSync(path.join(out,'stipra-qr-specimens.pdf'),bytes);
   fs.writeFileSync(path.join(out,'qr-specimens.json'),JSON.stringify({guide:QR.GUIDE,errorCorrection:'H',quietZoneModules:4,records,pdfSha256:crypto.createHash('sha256').update(bytes).digest('hex'),physicalPhoneTest:false},null,2)+'\n');
+  const Report=require('../src/report-layout.js'),Sep=require('../src/separation.js'),Screen=require('../src/screening.js');
+  const art=new Canvas(320,200),ac=art.getContext('2d');ac.fillStyle='#ffffff';ac.fillRect(0,0,320,200);ac.fillStyle='#336677';ac.fillRect(45,35,130,120);ac.fillStyle='#dbaa30';ac.fillRect(135,90,140,70);
+  const recipe={version:1,mode:'spot',paper:'#f5eee2',inks:[{id:'key',name:'Green key',color:'#006043',source:'black'},{id:'yellow',name:'Yellow',color:'#e2a523',source:'yellow'}]};
+  const sep=Sep.separate({width:320,height:200,rgba:ac.getImageData(0,0,320,200).data},recipe),screen=Screen.apply(sep,{version:1,seed:42,default:{mode:'dots',pitch:6}});
+  async function raster(data){const c=new Canvas(320,200),ctx=c.getContext('2d'),i=ctx.createImageData(320,200);i.data.set(data);ctx.putImageData(i,0,0);return Buffer.from(await c.toBuffer('png'));}
+  const cards=[{name:'Authored source',bytes:Buffer.from(await art.toBuffer('png'))},{name:'Digital proof',bytes:await raster(screen.preview)},...screen.masks.map(m=>({name:m.name,ink:m.color,bytes:null}))];
+  for(let i=0;i<screen.masks.length;i++)cards[i+2].bytes=await raster(Sep.plateRGBA(screen.masks[i].coverage));
+  const settings=screen.masks.map(m=>({...m,...m.screen,coverage:.3}));
+  const report=await Report.pdfReport(cards,{width:320,height:200,dpi:300,trim:{width:27.0933,height:16.9333},orientation:'landscape',paper:{name:'Warm rag',hex:'#f5eee2'},seed:42,name:'authored-geometry.png',sha:crypto.createHash('sha256').update(cards[0].bytes).digest('hex'),settings,inkRecipe:sep.recipe,screenRecipe:screen.recipe,proofRecipe:screen.recipe});
+  fs.writeFileSync(path.join(out,'stipra-qr-report.pdf'),report);
   const c=new Canvas(1500,620),ctx=c.getContext('2d');ctx.fillStyle='#f5eee2';ctx.fillRect(0,0,1500,620);ctx.fillStyle='#006043';ctx.font='24px sans-serif';
   for(const [i,style] of QR.STYLES.entries()){ctx.fillText(style,35+i*500,45);ctx.drawImage(await loadImage(path.join(out,style+'.png')),35+i*500,75,430,430);}
   ctx.font='20px sans-serif';ctx.fillText('stiprā / authentic wordmark / public guide / three treatments',35,565);fs.writeFileSync(path.join(out,'stipra-qr-preview.png'),Buffer.from(await c.toBuffer('png')));
