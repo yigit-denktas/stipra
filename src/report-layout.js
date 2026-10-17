@@ -44,10 +44,10 @@ async function pdfReport(cards,m){
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   // Specimen typography is opt-in: production PDFs retain the existing defaults.
   const typo=m.typography||null;
-  const paper=typo?.id==='paper-mono';
-  const regular=await pdf.embedFont(paper?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
-  const mono=await pdf.embedFont(paper?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-mono'));
-  const display=await pdf.embedFont(paper?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
+  const usePaperMono=typo?.id==='paper-mono';
+  const regular=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-sans'));
+  const mono=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontRegular):truetype('ibm-plex-mono'));
+  const display=await pdf.embedFont(usePaperMono?fs.readFileSync(typo.fontBold):truetype('ibm-plex-sans',700));
   const dims=A4[m.orientation],[W,H]=dims,margin=29,cw=W-2*margin;
   const [page,...unused]=[pdf.addPage(dims)],paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
   const fg=rgb(.14,.17,.15);
@@ -68,8 +68,8 @@ async function pdfReport(cards,m){
   }
   const portrait=m.orientation==='portrait';
   put('PRINT STUDY    /    '+m.orientation.toUpperCase()+' A4',margin,H-29,8,mono);
-  put('stiprā',margin,H-69,paper?29:32,typo?display:regular);
-  put('/ ink separation',margin+(paper?155:104),H-65,paper?12:18,regular);
+  put('stiprā',margin,H-69,usePaperMono?29:32,typo?display:regular);
+  put('/ ink separation',margin+(usePaperMono?155:104),H-65,usePaperMono?12:18,regular);
   put(fitText(m.name,mono,8,cw*.68),margin,H-88,8,mono);
   put(m.width+' × '+m.height+' px  /  '+m.dpi+' DPI  /  '+m.trim.width+' × '+m.trim.height+' mm',margin,H-102,8,mono);
   put(m.paper.name.toUpperCase()+'   /   '+m.settings.length+' INKS  /  SEED '+m.seed,margin,H-114,7.5,mono);
