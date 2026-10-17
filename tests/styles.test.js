@@ -99,3 +99,60 @@ test('browser source exposes initial Styles without hiding manual advanced contr
   assert.match(app,/StipraStyles\.resolve/);
   assert.match(html,/id="screen-settings"/);
 });
+
+test('editorial variants isolate a neutral tonal key and warm material instead of duplicating color masks',()=>{
+  const rgba=new Uint8ClampedArray([0,0,0,255,163,163,163,255,50,150,40,255,255,255,255,255]);
+  const r=Styles.resolve('editorial-halftone',{variant:'warm-third',dpi:300});
+  const sep=Sep.separate({width:4,height:1,rgba},r.inkRecipe);
+  assert.ok(sep.masks[2].coverage[1]>sep.masks[2].coverage[2]);
+  assert.equal(sep.masks[2].coverage[0],0);
+  assert.equal(sep.masks[2].coverage[3],0);
+  assert.equal(r.physicalScreens[0].effectiveLpi,null);
+  assert.equal(r.physicalScreens[1].effectiveLpi,50);
+  assert.equal(r.style.variantVersion,1);
+  assert.throws(()=>Styles.resolve('clean-linework',{variant:'tonal-key'}),/variant/);
+  assert.throws(()=>Styles.resolve('editorial-halftone',{variant:['tonal-key']}),/variant/);
+  assert.throws(()=>Styles.resolve('editorial-halftone',{variant:'__proto__'}),/variant/);
+  assert.throws(()=>Styles.resolve('editorial-halftone',{lpi:0}),/lpi/);
+  assert.throws(()=>Styles.resolve('editorial-halftone',{screening:'fake'}),/screening/);
+});
+test('browser and CLI module render identical variant masks with physical and unscreened overrides',()=>{
+  const context={StipraSeparation:Sep,StipraScreen:Screen};
+  vm.runInNewContext(fs.readFileSync(path.join(ROOT,'src/styles.js'),'utf8'),context);
+  for(const variant of ['default','tonal-key','warm-third'])for(const dpi of [150,300,600]){
+    const options={variant,dpi,lpi:35,screening:'authored',seed:42};
+    const r=Styles.resolve('editorial-halftone',options),b=context.StipraStyles.resolve('editorial-halftone',options);
+    assert.equal(JSON.stringify(r),JSON.stringify(b));
+    const input=pixels();
+    assert.deepEqual(Screen.apply(Sep.separate(input,r.inkRecipe),r.screenRecipe).preview,
+      Screen.apply(Sep.separate(input,b.inkRecipe),b.screenRecipe).preview);
+    assert.ok(Math.abs(r.physicalScreens[1].effectiveLpi-35)<.001);
+    const raw=Styles.resolve('editorial-halftone',{...options,screening:'unscreened'});
+    assert.ok(raw.physicalScreens.every(p=>p.effectiveLpi===null));assert.equal(raw.effectiveLpi,null);
+    const sep=Sep.separate(input,raw.inkRecipe),screened=Screen.apply(sep,raw.screenRecipe);
+    sep.masks.forEach((m,i)=>assert.deepEqual(m.coverage,screened.masks[i].coverage));
+  }
+});
+test('package CLI rejects detached style controls and accepts physical variant settings',()=>{
+  const {args}=require('../bin/package.js');
+  assert.throws(()=>args(['--input','x.png','--config','x.json','--out','x.zip','--lpi','50']),/require --style/);
+  const parsed=args(['--input','x.png','--style','editorial-halftone','--out','x.zip','--style-variant','tonal-key','--lpi','40']);
+  assert.equal(parsed['--style-variant'],'tonal-key');assert.equal(parsed['--lpi'],'40');
+});
+test('real package CLI retains style paper, source and browser-equivalent proof pixels',async()=>{
+  const os=require('node:os'),{Canvas,loadImage}=require('skia-canvas'),JSZip=require('jszip');
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-style-parity-'));
+  try{
+    const c=new Canvas(48,48),ctx=c.getContext('2d');ctx.fillStyle='#a3a3a3';ctx.fillRect(0,0,48,48);
+    const original=Buffer.from(await c.toBuffer('png')),file=path.join(dir,'input.png'),out=path.join(dir,'result.zip');fs.writeFileSync(file,original);
+    cp.execFileSync(process.execPath,[path.join(ROOT,'bin/stipra.js'),'package','--input',file,'--style','editorial-halftone','--style-variant','warm-third','--dpi','600','--lpi','50','--seed','42','--out',out]);
+    const zip=await JSZip.loadAsync(fs.readFileSync(out)),manifest=JSON.parse(await zip.file('manifest.json').async('string'));
+    const style=Styles.resolve('editorial-halftone',{variant:'warm-third',dpi:600,lpi:50,seed:42});
+    assert.equal(manifest.paper,style.inkRecipe.paper);assert.equal(manifest.style.variant,'warm-third');
+    assert.deepEqual(await zip.file('source/original.png').async('nodebuffer'),original);
+    assert.deepEqual(JSON.parse(await zip.file('recipe/style.json').async('string')),style);
+    const expected=Screen.apply(Sep.separate({width:48,height:48,rgba:ctx.getImageData(0,0,48,48).data},style.inkRecipe),style.screenRecipe);
+    const decoded=await loadImage(await zip.file('proof/composite.png').async('nodebuffer'));ctx.drawImage(decoded,0,0);
+    assert.deepEqual(ctx.getImageData(0,0,48,48).data,expected.preview);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

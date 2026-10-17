@@ -5,7 +5,7 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const Probe=require('../src/import/probe.js'),{ingestLocalBytes}=require('../src/import/node.js');
 const Prepress=require('../src/print-package.js'),Styles=require('../src/styles.js');
 function args(argv){
-  const o={},names=['--input','--config','--screen','--out','--dpi','--marks-mm','--expected-sha256','--paper','--style','--report-texture','--qr-style'];
+  const o={},names=['--input','--config','--screen','--out','--dpi','--marks-mm','--expected-sha256','--paper','--style','--report-texture','--style-variant','--lpi','--style-screening','--seed','--qr-style'];
   for(let i=0;i<argv.length;i++){
     const name=argv[i],value=argv[i+1];
     if(!names.includes(name)||!value||value.startsWith('--')||name in o)
@@ -15,6 +15,7 @@ function args(argv){
   if(!o['--input']||!o['--out']||Boolean(o['--config'])===Boolean(o['--style']))
     throw Error('Specify --input, --out, and exactly one --config JSON or --style ID');
   if(o['--style']&&o['--screen'])throw Error('--screen cannot override a named style; use --config with an explicit screen recipe');
+  if(!o['--style']&&['--style-variant','--lpi','--style-screening','--seed'].some(k=>o[k]))throw Error('style options require --style');
   return o;
 }
 async function run(argv){
@@ -30,13 +31,17 @@ async function run(argv){
   if(opts['--expected-sha256']&&opts['--expected-sha256']!==sourceHash)
     throw Error('Source SHA-256 does not match expected owner fixture');
   const dpi=opts['--dpi']===undefined?300:Number(opts['--dpi']);
-  const style=opts['--style']?Styles.resolve(opts['--style'],{dpi}):null;
+  const style=opts['--style']?Styles.resolve(opts['--style'],{
+    dpi,...(opts['--style-variant']?{variant:opts['--style-variant']}:{}),
+    ...(opts['--lpi']?{lpi:Number(opts['--lpi'])}:{}),
+    ...(opts['--seed']?{seed:Number(opts['--seed'])}:{}),
+    ...(opts['--style-screening']?{screening:opts['--style-screening']}:{} )}):null;
   const inkRecipe=style?style.inkRecipe:JSON.parse(fs.readFileSync(configPath,'utf8'));
   const screenRecipe=style?style.screenRecipe:screenPath?JSON.parse(fs.readFileSync(screenPath,'utf8')):null;
   const marksMm=opts['--marks-mm']===undefined?0:Number(opts['--marks-mm']);
   Prepress.validate(dpi,marksMm);
   const asset=await ingestLocalBytes(bytes,path.basename(inputPath));
-  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper:opts['--paper']||'auto',style,reportTexture:opts['--report-texture']||'speckled',qrStyle:opts['--qr-style']||'ink-dots'});
+  const result=await Prepress.generate({originalBytes:bytes,asset,inkRecipe,screenRecipe,dpi,marksMm,paper:opts['--paper']||(style?'recipe':'auto'),style,reportTexture:opts['--report-texture']||'speckled',qrStyle:opts['--qr-style']||'ink-dots'});
   fs.mkdirSync(path.dirname(out),{recursive:true});
   try{fs.writeFileSync(out,result.zip,{flag:'wx'});}
   catch(e){if(fs.existsSync(out))try{fs.unlinkSync(out)}catch{};throw e;}

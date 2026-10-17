@@ -44,3 +44,22 @@ The source image's geometry is not changed; the resolved ink colors, threshold, 
 The four defaults are **a baseline to improve**, not a finished style quality release. The three private owner fixtures expose different failure modes: sculpture ridges and dark coverage; complex forest depth/antler separation; smooth beach sky and tiny human figures. The forest [#43](https://github.com/yigit-denktas/stipra/issues/43) and source ICC [#44](https://github.com/yigit-denktas/stipra/issues/44) remain unresolved. Fine-line and typography testing needs a separate rights-cleared sample. No original owner photographs are committed.
 
 We should grade future style improvements on **same-input side-by-side comparisons**, real masks, coverage/overlap diagnostics, detail crops at intended print dimensions, and physical print samples. Merely passing schema or parity tests doesn't establish aesthetic merit or press safety.
+
+## Editorial tonal-key variants
+
+The four original starting recipes remain unchanged. Editorial Halftone additionally offers two explicit version-1 variants: `tonal-key` and `warm-third`. Each resolution records the family version, variant identifier and variant version. The [forest study](FOREST-STYLE-STUDY.md) explains their mask choices, measured contribution and limitations. Neither variant is an automatic forest detector or a new default.
+
+```sh
+node bin/stipra.js styles explain editorial-halftone
+node bin/stipra.js styles resolve editorial-halftone \
+  --variant tonal-key --dpi 600 --lpi 50 --seed 42
+node bin/stipra.js package --input photo.jpg \
+  --style editorial-halftone --style-variant tonal-key \
+  --dpi 600 --lpi 50 --seed 42 --out out/tonal-key.zip
+```
+
+The browser exposes the same variant, DPI, LPI and authored/unscreened selections. Changing these starting-style controls reapplies the recipe, replacing manual adjustments; individual ink and screen edits remain available afterward. The same `resolve` implementation supplies both paths. `styles resolve` prints the complete normalized recipes for inspection and manual reuse. `--style-screening unscreened` removes screening for a continuous-tone comparison without changing separation masks; browser uses the corresponding Screen treatment control.
+
+LPI overrides accept 5–150; the engine still clamps pixel pitch to 4–128. Read the effective per-plate values and warnings, especially at low DPI. Solid passes explicitly record null frequency; they are not presented as screened at the family's target LPI. DPI changes physical print dimensions while preserving native pixels, not image resolution through resampling.
+
+Named-style packages now retain their authored substrate by default, matching the browser proof. An explicit `--paper auto` or named stock remains available and intentionally changes the proof substrate; the selected paper is recorded in the package. Manual `--config` packages retain the existing automatic-paper default. The package embeds full style resolution and effective recipes; these are reproducible digital settings, not press calibration.
