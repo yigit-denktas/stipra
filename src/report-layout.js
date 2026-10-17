@@ -21,7 +21,12 @@ function truetype(family,weight=400){
   return Buffer.from(base.write({type:'ttf'}));
 }
 function orientation(w,h){return h>w*1.08?'portrait':'landscape';}
+async function paperBackground(m){
+  const [width,height]=A4[m.orientation],theme=Paper.theme(m.paper,m.settings);
+  return Paper.tile(m.paper,m.seed,{width:Math.ceil(width*2),height:Math.ceil(height*2),inks:theme.inks,style:m.reportTexture||'speckled'});
+}
 function htmlReport(cards,m){
+  const theme=Paper.theme(m.paper,m.settings),background=m.reportPaperBytes?'url(data:image/png;base64,'+m.reportPaperBytes.toString('base64')+')':'none';
   const font=truetype('ibm-plex-sans',400).toString('base64'),mono=truetype('ibm-plex-mono',400).toString('base64'),bold=truetype('ibm-plex-sans',700).toString('base64');
   const image=c=>'<figure><div class="image"><img alt="'+esc(c.name)+'" src="data:image/png;base64,'+c.bytes.toString('base64')+'"></div><figcaption>'+esc(c.name)+'<small>'+esc(c.note||'')+'</small></figcaption></figure>';
   const rows=m.settings.map((s,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td><td>'+esc(s.name)+'</td><td>'+esc(s.color)+'</td><td>'+esc(s.source)+'</td><td>'+esc(screenDescription(s,m.dpi))+'</td><td>'+fmt(s.coverage*100)+'%</td></tr>').join('');
@@ -29,14 +34,14 @@ function htmlReport(cards,m){
   return Buffer.from('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stiprā / ink study</title><style>'+
     '@font-face{font-family:Plex;src:url(data:font/ttf;base64,'+font+')}@font-face{font-family:Mono;src:url(data:font/ttf;base64,'+mono+')}'+
     '@font-face{font-family:Plex;font-weight:700;src:url(data:font/ttf;base64,'+bold+')}'+
-    '*{box-sizing:border-box}body{margin:0;background:'+m.paper.hex+';color:#222722;font:15px Plex,sans-serif}main{max-width:1180px;padding:26px;margin:auto}'+
-    'header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #26312c;padding-bottom:12px}'+
+    '*{box-sizing:border-box}body{margin:0;background:'+m.paper.hex+';color:'+theme.key+';background-image:'+background+';background-size:100% auto;font:15px Plex,sans-serif}main{max-width:1180px;padding:26px;margin:auto}'+
+    'header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid currentColor;padding-bottom:12px}'+
     'header strong{font-size:38px;letter-spacing:-.06em}header span{font:13px Mono,monospace;text-align:right}h2{font:13px Mono,monospace;text-transform:uppercase;letter-spacing:.12em;margin:20px 0 9px}'+
     '.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.plates{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}'+
-    'figure{break-inside:avoid;margin:0;min-width:0;border-bottom:1px solid #3b413d;padding-bottom:6px}.image{display:grid;place-items:center;height:'+(m.orientation==='portrait'?'420px':'290px')+'}'+
+    'figure{break-inside:avoid;margin:0;min-width:0;border-bottom:1px solid currentColor;padding-bottom:6px}.image{display:grid;place-items:center;height:'+(m.orientation==='portrait'?'420px':'290px')+'}'+
     'figure img{max-width:100%;max-height:100%;object-fit:contain}.plates .image{height:148px}figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font:13px Mono,monospace}'+
-    'small{color:#565e57}table{border-collapse:collapse;width:100%;font:13px Mono,monospace}td,th{border-top:1px solid #737d76;text-align:left;padding:8px}'+
-    'footer{border-top:2px solid #26312c;margin-top:24px;padding-top:10px;font:12px Mono,monospace;overflow-wrap:anywhere}'+
+    'small{color:#565e57}table{border-collapse:collapse;width:100%;font:13px Mono,monospace}td,th{border-top:1px solid currentColor;text-align:left;padding:8px}'+
+    'footer{border-top:2px solid currentColor;margin-top:24px;padding-top:10px;font:12px Mono,monospace;overflow-wrap:anywhere}'+
     '@media(max-width:560px){main{padding:13px}.hero{grid-template-columns:1fr}.image{height:300px}header strong{font-size:26px}}'+
     '@page{size:A4 '+m.orientation+';margin:12mm}'+
     '</style></head><body><main><header><strong>Stiprā / ink study</strong><span>'+m.width+'×'+m.height+'px · '+m.dpi+' dpi<br>'+esc(m.paper.name)+' / '+m.orientation+'</span></header>'+
@@ -53,7 +58,7 @@ function screenDescription(s,dpi){
 async function pdfReport(cards,m){
   const pdf=await PDFDocument.create({updateMetadata:false});
   pdf.registerFontkit(fontkit);
-  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v3');
+  pdf.setTitle('stiprā / ink study');pdf.setCreator('stiprā report-layout v4');
   pdf.setCreationDate(FIXED);pdf.setModificationDate(FIXED);
   const typo=m.typography||null;
   const embed=async(file,family,weight=400)=>pdf.embedFont(file?fs.readFileSync(file):truetype(family,weight));
@@ -63,17 +68,18 @@ async function pdfReport(cards,m){
   const label=typo?.fontLabel?await embed(typo.fontLabel):regular;
   const wordmark=typo?.fontWordmark?await embed(typo.fontWordmark):display;
   const dims=A4[m.orientation],[W,H]=dims,margin=34,cw=W-2*margin;
-  const paper=await pdf.embedPng(await Paper.tile(m.paper,m.seed));
+  const theme=Paper.theme(m.paper,m.settings);
+  const paper=await pdf.embedPng(m.reportPaperBytes||await paperBackground(m));
   const qr=await pdf.embedPng(await QRCode.toBuffer(GUIDE,{margin:4,width:320,errorCorrectionLevel:'M'}));
-  const fg=rgb(.14,.17,.15),audit={version:1,minTextPt:9,pages:[]};
+  const fg=pdfColor(theme.key),audit={version:2,minTextPt:9,theme,texture:{style:m.reportTexture||'speckled',dpi:144,seed:m.seed,simulation:true},pages:[]};
   const images=new Map();
   let page,record,y;
   const content=s=>typo?.lowercase?String(s).toLowerCase():String(s);
-  function put(s,x,baseline,size=10,font=regular){
+  function put(s,x,baseline,size=10,font=regular,ink=fg){
     const text=content(s),width=font.widthOfTextAtSize(text,size);
     if(size<9||x<margin-.1||x+width>W-margin+.1||baseline<margin||baseline+size>H-margin+.1)
       throw Error('report text exceeds page bounds: '+text);
-    page.drawText(text,{x,y:baseline,size,font,color:fg});
+    page.drawText(text,{x,y:baseline,size,font,color:ink});
     record.text.push({text,x,y:baseline,width,size,font:font.name});
   }
   function rule(baseline,weight=.6){
@@ -98,14 +104,20 @@ async function pdfReport(cards,m){
     put('stiprā',margin,H-65,30,wordmark);
     const titleX=margin+wordmark.widthOfTextAtSize('stiprā',30)+22;
     put(section,titleX,H-62,12,regular);
-    put('digital inspection / '+m.orientation+' A4',margin,H-88,9,mono);
+    put('SEPARATION SHEET / '+m.orientation.toUpperCase()+' A4',margin,H-88,9,mono);
+    for(const [x,cy] of [[17,H-17],[W-17,H-17],[17,17],[W-17,17]]){
+      page.drawLine({start:{x:x-5,y:cy},end:{x:x+5,y:cy},thickness:.5,color:fg,opacity:.7});
+      page.drawLine({start:{x,y:cy-5},end:{x,y:cy+5},thickness:.5,color:fg,opacity:.7});
+    }
+    const stockLabel=m.paper.name.toUpperCase()+' / '+m.settings.length+' INKS';
+    put(stockLabel,W-margin-mono.widthOfTextAtSize(content(stockLabel),9),H-88,9,mono);
     rule(H-100,1.2);y=H-122;
     page.drawLine({start:{x:margin,y:57},end:{x:W-margin-72,y:57},thickness:.6,color:fg});
     page.drawImage(qr,{x:W-margin-54,y:18,width:54,height:54});
     const {PDFName,PDFString}=require('pdf-lib');
     const annotation=pdf.context.register(pdf.context.obj({Type:'Annot',Subtype:'Link',Rect:[W-margin-54,18,W-margin,72],Border:[0,0,0],A:{S:PDFName.of('URI'),URI:PDFString.of(GUIDE)}}));
     page.node.set(PDFName.of('Annots'),pdf.context.obj([annotation]));
-    put('uncalibrated digital proof / original required for replay',margin,42,9,regular);
+    put('simulated paper / uncalibrated proof / original required for replay',margin,42,9,regular);
   }
   function ensure(height,section='recipe / continued'){
     if(y-height<76)newPage(section);
@@ -122,12 +134,17 @@ async function pdfReport(cards,m){
     const im=images.get(key),scale=Math.min(width/im.width,height/im.height);
     const iw=im.width*scale,ih=im.height*scale,px=x+(width-iw)/2,py=bottom+(height-ih)/2;
     page.drawImage(im,{x:px,y:py,width:iw,height:ih});
+    page.drawRectangle({x:px,y:py,width:iw,height:ih,borderWidth:.6,borderColor:c.ink?pdfColor(c.ink):fg,borderOpacity:.7});
     record.images.push({name:c.name,sha256:key,x:px,y:py,width:iw,height:ih,sourceWidth:im.width,sourceHeight:im.height});
   }
   newPage('source / proof / plates');
   const gap=18,half=(cw-gap)/2,portrait=m.orientation==='portrait';
-  put('01 / source photograph',margin,y,10,label);
-  put('02 / simulated overprint',margin+half+gap,y,10,label);
+  function banner(title,x,baseline,width){
+    page.drawRectangle({x:x-2,y:baseline-4,width:width+4,height:18,color:fg});
+    put(title,x+4,baseline+1,9,mono,pdfColor(m.paper.hex));
+  }
+  banner('01 / SOURCE PHOTOGRAPH',margin,y,half);
+  banner('02 / DIGITAL OVERPRINT',margin+half+gap,y,half);
   const heroH=portrait?330:198,heroBottom=y-12-heroH;
   await image(cards[0],margin,heroBottom,half,heroH);
   await image(cards[1],margin+half+gap,heroBottom,half,heroH);
@@ -184,4 +201,4 @@ async function pdfReport(cards,m){
   return Buffer.from(await pdf.save({useObjectStreams:false}));
 }
 
-module.exports={A4,orientation,htmlReport,pdfReport,screenDescription,truetype,GUIDE};
+module.exports={A4,orientation,htmlReport,pdfReport,screenDescription,truetype,paperBackground,GUIDE};
