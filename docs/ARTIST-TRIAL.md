@@ -21,4 +21,12 @@ The intended experimental distribution is the lean core/Canvas/inputs set. PDF/n
 
 The owner has created and verified npm account `yigit-denktas` and authorized experimental publication. Candidates use the personal scope and version `0.1.0-alpha.1`; see [the release procedure](RELEASE-CANDIDATE.md). CLI authentication succeeded and npm accepted all three uploads; registry processing and availability verification remain pending. No credentials belong in the repository or trial record. This authorization does not supply independent artist feedback.
 
-The owner selected a personal npm scope on 18 October 2026. The owner confirmed that no npm account exists yet. Account creation comes before selecting the exact personal namespace; do not infer it from GitHub. Authenticate through the normal npm login flow, never by placing a password, token or one-time code in an issue or chat. Package renaming/publication waits for the actual account identity.
+Publisher identity and upload status are recorded in [the accepted-upload record](evidence/npm-alpha-upload-2026-10-18.json). Use the audited CI tarballs while registry lookup returns 404; an accepted upload alone does not establish a working public install.
+
+## Human handoff
+
+An artist other than the implementer should follow the task above without agent setup assistance, then return their completed trial record and specific failure notes. There is no named participant or submitted record yet; no invitation has been sent. A maintainer or owner rehearsal can find defects, but does not count as independent feedback.
+
+For a first physical check, follow [the operator procedure](PHYSICAL-PRINT-CHECK.md): print the photo-free scale/legibility sheet at 100%, measure both 100 mm rules and the 101.6 × 76.2 mm master, and record the actual printer, stock and observed text/registration behavior. Keep evidence private and run the record checker. This home-printer check does not validate Riso color or dot gain.
+
+Return the actual records before closing #13 or the independent-usefulness portion of #70. Forest/beach artistic acceptance remains separate under #43/#47; the operator kit uses original procedural artwork, not the private owner photographs.
