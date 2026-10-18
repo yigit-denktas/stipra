@@ -635,7 +635,7 @@
         73,
         74
       ],
-      "note": "Exact lean tarballs and their combined offline consumer are verified. The owner authorized experimental alpha.1 publication under verified npm account yigit-denktas. CLI authentication and registry verification remain pending; independent artist feedback and physical acceptance remain open.",
+      "note": "Exact lean tarballs and their combined offline consumer are verified. The owner authorized experimental alpha.1 publication under verified npm account yigit-denktas. CLI authentication succeeded and npm accepted all three uploads; registry availability and downloaded archive verification remain pending; independent artist feedback and physical acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {

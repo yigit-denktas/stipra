@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-18",
+      "title": "Experimental npm uploads accepted; registry verification pending",
+      "status": "Unreleased",
+      "issues": [
+        70
+      ],
+      "changes": [
+        "Authenticate publisher yigit-denktas and approve publishing with the owner passkey.",
+        "npm accepted all three exact audited 0.1.0-alpha.1 archives under the alpha tag and reports processing.",
+        "Record upload SHA-256 and integrity values; registry download verification and clean install remain pending."
+      ]
+    },
+    {
+      "date": "2026-10-18",
       "title": "Personal-scope experimental library release candidate",
       "status": "Unreleased",
       "issues": [
