@@ -28,6 +28,17 @@ The experiment directory must be new and outside the checkout. `prepare.py` inst
 - `review/`: 150-DPI page renders; comparison also uses 300 DPI.
 - `environment.json`: generator/runtime information from preparation. Record the host, Poppler version and resource constraints alongside benchmark evidence.
 
+Results-v2 blocks PDF attachment changes except verified encoded-image hash leaves. Those exceptions require actual paired PNG hashes and equal decoded pixels. Package print contracts, package image pixels/identities and PDF links also block on changes. This research check does not alter the application's licensing release gate. Future environment records are automatically observed by preparation; replay acceptance remains unset until separately established.
+
+Run the standard-library contract tests and the real-PDF attachment mutation check:
+
+```sh
+python -m unittest discover -s scripts/experiments/skia-compare -p 'test_*.py' -v
+python scripts/experiments/skia-compare/verify-corrections.py /absolute/existing-experiment
+```
+
+The second command uses the declared analysis dependencies and existing synthetic reports. It creates only temporary mutated copies, asserts unchanged page drawing streams and rejects altered recipes/DPI/layout/hash metadata. Historical source evidence and archives remain unchanged; the public diagnostic copy redacts host paths.
+
 Memory samples use one 1024×768 canvas, five warmup and 60 recorded PNG exports, incremental marks and explicit GC after each encode. Cycle timings include that GC. Three short CPU trials cannot establish leak freedom, long-run stability, GPU behavior or a general performance advantage.
 
 Existing production goldens are read-only. Pixel, geometry, alpha, color, text metrics or QR changes require review. Encoded-byte-only differences are recorded separately. Promotion and native notice clearance remain separate decisions. See [the measured result](../../../docs/SKIA-V4-EXPERIMENT.md).

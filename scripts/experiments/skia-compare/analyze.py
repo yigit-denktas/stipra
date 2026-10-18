@@ -12,6 +12,7 @@ import numpy as np
 from PIL import Image
 from pypdf import PdfReader
 import zxingcpp
+from contracts import attachment_contract, pdf_contract_stops, redact_paths
 
 
 def digest(data):
@@ -107,12 +108,14 @@ def pdf_structure(file):
         pages.append({"size": [float(v) for v in page.mediabox], "spans": spans, "fonts": fonts, "links": links})
     attachments = {}
     for name, variants in document.attachments.items():
+        if len(variants) != 1:
+            raise ValueError("Ambiguous duplicate attachment: " + name)
         data = variants[0]
         attachments[name] = json.loads(data) if name.endswith(".json") else {"sha256": digest(data)}
     return {"pages": pages, "attachments": attachments}
 
 
-def compare_pdfs(root, left, right, prefix, boxes, url):
+def compare_pdfs(root, left, right, prefix, boxes, url, pixel_equal_image_pairs=()):
     """Renders paired PDFs through Poppler and checks their pixels and QR boxes."""
     a, b = pdf_structure(left), pdf_structure(right)
     result = {"id": prefix, "pageCounts": [len(a["pages"]), len(b["pages"])],
@@ -120,6 +123,8 @@ def compare_pdfs(root, left, right, prefix, boxes, url):
               "textAndFontsEqual": [{k: p[k] for k in ("spans", "fonts")} for p in a["pages"]] == [{k: p[k] for k in ("spans", "fonts")} for p in b["pages"]],
               "attachmentNamesEqual": sorted(a["attachments"]) == sorted(b["attachments"]),
               "attachmentContentEqual": {name: a["attachments"][name] == b["attachments"].get(name) for name in a["attachments"]},
+              "attachmentContract": attachment_contract(a["attachments"], b["attachments"], pixel_equal_image_pairs),
+              "linksEqual": [p["links"] for p in a["pages"]] == [p["links"] for p in b["pages"]],
               "renders": [], "qr": []}
     (root / "review").mkdir(exist_ok=True)
     for dpi in (150, 300):
@@ -154,7 +159,7 @@ def compare_pdfs(root, left, right, prefix, boxes, url):
 
 def analyze(root):
     """Writes the measured comparison and explicit promotion blockers."""
-    output = {"contract": "stipra-skia-results-v1", "comparisons": {}, "pdf": [], "memory": {}, "stops": [], "qr": [], "independentChecks": []}
+    output = {"contract": "stipra-skia-results-v2", "comparisons": {}, "pdf": [], "memory": {}, "stops": [], "qr": [], "independentChecks": []}
     for group in ("decode", "masks", "fonts", "paper"):
         runs = [json.loads((root / "results" / v / f"{group}-0" / "records.json").read_text()) for v in ("v3", "v4")]
         records = []
@@ -209,23 +214,28 @@ def analyze(root):
         else:
             paths = [root / item["artifactDirectory"] for item in (a, b)]
             files = [next(p.rglob("*.pdf")) for p in paths]
-            result = compare_pdfs(root, *files, a["id"], None, "https://apps.yigitdenktas.com/stipra/guide/")
-            result["printEqual"] = a["manifest"]["output"] == b["manifest"]["output"]
             parts_a = {p["name"]: p for p in a["parts"]}
             parts_b = {p["name"]: p for p in b["parts"]}
-            result["packageImages"] = []
+            package_images, image_pairs = [], []
             for name in parts_a:
                 if not name.endswith((".png", ".jpg", ".webp")):
                     continue
                 left_im, right_im = [Image.open(p / name).convert("RGBA") for p in paths]
-                result["packageImages"].append({"path": name, "encodedEqual": parts_a[name]["sha256"] == parts_b[name]["sha256"],
-                                                "pillowPixelsEqual": left_im.size == right_im.size and left_im.tobytes() == right_im.tobytes(), "dimensions": list(left_im.size)})
+                hashes = [digest((p / name).read_bytes()) for p in paths]
+                equal = left_im.size == right_im.size and left_im.tobytes() == right_im.tobytes()
+                if equal and name.endswith(".png"):
+                    image_pairs.append(tuple(hashes))
+                package_images.append({"path": name, "encodedEqual": hashes[0] == hashes[1], "pillowPixelsEqual": equal,
+                                       "workerIdentitiesVerified": hashes == [parts_a[name]["sha256"], parts_b[name]["sha256"]], "dimensions": list(left_im.size)})
+            result = compare_pdfs(root, *files, a["id"], None, "https://apps.yigitdenktas.com/stipra/guide/", image_pairs)
+            result["printEqual"] = a["manifest"]["output"] == b["manifest"]["output"]
+            result["packageImages"] = package_images
             orientation = a["manifest"]["report"]["orientation"]
             left_paper, right_paper = [Image.open(root / "results" / v / "reports-0" / ("paper-" + orientation + ".png")).convert("RGBA") for v in ("v3", "v4")]
             result["paperPixels"] = pixel_diff(left_paper.tobytes(), right_paper.tobytes(), *left_paper.size)
             output["pdf"].append(result)
             controlled = [root / "results" / v / "reports-0" / ("fixed-paper-" + orientation + ".pdf") for v in ("v3", "v4")]
-            output["pdf"].append(compare_pdfs(root, *controlled, "fixed-paper-" + orientation, None, "https://apps.yigitdenktas.com/stipra/guide/"))
+            output["pdf"].append(compare_pdfs(root, *controlled, "fixed-paper-" + orientation, None, "https://apps.yigitdenktas.com/stipra/guide/", image_pairs))
     for version in ("v3", "v4"):
         output["memory"][version] = []
         for file in sorted((root / "results" / version).glob("memory-*/records.json")):
@@ -247,9 +257,12 @@ def analyze(root):
         if not all(r["passed"] for r in item["results"]):
             output["stops"].append({"group": "qr", "id": str(item), "reason": "Public-guide QR failed decoding"})
     for pdf in output["pdf"]:
+        for reason in pdf_contract_stops(pdf):
+            output["stops"].append({"group": "pdf-contract", "id": pdf["id"], "reason": reason})
         if not pdf["pageSizesEqual"] or not pdf["textAndFontsEqual"] or any(not r.get("equal") for r in pdf["renders"]):
             output["stops"].append({"group": "pdf", "id": pdf["id"], "reason": "Page geometry, fonts, text or decoded page pixels changed"})
     output["promotion"] = "stop-and-review" if output["stops"] else "eligible-for-separate-decision"
+    output = redact_paths(output, root)
     (root / "results" / "comparison.json").write_text(json.dumps(output, indent=2) + "\n")
     print(json.dumps({"promotion": output["promotion"], "stops": len(output["stops"]), "cases": {k: len(v["records"]) for k, v in output["comparisons"].items()}, "pdfPairs": len(output["pdf"])}))
 

@@ -1,6 +1,6 @@
 # Skia Canvas 3.0.8 versus 4.0.0: isolated experiment
 
-18 October 2026. **Keep the production backend unchanged.** The tested masks, imported pixels and proof/master pixels match exactly, but v4 changes Canvas text metrics, missing-face bold synthesis and the speckled paper texture. Those differences trigger the agreed review gate. They are not evidence that v4 is unusable or that the existing PDF text layout is broken.
+18 October 2026. **Keep the production backend unchanged.** The tested masks, imported pixels and proof/master pixels match exactly. The product-facing migration deltas are the speckled paper texture and encoded PNG identities. Canvas metric/synthesis changes are backend probes with no production call sites in the pinned source; they do not establish a product typography regression. The conservative experimental stop verdict is retained.
 
 ## Measured scope
 
@@ -25,7 +25,7 @@ The file-import count includes the real ICC-reference fixtures, 16-bit SDR PNG, 
 
 ## Differences that matter
 
-The Canvas metric changes agree with [v4's documented metric corrections](https://skia-canvas.org/releases). Explicit alphabetic placement and the real static font faces preserve the tested text pixels, while the reported bounding boxes and em heights change. Code using those measurements needs review before an upgrade. Stipra's PDF text uses Fontkit/pdf-lib; its extracted text positions and embedded faces remain identical in this experiment.
+The Canvas metric changes agree with [v4's documented metric corrections](https://skia-canvas.org/releases). Explicit alphabetic placement and the real static font faces preserve the tested text pixels, while the reported bounding boxes and em heights change. A source audit finds no native `measureText`, `fontSynthesis`, `FontLibrary` or `fillText` use in src, bin, web or package sources. Browser overlays and developer review scripts are separate. Stipra's PDF text uses Fontkit/pdf-lib; its extracted text positions and embedded faces remain identical. These controls describe backend behavior, not a current product migration blocker.
 
 The missing-face control intentionally registers only Regular, then requests Bold. It changes under v4's default `fontSynthesis=true`, as documented upstream. This control must not be mistaken for a failure to load the genuine Bold font used elsewhere.
 
@@ -43,10 +43,24 @@ The verified Linux native binaries remain 30,457,832 bytes (v3) and 37,769,600 b
 
 ## Decision and reproduction
 
-The recorded verdict is **stop-and-review**, with 19 case-level stops covering Canvas metrics, the missing-face control, speckled paper and default report pixels. Several stops describe the same underlying change; this is not a count of independent bugs. The image/mask/proof compatibility evidence is favorable. Adoption still needs an explicit decision about the typography defaults/metrics and whether to retain or intentionally version the changed texture.
+The recorded verdict is **stop-and-review**, with 19 case-level stops: 15 backend typography probes, two speckled-paper cases and two default report cases. Several stops describe the same underlying change. The image/mask/proof compatibility evidence is favorable. A future migration needs a paper texture decision, encoded-PNG identity updates and reviewed audit/version pins. Rebaseline evidence deliberately; do not bypass the existing version guards. Build pages before running all tests so type-proof tests execute. No upgrade is needed merely because the behavior comparison passed.
 
 A fresh preparation and complete replay on the same host reproduced all decode/mask/font/paper worker records and the same promotion stops. This is a reproducibility check, not independent platform validation. The input/native identity guard also rejects an intentionally altered fixture.
 
 No application dependency, package version, public npm artifact, release gate, owner photograph or production golden changed. The native notice finding remains open in #14. Independent artist, accessibility and physical-print acceptance remain separate.
 
 [Harness and commands](../scripts/experiments/skia-compare/README.md) · [Measured comparison](evidence/skia-v4-comparison-2026-10-18.json) · [Environment](evidence/skia-v4-environment-2026-10-18.json) · [Earlier decision review](RENDER-BACKEND-REVIEW.md).
+
+## Independent replay and analyzer correction
+
+The owner supplied an independent AI-assisted review reporting a full replay on a different Linux x64 CPU host: Node/Python matched, while npm, Poppler, glibc and CPU count differed. Its supplied comparison reports 272 identical decode/mask/font/paper records, the same 19 stops and matching reference/PDF/QR verdicts. This strengthens the bounded Linux evidence; it is not Windows/macOS/GPU, artist or physical-print acceptance. The supplied replay failure records are not byte-identical, although the review reports the same failure behavior.
+
+The review correctly identified a PDF-attachment blind spot. Results-v2 now blocks added/removed or semantically changed attachments. Only report-layout `pages[*].images[*].sha256` changes may pass, and only when both hashes come from actual paired PNG files with identical decoded pixels. Geometry, recipe, DPI and arbitrary hashes remain blocking. Package image pixels, physical output contracts, recorded-versus-actual image hashes and PDF link changes are also explicit checks. Other worker-record integrity remains subject to the documented experiment limits.
+
+Five standard-library regression tests and four mutations of real PDF attachments pass. The mutations preserve page structure and drawing streams but are rejected by the corrected contract. Reanalysis of the captured evidence retains all 19 original stops, with compatible attachment contracts for all five PDF pairs. No native renderer or migration was rerun for this correction.
+
+The original archive remains unchanged at SHA-256 `abbb25088c75bd9a638f154c94c9dbe33642cbc0f6af7735c4734031b6ec2b76`. Host paths in its diagnostic records are historical; the public comparison copy and future analyzer/failure outputs redact them. The original environment record was curated; future preparation automatically captures host and analysis-tool versions and leaves replay acceptance unset.
+
+One supplied JSON source-lock hash differs from the LF pin. Local verification shows it equals the same file with CRLF endings: LF `3f1681a6…`, CRLF `bcbea8c2…`. This explains the byte-identity discrepancy without silently normalizing any pinned artifact. The separate narrow LF checkout task remains open.
+
+[Review identities, bounded claims and mutation results](evidence/skia-v4-review-reconciliation-2026-10-18.json). The full supplied review files remain private and unchanged.
