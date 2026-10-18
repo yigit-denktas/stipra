@@ -1,6 +1,6 @@
 # Digital acceptance and the library candidate
 
-The owner selected npm account `yigit-denktas` and authorized an experimental alpha. The three publishable candidates are `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs`, each at `0.1.0-alpha.1`. They remain unpublished pending authenticated publication. This is a reviewable candidate, not a registry release or a print-quality approval. No new runtime dependencies were added for these checks.
+The owner selected npm account `yigit-denktas` and authorized an experimental alpha. The three publishable candidates are `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs`, each at `0.1.0-alpha.1`. Authenticated uploads of all three exact audited archives were accepted by npm on 18 October 2026. npm reports processing; registry availability, downloadable hashes and a clean registry install remain unverified. See the [upload record](evidence/npm-alpha-upload-2026-10-18.json). This is not a print-quality approval. No new runtime dependencies were added for these checks.
 
 ```sh
 npm ci
@@ -36,7 +36,7 @@ The consumer imports package names through their public export maps, including `
 
 | Intended artifact | Verified here | Remaining gate |
 | --- | --- | --- |
-| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Authenticated registry publication; independent artist usefulness review remains separate |
+| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Registry availability, downloadable hashes and clean install; independent artist usefulness review remains separate |
 | Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
 | Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
 | Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
