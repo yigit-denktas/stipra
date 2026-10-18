@@ -3,6 +3,24 @@
   "releaseStatus": "Development changes on main; no npm package release or version tag is announced here.",
   "entries": [
     {
+      "date": "2026-10-18",
+      "title": "Keyboard navigation and verified project tracking",
+      "status": "Unreleased",
+      "issues": [
+        13,
+        14,
+        17,
+        70
+      ],
+      "changes": [
+        "Add a visible-on-focus skip link to all nine public destinations; verify Tab/Enter behavior in Chromium and audit nine routes with axe.",
+        "Give guide and per-ink screening groups valid accessible semantics.",
+        "Keep roadmap task headings as single expandable controls; put issue links inside the expanded content.",
+        "Save the v0.9 status board and inspect all 11 workflow configurations and unchanged private owner access.",
+        "Recheck pinned native release attachments and npm publisher access; Skia inventory and authentication remain unresolved."
+      ]
+    },
+    {
       "date": "2026-10-17",
       "title": "Controlled forest review and concrete release handoff",
       "status": "Unreleased",
@@ -101,7 +119,7 @@
         90
       ],
       "changes": [
-        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]
