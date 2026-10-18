@@ -14,7 +14,7 @@
 | How do we judge the design before approving it? | [Critical user journeys and review protocol](REVIEW.md) |
 | How is development/release history represented? | [Product-history rules](../docs/PRODUCT-HISTORY.md) and [source data](../docs/data/product-history.json) |
 | What color and font values does the browser actually use? | [Shared stylesheet](../web/stipra/shared.css) and [roadmap stylesheet](../web/stipra/roadmap.css) |
-| What has the latest public-page critique actually observed? | [Taste-skill review](../docs/DESIGN-TASTE-REVIEW-2026-10-18.md) |
+| How should we apply Impeccable's Read/Operate modes and follow up? | [Impeccable audit and reproducible tests](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md) |\n| What has the latest public-page critique actually observed? | [Taste-skill review](../docs/DESIGN-TASTE-REVIEW-2026-10-18.md) |
 | What can the reviewer run? | [Pinned Taste Skill](../.agents/skills/design-taste-frontend/README-STIPRA.md) and [design inspection workflow](../.github/workflows/design-taste-audit.yml) |
 
 The **implementation sources remain authoritative**. Do not copy CSS tokens into a second system of truth or mark a capability shipped because its issue or PR was closed. This folder states intent, semantics, review boundaries and edit decisions.
