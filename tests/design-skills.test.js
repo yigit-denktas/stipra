@@ -20,7 +20,7 @@ test('design skills have canonical files, Claude discovery and local licenses',(
 test('design skill local links resolve',()=>{
  for(const name of names){
   const base='.agents/skills/'+name,source=open(base+'/SKILL.md').toString();
-  for(const match of source.matchAll(/\\]\\(([^)]+)\\)/g)){
+  for(const match of source.matchAll(/\]\(([^)]+)\)/g)){
    const link=match[1].split('#')[0];if(!link||/^[a-z]+:\/\//i.test(link)||link.startsWith('mailto:'))continue;
    const full=path.normalize(path.join(base,decodeURIComponent(link)));
    assert.ok(exists(full),name+' broken reference: '+link);
