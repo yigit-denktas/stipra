@@ -42,6 +42,10 @@ Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.
 ## First milestone
 
 Complete the documented v0.9 backlog: paper contamination/geometry, generic image input, editable spot+CMYK separations, full-size plates, A4 HTML/PDF inspection sheet, diagnostics, CLI, QA.
+## Intent-first design handoff
+
+Before generating or revising a public interface, read [the Stiprā design entry point](design/README.md), [its public experience contract](design/CONTRACT.md) and the [accepted/rejected decision log](design/DECISIONS.md). Work from a specific reader task rather than the most probable AI layout. Use the [critical journeys and evidence protocol](design/REVIEW.md) to document behavior, screenshot review, rejection rationale and owner acceptance. **Follow these design rules as product-specific requirements, not as a generic component aesthetic to apply to other repos.**
+
 ## Public page design reviews
 
 The pinned upstream Taste Skill v2 lives in [`.agents/skills/design-taste-frontend/`](.agents/skills/design-taste-frontend/README-STIPRA.md). Before changing a public roadmap, changelog, guide, sitemap, sketches or regions page, read its `SKILL.md`, `references/critique.md` and the latest [page-by-page Stiprā review](docs/DESIGN-TASTE-REVIEW-2026-10-18.md). Verify the rendered page on desktop and phone, not just the CSS. Run its local `lint.mjs` and `inspect.mjs` if the environment supports Node 22 and Chrome. Keep the output and state any intentional exceptions.
