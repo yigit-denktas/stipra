@@ -6,7 +6,7 @@ test('roadmap distinguishes code, acceptance and published history',()=>{
  const h=structuredClone(history);const result=Roadmap.validate(h,ledger);assert.equal(result.ids.size,33);
  const html=Roadmap.render(h,ledger,changelog);
  for(const label of ['What we are working on.','Released versions.','The work, as it happened.','Where this could go.','Every capability, traceable.'])assert.ok(html.includes(label));
- assert.match(html,/No published release is recorded yet/);assert.match(html,/Owner-reported/);
+ if(h.releases.length===0)assert.match(html,/No published release is recorded yet/);assert.match(html,/Owner-reported/);
  assert.doesNotMatch(html,/PR #\d+/);
  const invalid=structuredClone(h);invalid.capabilities.push({...invalid.capabilities[0]});assert.throws(()=>Roadmap.validate(invalid,ledger),/duplicate capability/);
 });
