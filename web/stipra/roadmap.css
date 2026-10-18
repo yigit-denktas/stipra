@@ -85,3 +85,43 @@
 /* Reflow for zoom, long translations and extended version names. */
 .r-site{overflow-wrap:anywhere}
 .r-head h2,.r-section-head h2{overflow-wrap:anywhere}
+
+/* Taste pass: information before ornament. Keep the v4 release and capability language. */
+.doc-page:has(.r-site) header .eyebrow,.doc-page:has(.r-site) header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0!important;padding:0!important}
+.doc-page:has(.r-site) header{padding-top:12px;padding-bottom:8px}
+.doc-page:has(.r-site) .r-eyebrow{margin:0 0 10px}
+.r-head{padding:18px 0 18px;gap:24px}
+.r-head h2{font-size:clamp(2.65rem,5.4vw,5.2rem)!important}
+.r-head p{font-size:clamp(1rem,1.35vw,1.24rem);max-width:390px}
+.r-jump{margin-bottom:10px}
+.r-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;padding:15px 0}
+.r-overview strong{font-size:clamp(1.32rem,2.15vw,1.85rem)}
+.r-section{padding-top:40px!important}
+.r-section-head{margin-bottom:13px}
+.r-priority p,.r-release p{font-size:16px}
+.r-explain,.r-record>p{font-size:16px}
+.r-record-head,.r-record-history,.r-change small{font-size:14px}
+.r-search{padding:8px 0 15px;margin:0 0 16px}
+#features>.r-search{border-top:1px solid var(--r-rule)}
+.r-site .r-record details summary{min-height:44px}
+.r-site .r-record details ul li,.r-record-history li{font-size:15px}
+@media(max-width:700px){
+  .doc-page:has(.r-site) header{padding-top:8px;padding-bottom:5px}
+  .r-site .r-eyebrow{font-size:11px}
+  .r-head{padding:16px 0 13px;gap:8px}
+  .r-head h2{font-size:clamp(2.5rem,10vw,3.6rem)!important}
+  .r-head p{font-size:16px;max-width:34ch}
+  .r-overview{grid-template-columns:1fr 1fr;gap:14px;padding:12px 0}
+  .r-overview>div:last-child{grid-column:auto}
+  .r-overview strong{font-size:1.5rem;margin:2px 0}
+  .r-section{padding-top:28px!important}
+  .r-section-head{margin-bottom:10px}
+  .r-priority,.r-release{padding:14px 0}
+  .r-section-head h2{font-size:clamp(1.8rem,7vw,2.35rem)!important}
+}
+@media(max-width:360px){
+  .r-overview{grid-template-columns:1fr 1fr}
+  .r-head h2{font-size:2.3rem!important}
+  .r-overview>div:last-child{grid-column:auto}
+  .r-overview small{font-size:11px}
+}
