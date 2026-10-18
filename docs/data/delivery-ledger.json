@@ -36,7 +36,7 @@
         85,
         86
       ],
-      "exit": "Core/Canvas/inputs build and examples work with deterministic browser/Node/CLI evidence. #85/#86 mean bounded research decisions and pilots. Packages remain private; no public version tag."
+      "exit": "Historical alpha.0 engineering candidate: deterministic browser/Node/CLI evidence and bounded structured-input pilots. Current personal-scope alpha.1 uploads are accepted; registry availability remains unverified."
     },
     {
       "id": "published-alpha",
@@ -114,10 +114,10 @@
     }
   ],
   "nextSequence": [
-    "Resolve #14\u2019s remaining native Skia binary inventory before distributing a bundled native executable; browser exporter and lean-library scopes have separate checked reports.",
-    "Complete #13\u2019s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
-    "Make #70\u2019s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
-    "Keep #75 Java research, #28 analytic vector screens and identity/paper extensions optional."
+    "Verify availability, downloaded archive hashes and a clean registry install for the three accepted alpha.1 uploads (#70); do not republish accepted versions to bypass processing.",
+    "Send the approved #14 native inventory request using an authorized browser fallback: the GitHub connector rejected creation with HTTP 403. Obtain attributable component/notices evidence before bundling native Skia.",
+    "Collect actual operator print measurements and independent artist/human accessibility observations (#13/#70); review forest/beach quality separately (#43/#47).",
+    "Keep optional Java, analytic vector screens and identity/paper extensions separate; PR #98 is the existing roadmap/design proposal."
   ],
   "tasks": [
     {
@@ -292,7 +292,7 @@
         12,
         22
       ],
-      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Six-page Chromium axe audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open.",
+      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Nine-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T20:17:26Z"
     },
     {
@@ -305,7 +305,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains.",
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. Owner authorized upstream follow-up; connector creation returned HTTP 403, so the prepared request remains unsent pending browser fallback.",
       "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {

@@ -4,6 +4,21 @@
   "entries": [
     {
       "date": "2026-10-18",
+      "title": "Reconciled publication, provenance and human acceptance handoffs",
+      "status": "Unreleased",
+      "issues": [
+        14,
+        13,
+        70
+      ],
+      "changes": [
+        "Remove obsolete npm-account setup instructions and separate accepted uploads from registry availability.",
+        "Record the authorized upstream inventory request and the GitHub connector HTTP 403; no upstream message was sent.",
+        "Clarify independent artist and physical operator records still needed; retain open acceptance gates."
+      ]
+    },
+    {
+      "date": "2026-10-18",
       "title": "Experimental npm uploads accepted; registry verification pending",
       "status": "Unreleased",
       "issues": [
