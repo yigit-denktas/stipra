@@ -22,7 +22,7 @@ A studio should open around the image and its resulting print, not an endless fo
 
 A portrait needs different tonal care than a poster, diagram or newspaper illustration. A **Stipra Style** is a deliberate strategy: what the work is for, which inks to use, where their coverage comes from, what to protect, how to screen the masks, and when *not* to use that style.
 
-Start with four compelling, evidence-tested directions: **Portrait Duotone, Editorial Halftone, Bold Spot Poster, Clean Linework**. These are **proposed**, not four ready-to-use presets. Show a neutral/original baseline and a preview of each candidate using the *same input image*. Don't generate a library of lookalike slider snapshots. [#34 — Styles](https://github.com/yigit-denktas/stipra/issues/34).
+The four starter recipe families — **Portrait Duotone, Editorial Halftone, Bold Spot Poster, Clean Linework** — are implemented as a shared browser/CLI **technical baseline**, but they are **not yet approved as artistically suitable or physically validated presets**. Show a neutral/original baseline and a preview of each candidate using the *same input image*. Don't generate a library of lookalike slider snapshots. [#34 — Styles](https://github.com/yigit-denktas/stipra/issues/34).
 
 ### 3. Separate color from coverage
 
