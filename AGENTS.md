@@ -44,7 +44,7 @@ Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.
 Complete the documented v0.9 backlog: paper contamination/geometry, generic image input, editable spot+CMYK separations, full-size plates, A4 HTML/PDF inspection sheet, diagnostics, CLI, QA.
 ## Intent-first design handoff
 
-Before generating or revising a public interface, read [the Stiprā design entry point](design/README.md), [its public experience contract](design/CONTRACT.md) and the [accepted/rejected decision log](design/DECISIONS.md). Work from a specific reader task rather than the most probable AI layout. Use the [critical journeys and evidence protocol](design/REVIEW.md) to document behavior, screenshot review, rejection rationale and owner acceptance. **Follow these design rules as product-specific requirements, not as a generic component aesthetic to apply to other repos.**
+Before generating or revising a public interface, read [the Stiprā design entry point](design/README.md), [its public experience contract](design/CONTRACT.md), [implementation pattern contracts](design/PATTERNS.md) and the [accepted/rejected decision log](design/DECISIONS.md). Work from a specific reader task rather than the most probable AI layout. Use the [critical journeys and evidence protocol](design/REVIEW.md) to document behavior, screenshot review, rejection rationale and owner acceptance. **Follow these design rules as product-specific requirements, not as a generic component aesthetic to apply to other repos.**
 
 ## Public page design reviews
 
