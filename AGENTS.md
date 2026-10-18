@@ -20,6 +20,10 @@ Use branch names like feat/123-separation-sheet or fix/456-plate-offset. PR body
 
 When a change alters capabilities, setup, examples, limitations or the next priority, update README.md in the same PR and reconcile the relevant ROADMAP.md status. Keep the README short and link detailed contracts/evidence. Distinguish implemented behavior, verified checks, proposed work and publication/physical-print acceptance. Do not retain stale fixed issue counts or claim unsupported readiness.
 
+## Maintain the public product history
+
+When a change materially affects a capability, add a dated, typed event to `docs/data/product-history.json` and reconcile `docs/data/changelog.json`. Reuse its permanent capability ID; do not create a new feature merely because an old capability was improved. Classify features, validation, operations and research separately. Never infer publication or physical acceptance from a merged PR or closed issue. Release mappings require explicit typed changes in GitHub release notes. See [product-history rules](docs/PRODUCT-HISTORY.md). Run `node --test tests/roadmap-history.test.js tests/site-info.test.js` after edits.
+
 ## Before changing defaults or the studio UI
 
 Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.md](docs/STYLES-v1.md) for the four implemented, unvalidated starting recipes, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.
