@@ -1,6 +1,6 @@
 {
   "contract": "stipra-delivery-ledger-v1",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-18",
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
@@ -114,9 +114,9 @@
     }
   ],
   "nextSequence": [
-    "Resolve #14’s remaining native Skia binary inventory before distributing a bundled native executable; browser exporter and lean-library scopes have separate checked reports.",
-    "Complete #13’s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
-    "Make #70’s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
+    "Resolve #14\u2019s remaining native Skia binary inventory before distributing a bundled native executable; browser exporter and lean-library scopes have separate checked reports.",
+    "Complete #13\u2019s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
+    "Make #70\u2019s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
     "Keep #75 Java research, #28 analytic vector screens and identity/paper extensions optional."
   ],
   "tasks": [
@@ -311,12 +311,12 @@
     {
       "issue": 17,
       "title": "Configure native Stipra v0.9 milestone and GitHub Project",
-      "trackerState": "open",
-      "deliveryState": "partial",
+      "trackerState": "closed",
+      "deliveryState": "Configured and verified",
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "Native milestone #1 has original issues #1–#14. Existing private Project #3 reused; missing #1/#2 added, Priority/Area set for all 14, stale #9 status corrected and saved priority-sorted milestone table created. Status-board view/workflow rule details remain unverified after browser connection stalled.",
+      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1\u2013#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
       "sourceUpdatedAt": "2026-10-16T20:38:00Z"
     },
     {
@@ -353,7 +353,7 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim."
+      "note": "Image workflow implements 2\u20138 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim."
     },
     {
       "issue": 24,
@@ -453,7 +453,7 @@
     },
     {
       "issue": 39,
-      "title": "Owner photographs A/B/C — first complete print package validation",
+      "title": "Owner photographs A/B/C \u2014 first complete print package validation",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "studio",
@@ -505,7 +505,7 @@
     },
     {
       "issue": 46,
-      "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
+      "title": "Generate a reproducible layered Stipr\u0101 mark using its own separation and screening engine",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "identity",
@@ -545,7 +545,7 @@
     },
     {
       "issue": 54,
-      "title": "Real Stiprā palette + four authentic wordmarks + three owner-photo comparison PDFs",
+      "title": "Real Stipr\u0101 palette + four authentic wordmarks + three owner-photo comparison PDFs",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "identity",
@@ -624,7 +624,7 @@
     },
     {
       "issue": 70,
-      "title": "Creative coding alpha: sketch → ink proof → reproducible plates",
+      "title": "Creative coding alpha: sketch \u2192 ink proof \u2192 reproducible plates",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "library",
@@ -654,7 +654,7 @@
     },
     {
       "issue": 72,
-      "title": "Apply Stiprā treatments inside existing Canvas and p5.js sketches",
+      "title": "Apply Stipr\u0101 treatments inside existing Canvas and p5.js sketches",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "library",
@@ -845,6 +845,27 @@
       "Priority",
       "Area"
     ],
-    "remaining": "Status-board view and detailed workflow-rule verification remain incomplete after the browser session stopped responding. A duplicated draft View 7 exists; it is not claimed as a completed status board."
+    "remaining": null,
+    "statusBoard": {
+      "url": "https://github.com/users/yigit-denktas/projects/3/views/7",
+      "name": "v0.9 board",
+      "layout": "board",
+      "columnBy": "Status",
+      "sort": "Priority ascending",
+      "filter": "repo:yigit-denktas/stipra milestone:v0.9"
+    },
+    "verifiedAt": "2026-10-18",
+    "access": {
+      "visibility": "private",
+      "collaborators": 1,
+      "ownerRole": "Admin",
+      "changed": false
+    },
+    "workflows": {
+      "inspected": 11,
+      "enabled": 7,
+      "record": "docs/PROJECT-TRACKING.md",
+      "autoCloseWhenDone": true
+    }
   }
 }
