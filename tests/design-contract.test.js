@@ -22,7 +22,7 @@ test('documented public design tokens match the real browser stylesheet',()=>{
 test('Stiprā design contract is agent-discoverable and distinguishes decisions from evidence',()=>{
   const agents=get('AGENTS.md'),principles=get('DESIGN.md'),index=get('design/README.md');
   const decisions=get('design/DECISIONS.md'),review=get('design/REVIEW.md');
-  for(const name of ['CONTRACT.md','DECISIONS.md','REVIEW.md']){
+  for(const name of ['CONTRACT.md','PATTERNS.md','DECISIONS.md','REVIEW.md']){
     assert.ok(fs.existsSync(path.join(ROOT,'design',name)),name+' missing');
     assert.ok(index.includes(name),'Design index does not link '+name);
     assert.ok(agents.includes('design/'+name),'Agent instructions do not link '+name);
