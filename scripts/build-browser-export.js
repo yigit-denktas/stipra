@@ -27,10 +27,12 @@ async function build(outfile,{format='iife'}={}){
   }
   const notices=[];
   for(const dir of [...roots].sort()){
-    const {notices:readNotices,completeTerms}=require('./license-audit.js');
+    const {notices:readNotices,completeTerms,licensePolicy}=require('./license-audit.js');
     const {pkg,declared,sources}=readNotices(dir);
     if(!sources.length||!declared||!completeTerms(sources))throw Error('Missing or incomplete bundled dependency notice: '+pkg.name);
-    notices.push(pkg.name+' '+pkg.version+' / '+declared+'\n'+sources.map(x=>'Source: '+x.name+'\n'+x.text).join('\n')+
+    const {selected,reviewed}=licensePolicy(pkg.name,declared);
+    if(!reviewed)throw Error('Unreviewed bundled license expression: '+pkg.name+' / '+selected);
+    notices.push(pkg.name+' '+pkg.version+' / '+selected+'\n'+sources.map(x=>'Source: '+x.name+'\n'+x.text).join('\n')+
       '\nAuthor: '+JSON.stringify(pkg.author)+'\nContributors: '+JSON.stringify(pkg.contributors)+'\nRepository: '+JSON.stringify(pkg.repository));
   }
   fs.writeFileSync(path.join(path.dirname(outfile),'export-dependency-notices.txt'),notices.join('\n\n---\n\n'));

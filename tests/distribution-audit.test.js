@@ -67,5 +67,15 @@ test('browser exporter evidence identifies actual bundled artifacts and emitted 
     for(const item of report.outputs)assert.equal(hash(fs.readFileSync(path.join(path.dirname(file),item.path))),item.sha256);
     assert.ok(report.outputs.some(x=>x.path==='export-dependency-notices.txt'));
     assert.ok(!fs.readFileSync(file+'.audit.json','utf8').includes(ROOT));
+    const licensing=require('../scripts/license-audit'),readNotices=licensing.notices;
+    try{
+      licensing.notices=dir=>{
+        const n=readNotices(dir);
+        return n.pkg.name==='jszip'?{...n,declared:'GPL-3.0-only'}:n;
+      };
+      const rejected=await require('../scripts/check-release-artifact').gate('browser',temp);
+      assert.equal(rejected.status,'error');assert.match(rejected.error,/Unreviewed bundled license expression: jszip/);
+      assert.equal(JSON.parse(fs.readFileSync(path.join(temp,'release-gates/browser.json'))).status,'error');
+    }finally{licensing.notices=readNotices;}
   }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });

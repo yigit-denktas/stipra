@@ -3,6 +3,11 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'..'),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const ALLOWED=new Set(['MIT','ISC','BSD-2-Clause','BSD-3-Clause','Apache-2.0','Zlib','OFL-1.1','0BSD','CC0-1.0','(MIT AND Zlib)','MIT AND Apache-2.0']);
+/** Applies the same reviewed license selection to production inventories and browser bundles. */
+function licensePolicy(name,declared){
+  const selected=name==='brotli'?'MIT AND Apache-2.0':declared==='(MIT OR GPL-3.0-or-later)'?'MIT':declared;
+  return {selected,reviewed:ALLOWED.has(selected)};
+}
 const completeTerms=sources=>sources.some(x=>/Permission is hereby granted|Redistribution and use|SIL OPEN FONT LICENSE|Apache License|ISC License|Permission to use, copy/i.test(x.text));
 function notices(dir){
   const pkg=JSON.parse(fs.readFileSync(path.join(dir,'package.json'),'utf8'));
@@ -50,8 +55,8 @@ function audit(out){
     if(!fs.existsSync(dir))throw Error('Audit requires installed runtime dependency '+name);
     const n=notices(dir);
     if(n.pkg.version!==item.version)throw Error('Installed version differs from lock: '+name);
-    const selected=n.pkg.name==='brotli'?'MIT AND Apache-2.0':n.declared==='(MIT OR GPL-3.0-or-later)'?'MIT':n.declared;
-    if(!ALLOWED.has(selected))findings.push({package:n.pkg.name,kind:'license-review',detail:'Unreviewed license expression: '+selected});
+    const {selected,reviewed}=licensePolicy(n.pkg.name,n.declared);
+    if(!reviewed)findings.push({package:n.pkg.name,kind:'license-review',detail:'Unreviewed license expression: '+selected});
     if(!n.sources.length)throw Error('No license evidence: '+name);
     const fullTerms=completeTerms(n.sources);
     if(!fullTerms)findings.push({package:n.pkg.name,kind:'incomplete-notice',detail:'Published package supplies a declaration but incomplete license terms/attribution.'});
@@ -76,4 +81,4 @@ if(require.main===module){
     if(process.argv.includes('--release-check')&&report.findings.length)process.exitCode=1;
   }catch(e){console.error(e.message);process.exitCode=1;}
 }
-module.exports={audit,notices,completeTerms};
+module.exports={audit,notices,completeTerms,licensePolicy};

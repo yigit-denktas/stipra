@@ -30,7 +30,7 @@ The replacement introduces separately installed dependencies instead of hiding t
 
 ## Browser exporter
 
-`check:browser-distribution` builds the PDF/ZIP exporter and writes `out/browser-distribution/export.mjs.audit.json`, its dependency notices and output hashes. Every included package must have a declaration and full retained terms. The report includes the actual Fontkit module/hash, matching own-source inventory, resolved package versions, file hashes and final bundle/notice hashes. Both IIFE and ESM builds select the reviewed `fontkit/dist/browser.cjs` through the CommonJS source imports.
+`check:browser-distribution` builds the PDF/ZIP exporter and writes `out/browser-distribution/export.mjs.audit.json`, its dependency notices and output hashes. Every included package must have a declaration, full retained terms and a reviewed expression under the same license-selection policy as the production inventory. The report includes the actual Fontkit module/hash, matching own-source inventory, resolved package versions, file hashes and final bundle/notice hashes. Both IIFE and ESM builds select the reviewed `fontkit/dist/browser.cjs` through the CommonJS source imports.
 
 The browser exporter has no unresolved findings in this artifact scope. The whole site also distributes separately licensed Plex/Paper Mono fonts and optional replaceable p5 host files; the exporter report is not a site-wide trademark/media license. Generated print ZIPs retain report-font OFL terms. No owner photograph is committed or added to public evidence.
 
