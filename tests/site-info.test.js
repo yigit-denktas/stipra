@@ -12,13 +12,16 @@ test('delivery ledger preserves original denominator and rejects dependency gaps
 test('information pages and all navigation use valid relative destinations on either host',()=>{
   const stage=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-site-info-'));
   try{
-    for(const [route]of Info.ROUTES){if(['roadmap/','changelog/','sitemap/'].includes(route))continue;const file=path.join(stage,route.endsWith('.html')?route:route+'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'<!doctype html><html><body><h1>Destination</h1></body></html>');}
+    for(const [route]of Info.ROUTES){if(['roadmap/','changelog/','sitemap/'].includes(route))continue;const file=path.join(stage,route.endsWith('.html')?route:route+'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'<!doctype html><html><body><main><h1>Destination</h1></main></body></html>');}
     Info.build(stage);Info.build(stage);
-    for(const [route]of Info.ROUTES){const file=path.join(stage,route.endsWith('.html')?route:route+'index.html'),html=fs.readFileSync(file,'utf8');assert.equal((html.match(/class="site-nav"/g)||[]).length,1);
+    for(const [route]of Info.ROUTES){const file=path.join(stage,route.endsWith('.html')?route:route+'index.html'),html=fs.readFileSync(file,'utf8');assert.equal((html.match(/class="site-nav"/g)||[]).length,1);assert.equal((html.match(/class="skip-link"/g)||[]).length,1);assert.match(html,/<main id="main-content" tabindex="-1"/);
       for(const [,href]of html.matchAll(/href="([^"]+)"/g)){if(/^(?:https:|#)/.test(href)||href.endsWith('shared.css'))continue;const resolved=path.resolve(path.dirname(file),href),target=href.endsWith('/')?path.join(resolved,'index.html'):resolved;assert.ok(fs.existsSync(target),'Broken destination '+route+' → '+href);assert.ok(target.startsWith(stage+path.sep));}
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
     const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
-    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/In progress/);assert.match(roadmap,/Shipped versions/);assert.match(roadmap,/Find a capability/);assert.ok(fs.existsSync(path.join(stage,'roadmap/history.json')));assert.ok(fs.existsSync(path.join(stage,'roadmap/search-index.js')));assert.ok(fs.existsSync(path.join(stage,'roadmap/roadmap-search.js')));assert.match(roadmap,/<script defer src="\.\/search-index\.js"><\/script>/);assert.match(roadmap,/<script defer src="\.\/roadmap-search\.js"><\/script>/);const indexFile=fs.readFileSync(path.join(stage,'roadmap/search-index.js'),'utf8');assert.match(indexFile,/STIPRA_ROADMAP_INDEX/);
+    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/In progress/);assert.match(roadmap,/Shipped versions/);assert.match(roadmap,/Find a capability/);
+    for(const name of ['history.json','search-index.js','roadmap-search.js','roadmap.css'])assert.ok(fs.existsSync(path.join(stage,'roadmap',name)),name);
+    assert.match(roadmap,/<script defer src="\.\/search-index\.js"><\/script>/);
+    assert.match(roadmap,/<script defer src="\.\/roadmap-search\.js"><\/script>/);
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });
