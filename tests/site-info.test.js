@@ -19,6 +19,6 @@ test('information pages and all navigation use valid relative destinations on ei
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
     const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
-    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/What we are working on/);assert.match(roadmap,/Released versions/);assert.match(roadmap,/Every capability, traceable/);assert.ok(fs.existsSync(path.join(stage,'roadmap/history.json')));
+    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/In progress/);assert.match(roadmap,/Shipped versions/);assert.match(roadmap,/Find a capability/);assert.ok(fs.existsSync(path.join(stage,'roadmap/history.json')));assert.ok(fs.existsSync(path.join(stage,'roadmap/search-index.js')));assert.ok(fs.existsSync(path.join(stage,'roadmap/roadmap-search.js')));assert.match(roadmap,/<script defer src="\.\/search-index\.js"><\/script>/);assert.match(roadmap,/<script defer src="\.\/roadmap-search\.js"><\/script>/);const indexFile=fs.readFileSync(path.join(stage,'roadmap/search-index.js'),'utf8');assert.match(indexFile,/STIPRA_ROADMAP_INDEX/);
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });
