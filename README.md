@@ -56,7 +56,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Acceptance:** [Release gates](docs/RELEASE-CANDIDATE.md). Physical/artist review and the [native notice gap](docs/DEPENDENCY-AUDIT.md) remain open. The [v4 experiment](docs/SKIA-V4-EXPERIMENT.md) supports image parity; paper/PNG migration is deferred. Previews are **digital approximations**; branding is provisional.
+**Acceptance:** [Scoped release gates](docs/RELEASE-CANDIDATE.md) run in CI; native bundles remain blocked on [missing notices](docs/DEPENDENCY-AUDIT.md). Physical/artist review remains open. [v4 image parity](docs/SKIA-V4-EXPERIMENT.md) is verified; migration is deferred. Previews are **digital approximations**; branding is provisional.
 
 ## Follow the work
 

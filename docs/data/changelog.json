@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-18",
+      "title": "Artifact-specific release gates and portable pinned notices",
+      "status": "Unreleased",
+      "issues": [
+        14
+      ],
+      "changes": [
+        "Rebuild and gate the exact lean tarballs/offline consumer and both IIFE/ESM browser exporters in CI; bind evidence manifests by SHA-256.",
+        "Keep bundled native CLI/executable/container delivery blocked on missing compiled-component notices; retain the legacy broad rejection gate.",
+        "Check reviewed browser artifacts only when present in the resolved input graph; reject included native/WASM dependencies, unreviewed licenses and unresolved evidence.",
+        "Preserve the unchanged pinned MIT notice bytes with one LF checkout rule; test actual autocrlf checkout, tampering, stale reports and invalid artifact selection."
+      ]
+    },
+    {
+      "date": "2026-10-18",
       "title": "Public alpha.1 archives and fresh registry installation verified",
       "status": "Published alpha",
       "issues": [

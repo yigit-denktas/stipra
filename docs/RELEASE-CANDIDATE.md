@@ -6,12 +6,13 @@ The three packages `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` 
 npm ci
 npm test
 npm run check:goldens
-npm run check:library-candidate
+npm run check:release:lean
+npm run check:release:browser
 npm run audit:licenses
-npm run check:release-licenses
+npm run check:release:native
 ```
 
-The final command deliberately exits 1 for the unresolved native inventory. CI runs the non-gating `audit:licenses` inventory, plus separate failing checks for the exact lean packages and browser exporter; CI does not invoke this broad release command. Green CI is not native redistribution clearance.
+The final command deliberately exits 1 for the unresolved native inventory. CI runs the lean and browser release gates, the non-gating `audit:licenses` inventory, and rejection tests for the native gate. Green CI is not native redistribution clearance. The older broad `check:release-licenses` command also remains fail-closed with exit 1.
 
 ## Saved artwork acceptance — #13
 
@@ -34,12 +35,18 @@ The consumer imports package names through their public export maps, including `
 
 ## Artifact-specific gates — #14
 
-| Intended artifact | Verified here | Remaining gate |
-| --- | --- | --- |
-| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Registry archives and clean install verified; independent artist usefulness remains unperformed |
-| Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
-| Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
-| Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
+| Intended artifact | Release command | Verified here | Remaining gate |
+| --- | --- | --- | --- |
+| Experimental core/Canvas/inputs tarballs | `check:release:lean` | Fresh exact files/imports/notices, isolated offline install, public runtime/types | Independent artist usefulness remains unperformed; registry evidence is separate |
+| Browser PDF/ZIP exporter, IIFE and ESM | `check:release:browser` | Fresh resolved bundles, Fontkit own-source/maps, actual output hashes and complete notices | Separate host/font/media obligations remain |
+| Bundled native CLI/executable/container | `check:release:native` | Installed binary identity and production graph inventory | Blocked: exact native Rust/Skia/codec notices for the downloaded platform binary |
+| Printed results | Operator procedure | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
+
+`scripts/check-release-artifact.js <lean|browser|native>` requires an explicit class and rebuilds its evidence; it does not filter the broad inventory or trust a saved passing report. Unknown classes/arguments fail. `out/release-gates/CLASS.json` records `checked`, `blocked` or `error`, plus relative evidence paths and SHA-256. Only `checked` exits 0. Reports identify the exact candidate bytes through the linked manifests; altered outputs require a fresh run. A failed build replaces the old gate result with an error. CI uploads `artifact-release-gates` alongside the exact library archives and browser bundles.
+
+The browser command checks both `out/browser-distribution/export.mjs` (the existing IIFE output) and `out/browser-distribution/esm/export.mjs`. Browser notices use the broad audit's reviewed license-selection policy; unknown expressions fail even when full terms are present. Native identity checks apply only to reviewed artifacts actually present in each resolved browser graph; native Skia and fonteditor imports are rejected. The lean command checks its three packed JS archives without loading a native backend. Native executables and containers belong to `native`, not `lean`; there is no container bypass. No executable/container build or publication is authorized by a passing JS gate.
+
+The sole checkout override is `.gitattributes` → `licenses/third-party/MIT-terms.txt text eol=lf`. It preserves the existing hash-pinned notice bytes on Windows-style Git checkouts. Tests perform an actual `core.autocrlf=true` checkout with a CRLF control file, then require changed/CRLF notice bytes to fail the original hash check. The retained notice text and pinned digest are unchanged. This is a checkout-portability test on the CI host, not Windows renderer parity.
 
 One native provenance gap remains open. Fonteditor is removed; source-mapped Fontkit replaces the old opaque bundle. [Dependency evidence](DEPENDENCY-AUDIT.md) records the exact replacement and native boundary. Old retired artifacts are not retrospectively cleared.
 
