@@ -12,7 +12,7 @@ Apply the skill to CSS work in **all** public pages, but preserve the Stiprā [d
 - Consolidated responsive declarations for 700px / 480px / 360px thresholds. Kept current values, not a new typography scale.
 - Preserved the current Stiprā palette and DOM, so the roadmap still reads like editorial documentation.
 - Static comparison of property values per selector across 15 representative widths returned **no differences**; this is not a browser-rendered assertion.
-- Added `scripts/verify-roadmap-css-visual.js` and the dedicated workflow. It compares **real built pages** using original versus new CSS at four widths, including default, query and deep-link views, and saves before/after PNGs on failure.
+- Added `scripts/verify-roadmap-css-visual.js` and the dedicated workflow. It compares **real built pages** using original versus new CSS at four widths, including default, query, deep-link and expanded-record views, and saves before/after PNGs on failure.
 
 Run from a trusted checkout with Chromium available:
 
