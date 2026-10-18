@@ -57,3 +57,11 @@ Historical investigations are retained in `licenses/third-party/source-review.js
 ## Pinned native release recheck
 
 The 18 October 2026 [release-attachment observation](../licenses/third-party/native-release-observation.json) records the exact v3.0.8 GitHub release ID and all ten asset IDs, sizes and published compressed digests. None is a component inventory or notice bundle. These observations identify release downloads, not their complete compiled inputs; the native gate remains open. Historical source observations are explicitly labeled historical, with the current single finding linked separately. No native binary was downloaded or redistributed for this recheck.
+
+## Native component source map
+
+The [candidate source map](../licenses/third-party/native-source-candidates.json) traces Skia Canvas 3.0.8 → Rust Skia 0.88.0 at commit `38fd2e759f27f399c0c54a8bb9241dbe400ccc6d` → Skia submodule `c4cecffab004be7a901f3dd486fc5d9c27e8261f`. Its DEPS file pins 13 external revisions. Cargo.lock records 318 packages, 317 with registry checksums; this is a cross-platform/build/optional superset, not 318 compiled dependencies.
+
+Linux deserves separate treatment. Its workflow uses local-path Rust Skia crates and patches linking to include static Fontconfig. The source build script selects Fontconfig 2.17.1 and a minimal FreeType 2.13.3 bootstrap; the latter must not be mistaken for Skia's embedded FreeType revision. Those tarball downloads are versioned but have no digest check in that script. The build-container tags, package-manager inputs and Rust toolchain also move. Source blob identities and all candidate revisions are recorded, without copying upstream code or binary files.
+
+The installed Linux glibc binary's ELF build ID and eight DT_NEEDED entries are recorded too. These identify dynamic linkage, not statically included components or their versions. The remaining work is specific: resolve the platform/feature-selected graph after local patches, collect full original component notices, and tie that inventory to the published binary (or build a pinned replacement). The gate remains open; none of this changes browser/lean-library clearance or requires a new rendering engine.
