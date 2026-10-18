@@ -7,7 +7,11 @@ test('source-backed changes, record types and honest publication status',()=>{
  const h=structuredClone(history),result=Roadmap.validate(h,ledger,changelog);assert.equal(result.ids.size,h.capabilities.length);
  const html=Roadmap.render(h,ledger,changelog);
  for(const label of ['In progress','Shipped versions','Recent development','Find a capability','Ideas worth exploring'])assert.ok(html.includes(label),label);
- assert.match(html,/No published releases recorded/);assert.doesNotMatch(html,/PR #\d+/);assert.equal((html.match(/id="cap-INK-01"/g)||[]).length,1);
+ assert.match(html,/No published releases recorded/);
+ assert.doesNotMatch(html,/r-eyebrow|01 \/ NOW|02 \/ RELEASES/,'Document headings must carry meaning without decorative indices');
+ assert.ok(html.indexOf('id="now"')<html.indexOf('id="features"'),'Current work must precede feature reference');
+ assert.match(html,/See related work/);
+assert.doesNotMatch(html,/PR #\d+/);assert.equal((html.match(/id="cap-INK-01"/g)||[]).length,1);
  const duplicate=structuredClone(h);duplicate.events.push({...duplicate.events[0]});assert.throws(()=>Roadmap.validate(duplicate,ledger,changelog),/Duplicate/);
  const invented=structuredClone(h);invented.events[0].sourceTitle='Made-up changelog';assert.throws(()=>Roadmap.validate(invented,ledger,changelog),/changelog evidence/);
 });
