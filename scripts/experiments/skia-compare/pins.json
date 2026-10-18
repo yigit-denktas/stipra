@@ -1,0 +1,188 @@
+{
+  "contract": "stipra-skia-comparison-v1",
+  "sourceCommit": "24f731fb93a0aaee0f049a7ca0bb59f7215bcfb2",
+  "sourceLockSha256": "3f1681a6868d2b1307150f9529d6e60ee86b4336d2730e05a9897aaec34ff8d3",
+  "versions": {
+    "v3": "3.0.8",
+    "v4": "4.0.0"
+  },
+  "backendLocksSha256": {
+    "v3": "941f6f843cde6211300c0b1d0e340b5685adc35719cc10e8e8c0c8c7e21ee146",
+    "v4": "76e7c2ac2ee7048d746c3fb45cb0b239a66d41f87a73e25b1030238febab9f94"
+  },
+  "native": {
+    "v3": {
+      "path": "node_modules/skia-canvas/lib/skia.node",
+      "bytes": 30457832,
+      "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9"
+    },
+    "v4": {
+      "path": "node_modules/@skia-canvas/linux-x64-glibc/skia.node",
+      "bytes": 37769600,
+      "sha256": "ac225acac7ec2f920f48e76c48848ff30529566e02526286a35a2594103dd691"
+    }
+  },
+  "fontsSha256": {
+    "IBMPlexMono-Bold.ttf": "74e5eedcfa4596497d34e19023cabdabd3a8c852b903007a5654a59591a72ffb",
+    "PaperMono-ExtraBold.ttf": "a22726176c70ccf7681faf0f49f33fd15f06d7157f1fcbbc6ef01965fdbc4dd6",
+    "IBMPlexMono-Regular.ttf": "7c6fbddca4b700be918f5f6183d9bd4464fa427fe435f0b480d77fe2bb8c5a43",
+    "PaperMono-SemiBold.ttf": "1b1e6072d9cb533e4305a7076b244aa12127125689c9349fdb977573a35ac65e",
+    "IBMPlexSans-Bold.ttf": "9e6c74a889a700d707613d24548fe4ffa6bc59559a0689d2cf9e133bdcdafb2f",
+    "IBMPlexSans-Regular.ttf": "975dcda37d80f038dcd143c22e33ca2d97a0cc5a929aace1c749153b0fe1afa5",
+    "PaperMono-Regular.ttf": "130e1a09b64b4f150d34c93a6b7bd52d6c5c3513761d1fbc7be42d68398b8c10"
+  },
+  "inputs": {
+    "color-reference-jpeg-reference.jpg": {
+      "bytes": 538,
+      "sha256": "63ca215976ada21643d97f07a71c9912737b261c13146856ffeaf60ff518950b"
+    },
+    "color-reference-linear-jpeg.jpg": {
+      "bytes": 1311,
+      "sha256": "36ce1c83bb2635b7fc69b7dd3d51d71b3468cb1972cbf2d5838f23ab811f5471"
+    },
+    "color-reference-linear.png": {
+      "bytes": 518,
+      "sha256": "4dc3d13d14c94c78a09b8da4b73a9890823817952a0fba3edeeca132cccd348e"
+    },
+    "color-reference-reference.png": {
+      "bytes": 538,
+      "sha256": "e3c2c34442a44af80d7f5e019623d5f6b03cd09e83b0a824af4771642a0f84d0"
+    },
+    "color-reference-untagged.png": {
+      "bytes": 146,
+      "sha256": "7039cf9ab4a68f171fab72a3b45ecb91b1f8ce9b5d1a826137280dd33be172f0"
+    },
+    "exif-1.jpg": {
+      "bytes": 7635,
+      "sha256": "6069e9ff21ef43e8189303773523ae003138055439a48ac24c47092b180575b9"
+    },
+    "exif-2.jpg": {
+      "bytes": 7635,
+      "sha256": "26c59b0a6cee8f56b29fbe1d80c2353862ad1eb796aa4b05ca589405212e75a3"
+    },
+    "exif-3.jpg": {
+      "bytes": 7635,
+      "sha256": "a3ed77e218d835b7ec27c1b17a2909639692f6de0e8627b3dab720b11bdf914f"
+    },
+    "exif-4.jpg": {
+      "bytes": 7635,
+      "sha256": "716b2292f752b79bbede0424301d2af46a2e0ccf617171a6637271aa493c76b1"
+    },
+    "exif-5.jpg": {
+      "bytes": 7635,
+      "sha256": "c5a6de0a9e14a11dcc7a3f22f64c7b247e070a9b6698e7a622dbd7e4d7b2928a"
+    },
+    "exif-6.jpg": {
+      "bytes": 7635,
+      "sha256": "f26f74c7ee23bb6acdc796b89dee523b15d5f9fd27e19d69877d7ffef15280e9"
+    },
+    "exif-7.jpg": {
+      "bytes": 7635,
+      "sha256": "8887abf326f49127ae5eb4f40c6bd2340314acf5e10fbe0a0133921de74f8158"
+    },
+    "exif-8.jpg": {
+      "bytes": 7635,
+      "sha256": "0d5aafa6d6a845e16a6d3172201dcffa83091255871d90b777259f06bdaebd59"
+    },
+    "fills.svg": {
+      "bytes": 291,
+      "sha256": "2fb7ab2007bd28724023e7062853663d87e5c3e33326eec5e70e2172921f66f4"
+    },
+    "frozen-alpha.webp": {
+      "bytes": 618,
+      "sha256": "1c51336c2ff124403cda88899a06834f76585031ad87cf8dbb21625e5654f59d"
+    },
+    "frozen.jpg": {
+      "bytes": 7599,
+      "sha256": "5739315965d414de041c9ac3329f2a4742f3ec8145f037899832d37e2b45b295"
+    },
+    "png-boundaries-apng.png": {
+      "bytes": 126,
+      "sha256": "2ba44e9e02382e9fde10c34f4f2e474ff3bdc37f71e24fc607400c0f9d68f71e"
+    },
+    "png-boundaries-combinedSignals.png": {
+      "bytes": 534,
+      "sha256": "2dc8c864be84827d6a7b50d277801ef87e1537edd9b37e08e393999f3b203171"
+    },
+    "png-boundaries-displayP3.png": {
+      "bytes": 84,
+      "sha256": "5e1e2f88774a5c6b547e123f5f237f97294cb031c9413c7f28ccc879cfe897a9"
+    },
+    "png-boundaries-hlg.png": {
+      "bytes": 84,
+      "sha256": "a2bcc337494856cba15b0b92e7e7abc566fc62e419ff3e4dce370d66a1fde267"
+    },
+    "png-boundaries-identityExif.png": {
+      "bytes": 106,
+      "sha256": "4810d6caf90d1c589ecd4327a638fbb613c17a02ae11ed065673233e729052d1"
+    },
+    "png-boundaries-invalidDepth.png": {
+      "bytes": 68,
+      "sha256": "a1fa2138e9db43f2d7b6b5527c212827a189304a61f9a399d7d3302e6f2908ed"
+    },
+    "png-boundaries-lightLevel.png": {
+      "bytes": 88,
+      "sha256": "c5234cc9cace4a68999e14a8dcc6787caeea9014725ab00ae37ae208ebc36743"
+    },
+    "png-boundaries-mastering.png": {
+      "bytes": 104,
+      "sha256": "7572c4ce017f505df0f7eb9407f3c29cd1772d674072444036e19f4d282af0c2"
+    },
+    "png-boundaries-pq.png": {
+      "bytes": 84,
+      "sha256": "0a9e04183876bdb5e62a947a46f23f0764c6eb95f5dbab1e26a978dcdccdf365"
+    },
+    "png-boundaries-rotatedExif.png": {
+      "bytes": 106,
+      "sha256": "31f1a3e17dc2ef0e49077bcce13fce7db0662fe6b6664999a68db82d8ed5666e"
+    },
+    "png-boundaries-sdr16.png": {
+      "bytes": 70,
+      "sha256": "d3c4070d56c46f0b775d43efcd4582623518cd6ebcdf07e1d57ffcdce0ce7770"
+    },
+    "png-boundaries-srgb.png": {
+      "bytes": 84,
+      "sha256": "243a47eed4c101ad8a15ed94d869e13e26debd3211a9a6db411c0a1a62740073"
+    },
+    "rgba-33x49.bin": {
+      "bytes": 6468,
+      "sha256": "820077e080a3c1da50686743768b63fba249e32fe5d34ac49fdb802d7aeb6af5"
+    },
+    "rgba-33x49.png": {
+      "bytes": 6585,
+      "sha256": "917ca6f86273c2c72ff50b36b2f650e2c8d9056ead8d5e926fb417ff47ca0d4f"
+    },
+    "rgba-49x33.bin": {
+      "bytes": 6468,
+      "sha256": "0f369d44558f81c33af1f03d1f3a41ead621722c4f8d2819cec6937e1cfc13be"
+    },
+    "rgba-49x33.png": {
+      "bytes": 6569,
+      "sha256": "479b3d76307fe9e0f46c5007388e3a0423efe5fd6d94adc30dca6acdb4bd8b0c"
+    },
+    "rgba-49x49.bin": {
+      "bytes": 9604,
+      "sha256": "fa65428617a712559498386320aa96457ba30a259e2f3837da4969f2fc9f509c"
+    },
+    "rgba-49x49.png": {
+      "bytes": 9721,
+      "sha256": "39d188409deff446e150816b19b91c35535f611bbd0bde5ff82f22d49871775f"
+    },
+    "rgba-97x61.bin": {
+      "bytes": 23668,
+      "sha256": "025f0c910a184744012b2dc557d379d8c42b7e72924f42a81cc2e82353fb63da"
+    },
+    "rgba-97x61.png": {
+      "bytes": 23797,
+      "sha256": "0014fff835c4a3a0008e2e59c892c3c29caf3610e31cb64d5b3827116feb465b"
+    },
+    "unsafe.svg": {
+      "bytes": 110,
+      "sha256": "61c95f91685c35242182f1ca39efcf4e7cd08467dd7011dfacb33e07d2cdc495"
+    }
+  },
+  "fixtureGenerator": {
+    "python": "3.12.14",
+    "pillow": "12.3.0"
+  }
+}

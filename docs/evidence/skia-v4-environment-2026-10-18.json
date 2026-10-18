@@ -1,0 +1,31 @@
+{
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "libjpeg": "6.2",
+  "libwebp": "1.6.0",
+  "node": "v24.19.0",
+  "sourceCommit": "24f731fb93a0aaee0f049a7ca0bb59f7215bcfb2",
+  "os": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "libc": [
+    "glibc",
+    "2.39"
+  ],
+  "cpuCount": 9,
+  "npm": "11.9.0",
+  "poppler": "pdftoppm version 26.05.0",
+  "numpy": "2.3.5",
+  "qrDecoder": "zxing-cpp 2.3.0",
+  "sourceSnapshot": "git archive at sourceCommit; shared locked JavaScript node_modules; all skia-canvas imports redirected to isolated prefix",
+  "nativeInstall": "npm --ignore-scripts; v3 reviewed native copied after SHA-256 check; v4 registry optional platform package",
+  "memoryProtocol": "Three fresh processes per version, alternating order, 5 warmup + 60 recorded exports, 1024x768 incremental marks, explicit GC after each encode; cycle timing includes GC",
+  "cpuFallback": true,
+  "pypdf": "6.10.0",
+  "cleanReplay": {
+    "preparedFromCommittedPins": true,
+    "frozenFixtureManifestMatched": true,
+    "allDecodeMaskFontPaperRecordsIdentical": true,
+    "promotionAndStopCountIdentical": true,
+    "sameHostNotIndependentPlatform": true
+  }
+}

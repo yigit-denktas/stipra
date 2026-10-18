@@ -73,3 +73,5 @@ The complete request is saved in [#14](https://github.com/yigit-denktas/stipra/i
 ## Independent review reconciliation
 
 [The rendering review](RENDER-BACKEND-REVIEW.md) distinguishes notices, component inventory, packaging/native-build provenance and independent reproducibility. It records the artifact-specific gate proposal and Windows CRLF hash failure as follow-ups, not completed changes. CI runs the non-gating inventory and separate lean/browser artifact checks; it does not invoke the broad native release command. Green CI therefore does not clear native redistribution. The backend remains 3.0.8 and the existing finding remains open.
+
+The owner-authorized [isolated v4 experiment](SKIA-V4-EXPERIMENT.md) now records executed behavior evidence: identical image/mask/proof/master pixels, changed Canvas text metrics/default synthesis and speckled texture, and a stop-and-review promotion result. It does not establish compiled-component notice coverage, upgrade the dependency or change any release gate.

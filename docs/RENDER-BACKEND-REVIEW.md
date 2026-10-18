@@ -20,14 +20,14 @@ Upstream resvg 0.48/relicensing facts must not be assigned to current npm bindin
 
 ## Work deliberately not performed
 
-No backend upgrade, migration, native self-build, golden regeneration or release-gate weakening. No native compatibility/performance run, native notice clearance, physical print or human artist/accessibility acceptance is claimed. The proposed upstream inventory request remains unsent after the connector HTTP 403.
+No backend upgrade, migration, native self-build, golden regeneration or release-gate weakening. Native notice clearance, physical print and human artist/accessibility acceptance remain unperformed. The proposed upstream inventory request remains unsent after the connector HTTP 403. After this review, the owner authorized the [isolated v3/v4 experiment](SKIA-V4-EXPERIMENT.md); its measured compatibility results and promotion stops supersede the earlier unexecuted-experiment status.
 
 ## Bounded follow-ups
 
 1. Owner decides whether a self-contained offline executable is an actual product requirement. The browser, lean library and source-installed Node CLI are separate delivery scenarios.
 2. Under #14, design artifact-specific release gates: lean/browser checks can pass while native/container/executable review stays required. CI currently runs non-gating audit:licenses and separate lean/browser checks; it does not run check:release-licenses. A green workflow is not native clearance. Review any proposed gate change before implementation.
 3. Under #14, fix checkout portability for hash-pinned notice text. The reviewer demonstrates core.autocrlf=true changing MIT-terms.txt to CRLF and causing a hash failure before the native finding. Prefer a narrow LF checkout policy; do not weaken the hash comparison or modify the retained license terms. This fix is not included in the publication housekeeping.
-4. If justified, run one isolated 3.0.8-versus-4.0.0 experiment with pinned prefixes and fresh processes. Record JS mask identity, decoded RGBA and encoded bytes as three distinct results. Use procedural fixtures, explicit real font faces and fixed color/alpha/geometry contracts. Stop and review geometry, color, alpha, shaping or QR changes; do not regenerate goldens automatically. Exact decoded proof equality can be a promotion criterion, but expected upstream antialiasing/color fixes may justify an explicitly reviewed change rather than proving the experiment useless.
+4. The isolated 3.0.8-versus-4.0.0 experiment is [executed](SKIA-V4-EXPERIMENT.md), with separate JS mask, decoded RGBA and encoded-byte verdicts. Canvas metrics/default synthesis and speckled paper require review before promotion. No goldens were regenerated. Identical image/mask/proof results are favorable evidence, while accepting intentional text/texture changes remains a separate decision.
 
 Source anchors: [Skia Canvas release notes](https://skia-canvas.org/releases), [v4 publish workflow](https://github.com/samizdatco/skia-canvas/blob/v4.0.0/.github/workflows/publish.yml), [resvg binding manifest](https://registry.npmjs.org/@resvg%2fresvg-js/2.6.2), [node-canvas registry](https://registry.npmjs.org/canvas). Local boundaries and the remaining native gate are in [the audit contract](DEPENDENCY-AUDIT.md).
 
