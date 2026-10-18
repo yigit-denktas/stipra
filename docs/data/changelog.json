@@ -3,6 +3,17 @@
   "releaseStatus": "Development changes on main; no npm package release or version tag is announced here.",
   "entries": [
     {
+      "date": "2026-10-18",
+      "title": "Capability history and searchable roadmap",
+      "status": "Unreleased",
+      "issues": [],
+      "changes": [
+        "Classify product capabilities, validation, operations and research separately while retaining permanent identifiers.",
+        "Record typed, dated improvements against existing capabilities without asserting that development work is published.",
+        "Search release titles, changes and capabilities through one generated index; keep full evidence one level deeper."
+      ]
+    },
+    {
       "date": "2026-10-17",
       "title": "Controlled forest review and concrete release handoff",
       "status": "Unreleased",
