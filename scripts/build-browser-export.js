@@ -34,14 +34,14 @@ async function build(outfile,{format='iife'}={}){
       '\nAuthor: '+JSON.stringify(pkg.author)+'\nContributors: '+JSON.stringify(pkg.contributors)+'\nRepository: '+JSON.stringify(pkg.repository));
   }
   fs.writeFileSync(path.join(path.dirname(outfile),'export-dependency-notices.txt'),notices.join('\n\n---\n\n'));
-  const {hash,verifyArtifacts}=require('./artifact-evidence');
+  const {hash,verifyIncludedArtifacts}=require('./artifact-evidence');
   const inputs=Object.keys(result.metafile.inputs).sort().map(name=>{
     if(!name.includes('node_modules/'))return {path:name};
     const bytes=fs.readFileSync(path.resolve(ROOT,name));
     return {path:name,bytes:bytes.length,sha256:hash(bytes)};
   });
   if(inputs.some(x=>/node_modules\/(?:skia-canvas|fonteditor-core)\//.test(x.path)))throw Error('Native/WASM dependency entered the browser exporter');
-  const reviewed=verifyArtifacts(),included=reviewed.filter(x=>inputs.some(i=>i.path==='node_modules/'+x.package+'/'+x.artifact));
+  const included=verifyIncludedArtifacts(inputs);
   const fontkitSource=require('./fontkit-evidence').verify();
   const fontkitInputs=inputs.filter(x=>x.path.startsWith('node_modules/fontkit/dist/'));
   if(!fontkitInputs.length||fontkitInputs.some(x=>!fontkitSource.modules.some(m=>'node_modules/fontkit/'+m.path===x.path&&m.sha256===x.sha256)))throw Error('Browser fontkit entry has no source inventory');

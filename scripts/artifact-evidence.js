@@ -2,11 +2,12 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'..');
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const activeRecords=()=>JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/artifact-review.json'))).records.filter(x=>!x.retired);
 function platform(){
   return {os:process.platform,arch:process.arch,libc:process.platform==='linux'?(process.report.getReport().header.glibcVersionRuntime?'glibc':'musl'):null};
 }
 /** Verifies recorded artifact bytes without treating a hash match as provenance clearance. */
-function verifyArtifacts(root=ROOT,records=JSON.parse(fs.readFileSync(path.join(ROOT,'licenses/third-party/artifact-review.json'))).records.filter(x=>!x.retired)){
+function verifyArtifacts(root=ROOT,records=activeRecords()){
   const host=platform(),evidence=[];
   for(const record of records){
     const pkgDir=path.join(root,'node_modules',record.package),pkg=JSON.parse(fs.readFileSync(path.join(pkgDir,'package.json')));
@@ -19,4 +20,9 @@ function verifyArtifacts(root=ROOT,records=JSON.parse(fs.readFileSync(path.join(
   }
   return evidence;
 }
-module.exports={verifyArtifacts,hash};
+/** Checks identities only for reviewed artifacts in the resolved bundle input graph. */
+function verifyIncludedArtifacts(inputs,root=ROOT,records=activeRecords()){
+  const paths=new Set(inputs.map(x=>x.path));
+  return verifyArtifacts(root,records.filter(x=>paths.has('node_modules/'+x.package+'/'+x.artifact)));
+}
+module.exports={verifyArtifacts,verifyIncludedArtifacts,hash};

@@ -41,6 +41,8 @@ function notices(dir){
   return {pkg,declared,sources};
 }
 function audit(out){
+  fs.rmSync(path.join(out,'dependency-audit.json'),{force:true});
+  fs.rmSync(path.join(out,'THIRD-PARTY-NOTICES.txt'),{force:true});
   const lockBytes=fs.readFileSync(path.join(ROOT,'package-lock.json')),lock=JSON.parse(lockBytes),packages=[],texts=[],findings=[];
   for(const [name,item] of Object.entries(lock.packages).sort(([a],[b])=>a.localeCompare(b))){
     if(!name||item.dev)continue;

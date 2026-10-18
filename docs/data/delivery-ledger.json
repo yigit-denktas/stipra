@@ -305,7 +305,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. Owner authorized upstream follow-up; connector creation returned HTTP 403, so the prepared request remains unsent pending browser fallback.",
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. Owner authorized upstream follow-up; connector creation returned HTTP 403, so the prepared request remains unsent pending browser fallback. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail.",
       "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {

@@ -1,17 +1,19 @@
 # Dependency inventory and distribution gates
 
-Audit updated 17 October 2026. This inventories actual installed packages, retained notices and shipped artifacts; it is not blanket legal clearance.
+Audit updated 18 October 2026. This inventories actual installed packages, retained notices and shipped artifacts; it is not blanket legal clearance.
 
 ```sh
 npm ci
 npm run prepare:fonts
 npm run audit:licenses
-npm run check:browser-distribution
-npm run check:library-candidate
-npm run check:release-licenses
+npm run check:release:browser
+npm run check:release:lean
+npm run check:release:native
 ```
 
 The production graph now contains 74 package locations on the recorded Linux installation. `audit:licenses` checks lock versions, package integrity, notices and supplements, and writes `out/license-audit/`. The broad release check deliberately exits 1 for **one remaining finding: the platform-specific Skia native binary**. A successful inventory does not clear that binary.
+
+The [artifact gates](RELEASE-CANDIDATE.md#artifact-specific-gates--14) run fresh scoped checks: lean tarballs and both browser exporter formats can pass independently; the native CLI/executable/container class remains blocked with exit 1. CI invokes the lean/browser gates and tests native rejection; it does not treat an inventory command's success as distribution approval. Both the new native command and legacy `check:release-licenses` retain the unresolved finding. Each gate replaces stale results and links its current evidence by SHA-256.
 
 ## Two opaque artifacts removed
 
@@ -31,6 +33,8 @@ The replacement introduces separately installed dependencies instead of hiding t
 `check:browser-distribution` builds the PDF/ZIP exporter and writes `out/browser-distribution/export.mjs.audit.json`, its dependency notices and output hashes. Every included package must have a declaration and full retained terms. The report includes the actual Fontkit module/hash, matching own-source inventory, resolved package versions, file hashes and final bundle/notice hashes. Both IIFE and ESM builds select the reviewed `fontkit/dist/browser.cjs` through the CommonJS source imports.
 
 The browser exporter has no unresolved findings in this artifact scope. The whole site also distributes separately licensed Plex/Paper Mono fonts and optional replaceable p5 host files; the exporter report is not a site-wide trademark/media license. Generated print ZIPs retain report-font OFL terms. No owner photograph is committed or added to public evidence.
+
+The browser builder now selects reviewed artifact records from the actual input graph before checking their identities. An excluded native installation is never read to authorize the browser artifact. Included reviewed bytes/versions still fail if changed; native Skia/fonteditor inputs and the unused compiled Brotli encoder remain rejected. `check:release:browser` builds and gates both IIFE and ESM outputs and fails on unresolved findings or absent source evidence.
 
 ## Lean library candidate
 
@@ -72,6 +76,6 @@ The complete request is saved in [#14](https://github.com/yigit-denktas/stipra/i
 
 ## Independent review reconciliation
 
-[The rendering review](RENDER-BACKEND-REVIEW.md) distinguishes notices, component inventory, packaging/native-build provenance and independent reproducibility. It records the artifact-specific gate proposal and Windows CRLF hash failure as follow-ups, not completed changes. CI runs the non-gating inventory and separate lean/browser artifact checks; it does not invoke the broad native release command. Green CI therefore does not clear native redistribution. The backend remains 3.0.8 and the existing finding remains open.
+[The rendering review](RENDER-BACKEND-REVIEW.md) distinguishes notices, component inventory, packaging/native-build provenance and independent reproducibility. Its bounded gate and checkout follow-ups are implemented: explicit lean/browser/native commands and a narrow LF checkout rule for `licenses/third-party/MIT-terms.txt`. The original terms/digest are unchanged; actual Git checkout and tampering regressions verify this. CI gates lean/browser builds and tests native rejection; green CI does not clear native redistribution. The backend remains 3.0.8 and the existing finding remains open.
 
 The owner-authorized [isolated v4 experiment](SKIA-V4-EXPERIMENT.md) now records executed behavior evidence: identical image/mask/proof/master pixels, changed Canvas text metrics/default synthesis and speckled texture, and a stop-and-review promotion result. It does not establish compiled-component notice coverage, upgrade the dependency or change any release gate.
