@@ -24,17 +24,14 @@ function changes(){return page('Changelog','changelog/',`<p class="lead">${escap
 function build(stage){
   validate();stage=path.resolve(stage);for(const [route,html]of [['roadmap',roadmap()],['changelog',changes()],['sitemap',page('Site map','sitemap/',`<p class="lead">Find the studio, instructions and development record.</p><ul class="site-map">${ROUTES.map(([route,label,note])=>`<li><a href="../${route}">${escape(label)}</a><p>${escape(note)}</p></li>`).join('')}</ul><p>Primary host: <a href="${ledger.primary}">${ledger.primary}</a><br>Mirror: <a href="${ledger.mirror}">${ledger.mirror}</a></p><p><a href="../sitemap.xml">Machine-readable sitemap</a> · <a href="${ledger.repository}">Repository / issues / notices</a></p>`)]]){fs.mkdirSync(path.join(stage,route),{recursive:true});fs.writeFileSync(path.join(stage,route,'index.html'),html);}
   fs.copyFileSync(path.join(ROOT,'web/stipra/roadmap.css'),path.join(stage,'roadmap/roadmap.css'));
-  fs.writeFileSync(path.join(stage,'roadmap/history.json'),JSON.stringify(productHistory,null,2)+String.fromCharCode(10));
-  // Both the visible roadmap and its search index are generated from the same record.
+  fs.writeFileSync(path.join(stage,'roadmap/history.json'),JSON.stringify(productHistory,null,2)+'\n');
   const idx=ProductRoadmap.buildIndex(productHistory,ledger,changelog);
-  const indexSource='window.STIPRA_ROADMAP_INDEX='+JSON.stringify(idx).replace(/</g,'\\u003c')+';\n';
-  fs.writeFileSync(path.join(stage,'roadmap/search-index.js'),indexSource);
+  fs.writeFileSync(path.join(stage,'roadmap/search-index.js'),'window.STIPRA_ROADMAP_INDEX='+JSON.stringify(idx).replace(/</g,'\\u003c')+';\n');
   fs.copyFileSync(path.join(ROOT,'web/stipra/roadmap-search.js'),path.join(stage,'roadmap/roadmap-search.js'));
   const pageFile=path.join(stage,'roadmap/index.html');
-  const withSearch=fs.readFileSync(pageFile,'utf8').replace('</body>','<script defer src="./search-index.js"></script><script defer src="./roadmap-search.js"></script></body>');
-  fs.writeFileSync(pageFile,withSearch);
-
-  for(const route of ROUTES){const file=path.join(stage,route[0].endsWith('.html')?route[0]:route[0]+'index.html');if(!fs.existsSync(file))throw Error('Missing public destination '+file);let html=fs.readFileSync(file,'utf8');if(!html.includes('class="site-nav"')){const prefix=path.relative(path.dirname(file),stage).split(path.sep).join('/')||'.',nav=navigation(prefix+'/',route[0]);html=html.replace(/(<body\b[^>]*>)/i,'$1'+nav);fs.writeFileSync(file,html);}}
+  fs.writeFileSync(pageFile,fs.readFileSync(pageFile,'utf8').replace('</body>','<script defer src="./search-index.js"></script><script defer src="./roadmap-search.js"></script></body>'));
+  for(const route of ROUTES){const file=path.join(stage,route[0].endsWith('.html')?route[0]:route[0]+'index.html');if(!fs.existsSync(file))throw Error('Missing public destination '+file);let html=fs.readFileSync(file,'utf8');if(!html.includes('class="site-nav"')){const prefix=path.relative(path.dirname(file),stage).split(path.sep).join('/')||'.',nav=navigation(prefix+'/',route[0]);html=html.replace(/(<body\b[^>]*>)/i,'$1'+nav);}
+    if(!html.includes('class="skip-link"')){if(!/<main\b/.test(html))throw Error('Missing main destination '+file);html=html.replace(/<main\b/,'<main id="main-content" tabindex="-1"');html=html.replace(/(<body\b[^>]*>)/i,'$1<a class="skip-link" href="#main-content">Skip to content</a>');}fs.writeFileSync(file,html);}
   fs.writeFileSync(path.join(stage,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+ROUTES.map(([route])=>'<url><loc>'+escape(ledger.primary+route)+'</loc></url>').join('')+'</urlset>\n');
   return {routes:ROUTES.map(x=>x[0]),tasks:ledger.tasks.length};
 }
