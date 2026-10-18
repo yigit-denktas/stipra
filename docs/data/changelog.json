@@ -14,6 +14,24 @@
       ]
     },
     {
+      "date": "2026-10-18",
+      "title": "Keyboard navigation and verified project tracking",
+      "status": "Unreleased",
+      "issues": [
+        13,
+        14,
+        17,
+        70
+      ],
+      "changes": [
+        "Add a visible-on-focus skip link to all nine public destinations; verify Tab/Enter behavior in Chromium and audit nine routes with axe.",
+        "Give guide and per-ink screening groups valid accessible semantics.",
+        "Keep roadmap task headings as single expandable controls; put issue links inside the expanded content.",
+        "Save the v0.9 status board and inspect all 11 workflow configurations and unchanged private owner access.",
+        "Recheck pinned native release attachments and npm publisher access; Skia inventory and authentication remain unresolved."
+      ]
+    },
+    {
       "date": "2026-10-17",
       "title": "Controlled forest review and concrete release handoff",
       "status": "Unreleased",
