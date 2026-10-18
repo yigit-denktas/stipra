@@ -12,7 +12,7 @@
     {
       "id": "PRINT-TRUST",
       "title": "Trust the printed result",
-      "description": "Measure alignment on real printers, validate access with people, and close distribution evidence for the artifacts actually shipped.",
+      "description": "Print aligned plates at actual size. Record registration, legibility and the checks that still need real printers and people.",
       "capabilities": [
         "QA-02",
         "QA-03",
@@ -23,7 +23,7 @@
     {
       "id": "ARTIST-LIBRARY",
       "title": "Put the creative library in artists’ hands",
-      "description": "Observe an independent first use, address what fails, then make a deliberate publication decision.",
+      "description": "Ask an independent artist to use the Canvas/p5.js library. Fix what blocks first use before deciding whether to publish.",
       "capabilities": [
         "LIB-05",
         "LIB-06"
@@ -33,7 +33,7 @@
     {
       "id": "STYLE-QUALITY",
       "title": "Make every ink pass earn its place",
-      "description": "Test forest depth and the real suitability of the shared style families, not just their digital existence.",
+      "description": "Compare two- and three-ink forest prints at intended size. Keep each pass only when it contributes necessary depth or detail.",
       "capabilities": [
         "STY-02",
         "STY-03"
