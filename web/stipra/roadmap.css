@@ -125,3 +125,24 @@
   .r-overview>div:last-child{grid-column:auto}
   .r-overview small{font-size:11px}
 }
+
+/* Impeccable Read-mode refinement: content hierarchy without ornamental indices. */
+.r-site{scroll-margin-top:24px}
+.r-section-head{display:block;margin-bottom:15px}
+.r-section-head h2{max-width:780px}
+.r-site details{border-bottom:0;padding:0}
+.r-site details>summary{min-height:44px;text-decoration-thickness:1px;text-underline-offset:4px}
+.r-site details>summary:hover{text-decoration:underline}
+.r-site a{text-underline-offset:4px}
+.r-site ::selection{background:var(--green);color:var(--paper)}
+.r-site .r-priority h3{max-width:35ch}
+.r-site .r-priority p{max-width:68ch}
+.r-site .r-overview strong{font-variant-numeric:tabular-nums}
+.r-site :is(.r-priority,.r-release,.r-record,.r-change){scroll-margin-top:28px}
+.r-site .r-release h3 a{text-decoration:underline;text-decoration-thickness:1px}
+@media(max-width:700px){
+ .r-section-head{margin-bottom:12px}
+ .r-head{gap:6px}
+ .r-jump{margin-bottom:8px}
+ .r-site .r-overview>div{overflow-wrap:anywhere}
+}
