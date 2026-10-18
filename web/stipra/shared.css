@@ -13,3 +13,40 @@ body.lab{max-width:1580px}.lab .page-header{border-bottom:2px solid var(--green)
 .lab .view:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 
 .skip-link{position:fixed;left:1rem;top:1rem;z-index:10000;padding:.65rem 1rem;background:var(--paper);color:var(--green);border:2px solid var(--green);transform:translateY(-200%)}.skip-link:focus{transform:none}
+
+/* Taste review / public information system. Shared navigation, type and evidence rhythm. */
+.site-nav{max-width:1180px;align-items:center;justify-content:space-between;gap:8px 22px;padding:0 24px;font-size:14px;line-height:1.4}
+.site-nav-primary{display:flex;flex-wrap:wrap;align-items:center;gap:0 22px}
+.site-nav-primary a,.site-nav-more>summary{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+.site-nav a:hover,.site-nav-more>summary:hover{text-decoration:underline;text-underline-offset:4px}
+.site-nav a[aria-current=page]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:7px}
+.site-nav-more{position:relative;display:block;margin-left:auto}
+.site-nav-more>summary{font:14px/1.4 Mono,monospace;cursor:pointer;color:var(--green);list-style:none;gap:7px}
+.site-nav-more>summary::-webkit-details-marker{display:none}
+.site-nav-more>div{position:absolute;z-index:30;right:0;top:100%;min-width:170px;padding:8px 15px;border:1px solid var(--green);background:var(--paper);box-shadow:0 7px 22px #25352c16}
+.site-nav-more>div a{display:flex;min-height:44px;align-items:center;text-decoration:none;white-space:nowrap}
+.doc-page header{padding-bottom:12px}
+.doc-page main{padding-top:12px}
+.doc-page .lead{max-width:700px;line-height:1.3;letter-spacing:-.02em}
+.doc-page footer{line-height:1.65;color:#4d6054}
+.change-list{border-top:3px solid var(--green);margin:26px 0 55px}
+.change-entry{border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(110px,165px) minmax(0,1fr);gap:24px;padding:20px 0}
+.change-entry time,.change-entry .change-state{font:13px/1.4 Mono,monospace;color:#4d6054}
+.change-entry time{padding-top:4px}
+.change-entry h2{font-size:clamp(1.25rem,2.5vw,1.75rem);line-height:1.22;letter-spacing:-.025em;margin:3px 0 10px;color:var(--green)}
+.change-entry .change-state{margin:0}
+.change-entry .change-summary{font-size:16px;line-height:1.5;margin:0;max-width:70ch}
+.change-entry details{border:0;padding:3px 0 0;max-width:70ch}
+.change-entry summary{font:14px/1.4 Mono,monospace;display:flex;align-items:center;min-height:44px;color:var(--green)}
+.change-entry details ul{padding-left:20px;font-size:15px}
+.change-entry .change-evidence{font:13px/1.6 Mono,monospace;overflow-wrap:anywhere}
+@media(max-width:600px){
+  .site-nav{padding:0 20px;gap:0 8px}
+  .site-nav-primary{gap:0 15px}
+  .site-nav-primary a,.site-nav-more>summary{font-size:13px}
+  .site-nav-more>div{min-width:155px}
+  .change-entry{grid-template-columns:1fr;gap:2px;padding:17px 0}
+  .change-entry h2{margin-top:5px}
+  .doc-page .lead{font-size:1.3rem}
+}
+@media(max-width:360px){.site-nav-primary{gap:0 11px}.site-nav-primary a{font-size:12px}.site-nav-more>summary{font-size:12px}}
