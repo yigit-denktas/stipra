@@ -1,6 +1,6 @@
 # Digital acceptance and the library candidate
 
-The three local packages remain private at `0.1.0-alpha.0`. This is a reviewable candidate, not a registry release or a print-quality approval. No new runtime dependencies were added for these checks.
+The owner selected npm account `yigit-denktas` and authorized an experimental alpha. The three publishable candidates are `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs`, each at `0.1.0-alpha.1`. They remain unpublished pending authenticated publication. This is a reviewable candidate, not a registry release or a print-quality approval. No new runtime dependencies were added for these checks.
 
 ```sh
 npm ci
@@ -28,7 +28,7 @@ Physical evidence still needs an operator. The [print procedure and record check
 
 `check:library-candidate` first runs the actual tarball/import/notice audit, then installs those same three archives together in a fresh temporary project using offline npm with lifecycle scripts disabled. It requires exactly core, Canvas and inputs in the installed graph; there is no PDF stack, native codec, font, drawing framework or exporter callback in that graph.
 
-The consumer imports package names through their public export maps, including `@stipra/inputs/canvas`. It exercises Canvas capture → named regions → authored inks → core rendering, ESM/CJS parity, unchanged coverage and inert source-project replay. Strict NodeNext TypeScript checks the public entry points together. A synthetic Canvas readback fixture tests capture/mapping without adding a native library to the consumer; actual rendering and p5 integration remain the separate real Chromium CI checks.
+The consumer imports package names through their public export maps, including `@yigit-denktas/stipra-inputs/canvas`. It exercises Canvas capture → named regions → authored inks → core rendering, ESM/CJS parity, unchanged coverage and inert source-project replay. Strict NodeNext TypeScript checks the public entry points together. A synthetic Canvas readback fixture tests capture/mapping without adding a native library to the consumer; actual rendering and p5 integration remain the separate real Chromium CI checks.
 
 `out/distribution-audit/library-candidate.json` records runtime, exact archive hashes/bytes, installed graph, checks and remaining decisions beside the three tarballs. CI uploads the directory as `lean-distribution-audit`. Compare hashes with that report before sharing an archive. Reports are generated per run; changed bytes require rerunning the check. This does not test or authorize an `npm publish` operation, registry namespace access, release tags or optional downstream exporter dependencies.
 
@@ -36,11 +36,11 @@ The consumer imports package names through their public export maps, including `
 
 | Intended artifact | Verified here | Remaining gate |
 | --- | --- | --- |
-| Private core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Owner publication scope/version and independent artist usefulness review |
+| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Authenticated registry publication; independent artist usefulness review remains separate |
 | Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
 | Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
 | Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
 
 One native provenance gap remains open. Fonteditor is removed; source-mapped Fontkit replaces the old opaque bundle. [Dependency evidence](DEPENDENCY-AUDIT.md) records the exact replacement and native boundary. Old retired artifacts are not retrospectively cleared.
 
-The next publication decision is bounded: whether to publish the three lean packages as an experimental digital library, at an explicitly selected version and registry namespace, after reviewing the candidate and artist task. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.
+Publish only the exact audited tarballs, in core → canvas → inputs order, with `--tag alpha --access public --ignore-scripts --registry=https://registry.npmjs.org/`. Verify `npm whoami` is `yigit-denktas` first and compare each registry integrity value with `distribution-audit.json` afterward. The root application remains private. The audit rejects unreviewed names, versions, peers, registry and tags. Publication is authorized for the experimental digital library; independent artist feedback remains unperformed. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.

@@ -4,7 +4,7 @@ Implemented local alpha and bounded research pilots, 17 October 2026. Issues #83
 
 ## Regions → physical inks (#83)
 
-`@stipra/inputs` is an optional dependency-free package. `mapRegions(source, mapping)` accepts up to 64 named same-frame 8-bit coverage regions (64 MiB aggregate) and produces owned, unscreened masks for 1..8 physical inks. Regions describe the artwork, not ink channels. Mapping version 1 explicitly records paper, ink names/colors, binding order, strengths and combination:
+`@yigit-denktas/stipra-inputs` is an optional dependency-free package. `mapRegions(source, mapping)` accepts up to 64 named same-frame 8-bit coverage regions (64 MiB aggregate) and produces owned, unscreened masks for 1..8 physical inks. Regions describe the artwork, not ink channels. Mapping version 1 explicitly records paper, ink names/colors, binding order, strengths and combination:
 
 - `max`: strongest coverage wins. Two half-covered regions remain approximately half coverage.
 - `over`: ordered opacity union, `a + previous × (1 − a)`. Two 128/255 samples produce 192/255, not a binary edge or 256.

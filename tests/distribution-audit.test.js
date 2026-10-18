@@ -5,7 +5,7 @@ const ROOT=path.resolve(__dirname,'..');
 function fixture(source='export const value=1;'){
   const policy={name:'@stipra/test',peers:[],entries:['index.mjs'],files:['LICENSE','README.md','package.json','index.mjs']};
   const files={'LICENSE':fs.readFileSync(path.join(ROOT,'LICENSE')),'README.md':Buffer.from('Test package.'),
-    'package.json':Buffer.from(JSON.stringify({name:policy.name,version:'0.1.0-alpha.0',license:'MIT',private:true})),
+    'package.json':Buffer.from(JSON.stringify({name:policy.name,version:'0.1.0-alpha.1',license:'MIT',private:false,publishConfig:{access:'public',registry:'https://registry.npmjs.org/',tag:'alpha'}})),
     'index.mjs':Buffer.from(source)};
   return {files,policy};
 }
@@ -16,9 +16,18 @@ test('packed import audit rejects hidden imports, unlisted files and runtime dep
     const f=fixture(source);await assert.rejects(()=>inspect(f.files,f.policy));
   }
   const added=fixture();added.files['payload.wasm']=Buffer.from([0]);await assert.rejects(()=>inspect(added.files,added.policy),/packed files/);
-  const dep=fixture();dep.files['package.json']=Buffer.from(JSON.stringify({name:dep.policy.name,version:'0.1.0-alpha.0',license:'MIT',private:true,dependencies:{'fonteditor-core':'2.6.3'}}));
+  const dep=fixture();dep.files['package.json']=Buffer.from(JSON.stringify({name:dep.policy.name,version:'0.1.0-alpha.1',license:'MIT',private:false,publishConfig:{access:'public',registry:'https://registry.npmjs.org/',tag:'alpha'},dependencies:{'fonteditor-core':'2.6.3'}}));
   await assert.rejects(()=>inspect(dep.files,dep.policy),/runtime dependencies/);
   const notice=fixture();notice.files.LICENSE=Buffer.from('MIT');await assert.rejects(()=>inspect(notice.files,notice.policy),/MIT notice/);
+});
+test('packed audit rejects unintended publication identity, registry and tag',async()=>{
+  for(const change of [{private:true},{version:'0.1.0'},{name:'other-package'},
+    {publishConfig:{access:'public',registry:'https://example.org/',tag:'alpha'}},
+    {publishConfig:{access:'public',registry:'https://registry.npmjs.org/',tag:'latest'}}]){
+    const f=fixture(),pkg=JSON.parse(f.files['package.json']);
+    f.files['package.json']=Buffer.from(JSON.stringify({...pkg,...change}));
+    await assert.rejects(()=>inspect(f.files,f.policy));
+  }
 });
 test('artifact identity rejects changed bytes or versions without clearing provenance',()=>{
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-artifact-')),dir=path.join(root,'node_modules/example');fs.mkdirSync(dir,{recursive:true});

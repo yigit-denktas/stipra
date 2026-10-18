@@ -9,10 +9,10 @@ async function build(target=path.join(ROOT,'dist/stipra/sketches')){
     fs.copyFileSync(path.join(ROOT,'examples/sketches',name),path.join(out,name));
   fs.copyFileSync(path.join(ROOT,'packages/core/dist/index.mjs'),path.join(assets,'core.mjs'));
   const adapter=fs.readFileSync(path.join(ROOT,'packages/canvas/index.mjs'),'utf8');
-  if(!adapter.includes("from '@stipra/core'"))throw Error('Missing adapter core import');
-  fs.writeFileSync(path.join(assets,'canvas.mjs'),adapter.replace("from '@stipra/core'","from './core.mjs'"));
+  if(!adapter.includes("from '@yigit-denktas/stipra-core'"))throw Error('Missing adapter core import');
+  fs.writeFileSync(path.join(assets,'canvas.mjs'),adapter.replace("from '@yigit-denktas/stipra-core'","from './core.mjs'"));
   fs.copyFileSync(path.join(ROOT,'packages/inputs/dist/index.mjs'),path.join(assets,'inputs.mjs'));
-  fs.writeFileSync(path.join(assets,'regions-canvas.mjs'),fs.readFileSync(path.join(ROOT,'packages/inputs/canvas.mjs'),'utf8').replace("from '@stipra/canvas'","from './canvas.mjs'").replace("from './dist/index.mjs'","from './inputs.mjs'"));
+  fs.writeFileSync(path.join(assets,'regions-canvas.mjs'),fs.readFileSync(path.join(ROOT,'packages/inputs/canvas.mjs'),'utf8').replace("from '@yigit-denktas/stipra-canvas'","from './canvas.mjs'").replace("from './dist/index.mjs'","from './inputs.mjs'"));
   const pkg=JSON.parse(fs.readFileSync(require.resolve('p5/package.json'),'utf8'));
   fs.copyFileSync(require.resolve('p5/lib/p5.min.js'),path.join(assets,'p5.min.js'));
   fs.copyFileSync(require.resolve('p5/license.txt'),path.join(assets,'p5-LGPL-2.1.txt'));

@@ -1,4 +1,4 @@
-import {renderImage,renderLayers} from '@stipra/core';
+import {renderImage,renderLayers} from '@yigit-denktas/stipra-core';
 
 const sources=new WeakMap();
 const fail=(code,message,cause)=>{const e=new Error('stipra canvas: '+message,{cause});e.code=code;throw e;};

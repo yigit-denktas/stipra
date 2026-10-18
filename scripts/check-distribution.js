@@ -3,9 +3,9 @@
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process');
 const {hash}=require('./artifact-evidence'),ROOT=path.resolve(__dirname,'..');
 const POLICY={
-  core:{name:'@stipra/core',peers:[],entries:['dist/index.mjs','dist/index.cjs'],files:['LICENSE','README.md','package.json','dist/index.mjs','dist/index.cjs','dist/index.d.mts','dist/index.d.cts']},
-  canvas:{name:'@stipra/canvas',peers:['@stipra/core'],entries:['index.mjs'],files:['LICENSE','README.md','package.json','index.mjs','index.d.ts']},
-  inputs:{name:'@stipra/inputs',peers:['@stipra/canvas'],entries:['dist/index.mjs','dist/index.cjs','canvas.mjs'],files:['LICENSE','README.md','package.json','dist/index.mjs','dist/index.cjs','dist/index.d.mts','dist/index.d.cts','canvas.mjs','canvas.d.mts']}
+  core:{name:'@yigit-denktas/stipra-core',peers:[],entries:['dist/index.mjs','dist/index.cjs'],files:['LICENSE','README.md','package.json','dist/index.mjs','dist/index.cjs','dist/index.d.mts','dist/index.d.cts']},
+  canvas:{name:'@yigit-denktas/stipra-canvas',peers:['@yigit-denktas/stipra-core'],entries:['index.mjs'],files:['LICENSE','README.md','package.json','index.mjs','index.d.ts']},
+  inputs:{name:'@yigit-denktas/stipra-inputs',peers:['@yigit-denktas/stipra-canvas'],entries:['dist/index.mjs','dist/index.cjs','canvas.mjs'],files:['LICENSE','README.md','package.json','dist/index.mjs','dist/index.cjs','dist/index.d.mts','dist/index.d.cts','canvas.mjs','canvas.d.mts']}
 };
 function same(actual,expected,label){
   if(JSON.stringify([...actual].sort())!==JSON.stringify([...expected].sort()))throw Error('Unexpected '+label+': '+JSON.stringify(actual));
@@ -14,11 +14,12 @@ function same(actual,expected,label){
 async function inspect(files,policy){
   same(Object.keys(files),policy.files,'packed files');
   const pkg=JSON.parse(files['package.json']);
-  if(pkg.name!==policy.name||pkg.license!=='MIT'||pkg.private!==true)throw Error('Unexpected package identity/license/private flag');
+  if(pkg.name!==policy.name||pkg.license!=='MIT'||pkg.private!==false||pkg.version!=='0.1.0-alpha.1')throw Error('Unexpected package identity/license/private flag/version');
+  if(JSON.stringify(pkg.publishConfig)!==JSON.stringify({access:'public',registry:'https://registry.npmjs.org/',tag:'alpha'}))throw Error('Unreviewed publication configuration');
   for(const key of ['dependencies','optionalDependencies','bundledDependencies','bundleDependencies','scripts'])
     if(pkg[key]&&Object.keys(pkg[key]).length)throw Error('Unexpected runtime dependencies or lifecycle scripts: '+key);
   same(Object.keys(pkg.peerDependencies||{}),policy.peers,'peer dependencies');
-  for(const version of Object.values(pkg.peerDependencies||{}))if(version!=='0.1.0-alpha.0')throw Error('Unreviewed peer version');
+  for(const version of Object.values(pkg.peerDependencies||{}))if(version!=='0.1.0-alpha.1')throw Error('Unreviewed peer version');
   if(files.LICENSE.toString()!==fs.readFileSync(path.join(ROOT,'LICENSE'),'utf8'))throw Error('Packed MIT notice differs from repository notice');
   const imports=new Set();
   for(const entry of policy.entries){
@@ -63,7 +64,7 @@ async function check(out=path.join(ROOT,'out/distribution-audit')){
       fs.copyFileSync(archive,path.join(out,pack.filename));
     }
     const report={contract:'stipra-lean-distribution-audit-v1',status:'checked',node:process.version,packages,
-      exclusions:['Browser PDF/ZIP exporter, native CLI, p5 host and artwork are separate artifacts.','Packages remain private and unpublished; #70 artist/usefulness and publication decisions remain open.']};
+      exclusions:['Browser PDF/ZIP exporter, native CLI, p5 host and artwork are separate artifacts.','Registry publication is verified separately; physical print and independent artist acceptance remain open.']};
     fs.writeFileSync(path.join(out,'distribution-audit.json'),JSON.stringify(report,null,2)+'\n');return report;
   }finally{fs.rmSync(temp,{recursive:true,force:true});}
 }

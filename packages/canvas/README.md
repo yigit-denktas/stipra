@@ -1,9 +1,9 @@
-# @stipra/canvas — existing sketches, real ink masks
+# @yigit-denktas/stipra-canvas — existing sketches, real ink masks
 
-An optional browser adapter for the private local `@stipra/core` alpha. It accepts plain 2D Canvas, a p5 main canvas/renderer or p5.Graphics, without changing p5's prototypes, drawing loop, random/noise state or global names. It has one peer dependency: the matching local core package. It does not import p5, p5.grain or the PDF/ZIP stack.
+An optional browser adapter for the experimental `@yigit-denktas/stipra-core` alpha. It accepts plain 2D Canvas, a p5 main canvas/renderer or p5.Graphics, without changing p5's prototypes, drawing loop, random/noise state or global names. It has one peer dependency: the matching local core package. It does not import p5, p5.grain or the PDF/ZIP stack.
 
 ```js
-import {renderCanvas, drawProof, exportSnapshot} from '@stipra/canvas';
+import {renderCanvas, drawProof, exportSnapshot} from '@yigit-denktas/stipra-canvas';
 
 // Within your sketch: art is a separate p5.Graphics source, p is the destination.
 const proof = renderCanvas(art, {
@@ -35,7 +35,7 @@ The optional ESM export module is built by `scripts/build-sketches.js` into `dis
 ## Preserve artist-authored ink assignments
 
 ```js
-import {renderCanvasLayers} from '@stipra/canvas';
+import {renderCanvasLayers} from '@yigit-denktas/stipra-canvas';
 
 const proof = renderCanvasLayers({
   paper: '#f5eee2',
@@ -74,7 +74,7 @@ The script checks the source descriptor and reconstructed coverage hashes before
 
 ## Distribution and compatibility evidence
 
-The adapter is ESM plus TypeScript declarations and MIT text. It is private/unpublished. Clean offline installation installs only adapter and core. Browser CI exercises p5 **1.11.11** and **2.2.2** at density 1/2, real p5 global/instance examples, changing frames, alpha, state preservation, actual tainted canvas rejection and optional image/authored exports. Other versions/renderers are not claimed tested.
+The adapter is ESM plus TypeScript declarations and MIT text. This alpha.1 candidate is unpublished. Clean offline installation installs only adapter and core. Browser CI exercises p5 **1.11.11** and **2.2.2** at density 1/2, real p5 global/instance examples, changing frames, alpha, state preservation, actual tainted canvas rejection and optional image/authored exports. Other versions/renderers are not claimed tested.
 
 The hosted examples use an unmodified, replaceable p5.js 1.11.11 script. Its full LGPL-2.1 text, upstream source tag and replacement instructions are served beside it. p5 is separate from the MIT core/adapter tarballs. The optional full export distribution retains the broader application's unresolved #14 notice/native/WASM audit findings; this work does not declare them cleared.
 
