@@ -2,7 +2,9 @@
 import base64
 import hashlib
 import io
+import importlib.metadata
 import json
+import os
 import platform
 import shutil
 import struct
@@ -15,6 +17,20 @@ from PIL import Image, features
 
 HERE = Path(__file__).resolve().parent
 PINS = json.loads((HERE / "pins.json").read_text())
+
+
+def capture_environment():
+    """Captures observed host/tool versions without claiming replay acceptance."""
+    poppler = subprocess.run(["pdftoppm", "-v"], capture_output=True, text=True, check=True)
+    return {"contract": "stipra-skia-environment-v2", "capturedBy": "prepare.py", "python": platform.python_version(),
+            "pillow": Image.__version__, "libjpeg": features.version_codec("jpg"), "libwebp": features.version_module("webp"),
+            "node": subprocess.check_output(["node", "--version"], text=True).strip(),
+            "npm": subprocess.check_output(["npm", "--version"], text=True, stderr=subprocess.DEVNULL).strip(),
+            "poppler": (poppler.stderr or poppler.stdout).splitlines()[0], "os": platform.platform(), "kernel": platform.release(),
+            "machine": platform.machine(), "libc": list(platform.libc_ver()), "cpuCount": os.cpu_count(),
+            "analysisPackages": {name: importlib.metadata.version(name) for name in ("numpy", "pypdf", "zxing-cpp")},
+            "sourceCommit": PINS["sourceCommit"], "cleanReplay": None,
+            "scope": "Observed preparation environment only; replay requires a separate run and record."}
 
 
 def sha(data):
@@ -100,7 +116,7 @@ def prepare(root, repo):
         if native.stat().st_size != pin["bytes"] or sha(native.read_bytes()) != pin["sha256"]:
             raise AssertionError("Native binary identity changed")
     freeze_inputs(root)
-    env = {"python": platform.python_version(), "pillow": Image.__version__, "libjpeg": features.version_codec("jpg"), "libwebp": features.version_module("webp"), "node": subprocess.check_output(["node", "--version"], text=True).strip(), "sourceCommit": PINS["sourceCommit"]}
+    env = capture_environment()
     (root / "environment.json").write_text(json.dumps(env, indent=2) + "\n")
     print(root)
 

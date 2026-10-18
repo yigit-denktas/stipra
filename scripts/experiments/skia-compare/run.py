@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from contracts import redact_paths
 
 HERE = Path(__file__).resolve().parent
 
@@ -46,7 +47,7 @@ def run(root):
         record = {"version": version, "mode": "platform payload omitted from isolated copy", "exitCode": process.returncode, "error": process.stderr, "stdout": process.stdout, "failedLoudly": process.returncode != 0 and expected in process.stderr}
         if not record["failedLoudly"]:
             raise AssertionError("Missing payload failed silently")
-        records.append(record)
+        records.append(redact_paths(record, root))
     (root / "results/failure.json").write_text(json.dumps(records, indent=2) + "\n")
     subprocess.run([sys.executable, str(HERE / "analyze.py"), str(root)], check=True)
 

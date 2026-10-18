@@ -1,0 +1,356 @@
+{
+  "contract": "stipra-skia-review-reconciliation-v1",
+  "date": "2026-10-18",
+  "originalExperimentSource": "24f731fb93a0aaee0f049a7ca0bb59f7215bcfb2",
+  "originalHarnessCommit": "c04f61efe261e9d25cd2b2d58b6219fbc4f67992",
+  "suppliedEvidence": {
+    "stipra-skia-v4-experiment-independent-review.md": {
+      "bytes": 23973,
+      "sha256": "5e572950937ac2ce37ef39b66741f4a6fa371a72490884f97a0ace9a3ce47141"
+    },
+    "replay-vs-delivered.json": {
+      "bytes": 6779,
+      "sha256": "3210830c5d073d4bc91b2235b6d6755842943e29a715150b1381edd9b815622f"
+    },
+    "independent-analysis.json": {
+      "bytes": 37615,
+      "sha256": "29c2a657974b52eea856260add7bd77d2aba3c9f6cc7085e7b66f7656e148636"
+    }
+  },
+  "reportedIndependentReplay": {
+    "attribution": "Owner-supplied independent AI-assisted reviewer; environment/execution described in the supplied review, not independently observed by this session",
+    "records": 272,
+    "recordDifferences": 0,
+    "stopsEqual": true,
+    "failureRecordsByteEqual": false,
+    "scope": "Different Linux x64 CPU host/toolchain; not Windows/macOS/GPU, artist or physical-print acceptance"
+  },
+  "locallyVerified": {
+    "archiveSha256": "abbb25088c75bd9a638f154c94c9dbe33642cbc0f6af7735c4734031b6ec2b76",
+    "sourceLockLF": "3f1681a6868d2b1307150f9529d6e60ee86b4336d2730e05a9897aaec34ff8d3",
+    "sourceLockCRLF": "bcbea8c26ff6d1c4c99ce097c74fa4e4930f2630d0bd6d5c8babec0a1e501e64",
+    "reviewJSONSourceLock": "bcbea8c26ff6d1c4c99ce097c74fa4e4930f2630d0bd6d5c8babec0a1e501e64",
+    "lockExplanation": "The reported alternate source hash equals the LF lock converted to CRLF; do not normalize signed/hash-pinned artifact bytes silently.",
+    "productionNativeCanvasTypographyCalls": {
+      "paths": [
+        "src",
+        "bin",
+        "web",
+        "packages (source, excluding dist)"
+      ],
+      "symbols": [
+        "measureText",
+        "fontSynthesis",
+        "FontLibrary",
+        "fillText"
+      ],
+      "matches": 0
+    },
+    "attachmentMutationVerification": {
+      "contract": "stipra-attachment-mutation-verification-v1",
+      "baselineCompatible": true,
+      "baselineAllowedImageHashChanges": 4,
+      "mutations": [
+        {
+          "mutation": "ink-recipe",
+          "pageDrawingStreamsUnchanged": true,
+          "pageStructureUnchanged": true,
+          "blocked": true,
+          "unexpectedChanges": [
+            {
+              "attachment": "inks.json",
+              "path": [
+                "inks",
+                0,
+                "gain"
+              ]
+            }
+          ]
+        },
+        {
+          "mutation": "replay-dpi",
+          "pageDrawingStreamsUnchanged": true,
+          "pageStructureUnchanged": true,
+          "blocked": true,
+          "unexpectedChanges": [
+            {
+              "attachment": "replay.json",
+              "path": [
+                "dpi"
+              ]
+            }
+          ]
+        },
+        {
+          "mutation": "layout-position",
+          "pageDrawingStreamsUnchanged": true,
+          "pageStructureUnchanged": true,
+          "blocked": true,
+          "unexpectedChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "x"
+              ]
+            }
+          ]
+        },
+        {
+          "mutation": "unverified-image-hash",
+          "pageDrawingStreamsUnchanged": true,
+          "pageStructureUnchanged": true,
+          "blocked": true,
+          "unexpectedChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "sha256"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hardenedReanalysis": {
+    "contract": "stipra-skia-results-v2",
+    "promotion": "stop-and-review",
+    "stops": 19,
+    "pdfContracts": [
+      {
+        "id": "report-49x33",
+        "attachmentContract": {
+          "compatible": true,
+          "allowedImageHashChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                1,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                2,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                3,
+                "sha256"
+              ]
+            }
+          ],
+          "unexpectedChanges": []
+        },
+        "linksEqual": true,
+        "printEqual": true,
+        "packageImagesVerified": true
+      },
+      {
+        "id": "fixed-paper-landscape",
+        "attachmentContract": {
+          "compatible": true,
+          "allowedImageHashChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                1,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                2,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                3,
+                "sha256"
+              ]
+            }
+          ],
+          "unexpectedChanges": []
+        },
+        "linksEqual": true,
+        "printEqual": null,
+        "packageImagesVerified": true
+      },
+      {
+        "id": "report-33x49",
+        "attachmentContract": {
+          "compatible": true,
+          "allowedImageHashChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                1,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                2,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                3,
+                "sha256"
+              ]
+            }
+          ],
+          "unexpectedChanges": []
+        },
+        "linksEqual": true,
+        "printEqual": true,
+        "packageImagesVerified": true
+      },
+      {
+        "id": "fixed-paper-portrait",
+        "attachmentContract": {
+          "compatible": true,
+          "allowedImageHashChanges": [
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                0,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                1,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                2,
+                "sha256"
+              ]
+            },
+            {
+              "attachment": "report-layout.json",
+              "path": [
+                "pages",
+                0,
+                "images",
+                3,
+                "sha256"
+              ]
+            }
+          ],
+          "unexpectedChanges": []
+        },
+        "linksEqual": true,
+        "printEqual": null,
+        "packageImagesVerified": true
+      },
+      {
+        "id": "qr-specimen",
+        "attachmentContract": {
+          "compatible": true,
+          "allowedImageHashChanges": [],
+          "unexpectedChanges": []
+        },
+        "linksEqual": true,
+        "printEqual": null,
+        "packageImagesVerified": true
+      }
+    ],
+    "interpretation": "15 backend typography probes have no current production call sites; 4 paper/report pixel stops represent speckled texture changes. PNG byte identities also change. The strict verdict is retained."
+  },
+  "limits": [
+    "Original archive and supplied review attachments preserved unchanged.",
+    "Reanalysis used existing captured artifacts; no new native backend execution was needed.",
+    "No dependency upgrade, golden regeneration, native notice clearance or publication.",
+    "Other worker fields still rely on recorded inputs; package-image identities are freshly hashed for attachment exceptions."
+  ]
+}
