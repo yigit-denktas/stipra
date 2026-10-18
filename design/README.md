@@ -14,6 +14,7 @@
 | How do we judge the design before approving it? | [Critical user journeys and review protocol](REVIEW.md) |
 | How is development/release history represented? | [Product-history rules](../docs/PRODUCT-HISTORY.md) and [source data](../docs/data/product-history.json) |
 | What color and font values does the browser actually use? | [Shared stylesheet](../web/stipra/shared.css) and [roadmap stylesheet](../web/stipra/roadmap.css) |
+| What governs CSS refactors and visual regressions? | [Good CSS consolidation report](../docs/ROADMAP-CSS-CONSOLIDATION-2026-10-18.md) and [pinned CSS skill](../.agents/skills/good-css/README-STIPRA.md) |
 | How should we apply Impeccable's Read/Operate modes and follow up? | [Impeccable audit and reproducible tests](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md) |\n| What has the latest public-page critique actually observed? | [Taste-skill review](../docs/DESIGN-TASTE-REVIEW-2026-10-18.md) |
 | What can the reviewer run? | [Pinned Taste Skill](../.agents/skills/design-taste-frontend/README-STIPRA.md) and [design inspection workflow](../.github/workflows/design-taste-audit.yml) |
 
