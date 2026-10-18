@@ -1,0 +1,318 @@
+{
+  "schema": 1,
+  "source": "https://github.com/pbakaus/impeccable",
+  "sourceRevision": "ab524607fdea",
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "path": ".agents/skills/impeccable/agents/impeccable_asset_producer.toml",
+      "sha": "91eeca4cce0e62881149b094e758f814510649c3",
+      "bytes": 8429
+    },
+    {
+      "path": ".agents/skills/impeccable/agents/impeccable_documenter.toml",
+      "sha": "45203ec73dc5d2509d0bd4f13e0eccbe51b4366e",
+      "bytes": 3203
+    },
+    {
+      "path": ".agents/skills/impeccable/agents/impeccable_finish_reviewer.toml",
+      "sha": "124b0c4e4418308288b731f78d134e28093ade33",
+      "bytes": 15703
+    },
+    {
+      "path": ".agents/skills/impeccable/agents/impeccable_manual_edit_applier.toml",
+      "sha": "469dd2da6512966a110b94e20abd18283d3689e7",
+      "bytes": 7032
+    },
+    {
+      "path": ".agents/skills/impeccable/agents/openai.yaml",
+      "sha": "e86d8a955ee9527dc9acfa70ded41f8c54aea435",
+      "bytes": 236
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/adapt.md",
+      "sha": "de4631d7e8f14b3c193175b87302b6ccc814e34c",
+      "bytes": 11313
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/adapt.native.md",
+      "sha": "435c40a6f416809d88cef92c09f0331c65fddec8",
+      "bytes": 3910
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/android.md",
+      "sha": "1f67a6bb574960cccb1692f460cc5432baebad65",
+      "bytes": 4093
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/animate.md",
+      "sha": "c8fb9e038bb74a125646b64c49bc39711f63e8f4",
+      "bytes": 5236
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/audit.md",
+      "sha": "29eefcc071b9e0c4f33c86cae96fdb7eed1685b4",
+      "bytes": 9250
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/audit.native.md",
+      "sha": "af725765fb65a02375815060fe825da390f2d051",
+      "bytes": 8326
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/bolder.md",
+      "sha": "c11a146b502cb46f6d5ad3f11ba0f6ff75c0e4d7",
+      "bytes": 3566
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/clarify.md",
+      "sha": "4506a31c95e02b2ad918367a0ef4461643d51532",
+      "bytes": 4590
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/colorize.md",
+      "sha": "02fa661efac9229d6e869a20ef8ee928d4b986a0",
+      "bytes": 4537
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/component-review.md",
+      "sha": "a3c35c92999ecde66f53c96fb287d8adaa0e17f3",
+      "bytes": 8017
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/craft-floor.md",
+      "sha": "43da17bca0f54d2c77d59726b76033e6a22c592b",
+      "bytes": 5502
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/craft.md",
+      "sha": "dbbc9402c07cdab21f2b6eb69279b8435fecfd7f",
+      "bytes": 555
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/critique.md",
+      "sha": "07ae4a854ede894de3320f42e50743c1ab4681fb",
+      "bytes": 48958
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/degraded/asset-producer.md",
+      "sha": "76f2357b8aaec59fcb77dbc87582e235c3fcb365",
+      "bytes": 8581
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/degraded/documenter.md",
+      "sha": "e9dfb799bcece32233386bf9702bc3141d56d196",
+      "bytes": 3325
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/degraded/finish-reviewer.md",
+      "sha": "06f257d4a97ec7a19726e9b8eea702592bc0fdf8",
+      "bytes": 15803
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/degraded/manual-edit-applier.md",
+      "sha": "ef5095b924623ce04e02188a6790ebd98a273bcd",
+      "bytes": 7196
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/delight.md",
+      "sha": "60a8e83ee48d50901acfa886d3ec4bc72b40ec6f",
+      "bytes": 3716
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/distill.md",
+      "sha": "6a449dd3cc84ce77c37dcc1beece4f9e4a7bc3b7",
+      "bytes": 5648
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/doctor.md",
+      "sha": "99211927a5a045f24521c92cb26815e8f664eef9",
+      "bytes": 5563
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/document.md",
+      "sha": "5f332e5fe874d1ce4597d2fc9512260bae18d97a",
+      "bytes": 27523
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/extract.md",
+      "sha": "7c9d009c5a573dd15332b4431f6f0044374d25b7",
+      "bytes": 3406
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/generate.md",
+      "sha": "7fe7a49886003677fdecad79a528f368b13d7f0f",
+      "bytes": 13221
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/harden.md",
+      "sha": "07f3d90b20cef7ef7bb61b3787b4afb6d65089de",
+      "bytes": 9305
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/hooks.md",
+      "sha": "43c05d1876cf8cf34d7283fbb802046ddefe9505",
+      "bytes": 14087
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/init.md",
+      "sha": "fe5422cc811fb8c93989dc9a4ec7b24afbc91a69",
+      "bytes": 11766
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/ios.md",
+      "sha": "c6244dfe32176e5718d86211b7d1eb5601eb0860",
+      "bytes": 3812
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/layout.md",
+      "sha": "aa547c742fc373bc459bdbb7977683441aa48ec0",
+      "bytes": 5161
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/live-setup.md",
+      "sha": "6e10f00f7f2a789da582f38cdaef89de39ead266",
+      "bytes": 8186
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/live.md",
+      "sha": "a042ed5837d99973e8f4e1883adf8ca982b42361",
+      "bytes": 36792
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/mode-operate.md",
+      "sha": "833775ba85f03bf65a4c1b23e39192f7653414e6",
+      "bytes": 4716
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/mode-persuade.md",
+      "sha": "9c152d67064fb8453a7eaa89de20c35fc115b085",
+      "bytes": 3638
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/mode-read.md",
+      "sha": "b30c4c9139e3094bd35c60738decb6109326153f",
+      "bytes": 4396
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/new-work.md",
+      "sha": "6720fa3b1b7bec285d05f927b4248a9ffca130aa",
+      "bytes": 61778
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/onboard.md",
+      "sha": "f2e1c15af24976fbddb6770719fae66172268ff4",
+      "bytes": 7688
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/operate.md",
+      "sha": "524f2c3ae9fa497284e9699f3ca5320cce5d05cf",
+      "bytes": 4145
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/optimize.md",
+      "sha": "ea61921c2b2006b68e7b27d92cb66dd7fd05a0ce",
+      "bytes": 7594
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/overdrive.md",
+      "sha": "9f8fc8eec3b07156b670a2561d1f74c17ccdd9f2",
+      "bytes": 9079
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/polish.md",
+      "sha": "f93170f773cac058f51e289603aed7575d62a6a2",
+      "bytes": 6646
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/quieter.md",
+      "sha": "61ea5c7027b54ef7354f55d591b6df8e1fc11dd8",
+      "bytes": 5020
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/region-map.md",
+      "sha": "7b7685cf59a7ee8fa9361d4f0b986ec0ba5b48ad",
+      "bytes": 3361
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/routing.md",
+      "sha": "21c12a626e7ef084fa6ed5d03b93b91e3eb122ce",
+      "bytes": 3336
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/shape.md",
+      "sha": "90a74ae813331cbce8fff6beb498ced77970fadf",
+      "bytes": 3547
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/typeset.md",
+      "sha": "683175632928ab5566e517ad6128a07166e095e8",
+      "bytes": 6263
+    },
+    {
+      "path": ".agents/skills/impeccable/reference/visualize.md",
+      "sha": "11ba6d7cd67a344ebc24c0a7870a4aa7c0b412cc",
+      "bytes": 13918
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/command-metadata.json",
+      "sha": "89891ea4df179d5a07cf3aef42e84dafb1d05689",
+      "bytes": 8392
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/data/font-index-failures.json",
+      "sha": "1aca67220413ef163570c75405b444d7a27a32be",
+      "bytes": 2437
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/data/font-index.json",
+      "sha": "9d2029971df232a72ff6584d264c104490521742",
+      "bytes": 1100013
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/impeccable",
+      "sha": "eb60f8667dd6924bc6271e9e1a0761ea5f945751",
+      "bytes": 8514
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/impeccable.cmd",
+      "sha": "789a96f4cc9d3e5d5959213eafd89185e1ea5ef7",
+      "bytes": 9306
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/live-browser-dom.js",
+      "sha": "ef1ca8928111080ddb923da14c7827b7396a9e62",
+      "bytes": 12283
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/live-browser-ignores.js",
+      "sha": "1c8514c7bcd8b8d889a1763965326fb6adec24a1",
+      "bytes": 10346
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/live-browser-session.js",
+      "sha": "388d2c2f9d760f343d6404511ddd8b3ae5006e86",
+      "bytes": 5751
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/live-browser.js",
+      "sha": "75abdf0c0f39684decbbf928eb286d9b886c2946",
+      "bytes": 549710
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/modern-screenshot.umd.js",
+      "sha": "a9c5208f6b141d3bafdb8eb843d6fcbdcf23e370",
+      "bytes": 29290
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/VERSION",
+      "sha": "c34958a4711ded00fa63cf08feba742975cb3fed",
+      "bytes": 7
+    },
+    {
+      "path": ".agents/skills/impeccable/SKILL.md",
+      "sha": "6c1a5ae3479ef5baaed3ecce625af819fc0fd5d6",
+      "bytes": 11659
+    }
+  ]
+}
