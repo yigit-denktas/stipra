@@ -22,7 +22,7 @@ test('roadmap CSS has one current implementation, not old v3 styles and override
 test('responsive rules stay intentional and visual test fixture remains available',()=>{
  const css=read('web/stipra/roadmap.css');
  const queries=[...css.matchAll(/@media\s*\(max-width:\s*(\d+)px\)/g)].map(x=>Number(x[1]));
- assert.deepEqual(queries,[700,480,360]);
+ assert.deepEqual(queries,[700,480,360,680]);
  assert.ok(fs.existsSync(path.join(root,'scripts/verify-roadmap-css-visual.js')));
  assert.ok(fs.existsSync(path.join(root,'.agents/skills/good-css/SKILL.md')));
 });

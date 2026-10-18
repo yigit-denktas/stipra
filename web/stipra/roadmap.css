@@ -62,8 +62,9 @@
 .r-change{display:grid;grid-template-columns:170px minmax(0,1fr);gap:20px;border-bottom:1px solid var(--r-rule);padding:12px 0!important}
 .r-change a{color:var(--text);font-weight:600}
 .r-area{border-bottom:1px solid var(--r-rule)}
-.r-area>summary{font:700 21px Plex,system-ui,sans-serif!important;min-height:65px!important}
+.r-area>summary{font:700 21px Plex,system-ui,sans-serif!important;min-height:65px!important;flex-wrap:wrap}
 .r-area>summary small{margin-left:auto;font:13px Mono,monospace;color:var(--r-muted)}
+.r-area>summary::after{margin-inline-start:8px}
 .r-records{list-style:none;padding:0!important;margin:0 0 12px 170px!important;max-width:780px}
 .r-record{padding:15px 0!important;border-top:1px solid var(--r-rule)}
 .r-record h3{color:var(--text);font-size:18px;line-height:1.3;margin:6px 0}
@@ -116,5 +117,9 @@
 @media (max-width:360px){
 .r-overview small{font-size:11px}
 .r-head h2{font-size:2.3rem!important}
+}
+@media (max-width:680px){
+.r-jump a{font-size:12px}
+.doc-page:has(.r-site) header .eyebrow{display:none}
 }
 @media(prefers-reduced-motion:reduce){.r-site *{scroll-behavior:auto!important}}

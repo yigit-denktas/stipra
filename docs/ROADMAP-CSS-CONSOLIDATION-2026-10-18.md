@@ -48,3 +48,9 @@ The new CSS has one responsive range per actual visible transition. The project-
 ## Exit decision
 
 Do not merge PR #98 on static equivalence alone. Confirm the real built-page browser comparison, normal repository tests, and review the evidence for any intended differences. Manual keyboard, screen reader, artist/printer and actual release-ingestion checks remain separate release gates.
+
+## Actual built-branch comparison follow-up
+
+The first real workflow comparison caught lost legacy phone jump-link sizing and area-marker spacing, alongside differences in scrolled captures. The consolidated sheet now retains the original 680px navigation rule and marker margin/wrapping. This deliberately leaves four meaningful width thresholds; preserving the original behavior takes priority over the earlier three-threshold target. The committed pre-refactor fixture is unchanged.
+
+The browser harness verifies the requested URL is loaded, waits for fonts and two animation frames after scrolling, and retains scroll/layout diagnostics with each capture. Pixel equality remains mandatory for the comparison states; no tolerance or replacement golden is introduced. Actual workflow results, rather than the earlier representative prototype, determine acceptance.

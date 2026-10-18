@@ -38,14 +38,14 @@ async function run(){
   await call('Page.enable');await call('Runtime.enable');await call('Network.enable');await call('Network.setCacheDisabled',{cacheDisabled:true});
 
   for(const w of widths)for(const [idx,state]of states.entries()){
-   const images=[];
+   const images=[],captures=[];
    for(const variant of ['before','after']){
     const file=path.join(out,w+'-'+idx+'-'+variant+'.png');
     const url='http://127.0.0.1:'+server.address().port+'/'+variant+'/roadmap/index.html'+state;
     await call('Emulation.setDeviceMetricsOverride',{width:w,height:1100,deviceScaleFactor:1,mobile:false});
     await call('Page.navigate',{url});
     for(let attempt=0;attempt<100;attempt++){
-     const check=await call('Runtime.evaluate',{expression:'document.readyState==="complete"&&document.fonts.status==="loaded"&&!!document.querySelector(".r-site")',returnByValue:true});
+     const check=await call('Runtime.evaluate',{expression:'location.href==='+JSON.stringify(url)+'&&document.readyState==="complete"&&document.fonts.status==="loaded"&&!!document.querySelector(".r-site")',returnByValue:true});
      if(check.result.value)break;
      if(attempt===99)throw Error('Page never finished loading '+url);
      await new Promise(resolve=>setTimeout(resolve,50));
@@ -56,12 +56,15 @@ async function run(){
      const checked=await call('Runtime.evaluate',{expression:'document.getElementById("cap-INK-01")?.closest("details")?.open',returnByValue:true});
      assert.equal(checked.result.value,true,'Incoming deep link should open its disclosure');
     }
+    await call('Runtime.evaluate',{expression:'document.fonts.ready.then(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))',awaitPromise:true});
     const overflow=await call('Runtime.evaluate',{expression:'document.documentElement.scrollWidth > innerWidth',returnByValue:true});
     assert.equal(overflow.result.value,false,'Unexpected horizontal overflow at '+w+' '+state);
+    const layout=await call('Runtime.evaluate',{expression:'JSON.stringify({url:location.href,scrollY,height:document.documentElement.scrollHeight,items:[...document.querySelectorAll(".r-site,.r-head,.r-jump a,.r-overview,.r-section,.r-explain,.r-priority,.r-release,.r-footer,.r-area>summary,.r-record,.r-record-head,.r-search")].map(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {text:e.textContent.trim().slice(0,45),x:r.x,y:r.y,width:r.width,height:r.height,font:s.font,lineHeight:s.lineHeight,flexWrap:s.flexWrap,margin:s.margin,padding:s.padding}})})',returnByValue:true});
+    captures.push({variant,...JSON.parse(layout.result.value)});
     const png=Buffer.from((await call('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false})).data,'base64');
     fs.writeFileSync(file,png);images.push(png);
    }
-   const identical=images[0].equals(images[1]);results.push({width:w,state:state||'default',pixelExact:identical});
+   const identical=images[0].equals(images[1]);results.push({width:w,state:state||'default',pixelExact:identical,captures});
   }
   fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(results,null,2)+'\n');
   console.log(JSON.stringify({checked:results.length,identical:results.filter(x=>x.pixelExact).length,results},null,2));
