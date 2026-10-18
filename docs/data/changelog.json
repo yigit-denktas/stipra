@@ -1,7 +1,26 @@
 {
   "contract": "stipra-changelog-v1",
-  "releaseStatus": "Development changes on main; no npm package release or version tag is announced here.",
+  "releaseStatus": "Lean JavaScript packages 0.1.0-alpha.1 are published and registry-verified. Studio development and human/native acceptance remain separate; no GitHub release tag is implied.",
   "entries": [
+    {
+      "date": "2026-10-18",
+      "title": "Reconcile public history and release automation",
+      "status": "Unreleased",
+      "issues": [
+        70,
+        14,
+        17,
+        13
+      ],
+      "prs": [
+        98
+      ],
+      "changes": [
+        "Show the registry-verified library separately from repository GitHub releases and restore the delivery map, version gates and directed dependencies.",
+        "Use state-independent publication fixtures, collision-safe event IDs, atomic release-snapshot recovery and explicit Pages dispatch for the recorded commit.",
+        "Reconcile current main, retain artifact-specific release gates and extend accessibility/navigation coverage to the delivery page; first live release-action and human acceptance remain pending."
+      ]
+    },
     {
       "date": "2026-10-18",
       "title": "Capability history and searchable roadmap",
@@ -11,6 +30,90 @@
         "Classify product capabilities, validation, operations and research separately while retaining permanent identifiers.",
         "Record typed, dated improvements against existing capabilities without asserting that development work is published.",
         "Search release titles, changes and capabilities through one generated index; keep full evidence one level deeper."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Artifact-specific release gates and portable pinned notices",
+      "status": "Unreleased",
+      "issues": [
+        14
+      ],
+      "changes": [
+        "Rebuild and gate the exact lean tarballs/offline consumer and both IIFE/ESM browser exporters in CI; bind evidence manifests by SHA-256.",
+        "Keep bundled native CLI/executable/container delivery blocked on missing compiled-component notices; retain the legacy broad rejection gate.",
+        "Check reviewed browser artifacts only when present in the resolved input graph; reject included native/WASM dependencies, unreviewed licenses and unresolved evidence.",
+        "Preserve the unchanged pinned MIT notice bytes with one LF checkout rule; test actual autocrlf checkout, tampering, stale reports and invalid artifact selection."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Public alpha.1 archives and fresh registry installation verified",
+      "status": "Published alpha",
+      "issues": [
+        70,
+        14
+      ],
+      "changes": [
+        "Verify all three downloaded alpha.1 archives against the original committed upload record, including SHA-256, SHA-512 and byte counts.",
+        "Install from an initially empty npm cache with lifecycle scripts disabled; verify exactly three installed packages, public runtime/TypeScript exports and replay.",
+        "Record alpha/latest tags and 0.0.0-stage registry placeholders without modifying them; correct obsolete processing/404 and unpublished wording.",
+        "Keep native backend, broad release policy, original goldens and human acceptance unchanged."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Reconciled publication, provenance and human acceptance handoffs",
+      "status": "Unreleased",
+      "issues": [
+        14,
+        13,
+        70
+      ],
+      "changes": [
+        "Remove obsolete npm-account setup instructions and separate accepted uploads from registry availability.",
+        "Record the authorized upstream inventory request and the GitHub connector HTTP 403; no upstream message was sent.",
+        "Clarify independent artist and physical operator records still needed; retain open acceptance gates."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Experimental npm uploads accepted; registry verification pending",
+      "status": "Unreleased",
+      "issues": [
+        70
+      ],
+      "changes": [
+        "Authenticate publisher yigit-denktas and approve publishing with the owner passkey.",
+        "npm accepted all three exact audited 0.1.0-alpha.1 archives under the alpha tag and reports processing.",
+        "Record upload SHA-256 and integrity values; registry download verification and clean install remain pending."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Personal-scope experimental library release candidate",
+      "status": "Unreleased",
+      "issues": [
+        70
+      ],
+      "changes": [
+        "Prepare @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs at 0.1.0-alpha.1 with matching peers and public API examples.",
+        "Audit exact package identities, alpha tag and npm registry; reject altered publication settings.",
+        "Owner supplied verified account and experimental publication authorization; authenticated registry publication remains pending."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Native component source map and personal publisher scope",
+      "status": "Unreleased",
+      "issues": [
+        14,
+        70
+      ],
+      "changes": [
+        "Trace pinned Rust Skia, Skia and 13 external source revisions; record the 318-entry Cargo lockfile superset without calling it a compiled inventory.",
+        "Identify the Linux static Fontconfig patch and distinguish its bootstrap FreeType from Skia embedded FreeType.",
+        "Record the owner\u2019s personal npm-scope choice; account identity and authenticated publication remain pending."
       ]
     },
     {
@@ -130,7 +233,7 @@
         90
       ],
       "changes": [
-        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]

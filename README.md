@@ -28,7 +28,7 @@ The macron belongs to the display name; the repository, URL and CLI use `stipra`
 
 The **browser studio** processes supported PNG, JPEG, WebP and restricted SVG locally. Choose a shared Style or edit spot/CMYK masks, inspect the proof and individual plates, and save a print-package ZIP. No account or image API is needed. See [input limits](docs/IMPORT.md).
 
-For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā inside an existing **2D** sketch, preserves a frozen source frame, and optionally exports its aligned plates. These are **local, unpublished alpha packages**.
+For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā in a **2D** sketch, freezes its source frame and exports aligned plates. The `@yigit-denktas/stipra-*` packages are published at `0.1.0-alpha.1`.
 
 Prefer a script? With Node.js 20+ installed:
 
@@ -50,13 +50,13 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts.
 
-**Delivery:** [Dependency/version map](https://apps.yigitdenktas.com/stipra/roadmap/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, solo/mute/paper, native pixel zoom and print geometry.
+**Delivery:** [Roadmap](https://apps.yigitdenktas.com/stipra/roadmap/) · [Delivery map](https://apps.yigitdenktas.com/stipra/delivery/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, solo/mute/paper, native pixel zoom and print geometry.
 
 **Structured inputs:** named regions → physical inks and opt-in frozen source projects are implemented locally (#83/#84). [Try the region example](https://apps.yigitdenktas.com/stipra/regions/). [Contracts and evidence](docs/STRUCTURED-INPUTS.md) cover replay, the bounded OpenRaster/auxiliary pilots and local C2PA feasibility (#85/#86); native Apple/EXR and browser credentials remain deferred.
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Acceptance:** [Keyboard checks, goldens and release gates](docs/RELEASE-CANDIDATE.md). Physical/artist review, one [native provenance finding](docs/DEPENDENCY-AUDIT.md) and publication remain open. Previews are **digital approximations**. Packages are unpublished; branding is provisional.
+**Acceptance:** [Scoped release gates](docs/RELEASE-CANDIDATE.md) run in CI; native bundles remain blocked on [missing notices](docs/DEPENDENCY-AUDIT.md). Physical/artist review remains open. Previews are **digital approximations**; branding is provisional.
 
 ## Follow the work
 

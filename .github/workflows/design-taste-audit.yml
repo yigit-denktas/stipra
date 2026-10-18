@@ -34,7 +34,7 @@ jobs:
           node .agents/skills/design-taste-frontend/scripts/lint.mjs \
             web/stipra/roadmap.css web/stipra/shared.css scripts/build-roadmap-page.js \
             > .taste-skill/reports/lint.txt 2>&1 || true
-          for route in roadmap changelog sitemap guide sketches regions; do
+          for route in roadmap changelog delivery sitemap guide sketches regions; do
             if node .agents/skills/design-taste-frontend/scripts/inspect.mjs \
               "dist/stipra/$route/index.html" --out ".taste-skill/$route" \
               > ".taste-skill/reports/$route.txt" 2>&1; then

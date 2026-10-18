@@ -2,7 +2,7 @@
 
 Stiprā is useful when a sketch needs named ink masks, explicit screening, inspection and a replayable package. For a flat PNG or grain-only effect, the host's existing tools are simpler. Keep the core and Canvas adapter as a small optional layer; do not build another sketch runtime or photo editor.
 
-This is a maintainer-run engineering and workflow evaluation for #74, not independent artist usability research. Core and adapter remain private local packages at `0.1.0-alpha.0`. No registry release or tag is authorized by these checks.
+This is a maintainer-run engineering and workflow evaluation for #74, not independent artist usability research. The original engineering evaluation used private local `0.1.0-alpha.0` packages; the published personal-scope `0.1.0-alpha.1` release is described in [release checks](RELEASE-CANDIDATE.md). No registry release or tag is authorized by these checks.
 
 ## Evidence and reproduction
 
@@ -101,8 +101,8 @@ Primary sources checked 17 October 2026:
 
 The 132 Node tests and all real-browser checks passed in the recorded CI run. The local core and Canvas packages pass offline installation, exact-content checks and strict TypeScript consumption. Core has no runtime dependencies; the adapter has only the matching core peer. Real-browser compatibility covers Chromium and p5 1.11.11 / 2.2.2 at densities 1/2. That does not establish Safari, Firefox, WEBGL or other p5 version compatibility.
 
-Keep `private: true` and `0.1.0-alpha.0`. Publication is a separate owner decision after the intended distribution is defined. The current audit has one #14 finding for native Skia; the opaque fontkit bundle was replaced and fonteditor removed after #94. Historical incomplete-notice fixes remain retained. Existing notices are retained, and the release-license check remains intentionally red. p5 is a separately replaceable LGPL host, not part of the MIT core/adapter packages. p5.grain is not added merely for this comparison. The [current candidate checks](RELEASE-CANDIDATE.md) install the exact audited core/Canvas/inputs tarballs together and exercise their public runtime/type exports; this extends the historical alpha evidence without claiming publication or independent artist acceptance.
+The owner now authorizes experimental alpha publication under `@yigit-denktas`; current manifests pin public access, the npm registry and the alpha tag. The current audit has one #14 finding for native Skia; the opaque fontkit bundle was replaced and fonteditor removed after #94. Historical incomplete-notice fixes remain retained. Existing notices are retained, and the release-license check remains intentionally red. p5 is a separately replaceable LGPL host, not part of the MIT core/adapter packages. p5.grain is not added merely for this comparison. The [current candidate checks](RELEASE-CANDIDATE.md) install the exact audited core/Canvas/inputs tarballs together and exercise their public runtime/type exports; this extends the historical alpha evidence independently of registry verification and without claiming independent artist acceptance.
 
 Physical output remains unverified (#13). The digital alpha and reproducible masks can be evaluated now; calibrated ink appearance, spread, stock, registration and machine behavior require actual print observations. Branding remains provisional. No claim of print readiness follows from these timings or parity checks.
 
-The [artist trial and publication handoff](ARTIST-TRIAL.md) now supplies a concrete task and empty record. The session publisher check returns npm ENEEDAUTH; no npm account/scope is established here. That is a real registry-access blocker, not a failed core/Canvas/inputs package check.
+The [artist trial and publication handoff](ARTIST-TRIAL.md) now supplies a concrete task and empty record. The owner supplied verified npm account `yigit-denktas`; CLI authentication and registry publication are tracked separately from these package checks.

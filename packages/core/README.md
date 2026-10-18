@@ -1,9 +1,9 @@
-# @stipra/core — local experimental alpha
+# @yigit-denktas/stipra-core — local experimental alpha
 
-A small, synchronous printmaking engine for existing JavaScript artwork. It reuses Stiprā's separation, screening, shared Styles and diagnostics. The package has **zero runtime dependencies** and includes browser ESM, CommonJS and TypeScript declarations. It is private and has not been published to npm.
+A small, synchronous printmaking engine for existing JavaScript artwork. It reuses Stiprā's separation, screening, shared Styles and diagnostics. The package has **zero runtime dependencies** and includes browser ESM, CommonJS and TypeScript declarations. Version `0.1.0-alpha.1` is published; registry archives and a clean install are verified.
 
 ```js
-import { renderImage, renderLayers } from '@stipra/core';
+import { renderImage, renderLayers } from '@yigit-denktas/stipra-core';
 
 const result = renderImage({
   width: imageData.width,
@@ -55,6 +55,6 @@ npm run build:core
 npm pack ./packages/core --pack-destination /your/output
 ```
 
-Install the resulting tarball into your sketch project. `npm run check:core-package` builds, packs, installs offline into a clean temporary project, checks both module entries and TypeScript consumers, and writes a measured package report under `out/core-package/`. There is no registry publication step. The package's `private` flag deliberately prevents publication.
+Install the resulting tarball into your sketch project. `npm run check:core-package` builds, packs, installs offline into a clean temporary project, checks both module entries and TypeScript consumers, and writes a measured package report under `out/core-package/`. There is no registry publication step. Publication uses the npm registry with public access and the `alpha` tag after exact-tarball checks.
 
 MIT applies to the independently authored code included here; the tarball includes its full license. Build-only dependencies and the wider studio/CLI dependency graph are separate. Digital overprint remains an uncalibrated approximation; physical print acceptance is not established by this alpha.

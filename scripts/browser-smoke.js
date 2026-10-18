@@ -116,7 +116,7 @@ async function run(){
              if(externalRequests.length)throw Error('Unexpected external processing request');
              const dir=path.join(root,'out/workflow-validation');fs.mkdirSync(dir,{recursive:true});
              fs.writeFileSync(path.join(dir,'browser-checks.json'),JSON.stringify({contract:'stipra-workflow-browser-v1',externalRequests:externalRequests.length,checks:['import and color policy','mask edits','solo/mute/paper/native zoom','2–8 ink setup','keyboard focus and labels','responsive workspace and information pages','marked export pixels, hashes, density and PDF recipes']},null,2)+'\n');
-             for(const [name,route]of [['studio','index.html'],['roadmap','roadmap/index.html'],['changelog','changelog/index.html'],['sitemap','sitemap/index.html']]){
+             for(const [name,route]of [['studio','index.html'],['roadmap','roadmap/index.html'],['changelog','changelog/index.html'],['delivery','delivery/index.html'],['sitemap','sitemap/index.html']]){
                await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false},sessionId);
                await call('Page.navigate',{url:url.replace('/web/stipra/browser-smoke.html','/dist/stipra/'+route)},sessionId);
                await new Promise(resolve=>setTimeout(resolve,1000));

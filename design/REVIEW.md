@@ -11,7 +11,7 @@ These are acceptance **scenarios**, not claims that an independent human has alr
 ### Journey A — New reader understands what is real and what is next
 **Persona/task.** Someone unfamiliar with Stiprā opens `/stipra/roadmap/` on a phone and asks: “What can I use today, what are the top three work areas, and has v0.8.0 actually been released?”
 
-**Fixture.** Actual `docs/data/product-history.json` with no published releases; initiatives `PRINT-TRUST`, `ARTIST-LIBRARY`, `STYLE-QUALITY`, and the owner-reported working build.
+**Fixture.** Actual `docs/data/product-history.json` with a verified npm library and no GitHub releases; initiatives `PRINT-TRUST`, `ARTIST-LIBRARY`, `STYLE-QUALITY`, and the owner-reported working build.
 
 **Steps.**
 1. Open the page at 390px; read without scrolling past an unrelated card grid.
@@ -60,7 +60,7 @@ These are acceptance **scenarios**, not claims that an independent human has alr
 
 | State | Evidence to capture |
 | --- | --- |
-| Real current roadmap: zero verified public releases | A truthful absence, working build separate, readable current priorities |
+| Real current roadmap: verified npm alpha, zero GitHub releases | Published library visible, GitHub absence scoped, working build separate, readable priorities |
 | Future stress case: 10 releases / 48 capabilities / multiple events | Scan release index; find cross-version capability; no “every feature in exactly one release” shortcut |
 | Extended archive: 100 versions and many events | Search and disclosure performance, no duplicate IDs, stable permalinks |
 | Zero search results / ambiguous release title | Helpful empty state and consistent search scope |
@@ -75,7 +75,8 @@ These are acceptance **scenarios**, not claims that an independent human has alr
 ## 3. Two complementary reviewers, one editorial decision
 
 - **Design Maturity Review** (the user's existing skill): investigate appropriateness, purpose, craft, systemic coherence and product-specific expression across *any* artifact. Best for deciding what to question and whether the direction itself is justified.
-- **Impeccable v4.6** ([source-informed Stiprā audit](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md)): distinguish **Read** (roadmap/changelog/guide) from **Operate** (Studio), and use its audit/clarify/distill/harden/polish checks for specific failures. The upstream CLI/detector were not run in the original audit. The pinned skill now exists at `.agents/skills/impeccable/`, but its engine requires a separate first-run download or preinstallation. Keep hooks off unless explicitly authorized. Do not overwrite existing design contracts or automatically authorize hooks.\n- **Taste Skill v2** (pinned under `.agents/skills/design-taste-frontend/`): inspect public-facing page composition/copy, warn on generic habits, measure rendered geometry and produce screenshots. Best for exploring and editing the actual visual page.
+- **Impeccable v4.6** ([source-informed Stiprā audit](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md)): distinguish **Read** (roadmap/changelog/guide) from **Operate** (Studio), and use its audit/clarify/distill/harden/polish checks for specific failures. The upstream CLI/detector were not run in the original audit. The pinned skill now exists at `.agents/skills/impeccable/`, but its engine requires a separate first-run download or preinstallation. Keep hooks off unless explicitly authorized. Do not overwrite existing design contracts or automatically authorize hooks.
+- **Taste Skill v2** (pinned under `.agents/skills/design-taste-frontend/`): inspect public-facing page composition/copy, warn on generic habits, measure rendered geometry and produce screenshots. Best for exploring and editing the actual visual page.
 - **Implementation tests** (`tests/roadmap-history.test.js`, `tests/site-info.test.js`, CI): establish behavioral invariants and source-backed state; they cannot approve taste or physical print quality.
 - **Editor / owner:** makes the keep/revise/reject decision after reading evidence and experiencing the product. Automated model scores are diagnostic notes, not authority.
 

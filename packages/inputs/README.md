@@ -1,10 +1,10 @@
-# @stipra/inputs — local experimental alpha
+# @yigit-denktas/stipra-inputs — local experimental alpha
 
-Optional dependency-free adapters; not published. Run `npm run build:inputs`, then pack this directory. This package does not import the core, PDF/ZIP writer, fonts, image codecs or a drawing runtime. The `/canvas` subpath additionally needs `@stipra/canvas` (and its core peer).
+Optional dependency-free adapters; not published. Run `npm run build:inputs`, then pack this directory. This package does not import the core, PDF/ZIP writer, fonts, image codecs or a drawing runtime. The `/canvas` subpath additionally needs `@yigit-denktas/stipra-canvas` (and its core peer).
 
 ```js
-import {mapRegions, regionProject} from '@stipra/inputs';
-import {renderLayers} from '@stipra/core';
+import {mapRegions, regionProject} from '@yigit-denktas/stipra-inputs';
+import {renderLayers} from '@yigit-denktas/stipra-core';
 const mapped = mapRegions(source, {
   version: 1, paper: '#ffffff',
   inks: [{id: 'green', name: 'Green', color: '#006043', combine: 'max',

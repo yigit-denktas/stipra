@@ -1,4 +1,4 @@
-import type {ImageInput, LayersInput, ImageOptions, LayerOptions, RenderResult, Frame} from '@stipra/core';
+import type {ImageInput, LayersInput, ImageOptions, LayerOptions, RenderResult, Frame} from '@yigit-denktas/stipra-core';
 /** A plain canvas or a structural p5 2D drawing host; p5 is not a dependency. */
 export type CanvasSource = HTMLCanvasElement | {canvas: HTMLCanvasElement; width?: number; height?: number} | {elt: HTMLCanvasElement; width?: number; height?: number};
 /** Explicit backing-pixel and logical drawing dimensions, with no automatic resampling. */

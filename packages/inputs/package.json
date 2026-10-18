@@ -1,7 +1,56 @@
 {
-  "name":"@stipra/inputs","version":"0.1.0-alpha.0","private":true,"license":"MIT","type":"commonjs",
-  "description":"Optional named-region and explicit auxiliary-mask adapters for Stiprā",
-  "exports":{".":{"import":{"types":"./dist/index.d.mts","default":"./dist/index.mjs"},"require":{"types":"./dist/index.d.cts","default":"./dist/index.cjs"}},"./canvas":{"types":"./canvas.d.mts","default":"./canvas.mjs"}},
-  "files":["dist/index.mjs","dist/index.cjs","dist/index.d.mts","dist/index.d.cts","canvas.mjs","canvas.d.mts","LICENSE","README.md"],
-  "peerDependencies":{"@stipra/canvas":"0.1.0-alpha.0"},"peerDependenciesMeta":{"@stipra/canvas":{"optional":true}},"sideEffects":false,"engines":{"node":">=20"}
+  "name": "@yigit-denktas/stipra-inputs",
+  "version": "0.1.0-alpha.1",
+  "private": false,
+  "license": "MIT",
+  "type": "commonjs",
+  "description": "Optional named-region and explicit auxiliary-mask adapters for Stiprā",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./canvas": {
+      "types": "./canvas.d.mts",
+      "default": "./canvas.mjs"
+    }
+  },
+  "files": [
+    "dist/index.mjs",
+    "dist/index.cjs",
+    "dist/index.d.mts",
+    "dist/index.d.cts",
+    "canvas.mjs",
+    "canvas.d.mts",
+    "LICENSE",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@yigit-denktas/stipra-canvas": "0.1.0-alpha.1"
+  },
+  "peerDependenciesMeta": {
+    "@yigit-denktas/stipra-canvas": {
+      "optional": true
+    }
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "alpha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yigit-denktas/stipra.git",
+    "directory": "packages/inputs"
+  }
 }

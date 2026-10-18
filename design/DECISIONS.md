@@ -89,10 +89,23 @@ Keep this log compact and consequential. Do not register every CSS tweak as an a
 
 **Reopen if.** First-reader testing shows weaker navigation, focus behavior is incorrect, or real output demonstrations require a richer layout. Obtain owner acceptance before merging PR #98.
 
+### D-011 — Publication channels and delivery gates keep distinct authorities
+**Date:** 18 October 2026. **State:** implemented in draft PR; owner review pending.
+
+**Problem.** The new overview described the verified npm alpha as unpublished, hid the existing milestone/dependency map and assumed an empty GitHub release history in its workflow tests.
+
+**Chosen design.** Derive library availability from the existing registry verification, scope GitHub release history explicitly, and expose the existing ledger through a linked Delivery map. Keep capability IDs and the current editorial composition. Rehearse the actual publication CLI with populated fixtures, retain exact tag identity and dispatch the Pages build for the recorded source commit.
+
+**Rejected.** A fictional GitHub release to fill the empty state; another independent delivery-status registry; loss of prerequisite/exit evidence; a new visual redesign to fix status/data failures.
+
+**Evidence.** [Review reconciliation](../docs/PR98-RECONCILIATION-2026-10-18.md), actual CLI and generated-site tests, artifact-specific gates and workflow evidence attached to PR #98. The first live release action and human acceptance remain unperformed.
+
+**Reopen if.** The release channels need a new artifact class, actual reader tests cannot find delivery gates, or a genuine deployment fails to show its recorded source history.
+
 ## How to record the next decision
 
 ```md
-### D-010 — [concrete question]
+### D-012 — [concrete question]
 Date: YYYY-MM-DD
 Surface / capability:
 Requested by:

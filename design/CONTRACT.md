@@ -32,7 +32,7 @@ Replace the word “Stiprā” with an unrelated analytics SaaS. If the interfac
 
 ## 2. Information architecture — do not flatten different truths
 
-Public main destinations: **Studio, Field guide, Roadmap, Changelog**. Sketches, Regions and Site map remain discoverable secondary links. Every page needs its own clear purpose.
+Public main destinations: **Studio, Field guide, Roadmap, Changelog**. Sketches, Regions, Delivery map and Site map remain discoverable secondary links. Every page needs its own clear purpose.
 
 | Surface | User task | Default level of detail | Deeper information |
 | --- | --- | --- | --- |
@@ -46,9 +46,9 @@ Public main destinations: **Studio, Field guide, Roadmap, Changelog**. Sketches,
 **Three independent state dimensions:**
 - **Implementation:** `implemented`, `in-progress`, `planned`; describes software/development state.
 - **Acceptance:** `digital-evidence`, `pending`, `not-evaluated`; describes the evidence actually recorded.
-- **Publication:** a GitHub release with an actual tag, published timestamp and declared change events; never inferred from a merged PR, closed issue or internal package version.
+- **Publication:** channel-specific evidence. Library availability is derived from the committed registry archive/consumer verification; repository GitHub releases require an actual tag, published timestamp and declared change events. Neither is inferred from a merged PR or closed issue.
 
-The existing product-history registry is authoritative for these distinctions. In the public page, the owner-reported working `v0.8.0` is **not** silently transformed into a tagged/public release. Future-state simulations must be clearly fictional and remain outside production history.
+Capability/event state comes from product-history.json, npm publication from the existing registry verification, and engineering milestones/gates from delivery-ledger.json. The public Delivery map exposes the latter without duplicating its status in the overview. In the public page, the owner-reported working `v0.8.0` is **not** silently transformed into a tagged/public release. Future-state simulations must be clearly fictional and remain outside production history.
 
 Use a permanent ID such as `INK-01` for a capability over its lifetime. A later update creates an **event attached to that same capability**; it does not manufacture a new feature. Separate research, operations and validation records from user-facing features.
 

@@ -23,7 +23,7 @@
     {
       "id": "ARTIST-LIBRARY",
       "title": "Put the creative library in artists’ hands",
-      "description": "Ask an independent artist to use the Canvas/p5.js library. Fix what blocks first use before deciding whether to publish.",
+      "description": "Ask an independent artist to install the published Canvas/p5.js alpha, make a proof and export plates. Record and fix first-use obstacles.",
       "capabilities": [
         "LIB-05",
         "LIB-06"
@@ -244,7 +244,7 @@
       "id": "LIB-01",
       "area": "Library",
       "title": "Use a small dependency-free JavaScript separation core.",
-      "detail": "The local experimental API is installed and tested as a private candidate, not a published npm package.",
+      "detail": "The dependency-free core is published at experimental alpha.1; registry archives and a fresh consumer are verified. Heavy export/native dependencies stay outside the lean import.",
       "issues": [
         71
       ],
@@ -321,7 +321,7 @@
       "id": "QA-01",
       "area": "Quality",
       "title": "Run repeatable browser and print-geometry checks.",
-      "detail": "Six-page automated accessibility audit, mask goldens, and paper-seed geometry assertions are recorded; human review is separate.",
+      "detail": "Automated accessibility and Tab/Enter checks, mask goldens and paper-seed geometry assertions are recorded; human review is separate.",
       "issues": [
         13
       ],
@@ -381,16 +381,16 @@
     {
       "id": "OPS-01",
       "area": "Studio",
-      "title": "Finish the shared tracking and release checks.",
-      "detail": "Issue/milestone administration is partly reconciled; board behavior and release-policy checks remain to verify.",
+      "title": "Track delivery and check release artifacts.",
+      "detail": "The existing milestone, priority table, status board and workflow rules are verified. Fresh artifact-specific gates check lean/browser releases while native bundles remain blocked.",
       "issues": [
         17
       ],
       "dependsOn": [
         "STU-02"
       ],
-      "implementation": "in-progress",
-      "acceptance": "not-evaluated",
+      "implementation": "implemented",
+      "acceptance": "digital-evidence",
       "recordType": "operations"
     },
     {
@@ -406,13 +406,13 @@
       ],
       "implementation": "in-progress",
       "acceptance": "pending",
-      "recordType": "feature"
+      "recordType": "validation"
     },
     {
       "id": "LIB-06",
       "area": "Library",
-      "title": "Make the library publishable and explicitly approve a release.",
-      "detail": "Confirm npm publisher access, scoped package ownership, exact package contents and the owner’s publication decision.",
+      "title": "Publish and verify the experimental JavaScript library.",
+      "detail": "Core, Canvas and inputs alpha.1 are public; archive SHA-256/SHA-512 and a clean registry consumer match the committed evidence. Independent artist usefulness remains separate.",
       "issues": [
         70
       ],
@@ -420,20 +420,20 @@
         "LIB-05",
         "AUD-01"
       ],
-      "implementation": "in-progress",
-      "acceptance": "pending",
-      "recordType": "feature"
+      "implementation": "implemented",
+      "acceptance": "digital-evidence",
+      "recordType": "operations"
     },
     {
       "id": "OPS-02",
       "area": "Studio",
       "title": "Connect verified releases to the public history automatically.",
-      "detail": "Build a generated release index from real tags/releases and reconcile dated changelog entries without inventing shipped versions.",
+      "detail": "Typed GitHub release history, snapshot catch-up and explicit Pages dispatch for the recorded source revision are implemented. The first live release-action run remains unperformed.",
       "issues": [],
       "dependsOn": [
         "LIB-06"
       ],
-      "implementation": "in-progress",
+      "implementation": "implemented",
       "acceptance": "pending",
       "recordType": "operations"
     },
@@ -722,6 +722,48 @@
       "capabilityId": "OPS-02",
       "title": "Give releases and capabilities a shared, searchable history",
       "sourceTitle": "Capability history and searchable roadmap"
+    },
+    {
+      "id": "DEV-017",
+      "date": "2026-10-18",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "LIB-06",
+      "title": "Verify published library archives and a clean registry consumer",
+      "sourceTitle": "Public alpha.1 archives and fresh registry installation verified"
+    },
+    {
+      "id": "DEV-018",
+      "date": "2026-10-18",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Check lean and browser release artifacts while native notices remain blocked",
+      "sourceTitle": "Artifact-specific release gates and portable pinned notices"
+    },
+    {
+      "id": "DEV-019",
+      "date": "2026-10-18",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OPS-02",
+      "title": "Validate populated release history, retain distinct tag identities and dispatch Pages explicitly",
+      "sourceTitle": "Reconcile public history and release automation"
+    },
+    {
+      "id": "DEV-020",
+      "date": "2026-10-18",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Restore version targets and directed dependency gates through the delivery map",
+      "sourceTitle": "Reconcile public history and release automation"
     }
+  ],
+  "libraryCapabilityIds": [
+    "LIB-01",
+    "LIB-02",
+    "LIB-03",
+    "LIB-04"
   ]
 }

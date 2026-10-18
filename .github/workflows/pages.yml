@@ -3,6 +3,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      revision:
+        description: Exact recorded source commit to build (main by default)
+        required: false
+        default: main
 permissions:
   contents: read
 concurrency:
@@ -13,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.revision || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'

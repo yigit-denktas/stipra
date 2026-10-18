@@ -4,7 +4,7 @@
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
-  "policy": "Versions below are conditional targets, not published tags. Implementation, issue closure and acceptance are separate. Prerequisites refer to the named capability; broader unfinished work in an umbrella issue need not block a working subset.",
+  "policy": "Studio versions below are conditional targets; the lean library alpha.1 is published with separate registry evidence. Implementation, issue closure and human acceptance are separate. Prerequisites refer to the named capability, not every checkbox in an umbrella issue.",
   "originalV09Issues": [
     1,
     2,
@@ -36,17 +36,17 @@
         85,
         86
       ],
-      "exit": "Core/Canvas/inputs build and examples work with deterministic browser/Node/CLI evidence. #85/#86 mean bounded research decisions and pilots. Packages remain private; no public version tag."
+      "exit": "Historical alpha.0 engineering candidate: deterministic browser/Node/CLI evidence and bounded structured-input pilots. Current personal-scope alpha.1 registry bytes and fresh install are verified; human acceptance remains open."
     },
     {
       "id": "published-alpha",
-      "version": "Library 0.1.0-alpha.1 (proposed)",
-      "state": "target",
+      "version": "Library 0.1.0-alpha.1",
+      "state": "published",
       "tasks": [
         70,
         14
       ],
-      "exit": "Owner accepts the alpha/usefulness evidence and approves publication; package contents/types/install/size pass, with a notice audit for each artifact actually shipped. Native/WASM full-export findings are not silently transferred to the dependency-free core. No physical-quality claim."
+      "exit": "Experimental alpha.1 is published: exact registry archive bytes and a fresh three-package runtime/TypeScript consumer are verified. Lean/browser distribution checks pass in their own scopes. Independent artist usefulness remains open in #70; physical/human acceptance and native binary notices remain separate in #13/#14. No print-quality claim."
     },
     {
       "id": "studio-rc",
@@ -114,10 +114,10 @@
     }
   ],
   "nextSequence": [
-    "Resolve #14\u2019s remaining native Skia binary inventory before distributing a bundled native executable; browser exporter and lean-library scopes have separate checked reports.",
-    "Complete #13\u2019s remaining acceptance observations; review #43/#47 artistic results with intended-size physical prints.",
-    "Make #70\u2019s owner/artist usefulness and publication decision for the lean library independently of optional extensions.",
-    "Keep #75 Java research, #28 analytic vector screens and identity/paper extensions optional."
+    "Collect independent artist usefulness feedback for the registry-verified alpha.1 release (#70); physical and human accessibility acceptance remain separate (#13).",
+    "Send the approved #14 native inventory request using an authorized browser fallback: the GitHub connector rejected creation with HTTP 403. Obtain attributable component/notices evidence before bundling native Skia.",
+    "Collect actual operator print measurements and independent artist/human accessibility observations (#13/#70); review forest/beach quality separately (#43/#47).",
+    "Keep optional Java, analytic vector screens and identity/paper extensions separate; PR #98 is the existing roadmap/design proposal."
   ],
   "tasks": [
     {
@@ -292,7 +292,7 @@
         12,
         22
       ],
-      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Six-page Chromium axe audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open.",
+      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Nine-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T20:17:26Z"
     },
     {
@@ -305,7 +305,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains.",
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. Owner authorized upstream follow-up; connector creation returned HTTP 403, so the prepared request remains unsent pending browser fallback. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail.",
       "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {
@@ -635,7 +635,7 @@
         73,
         74
       ],
-      "note": "Core/Canvas/inputs engineering and a combined offline consumer of the exact audited tarballs are verified locally; public runtime/types and inert region replay are checked. Private 0.1.0-alpha.0 remains unpublished. Independent artist feedback and owner version/namespace/publication decision are open. An empty artist trial record and publication handoff are prepared; npm publisher check returns ENEEDAUTH, and registry scope ownership is not established.",
+      "note": "Published @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs alpha.1: fresh registry download SHA-256/SHA-512/bytes match the committed upload record; an empty-cache consumer installs exactly three packages and passes runtime/types/replay checks. Alpha/latest tags and public 0.0.0-stage placeholders are observed, not changed. Independent artist and physical/human acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {

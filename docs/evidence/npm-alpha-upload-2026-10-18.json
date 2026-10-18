@@ -1,0 +1,43 @@
+{
+  "contract": "stipra-npm-upload-record-v1",
+  "date": "2026-10-18",
+  "sourceCommit": "743e435fcbc3f5f3f0ef548057375961e213a083",
+  "mergeCommit": "70e4cf0ebbb8f11542cd87b089fa6b5b7ddb9b6c",
+  "publisher": "yigit-denktas",
+  "registry": "https://registry.npmjs.org/",
+  "status": "uploads-accepted-processing",
+  "registryAvailability": "not-yet-verified",
+  "packages": [
+    {
+      "name": "@yigit-denktas/stipra-core",
+      "version": "0.1.0-alpha.1",
+      "tag": "alpha",
+      "access": "public",
+      "file": "yigit-denktas-stipra-core-0.1.0-alpha.1.tgz",
+      "bytes": 35492,
+      "sha256": "97ee09418074c5210aaa86a21762c8ea0861d4ac2a9a1e8138d4638c6d5ac7be",
+      "integrity": "sha512-xJD4ubH3ObQBJQsMWPPnfquGphYaMNF5NqceRUOsg0UokanDs76uNuYZ7uXqcMtaPvv/ojyFIVhsQ6GWUAhMVQ=="
+    },
+    {
+      "name": "@yigit-denktas/stipra-canvas",
+      "version": "0.1.0-alpha.1",
+      "tag": "alpha",
+      "access": "public",
+      "file": "yigit-denktas-stipra-canvas-0.1.0-alpha.1.tgz",
+      "bytes": 8777,
+      "sha256": "536697af3d26eb44e847a3f47af1278292dc0040794e0b2f09c3e9831f730d76",
+      "integrity": "sha512-I3OeND1ryT3lOH+Gz3CciBevXdhMSisUi+3KJqq9Zp/v1Ja1OH6C7QV2RYcTLG4G/cG30/T8DhNs+vTdMJndtA=="
+    },
+    {
+      "name": "@yigit-denktas/stipra-inputs",
+      "version": "0.1.0-alpha.1",
+      "tag": "alpha",
+      "access": "public",
+      "file": "yigit-denktas-stipra-inputs-0.1.0-alpha.1.tgz",
+      "bytes": 8497,
+      "sha256": "4b658feb2153c4d2938476680fc8f5ac248e2f7950d444666b0f0b28e4631285",
+      "integrity": "sha512-0dxJS+GoNM98MUDI24bOiMQ9iBmX7eWTrDufFdrPC2ZxZn7huFZLqvbbbagD2DKbX/swDWJBuxJ+DWzSWfjyBg=="
+    }
+  ],
+  "limits": "npm reported successful uploads and processing. Registry still returned 404 afterward; downloadable byte identity and clean registry install remain pending. Physical and independent human acceptance remain open."
+}

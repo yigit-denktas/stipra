@@ -61,7 +61,7 @@ flowchart TD
   F["Optional source-project evidence: proposed"] --> E
 ```
 
-A proposed named-region adapter sits before `renderLayers`, not inside the screening algorithm. A proposed source-project descriptor sits beside the current snapshot/recipes in the optional package, not inside `@stipra/core`. Vector scene recipes remain a separate supported path until a concrete interoperability contract is implemented and tested.
+A proposed named-region adapter sits before `renderLayers`, not inside the screening algorithm. A proposed source-project descriptor sits beside the current snapshot/recipes in the optional package, not inside `@yigit-denktas/stipra-core`. Vector scene recipes remain a separate supported path until a concrete interoperability contract is implemented and tested.
 
 A source descriptor should relate explicit local artifacts using IDs, role, media type, byte hash, source frame/origin, transform, precision, alpha interpretation, producer/version, declared versus estimated origin and transformation history. Optional depth needs units, near/far direction and invalid-value rules; categorical IDs need a categorical sampler, not color-image filtering. Plain masks need no fabricated camera or scene metadata.
 

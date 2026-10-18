@@ -1,17 +1,18 @@
 # Digital acceptance and the library candidate
 
-The three local packages remain private at `0.1.0-alpha.0`. This is a reviewable candidate, not a registry release or a print-quality approval. No new runtime dependencies were added for these checks.
+The three packages `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs` are published at `0.1.0-alpha.1`. On 18 October 2026 a fresh registry download verified their byte counts, SHA-256 and SHA-512 against the original [upload record](evidence/npm-alpha-upload-2026-10-18.json). A consumer with an initially empty npm cache installed exactly those three packages and passed runtime replay/ESM/CJS and strict TypeScript checks. See [registry evidence](evidence/npm-alpha-registry-2026-10-18.json). This is an experimental digital release, not print-quality or independent artist approval.
 
 ```sh
 npm ci
 npm test
 npm run check:goldens
-npm run check:library-candidate
+npm run check:release:lean
+npm run check:release:browser
 npm run audit:licenses
-npm run check:release-licenses
+npm run check:release:native
 ```
 
-The final command deliberately exits 1 while the remaining native finding remain. A successful inventory or lean-library check does not override it.
+The final command deliberately exits 1 for the unresolved native inventory. CI runs the lean and browser release gates, the non-gating `audit:licenses` inventory, and rejection tests for the native gate. Green CI is not native redistribution clearance. The older broad `check:release-licenses` command also remains fail-closed with exit 1.
 
 ## Saved artwork acceptance — #13
 
@@ -28,19 +29,35 @@ Physical evidence still needs an operator. The [print procedure and record check
 
 `check:library-candidate` first runs the actual tarball/import/notice audit, then installs those same three archives together in a fresh temporary project using offline npm with lifecycle scripts disabled. It requires exactly core, Canvas and inputs in the installed graph; there is no PDF stack, native codec, font, drawing framework or exporter callback in that graph.
 
-The consumer imports package names through their public export maps, including `@stipra/inputs/canvas`. It exercises Canvas capture → named regions → authored inks → core rendering, ESM/CJS parity, unchanged coverage and inert source-project replay. Strict NodeNext TypeScript checks the public entry points together. A synthetic Canvas readback fixture tests capture/mapping without adding a native library to the consumer; actual rendering and p5 integration remain the separate real Chromium CI checks.
+The consumer imports package names through their public export maps, including `@yigit-denktas/stipra-inputs/canvas`. It exercises Canvas capture → named regions → authored inks → core rendering, ESM/CJS parity, unchanged coverage and inert source-project replay. Strict NodeNext TypeScript checks the public entry points together. A synthetic Canvas readback fixture tests capture/mapping without adding a native library to the consumer; actual rendering and p5 integration remain the separate real Chromium CI checks.
 
-`out/distribution-audit/library-candidate.json` records runtime, exact archive hashes/bytes, installed graph, checks and remaining decisions beside the three tarballs. CI uploads the directory as `lean-distribution-audit`. Compare hashes with that report before sharing an archive. Reports are generated per run; changed bytes require rerunning the check. This does not test or authorize an `npm publish` operation, registry namespace access, release tags or optional downstream exporter dependencies.
+`out/distribution-audit/library-candidate.json` records runtime, exact archive hashes/bytes, installed graph, checks and remaining decisions beside the three tarballs. CI uploads the directory as `lean-distribution-audit`. Compare hashes with that report before sharing an archive. Reports are generated per run; changed bytes require rerunning the check. This local packing command does not query the registry. Its report makes no publication-state claim; local source edits may change candidate bytes even at the same manifest version. The immutable released archives are identified separately by the registry evidence. Do not republish modified source as alpha.1.
 
 ## Artifact-specific gates — #14
 
-| Intended artifact | Verified here | Remaining gate |
-| --- | --- | --- |
-| Private core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Owner publication scope/version and independent artist usefulness review |
-| Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
-| Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
-| Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
+| Intended artifact | Release command | Verified here | Remaining gate |
+| --- | --- | --- | --- |
+| Experimental core/Canvas/inputs tarballs | `check:release:lean` | Fresh exact files/imports/notices, isolated offline install, public runtime/types | Independent artist usefulness remains unperformed; registry evidence is separate |
+| Browser PDF/ZIP exporter, IIFE and ESM | `check:release:browser` | Fresh resolved bundles, Fontkit own-source/maps, actual output hashes and complete notices | Separate host/font/media obligations remain |
+| Bundled native CLI/executable/container | `check:release:native` | Installed binary identity and production graph inventory | Blocked: exact native Rust/Skia/codec notices for the downloaded platform binary |
+| Printed results | Operator procedure | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
+
+`scripts/check-release-artifact.js <lean|browser|native>` requires an explicit class and rebuilds its evidence; it does not filter the broad inventory or trust a saved passing report. Unknown classes/arguments fail. `out/release-gates/CLASS.json` records `checked`, `blocked` or `error`, plus relative evidence paths and SHA-256. Only `checked` exits 0. Reports identify the exact candidate bytes through the linked manifests; altered outputs require a fresh run. A failed build replaces the old gate result with an error. CI uploads `artifact-release-gates` alongside the exact library archives and browser bundles.
+
+The browser command checks both `out/browser-distribution/export.mjs` (the existing IIFE output) and `out/browser-distribution/esm/export.mjs`. Browser notices use the broad audit's reviewed license-selection policy; unknown expressions fail even when full terms are present. Native identity checks apply only to reviewed artifacts actually present in each resolved browser graph; native Skia and fonteditor imports are rejected. The lean command checks its three packed JS archives without loading a native backend. Native executables and containers belong to `native`, not `lean`; there is no container bypass. No executable/container build or publication is authorized by a passing JS gate.
+
+The sole checkout override is `.gitattributes` → `licenses/third-party/MIT-terms.txt text eol=lf`. It preserves the existing hash-pinned notice bytes on Windows-style Git checkouts. Tests perform an actual `core.autocrlf=true` checkout with a CRLF control file, then require changed/CRLF notice bytes to fail the original hash check. The retained notice text and pinned digest are unchanged. This is a checkout-portability test on the CI host, not Windows renderer parity.
 
 One native provenance gap remains open. Fonteditor is removed; source-mapped Fontkit replaces the old opaque bundle. [Dependency evidence](DEPENDENCY-AUDIT.md) records the exact replacement and native boundary. Old retired artifacts are not retrospectively cleared.
 
-The next publication decision is bounded: whether to publish the three lean packages as an experimental digital library, at an explicitly selected version and registry namespace, after reviewing the candidate and artist task. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.
+Publish only the exact audited tarballs, in core → canvas → inputs order, with `--tag alpha --access public --ignore-scripts --registry=https://registry.npmjs.org/`. Verify `npm whoami` is `yigit-denktas` first and compare each registry integrity value with `distribution-audit.json` afterward. The root application remains private. The audit rejects unreviewed names, versions, peers, registry and tags. Publication is authorized for the experimental digital library; independent artist feedback remains unperformed. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.
+
+## Registry state and reproduction
+
+Both `alpha` and `latest` currently point to alpha.1. All three package names also expose `0.0.0-stage` placeholder versions; these are observed registry artifacts, not the audited release. Their origin has not been established. This verification changed no tags, versions or registry artifacts. Use an explicit version when reproducing:
+
+```sh
+npm install --save-exact --ignore-scripts --no-audit --no-fund --registry=https://registry.npmjs.org/ @yigit-denktas/stipra-core@0.1.0-alpha.1 @yigit-denktas/stipra-canvas@0.1.0-alpha.1 @yigit-denktas/stipra-inputs@0.1.0-alpha.1
+```
+
+Check `npm view PACKAGE@0.1.0-alpha.1 dist.integrity --registry=https://registry.npmjs.org/` against the evidence and independently hash the downloaded archive. Installation success alone does not prove byte identity. The published package READMEs contain pre-publication wording; corrected source documentation is for subsequent builds, not a modification of the immutable alpha.1 archives.

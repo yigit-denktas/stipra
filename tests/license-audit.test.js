@@ -1,6 +1,11 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
-const {audit,notices}=require('../scripts/license-audit');
+const {audit,notices,licensePolicy}=require('../scripts/license-audit');
+test('shared license policy selects reviewed alternatives and rejects unknown expressions',()=>{
+  assert.deepEqual(licensePolicy('jszip','(MIT OR GPL-3.0-or-later)'),{selected:'MIT',reviewed:true});
+  assert.deepEqual(licensePolicy('brotli','MIT'),{selected:'MIT AND Apache-2.0',reviewed:true});
+  for(const declared of [null,'GPL-3.0-only','unknown','MIT OR unknown'])assert.equal(licensePolicy('new-dependency',declared).reviewed,false);
+});
 test('dependency audit preserves alternative licenses and exposes actual distribution gaps',()=>{
   const out=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-licenses-'));
   try{

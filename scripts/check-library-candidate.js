@@ -16,14 +16,14 @@ async function candidate(out=path.join(ROOT,'out/distribution-audit')){
     cp.execFileSync('npm',['install',...archives,'--offline','--ignore-scripts','--no-audit','--no-fund'],{cwd:temp,stdio:'pipe'});
     const lock=JSON.parse(fs.readFileSync(path.join(temp,'package-lock.json')));
     const installed=Object.keys(lock.packages).filter(Boolean).sort();
-    assert.deepEqual(installed,['node_modules/@stipra/canvas','node_modules/@stipra/core','node_modules/@stipra/inputs']);
+    assert.deepEqual(installed,['node_modules/@yigit-denktas/stipra-canvas','node_modules/@yigit-denktas/stipra-core','node_modules/@yigit-denktas/stipra-inputs']);
     fs.writeFileSync(path.join(temp,'consumer.mjs'),`
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {renderLayers} from '@stipra/core';
-import {mapRegions,regionProject,replayRegions} from '@stipra/inputs';
-import {captureRegions} from '@stipra/inputs/canvas';
-import {captureCanvas} from '@stipra/canvas';
+import {renderLayers} from '@yigit-denktas/stipra-core';
+import {mapRegions,regionProject,replayRegions} from '@yigit-denktas/stipra-inputs';
+import {captureRegions} from '@yigit-denktas/stipra-inputs/canvas';
+import {captureCanvas} from '@yigit-denktas/stipra-canvas';
 const require=createRequire(import.meta.url);
 const width=3,height=1,rgba=new Uint8ClampedArray([0,0,0,255,0,0,0,128,0,0,0,0]);
 const source={width,height,getContext:()=>({getImageData:()=>({data:rgba.slice(),colorSpace:'srgb'})})};
@@ -31,11 +31,11 @@ assert.deepEqual([...captureCanvas(source).input.rgba],[...rgba]);
 const regions=captureRegions({regions:[{id:'drawing',name:'Drawing',source,polarity:'alpha',provenance:{kind:'authored'}}]});
 assert.deepEqual([...regions.regions[0].coverage],[255,128,0]);
 const mapping={version:1,paper:'#ffffff',inks:[{id:'green',name:'Green',color:'#006043',combine:'max',regions:[{id:'drawing'}]}]};
-const mapped=mapRegions(regions,mapping),cjs=require('@stipra/inputs').mapRegions(regions,mapping);
+const mapped=mapRegions(regions,mapping),cjs=require('@yigit-denktas/stipra-inputs').mapRegions(regions,mapping);
 assert.deepEqual(mapped,cjs);
 const options={seed:42};
 const rendered=renderLayers(mapped.input,options);
-assert.deepEqual(rendered,require('@stipra/core').renderLayers(cjs.input,options));
+assert.deepEqual(rendered,require('@yigit-denktas/stipra-core').renderLayers(cjs.input,options));
 assert.deepEqual(replayRegions(regionProject(regions,mapping)).input,mapped.input);
 assert.deepEqual([...regions.regions[0].coverage],[255,128,0]);
 assert.equal(rendered.proof.width,width);assert.equal(rendered.proof.height,height);
@@ -43,19 +43,19 @@ console.log(JSON.stringify({publicExports:true,esmCjsParity:true,canvasRegionCor
 `);
     const checks=JSON.parse(cp.execFileSync(process.execPath,['consumer.mjs'],{cwd:temp,encoding:'utf8',stdio:['ignore','pipe','pipe']}));
     fs.writeFileSync(path.join(temp,'consumer.mts'),`
-import {renderLayers} from '@stipra/core';
-import {captureCanvas} from '@stipra/canvas';
-import {mapRegions} from '@stipra/inputs';
-import {captureRegions} from '@stipra/inputs/canvas';
+import {renderLayers} from '@yigit-denktas/stipra-core';
+import {captureCanvas} from '@yigit-denktas/stipra-canvas';
+import {mapRegions} from '@yigit-denktas/stipra-inputs';
+import {captureRegions} from '@yigit-denktas/stipra-inputs/canvas';
 const source=document.createElement('canvas');captureCanvas(source);
 const regions=captureRegions({regions:[{id:'drawing',name:'Drawing',source,polarity:'alpha',provenance:{kind:'authored'}}]});
 renderLayers(mapRegions(regions,{version:1,paper:'#ffffff',inks:[{id:'green',name:'Green',color:'#006043',combine:'max',regions:[{id:'drawing'}]}]}).input);
 `);
     cp.execFileSync(process.execPath,[require.resolve('typescript/bin/tsc'),'--strict','--noEmit','--target','ES2020','--module','NodeNext','--moduleResolution','NodeNext','consumer.mts'],{cwd:temp,stdio:'pipe'});
-    const report={contract:'stipra-library-candidate-v1',status:'verified-private-candidate',node:process.version,
+    const report={contract:'stipra-library-candidate-v1',status:'verified-packed-candidate',node:process.version,
       packages:audit.packages.map(({name,version,tarball})=>({name,version,tarball})),installed,
       checks:{...checks,offlineInstall:true,lifecycleScriptsDisabled:true,typescriptPublicExports:true},
-      gates:{registryPublished:false,ownerPublicationDecision:'pending',independentArtistTrial:'not-performed',physicalPrintValidation:'not-performed',
+      gates:{registryVerification:'not-queried-by-this-command',ownerPublicationDecision:'experimental-alpha-authorized',independentArtistTrial:'not-performed',physicalPrintValidation:'not-performed',
         broadExportDistribution:'Native Skia inventory remains review-required. Browser exporter uses the separately checked source-mapped Fontkit replacement; fonteditor is removed. All remain outside these lean tarballs.'},
       scope:'Exact tarballs only. Canvas fixture tests capture/region mapping, not browser rendering; real Chromium/p5 checks are separate CI evidence.'};
     fs.writeFileSync(path.join(out,'library-candidate.json'),JSON.stringify(report,null,2)+'\n');return report;

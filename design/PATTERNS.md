@@ -23,7 +23,7 @@ The source of truth is the actual CSS and generated HTML: `web/stipra/shared.css
 
 **Input:** route and local site navigation. **Output:** a readable page with one main landmark and meaningful links. **Failure states:** route not found, link invalid, mobile menu impossible to reach, keyboard focus invisible.
 
-The four primary destinations are Studio / Guide / Roadmap / Changelog. Sketches, Regions and Site map remain inside a native `details` “More” disclosure. Do not duplicate the complete site map as seven equally dominant navigation tabs. The site map is a reference destination, not a marketing page.
+The four primary destinations are Studio / Guide / Roadmap / Changelog. Sketches, Regions, Delivery map and Site map remain inside a native `details` “More” disclosure. Do not duplicate the complete site map as seven equally dominant navigation tabs. The site map is a reference destination, not a marketing page.
 
 The global wordmark, ink-colored links, paper ground and font families come from shared CSS. Do not copy-paste a second palette into every page. Use real page-specific composition below the shared shell.
 
@@ -34,7 +34,7 @@ The global wordmark, ink-colored links, paper ground and font families come from
 - “Implemented” = engineering behavior exists. Do not imply human acceptance.
 - “Digital evidence” = named browser/Node/geometry checks exist. Do not imply press output is calibrated.
 - “Pending” = evidence not yet accepted. State which printer, artist, accessibility or licence check is missing.
-- “Published” = a version + timestamp + release URL **from a genuine release event**.
+- “Published” = channel-specific evidence: verified registry archives/consumer for the npm library; a version + actual timestamp + URL from a genuine GitHub release event for repository releases. Registry verification time is not an invented publication date.
 - “Planned” = objective without a committed date unless deliberately approved.
 
 **Forbidden shortcut:** show `17/33 features complete = 51.52% release readiness`. Capability size and evidence differ; this count measures nothing comparable. Use concrete tasks and real gate outcomes.

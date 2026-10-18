@@ -1,0 +1,5065 @@
+{
+  "contract": "stipra-skia-results-v1",
+  "comparisons": {
+    "decode": {
+      "records": [
+        {
+          "id": "color-reference-jpeg-reference.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "color-reference-linear-jpeg.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "color-reference-linear.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "color-reference-reference.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "color-reference-untagged.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-1.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-2.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-3.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-4.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-5.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-6.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-7.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "exif-8.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "fills.svg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "frozen-alpha.webp",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "frozen.jpg",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "png-boundaries-apng.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: animated PNG unsupported; export an explicit still frame first",
+            "import: animated PNG unsupported; export an explicit still frame first"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-combinedSignals.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: combined PNG cICP/ICC color signals are not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: combined PNG cICP/ICC color signals are not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-displayP3.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-hlg.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-identityExif.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "png-boundaries-invalidDepth.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: unsupported PNG bit depth/color type",
+            "import: unsupported PNG bit depth/color type"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-lightLevel.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG mastering/light-level metadata is not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: PNG mastering/light-level metadata is not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-mastering.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG mastering/light-level metadata is not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: PNG mastering/light-level metadata is not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-pq.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG",
+            "import: PNG cICP color signal is not validated; convert explicitly to an SDR sRGB still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-rotatedExif.png",
+          "sourcesUnchanged": true,
+          "errors": [
+            "import: PNG EXIF orientation is not yet normalized; export an orientation-normalized still PNG",
+            "import: PNG EXIF orientation is not yet normalized; export an orientation-normalized still PNG"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        },
+        {
+          "id": "png-boundaries-sdr16.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "png-boundaries-srgb.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "rgba-33x49.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "rgba-49x33.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "rgba-49x49.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "rgba-97x61.png",
+          "sourcesUnchanged": true,
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "metadataEqual": true
+        },
+        {
+          "id": "unsafe.svg",
+          "sourcesUnchanged": true,
+          "errors": [
+            "svg: unsupported element <image> (no scripts, fonts, filters, images, links or foreignObject)",
+            "svg: unsupported element <image> (no scripts, fonts, filters, images, links or foreignObject)"
+          ],
+          "expectedRejection": true,
+          "rejectionEqual": true
+        }
+      ],
+      "backend": [
+        {
+          "version": "3.0.8",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "threads": 8,
+            "error": "Could not create Vulkan instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v3/node_modules/skia-canvas/lib/skia.node",
+              "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9"
+            }
+          ]
+        },
+        {
+          "version": "4.0.0",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "msaa": [
+              0
+            ],
+            "threads": 8,
+            "error": "Vulkan: Could not create instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v4/node_modules/@skia-canvas/linux-x64-glibc/skia.node",
+              "sha256": "ac225acac7ec2f920f48e76c48848ff30529566e02526286a35a2594103dd691"
+            }
+          ]
+        }
+      ]
+    },
+    "masks": {
+      "records": [
+        {
+          "id": "49x33-base-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x33-base-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            603,
+            487
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-base-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            360,
+            297
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-base-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            930,
+            610
+          ]
+        },
+        {
+          "id": "49x33-base-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2545,
+            2545
+          ]
+        },
+        {
+          "id": "49x33-base-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2006,
+            2006
+          ]
+        },
+        {
+          "id": "49x33-forest-contrast-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x33-forest-contrast-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            940,
+            1852
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-forest-contrast-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            436,
+            357
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-forest-contrast-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            2188,
+            2280
+          ]
+        },
+        {
+          "id": "49x33-forest-contrast-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2449,
+            2449
+          ]
+        },
+        {
+          "id": "49x33-forest-contrast-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            1604,
+            1604
+          ]
+        },
+        {
+          "id": "49x33-coast-duotone-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x33-coast-duotone-plate-blue",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            366,
+            474
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-coast-duotone-plate-warm",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            489,
+            389
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x33-coast-duotone-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1367,
+            1049
+          ]
+        },
+        {
+          "id": "49x33-coast-duotone-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2787,
+            2787
+          ]
+        },
+        {
+          "id": "49x33-coast-duotone-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            1824,
+            1824
+          ]
+        },
+        {
+          "id": "33x49-base-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "33x49-base-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            613,
+            495
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-base-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            346,
+            298
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-base-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            912,
+            617
+          ]
+        },
+        {
+          "id": "33x49-base-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2622,
+            2622
+          ]
+        },
+        {
+          "id": "33x49-base-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2094,
+            2094
+          ]
+        },
+        {
+          "id": "33x49-forest-contrast-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "33x49-forest-contrast-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            913,
+            1833
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-forest-contrast-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            435,
+            372
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-forest-contrast-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            2093,
+            2250
+          ]
+        },
+        {
+          "id": "33x49-forest-contrast-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2327,
+            2327
+          ]
+        },
+        {
+          "id": "33x49-forest-contrast-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            1534,
+            1534
+          ]
+        },
+        {
+          "id": "33x49-coast-duotone-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "33x49-coast-duotone-plate-blue",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            326,
+            379
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-coast-duotone-plate-warm",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            500,
+            412
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "33x49-coast-duotone-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1215,
+            898
+          ]
+        },
+        {
+          "id": "33x49-coast-duotone-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2895,
+            2895
+          ]
+        },
+        {
+          "id": "33x49-coast-duotone-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            1892,
+            1892
+          ]
+        },
+        {
+          "id": "49x49-base-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x49-base-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            804,
+            647
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-base-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            402,
+            345
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-base-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1198,
+            828
+          ]
+        },
+        {
+          "id": "49x49-base-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            3365,
+            3365
+          ]
+        },
+        {
+          "id": "49x49-base-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2648,
+            2648
+          ]
+        },
+        {
+          "id": "49x49-forest-contrast-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x49-forest-contrast-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1218,
+            2305
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-forest-contrast-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            549,
+            448
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-forest-contrast-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            3016,
+            2905
+          ]
+        },
+        {
+          "id": "49x49-forest-contrast-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            3178,
+            3178
+          ]
+        },
+        {
+          "id": "49x49-forest-contrast-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2008,
+            2008
+          ]
+        },
+        {
+          "id": "49x49-coast-duotone-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "49x49-coast-duotone-plate-blue",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            389,
+            488
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-coast-duotone-plate-warm",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            644,
+            515
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "49x49-coast-duotone-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1686,
+            1282
+          ]
+        },
+        {
+          "id": "49x49-coast-duotone-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            3781,
+            3781
+          ]
+        },
+        {
+          "id": "49x49-coast-duotone-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            2372,
+            2372
+          ]
+        },
+        {
+          "id": "97x61-base-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "97x61-base-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1660,
+            1276
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-base-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            772,
+            657
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-base-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            2583,
+            1692
+          ]
+        },
+        {
+          "id": "97x61-base-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            7607,
+            7607
+          ]
+        },
+        {
+          "id": "97x61-base-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            5534,
+            5534
+          ]
+        },
+        {
+          "id": "97x61-forest-contrast-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "97x61-forest-contrast-plate-key",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            2278,
+            3647
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-forest-contrast-plate-accent",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1034,
+            846
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-forest-contrast-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            6267,
+            5018
+          ]
+        },
+        {
+          "id": "97x61-forest-contrast-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            7100,
+            7100
+          ]
+        },
+        {
+          "id": "97x61-forest-contrast-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            3948,
+            3948
+          ]
+        },
+        {
+          "id": "97x61-coast-duotone-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        },
+        {
+          "id": "97x61-coast-duotone-plate-blue",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            562,
+            806
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-coast-duotone-plate-warm",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1155,
+            913
+          ],
+          "printEqual": true
+        },
+        {
+          "id": "97x61-coast-duotone-proof-png",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            3448,
+            2539
+          ]
+        },
+        {
+          "id": "97x61-coast-duotone-proof-jpg",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            8265,
+            8265
+          ]
+        },
+        {
+          "id": "97x61-coast-duotone-proof-webp",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": true,
+          "encodedBytes": [
+            4578,
+            4578
+          ]
+        },
+        {
+          "id": "authored-layers-js",
+          "sourcesUnchanged": true,
+          "jsEqual": true
+        }
+      ],
+      "backend": [
+        {
+          "version": "3.0.8",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "threads": 8,
+            "error": "Could not create Vulkan instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v3/node_modules/skia-canvas/lib/skia.node",
+              "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9"
+            }
+          ]
+        },
+        {
+          "version": "4.0.0",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "msaa": [
+              0
+            ],
+            "threads": 8,
+            "error": "Vulkan: Could not create instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v4/node_modules/@skia-canvas/linux-x64-glibc/skia.node",
+              "sha256": "ac225acac7ec2f920f48e76c48848ff30529566e02526286a35a2594103dd691"
+            }
+          ]
+        }
+      ]
+    },
+    "fonts": {
+      "records": [
+        {
+          "id": "Trial-Sans-400-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12629,
+            8917
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 476.2900085449219,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 476.2900085449219,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 476.2872009277344,
+              "actualBoundingBoxLeft": -2.296875,
+              "actualBoundingBoxRight": 470.19976806640625,
+              "actualBoundingBoxAscent": 47.359375,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Sans-400-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12629,
+            8917
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 476.2900085449219,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 476.2900085449219,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 476.2872009277344,
+              "actualBoundingBoxLeft": -2.296875,
+              "actualBoundingBoxRight": 470.19976806640625,
+              "actualBoundingBoxAscent": 47.359375,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Trial-Sans-700-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12631,
+            8967
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 497.1499938964844,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 497.1499938964844,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 497.1511535644531,
+              "actualBoundingBoxLeft": -1.65625,
+              "actualBoundingBoxRight": 493.251220703125,
+              "actualBoundingBoxAscent": 47.9375,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Sans-700-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12631,
+            8967
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 497.1499938964844,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 497.1499938964844,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 497.1511535644531,
+              "actualBoundingBoxLeft": -1.65625,
+              "actualBoundingBoxRight": 493.251220703125,
+              "actualBoundingBoxAscent": 47.9375,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Trial-Mono-400-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13184,
+            9413
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 652.7999877929688,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 652.7999877929688,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 652.798828125,
+              "actualBoundingBoxLeft": -4.28125,
+              "actualBoundingBoxRight": 647.55517578125,
+              "actualBoundingBoxAscent": 47.875,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Mono-400-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13184,
+            9413
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 652.7999877929688,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 652.7999877929688,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 652.798828125,
+              "actualBoundingBoxLeft": -4.28125,
+              "actualBoundingBoxRight": 647.55517578125,
+              "actualBoundingBoxAscent": 47.875,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Trial-Mono-700-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13066,
+            9387
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 652.7999877929688,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 652.7999877929688,
+              "actualBoundingBoxAscent": 48.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 652.798828125,
+              "actualBoundingBoxLeft": -3.140625,
+              "actualBoundingBoxRight": 649.91455078125,
+              "actualBoundingBoxAscent": 48.0625,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Mono-700-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13066,
+            9387
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 652.7999877929688,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 652.7999877929688,
+              "actualBoundingBoxAscent": 48.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 652.798828125,
+              "actualBoundingBoxLeft": -3.140625,
+              "actualBoundingBoxRight": 649.91455078125,
+              "actualBoundingBoxAscent": 48.0625,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Trial-Paper-400-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13224,
+            9508
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 659.3300170898438,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 659.3300170898438,
+              "actualBoundingBoxAscent": 49.119998931884766,
+              "actualBoundingBoxDescent": 11.880001068115234,
+              "fontBoundingBoxAscent": 61.119998931884766,
+              "fontBoundingBoxDescent": 15.680000305175781,
+              "emHeightAscent": 61.119998931884766,
+              "emHeightDescent": 15.680000305175781
+            },
+            {
+              "width": 659.326904296875,
+              "actualBoundingBoxLeft": -6.015625,
+              "actualBoundingBoxRight": 654.83984375,
+              "actualBoundingBoxAscent": 48.578125,
+              "actualBoundingBoxDescent": 11.640625,
+              "fontBoundingBoxAscent": 61.12,
+              "fontBoundingBoxDescent": 15.68,
+              "emHeightAscent": 50.93333333333333,
+              "emHeightDescent": 13.066666666666666
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Paper-400-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            13224,
+            9508
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 659.3300170898438,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 659.3300170898438,
+              "actualBoundingBoxAscent": 49.119998931884766,
+              "actualBoundingBoxDescent": 11.880001068115234,
+              "fontBoundingBoxAscent": 61.119998931884766,
+              "fontBoundingBoxDescent": 15.680000305175781,
+              "emHeightAscent": 61.119998931884766,
+              "emHeightDescent": 15.680000305175781
+            },
+            {
+              "width": 659.326904296875,
+              "actualBoundingBoxLeft": -6.015625,
+              "actualBoundingBoxRight": 654.83984375,
+              "actualBoundingBoxAscent": 48.578125,
+              "actualBoundingBoxDescent": 11.640625,
+              "fontBoundingBoxAscent": 61.12,
+              "fontBoundingBoxDescent": 15.68,
+              "emHeightAscent": 50.93333333333333,
+              "emHeightDescent": 13.066666666666666
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Trial-Paper-800-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12112,
+            8928
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 659.3300170898438,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 659.3300170898438,
+              "actualBoundingBoxAscent": 49.119998931884766,
+              "actualBoundingBoxDescent": 11.880001068115234,
+              "fontBoundingBoxAscent": 61.119998931884766,
+              "fontBoundingBoxDescent": 15.680000305175781,
+              "emHeightAscent": 61.119998931884766,
+              "emHeightDescent": 15.680000305175781
+            },
+            {
+              "width": 659.326904296875,
+              "actualBoundingBoxLeft": -5.125,
+              "actualBoundingBoxRight": 655.41796875,
+              "actualBoundingBoxAscent": 48.578125,
+              "actualBoundingBoxDescent": 11.640625,
+              "fontBoundingBoxAscent": 61.12,
+              "fontBoundingBoxDescent": 15.68,
+              "emHeightAscent": 50.93333333333333,
+              "emHeightDescent": 13.066666666666666
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Trial-Paper-800-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12112,
+            8928
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 659.3300170898438,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 659.3300170898438,
+              "actualBoundingBoxAscent": 49.119998931884766,
+              "actualBoundingBoxDescent": 11.880001068115234,
+              "fontBoundingBoxAscent": 61.119998931884766,
+              "fontBoundingBoxDescent": 15.680000305175781,
+              "emHeightAscent": 61.119998931884766,
+              "emHeightDescent": 15.680000305175781
+            },
+            {
+              "width": 659.326904296875,
+              "actualBoundingBoxLeft": -5.125,
+              "actualBoundingBoxRight": 655.41796875,
+              "actualBoundingBoxAscent": 48.578125,
+              "actualBoundingBoxDescent": 11.640625,
+              "fontBoundingBoxAscent": 61.12,
+              "fontBoundingBoxDescent": 15.68,
+              "emHeightAscent": 50.93333333333333,
+              "emHeightDescent": 13.066666666666666
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "Regular-Only-700-default",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": false,
+            "changedPixels": 4946,
+            "maxChannelDelta": 245,
+            "meanChannelDelta": 2.4937077205882354,
+            "alphaChangedPixels": 0,
+            "bbox": [
+              21,
+              51,
+              492,
+              114
+            ]
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12629,
+            8565
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 476.2900085449219,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 476.2900085449219,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 476.2872009277344,
+              "actualBoundingBoxLeft": -0.9108054637908936,
+              "actualBoundingBoxRight": 471.19976806640625,
+              "actualBoundingBoxAscent": 48.359375,
+              "actualBoundingBoxDescent": 13.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            null,
+            true
+          ]
+        },
+        {
+          "id": "Regular-Only-700-false",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12629,
+            8917
+          ],
+          "metricsEqual": false,
+          "metrics": [
+            {
+              "width": 476.2900085449219,
+              "actualBoundingBoxLeft": 0,
+              "actualBoundingBoxRight": 476.2900085449219,
+              "actualBoundingBoxAscent": 47.599998474121094,
+              "actualBoundingBoxDescent": 13.400001525878906,
+              "fontBoundingBoxAscent": 65.5999984741211,
+              "fontBoundingBoxDescent": 17.600000381469727,
+              "emHeightAscent": 65.5999984741211,
+              "emHeightDescent": 17.600000381469727
+            },
+            {
+              "width": 476.2872009277344,
+              "actualBoundingBoxLeft": -2.296875,
+              "actualBoundingBoxRight": 470.19976806640625,
+              "actualBoundingBoxAscent": 47.359375,
+              "actualBoundingBoxDescent": 12.796875,
+              "fontBoundingBoxAscent": 65.6,
+              "fontBoundingBoxDescent": 17.6,
+              "emHeightAscent": 49.92,
+              "emHeightDescent": 14.08
+            }
+          ],
+          "synthesis": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "qr-150-20",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            15814,
+            8193
+          ]
+        },
+        {
+          "id": "qr-150-25.4",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            8480,
+            5144
+          ]
+        },
+        {
+          "id": "qr-150-32",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            12595,
+            7231
+          ]
+        },
+        {
+          "id": "qr-300-20",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            34635,
+            19245
+          ]
+        },
+        {
+          "id": "qr-300-25.4",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            16245,
+            11192
+          ]
+        },
+        {
+          "id": "qr-300-32",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            36581,
+            23923
+          ]
+        },
+        {
+          "id": "qr-600-20",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            80038,
+            48610
+          ]
+        },
+        {
+          "id": "qr-600-25.4",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            47507,
+            35339
+          ]
+        },
+        {
+          "id": "qr-600-32",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            81108,
+            60444
+          ]
+        },
+        {
+          "id": "real-font-shaping",
+          "jsEqual": true
+        }
+      ],
+      "backend": [
+        {
+          "version": "3.0.8",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "threads": 8,
+            "error": "Could not create Vulkan instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v3/node_modules/skia-canvas/lib/skia.node",
+              "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9"
+            }
+          ]
+        },
+        {
+          "version": "4.0.0",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "msaa": [
+              0
+            ],
+            "threads": 8,
+            "error": "Vulkan: Could not create instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v4/node_modules/@skia-canvas/linux-x64-glibc/skia.node",
+              "sha256": "ac225acac7ec2f920f48e76c48848ff30529566e02526286a35a2594103dd691"
+            }
+          ]
+        }
+      ]
+    },
+    "paper": {
+      "records": [
+        {
+          "id": "paper-448x448-none",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            1821,
+            1819
+          ]
+        },
+        {
+          "id": "paper-448x448-fibre",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            51318,
+            33658
+          ]
+        },
+        {
+          "id": "paper-448x448-speckled",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": false,
+            "changedPixels": 656,
+            "maxChannelDelta": 1,
+            "meanChannelDelta": 0.0015856684470663266,
+            "alphaChangedPixels": 0,
+            "bbox": [
+              2,
+              3,
+              448,
+              448
+            ]
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            61287,
+            42629
+          ]
+        },
+        {
+          "id": "paper-1684x1191-none",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            10370,
+            10369
+          ]
+        },
+        {
+          "id": "paper-1684x1191-fibre",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": true,
+            "changedPixels": 0,
+            "maxChannelDelta": 0,
+            "meanChannelDelta": 0.0,
+            "alphaChangedPixels": 0,
+            "bbox": null
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            485836,
+            327396
+          ]
+        },
+        {
+          "id": "paper-1684x1191-speckled",
+          "dimensionsEqual": true,
+          "pixels": {
+            "equal": false,
+            "changedPixels": 7018,
+            "maxChannelDelta": 2,
+            "meanChannelDelta": 0.00176888321157693,
+            "alphaChangedPixels": 0,
+            "bbox": [
+              0,
+              0,
+              1682,
+              1191
+            ]
+          },
+          "encodedEqual": false,
+          "encodedBytes": [
+            602513,
+            418201
+          ]
+        }
+      ],
+      "backend": [
+        {
+          "version": "3.0.8",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "threads": 8,
+            "error": "Could not create Vulkan instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v3/node_modules/skia-canvas/lib/skia.node",
+              "sha256": "2363537634644a50b69d785411713d12ae62453c1238bb98842e65b9919777f9"
+            }
+          ]
+        },
+        {
+          "version": "4.0.0",
+          "node": "v24.19.0",
+          "platform": "linux",
+          "arch": "x64",
+          "engine": {
+            "renderer": "CPU",
+            "api": "Vulkan",
+            "device": "CPU-based renderer (Fallback)",
+            "driver": "N/A",
+            "msaa": [
+              0
+            ],
+            "threads": 8,
+            "error": "Vulkan: Could not create instance",
+            "textContrast": 0,
+            "textGamma": 1.4
+          },
+          "native": [
+            {
+              "path": "backends/v4/node_modules/@skia-canvas/linux-x64-glibc/skia.node",
+              "sha256": "ac225acac7ec2f920f48e76c48848ff30529566e02526286a35a2594103dd691"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "pdf": [
+    {
+      "id": "report-49x33",
+      "pageCounts": [
+        2,
+        2
+      ],
+      "pageSizesEqual": true,
+      "textAndFontsEqual": true,
+      "attachmentNamesEqual": true,
+      "attachmentContentEqual": {
+        "inks.json": true,
+        "screens.json": true,
+        "proof-screens.json": true,
+        "replay.json": true,
+        "report-layout.json": false,
+        "diagnostics.json": true
+      },
+      "renders": [
+        {
+          "page": 1,
+          "dpi": 150,
+          "rgbaSha256": [
+            "32b09c45db6bc4bb3690f940afae30b203d5f70d58e354bbeed149cc670c267d",
+            "2466636414c4dbab934679800caf9b92e5299d348ff6ebd65322ed3613a927c5"
+          ],
+          "equal": false,
+          "changedPixels": 7076,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.0012996654590359596,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            0,
+            1751,
+            1241
+          ]
+        },
+        {
+          "page": 2,
+          "dpi": 150,
+          "rgbaSha256": [
+            "3ad2f50153688e4bf06191077e74d26190c0d9c8ce0c11e729662794c2ff272e",
+            "33c0bd9fde548c44f9bf0c5dab74462d2634e984c6ef372b613283c16b3faaab"
+          ],
+          "equal": false,
+          "changedPixels": 9206,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.0016925742196724053,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            0,
+            1751,
+            1241
+          ]
+        },
+        {
+          "page": 1,
+          "dpi": 300,
+          "rgbaSha256": [
+            "4a4a7ab95dc959bc10118f8832de46b441b3eeb8a6764f0efe56650281aca383",
+            "069ecef9bca104cab2e1d9f7ae21c81cb98c970cc16fad56eee3b0bfa08c27e6"
+          ],
+          "equal": false,
+          "changedPixels": 28236,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.0013048139635459825,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            0,
+            3502,
+            2481
+          ]
+        },
+        {
+          "page": 2,
+          "dpi": 300,
+          "rgbaSha256": [
+            "fb8df8b9c7a0b9cc849f45d2e62b465a3cacd083083cd6ae678a0e40286d1ac5",
+            "b3c889fa0b55d8f07421abc7ff6506cafac100556a8c85517764411cd0852db5"
+          ],
+          "equal": false,
+          "changedPixels": 36701,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.001701730184751891,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            0,
+            3502,
+            2481
+          ]
+        }
+      ],
+      "qr": [
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        }
+      ],
+      "printEqual": true,
+      "packageImages": [
+        {
+          "path": "source/original.png",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "exports/proof.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "exports/proof.jpg",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "exports/proof.webp",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "source/normalized.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "proof/composite.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "proof/paper.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "plates/ink-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "screened/ink-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "plates/marked-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            97,
+            81
+          ]
+        },
+        {
+          "path": "plates/ink-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "screened/ink-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            49,
+            33
+          ]
+        },
+        {
+          "path": "plates/marked-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            97,
+            81
+          ]
+        }
+      ],
+      "paperPixels": {
+        "equal": false,
+        "changedPixels": 7018,
+        "maxChannelDelta": 2,
+        "meanChannelDelta": 0.00176888321157693,
+        "alphaChangedPixels": 0,
+        "bbox": [
+          0,
+          0,
+          1682,
+          1191
+        ]
+      }
+    },
+    {
+      "id": "fixed-paper-landscape",
+      "pageCounts": [
+        2,
+        2
+      ],
+      "pageSizesEqual": true,
+      "textAndFontsEqual": true,
+      "attachmentNamesEqual": true,
+      "attachmentContentEqual": {
+        "inks.json": true,
+        "screens.json": true,
+        "proof-screens.json": true,
+        "replay.json": true,
+        "report-layout.json": false,
+        "diagnostics.json": true
+      },
+      "renders": [
+        {
+          "page": 1,
+          "dpi": 150,
+          "rgbaSha256": [
+            "32b09c45db6bc4bb3690f940afae30b203d5f70d58e354bbeed149cc670c267d",
+            "32b09c45db6bc4bb3690f940afae30b203d5f70d58e354bbeed149cc670c267d"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 2,
+          "dpi": 150,
+          "rgbaSha256": [
+            "3ad2f50153688e4bf06191077e74d26190c0d9c8ce0c11e729662794c2ff272e",
+            "3ad2f50153688e4bf06191077e74d26190c0d9c8ce0c11e729662794c2ff272e"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 1,
+          "dpi": 300,
+          "rgbaSha256": [
+            "4a4a7ab95dc959bc10118f8832de46b441b3eeb8a6764f0efe56650281aca383",
+            "4a4a7ab95dc959bc10118f8832de46b441b3eeb8a6764f0efe56650281aca383"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 2,
+          "dpi": 300,
+          "rgbaSha256": [
+            "fb8df8b9c7a0b9cc849f45d2e62b465a3cacd083083cd6ae678a0e40286d1ac5",
+            "fb8df8b9c7a0b9cc849f45d2e62b465a3cacd083083cd6ae678a0e40286d1ac5"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        }
+      ],
+      "qr": [
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "report-33x49",
+      "pageCounts": [
+        2,
+        2
+      ],
+      "pageSizesEqual": true,
+      "textAndFontsEqual": true,
+      "attachmentNamesEqual": true,
+      "attachmentContentEqual": {
+        "inks.json": true,
+        "screens.json": true,
+        "proof-screens.json": true,
+        "replay.json": true,
+        "report-layout.json": false,
+        "diagnostics.json": true
+      },
+      "renders": [
+        {
+          "page": 1,
+          "dpi": 150,
+          "rgbaSha256": [
+            "25fb1689296590a27bb3799adc664579befd4a53da6cb574a002c615bb32fe81",
+            "51b698ed4309811efe38714a96141fb89505db5614fb87c8f4c85db2702f3453"
+          ],
+          "equal": false,
+          "changedPixels": 6021,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.00111877352743631,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            1,
+            1240,
+            1754
+          ]
+        },
+        {
+          "page": 2,
+          "dpi": 150,
+          "rgbaSha256": [
+            "1d48c56800c2ef3ad17d79bb3585a0021c96a9a942a1d27d95566062e9363a1a",
+            "4ee28bd1365872647b01af4b13aa8b228f0051fbccfd2c3231a230c5d1f15a3b"
+          ],
+          "equal": false,
+          "changedPixels": 9087,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.0016815484257463314,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            1,
+            1240,
+            1754
+          ]
+        },
+        {
+          "page": 1,
+          "dpi": 300,
+          "rgbaSha256": [
+            "5ba904344581105eacf47814b528995428417ea50a1201007f3d8ebb54365a31",
+            "20b7985e332b1576cce92b96e48d8b616da8d57825dd95457ba0b9d26d873e86"
+          ],
+          "equal": false,
+          "changedPixels": 24200,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.001119482985168466,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            1,
+            2479,
+            3508
+          ]
+        },
+        {
+          "page": 2,
+          "dpi": 300,
+          "rgbaSha256": [
+            "72afee900074665b449b04273f0e702bcd0176bc7cb08eab366a61044ecd02b9",
+            "1d452991b19261e8ed5f9cd0cfa0035afb6c7fb4d7d4a3c14999f101fa336671"
+          ],
+          "equal": false,
+          "changedPixels": 36441,
+          "maxChannelDelta": 2,
+          "meanChannelDelta": 0.0016911595399839235,
+          "alphaChangedPixels": 0,
+          "bbox": [
+            0,
+            1,
+            2479,
+            3508
+          ]
+        }
+      ],
+      "qr": [
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        }
+      ],
+      "printEqual": true,
+      "packageImages": [
+        {
+          "path": "source/original.png",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "exports/proof.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "exports/proof.jpg",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "exports/proof.webp",
+          "encodedEqual": true,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "source/normalized.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "proof/composite.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "proof/paper.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "plates/ink-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "screened/ink-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "plates/marked-01-key.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            81,
+            97
+          ]
+        },
+        {
+          "path": "plates/ink-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "screened/ink-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            33,
+            49
+          ]
+        },
+        {
+          "path": "plates/marked-02-accent.png",
+          "encodedEqual": false,
+          "pillowPixelsEqual": true,
+          "dimensions": [
+            81,
+            97
+          ]
+        }
+      ],
+      "paperPixels": {
+        "equal": false,
+        "changedPixels": 6974,
+        "maxChannelDelta": 2,
+        "meanChannelDelta": 0.0017637726336279021,
+        "alphaChangedPixels": 0,
+        "bbox": [
+          0,
+          1,
+          1190,
+          1684
+        ]
+      }
+    },
+    {
+      "id": "fixed-paper-portrait",
+      "pageCounts": [
+        2,
+        2
+      ],
+      "pageSizesEqual": true,
+      "textAndFontsEqual": true,
+      "attachmentNamesEqual": true,
+      "attachmentContentEqual": {
+        "inks.json": true,
+        "screens.json": true,
+        "proof-screens.json": true,
+        "replay.json": true,
+        "report-layout.json": false,
+        "diagnostics.json": true
+      },
+      "renders": [
+        {
+          "page": 1,
+          "dpi": 150,
+          "rgbaSha256": [
+            "25fb1689296590a27bb3799adc664579befd4a53da6cb574a002c615bb32fe81",
+            "25fb1689296590a27bb3799adc664579befd4a53da6cb574a002c615bb32fe81"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 2,
+          "dpi": 150,
+          "rgbaSha256": [
+            "1d48c56800c2ef3ad17d79bb3585a0021c96a9a942a1d27d95566062e9363a1a",
+            "1d48c56800c2ef3ad17d79bb3585a0021c96a9a942a1d27d95566062e9363a1a"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 1,
+          "dpi": 300,
+          "rgbaSha256": [
+            "5ba904344581105eacf47814b528995428417ea50a1201007f3d8ebb54365a31",
+            "5ba904344581105eacf47814b528995428417ea50a1201007f3d8ebb54365a31"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 2,
+          "dpi": 300,
+          "rgbaSha256": [
+            "72afee900074665b449b04273f0e702bcd0176bc7cb08eab366a61044ecd02b9",
+            "72afee900074665b449b04273f0e702bcd0176bc7cb08eab366a61044ecd02b9"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        }
+      ],
+      "qr": [
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 2,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qr-specimen",
+      "pageCounts": [
+        1,
+        1
+      ],
+      "pageSizesEqual": true,
+      "textAndFontsEqual": true,
+      "attachmentNamesEqual": true,
+      "attachmentContentEqual": {},
+      "renders": [
+        {
+          "page": 1,
+          "dpi": 150,
+          "rgbaSha256": [
+            "cc92ce22c7e4d08575e5477ad549f2536a940e4b0e311ecfc618e9b0feed694d",
+            "cc92ce22c7e4d08575e5477ad549f2536a940e4b0e311ecfc618e9b0feed694d"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        },
+        {
+          "page": 1,
+          "dpi": 300,
+          "rgbaSha256": [
+            "fd5d4f210e9bbf29e11d107e32dc77d8886047442ec7262339a955f87568919f",
+            "fd5d4f210e9bbf29e11d107e32dc77d8886047442ec7262339a955f87568919f"
+          ],
+          "equal": true,
+          "changedPixels": 0,
+          "maxChannelDelta": 0,
+          "meanChannelDelta": 0.0,
+          "alphaChangedPixels": 0,
+          "bbox": null
+        }
+      ],
+      "qr": [
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 20,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 150,
+          "mm": 32,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 20,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 150,
+          "mm": 32,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 20,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v3",
+          "page": 1,
+          "dpi": 300,
+          "mm": 32,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 20,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 25.4,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        },
+        {
+          "version": "v4",
+          "page": 1,
+          "dpi": 300,
+          "mm": 32,
+          "results": [
+            {
+              "mode": "RGB",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            },
+            {
+              "mode": "L",
+              "passed": true,
+              "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "memory": {
+    "v3": [
+      {
+        "trial": "memory-1",
+        "requireMs": 20.044300000000007,
+        "canvasMs": 0.6140940000000086,
+        "decodeMs": 0.44553100000000256,
+        "encodeMs": 30.256918999999996,
+        "medianExportMs": 28.178548999999975,
+        "rssStart": 58019840,
+        "rssEnd": 58019840,
+        "rssMin": 58019840,
+        "rssMax": 58019840,
+        "maxRssKiB": 56660,
+        "samples": 60
+      },
+      {
+        "trial": "memory-2",
+        "requireMs": 15.360394,
+        "canvasMs": 0.3956459999999993,
+        "decodeMs": 0.30898500000000695,
+        "encodeMs": 24.144043999999994,
+        "medianExportMs": 26.05495350000001,
+        "rssStart": 60665856,
+        "rssEnd": 60665856,
+        "rssMin": 60665856,
+        "rssMax": 60665856,
+        "maxRssKiB": 59244,
+        "samples": 60
+      },
+      {
+        "trial": "memory-3",
+        "requireMs": 15.13619700000001,
+        "canvasMs": 0.4278839999999917,
+        "decodeMs": 0.34067300000000955,
+        "encodeMs": 28.213566999999998,
+        "medianExportMs": 27.037131999999957,
+        "rssStart": 57683968,
+        "rssEnd": 57815040,
+        "rssMin": 57683968,
+        "rssMax": 57815040,
+        "maxRssKiB": 56460,
+        "samples": 60
+      }
+    ],
+    "v4": [
+      {
+        "trial": "memory-1",
+        "requireMs": 17.799988,
+        "canvasMs": 0.5821559999999977,
+        "decodeMs": 0.5116900000000015,
+        "encodeMs": 12.788865999999999,
+        "medianExportMs": 11.206021999999962,
+        "rssStart": 56070144,
+        "rssEnd": 59084800,
+        "rssMin": 56070144,
+        "rssMax": 59084800,
+        "maxRssKiB": 57700,
+        "samples": 60
+      },
+      {
+        "trial": "memory-2",
+        "requireMs": 15.611564000000001,
+        "canvasMs": 0.6202540000000027,
+        "decodeMs": 0.38192399999999793,
+        "encodeMs": 10.429324000000008,
+        "medianExportMs": 10.88865050000004,
+        "rssStart": 56414208,
+        "rssEnd": 62705664,
+        "rssMin": 56414208,
+        "rssMax": 62705664,
+        "maxRssKiB": 61236,
+        "samples": 60
+      },
+      {
+        "trial": "memory-3",
+        "requireMs": 14.093598999999998,
+        "canvasMs": 0.795607000000004,
+        "decodeMs": 0.40258599999999944,
+        "encodeMs": 10.207772000000006,
+        "medianExportMs": 9.96586499999998,
+        "rssStart": 56451072,
+        "rssEnd": 62349312,
+        "rssMin": 56451072,
+        "rssMax": 62349312,
+        "maxRssKiB": 60888,
+        "samples": 60
+      }
+    ]
+  },
+  "stops": [
+    {
+      "group": "fonts",
+      "id": "Trial-Sans-400-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Sans-400-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Sans-700-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Sans-700-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Mono-400-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Mono-400-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Mono-700-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Mono-700-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Paper-400-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Paper-400-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Paper-800-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Trial-Paper-800-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Regular-Only-700-default",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "fonts",
+      "id": "Regular-Only-700-default",
+      "reason": "Missing-face default synthesizes bold in v4"
+    },
+    {
+      "group": "fonts",
+      "id": "Regular-Only-700-false",
+      "reason": "Canvas text metrics changed; review callers"
+    },
+    {
+      "group": "paper",
+      "id": "paper-448x448-speckled",
+      "reason": "Mask, decoded artwork or geometry changed"
+    },
+    {
+      "group": "paper",
+      "id": "paper-1684x1191-speckled",
+      "reason": "Mask, decoded artwork or geometry changed"
+    },
+    {
+      "group": "pdf",
+      "id": "report-49x33",
+      "reason": "Page geometry, fonts, text or decoded page pixels changed"
+    },
+    {
+      "group": "pdf",
+      "id": "report-33x49",
+      "reason": "Page geometry, fonts, text or decoded page pixels changed"
+    }
+  ],
+  "qr": [
+    {
+      "id": "qr-150-20",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-150-20",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-150-25.4",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-150-25.4",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-150-32",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-150-32",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-20",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-20",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-25.4",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-25.4",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-32",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-300-32",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-20",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-20",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-25.4",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-25.4",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-32",
+      "version": "v3",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    },
+    {
+      "id": "qr-600-32",
+      "version": "v4",
+      "results": [
+        {
+          "mode": "RGB",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        },
+        {
+          "mode": "L",
+          "passed": true,
+          "decoded": "https://apps.yigitdenktas.com/stipra/guide/"
+        }
+      ]
+    }
+  ],
+  "independentChecks": [
+    {
+      "id": "49x33-base-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-base-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-base-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-base-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-forest-contrast-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-forest-contrast-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-forest-contrast-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-forest-contrast-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-coast-duotone-plate-blue",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-coast-duotone-plate-blue",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-coast-duotone-plate-warm",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x33-coast-duotone-plate-warm",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-base-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-base-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-base-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-base-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-forest-contrast-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-forest-contrast-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-forest-contrast-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-forest-contrast-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-coast-duotone-plate-blue",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-coast-duotone-plate-blue",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-coast-duotone-plate-warm",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "33x49-coast-duotone-plate-warm",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-base-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-base-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-base-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-base-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-forest-contrast-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-forest-contrast-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-forest-contrast-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-forest-contrast-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-coast-duotone-plate-blue",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-coast-duotone-plate-blue",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-coast-duotone-plate-warm",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "49x49-coast-duotone-plate-warm",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-base-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-base-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-base-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-base-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-forest-contrast-plate-key",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-forest-contrast-plate-key",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-forest-contrast-plate-accent",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-forest-contrast-plate-accent",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-coast-duotone-plate-blue",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-coast-duotone-plate-blue",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-coast-duotone-plate-warm",
+      "version": "v3",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    },
+    {
+      "id": "97x61-coast-duotone-plate-warm",
+      "version": "v4",
+      "grayscalePolarity": true,
+      "density300": true,
+      "originZero": true
+    }
+  ],
+  "references": [
+    {
+      "version": "v3",
+      "id": "linear-LittleCMS-reference",
+      "maxSampleDelta": 0,
+      "tolerance": 2,
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "linear-jpeg-LittleCMS-reference",
+      "maxSampleDelta": 0,
+      "tolerance": 2,
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-1-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-2-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-3-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-4-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-5-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-6-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-7-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v3",
+      "id": "exif-8-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "linear-LittleCMS-reference",
+      "maxSampleDelta": 0,
+      "tolerance": 2,
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "linear-jpeg-LittleCMS-reference",
+      "maxSampleDelta": 0,
+      "tolerance": 2,
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-1-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-2-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-3-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-4-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-5-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-6-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-7-orientation-once",
+      "passed": true
+    },
+    {
+      "version": "v4",
+      "id": "exif-8-orientation-once",
+      "passed": true
+    }
+  ],
+  "failure": [
+    {
+      "version": "v3",
+      "mode": "platform payload omitted from isolated copy",
+      "exitCode": 1,
+      "error": "node:internal/modules/cjs/loader:1520\n  throw err;\n  ^\n\nError: Cannot find module '../skia.node'\nRequire stack:\n- $EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/classes/neon.js\n- $EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/classes/canvas.js\n- $EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/index.js\n- $SCRATCH\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1517:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1122:12)\n    at Module._load (node:internal/modules/cjs/loader:1294:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\n    at require (node:internal/modules/helpers:153:16)\n    at Object.<anonymous> ($EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/classes/neon.js:18:29)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    '$EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/classes/neon.js',\n    '$EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/classes/canvas.js',\n    '$EXPERIMENT/failure/v3/node_modules/skia-canvas/lib/index.js',\n    '$SCRATCH'\n  ]\n}\n\nNode.js v24.19.0\n",
+      "stdout": "",
+      "failedLoudly": true
+    },
+    {
+      "version": "v4",
+      "mode": "platform payload omitted from isolated copy",
+      "exitCode": 1,
+      "error": "$EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:129\n      if (e.code == 'MODULE_NOT_FOUND') throw new Error(nativeModuleNotFound(dlopenError), {cause:e}) // package not installed\n                                        ^\n\nError: Skia Canvas could not find a native binary for this platform (linux-x64-glibc).\n\nThe \"@skia-canvas/linux-x64-glibc\" package should have been installed automatically as an optional\ndependency but is not present.\n\nSome likely causes:\n \u2022 node_modules was copied over from a machine running a different OS or architecture\n \u2022 optional dependencies were disabled during install (--no-optional / --omit=optional)\n \u2022 you're using pnpm/yarn without specifying supportedArchitectures for this system\n\nTo fix it:\n \u2022 delete node_modules and re-run \"npm install\" on this machine\n \u2022 add a supportedArchitectures entry to pnpm-workspace.yaml or .yarnrc.yml, then reinstall\n \u2022 if all else fails, you can try to fetch or compile the library with:\n   node node_modules/skia-canvas/lib/prebuild.mjs download --or-compile\n\n    at attempt ($EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:129:47)\n    at loadNative ($EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:145:9)\n    at Object.<anonymous> ($EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:23:29)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\n    at require (node:internal/modules/helpers:153:16) {\n  [cause]: Error: Cannot find module '@skia-canvas/linux-x64-glibc'\n  Require stack:\n  - $EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js\n  - $EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/canvas.js\n  - $EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/index.js\n  - $SCRATCH\n      at Module._resolveFilename (node:internal/modules/cjs/loader:1517:15)\n      at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)\n      at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)\n      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1122:12)\n      at Module._load (node:internal/modules/cjs/loader:1294:5)\n      at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n      at Module.require (node:internal/modules/cjs/loader:1617:12)\n      at require (node:internal/modules/helpers:153:16)\n      at $EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:145:23\n      at attempt ($EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js:127:17) {\n    code: 'MODULE_NOT_FOUND',\n    requireStack: [\n      '$EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/neon.js',\n      '$EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/classes/canvas.js',\n      '$EXPERIMENT/failure/v4/node_modules/skia-canvas/lib/index.js',\n      '$SCRATCH'\n    ]\n  }\n}\n\nNode.js v24.19.0\n",
+      "stdout": "",
+      "failedLoudly": true
+    }
+  ],
+  "promotion": "stop-and-review"
+}
