@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-18",
+      "title": "Personal-scope experimental library release candidate",
+      "status": "Unreleased",
+      "issues": [
+        70
+      ],
+      "changes": [
+        "Prepare @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs at 0.1.0-alpha.1 with matching peers and public API examples.",
+        "Audit exact package identities, alpha tag and npm registry; reject altered publication settings.",
+        "Owner supplied verified account and experimental publication authorization; authenticated registry publication remains pending."
+      ]
+    },
+    {
+      "date": "2026-10-18",
       "title": "Native component source map and personal publisher scope",
       "status": "Unreleased",
       "issues": [

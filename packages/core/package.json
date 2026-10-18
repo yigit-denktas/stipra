@@ -1,7 +1,7 @@
 {
-  "name": "@stipra/core",
-  "version": "0.1.0-alpha.0",
-  "private": true,
+  "name": "@yigit-denktas/stipra-core",
+  "version": "0.1.0-alpha.1",
+  "private": false,
   "description": "Stiprā's deterministic ink separation and screening core",
   "license": "MIT",
   "type": "commonjs",
@@ -9,12 +9,36 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.mts", "default": "./dist/index.mjs" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "files": ["dist/index.mjs", "dist/index.cjs", "dist/index.d.mts", "dist/index.d.cts", "LICENSE", "README.md"],
+  "files": [
+    "dist/index.mjs",
+    "dist/index.cjs",
+    "dist/index.d.mts",
+    "dist/index.d.cts",
+    "LICENSE",
+    "README.md"
+  ],
   "sideEffects": false,
-  "repository": { "type": "git", "url": "https://github.com/yigit-denktas/stipra.git", "directory": "packages/core" },
-  "engines": { "node": ">=20" }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yigit-denktas/stipra.git",
+    "directory": "packages/core"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "alpha"
+  }
 }

@@ -6,7 +6,7 @@ Updated 17 October 2026. [Structured-artwork decision](STRUCTURED-ARTWORK.md) re
 
 **Native vector scenes:** `src/core.js` validates procedural v1 geometry/ink recipes. `bin/scene.js` emits vector scenes and per-ink SVGs from that contract. This retains the supported primitives and transforms. It is distinct from the pixel separation SDK; arbitrary imported SVG is not converted into this schema. See [RECIPE-v1](RECIPE-v1.md).
 
-**Pixels and authored coverage:** `src/sdk/index.js` exposes `renderImage` and `renderLayers` through `@stipra/core`. It wraps the shared separation, screening, Styles, diagnostics and physical export-plan modules. Its input is explicit 8-bit sRGB straight-alpha RGBA or one to eight same-frame 8-bit ink masks. Its owned results include continuous coverage, screened production masks, proof pixels, normalized recipes and diagnostics. The core has no runtime dependencies, DOM, native codecs, fonts, PDF or ZIP imports.
+**Pixels and authored coverage:** `src/sdk/index.js` exposes `renderImage` and `renderLayers` through `@yigit-denktas/stipra-core`. It wraps the shared separation, screening, Styles, diagnostics and physical export-plan modules. Its input is explicit 8-bit sRGB straight-alpha RGBA or one to eight same-frame 8-bit ink masks. Its owned results include continuous coverage, screened production masks, proof pixels, normalized recipes and diagnostics. The core has no runtime dependencies, DOM, native codecs, fonts, PDF or ZIP imports.
 
 The preserved Prehnite v8 case study remains behind the legacy `render`/`presets` commands. It is not the implementation of the general pixel SDK.
 
@@ -14,7 +14,7 @@ The preserved Prehnite v8 case study remains behind the legacy `render`/`presets
 
 `src/import/{svg,probe,asset,node}.js` validates supported PNG/JPEG/WebP and a restricted SVG subset, decodes locally, normalizes supported orientation and requests 8-bit sRGB pixels. Original bytes remain separate. Restricted SVG is reconstructed safely and rasterized for the image path; its original is retained as inert text. See [IMPORT](IMPORT.md) and [color policy](COLOR-MANAGEMENT.md).
 
-`@stipra/canvas` captures existing 2D Canvas/p5 sources and authored ink canvases. It records backing/logical dimensions, explicit polarity and alpha behavior, leaves host RNG/drawing state alone, and returns a separate drawable proof. Source snapshots remain owned and exports freeze before loading optional dependencies. WEBGL/WebGPU are unsupported. The bounded draft helper is an example, not a new package API. See [adapter contract](../packages/canvas/README.md).
+`@yigit-denktas/stipra-canvas` captures existing 2D Canvas/p5 sources and authored ink canvases. It records backing/logical dimensions, explicit polarity and alpha behavior, leaves host RNG/drawing state alone, and returns a separate drawable proof. Source snapshots remain owned and exports freeze before loading optional dependencies. WEBGL/WebGPU are unsupported. The bounded draft helper is an example, not a new package API. See [adapter contract](../packages/canvas/README.md).
 
 The browser studio is an image-input host. Authored ink input exists in the SDK/adapter/package writer, not a completed studio layer-import UI.
 

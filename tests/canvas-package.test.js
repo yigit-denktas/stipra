@@ -14,9 +14,9 @@ test.before(async()=>{
   fs.writeFileSync(path.join(temp,'package.json'),JSON.stringify({name:'canvas-consumer',version:'1.0.0',private:true}));
   npm('install',path.join(temp,core.filename),path.join(temp,host.filename),'--offline','--ignore-scripts','--no-audit','--no-fund');
   const lock=JSON.parse(fs.readFileSync(path.join(temp,'package-lock.json')));
-  assert.deepEqual(Object.keys(lock.packages).sort(),['','node_modules/@stipra/canvas','node_modules/@stipra/core']);
-  adapter=await import(pathToFileURL(path.join(temp,'node_modules/@stipra/canvas/index.mjs')).href);
-  fs.writeFileSync(path.join(temp,'consumer.mts'),`import {renderCanvas,renderCanvasLayers,drawProof,exportSnapshot} from '@stipra/canvas';
+  assert.deepEqual(Object.keys(lock.packages).sort(),['','node_modules/@yigit-denktas/stipra-canvas','node_modules/@yigit-denktas/stipra-core']);
+  adapter=await import(pathToFileURL(path.join(temp,'node_modules/@yigit-denktas/stipra-canvas/index.mjs')).href);
+  fs.writeFileSync(path.join(temp,'consumer.mts'),`import {renderCanvas,renderCanvasLayers,drawProof,exportSnapshot} from '@yigit-denktas/stipra-canvas';
 const a=document.createElement('canvas');const r=renderCanvas(a,{style:{id:'clean-linework'}});drawProof(r,a);
 renderCanvasLayers({paper:'#ffffff',inks:[{id:'x',name:'X',color:'#006043',source:a,polarity:'alpha'}]});`);
   cp.execFileSync(process.execPath,[require.resolve('typescript/bin/tsc'),'--strict','--noEmit','--target','ES2020','--module','NodeNext','--moduleResolution','NodeNext','consumer.mts'],{cwd:temp,stdio:'pipe'});

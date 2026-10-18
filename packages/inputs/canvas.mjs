@@ -1,4 +1,4 @@
-import {captureCanvas} from '@stipra/canvas';
+import {captureCanvas} from '@yigit-denktas/stipra-canvas';
 import {coverageFromRGBA} from './dist/index.mjs';
 /** Captures named source regions on one backing and logical frame without assigning inks. */
 export function captureRegions({regions}){

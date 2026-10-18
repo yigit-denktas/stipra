@@ -34,7 +34,7 @@ The browser exporter has no unresolved findings in this artifact scope. The whol
 
 ## Lean library candidate
 
-`check:library-candidate` builds and inspects the exact private core/Canvas/inputs tarballs, then installs those archives together offline with lifecycle scripts disabled. The installed graph must contain only those three packages. Public runtime/type exports and Canvas-region-core replay are checked. The packages contain the original Stiprā MIT notice and no PDF stack, font, native library or drawing framework. CI uploads the tarballs and reports as `lean-distribution-audit`.
+`check:library-candidate` builds and inspects the exact core/Canvas/inputs candidate tarballs, then installs those archives together offline with lifecycle scripts disabled. The installed graph must contain only those three packages. Public runtime/type exports and Canvas-region-core replay are checked. The packages contain the original Stiprā MIT notice and no PDF stack, font, native library or drawing framework. CI uploads the tarballs and reports as `lean-distribution-audit`.
 
 The import audit rejects unexpected files, lifecycle scripts, runtime dependencies, unresolved imports and unreviewed peer versions. An application-supplied exporter callback is outside that boundary. See [candidate scope](RELEASE-CANDIDATE.md). Publication/artist acceptance remain #70.
 

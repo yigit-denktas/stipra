@@ -5,7 +5,7 @@ function canvas(w,h){const c=new Canvas(w,h);c.ownerDocument={createElement:()=>
 const dataURL=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
 test('bounded draft cache retains its original full-resolution frame for explicit final rendering',async()=>{
   await require('../scripts/build-core').build();
-  const adapter=fs.readFileSync(path.join(__dirname,'../packages/canvas/index.mjs'),'utf8').replace('@stipra/core',pathToFileURL(path.join(__dirname,'../packages/core/dist/index.mjs')).href);
+  const adapter=fs.readFileSync(path.join(__dirname,'../packages/canvas/index.mjs'),'utf8').replace('@yigit-denktas/stipra-core',pathToFileURL(path.join(__dirname,'../packages/core/dist/index.mjs')).href);
   const draft=fs.readFileSync(path.join(__dirname,'../examples/sketches/draft.mjs'),'utf8').replace('./assets/canvas.mjs',dataURL(adapter));
   const {createDraftRenderer}=await import(dataURL(draft)),source=canvas(288,216),ctx=source.getContext('2d');ctx.fillStyle='#006043';ctx.fillRect(40,10,100,150);
   const expected=Core.renderImage({width:288,height:216,colorSpace:'srgb',rgba:ctx.getImageData(0,0,288,216).data},{style:{id:'clean-linework'},seed:42});

@@ -635,7 +635,7 @@
         73,
         74
       ],
-      "note": "Core/Canvas/inputs engineering and a combined offline consumer of the exact audited tarballs are verified locally; public runtime/types and inert region replay are checked. Private 0.1.0-alpha.0 remains unpublished. Independent artist feedback and owner version/namespace/publication decision are open. An empty artist trial record and publication handoff are prepared; npm publisher check returns ENEEDAUTH, and registry scope ownership is not established.",
+      "note": "Exact lean tarballs and their combined offline consumer are verified. The owner authorized experimental alpha.1 publication under verified npm account yigit-denktas. CLI authentication and registry verification remain pending; independent artist feedback and physical acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {
