@@ -74,6 +74,21 @@ Keep this log compact and consequential. Do not register every CSS tweak as an a
 
 **Reopen if.** A documented experiment produces a better and accessible way of understanding ink passes or release history, even if it changes an established layout convention.
 
+### D-010 — Use Impeccable's Read/Operate distinction without replacing Stiprā's identity
+**Date:** 18 October 2026. **State:** implemented in draft PR, awaiting owner review.
+
+**Problem.** An otherwise coherent history page repeated its own orientation with an eyebrow and decorative section indices. Incoming capability URLs failed to open nested history records. The Guide displayed a second header navigation alongside the generated shared site navigation.
+
+**Chosen design.** Keep the existing green/cream editorial composition. Remove only decorative heading labels; make the first screen more task-focused; use specific printmaking verbs in active work. Reveal nested records on incoming fragment URLs as well as same-page clicks. Keep one public navigation system on the Guide. Treat Roadmap/Changelog/Guide as **Read**, Studio as **Operate**, and use genuine print specimens only where they clarify technical content.
+
+**Rejected.** Redesigning the page in Impeccable's preferred aesthetic, introducing additional accent cards or motion, fake release badges, automated taste score as an approval gate, or replacing root DESIGN.md with another generated design brief.
+
+**Evidence.** [Impeccable audit](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md), source tests and representative 320/390/768/1440px Chromium snapshots (local prototype, not the production-built branch). The generated page source and the deep-link helper were exercised against the 33-record history.
+
+**Risks / limitations.** Latest CI is not verified. The prototype is a reconstruction of the changed composition; it cannot substitute for a post-build screenshot or human/accessibility acceptance. Current CSS still carries superseded rule layers.
+
+**Reopen if.** First-reader testing shows weaker navigation, focus behavior is incorrect, or real output demonstrations require a richer layout. Obtain owner acceptance before merging PR #98.
+
 ## How to record the next decision
 
 ```md
