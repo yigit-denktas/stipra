@@ -1,5 +1,5 @@
 {
-  "contract": "stipra-product-history-v1",
+  "contract": "stipra-product-history-v2",
   "asOf": "2026-10-17",
   "workingBuild": {
     "label": "v0.8.0",
@@ -83,7 +83,8 @@
       ],
       "dependsOn": [],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "ART-02",
@@ -98,7 +99,8 @@
         "ART-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "INK-01",
@@ -112,7 +114,8 @@
         "ART-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "INK-02",
@@ -126,7 +129,8 @@
         "INK-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "INK-03",
@@ -140,7 +144,8 @@
         "INK-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "OUT-01",
@@ -154,7 +159,8 @@
         "INK-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "OUT-02",
@@ -170,7 +176,8 @@
         "OUT-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "OUT-03",
@@ -184,7 +191,8 @@
         "OUT-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "STU-01",
@@ -198,7 +206,8 @@
         "INK-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "STU-02",
@@ -212,7 +221,8 @@
         "OUT-03"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "STY-01",
@@ -227,7 +237,8 @@
         "INK-02"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "LIB-01",
@@ -241,7 +252,8 @@
         "INK-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "LIB-02",
@@ -255,7 +267,8 @@
         "LIB-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "LIB-03",
@@ -270,7 +283,8 @@
         "LIB-02"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "LIB-04",
@@ -285,7 +299,8 @@
         "LIB-03"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "DOC-01",
@@ -299,7 +314,8 @@
         "OUT-02"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "feature"
     },
     {
       "id": "QA-01",
@@ -313,7 +329,8 @@
         "STU-01"
       ],
       "implementation": "implemented",
-      "acceptance": "digital-evidence"
+      "acceptance": "digital-evidence",
+      "recordType": "validation"
     },
     {
       "id": "QA-02",
@@ -328,7 +345,8 @@
         "OUT-02"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "validation"
     },
     {
       "id": "QA-03",
@@ -342,7 +360,8 @@
         "STU-01"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "validation"
     },
     {
       "id": "AUD-01",
@@ -356,7 +375,8 @@
         "OUT-03"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "operations"
     },
     {
       "id": "OPS-01",
@@ -370,7 +390,8 @@
         "STU-02"
       ],
       "implementation": "in-progress",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "operations"
     },
     {
       "id": "LIB-05",
@@ -384,7 +405,8 @@
         "LIB-03"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "feature"
     },
     {
       "id": "LIB-06",
@@ -399,7 +421,8 @@
         "AUD-01"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "feature"
     },
     {
       "id": "OPS-02",
@@ -411,7 +434,8 @@
         "LIB-06"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "operations"
     },
     {
       "id": "STY-02",
@@ -425,7 +449,8 @@
         "STY-01"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "feature"
     },
     {
       "id": "STY-03",
@@ -440,7 +465,8 @@
         "STY-01"
       ],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "feature"
     },
     {
       "id": "ID-01",
@@ -454,7 +480,8 @@
       ],
       "dependsOn": [],
       "implementation": "in-progress",
-      "acceptance": "pending"
+      "acceptance": "pending",
+      "recordType": "feature"
     },
     {
       "id": "VEC-01",
@@ -468,7 +495,8 @@
         "INK-02"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "feature"
     },
     {
       "id": "ART-03",
@@ -482,7 +510,8 @@
         "ART-01"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "feature"
     },
     {
       "id": "ART-04",
@@ -496,7 +525,8 @@
         "ART-01"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "research"
     },
     {
       "id": "LIB-07",
@@ -510,7 +540,8 @@
         "LIB-06"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "research"
     },
     {
       "id": "VIS-01",
@@ -524,7 +555,8 @@
         "STY-01"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "feature"
     },
     {
       "id": "VIS-02",
@@ -538,11 +570,149 @@
         "STY-01"
       ],
       "implementation": "planned",
-      "acceptance": "not-evaluated"
+      "acceptance": "not-evaluated",
+      "recordType": "research"
     }
   ],
   "notes": {
     "releaseRule": "Only releases recorded from a published GitHub release event appear as released. Implemented is not published.",
     "sources": "Source issue references are evidence, not public headings."
-  }
+  },
+  "events": [
+    {
+      "id": "DEV-001",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "INK-03",
+      "title": "Measure ink contribution, overlap and effective screen frequency",
+      "sourceTitle": "Shared Styles and separation quality"
+    },
+    {
+      "id": "DEV-002",
+      "date": "2026-10-17",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STY-01",
+      "title": "Share versioned separation recipes across browser and CLI",
+      "sourceTitle": "Shared Styles and separation quality"
+    },
+    {
+      "id": "DEV-003",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "OUT-02",
+      "title": "Add ink-linked annotations and reproducible report recipes",
+      "sourceTitle": "Editorial reports, public guide and ink-dot QR"
+    },
+    {
+      "id": "DEV-004",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "LIB-01",
+      "title": "Build a dependency-free creative-coding core",
+      "sourceTitle": "Measured Canvas/p5.js alpha"
+    },
+    {
+      "id": "DEV-005",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "LIB-02",
+      "title": "Integrate authored ink layers from Canvas and p5.js sketches",
+      "sourceTitle": "Measured Canvas/p5.js alpha"
+    },
+    {
+      "id": "DEV-006",
+      "date": "2026-10-17",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "LIB-03",
+      "title": "Check plate export parity across browser, Node and CLI",
+      "sourceTitle": "Measured Canvas/p5.js alpha"
+    },
+    {
+      "id": "DEV-007",
+      "date": "2026-10-17",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "ART-02",
+      "title": "Preserve color interpretation boundaries and source precision",
+      "sourceTitle": "Color boundaries and structured-artwork research"
+    },
+    {
+      "id": "DEV-008",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "LIB-04",
+      "title": "Preserve named artwork regions and replayable source projects",
+      "sourceTitle": "Keep source regions through export"
+    },
+    {
+      "id": "DEV-009",
+      "date": "2026-10-17",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STU-01",
+      "title": "Add manual 2–8 ink inspection and native pixel zoom",
+      "sourceTitle": "Studio inspection and delivery map"
+    },
+    {
+      "id": "DEV-010",
+      "date": "2026-10-17",
+      "type": "added",
+      "stage": "development",
+      "capabilityId": "STU-02",
+      "title": "Add bounded compare, batch and verification commands",
+      "sourceTitle": "Compare, batch, export and verify"
+    },
+    {
+      "id": "DEV-011",
+      "date": "2026-10-17",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "OUT-03",
+      "title": "Add proof derivatives and independent package verification",
+      "sourceTitle": "Compare, batch, export and verify"
+    },
+    {
+      "id": "DEV-012",
+      "date": "2026-10-17",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "QA-01",
+      "title": "Audit real pages and retain outstanding manual checks",
+      "sourceTitle": "Broader accessibility and geometry acceptance"
+    },
+    {
+      "id": "DEV-013",
+      "date": "2026-10-17",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OUT-02",
+      "title": "Replace opaque font artifacts in PDF exports",
+      "sourceTitle": "Replace opaque font artifacts in PDF exports"
+    },
+    {
+      "id": "DEV-014",
+      "date": "2026-10-17",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STY-01",
+      "title": "Add opt-in forest-contrast recipe without changing existing recipes",
+      "sourceTitle": "Controlled forest review and concrete release handoff"
+    },
+    {
+      "id": "DEV-015",
+      "date": "2026-10-17",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "LIB-05",
+      "title": "Prepare independent artist-trial record; trial not yet completed",
+      "sourceTitle": "Controlled forest review and concrete release handoff"
+    }
+  ]
 }
