@@ -2,7 +2,7 @@
 
 Status: prepared, not performed. This is the remaining usefulness evidence for #70, separate from software parity and physical printing.
 
-Use the current [Canvas/p5 examples](https://apps.yigitdenktas.com/stipra/sketches/) and the three exact tarballs in the CI `lean-distribution-audit` artifact. Follow [the candidate checks](RELEASE-CANDIDATE.md) to build/install them locally; candidates are not yet available from npm. Use artwork you own. Keep photographs and image-bearing exports private.
+Use the current [Canvas/p5 examples](https://apps.yigitdenktas.com/stipra/sketches/) and the three exact tarballs in the CI `lean-distribution-audit` artifact. Follow [the candidate checks](RELEASE-CANDIDATE.md) to build/install them locally; the exact alpha.1 release is available from npm. Use artwork you own. Keep photographs and image-bearing exports private.
 
 The task is small: start with an existing Canvas or p5 sketch, apply a shared treatment, inspect two ink passes, then export and replay the frozen source/layers with the same recipe. Also try artist-authored ink masks with solid lettering. Compare this with your normal Canvas/p5 buffer/export approach; drawing and grain stay in the host.
 
@@ -19,9 +19,9 @@ Use `examples/alpha/artist-trial-record.json` for an empty record. A completed r
 
 The intended experimental distribution is the lean core/Canvas/inputs set. PDF/native tools remain optional and outside their imports. The native Skia finding does not become a dependency of these tarballs. A digital alpha must still state its performance, host and uncalibrated-proof limits.
 
-The owner has created and verified npm account `yigit-denktas` and authorized experimental publication. Candidates use the personal scope and version `0.1.0-alpha.1`; see [the release procedure](RELEASE-CANDIDATE.md). CLI authentication succeeded and npm accepted all three uploads; registry processing and availability verification remain pending. No credentials belong in the repository or trial record. This authorization does not supply independent artist feedback.
+The owner has created and verified npm account `yigit-denktas` and authorized experimental publication. Published packages use the personal scope and version `0.1.0-alpha.1`; see [the release procedure](RELEASE-CANDIDATE.md). Registry archives, hashes and a fresh install are verified in the release evidence. No credentials belong in the repository or trial record. This authorization does not supply independent artist feedback.
 
-Publisher identity and upload status are recorded in [the accepted-upload record](evidence/npm-alpha-upload-2026-10-18.json). Use the audited CI tarballs while registry lookup returns 404; an accepted upload alone does not establish a working public install.
+Publisher identity and upload status are recorded in [the accepted-upload record](evidence/npm-alpha-upload-2026-10-18.json). The [registry verification](evidence/npm-alpha-registry-2026-10-18.json) supersedes the earlier processing/404 observations. Use exact alpha.1 versions for a trial.
 
 ## Human handoff
 

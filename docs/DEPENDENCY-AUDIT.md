@@ -69,3 +69,7 @@ The installed Linux glibc binary's ELF build ID and eight DT_NEEDED entries are 
 ## Upstream inventory request
 
 The complete request is saved in [#14](https://github.com/yigit-denktas/stipra/issues/14#issuecomment-6244927071). On 18 October 2026 the owner authorized proceeding with the provenance follow-up. Posting the prepared request to `samizdatco/skia-canvas` through the connected GitHub integration returned HTTP 403, “Resource not accessible by integration.” No upstream issue was created and no maintainer response is pending. A browser handoff is needed to send the approved text. The native distribution gate remains open; a request or source revision map would not itself clear it.
+
+## Independent review reconciliation
+
+[The rendering review](RENDER-BACKEND-REVIEW.md) distinguishes notices, component inventory, packaging/native-build provenance and independent reproducibility. It records the artifact-specific gate proposal and Windows CRLF hash failure as follow-ups, not completed changes. CI runs the non-gating inventory and separate lean/browser artifact checks; it does not invoke the broad native release command. Green CI therefore does not clear native redistribution. The backend remains 3.0.8 and the existing finding remains open.

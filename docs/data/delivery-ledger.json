@@ -4,7 +4,7 @@
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
-  "policy": "Versions below are conditional targets, not published tags. Implementation, issue closure and acceptance are separate. Prerequisites refer to the named capability; broader unfinished work in an umbrella issue need not block a working subset.",
+  "policy": "Studio versions below are conditional targets; the lean library alpha.1 is published with separate registry evidence. Implementation, issue closure and human acceptance are separate. Prerequisites refer to the named capability, not every checkbox in an umbrella issue.",
   "originalV09Issues": [
     1,
     2,
@@ -36,7 +36,7 @@
         85,
         86
       ],
-      "exit": "Historical alpha.0 engineering candidate: deterministic browser/Node/CLI evidence and bounded structured-input pilots. Current personal-scope alpha.1 uploads are accepted; registry availability remains unverified."
+      "exit": "Historical alpha.0 engineering candidate: deterministic browser/Node/CLI evidence and bounded structured-input pilots. Current personal-scope alpha.1 registry bytes and fresh install are verified; human acceptance remains open."
     },
     {
       "id": "published-alpha",
@@ -114,7 +114,7 @@
     }
   ],
   "nextSequence": [
-    "Verify availability, downloaded archive hashes and a clean registry install for the three accepted alpha.1 uploads (#70); do not republish accepted versions to bypass processing.",
+    "Collect independent artist usefulness feedback for the registry-verified alpha.1 release (#70); physical and human accessibility acceptance remain separate (#13).",
     "Send the approved #14 native inventory request using an authorized browser fallback: the GitHub connector rejected creation with HTTP 403. Obtain attributable component/notices evidence before bundling native Skia.",
     "Collect actual operator print measurements and independent artist/human accessibility observations (#13/#70); review forest/beach quality separately (#43/#47).",
     "Keep optional Java, analytic vector screens and identity/paper extensions separate; PR #98 is the existing roadmap/design proposal."
@@ -635,7 +635,7 @@
         73,
         74
       ],
-      "note": "Exact lean tarballs and their combined offline consumer are verified. The owner authorized experimental alpha.1 publication under verified npm account yigit-denktas. CLI authentication succeeded and npm accepted all three uploads; registry availability and downloaded archive verification remain pending; independent artist feedback and physical acceptance remain open.",
+      "note": "Published @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs alpha.1: fresh registry download SHA-256/SHA-512/bytes match the committed upload record; an empty-cache consumer installs exactly three packages and passes runtime/types/replay checks. Alpha/latest tags and public 0.0.0-stage placeholders are observed, not changed. Independent artist and physical/human acceptance remain open.",
       "sourceUpdatedAt": "2026-10-17T16:19:29Z"
     },
     {

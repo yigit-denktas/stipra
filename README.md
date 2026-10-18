@@ -28,7 +28,7 @@ The macron belongs to the display name; the repository, URL and CLI use `stipra`
 
 The **browser studio** processes supported PNG, JPEG, WebP and restricted SVG locally. Choose a shared Style or edit spot/CMYK masks, inspect the proof and individual plates, and save a print-package ZIP. No account or image API is needed. See [input limits](docs/IMPORT.md).
 
-For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā in a **2D** sketch, freezes its source frame and exports aligned plates. The `@yigit-denktas/stipra-*` alpha.1 uploads await registry verification.
+For creative coding, the [core API](packages/core/README.md) accepts sRGB pixels or authored ink coverage. The optional [Canvas/p5 adapter](packages/canvas/README.md) applies Stiprā in a **2D** sketch, freezes its source frame and exports aligned plates. The `@yigit-denktas/stipra-*` packages are published at `0.1.0-alpha.1`.
 
 Prefer a script? With Node.js 20+ installed:
 
@@ -56,7 +56,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Acceptance:** [Keyboard checks, goldens and release gates](docs/RELEASE-CANDIDATE.md). Physical/artist review, one [mapped native provenance gap](docs/DEPENDENCY-AUDIT.md) and publication remain open. Previews are **digital approximations**. Packages are unpublished; branding is provisional.
+**Acceptance:** [Keyboard checks, goldens and release gates](docs/RELEASE-CANDIDATE.md). Physical/artist review and one [native provenance gap](docs/DEPENDENCY-AUDIT.md) remain open. Previews are **digital approximations**; branding is provisional.
 
 ## Follow the work
 
