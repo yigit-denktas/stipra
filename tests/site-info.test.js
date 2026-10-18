@@ -34,3 +34,10 @@ test('information pages and all navigation use valid relative destinations on ei
     assert.match(roadmap,/<script defer src="\.\/roadmap-search\.js"><\/script>/);
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });
+
+test('field guide uses the shared site navigation rather than a competing header menu',()=>{
+ const guide=fs.readFileSync(path.join(__dirname,'../web/stipra/guide.html'),'utf8');
+ assert.doesNotMatch(guide,/aria-label="Main navigation"/);
+ assert.match(guide,/href="\.\.\/"[^>]*>Open the studio/);
+ assert.match(guide,/Code and licenses/);
+});
