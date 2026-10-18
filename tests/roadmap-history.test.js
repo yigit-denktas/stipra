@@ -39,3 +39,17 @@ test('100 published versions remain browsable and searchable',()=>{
  assert.equal(h.events.filter(x=>x.stage==='release').length,100);
  assert.ok(Search.search(Roadmap.buildIndex(h,ledger,changelog),'Ink improvement 99').some(x=>x.id==='cap-INK-01'));
 });
+
+test('direct capability and release fragments open every containing disclosure safely',()=>{
+ const root={tagName:'MAIN',parentElement:null};
+ const area={tagName:'DETAILS',open:false,parentElement:root};
+ const history={tagName:'DETAILS',open:false,parentElement:area};
+ const target={tagName:'LI',parentElement:history};
+ const fake={getElementById:id=>id==='cap-INK-01'?target:null};
+ assert.equal(Search.revealHash(fake,'#cap-INK-01'),true);
+ assert.equal(area.open,true);
+ assert.equal(history.open,true);
+ assert.equal(Search.revealHash(fake,'#missing'),false);
+ assert.equal(Search.revealHash(fake,'#%invalid'),false);
+ assert.equal(Search.revealHash(fake,'not-a-fragment'),false);
+});
