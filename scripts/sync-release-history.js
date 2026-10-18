@@ -19,6 +19,7 @@ function synchronize(history,event){
  if(!declared){const issues=new Set([...raw.matchAll(/(?:^|\s)#(\d+)\b/g)].map(m=>Number(m[1])));ids=history.capabilities.filter(c=>c.issues.some(n=>issues.has(n))).map(c=>c.id);}
  history.releases.push({tag,publishedAt,url,summary:r.name||tag,capabilityIds:ids});
  history.releases.sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt));
+ history.asOf=publishedAt.slice(0,10);
  return true;
 }
 function main(){
