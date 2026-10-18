@@ -39,7 +39,7 @@ function buildIndex(h,ledger,changelog){
  for(const r of h.releases)index.push({kind:'release',id:'release-'+r.tag,label:r.tag+' — '+(r.summary||'Release'),text:[r.tag,r.summary,r.publishedAt,...es.filter(e=>e.releaseTag===r.tag).map(e=>e.title)].join(' '),href:'#release-'+r.tag});
  for(const c of h.capabilities){const ce=es.filter(e=>e.capabilityId===c.id);const rr=ce.filter(e=>e.releaseTag).map(e=>rels.get(e.releaseTag)).filter(Boolean);
   index.push({kind:c.recordType,id:'cap-'+c.id,label:c.title,text:[c.id,c.title,c.detail,c.area,c.recordType,c.implementation,...ce.map(e=>e.title),...rr.map(r=>r.tag+' '+r.summary)].join(' '),href:'#cap-'+c.id});}
- for(const e of es)index.push({kind:'change',id:'change-'+e.id,label:typeLabels[e.type]+': '+e.title,text:[e.title,e.type,e.date,e.releaseTag||'',e.sourceTitle||'',e.capabilityId,rels.get(e.releaseTag)?.summary||''].join(' '),href:'#change-'+e.id});
+ for(const e of es)index.push({kind:'change',id:'change-'+e.id,label:typeLabels[e.type]+': '+e.title,text:[e.title,e.type,e.date,e.releaseTag||'',e.sourceTitle||'',e.capabilityId,rels.get(e.releaseTag)?.summary||''].join(' '),href:'#cap-'+e.capabilityId});
  for(const i of h.initiatives)index.push({kind:'initiative',id:'initiative-'+i.id,label:i.title,text:[i.title,i.description,...i.capabilities.map(id=>byId.get(id).title)].join(' '),href:'#initiative-'+i.id});
  return index;
 }
