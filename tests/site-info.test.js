@@ -19,7 +19,16 @@ test('information pages and all navigation use valid relative destinations on ei
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
     const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
+    assert.match(changes,/class="change-list"/);
+    assert.match(changes,/Details and sources/);
+    assert.match(changes,/class="site-nav-more"/);
+    assert.ok(changes.indexOf('class="change-list"') < changes.indexOf('PR #89'));
+
     const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/In progress/);assert.match(roadmap,/Shipped versions/);assert.match(roadmap,/Find a capability/);
+    assert.ok(roadmap.indexOf('id="now"') < roadmap.indexOf('<form class="r-search"'), 'Current work must precede reference search');
+    assert.ok(roadmap.indexOf('id="features"') < roadmap.indexOf('<form class="r-search"'), 'Search belongs to the feature reference');
+    assert.equal((roadmap.match(/class="r-overview"/g)||[]).length,1);
+
     for(const name of ['history.json','search-index.js','roadmap-search.js','roadmap.css'])assert.ok(fs.existsSync(path.join(stage,'roadmap',name)),name);
     assert.match(roadmap,/<script defer src="\.\/search-index\.js"><\/script>/);
     assert.match(roadmap,/<script defer src="\.\/roadmap-search\.js"><\/script>/);
