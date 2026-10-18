@@ -1,7 +1,7 @@
 {
   "contract": "stipra-upstream-source-review-v1",
   "checkedAt": "2026-10-17",
-  "status": "three-findings-remain-open",
+  "status": "historical-investigation",
   "scope": "Pinned upstream source observations, not attestations or compiled-artifact clearance.",
   "sources": [
     {
@@ -22,5 +22,11 @@
       "gitBlobSha1": "97274a57613d2d638eb35f5a073736a749c9a0f7",
       "observation": "Workflow uses moving stable Rust/build containers and a source-tag-derived rust-skia checkout; this is not a component/notice inventory tied to the downloaded native binary."
     }
-  ]
+  ],
+  "currentResolution": {
+    "checkedAt": "2026-10-18",
+    "opaqueFontArtifacts": "Removed/replaced in PR #95; old source observations are retained, not retrospectively cleared.",
+    "remainingFinding": "Native Skia compiled-component inventory",
+    "releaseObservation": "native-release-observation.json"
+  }
 }
