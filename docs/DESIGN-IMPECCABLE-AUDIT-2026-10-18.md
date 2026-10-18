@@ -1,5 +1,8 @@
 # Impeccable review — Stiprā public pages and roadmap
 
+**Installation update (18 October 2026):** After this original source-informed audit, the complete Impeccable agent skill was installed to PR #98 at `.agents/skills/impeccable/` with all 62 upstream Git blobs verified at revision `ab524607fdea`. Its engine is not bundled and the detector was still not executed here. See [`design/SKILLS.md`](../design/SKILLS.md) for current installation status; the observations below remain an archival record.
+
+
 **Date:** 18 October 2026  
 **Source:** [pbakaus/impeccable](https://github.com/pbakaus/impeccable), `SKILL.md` v4.6.0, upstream main at `ab524607fdea…` when inspected.  
 **Scope:** draft [PR #98](https://github.com/yigit-denktas/stipra/pull/98), prior actual/future roadmap previews, and repository source for Studio, Guide, Changelog, Sketches, Regions and Site map.  
@@ -65,7 +68,7 @@ The earlier design decision log in `design/DECISIONS.md` continues to own Stipr�
 
 ## Reproducing with the official CLI later
 
-Impeccable has not been vendored or installed by this PR. In a trusted local checkout with network access, use the upstream documented installer:
+At the time of this review Impeccable had not been installed. Its exact skill source has since been vendored into this PR. In a trusted local checkout with network access, the upstream documented installer remains an alternative:
 
 ```sh
 npx impeccable install --providers=codex,claude --scope=project

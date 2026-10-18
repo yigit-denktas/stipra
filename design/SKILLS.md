@@ -22,9 +22,9 @@ These are project files committed to the review branch; none is installed global
 ## Verify installation
 
 ```sh
-npm test -- --test-name-pattern="design skill"
-# Or targeted:
 node --test tests/design-skills.test.js
+# Or run all repository checks:
+npm test
 ```
 
 The targeted test resolves every installed skill, verifies the four Claude discovery shims, verifies Impeccable's upstream Git SHA-1 blobs, and verifies direct Markdown links inside the skills. The Impeccable binary download/engine runtime is outside this file-integrity check.

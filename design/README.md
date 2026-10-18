@@ -1,5 +1,7 @@
 # Stiprā design system — entry point
 
+**Agent skills:** [Four installed skills, provenance, verification and selection](SKILLS.md).
+
 **Scope:** public product pages and the Studio's shared language. This is a compact set of decisions and review procedures, not a new UI framework or a replacement for the print engine.
 
 > Preserve the product's point of view. Encode repeatable standards. Edit the result in a real browser. Keep the unusual thing that genuinely improves the work.
