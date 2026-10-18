@@ -1,0 +1,548 @@
+{
+  "contract": "stipra-product-history-v1",
+  "asOf": "2026-10-17",
+  "workingBuild": {
+    "label": "v0.8.0",
+    "kind": "user-reported-working-build",
+    "released": false,
+    "note": "Identified by the owner; no public tag or published release date verified."
+  },
+  "releases": [],
+  "initiatives": [
+    {
+      "id": "PRINT-TRUST",
+      "title": "Trust the printed result",
+      "description": "Measure alignment on real printers, validate access with people, and close distribution evidence for the artifacts actually shipped.",
+      "capabilities": [
+        "QA-02",
+        "QA-03",
+        "AUD-01"
+      ],
+      "priority": "now"
+    },
+    {
+      "id": "ARTIST-LIBRARY",
+      "title": "Put the creative library in artists’ hands",
+      "description": "Observe an independent first use, address what fails, then make a deliberate publication decision.",
+      "capabilities": [
+        "LIB-05",
+        "LIB-06"
+      ],
+      "priority": "now"
+    },
+    {
+      "id": "STYLE-QUALITY",
+      "title": "Make every ink pass earn its place",
+      "description": "Test forest depth and the real suitability of the shared style families, not just their digital existence.",
+      "capabilities": [
+        "STY-02",
+        "STY-03"
+      ],
+      "priority": "now"
+    },
+    {
+      "id": "VECTOR",
+      "title": "Extend the image-to-plate vocabulary",
+      "description": "Consider analytic vector screening and structured artwork interchange when there is a concrete printmaking case.",
+      "capabilities": [
+        "VEC-01",
+        "ART-03",
+        "ART-04"
+      ],
+      "priority": "next"
+    },
+    {
+      "id": "DESIGN",
+      "title": "Develop the studio’s own visual language",
+      "description": "Resolve the public identity and revisit paper simulation and optional case-study details.",
+      "capabilities": [
+        "ID-01",
+        "VIS-01",
+        "VIS-02"
+      ],
+      "priority": "next"
+    },
+    {
+      "id": "EXTEND",
+      "title": "Explore more creative hosts",
+      "description": "Evaluate a Processing Java bridge without compromising the small JavaScript core.",
+      "capabilities": [
+        "LIB-07"
+      ],
+      "priority": "next"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "ART-01",
+      "area": "Artwork",
+      "title": "Import images and safe SVG artwork without changing their layout.",
+      "detail": "PNG, JPEG, WebP and restricted SVG input retain the artwork’s original geometry and explicit print dimensions.",
+      "issues": [
+        6
+      ],
+      "dependsOn": [],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "ART-02",
+      "area": "Artwork",
+      "title": "Keep source color information explicit.",
+      "detail": "Color/profile normalization and guarded PNG interpretation are checked rather than guessed.",
+      "issues": [
+        44,
+        82
+      ],
+      "dependsOn": [
+        "ART-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "INK-01",
+      "area": "Inks",
+      "title": "Separate images into editable spot inks or CMYK.",
+      "detail": "The controls modify independent pixel-coverage masks, not merely the preview colors.",
+      "issues": [
+        7
+      ],
+      "dependsOn": [
+        "ART-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "INK-02",
+      "area": "Inks",
+      "title": "Screen each ink with dots, lines and reverse or hybrid patterns.",
+      "detail": "The raster screening operates on actual per-ink masks and preserves registration geometry.",
+      "issues": [
+        5
+      ],
+      "dependsOn": [
+        "INK-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "INK-03",
+      "area": "Inks",
+      "title": "Measure how ink layers contribute and overlap.",
+      "detail": "Shared diagnostics estimate contribution, overlaps and effective lines-per-inch in browser and CLI.",
+      "issues": [
+        56
+      ],
+      "dependsOn": [
+        "INK-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "OUT-01",
+      "area": "Printing",
+      "title": "Export aligned monochrome printing masters.",
+      "detail": "Full-frame grayscale plates preserve native pixels, DPI and zero-registration origin.",
+      "issues": [
+        8
+      ],
+      "dependsOn": [
+        "INK-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "OUT-02",
+      "area": "Printing",
+      "title": "Generate readable A4 separation sheets and reports.",
+      "detail": "Portrait/landscape pagination, paper dimensions, recipes and ink-linked annotations are implemented digitally.",
+      "issues": [
+        9,
+        45,
+        60
+      ],
+      "dependsOn": [
+        "OUT-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "OUT-03",
+      "area": "Printing",
+      "title": "Package printable plates and digital proofs together.",
+      "detail": "PNG, JPEG, WebP, sampled-path SVG, PDF, HTML and ZIP outputs have automated digital checks.",
+      "issues": [
+        12
+      ],
+      "dependsOn": [
+        "OUT-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "STU-01",
+      "area": "Studio",
+      "title": "Inspect two to eight inks in the browser studio.",
+      "detail": "Solo, mute, paper, native-pixel zoom, registration marks and print geometry share one workspace.",
+      "issues": [
+        22
+      ],
+      "dependsOn": [
+        "INK-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "STU-02",
+      "area": "Studio",
+      "title": "Repeat the same workflow from a local command line.",
+      "detail": "Import, separate, compare, batch, verify and create sheets with versioned result records.",
+      "issues": [
+        11
+      ],
+      "dependsOn": [
+        "OUT-03"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "STY-01",
+      "area": "Styles",
+      "title": "Start from four shared printmaking recipe families.",
+      "detail": "Versioned style presets, physical-screen settings and suitability diagnostics exist; artistic approval is tracked separately.",
+      "issues": [
+        34,
+        47
+      ],
+      "dependsOn": [
+        "INK-02"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "LIB-01",
+      "area": "Library",
+      "title": "Use a small dependency-free JavaScript separation core.",
+      "detail": "The local experimental API is installed and tested as a private candidate, not a published npm package.",
+      "issues": [
+        71
+      ],
+      "dependsOn": [
+        "INK-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "LIB-02",
+      "area": "Library",
+      "title": "Connect existing Canvas and p5.js sketches to ink passes.",
+      "detail": "An adapter consumes familiar drawing workflows without inventing another sketch framework.",
+      "issues": [
+        72
+      ],
+      "dependsOn": [
+        "LIB-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "LIB-03",
+      "area": "Library",
+      "title": "Export artist-authored layers as ink plates.",
+      "detail": "An authored-ink workflow includes frozen-frame replay and matching browser/Node/CLI checks.",
+      "issues": [
+        73,
+        74
+      ],
+      "dependsOn": [
+        "LIB-02"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "LIB-04",
+      "area": "Library",
+      "title": "Keep named regions and replayable source projects.",
+      "detail": "Structured masks, ink mappings, hashes and recipes can be carried through export as inert data.",
+      "issues": [
+        83,
+        84
+      ],
+      "dependsOn": [
+        "LIB-03"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "DOC-01",
+      "area": "Studio",
+      "title": "Read a public reproduction guide alongside the studio.",
+      "detail": "The hosted field guide, editorial print annotations and QR specimen workflow are implemented.",
+      "issues": [
+        65
+      ],
+      "dependsOn": [
+        "OUT-02"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "QA-01",
+      "area": "Quality",
+      "title": "Run repeatable browser and print-geometry checks.",
+      "detail": "Six-page automated accessibility audit, mask goldens, and paper-seed geometry assertions are recorded; human review is separate.",
+      "issues": [
+        13
+      ],
+      "dependsOn": [
+        "STU-01"
+      ],
+      "implementation": "implemented",
+      "acceptance": "digital-evidence"
+    },
+    {
+      "id": "QA-02",
+      "area": "Quality",
+      "title": "Prove real print alignment on physical equipment.",
+      "detail": "Print at 100% scale, measure geometry and registration, inspect actual paper/ink effects, and save attributable observations.",
+      "issues": [
+        13
+      ],
+      "dependsOn": [
+        "OUT-01",
+        "OUT-02"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "QA-03",
+      "area": "Quality",
+      "title": "Have people test keyboard, screen-reader and first-use flows.",
+      "detail": "Automation cannot replace direct accessibility inspection or an independent person completing the workflow.",
+      "issues": [
+        13
+      ],
+      "dependsOn": [
+        "STU-01"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "AUD-01",
+      "area": "Quality",
+      "title": "Close the remaining native-component license evidence.",
+      "detail": "The browser artifact is separately reviewed; native Skia compiled-component provenance still needs a distribution decision.",
+      "issues": [
+        14
+      ],
+      "dependsOn": [
+        "OUT-03"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "OPS-01",
+      "area": "Studio",
+      "title": "Finish the shared tracking and release checks.",
+      "detail": "Issue/milestone administration is partly reconciled; board behavior and release-policy checks remain to verify.",
+      "issues": [
+        17
+      ],
+      "dependsOn": [
+        "STU-02"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "LIB-05",
+      "area": "Library",
+      "title": "Let an independent artist try the coding workflow.",
+      "detail": "Record what an actual first reader can install, sketch, separate and export; avoid substituting internal tests for an artist trial.",
+      "issues": [
+        70
+      ],
+      "dependsOn": [
+        "LIB-03"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "LIB-06",
+      "area": "Library",
+      "title": "Make the library publishable and explicitly approve a release.",
+      "detail": "Confirm npm publisher access, scoped package ownership, exact package contents and the owner’s publication decision.",
+      "issues": [
+        70
+      ],
+      "dependsOn": [
+        "LIB-05",
+        "AUD-01"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "OPS-02",
+      "area": "Studio",
+      "title": "Connect verified releases to the public history automatically.",
+      "detail": "Build a generated release index from real tags/releases and reconcile dated changelog entries without inventing shipped versions.",
+      "issues": [],
+      "dependsOn": [
+        "LIB-06"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "STY-02",
+      "area": "Styles",
+      "title": "Decide whether forest prints keep enough depth with fewer inks.",
+      "detail": "A two-/three-pass comparison exists; choose a recipe only after reviewing real artwork at intended size.",
+      "issues": [
+        43
+      ],
+      "dependsOn": [
+        "STY-01"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "STY-03",
+      "area": "Styles",
+      "title": "Evaluate when each starter style is actually useful.",
+      "detail": "Review image suitability, overprints and physical proofs before calling a recipe family accepted.",
+      "issues": [
+        47,
+        34
+      ],
+      "dependsOn": [
+        "STY-01"
+      ],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "ID-01",
+      "area": "Identity",
+      "title": "Finish the Stiprā identity through owner review.",
+      "detail": "Typographic studies and engine-generated marks exist; the final wordmark/workspace direction is not approved.",
+      "issues": [
+        31,
+        57,
+        46
+      ],
+      "dependsOn": [],
+      "implementation": "in-progress",
+      "acceptance": "pending"
+    },
+    {
+      "id": "VEC-01",
+      "area": "Inks",
+      "title": "Add genuinely analytic vector screening.",
+      "detail": "Construct real vector dot/facet geometry rather than representing sampled pixels as SVG paths.",
+      "issues": [
+        28
+      ],
+      "dependsOn": [
+        "INK-02"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "ART-03",
+      "area": "Artwork",
+      "title": "Accept richer layered formats when justified.",
+      "detail": "Advance OpenRaster/auxiliary-channel research to real adapters only after the input contract is proven.",
+      "issues": [
+        86
+      ],
+      "dependsOn": [
+        "ART-01"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "ART-04",
+      "area": "Artwork",
+      "title": "Investigate signed image provenance and offline verification.",
+      "detail": "Move beyond the bounded C2PA feasibility study only with a concrete publishing and security model.",
+      "issues": [
+        85
+      ],
+      "dependsOn": [
+        "ART-01"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "LIB-07",
+      "area": "Library",
+      "title": "Explore a Processing Java bridge.",
+      "detail": "Only proceed if actual users need Java hosting beyond the compact JavaScript alpha.",
+      "issues": [
+        75
+      ],
+      "dependsOn": [
+        "LIB-06"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "VIS-01",
+      "area": "Styles",
+      "title": "Study richer simulated paper fibers and ink debris.",
+      "detail": "Additional paper realism is optional and must not be mistaken for measured stock/press behavior.",
+      "issues": [
+        4
+      ],
+      "dependsOn": [
+        "STY-01"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    },
+    {
+      "id": "VIS-02",
+      "area": "Styles",
+      "title": "Return to the Prehnite-specific gem geometry study.",
+      "detail": "Improve crystal seams and facet proportions without blocking core image printing work.",
+      "issues": [
+        3
+      ],
+      "dependsOn": [
+        "STY-01"
+      ],
+      "implementation": "planned",
+      "acceptance": "not-evaluated"
+    }
+  ],
+  "notes": {
+    "releaseRule": "Only releases recorded from a published GitHub release event appear as released. Implemented is not published.",
+    "sources": "Source issue references are evidence, not public headings."
+  }
+}

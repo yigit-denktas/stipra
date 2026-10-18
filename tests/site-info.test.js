@@ -19,6 +19,6 @@ test('information pages and all navigation use valid relative destinations on ei
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
     const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
-    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/Opens:/);assert.match(roadmap,/9\/14/);
+    const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/What we are working on/);assert.match(roadmap,/Released versions/);assert.match(roadmap,/Every capability, traceable/);assert.ok(fs.existsSync(path.join(stage,'roadmap/history.json')));
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });
