@@ -64,6 +64,12 @@ The [Dizzy Ink Risograph Guide](https://www.dizzyink.co.uk/guide-to-risograph) i
 
 The lessons are ours to apply, but we don't copy their photos, diagrams, swatch artwork, page layout or code. The original website remains the place to experience them.
 
+## Design system, public pages and agent editing
+
+The principles above are the authority for the printmaking experience. The public roadmap/changelog/guide system has its own [experience contract](design/CONTRACT.md), [decision and rejection log](design/DECISIONS.md), and [three-task review protocol](design/REVIEW.md). The [design index](design/README.md) identifies which file governs intent, actual CSS, product-history facts and evidence.
+
+Our design system is **more than colors and components**: it includes the objects the user manipulates (original, masks, proof, recipe, print package), source-backed communication, information relationships, interaction semantics and review decisions. Agents should extend the existing system only when they can show an improvement in an actual user task; a completed rendering is not automatic design approval. Treat the user's 2026 Katie Dill/Stripe discussion as inspiration, not a claim of using Stripe's private tooling.
+
 ## What belongs where
 
 | Need | Document |
