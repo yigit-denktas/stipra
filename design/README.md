@@ -10,7 +10,7 @@
 | --- | --- |
 | What is Stiprā for, and which interaction choices remain open? | [Product design principles](../DESIGN.md) |
 | What must the public pages communicate, and how should they look and behave? | [Public experience contract](CONTRACT.md) |
-| What was accepted or rejected, and why? | [Design decisions](DECISIONS.md) |
+| What patterns and page-flow behaviors should code follow? | [Interface patterns](PATTERNS.md) |\n| What was accepted or rejected, and why? | [Design decisions](DECISIONS.md) |
 | How do we judge the design before approving it? | [Critical user journeys and review protocol](REVIEW.md) |
 | How is development/release history represented? | [Product-history rules](../docs/PRODUCT-HISTORY.md) and [source data](../docs/data/product-history.json) |
 | What color and font values does the browser actually use? | [Shared stylesheet](../web/stipra/shared.css) and [roadmap stylesheet](../web/stipra/roadmap.css) |
