@@ -1,6 +1,6 @@
 # @yigit-denktas/stipra-core — local experimental alpha
 
-A small, synchronous printmaking engine for existing JavaScript artwork. It reuses Stiprā's separation, screening, shared Styles and diagnostics. The package has **zero runtime dependencies** and includes browser ESM, CommonJS and TypeScript declarations. This is the unpublished `0.1.0-alpha.1` candidate.
+A small, synchronous printmaking engine for existing JavaScript artwork. It reuses Stiprā's separation, screening, shared Styles and diagnostics. The package has **zero runtime dependencies** and includes browser ESM, CommonJS and TypeScript declarations. Version `0.1.0-alpha.1` is published; registry archives and a clean install are verified.
 
 ```js
 import { renderImage, renderLayers } from '@yigit-denktas/stipra-core';

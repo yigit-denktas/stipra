@@ -52,10 +52,10 @@ const regions=captureRegions({regions:[{id:'drawing',name:'Drawing',source,polar
 renderLayers(mapRegions(regions,{version:1,paper:'#ffffff',inks:[{id:'green',name:'Green',color:'#006043',combine:'max',regions:[{id:'drawing'}]}]}).input);
 `);
     cp.execFileSync(process.execPath,[require.resolve('typescript/bin/tsc'),'--strict','--noEmit','--target','ES2020','--module','NodeNext','--moduleResolution','NodeNext','consumer.mts'],{cwd:temp,stdio:'pipe'});
-    const report={contract:'stipra-library-candidate-v1',status:'verified-unpublished-candidate',node:process.version,
+    const report={contract:'stipra-library-candidate-v1',status:'verified-packed-candidate',node:process.version,
       packages:audit.packages.map(({name,version,tarball})=>({name,version,tarball})),installed,
       checks:{...checks,offlineInstall:true,lifecycleScriptsDisabled:true,typescriptPublicExports:true},
-      gates:{registryPublished:false,ownerPublicationDecision:'experimental-alpha-authorized',independentArtistTrial:'not-performed',physicalPrintValidation:'not-performed',
+      gates:{registryVerification:'not-queried-by-this-command',ownerPublicationDecision:'experimental-alpha-authorized',independentArtistTrial:'not-performed',physicalPrintValidation:'not-performed',
         broadExportDistribution:'Native Skia inventory remains review-required. Browser exporter uses the separately checked source-mapped Fontkit replacement; fonteditor is removed. All remain outside these lean tarballs.'},
       scope:'Exact tarballs only. Canvas fixture tests capture/region mapping, not browser rendering; real Chromium/p5 checks are separate CI evidence.'};
     fs.writeFileSync(path.join(out,'library-candidate.json'),JSON.stringify(report,null,2)+'\n');return report;

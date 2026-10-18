@@ -1,6 +1,6 @@
 # Digital acceptance and the library candidate
 
-The owner selected npm account `yigit-denktas` and authorized an experimental alpha. The three publishable candidates are `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs`, each at `0.1.0-alpha.1`. Authenticated uploads of all three exact audited archives were accepted by npm on 18 October 2026. npm reports processing; registry availability, downloadable hashes and a clean registry install remain unverified. See the [upload record](evidence/npm-alpha-upload-2026-10-18.json). This is not a print-quality approval. No new runtime dependencies were added for these checks.
+The three packages `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs` are published at `0.1.0-alpha.1`. On 18 October 2026 a fresh registry download verified their byte counts, SHA-256 and SHA-512 against the original [upload record](evidence/npm-alpha-upload-2026-10-18.json). A consumer with an initially empty npm cache installed exactly those three packages and passed runtime replay/ESM/CJS and strict TypeScript checks. See [registry evidence](evidence/npm-alpha-registry-2026-10-18.json). This is an experimental digital release, not print-quality or independent artist approval.
 
 ```sh
 npm ci
@@ -11,7 +11,7 @@ npm run audit:licenses
 npm run check:release-licenses
 ```
 
-The final command deliberately exits 1 while the remaining native finding remain. A successful inventory or lean-library check does not override it.
+The final command deliberately exits 1 for the unresolved native inventory. CI runs the non-gating `audit:licenses` inventory, plus separate failing checks for the exact lean packages and browser exporter; CI does not invoke this broad release command. Green CI is not native redistribution clearance.
 
 ## Saved artwork acceptance — #13
 
@@ -30,13 +30,13 @@ Physical evidence still needs an operator. The [print procedure and record check
 
 The consumer imports package names through their public export maps, including `@yigit-denktas/stipra-inputs/canvas`. It exercises Canvas capture → named regions → authored inks → core rendering, ESM/CJS parity, unchanged coverage and inert source-project replay. Strict NodeNext TypeScript checks the public entry points together. A synthetic Canvas readback fixture tests capture/mapping without adding a native library to the consumer; actual rendering and p5 integration remain the separate real Chromium CI checks.
 
-`out/distribution-audit/library-candidate.json` records runtime, exact archive hashes/bytes, installed graph, checks and remaining decisions beside the three tarballs. CI uploads the directory as `lean-distribution-audit`. Compare hashes with that report before sharing an archive. Reports are generated per run; changed bytes require rerunning the check. This does not test or authorize an `npm publish` operation, registry namespace access, release tags or optional downstream exporter dependencies.
+`out/distribution-audit/library-candidate.json` records runtime, exact archive hashes/bytes, installed graph, checks and remaining decisions beside the three tarballs. CI uploads the directory as `lean-distribution-audit`. Compare hashes with that report before sharing an archive. Reports are generated per run; changed bytes require rerunning the check. This local packing command does not query the registry. Its report makes no publication-state claim; local source edits may change candidate bytes even at the same manifest version. The immutable released archives are identified separately by the registry evidence. Do not republish modified source as alpha.1.
 
 ## Artifact-specific gates — #14
 
 | Intended artifact | Verified here | Remaining gate |
 | --- | --- | --- |
-| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Registry availability, downloadable hashes and clean install; independent artist usefulness review remains separate |
+| Experimental core/Canvas/inputs tarballs | Exact files/imports/notices, isolated offline install, public runtime/types | Registry archives and clean install verified; independent artist usefulness remains unperformed |
 | Browser PDF/ZIP exporter | Replacement Fontkit own-source/maps, resolved dependency versions, actual output hashes and complete notices | None in this exporter artifact; separate host/font/media obligations remain |
 | Bundled native CLI/executable | Installed Linux x64 glibc binary identity and production graph inventory | Exact native Rust/Skia/codec notices for the downloaded platform binary |
 | Printed results | Digital geometry and an operator record validator | Actual print observations, visual review and any calibrated-ink claims |
@@ -44,3 +44,13 @@ The consumer imports package names through their public export maps, including `
 One native provenance gap remains open. Fonteditor is removed; source-mapped Fontkit replaces the old opaque bundle. [Dependency evidence](DEPENDENCY-AUDIT.md) records the exact replacement and native boundary. Old retired artifacts are not retrospectively cleared.
 
 Publish only the exact audited tarballs, in core → canvas → inputs order, with `--tag alpha --access public --ignore-scripts --registry=https://registry.npmjs.org/`. Verify `npm whoami` is `yigit-denktas` first and compare each registry integrity value with `distribution-audit.json` afterward. The root application remains private. The audit rejects unreviewed names, versions, peers, registry and tags. Publication is authorized for the experimental digital library; independent artist feedback remains unperformed. Full native/export distribution and physical claims keep their own gates. No identity approval, owner-photo redistribution or physical-print certification follows from library acceptance.
+
+## Registry state and reproduction
+
+Both `alpha` and `latest` currently point to alpha.1. All three package names also expose `0.0.0-stage` placeholder versions; these are observed registry artifacts, not the audited release. Their origin has not been established. This verification changed no tags, versions or registry artifacts. Use an explicit version when reproducing:
+
+```sh
+npm install --save-exact --ignore-scripts --no-audit --no-fund --registry=https://registry.npmjs.org/ @yigit-denktas/stipra-core@0.1.0-alpha.1 @yigit-denktas/stipra-canvas@0.1.0-alpha.1 @yigit-denktas/stipra-inputs@0.1.0-alpha.1
+```
+
+Check `npm view PACKAGE@0.1.0-alpha.1 dist.integrity --registry=https://registry.npmjs.org/` against the evidence and independently hash the downloaded archive. Installation success alone does not prove byte identity. The published package READMEs contain pre-publication wording; corrected source documentation is for subsequent builds, not a modification of the immutable alpha.1 archives.

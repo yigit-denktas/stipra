@@ -1,0 +1,96 @@
+{
+  "contract": "stipra-registry-release-v1",
+  "checkedAt": "2026-10-18T12:47:52.567523+00:00",
+  "status": "verified-public-alpha",
+  "registry": "https://registry.npmjs.org/",
+  "releaseSourceCommit": "743e435fcbc3f5f3f0ef548057375961e213a083",
+  "verificationSourceCommit": "71358d551e4ac0fa86070d8edd40b19b8c1e027b",
+  "uploadRecord": "npm-alpha-upload-2026-10-18.json",
+  "packages": [
+    {
+      "name": "@yigit-denktas/stipra-core",
+      "version": "0.1.0-alpha.1",
+      "distTags": {
+        "latest": "0.1.0-alpha.1",
+        "alpha": "0.1.0-alpha.1"
+      },
+      "publicVersions": [
+        "0.0.0-stage",
+        "0.1.0-alpha.1"
+      ],
+      "integrity": "sha512-xJD4ubH3ObQBJQsMWPPnfquGphYaMNF5NqceRUOsg0UokanDs76uNuYZ7uXqcMtaPvv/ojyFIVhsQ6GWUAhMVQ==",
+      "sha256": "97ee09418074c5210aaa86a21762c8ea0861d4ac2a9a1e8138d4638c6d5ac7be",
+      "bytes": 35492,
+      "tarball": "https://registry.npmjs.org/@yigit-denktas/stipra-core/-/stipra-core-0.1.0-alpha.1.tgz",
+      "peerDependencies": {}
+    },
+    {
+      "name": "@yigit-denktas/stipra-canvas",
+      "version": "0.1.0-alpha.1",
+      "distTags": {
+        "latest": "0.1.0-alpha.1",
+        "alpha": "0.1.0-alpha.1"
+      },
+      "publicVersions": [
+        "0.0.0-stage",
+        "0.1.0-alpha.1"
+      ],
+      "integrity": "sha512-I3OeND1ryT3lOH+Gz3CciBevXdhMSisUi+3KJqq9Zp/v1Ja1OH6C7QV2RYcTLG4G/cG30/T8DhNs+vTdMJndtA==",
+      "sha256": "536697af3d26eb44e847a3f47af1278292dc0040794e0b2f09c3e9831f730d76",
+      "bytes": 8777,
+      "tarball": "https://registry.npmjs.org/@yigit-denktas/stipra-canvas/-/stipra-canvas-0.1.0-alpha.1.tgz",
+      "peerDependencies": {
+        "@yigit-denktas/stipra-core": "0.1.0-alpha.1"
+      }
+    },
+    {
+      "name": "@yigit-denktas/stipra-inputs",
+      "version": "0.1.0-alpha.1",
+      "distTags": {
+        "latest": "0.1.0-alpha.1",
+        "alpha": "0.1.0-alpha.1"
+      },
+      "publicVersions": [
+        "0.0.0-stage",
+        "0.1.0-alpha.1"
+      ],
+      "integrity": "sha512-0dxJS+GoNM98MUDI24bOiMQ9iBmX7eWTrDufFdrPC2ZxZn7huFZLqvbbbagD2DKbX/swDWJBuxJ+DWzSWfjyBg==",
+      "sha256": "4b658feb2153c4d2938476680fc8f5ac248e2f7950d444666b0f0b28e4631285",
+      "bytes": 8497,
+      "tarball": "https://registry.npmjs.org/@yigit-denktas/stipra-inputs/-/stipra-inputs-0.1.0-alpha.1.tgz",
+      "peerDependencies": {
+        "@yigit-denktas/stipra-canvas": "0.1.0-alpha.1"
+      }
+    }
+  ],
+  "consumer": {
+    "installed": [
+      "node_modules/@yigit-denktas/stipra-canvas",
+      "node_modules/@yigit-denktas/stipra-core",
+      "node_modules/@yigit-denktas/stipra-inputs"
+    ],
+    "checks": {
+      "publicExports": true,
+      "esmCjsParity": true,
+      "canvasRegionCore": true,
+      "sourceUnchanged": true,
+      "regionReplay": true,
+      "freshRegistryInstall": true,
+      "emptyInitialCache": true,
+      "lifecycleScriptsDisabled": true,
+      "typescriptPublicExports": true
+    },
+    "node": "v24.19.0",
+    "npm": "11.9.0"
+  },
+  "observations": [
+    "Registry alpha and latest both resolve to 0.1.0-alpha.1; no dist-tags were changed by verification.",
+    "Public 0.0.0-stage versions are observed on all three package names; their origin is not established by this verification. They are not the audited alpha payload.",
+    "SHA-256, SHA-512 integrity and byte counts of downloaded alpha archives match the original committed upload record."
+  ],
+  "limits": [
+    "Linux x64 / Node v24.19.0 / npm 11.9.0 registry-consumer check; actual Chromium/p5 and other platforms retain their separate CI evidence.",
+    "No native Skia, font, PDF exporter, owner photograph or new package version was published by this verification.",
+    "Independent artist, human accessibility and physical-print acceptance remain open."
+  ]
+}

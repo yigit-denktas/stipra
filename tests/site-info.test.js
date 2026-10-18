@@ -18,7 +18,7 @@ test('information pages and all navigation use valid relative destinations on ei
       for(const [,href]of html.matchAll(/href="([^"]+)"/g)){if(/^(?:https:|#)/.test(href)||href.endsWith('shared.css'))continue;const resolved=path.resolve(path.dirname(file),href),target=href.endsWith('/')?path.join(resolved,'index.html'):resolved;assert.ok(fs.existsSync(target),'Broken destination '+route+' → '+href);assert.ok(target.startsWith(stage+path.sep));}
     }
     const xml=fs.readFileSync(path.join(stage,'sitemap.xml'),'utf8');assert.equal((xml.match(/<loc>/g)||[]).length,Info.ROUTES.length);assert.ok(!xml.includes('github.io'));
-    const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/no npm package release/);assert.match(changes,/PR #89/);
+    const changes=fs.readFileSync(path.join(stage,'changelog/index.html'),'utf8');assert.match(changes,/0\.1\.0-alpha\.1.*published and registry-verified/);assert.doesNotMatch(changes,/Packages remain unpublished/);assert.match(changes,/PR #89/);
     const roadmap=fs.readFileSync(path.join(stage,'roadmap/index.html'),'utf8');assert.match(roadmap,/Opens:/);assert.match(roadmap,/9\/14/);
   }finally{fs.rmSync(stage,{recursive:true,force:true});}
 });

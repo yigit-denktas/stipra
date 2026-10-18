@@ -1,7 +1,22 @@
 {
   "contract": "stipra-changelog-v1",
-  "releaseStatus": "Development changes on main; no npm package release or version tag is announced here.",
+  "releaseStatus": "Lean JavaScript packages 0.1.0-alpha.1 are published and registry-verified. Studio development and human/native acceptance remain separate; no GitHub release tag is implied.",
   "entries": [
+    {
+      "date": "2026-10-18",
+      "title": "Public alpha.1 archives and fresh registry installation verified",
+      "status": "Published alpha",
+      "issues": [
+        70,
+        14
+      ],
+      "changes": [
+        "Verify all three downloaded alpha.1 archives against the original committed upload record, including SHA-256, SHA-512 and byte counts.",
+        "Install from an initially empty npm cache with lifecycle scripts disabled; verify exactly three installed packages, public runtime/TypeScript exports and replay.",
+        "Record alpha/latest tags and 0.0.0-stage registry placeholders without modifying them; correct obsolete processing/404 and unpublished wording.",
+        "Keep native backend, broad release policy, original goldens and human acceptance unchanged."
+      ]
+    },
     {
       "date": "2026-10-18",
       "title": "Reconciled publication, provenance and human acceptance handoffs",
