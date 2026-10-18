@@ -41,7 +41,8 @@
     "check:print-observations": "node scripts/check-print-observations.js",
     "prepare:fonts": "node scripts/cache-paper-mono.js",
     "check:browser-distribution": "node scripts/build-browser-export.js out/browser-distribution/export.mjs",
-    "check:accessibility": "STIPRA_SMOKE_PAGE=examples/accessibility/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_ACCESSIBILITY_PASS node scripts/browser-smoke.js"
+    "check:accessibility": "STIPRA_SMOKE_PAGE=examples/accessibility/browser-smoke.html STIPRA_SMOKE_EXPECT=BROWSER_ACCESSIBILITY_PASS node scripts/browser-smoke.js",
+    "check:roadmap-visual": "node scripts/verify-roadmap-css-visual.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",
