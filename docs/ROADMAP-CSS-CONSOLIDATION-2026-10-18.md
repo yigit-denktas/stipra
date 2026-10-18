@@ -3,7 +3,11 @@
 **Date:** 18 October 2026. **Target:** [Draft PR #98](https://github.com/yigit-denktas/stipra/pull/98).  
 **Source:** [vojtaholik/good-css](https://github.com/vojtaholik/good-css), pinned project-scoped copy at `.agents/skills/good-css/`, upstream MIT license included.
 
-## Scope and result
+## Current verification
+
+The actual built-page comparison passed in [GitHub Actions run 39151317165](https://github.com/yigit-denktas/stipra/actions/runs/39151317165) at `2cff9c0`: all 16 screenshots match the unchanged original stylesheet fixture exactly. The fixes below restore the original mobile navigation, disclosure spacing and release-row borders. The final stylesheet retains four thresholds (700, 680, 480 and 360px). The following initial measurements and pending-verification note describe the earlier consolidation checkpoint, not the current acceptance status. Normal CI results and deployed-page review are recorded on PR #98.
+
+## Initial scope and result
 
 Clean up the accumulation of roadmap v3, v4, Taste Skill and Impeccable CSS **without redesigning** the roadmap or changing actual product-history data, release publication, copy, or Studio behavior.
 
