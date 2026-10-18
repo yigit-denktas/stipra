@@ -8,7 +8,7 @@ const assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),dist=path.join(root,'dist/stipra');
 const fixture=path.join(root,'tests/fixtures/roadmap-before-good-css.css');
 const out=path.join(root,'out/roadmap-css-visual');
-const widths=[320,390,768,1440],states=['','?q=ink','#cap-INK-01'];
+const widths=[320,390,768,1440],states=['','?q=ink','#cap-INK-01','?expanded=1'];
 function chrome(){for(const b of [process.env.CHROME_BIN,'chromium','google-chrome','google-chrome-stable'].filter(Boolean)){
  const p=spawnSync(b,['--version'],{encoding:'utf8',timeout:5000});if(p.status===0)return b;
 }throw Error('Chromium unavailable: set CHROME_BIN');}
@@ -51,6 +51,7 @@ async function run(){
      await new Promise(resolve=>setTimeout(resolve,50));
     }
     if(state==='?q=ink')await call('Runtime.evaluate',{expression:'document.querySelector(".r-search")?.scrollIntoView({block:"start"})'});
+    if(state==='?expanded=1')await call('Runtime.evaluate',{expression:'(()=>{const area=document.querySelector(".r-area");if(area){area.open=true;area.querySelector(".r-record details")?.setAttribute("open","");area.scrollIntoView({block:"start"});}return !!area})()',returnByValue:true});
     if(state.startsWith('#')){
      const checked=await call('Runtime.evaluate',{expression:'document.getElementById("cap-INK-01")?.closest("details")?.open',returnByValue:true});
      assert.equal(checked.result.value,true,'Incoming deep link should open its disclosure');
