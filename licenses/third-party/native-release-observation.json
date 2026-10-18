@@ -1,0 +1,73 @@
+{
+  "contract": "stipra-native-release-observation-v1",
+  "checkedAt": "2026-10-18",
+  "source": "https://api.github.com/repos/samizdatco/skia-canvas/releases/tags/v3.0.8",
+  "releaseId": 250120924,
+  "tag": "v3.0.8",
+  "publishedAt": "2025-09-25T20:41:59Z",
+  "assets": [
+    {
+      "id": 297282313,
+      "name": "aws-lambda-arm64.zip",
+      "bytes": 12680763,
+      "digest": "sha256:a5bc5e17c1031c978e00a76e2103e335ce3aaeeff96b6320c32bb280f4b9cf68"
+    },
+    {
+      "id": 297284056,
+      "name": "aws-lambda-x64.zip",
+      "bytes": 12589038,
+      "digest": "sha256:49aeb2ea91cbc191747946ac3333fa09b6c20ab874cbe62f78ebb1cee578f7e6"
+    },
+    {
+      "id": 297280524,
+      "name": "darwin-arm64.gz",
+      "bytes": 10001340,
+      "digest": "sha256:df5f6aec9b92a83861473dff8cf1ed3aea16b89af6f66a9cfbc25ff7fc7460a9"
+    },
+    {
+      "id": 297280858,
+      "name": "darwin-x64.gz",
+      "bytes": 10294025,
+      "digest": "sha256:3301d9241b661f30dcaf73c413b91549d020d7c2faff4b13905007b93ff66736"
+    },
+    {
+      "id": 297282222,
+      "name": "linux-arm64-glibc.gz",
+      "bytes": 12587404,
+      "digest": "sha256:0665d07a60c05d912a2fd1459aeb37714eb0445c2f7848407638546c3d2e1a70"
+    },
+    {
+      "id": 297283993,
+      "name": "linux-arm64-musl.gz",
+      "bytes": 13319046,
+      "digest": "sha256:27c58e0027c0507a7fcca274492c23b52d19b2a73ffe3199fd6fd808b578f78f"
+    },
+    {
+      "id": 297283999,
+      "name": "linux-x64-glibc.gz",
+      "bytes": 12505166,
+      "digest": "sha256:f45925290599d4b7cb5211c123fadee27bc899d7556696e2e333d0efac6937b2"
+    },
+    {
+      "id": 297287295,
+      "name": "linux-x64-musl.gz",
+      "bytes": 13471943,
+      "digest": "sha256:be1bdee982d2b4abf2827d97d04d212bb03ab849177f40a37023401c61d3e730"
+    },
+    {
+      "id": 297280989,
+      "name": "win32-arm64.gz",
+      "bytes": 10341692,
+      "digest": "sha256:53de01055e63bb610aece10abf6520f7140a5f25c2a8a7f9361cd7529b71e333"
+    },
+    {
+      "id": 297281388,
+      "name": "win32-x64.gz",
+      "bytes": 10752533,
+      "digest": "sha256:bdf56f8b0e0473ec414f510b5b7068d33a76b3488fd608f49ca92d5bfb77b428"
+    }
+  ],
+  "attachedComponentInventory": false,
+  "scope": "Observed release attachment list only. Asset digests identify compressed downloads; they do not attest binary build inputs, compiled components or complete notices. No native artifact or upstream code is redistributed.",
+  "distribution": "review-required"
+}

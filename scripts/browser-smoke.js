@@ -74,6 +74,24 @@ async function run(){
          if(state.state==='fail')throw Error('Browser smoke failed: '+state.output);
          if(state.state==='pass'){
            if(state.output!==(process.env.STIPRA_SMOKE_EXPECT||'BROWSER_SMOKE_PASS'))throw Error('Unexpected smoke result: '+state.output);
+           if(page==='examples/accessibility/browser-smoke.html'){
+             const file=path.join(root,'out/accessibility/audit.json'),audit=JSON.parse(fs.readFileSync(file));audit.keyboard=[];
+             try{
+               for(const [route] of require('./build-site-info').ROUTES){
+                 const destination='/dist/stipra/'+(route.endsWith('.html')?route:route+'index.html');
+                 await call('Page.navigate',{url:new URL(destination,url).href},sessionId);
+                 for(;;){const ready=await call('Runtime.evaluate',{expression:'location.pathname==='+JSON.stringify(destination)+' && document.readyState==="complete" && Boolean(document.querySelector(".skip-link"))',returnByValue:true},sessionId);if(ready.result.value)break;await new Promise(resolve=>setTimeout(resolve,50));}
+                 for(const type of ['keyDown','keyUp'])await call('Input.dispatchKeyEvent',{type,key:'Tab',code:'Tab',windowsVirtualKeyCode:9},sessionId);
+                 const focused=await call('Runtime.evaluate',{expression:'JSON.stringify({skip:document.activeElement.matches(".skip-link"),visible:document.activeElement.getBoundingClientRect().top>=0 && document.activeElement.getBoundingClientRect().bottom<=innerHeight})',returnByValue:true},sessionId);
+                 const checked=JSON.parse(focused.result.value);if(!checked.skip||!checked.visible)throw Error('First Tab must expose the skip link: '+route);
+                 for(const type of ['keyDown','keyUp'])await call('Input.dispatchKeyEvent',{type,key:'Enter',code:'Enter',windowsVirtualKeyCode:13},sessionId);
+                 const target=await call('Runtime.evaluate',{expression:'document.activeElement.id==="main-content" && location.hash==="#main-content"',returnByValue:true},sessionId);
+                 if(!target.result.value)throw Error('Enter must focus the main content: '+route);
+                 audit.keyboard.push({route,firstTabVisible:true,enterFocusesMain:true});
+               }
+             }catch(error){audit.keyboardError=error.message;throw error;}
+             finally{fs.writeFileSync(file,JSON.stringify(audit,null,2)+'\n');}
+           }
            if(['examples/alpha/browser-smoke.html','examples/regions/browser-smoke.html','examples/export-validation/browser-smoke.html'].includes(page)){
              const value=await call('Runtime.evaluate',{expression:'document.getElementById("evidence").textContent',returnByValue:true},sessionId);
              const evidence=JSON.parse(value.result.value),dir=path.join(root,page==='examples/regions/browser-smoke.html'?'out/structured-inputs':page==='examples/export-validation/browser-smoke.html'?'out/export-workflow':'out/alpha-validation');fs.mkdirSync(dir,{recursive:true});
