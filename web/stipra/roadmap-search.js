@@ -9,6 +9,17 @@
   if(!words.length)return [];
   return index.filter(item=>{const haystack=String(item.text).normalize('NFKC').toLowerCase();return words.every(word=>haystack.includes(word));});
  }
+ function revealHash(doc,hash){
+  if(!hash||hash[0]!=='#')return false;
+  let id;
+  try{id=decodeURIComponent(hash.slice(1));}catch{return false;}
+  const target=doc.getElementById(id);
+  if(!target)return false;
+  for(let parent=target.parentElement;parent;parent=parent.parentElement){
+   if(parent.tagName?.toUpperCase()==='DETAILS')parent.open=true;
+  }
+  return true;
+ }
  function mount(doc,index){
   const field=doc.getElementById('r-query'),panel=doc.getElementById('r-results'),list=doc.getElementById('r-result-list'),count=doc.getElementById('r-result-count'),form=doc.querySelector('.r-search');
   if(!field||!panel||!list||!count)return;
@@ -26,11 +37,22 @@
   form?.addEventListener('submit',e=>e.preventDefault());
   form?.addEventListener('reset',()=>{field.value='';update();});
   doc.addEventListener('click',e=>{
-   const a=e.target.closest('a[href^="#"]');if(!a)return;
-   const target=doc.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
-   if(!target)return;for(let p=target.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
+   const anchor=e.target.closest?.('a[href^="#"]');
+   if(anchor)revealHash(doc,anchor.getAttribute('href'));
   });
+  const view=doc.defaultView;
+  if(view){
+   const showLinkedRecord=()=>{
+    if(revealHash(doc,view.location.hash)){
+     const target=doc.getElementById(decodeURIComponent(view.location.hash.slice(1)));
+     // On direct entry the initial browser jump can occur before <details> opens.
+     view.requestAnimationFrame?.(()=>target?.scrollIntoView?.({block:'start'}));
+    }
+   };
+   view.addEventListener?.('hashchange',showLinkedRecord);
+   showLinkedRecord();
+  }
   if(doc.defaultView?.location?.search){const q=new URLSearchParams(doc.defaultView.location.search).get('q');if(q){field.value=q;update();}}
  }
- return {search,mount};
+ return {search,mount,revealHash};
 });
