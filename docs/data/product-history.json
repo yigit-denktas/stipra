@@ -1,6 +1,6 @@
 {
   "contract": "stipra-product-history-v2",
-  "asOf": "2026-10-17",
+  "asOf": "2026-10-18",
   "workingBuild": {
     "label": "v0.8.0",
     "kind": "user-reported-working-build",
@@ -433,8 +433,8 @@
       "dependsOn": [
         "LIB-06"
       ],
-      "implementation": "planned",
-      "acceptance": "not-evaluated",
+      "implementation": "in-progress",
+      "acceptance": "pending",
       "recordType": "operations"
     },
     {
@@ -713,6 +713,15 @@
       "capabilityId": "LIB-05",
       "title": "Prepare independent artist-trial record; trial not yet completed",
       "sourceTitle": "Controlled forest review and concrete release handoff"
+    },
+    {
+      "id": "DEV-016",
+      "date": "2026-10-18",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "OPS-02",
+      "title": "Give releases and capabilities a shared, searchable history",
+      "sourceTitle": "Capability history and searchable roadmap"
     }
   ]
 }
