@@ -7,7 +7,7 @@ Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a
 
 ## Current: experimental digital alpha published
 
-The [library direction](docs/CREATIVE-CODING-LIBRARY.md) now has an implemented local alpha. The lean core (#71), Canvas/p5 adapter (#72), authored-ink export (#73) and measured engineering evaluation (#74) are merged in #78/#79/#80. [Alpha evidence](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility and browser/Node/CLI parity. The alpha.1 registry archives and clean install are verified; [tracker #70](https://github.com/yigit-denktas/stipra/issues/70) remains open for independent artist usefulness feedback.
+The [library direction](docs/CREATIVE-CODING-LIBRARY.md) now has an implemented local alpha. The lean core (#71), Canvas/p5 adapter (#72), authored-ink export (#73) and measured engineering evaluation (#74) are merged in #78/#79/#80. [Alpha evidence](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility and browser/Node/CLI parity. The delivery milestone records alpha.1 as published, with registry archives and clean install verified; [tracker #70](https://github.com/yigit-denktas/stipra/issues/70) remains open for independent artist usefulness feedback.
 
 The normalized color contract/reference tests (#44) and bounded PNG interpretation fix (#82) are implemented. The audit now has one native Skia provenance finding (#14); the browser exporter uses a source-mapped Fontkit replacement and fonteditor is removed. The supported digital master/CLI/export scope (#8/#11/#12) is delivered in #93; physical and broader QA acceptance remain #13. The essential studio workflow (#22) is implemented.
 

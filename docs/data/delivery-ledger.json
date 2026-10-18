@@ -40,13 +40,13 @@
     },
     {
       "id": "published-alpha",
-      "version": "Library 0.1.0-alpha.1 (proposed)",
-      "state": "target",
+      "version": "Library 0.1.0-alpha.1",
+      "state": "published",
       "tasks": [
         70,
         14
       ],
-      "exit": "Owner accepts the alpha/usefulness evidence and approves publication; package contents/types/install/size pass, with a notice audit for each artifact actually shipped. Native/WASM full-export findings are not silently transferred to the dependency-free core. No physical-quality claim."
+      "exit": "Experimental alpha.1 is published: exact registry archive bytes and a fresh three-package runtime/TypeScript consumer are verified. Lean/browser distribution checks pass in their own scopes. Independent artist usefulness remains open in #70; physical/human acceptance and native binary notices remain separate in #13/#14. No print-quality claim."
     },
     {
       "id": "studio-rc",
