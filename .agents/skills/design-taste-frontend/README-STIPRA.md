@@ -22,6 +22,10 @@ node .agents/skills/design-taste-frontend/scripts/inspect.mjs dist/stipra/roadma
 
 The inspector creates `.taste-skill/inspect` screenshots and a JSON report. Treat its output as evidence, not as a substitute for judgment. It evaluates public marketing pages by default and may report image/motion deficits on an intentionally text-forward software changelog.
 
+## Contract before inspection
+
+Read [`design/CONTRACT.md`](../../../design/CONTRACT.md), [`design/PATTERNS.md`](../../../design/PATTERNS.md) and the decision log before proposing visual changes. The upstream skill provides critique and experiments; Stiprā's contract specifies the product-specific experience, with [`design/REVIEW.md`](../../../design/REVIEW.md) assigning final judgment to an editor/owner and evidence from real user tasks.
+
 ## Stiprā-specific boundaries
 
 - Apply the taste skill to **public editorial pages**, not as a replacement for usability or print-production rules in the interactive Studio.
