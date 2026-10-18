@@ -26,22 +26,45 @@ async function run(){
  }catch{res.writeHead(404).end();}});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const bin=chrome(),results=[];
+ const child=spawn(bin,['--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--remote-debugging-pipe','about:blank'],{stdio:['ignore','ignore','pipe','pipe','pipe']});
+ let pending=new Map(),serial=0,stream='',sessionId,stderr='';
+ child.stderr.on('data',x=>stderr=(stderr+x.toString()).slice(-1000));
+ const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');});
+ child.stdio[4].on('data',chunk=>{stream+=chunk.toString();let n;while((n=stream.indexOf('\0'))>=0){const raw=stream.slice(0,n);stream=stream.slice(n+1);if(!raw)continue;const x=JSON.parse(raw),p=pending.get(x.id);if(p){pending.delete(x.id);x.error?p.reject(Error(x.error.message)):p.resolve(x.result);}}});
+ child.on('exit',code=>{for(const p of pending.values())p.reject(Error('Chrome exit '+code+' '+stderr));pending.clear();});
  try{
+  const {targetId}=await call('Target.createTarget',{url:'about:blank'});
+  sessionId=(await call('Target.attachToTarget',{targetId,flatten:true})).sessionId;
+  await call('Page.enable');await call('Runtime.enable');await call('Network.enable');await call('Network.setCacheDisabled',{cacheDisabled:true});
+
   for(const w of widths)for(const [idx,state]of states.entries()){
    const images=[];
    for(const variant of ['before','after']){
     const file=path.join(out,w+'-'+idx+'-'+variant+'.png');
     const url='http://127.0.0.1:'+server.address().port+'/'+variant+'/roadmap/index.html'+state;
-    const args=['--headless','--no-sandbox','--disable-dev-shm-usage','--hide-scrollbars','--force-device-scale-factor=1','--window-size='+w+',1100','--virtual-time-budget=2200','--screenshot='+file,url];
-    const result=await new Promise((resolve,reject)=>{const p=spawn(bin,args,{stdio:['ignore','ignore','pipe']});let stderr='';p.stderr.on('data',x=>stderr=(stderr+x.toString()).slice(-800));p.on('error',reject);p.on('close',code=>resolve({code,stderr}));});
-    if(result.code!==0||!fs.existsSync(file))throw Error('Chromium screenshot failed: '+w+' '+variant+' '+result.stderr);
-    images.push(fs.readFileSync(file));
+    await call('Emulation.setDeviceMetricsOverride',{width:w,height:1100,deviceScaleFactor:1,mobile:false});
+    await call('Page.navigate',{url});
+    for(let attempt=0;attempt<100;attempt++){
+     const check=await call('Runtime.evaluate',{expression:'document.readyState==="complete"&&document.fonts.status==="loaded"&&!!document.querySelector(".r-site")',returnByValue:true});
+     if(check.result.value)break;
+     if(attempt===99)throw Error('Page never finished loading '+url);
+     await new Promise(resolve=>setTimeout(resolve,50));
+    }
+    if(state==='?q=ink')await call('Runtime.evaluate',{expression:'document.querySelector(".r-search")?.scrollIntoView({block:"start"})'});
+    if(state.startsWith('#')){
+     const checked=await call('Runtime.evaluate',{expression:'document.getElementById("cap-INK-01")?.closest("details")?.open',returnByValue:true});
+     assert.equal(checked.result.value,true,'Incoming deep link should open its disclosure');
+    }
+    const overflow=await call('Runtime.evaluate',{expression:'document.documentElement.scrollWidth > innerWidth',returnByValue:true});
+    assert.equal(overflow.result.value,false,'Unexpected horizontal overflow at '+w+' '+state);
+    const png=Buffer.from((await call('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false})).data,'base64');
+    fs.writeFileSync(file,png);images.push(png);
    }
    const identical=images[0].equals(images[1]);results.push({width:w,state:state||'default',pixelExact:identical});
   }
   fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(results,null,2)+'\n');
   console.log(JSON.stringify({checked:results.length,identical:results.filter(x=>x.pixelExact).length,results},null,2));
   if(results.some(x=>!x.pixelExact))throw Error('CSS visual differences: compare the before/after PNG files in '+out);
- }finally{await new Promise(resolve=>server.close(resolve));}
+ }finally{child.kill();await new Promise(resolve=>server.close(resolve));}
 }
 run().catch(e=>{console.error(e.stack||e);process.exitCode=1});
