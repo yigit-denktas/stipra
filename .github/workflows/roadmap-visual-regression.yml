@@ -1,0 +1,35 @@
+name: Roadmap CSS visual regression
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'web/stipra/roadmap.css'
+      - 'web/stipra/roadmap-search.js'
+      - 'scripts/build-roadmap-page.js'
+      - 'scripts/build-site-info.js'
+      - 'scripts/verify-roadmap-css-visual.js'
+      - 'tests/fixtures/roadmap-before-good-css.css'
+      - '.github/workflows/roadmap-visual-regression.yml'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build:pages
+      - name: Visual baseline versus consolidated stylesheet
+        run: npm run check:roadmap-visual
+      - name: Preserve before/after screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roadmap-css-visual-regression
+          path: out/roadmap-css-visual/
+          if-no-files-found: warn
