@@ -56,3 +56,16 @@ Likewise, a major visual release may deserve a real before/after screenshot or a
 - Merge of this review PR remains the owner/design decision. No future-state simulation is shipped as product history.
 
 The reusable design skill lives in `.agents/skills/design-taste-frontend/`. Its pinned upstream source and scope are documented in `README-STIPRA.md`.
+
+## Editorial follow-up — preserving intent across agents
+
+The user's 18 October Katie Dill/Stripe discussion raised an important distinction: standardize **how quality is achieved**, not **what every product looks like**. This second-pass design infrastructure is a concrete response, not an assertion that the early Taste review has become a human usability study.
+
+- [`design/CONTRACT.md`](../design/CONTRACT.md): Stiprā-specific point of view, authentic palette/fonts, editorial IA, honest statuses and interaction contracts.
+- [`design/PATTERNS.md`](../design/PATTERNS.md): concrete markup/CSS patterns, intended usage and anti-patterns.
+- [`design/DECISIONS.md`](../design/DECISIONS.md): chosen, rejected and experimental directions with evidence, limitations and reopening criteria.
+- [`design/REVIEW.md`](../design/REVIEW.md): three critical task journeys and a separate editor/critic workflow.
+
+**Important boundaries:** Some rows describe implemented draft-PR behaviors and user-expressed preferences, but none of these documents by itself constitutes final owner acceptance. The active Studio layout decision (#31), independent user and accessibility observations, print acceptance, licensing evidence, actual release publication and the first live release-history ingestion remain separate and open unless verified by their own sources.
+
+The new `tests/design-contract.test.js` is a deliberately narrow check: it alerts us when documented CSS tokens drift from the actual stylesheet and when required agent/contract entry points disappear. It cannot judge artistic quality. The existing product-history and site-info tests continue to guard truthful release history, navigation and information placement. This division reflects the editor principle discussed in the user's summary of [Katie Dill's talk](https://www.youtube.com/watch?v=GLvFTMtw4Jk&t=547s): fast implementation is not itself design approval.
