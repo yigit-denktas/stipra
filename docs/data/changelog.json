@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Open matching ink controls directly from each plate",
+      "status": "Development",
+      "issues": [
+        22,
+        31
+      ],
+      "changes": [
+        "Add a named adjustment button to every grayscale plate; open, scroll to and focus its existing ink settings without changing artwork or inspection state.",
+        "Cover manual eight-ink, CMYK, shared-style and phone/desktop navigation in the real browser workflow. Independent human acceptance and the broader workspace redesign remain open."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Prepare actual acceptance and improve public-text legibility",
       "status": "Development",
       "prs": [

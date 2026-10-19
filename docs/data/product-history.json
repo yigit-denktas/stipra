@@ -794,6 +794,15 @@
       "capabilityId": "OPS-01",
       "title": "Increase secondary text and shorten public-document line lengths",
       "sourceTitle": "Prepare actual acceptance and improve public-text legibility"
+    },
+    {
+      "id": "DEV-025",
+      "date": "2026-10-19",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STU-01",
+      "title": "Open matching ink controls directly from each plate",
+      "sourceTitle": "Open matching ink controls directly from each plate"
     }
   ],
   "libraryCapabilityIds": [

@@ -124,3 +124,9 @@ Revisit when:
 ## 19 October owner-authorized landing and legibility follow-up
 
 PR #98 merged as `e4f7ee6` after the owner requested all five follow-ups and the exact head passed 75 CI steps and 16 pixel comparisons. This authorizes landing the reviewed design; independent user/assistive-technology and physical acceptance remain open. Small auxiliary text now has explicit 13/14/16px roles and running paragraphs a 70ch maximum. The roadmap stylesheet and its original comparison fixture are unchanged. Paper, ink palette, Plex, sharp rules and lowercase wordmark are retained. Reopen based on observed reading or reflow failures, not a generic marketing score.
+
+## 19 October bounded Studio navigation follow-up
+
+The owner authorized exercising the Studio workflow and fixing concrete friction. An agent review found that plate inspection required matching an ink name to a separate collapsed settings disclosure; on phones those controls sit below the artwork. Each plate now has a named adjustment button targeting the existing disclosure by ink ID. It opens and focuses the matching summary and scrolls it into view. It does not apply a recipe or change inspection state. The existing controls remain available.
+
+This bounded behavior retains the current workspace composition, palette, wordmark and advanced settings. A new sidebar, modal editor and automatic solo were rejected as unnecessary for locating controls. Browser regression coverage checks focus, unchanged pixels, dynamic recipe targets and touch sizes. This is an agent finding with automated evidence, not independent human usability acceptance; the full #31 layout decision remains open.

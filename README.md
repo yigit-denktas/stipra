@@ -50,7 +50,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts.
 
-**Delivery:** [Roadmap](https://apps.yigitdenktas.com/stipra/roadmap/) · [Delivery map](https://apps.yigitdenktas.com/stipra/delivery/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, solo/mute/paper, native pixel zoom and print geometry.
+**Delivery:** [Roadmap](https://apps.yigitdenktas.com/stipra/roadmap/) · [Delivery map](https://apps.yigitdenktas.com/stipra/delivery/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, plate adjustment, solo/mute/paper and print geometry.
 
 **Structured inputs:** named regions → physical inks and opt-in frozen source projects are implemented locally (#83/#84). [Try the region example](https://apps.yigitdenktas.com/stipra/regions/). [Contracts and evidence](docs/STRUCTURED-INPUTS.md) cover replay, the bounded OpenRaster/auxiliary pilots and local C2PA feasibility (#85/#86); native Apple/EXR and browser credentials remain deferred.
 
