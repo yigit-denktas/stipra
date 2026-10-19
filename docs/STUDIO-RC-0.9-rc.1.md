@@ -38,6 +38,10 @@ On 19 October, the primary hosted Studio entry state, guide comparison instructi
 
 The browser download transport timed out while acquiring the public 8 × 8 SVG fixture. Import/comparison/package download on the live host were therefore not completed in this session. This is an observation about the review tooling, not evidence of an application export defect. The existing real Chromium workflow exercises actual procedural imports, edits, comparison adoption/invalidation, inspection and exported ZIP contents; require its fresh final-head pass. The local command runner was unavailable, so no local test run is claimed.
 
+## Main-build verification follow-up
+
+The 19 October main build at `aec0c23d6cc538e4e00352c66ee9543eba7694cd` passed all 77 CI steps and Pages deployment. A fresh downloaded archive matches its GitHub SHA-256; all 78 site files match the manifest, with no missing, unlisted or duplicate entries. Fourteen release-history/navigation tests also pass locally after the command runner recovered. [Prepared prerelease notes and exact verification procedure](STUDIO-PRERELEASE-v0.9-rc.1.md) record the immutable target and archive. This supplements the earlier session limits above; it does not establish a completed live-host import/download check. Browser automation now reports an extension UI that requires a person to dismiss it. No release/tag or human acceptance is claimed.
+
 ## Acceptance boundaries
 
 | Item | Candidate treatment |

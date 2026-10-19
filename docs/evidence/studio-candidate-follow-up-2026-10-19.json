@@ -1,0 +1,84 @@
+{
+  "contract": "stipra-studio-candidate-follow-up-v1",
+  "checkedAt": "2026-10-19",
+  "releaseStatus": "prepared-not-published",
+  "sourceRevision": "aec0c23d6cc538e4e00352c66ee9543eba7694cd",
+  "archive": {
+    "archiveBytes": 3714250,
+    "archiveSha256": "a07cb05d0f14945b69870c6b6fb1e084cf62cb0e10674cfb2caac72eabce32b3",
+    "sourceRevision": "aec0c23d6cc538e4e00352c66ee9543eba7694cd",
+    "workflowRunId": "39274175313",
+    "files": 79,
+    "manifestFiles": 78,
+    "hashFailures": [],
+    "unlistedFiles": [],
+    "missingFiles": [],
+    "duplicateNames": false
+  },
+  "verificationRun": {
+    "id": 39274175313,
+    "conclusion": "success",
+    "stepsPassed": 77,
+    "stepsTotal": 77,
+    "nodeTestsPassed": 189,
+    "nodeTestsSkipped": 0
+  },
+  "pagesRun": {
+    "id": 39274175418,
+    "conclusion": "success"
+  },
+  "localTests": {
+    "command": "node --test tests/roadmap-history.test.js tests/release-history.test.js tests/site-info.test.js",
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "liveHost": {
+    "fullJourney": "not-completed",
+    "exactByteIdentity": "not-established",
+    "observedUi": [
+      "Studio entry and uncalibrated-preview wording",
+      "guide comparison instructions",
+      "Canvas frame advance 0 to 1"
+    ],
+    "blockers": [
+      "Browser file-download helper failed for public fixtures",
+      "Connected Edge reports another extension UI requiring a person to dismiss it"
+    ],
+    "commandRunnerHttp": "primary-host asset requests returned HTTP 403; not evidence of a product defect"
+  },
+  "nativeNotices": {
+    "issue": "https://github.com/samizdatco/skia-canvas/issues/309",
+    "responseObserved": false,
+    "distribution": "native-bundles-blocked"
+  },
+  "humanAcceptance": {
+    "keyboardScreenReader": "unperformed",
+    "physicalPrints": "owner-deferred-unperformed",
+    "independentArtist": "owner-deferred-unperformed"
+  },
+  "publication": {
+    "tagCreated": false,
+    "releaseCreated": false,
+    "npmChanged": false,
+    "notes": "docs/STUDIO-PRERELEASE-v0.9-rc.1.md",
+    "limits": "No release-write connector; browser automation blocked by extension UI.",
+    "proposedTag": "v0.9.0-rc.1",
+    "planningLabel": "Studio v0.9-rc.1"
+  },
+  "transferObservation": "First download was truncated and rejected; a fresh complete download matched the authoritative archive digest before ZIP and manifest checks.",
+  "followUpDocumentationTests": {
+    "command": "node --test tests/readme.test.js tests/roadmap-history.test.js tests/release-history.test.js tests/site-info.test.js",
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0
+  },
+  "documentedVerificationProcedure": "Executed against the pinned downloaded archive; passed.",
+  "releaseNotesValidation": {
+    "mode": "in-memory-only",
+    "proposedTag": "v0.9.0-rc.1",
+    "typedChanges": 6,
+    "contract": "passed",
+    "publicationWritten": false
+  }
+}
