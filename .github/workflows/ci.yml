@@ -126,3 +126,30 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - run: node scripts/review-qr.js /tmp/stipra-qr-review
       - run: python scripts/verify-qr.py /tmp/stipra-qr-review
+      - name: Record Studio candidate identity
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process');
+          const root='dist/stipra',files=[];
+          function walk(dir){
+            for(const entry of fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
+              const file=path.join(dir,entry.name);
+              if(entry.isSymbolicLink())throw Error('Candidate contains a symlink: '+file);
+              if(entry.isDirectory())walk(file);
+              else if(entry.isFile()){
+                const bytes=fs.readFileSync(file);
+                files.push({path:path.relative(root,file).split(path.sep).join('/'),bytes:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex')});
+              }else throw Error('Unsupported candidate entry: '+file);
+            }
+          }
+          walk(root);
+          if(!files.length)throw Error('Empty Studio candidate');
+          const manifest={contract:'stipra-studio-candidate-v1',target:'v0.9-rc.1',status:'experimental-digital-candidate',sourceRevision:cp.execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),workflowRunId:process.env.GITHUB_RUN_ID,workflowRunAttempt:process.env.GITHUB_RUN_ATTEMPT,files};
+          fs.writeFileSync(path.join(root,'candidate.json'),JSON.stringify(manifest,null,2)+'\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: studio-browser-candidate-${{ github.sha }}
+          path: dist/stipra/
+          if-no-files-found: error
+          retention-days: 30

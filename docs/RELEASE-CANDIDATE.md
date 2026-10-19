@@ -1,9 +1,12 @@
-# Digital acceptance and the library candidate
+# Digital acceptance and release candidates
+
+[Studio v0.9-rc.1](STUDIO-RC-0.9-rc.1.md) is a prepared experimental browser candidate with its own scope, exact-run build artifact and bounded hosted review. It is separate from the already published library alpha.1 and final human/physical acceptance.
 
 The three packages `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs` are published at `0.1.0-alpha.1`. On 18 October 2026 a fresh registry download verified their byte counts, SHA-256 and SHA-512 against the original [upload record](evidence/npm-alpha-upload-2026-10-18.json). A consumer with an initially empty npm cache installed exactly those three packages and passed runtime replay/ESM/CJS and strict TypeScript checks. See [registry evidence](evidence/npm-alpha-registry-2026-10-18.json). This is an experimental digital release, not print-quality or independent artist approval.
 
 ```sh
 npm ci
+npm run build:pages
 npm test
 npm run check:goldens
 npm run check:release:lean
@@ -22,7 +25,7 @@ These are vector serialization goldens. They catch geometry, typography, screen 
 
 The generic vector path verifies that changing paper seed/color leaves every monochrome master byte-identical. Prehnite now also accepts an explicit `paperSeed`: its substrate changes independently while all six native plate exports remain identical. Omitting it preserves the old defaults and every saved golden. The zero-softness path has geometric checks for genuinely shared straight edges in either traversal direction; the deliberately softened default appearance is preserved. This is not an automatic approval of the optional geometry redesign (#3).
 
-`npm run check:accessibility` runs axe-core 4.10.3 against nine actual pages in Chromium: studio, import editor, Prehnite editor, guide, sketches, regions, roadmap, changelog and sitemap. The CI artifact `accessibility-acceptance` records passes, violations and incomplete checks for WCAG 2/2.1 A/AA tags. Incomplete checks need manual review; zero detected violations is not a full accessibility certification. Axe is an MPL-2.0 development-only audit tool and is not shipped in the site or libraries. Existing interaction tests still exercise import, masks, keyboard labels and export. The same audit also sends actual Tab/Enter events through Chromium on all nine generated destinations: the first Tab must reveal the skip link and Enter must move focus to main content. This bounded automated keyboard check does not replace a human screen-reader trial.
+`npm run check:accessibility` runs axe-core 4.10.3 against ten actual destinations in Chromium: studio, import editor, Prehnite editor, guide, sketches, regions, roadmap, changelog, delivery map and sitemap. The CI artifact `accessibility-acceptance` records passes, violations and incomplete checks for WCAG 2/2.1 A/AA tags. Incomplete checks need manual review; zero detected violations is not a full accessibility certification. Axe is an MPL-2.0 development-only audit tool and is not shipped in the site or libraries. Existing interaction tests still exercise import, masks, keyboard labels and export. The same audit also sends actual Tab/Enter events through Chromium on all ten generated destinations: the first Tab must reveal the skip link and Enter must move focus to main content. This bounded automated keyboard check does not replace a human screen-reader trial.
 Physical evidence still needs an operator. The [print procedure and record checker](PHYSICAL-PRINT-CHECK.md) distinguish a filled observation record from an authenticated physical result. #13 remains open.
 
 ## Exact library consumer — #70

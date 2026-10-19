@@ -50,8 +50,8 @@
     },
     {
       "id": "studio-rc",
-      "version": "Studio v0.9-rc.1 (target)",
-      "state": "target",
+      "version": "Studio v0.9-rc.1 (prepared candidate)",
+      "state": "prepared",
       "tasks": [
         8,
         9,
@@ -59,7 +59,7 @@
         12,
         22
       ],
-      "exit": "The bounded browser/CLI workflow, full-frame raster masters and reports pass release acceptance; compare/batch and the promised format matrix are completed or an owner-approved scope change is recorded. Candidate status remains explicit where audits/print checks are open."
+      "exit": "Prepared experimental digital browser candidate. Review the exact successful run and retained public-site artifact for import, controlled recipe comparison, editable masks, aligned masters and reports. No GitHub release/tag or new npm publication is implied. Human accessibility remains open; physical and independent artist trials are owner-deferred. Native notices block native bundles only. See docs/STUDIO-RC-0.9-rc.1.md."
     },
     {
       "id": "studio-v09",
@@ -114,10 +114,10 @@
     }
   ],
   "nextSequence": [
-    "Collect independent artist, human accessibility and actual operator print records using the prepared acceptance kit (#13/#70); blank records are not completed acceptance.",
+    "Review the prepared Studio v0.9-rc.1 browser artifact against its exact successful CI commit; retain experimental/uncalibrated wording and record any later publication separately.",
+    "Complete human keyboard/screen-reader observations (#13). Physical prints and independent artist trials (#13/#70) are owner-deferred, not passed.",
     "Await the compiled-component/notices response to samizdatco/skia-canvas#309, posted on 19 October 2026; native bundles remain blocked (#14).",
-    "Review the private same-frame forest two-/three-ink and beach 50/75-LPI comparisons at intended size; preserve existing recipe versions until accepted (#43/#47/#34).",
-    "PR #98 is merged; verify the bounded public-text legibility follow-up. Keep optional Java, analytic vector screens and identity extensions separate."
+    "Retain owner-approved digital forest/beach specimens and frozen recipes; broader Style and physical acceptance remains open (#43/#47/#34). Keep optional Java, analytic vector screens and identity extensions separate."
   ],
   "tasks": [
     {
@@ -316,7 +316,7 @@
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1\u2013#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
+      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1–#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
       "sourceUpdatedAt": "2026-10-16T20:38:00Z"
     },
     {
@@ -353,7 +353,7 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2\u20138 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
+      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
     },
     {
       "issue": 24,
@@ -453,7 +453,7 @@
     },
     {
       "issue": 39,
-      "title": "Owner photographs A/B/C \u2014 first complete print package validation",
+      "title": "Owner photographs A/B/C — first complete print package validation",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "studio",
@@ -473,7 +473,7 @@
         7,
         56
       ],
-      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md.",
+      "note": "Two-/three-ink forest variants and detail studies exist; owner approved the supplied digital forest/beach specimens; physical acceptance is deferred. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md.",
       "sourceUpdatedAt": "2026-10-17T12:48:54Z"
     },
     {
@@ -505,7 +505,7 @@
     },
     {
       "issue": 46,
-      "title": "Generate a reproducible layered Stipr\u0101 mark using its own separation and screening engine",
+      "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "identity",
@@ -545,7 +545,7 @@
     },
     {
       "issue": 54,
-      "title": "Real Stipr\u0101 palette + four authentic wordmarks + three owner-photo comparison PDFs",
+      "title": "Real Stiprā palette + four authentic wordmarks + three owner-photo comparison PDFs",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "identity",
@@ -624,7 +624,7 @@
     },
     {
       "issue": 70,
-      "title": "Creative coding alpha: sketch \u2192 ink proof \u2192 reproducible plates",
+      "title": "Creative coding alpha: sketch → ink proof → reproducible plates",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "library",
@@ -654,7 +654,7 @@
     },
     {
       "issue": 72,
-      "title": "Apply Stipr\u0101 treatments inside existing Canvas and p5.js sketches",
+      "title": "Apply Stiprā treatments inside existing Canvas and p5.js sketches",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "library",

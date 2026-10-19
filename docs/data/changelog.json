@@ -4,6 +4,22 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Prepare the experimental Studio release candidate",
+      "status": "Development",
+      "issues": [
+        13,
+        14,
+        22,
+        70
+      ],
+      "changes": [
+        "Define the bounded browser candidate, retain a commit-named public-site CI artifact and separate preparation from tagged or npm publication.",
+        "Reconcile stale PR #98, upstream-contact and publication wording across release records; retain open native/human acceptance and owner-deferred physical/artist trials.",
+        "Record hosted UI/guide/Canvas observations and the incomplete live import/download check without inventing a pass."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Compare recipes without replacing current edits",
       "status": "Development",
       "issues": [
@@ -176,7 +192,7 @@
       "changes": [
         "Trace pinned Rust Skia, Skia and 13 external source revisions; record the 318-entry Cargo lockfile superset without calling it a compiled inventory.",
         "Identify the Linux static Fontconfig patch and distinguish its bootstrap FreeType from Skia embedded FreeType.",
-        "Record the owner\u2019s personal npm-scope choice; account identity and authenticated publication remain pending."
+        "Record the owner’s personal npm-scope choice; account identity and authenticated publication remain pending."
       ]
     },
     {
@@ -296,7 +312,7 @@
         90
       ],
       "changes": [
-        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]
