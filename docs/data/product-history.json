@@ -22,7 +22,7 @@
     },
     {
       "id": "ARTIST-LIBRARY",
-      "title": "Put the creative library in artists\u2019 hands",
+      "title": "Put the creative library in artists’ hands",
       "description": "Ask an independent artist to install the published Canvas/p5.js alpha, make a proof and export plates. Record and fix first-use obstacles.",
       "capabilities": [
         "LIB-05",
@@ -53,7 +53,7 @@
     },
     {
       "id": "DESIGN",
-      "title": "Develop the studio\u2019s own visual language",
+      "title": "Develop the studio’s own visual language",
       "description": "Resolve the public identity and revisit paper simulation and optional case-study details.",
       "capabilities": [
         "ID-01",
@@ -77,7 +77,7 @@
       "id": "ART-01",
       "area": "Artwork",
       "title": "Import images and safe SVG artwork without changing their layout.",
-      "detail": "PNG, JPEG, WebP and restricted SVG input retain the artwork\u2019s original geometry and explicit print dimensions.",
+      "detail": "PNG, JPEG, WebP and restricted SVG input retain the artwork’s original geometry and explicit print dimensions.",
       "issues": [
         6
       ],
@@ -471,7 +471,7 @@
     {
       "id": "ID-01",
       "area": "Identity",
-      "title": "Finish the Stipr\u0101 identity through owner review.",
+      "title": "Finish the Stiprā identity through owner review.",
       "detail": "Typographic studies and engine-generated marks exist; the final wordmark/workspace direction is not approved.",
       "issues": [
         31,
@@ -657,7 +657,7 @@
       "type": "improved",
       "stage": "development",
       "capabilityId": "STU-01",
-      "title": "Add manual 2\u20138 ink inspection and native pixel zoom",
+      "title": "Add manual 2–8 ink inspection and native pixel zoom",
       "sourceTitle": "Studio inspection and delivery map"
     },
     {
@@ -848,6 +848,15 @@
       "capabilityId": "OPS-01",
       "title": "Align Studio and guide comparison language and tradeoffs",
       "sourceTitle": "Compare recipes without replacing current edits"
+    },
+    {
+      "id": "DEV-031",
+      "date": "2026-10-19",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Prepare a scoped digital Studio candidate and retain its exact-run browser build",
+      "sourceTitle": "Prepare the experimental Studio release candidate"
     }
   ],
   "libraryCapabilityIds": [
