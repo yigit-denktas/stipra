@@ -7,7 +7,22 @@
     "released": false,
     "note": "Identified by the owner; no public tag or published release date verified."
   },
-  "releases": [],
+  "releases": [
+    {
+      "tag": "v0.9.0-rc.1",
+      "publishedAt": "2026-10-19T15:57:16Z",
+      "url": "https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1",
+      "summary": "Stiprā Studio v0.9.0-rc.1 — experimental digital candidate",
+      "capabilityIds": [
+        "ART-01",
+        "STU-01",
+        "STY-01",
+        "DOC-01",
+        "QA-01",
+        "OPS-01"
+      ]
+    }
+  ],
   "initiatives": [
     {
       "id": "PRINT-TRUST",
@@ -866,6 +881,60 @@
       "capabilityId": "OPS-01",
       "title": "Verify the main Studio archive and prepare exact-commit prerelease notes",
       "sourceTitle": "Verify the main Studio candidate and prepare prerelease notes"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-01",
+      "date": "2026-10-19",
+      "type": "added",
+      "stage": "release",
+      "capabilityId": "ART-01",
+      "title": "Import supported raster images and restricted geometric SVG with declared color and geometry limits.",
+      "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-02",
+      "date": "2026-10-19",
+      "type": "added",
+      "stage": "release",
+      "capabilityId": "STU-01",
+      "title": "Inspect and adjust two to eight spot inks or CMYK, compare candidate recipes, and explicitly keep or adopt a treatment.",
+      "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-03",
+      "date": "2026-10-19",
+      "type": "added",
+      "stage": "release",
+      "capabilityId": "STY-01",
+      "title": "Use versioned shared recipe families with physical screen-frequency settings and suitability guidance.",
+      "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-04",
+      "date": "2026-10-19",
+      "type": "added",
+      "stage": "release",
+      "capabilityId": "DOC-01",
+      "title": "Follow public reproduction instructions using the Studio's control names and print vocabulary.",
+      "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-05",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "release",
+      "capabilityId": "QA-01",
+      "title": "Check digital geometry, deterministic masks, real Chromium interaction and browser/CLI export parity for the candidate source.",
+      "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "REL-88322C9FE36927F9AD6D7F4962A31C8094CD0F20D11A365FE9F60EBCD093BF1B-06",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "release",
+      "capabilityId": "OPS-01",
+      "title": "Verify the retained browser archive and every listed site file against their recorded SHA-256 values.",
+      "releaseTag": "v0.9.0-rc.1"
     }
   ],
   "libraryCapabilityIds": [
