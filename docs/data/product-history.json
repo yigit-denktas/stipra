@@ -441,7 +441,7 @@
       "id": "STY-02",
       "area": "Styles",
       "title": "Decide whether forest prints keep enough depth with fewer inks.",
-      "detail": "A two-/three-pass comparison exists; choose a recipe only after reviewing real artwork at intended size.",
+      "detail": "The owner approved the supplied forest/beach digital specimens on 19 October. Physical prints and independent artist trials are deferred; broader quality acceptance remains pending.",
       "issues": [
         43
       ],
@@ -456,7 +456,7 @@
       "id": "STY-03",
       "area": "Styles",
       "title": "Evaluate when each starter style is actually useful.",
-      "detail": "Review image suitability, overprints and physical proofs before calling a recipe family accepted.",
+      "detail": "Two digital specimens have owner visual approval. Family-wide suitability and physical/independent artist acceptance remain pending; development can continue.",
       "issues": [
         47,
         34
@@ -821,6 +821,33 @@
       "capabilityId": "STY-02",
       "title": "Compare shadow clipping and fixed ink passes on the original artwork",
       "sourceTitle": "Retain forest shadow steps and separate beach silhouettes"
+    },
+    {
+      "id": "DEV-028",
+      "date": "2026-10-19",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STU-01",
+      "title": "Compare recipes without replacing current edits",
+      "sourceTitle": "Compare recipes without replacing current edits"
+    },
+    {
+      "id": "DEV-029",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "STY-02",
+      "title": "Record owner visual approval of two digital specimens; defer human and print trials",
+      "sourceTitle": "Compare recipes without replacing current edits"
+    },
+    {
+      "id": "DEV-030",
+      "date": "2026-10-19",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Align Studio and guide comparison language and tradeoffs",
+      "sourceTitle": "Compare recipes without replacing current edits"
     }
   ],
   "libraryCapabilityIds": [

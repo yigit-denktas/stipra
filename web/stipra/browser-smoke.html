@@ -199,6 +199,46 @@
         for(const [name,key] of [['Gamma','gamma'],['Strength','gain'],['Threshold','threshold']])if(Math.abs(Number(el('control-'+ink.id+'-'+name).value)-ink[key])>.00001)throw Error('Displayed setting differs from recipe '+ink.id+'/'+key);
       }
     }
+    el('style-variant').value='forest-contrast';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
+    el('control-key-Strength').value='0.83';el('control-key-Strength').dispatchEvent(new Event('input',{bubbles:true}));
+    await delay(30);
+    const galleryPixels=()=>canvases().map(c=>Array.from(c.getContext('2d').getImageData(0,0,c.width,c.height).data));
+    const fullCurrent=galleryPixels()[1];el('solo-key').click();
+    const inspectedCurrent=galleryPixels();
+    el('recipe-comparison').open=true;
+    el('comparison-recipe').value='editorial-halftone/forest-balanced';el('comparison-recipe').dispatchEvent(new Event('change'));
+    const previewComparison=async()=>{el('comparison-preview').click();await until(()=>!el('comparison-results').hidden,'recipe comparison ready');};
+    await previewComparison();
+    const proofPixels=id=>{const c=el(id).querySelector('canvas');return Array.from(c.getContext('2d').getImageData(0,0,c.width,c.height).data);};
+    const comparedCurrent=proofPixels('comparison-current');
+    if(!fullCurrent.every((v,i)=>v===comparedCurrent[i]))throw Error('Comparison current proof inherited solo/mute');
+    if(JSON.stringify(galleryPixels())!==JSON.stringify(inspectedCurrent)||el('control-key-Strength').value!=='0.83')throw Error('Preview changed current edits/artwork');
+    if([...d.querySelectorAll('#comparison-results canvas')].some(c=>c.width!==48||c.height!==32))throw Error('Comparison changed source framing');
+    for(const width of [390,768,1440]){
+      frame.style.width=width+'px';await delay(80);
+      if(d.documentElement.scrollWidth>d.documentElement.clientWidth+2)throw Error('Comparison overflow '+width);
+      const pair=[...d.querySelectorAll('#comparison-results canvas')].map(c=>c.getBoundingClientRect());
+      if(Math.abs(pair[0].width-pair[1].width)>1||Math.abs(pair[0].height-pair[1].height)>1)throw Error('Comparison scale mismatch '+width);
+      for(const id of ['comparison-preview','comparison-keep','comparison-use'])if(el(id).getBoundingClientRect().height<44)throw Error('Comparison target too small '+id);
+    }
+    frame.style.width='900px';el('comparison-keep').click();
+    if(!el('comparison-results').hidden||el('solo-key').getAttribute('aria-pressed')!=='true'||el('control-key-Strength').value!=='0.83')throw Error('Keep current lost edits/inspection');
+    await previewComparison();el('control-key-Strength').value='0.84';el('control-key-Strength').dispatchEvent(new Event('input',{bubbles:true}));await delay(30);
+    if(!el('comparison-results').hidden||!el('comparison-use').disabled)throw Error('Stale comparison survived a mask edit');
+    await previewComparison();
+    const replacement=new DataTransfer();replacement.items.add(new File([screeningBlob],'replacement.png',{type:'image/png'}));
+    el('drop').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:replacement}));
+    if(!el('comparison-use').disabled||!el('comparison-preview').disabled)throw Error('Comparison still usable during import');
+    await until(()=>el('drop').getAttribute('aria-busy')==='false','replacement imported');
+    if(!el('comparison-results').hidden)throw Error('Old-source comparison survived import');
+    el('comparison-recipe').value='editorial-halftone/coast-tonal';el('comparison-recipe').dispatchEvent(new Event('change'));
+    await previewComparison();
+    const chosenPixels=proofPixels('comparison-candidate'),chosenPaper=el('paper').value;
+    el('comparison-use').click();
+    if(el('style-variant').value!=='coast-tonal'||el('paper').value!==chosenPaper)throw Error('Candidate recipe/paper not adopted');
+    const appliedPixels=galleryPixels()[1];
+    if(!chosenPixels.every((v,i)=>v===appliedPixels[i]))throw Error('Applied proof differs from preview');
+    if(d.activeElement!==el('recipe-comparison').querySelector('summary'))throw Error('Comparison decision lost keyboard focus');
     // Export through the real UI; inspect the downloaded ZIP rather than just its button.
     let exportedBlob;
     const win=frame.contentWindow,createURL=win.URL.createObjectURL.bind(win.URL),click=win.HTMLAnchorElement.prototype.click;
@@ -241,6 +281,7 @@
       guideFrame.style.width=width+'px';await delay(80);
       const gd=guideFrame.contentDocument;
       if(gd.documentElement.scrollWidth>gd.documentElement.clientWidth+2)throw Error('Guide horizontal overflow at '+width+'px');
+      if(!gd.getElementById('compare')||!gd.body.textContent.includes('Use candidate')||!gd.body.textContent.includes('Keep current'))throw Error('Guide comparison instructions missing');
       if(!gd.querySelector('a[href="../"]'))throw Error('Guide studio navigation missing');
     }
     if(!d.querySelector('meta[http-equiv="Content-Security-Policy"]').content.includes("connect-src 'none'"))throw Error('Local processing CSP missing');

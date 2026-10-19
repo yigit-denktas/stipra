@@ -4,6 +4,22 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Compare recipes without replacing current edits",
+      "status": "Development",
+      "issues": [
+        22,
+        31,
+        43,
+        47
+      ],
+      "changes": [
+        "Preview current/candidate full proofs with the same framing, paper, DPI and seed; keep current edits or explicitly apply the candidate. Invalidate stale previews after settings or artwork change.",
+        "Align Studio and guide labels, explanations and recipe tradeoffs while preserving advanced controls.",
+        "Record owner visual approval of the supplied forest/beach specimens. Physical prints and independent artist testing are deferred, not passed."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Retain forest shadow steps and separate beach silhouettes",
       "status": "Development",
       "issues": [

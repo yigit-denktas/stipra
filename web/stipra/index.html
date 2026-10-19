@@ -36,6 +36,18 @@ p{line-height:1.5}
 .view figcaption{padding:.65rem;font-size:.8rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;align-items:baseline}
 .view figcaption small{font-size:.73rem}
 .view--plate{align-self:start}
+.recipe-comparison{border-block:1px solid var(--line);padding-block:1rem;margin-block:1rem}
+.recipe-comparison>summary,.style-guidance>summary{min-block-size:44px;align-content:center;cursor:pointer}
+.recipe-comparison>summary{font-weight:700;color:var(--green)}
+.comparison-picker,.comparison-actions{display:flex;flex-wrap:wrap;align-items:end;gap:.75rem}
+.comparison-picker>.field{flex:1 1 16rem}
+.comparison-picker>button{margin-block-end:.7rem}
+.comparison-picker button,.comparison-actions button{min-block-size:44px}
+.comparison-actions{margin-block:1rem}
+.comparison-actions button:active,.comparison-picker button:active{transform:scale(.98)}
+#comparison-keep{background:transparent;color:var(--green)}
+#comparison-results .view canvas{display:block;inline-size:100%;block-size:auto}
+#comparison-status:empty{display:none}
 .plate-adjust{min-block-size:44px;font-size:.875rem}
 .plate-adjust:active{transform:scale(.98)}
 .empty-state{border:1px dashed #808a8970;border-radius:10px;padding:clamp(2rem,6vw,5rem) 1rem;text-align:center}
@@ -120,6 +132,22 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div id="ink-visibility"></div></fieldset>
     <p id="error" role="alert" hidden></p>
     <p id="diagnostics" class="muted" aria-live="polite" hidden></p>
+    <details id="recipe-comparison" class="recipe-comparison" hidden>
+      <summary>Compare recipes</summary>
+      <p class="helper">Preview a candidate beside your current treatment. Both use the full source, current paper, DPI and seed. Recipe screens may differ. Your settings stay unchanged until you choose Use candidate.</p>
+      <div class="comparison-picker"><div class="field"><label for="comparison-recipe">Candidate recipe</label><select id="comparison-recipe"></select></div><button id="comparison-preview" type="button" disabled>Preview comparison</button></div>
+      <p id="comparison-note" class="helper"></p>
+      <p id="comparison-status" role="status" aria-live="polite"></p>
+      <div id="comparison-results" hidden>
+        <div class="hero-grid" role="group" aria-label="Current and candidate full proofs">
+          <figure class="view"><div id="comparison-current"></div><figcaption><strong>Current treatment</strong><span id="comparison-current-name"></span></figcaption></figure>
+          <figure class="view"><div id="comparison-candidate"></div><figcaption><strong>Candidate</strong><span id="comparison-candidate-name"></span></figcaption></figure>
+        </div>
+        <p id="comparison-settings" class="helper"></p>
+        <div class="comparison-actions"><button id="comparison-keep" type="button">Keep current</button><button id="comparison-use" type="button" disabled>Use candidate</button></div>
+      </div>
+      <p class="helper">Comparisons show all inks with paper, regardless of solo/mute inspection. <a href="./guide/#compare">How recipe comparisons work</a></p>
+    </details>
     <div id="grid">
       <div id="empty-state" class="empty-state">
         <h3>See how the inks come apart</h3>
@@ -148,7 +176,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         <label for="style-dpi">Print resolution (DPI)</label><input id="style-dpi" type="number" min="72" max="1200" value="300">
         <label for="style-lpi">Screen frequency (LPI, blank uses recipe)</label><input id="style-lpi" type="number" min="5" max="150" placeholder="Recipe default">
         <label for="style-screening">Screen treatment</label><select id="style-screening"><option value="authored">Authored screens</option><option value="unscreened">Unscreened comparison</option></select>
-        <small id="style-note" class="muted">Choose an intent, then refine the individual ink plates. Changing starting-style controls reapplies the recipe and replaces manual edits.</small>
+        <p id="style-summary" class="helper">Choose a starting style or compare a candidate before replacing your edits.</p>
+        <a href="#recipe-comparison">Compare recipes before applying</a>
+        <details class="style-guidance"><summary>Recipe guidance and print settings</summary><small id="style-note" class="muted">Choose an intent, then refine the individual ink plates. Changing starting-style controls reapplies the recipe and replaces manual edits.</small></details>
       </div>
       <div class="field"><label for="mode">Separation mode</label>
         <select id="mode"><option value="spot">Spot inks</option><option value="cmyk">Four-color CMYK</option></select>
