@@ -1,5 +1,5 @@
 'use strict';
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process'),{pathToFileURL}=require('node:url');
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process'),{pathToFileURL}=require('node:url'),{runNpm}=require('./npm-cli');
 const {Canvas}=require('skia-canvas');let adapter,temp;
 function canvas(w=4,h=3){
   const c=new Canvas(w,h);c.ownerDocument={createElement:()=>canvas(1,1)};return c;
@@ -7,7 +7,7 @@ function canvas(w=4,h=3){
 test.before(async()=>{
   await require('../scripts/build-core').build();fs.copyFileSync(path.join(__dirname,'../LICENSE'),path.join(__dirname,'../packages/canvas/LICENSE'));
   temp=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-canvas-'));
-  const npm=(...args)=>cp.execFileSync('npm',args,{cwd:temp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
+  const npm=(...args)=>runNpm(args,{cwd:temp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
   const [core]=JSON.parse(npm('pack',path.join(__dirname,'../packages/core'),'--json','--pack-destination',temp));
   const [host]=JSON.parse(npm('pack',path.join(__dirname,'../packages/canvas'),'--json','--pack-destination',temp));
   assert.deepEqual(host.files.map(x=>x.path).sort(),['LICENSE','README.md','index.d.ts','index.mjs','package.json']);

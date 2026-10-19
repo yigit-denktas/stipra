@@ -31,7 +31,7 @@ test('README issues badge is static and links to repository issues without GitHu
 
 
 test('README is a short human entry point and links to real help for people and agents', () => {
-  const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+  const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8').replace(/\r\n/g, '\n');
   const guide = fs.readFileSync(path.join(root, 'docs/GETTING-STARTED.md'), 'utf8');
   const design = fs.readFileSync(path.join(root, 'DESIGN.md'), 'utf8');
   const roadmap = fs.readFileSync(path.join(root, 'ROADMAP.md'), 'utf8');

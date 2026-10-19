@@ -1,9 +1,9 @@
 'use strict';
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process'),{pathToFileURL}=require('node:url');
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process'),{pathToFileURL}=require('node:url'),{runNpm}=require('./npm-cli');
 test('optional inputs package installs offline without runtime dependencies and has usable ESM/CJS/types',async()=>{
   await require('../scripts/build-inputs').build();const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-inputs-'));
   try{
-    const npm=(...args)=>cp.execFileSync('npm',args,{cwd:tmp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
+    const npm=(...args)=>runNpm(args,{cwd:tmp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
     const [packed]=JSON.parse(npm('pack',path.resolve(__dirname,'../packages/inputs'),'--json','--pack-destination',tmp));
     fs.writeFileSync(path.join(tmp,'package.json'),JSON.stringify({name:'inputs-consumer',version:'1.0.0',private:true}));
     npm('install',path.join(tmp,packed.filename),'--offline','--ignore-scripts','--no-audit','--no-fund');
