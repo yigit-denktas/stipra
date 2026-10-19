@@ -12,7 +12,8 @@ pdfmetrics.registerFont(TTFont("Plex",str(fontroot/"IBMPlexSans-Regular.ttf")))
 pdfmetrics.registerFont(TTFont("PlexBold",str(fontroot/"IBMPlexSans-Bold.ttf")))
 root=Path(__file__).resolve().parents[2]/'out/reconstruction-study'
 methods=[('Original','source.png'),('Single-ink solid reference','baseline.png'),('Cell-area stipple','01-weighted-stipple.png'),('Directional hatching','02-directional-hatch.png'),('Greedy continuous route','03-continuous-route.png'),('VTracer polygon regions','04-vector-regions.png'),('Dither / unconstrained reference','05-dither.png'),('Explicit hybrid composition','06-hybrid.png')]
-evidence=json.loads((root.parent.parent/'docs/evidence/reconstruction-study-01.json').read_text())
+evidence=json.loads((root.parent.parent/'docs/evidence/reconstruction-study-01.json').read_text(encoding='utf-8'))
+replay=evidence.get('reproducibility',{}).get('sameEnvironmentReplay')
 pdf=canvas.Canvas(str(root/'reconstruction-study-01.pdf'),pagesize=landscape(A3),invariant=1)
 for name,title,credit in [('portrait','Portrait / organic detail','NASA / Eileen Collins; public domain, via scikit-image'),('architecture','Architecture / long horizontal composition','Noclip / Capitol Building Full View; public-domain dedication')]:
  fixture=next(f for f in evidence['fixtures']if f['id']==name)
@@ -63,7 +64,15 @@ for source_index,fixture in enumerate(evidence['fixtures']):
  pdf.drawString(12*mm,y-82*mm,'VTracer levels: '+str(v['palette'])+' / input band %: '+', '.join(f"{x*100:.2f}"for x in v['inputBandFractions']))
  pdf.drawString(12*mm,y-89*mm,'Rendered nearest-band %: '+', '.join(f"{x*100:.2f}"for x in v['renderedNearestBandFractions'])+f" / band L1 {v['bandFractionL1']:.4f} / all four bands retained")
  pdf.drawString(12*mm,y-96*mm,'SVG fills are the four input grays; edge antialiasing adds intermediate pixels. Regions are not globally coverage-normalized.')
+ spatial=v.get('spatialBandAgreement')
+ if spatial:
+  pdf.drawString(12*mm,y-103*mm,f"VTracer spatial band agreement {spatial['pixelBandAgreement']*100:.2f}% / boundary mismatch {spatial['boundaryBandMismatchRate']*100:.2f}% / per-band IoU "+', '.join(f"{k}:{x:.2f}"for k,x in spatial['perBandIoU'].items()))
+  worst=max(fixture['metrics'][m]['localTone']['blockSignedErrorPp']['p95']for m in ['01-weighted-stipple','02-directional-hatch','06-hybrid'])
+  pdf.drawString(12*mm,y-110*mm,'Local tone residual after global calibration (stipple/hatch/hybrid): 16 x 16 signed block error p05/p95 reported in evidence; the global factor does not guarantee local tone.')
+  _ = worst
 pdf.setFont('Plex',9);pdf.drawString(12*mm,23*mm,'Baseline: continuous Pillow L darkness through Core.renderLayers, solid/no halftone. Dither: unconstrained raster reference, not an equal-complexity competitor.')
-pdf.drawString(12*mm,17*mm,'Length sums M/L/Z polylines, including closes; circles counted separately. Gen excludes render calibration. Frozen-point replay does not resample sites.')
-pdf.drawString(12*mm,11*mm,'No human blind rankings or physical prints. Runtime includes bisection calibration and is not a fair optimized-renderer speed comparison.')
+pdf.drawString(12*mm,17*mm,'Length sums M/L/Z polylines, including closes; circles counted separately. Gen excludes render calibration; Render includes calibration and is not a speed comparison.')
+if replay:pdf.drawString(12*mm,11*mm,f"Same-environment replay: {replay.get('matchedArtifacts',0)}/{replay.get('comparedArtifacts',32)} SVG/decoded-pixel checks matched; see replay-check.json.")
+else:pdf.drawString(12*mm,11*mm,'Same-environment replay: not run for this report; no replay-check.json recorded.')
+pdf.drawString(12*mm,7*mm,'No human blind rankings or physical prints. Frozen-point replay does not resample sites; cross-build geometry is not claimed identical.')
 pdf.showPage();pdf.save()
