@@ -1,0 +1,2246 @@
+{
+  "contract": "stipra-separation-quality-study-v1",
+  "dpi": 300,
+  "physicalPrintVerified": false,
+  "ownerApproved": false,
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "skiaCanvas": "3.0.8"
+  },
+  "records": [
+    {
+      "fixture": "A",
+      "sourceSha256": "0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "1680898969919.jpg",
+        "intrinsic": {
+          "width": 805,
+          "height": 644
+        },
+        "oriented": {
+          "width": 805,
+          "height": 644
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "unspecified"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 805,
+          "height": 644,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 805,
+            "height": 644
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 33492,
+        "warnings": [],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "unspecified",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 805,
+      "height": 644,
+      "widthMm": 68.15666666666667,
+      "heightMm": 54.52533333333333,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Tonal key / two inks",
+          "version": 1,
+          "variant": "tonal-key",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "documentary landscapes",
+            "textured objects with a usable RGB shadow range"
+          ],
+          "avoid": [
+            "neutral color reproduction",
+            "fine pale details without a print-size review"
+          ],
+          "description": "A continuous-tone green key carries structure; yellow adds a screened chromatic pass without filling neutral shadows.",
+          "references": [],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#f5eee2",
+          "inks": [
+            {
+              "id": "key",
+              "name": "Green tonal key",
+              "color": "#006043",
+              "source": "black",
+              "threshold": 0,
+              "gain": 1.15,
+              "gamma": 1.1,
+              "invert": false
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow",
+              "color": "#e2a523",
+              "source": "yellow",
+              "threshold": 0,
+              "gain": 0.45,
+              "gamma": 1.15,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 22,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "key": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "accent": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": -15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "key",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "accent",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0.7433818139732263,
+        "fullCoverageOnNonblackFraction": 0.052062034643725164,
+        "occupiedToneLevels": 224
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 518420,
+          "shadowFraction": 0.761352,
+          "highlightFraction": 0.093903,
+          "nearNeutralFraction": 0.740037,
+          "tonalRange": 0.996063,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": [
+            "Dark source: compare an open-shadow key and inspect texture before adding ink."
+          ]
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 805,
+        "height": 644,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.99989,
+          "meanAdditiveCoverage": 0.848595,
+          "overlapTwoPlusFraction": 0.025938,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.01423
+        },
+        "plates": [
+          {
+            "id": "key",
+            "name": "Green tonal key",
+            "meanCoverage": 0.816692,
+            "occupiedFraction": 0.999873,
+            "veryDenseFraction": 0.755384,
+            "meanWhereOccupied": 0.816796,
+            "additiveInkShare": 0.962405,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 22,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "accent",
+            "name": "Golden yellow",
+            "meanCoverage": 0.031903,
+            "occupiedFraction": 0.031903,
+            "veryDenseFraction": 0.031903,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.037595,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": -15,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "key",
+              "accent"
+            ],
+            "overlapFraction": 0.025938
+          }
+        ],
+        "warnings": [
+          {
+            "code": "broad-heavy-pass",
+            "inkIds": [
+              "key"
+            ],
+            "message": "Large average nominal coverage. Inspect detail and the substrate; this is not a machine safety limit."
+          }
+        ]
+      },
+      "proofFile": "A-tonal-key.png",
+      "proofSha256": "a489ba7a05d98ddd40fd46856ea1c40fec5c51330f509561f9881719f3fa13d8",
+      "plateFiles": [
+        {
+          "id": "key",
+          "file": "A-tonal-key-plate-key.png",
+          "sha256": "8aa51b80095456b3e72ef0fadd237b8bf14de3e162cab42395a3e6399eb89805"
+        },
+        {
+          "id": "accent",
+          "file": "A-tonal-key-plate-accent.png",
+          "sha256": "75d11a3f7dbc59ecbf279c5c31179653e5bd514870b36538e02ed79b72613b13"
+        }
+      ]
+    },
+    {
+      "fixture": "A",
+      "sourceSha256": "0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "1680898969919.jpg",
+        "intrinsic": {
+          "width": 805,
+          "height": 644
+        },
+        "oriented": {
+          "width": 805,
+          "height": 644
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "unspecified"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 805,
+          "height": 644,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 805,
+            "height": 644
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 33492,
+        "warnings": [],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "unspecified",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 805,
+      "height": 644,
+      "widthMm": 68.15666666666667,
+      "heightMm": 54.52533333333333,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Detailed shadows / two inks",
+          "version": 1,
+          "variant": "forest-balanced",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "dense landscapes with useful shadow gradation",
+            "light neutral objects against dark foliage"
+          ],
+          "avoid": [
+            "neutral color fidelity",
+            "assuming unclipped masks recover detail absent from the source"
+          ],
+          "description": "A unit-gain photographic green key anchors deep shadows without the broad gain clipping of forest-contrast. The yellow chroma pass is unchanged; inspect the remaining quantization and foliage detail.",
+          "references": [
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#f5eee2",
+          "inks": [
+            {
+              "id": "key",
+              "name": "Green detailed-shadow key",
+              "color": "#006043",
+              "source": "tone",
+              "threshold": 0,
+              "gain": 1,
+              "gamma": 1.3,
+              "invert": false
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow chroma",
+              "color": "#e2a523",
+              "source": "yellow-density",
+              "grayRemoval": 1,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.05,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 22,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "key": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "accent": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": -15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "key",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "accent",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0.2573762586319972,
+        "fullCoverageOnNonblackFraction": 0,
+        "occupiedToneLevels": 256
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 518420,
+          "shadowFraction": 0.761352,
+          "highlightFraction": 0.093903,
+          "nearNeutralFraction": 0.740037,
+          "tonalRange": 0.996063,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": [
+            "Dark source: compare an open-shadow key and inspect texture before adding ink."
+          ]
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 805,
+        "height": 644,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.999971,
+          "meanAdditiveCoverage": 0.818548,
+          "overlapTwoPlusFraction": 0.009949,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.001545
+        },
+        "plates": [
+          {
+            "id": "key",
+            "name": "Green detailed-shadow key",
+            "meanCoverage": 0.798585,
+            "occupiedFraction": 0.999971,
+            "veryDenseFraction": 0.74843,
+            "meanWhereOccupied": 0.798608,
+            "additiveInkShare": 0.975612,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 22,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "accent",
+            "name": "Golden yellow chroma",
+            "meanCoverage": 0.019963,
+            "occupiedFraction": 0.019963,
+            "veryDenseFraction": 0.019963,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.024388,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": -15,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "key",
+              "accent"
+            ],
+            "overlapFraction": 0.009949
+          }
+        ],
+        "warnings": [
+          {
+            "code": "broad-heavy-pass",
+            "inkIds": [
+              "key"
+            ],
+            "message": "Large average nominal coverage. Inspect detail and the substrate; this is not a machine safety limit."
+          },
+          {
+            "code": "low-contribution",
+            "inkIds": [
+              "accent"
+            ],
+            "message": "This pass contributes little average area. Review whether it earns a separate physical ink."
+          }
+        ]
+      },
+      "proofFile": "A-forest-balanced.png",
+      "proofSha256": "dbd286d54c22232d03c74bc459718481967b44d767f1cffcc96932fd3ac2be95",
+      "plateFiles": [
+        {
+          "id": "key",
+          "file": "A-forest-balanced-plate-key.png",
+          "sha256": "2afa8fbf3a81acae086fa0bb68ee75bcbc231c98edd6d5ba32ca75757fcd4cce"
+        },
+        {
+          "id": "accent",
+          "file": "A-forest-balanced-plate-accent.png",
+          "sha256": "894c7c8b4cdccaa63112184c86154d08645a2ebda6f2f1e2441e83defcdf1afe"
+        }
+      ]
+    },
+    {
+      "fixture": "A",
+      "sourceSha256": "0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "1680898969919.jpg",
+        "intrinsic": {
+          "width": 805,
+          "height": 644
+        },
+        "oriented": {
+          "width": 805,
+          "height": 644
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "unspecified"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 805,
+          "height": 644,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 805,
+            "height": 644
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 33492,
+        "warnings": [],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "unspecified",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 805,
+      "height": 644,
+      "widthMm": 68.15666666666667,
+      "heightMm": 54.52533333333333,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Cool tonal detail / two inks",
+          "version": 1,
+          "variant": "coast-tonal",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "cool landscapes with small dark silhouettes",
+            "blue water and tonal detail"
+          ],
+          "avoid": [
+            "exact color reproduction",
+            "expecting automatic figure detection or preservation at any print size"
+          ],
+          "description": "A photographic blue key separates dark marks from saturated blue water more clearly than red-channel density alone. The coral pass is unchanged; expect a paler sky than coast-duotone.",
+          "references": [
+            {
+              "title": "Dizzy Ink / Risograph profiles",
+              "url": "https://risograph.co.uk/04-risograph-profiles",
+              "id": "dizzy-profiles"
+            },
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#faf8f2",
+          "inks": [
+            {
+              "id": "blue",
+              "name": "Stipr\u0101 blue tonal key",
+              "color": "#0d4dad",
+              "source": "tone",
+              "threshold": 0,
+              "gain": 1,
+              "gamma": 0.9,
+              "invert": false
+            },
+            {
+              "id": "warm",
+              "name": "Stipr\u0101 coral chroma",
+              "color": "#ff665d",
+              "source": "yellow-density",
+              "grayRemoval": 0.65,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.2,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 15,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "blue": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "warm": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": 75,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "blue",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "warm",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0.257569152424675,
+        "fullCoverageOnNonblackFraction": 0,
+        "occupiedToneLevels": 254
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 518420,
+          "shadowFraction": 0.761352,
+          "highlightFraction": 0.093903,
+          "nearNeutralFraction": 0.740037,
+          "tonalRange": 0.996063,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": [
+            "Dark source: compare an open-shadow key and inspect texture before adding ink."
+          ]
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 805,
+        "height": 644,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 1,
+          "meanAdditiveCoverage": 1.07447,
+          "overlapTwoPlusFraction": 0.241414,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.218672
+        },
+        "plates": [
+          {
+            "id": "blue",
+            "name": "Stipr\u0101 blue tonal key",
+            "meanCoverage": 0.825506,
+            "occupiedFraction": 1,
+            "veryDenseFraction": 0.752984,
+            "meanWhereOccupied": 0.825506,
+            "additiveInkShare": 0.768291,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 15,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "warm",
+            "name": "Stipr\u0101 coral chroma",
+            "meanCoverage": 0.248964,
+            "occupiedFraction": 0.248964,
+            "veryDenseFraction": 0.248964,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.231709,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": 75,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "blue",
+              "warm"
+            ],
+            "overlapFraction": 0.241414
+          }
+        ],
+        "warnings": [
+          {
+            "code": "broad-heavy-pass",
+            "inkIds": [
+              "blue"
+            ],
+            "message": "Large average nominal coverage. Inspect detail and the substrate; this is not a machine safety limit."
+          }
+        ]
+      },
+      "proofFile": "A-coast-tonal.png",
+      "proofSha256": "42d7179b9f85d23b63ef8d96feafc735fb49502cfdf47887068a37aa9b680ecd",
+      "plateFiles": [
+        {
+          "id": "blue",
+          "file": "A-coast-tonal-plate-blue.png",
+          "sha256": "a940a04eb601fa58bf0ee914fb2814df6e8145c7a837e5900fa21d76ff226422"
+        },
+        {
+          "id": "warm",
+          "file": "A-coast-tonal-plate-warm.png",
+          "sha256": "13b17a0abf0cb02f906788d726328fa4477300824e5e1004c115fa49b6ca1c23"
+        }
+      ]
+    },
+    {
+      "fixture": "B",
+      "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "SPK-Skulpturenpark-04.web_-2048x1365.jpg",
+        "intrinsic": {
+          "width": 2048,
+          "height": 1365
+        },
+        "oriented": {
+          "width": 2048,
+          "height": 1365
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "unspecified"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 2048,
+          "height": 1365,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 2048,
+            "height": 1365
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 880248,
+        "warnings": [],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "unspecified",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 2048,
+      "height": 1365,
+      "widthMm": 173.39733333333334,
+      "heightMm": 115.57,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Anchored shadows / two inks",
+          "version": 1,
+          "variant": "forest-contrast",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "dark documentary landscapes needing a stronger background anchor",
+            "textured neutral objects amid foliage"
+          ],
+          "avoid": [
+            "assuming stronger contrast preserves every shadow detail",
+            "neutral color fidelity"
+          ],
+          "description": "The photographic green key reaches deeper shadows while opening middle tones; the same yellow chroma pass preserves the earlier two-ink material separation. Compare dark texture at native and physical size.",
+          "references": [
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#f5eee2",
+          "inks": [
+            {
+              "id": "key",
+              "name": "Green contrast key",
+              "color": "#006043",
+              "source": "tone",
+              "threshold": 0,
+              "gain": 1.1,
+              "gamma": 1.3,
+              "invert": false
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow chroma",
+              "color": "#e2a523",
+              "source": "yellow-density",
+              "grayRemoval": 1,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.05,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 22,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "key": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "accent": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": -15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "key",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "accent",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0.13125858516483516,
+        "fullCoverageOnNonblackFraction": 0.09341303228021978,
+        "occupiedToneLevels": 256
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 2795520,
+          "shadowFraction": 0.322799,
+          "highlightFraction": 0.004184,
+          "nearNeutralFraction": 0.145626,
+          "tonalRange": 1,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": [
+            "Dark source: compare an open-shadow key and inspect texture before adding ink."
+          ]
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 2048,
+        "height": 1365,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.999988,
+          "meanAdditiveCoverage": 0.725491,
+          "overlapTwoPlusFraction": 0.126273,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.016159
+        },
+        "plates": [
+          {
+            "id": "key",
+            "name": "Green contrast key",
+            "meanCoverage": 0.558612,
+            "occupiedFraction": 0.999988,
+            "veryDenseFraction": 0.258559,
+            "meanWhereOccupied": 0.558619,
+            "additiveInkShare": 0.769978,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 22,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "accent",
+            "name": "Golden yellow chroma",
+            "meanCoverage": 0.166879,
+            "occupiedFraction": 0.166879,
+            "veryDenseFraction": 0.166879,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.230022,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": -15,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "key",
+              "accent"
+            ],
+            "overlapFraction": 0.126273
+          }
+        ],
+        "warnings": []
+      },
+      "proofFile": "B-forest-contrast.png",
+      "proofSha256": "123eb7e7d5693e23f8b439232afe10e81c0a668da3aba686625f0a4cf752113f",
+      "plateFiles": [
+        {
+          "id": "key",
+          "file": "B-forest-contrast-plate-key.png",
+          "sha256": "cd438b1dc943b522b9604779661dfcaa8aa4151c72bed3bdc3d5d6f105ac3dc3"
+        },
+        {
+          "id": "accent",
+          "file": "B-forest-contrast-plate-accent.png",
+          "sha256": "900a8f1c04fc8ebc67f13a380cc5304a7727d82b0298f68ea54a2b24c3c01553"
+        }
+      ]
+    },
+    {
+      "fixture": "B",
+      "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "SPK-Skulpturenpark-04.web_-2048x1365.jpg",
+        "intrinsic": {
+          "width": 2048,
+          "height": 1365
+        },
+        "oriented": {
+          "width": 2048,
+          "height": 1365
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "unspecified"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 2048,
+          "height": 1365,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 2048,
+            "height": 1365
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 880248,
+        "warnings": [],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "unspecified",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 2048,
+      "height": 1365,
+      "widthMm": 173.39733333333334,
+      "heightMm": 115.57,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Detailed shadows / two inks",
+          "version": 1,
+          "variant": "forest-balanced",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "dense landscapes with useful shadow gradation",
+            "light neutral objects against dark foliage"
+          ],
+          "avoid": [
+            "neutral color fidelity",
+            "assuming unclipped masks recover detail absent from the source"
+          ],
+          "description": "A unit-gain photographic green key anchors deep shadows without the broad gain clipping of forest-contrast. The yellow chroma pass is unchanged; inspect the remaining quantization and foliage detail.",
+          "references": [
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#f5eee2",
+          "inks": [
+            {
+              "id": "key",
+              "name": "Green detailed-shadow key",
+              "color": "#006043",
+              "source": "tone",
+              "threshold": 0,
+              "gain": 1,
+              "gamma": 1.3,
+              "invert": false
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow chroma",
+              "color": "#e2a523",
+              "source": "yellow-density",
+              "grayRemoval": 1,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.05,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 22,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "key": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 22,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "accent": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": -15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "key",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "accent",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0.0010037488553113552,
+        "fullCoverageOnNonblackFraction": 0,
+        "occupiedToneLevels": 256
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 2795520,
+          "shadowFraction": 0.322799,
+          "highlightFraction": 0.004184,
+          "nearNeutralFraction": 0.145626,
+          "tonalRange": 1,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": [
+            "Dark source: compare an open-shadow key and inspect texture before adding ink."
+          ]
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 2048,
+        "height": 1365,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.999987,
+          "meanAdditiveCoverage": 0.680714,
+          "overlapTwoPlusFraction": 0.112131,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.010159
+        },
+        "plates": [
+          {
+            "id": "key",
+            "name": "Green detailed-shadow key",
+            "meanCoverage": 0.513835,
+            "occupiedFraction": 0.999987,
+            "veryDenseFraction": 0.193637,
+            "meanWhereOccupied": 0.513841,
+            "additiveInkShare": 0.754847,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 22,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "accent",
+            "name": "Golden yellow chroma",
+            "meanCoverage": 0.166879,
+            "occupiedFraction": 0.166879,
+            "veryDenseFraction": 0.166879,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.245153,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": -15,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "key",
+              "accent"
+            ],
+            "overlapFraction": 0.112131
+          }
+        ],
+        "warnings": []
+      },
+      "proofFile": "B-forest-balanced.png",
+      "proofSha256": "0beb03aea2ecd33c7b4b2f4eb570f471332569823f0a3588927c180d672142e5",
+      "plateFiles": [
+        {
+          "id": "key",
+          "file": "B-forest-balanced-plate-key.png",
+          "sha256": "dc25825ab5d8d84f10a599d3196d006ba47528edb2351bacbb7c46ba51ad822c"
+        },
+        {
+          "id": "accent",
+          "file": "B-forest-balanced-plate-accent.png",
+          "sha256": "900a8f1c04fc8ebc67f13a380cc5304a7727d82b0298f68ea54a2b24c3c01553"
+        }
+      ]
+    },
+    {
+      "fixture": "C",
+      "sourceSha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "IMG_9087.jpg",
+        "intrinsic": {
+          "width": 1152,
+          "height": 2048
+        },
+        "oriented": {
+          "width": 1152,
+          "height": 2048
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "embedded-icc",
+          "byteLength": 456,
+          "description": "sRGB",
+          "colorSpace": "RGB",
+          "connectionSpace": "XYZ"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 1152,
+          "height": 2048,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 1152,
+            "height": 2048
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 898480,
+        "warnings": [
+          "Original ICC bytes are retained with the source. The decoder converts into an 8-bit sRGB working preview; this is not a calibrated press proof."
+        ],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "embedded-icc",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 1152,
+      "height": 2048,
+      "widthMm": 97.536,
+      "heightMm": 173.39733333333334,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Cool atmosphere / two inks",
+          "version": 1,
+          "variant": "coast-duotone",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "blue skies and water",
+            "cool landscapes with small warm details"
+          ],
+          "avoid": [
+            "exact color reproduction",
+            "uniform warm scenes",
+            "tiny figures without a detail review"
+          ],
+          "description": "A blue red-channel-density pass retains pale cool atmosphere; a partially gray-removed coral pass warms material while leaving neutral shadows largely to blue.",
+          "references": [
+            {
+              "title": "Dizzy Ink / Risograph profiles",
+              "url": "https://risograph.co.uk/04-risograph-profiles",
+              "id": "dizzy-profiles"
+            },
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#faf8f2",
+          "inks": [
+            {
+              "id": "blue",
+              "name": "Stipr\u0101 blue atmosphere",
+              "color": "#0d4dad",
+              "source": "cyan-density",
+              "grayRemoval": 0,
+              "threshold": 0,
+              "gain": 0.95,
+              "gamma": 0.95,
+              "invert": false
+            },
+            {
+              "id": "warm",
+              "name": "Stipr\u0101 coral chroma",
+              "color": "#ff665d",
+              "source": "yellow-density",
+              "grayRemoval": 0.65,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.2,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 15,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "blue": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "warm": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": 75,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "blue",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "warm",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 0,
+        "fullCoverageOnNonblackFraction": 0,
+        "occupiedToneLevels": 241
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 2359296,
+          "shadowFraction": 0.008148,
+          "highlightFraction": 0.058461,
+          "nearNeutralFraction": 0.033048,
+          "tonalRange": 1,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": []
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 1152,
+        "height": 2048,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.990198,
+          "meanAdditiveCoverage": 0.510818,
+          "overlapTwoPlusFraction": 0.053889,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.006965
+        },
+        "plates": [
+          {
+            "id": "blue",
+            "name": "Stipr\u0101 blue atmosphere",
+            "meanCoverage": 0.44153,
+            "occupiedFraction": 0.98872,
+            "veryDenseFraction": 0.03412,
+            "meanWhereOccupied": 0.446567,
+            "additiveInkShare": 0.864357,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 15,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "warm",
+            "name": "Stipr\u0101 coral chroma",
+            "meanCoverage": 0.069289,
+            "occupiedFraction": 0.069289,
+            "veryDenseFraction": 0.069289,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.135643,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": 75,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "blue",
+              "warm"
+            ],
+            "overlapFraction": 0.053889
+          }
+        ],
+        "warnings": []
+      },
+      "proofFile": "C-coast-duotone.png",
+      "proofSha256": "93d0778fdf8a340395969b1b7cfe16861047821ebb6be41d2f1203cd16cd88eb",
+      "plateFiles": [
+        {
+          "id": "blue",
+          "file": "C-coast-duotone-plate-blue.png",
+          "sha256": "27308f7773b9e88d907fc5641867222627c34dfc215f704ea9e97aa3a0c506e6"
+        },
+        {
+          "id": "warm",
+          "file": "C-coast-duotone-plate-warm.png",
+          "sha256": "e1dd8942a38824be47de76f6bb47f8fc3fcf79c27d084ccdf641b2c8d3b66bd3"
+        }
+      ]
+    },
+    {
+      "fixture": "C",
+      "sourceSha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+      "sourceMetadata": {
+        "contract": "stipra-import-v1",
+        "format": "jpeg",
+        "sourceName": "IMG_9087.jpg",
+        "intrinsic": {
+          "width": 1152,
+          "height": 2048
+        },
+        "oriented": {
+          "width": 1152,
+          "height": 2048
+        },
+        "orientation": 1,
+        "alpha": false,
+        "profile": {
+          "kind": "embedded-icc",
+          "byteLength": 456,
+          "description": "sRGB",
+          "colorSpace": "RGB",
+          "connectionSpace": "XYZ"
+        },
+        "dpi": null,
+        "layout": {
+          "width": 1152,
+          "height": 2048,
+          "origin": {
+            "x": 0,
+            "y": 0
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 1152,
+            "height": 2048
+          },
+          "bleed": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "note": "Source files do not define production trim; the complete oriented image is the initial trim."
+        },
+        "sourceBytes": 898480,
+        "warnings": [
+          "Original ICC bytes are retained with the source. The decoder converts into an 8-bit sRGB working preview; this is not a calibrated press proof."
+        ],
+        "pixels": {
+          "channels": "RGBA",
+          "bitDepth": 8,
+          "colorSpace": "srgb",
+          "orientationApplied": true
+        },
+        "colorManagement": {
+          "policy": "stipra-srgb-v1",
+          "decoder": "skia-canvas",
+          "workingSpace": "srgb",
+          "sourceProfile": "embedded-icc",
+          "conversion": "decoder-managed-to-srgb",
+          "untaggedPolicy": "decoder-default; sRGB working output",
+          "pressCalibrated": false
+        },
+        "provenance": {
+          "sourceRetainedSeparately": true,
+          "aspectRatioPreserved": true,
+          "positionPreserved": true
+        }
+      },
+      "width": 1152,
+      "height": 2048,
+      "widthMm": 97.536,
+      "heightMm": 173.39733333333334,
+      "style": {
+        "contract": "stipra-style-resolution-v1",
+        "style": {
+          "id": "editorial-halftone",
+          "name": "Cool tonal detail / two inks",
+          "version": 1,
+          "variant": "coast-tonal",
+          "variantVersion": 1,
+          "intent": "newspaper photo or editorial illustration",
+          "goodFor": [
+            "cool landscapes with small dark silhouettes",
+            "blue water and tonal detail"
+          ],
+          "avoid": [
+            "exact color reproduction",
+            "expecting automatic figure detection or preservation at any print size"
+          ],
+          "description": "A photographic blue key separates dark marks from saturated blue water more clearly than red-channel density alone. The coral pass is unchanged; expect a paler sky than coast-duotone.",
+          "references": [
+            {
+              "title": "Dizzy Ink / Risograph profiles",
+              "url": "https://risograph.co.uk/04-risograph-profiles",
+              "id": "dizzy-profiles"
+            },
+            {
+              "title": "Exploriso / Custom CMYK and GCR",
+              "url": "https://en.exploriso.info/exploriso/colour/separations/convert-via-custom-cmyk-and-gcr/",
+              "id": "exploriso-gcr"
+            }
+          ],
+          "calibration": "experimental RGB approximation; no external profiles or artwork included"
+        },
+        "dpi": 300,
+        "seed": 42,
+        "screening": "authored",
+        "targetLpi": 50,
+        "effectiveLpi": 50,
+        "strength": 1,
+        "inkRecipe": {
+          "version": 1,
+          "mode": "spot",
+          "paper": "#faf8f2",
+          "inks": [
+            {
+              "id": "blue",
+              "name": "Stipr\u0101 blue tonal key",
+              "color": "#0d4dad",
+              "source": "tone",
+              "threshold": 0,
+              "gain": 1,
+              "gamma": 0.9,
+              "invert": false
+            },
+            {
+              "id": "warm",
+              "name": "Stipr\u0101 coral chroma",
+              "color": "#ff665d",
+              "source": "yellow-density",
+              "grayRemoval": 0.65,
+              "threshold": 0,
+              "gain": 0.65,
+              "gamma": 1.2,
+              "invert": false
+            }
+          ]
+        },
+        "screenRecipe": {
+          "version": 1,
+          "seed": 42,
+          "default": {
+            "mode": "dots",
+            "pitch": 6,
+            "angle": 15,
+            "dotScale": 1,
+            "jitter": 0,
+            "solidThreshold": 0.9,
+            "registration": {
+              "x": 0,
+              "y": 0,
+              "rotate": 0
+            }
+          },
+          "plates": {
+            "blue": {
+              "mode": "solid",
+              "pitch": 6,
+              "angle": 15,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            },
+            "warm": {
+              "mode": "dots",
+              "pitch": 6,
+              "angle": 75,
+              "dotScale": 1,
+              "jitter": 0,
+              "solidThreshold": 0.9,
+              "registration": {
+                "x": 0,
+                "y": 0,
+                "rotate": 0
+              }
+            }
+          }
+        },
+        "physicalScreens": [
+          {
+            "id": "blue",
+            "mode": "solid",
+            "targetLpi": null,
+            "effectiveLpi": null,
+            "pitchPx": null
+          },
+          {
+            "id": "warm",
+            "mode": "dots",
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "pitchPx": 6
+          }
+        ],
+        "warnings": [
+          "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+          "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+        ]
+      },
+      "continuousKey": {
+        "measurement": "continuous key before screening; fractions of full source grid",
+        "nonblackToneAbove": 0.02,
+        "fullCoverageFraction": 6.442599826388889e-05,
+        "fullCoverageOnNonblackFraction": 0,
+        "occupiedToneLevels": 256
+      },
+      "diagnostics": {
+        "suitability": {
+          "measurement": "alpha-weighted encoded RGB tone; no semantic classification",
+          "visiblePixelWeight": 2359296,
+          "shadowFraction": 0.008148,
+          "highlightFraction": 0.058461,
+          "nearNeutralFraction": 0.033048,
+          "tonalRange": 1,
+          "thresholds": {
+            "shadowBelow": 0.25,
+            "highlightAbove": 0.85,
+            "neutralChromaBelow": 0.04
+          },
+          "guidance": []
+        },
+        "contract": "stipra-plate-diagnostics-v1",
+        "width": 1152,
+        "height": 2048,
+        "dpi": 300,
+        "measurement": "nominal raster coverage, additive and uncalibrated",
+        "thresholds": {
+          "activeThreshold": 0.25,
+          "littleUsedMean": 0.025,
+          "denseMean": 0.7,
+          "overlapFraction": 0.35,
+          "heavyCombinedCoverage": 1.8,
+          "solidPlateCoverage": 0.8509803921568627
+        },
+        "overall": {
+          "inkedFraction": 0.999954,
+          "meanAdditiveCoverage": 0.450146,
+          "overlapTwoPlusFraction": 0.05861,
+          "overlapThreePlusFraction": 0,
+          "heavyCombinedFraction": 0.00108
+        },
+        "plates": [
+          {
+            "id": "blue",
+            "name": "Stipr\u0101 blue tonal key",
+            "meanCoverage": 0.380858,
+            "occupiedFraction": 0.999954,
+            "veryDenseFraction": 0.0024,
+            "meanWhereOccupied": 0.380875,
+            "additiveInkShare": 0.846075,
+            "screen": {
+              "mode": "solid",
+              "pitchPx": 6,
+              "angleDeg": 15,
+              "effectiveLpi": null
+            }
+          },
+          {
+            "id": "warm",
+            "name": "Stipr\u0101 coral chroma",
+            "meanCoverage": 0.069289,
+            "occupiedFraction": 0.069289,
+            "veryDenseFraction": 0.069289,
+            "meanWhereOccupied": 1,
+            "additiveInkShare": 0.153925,
+            "screen": {
+              "mode": "dots",
+              "pitchPx": 6,
+              "angleDeg": 75,
+              "effectiveLpi": 50
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "inks": [
+              "blue",
+              "warm"
+            ],
+            "overlapFraction": 0.05861
+          }
+        ],
+        "warnings": []
+      },
+      "proofFile": "C-coast-tonal.png",
+      "proofSha256": "ba4e6310f322f465e3016dd43e60d9a9a37c139fdb9cdd58092532ec2f87df9a",
+      "plateFiles": [
+        {
+          "id": "blue",
+          "file": "C-coast-tonal-plate-blue.png",
+          "sha256": "6b34ca8905dfc37b063686948899559c8ebc88efda7e55badaf0b4a953a586cd"
+        },
+        {
+          "id": "warm",
+          "file": "C-coast-tonal-plate-warm.png",
+          "sha256": "e1dd8942a38824be47de76f6bb47f8fc3fcf79c27d084ccdf641b2c8d3b66bd3"
+        }
+      ]
+    }
+  ],
+  "detailRegions": {
+    "B": [
+      {
+        "id": "foliage",
+        "x": 650,
+        "y": 50,
+        "width": 600,
+        "height": 450
+      },
+      {
+        "id": "stumps",
+        "x": 1100,
+        "y": 650,
+        "width": 550,
+        "height": 600
+      },
+      {
+        "id": "display",
+        "x": 730,
+        "y": 250,
+        "width": 550,
+        "height": 400
+      },
+      {
+        "id": "antlers",
+        "x": 290,
+        "y": 850,
+        "width": 400,
+        "height": 400
+      }
+    ],
+    "C": [
+      {
+        "id": "sky",
+        "x": 80,
+        "y": 100,
+        "width": 900,
+        "height": 500
+      },
+      {
+        "id": "horizon",
+        "x": 80,
+        "y": 980,
+        "width": 900,
+        "height": 350
+      },
+      {
+        "id": "figures",
+        "x": 530,
+        "y": 1280,
+        "width": 330,
+        "height": 350
+      }
+    ],
+    "A": [
+      {
+        "id": "ridges",
+        "x": 180,
+        "y": 100,
+        "width": 450,
+        "height": 450
+      }
+    ]
+  },
+  "sharedStyleMatrix": {
+    "fixtures": [
+      "A",
+      "B",
+      "C",
+      "type"
+    ],
+    "proofs": 60,
+    "physicalPrintVerified": false,
+    "ownerApproved": false
+  },
+  "canonicalAccentChecks": [
+    {
+      "fixture": "B",
+      "plate": "plate",
+      "sha256": "1abada63bd2738a85310429a4a9b7a191496fafa3fa379210d8278b63057c72b"
+    },
+    {
+      "fixture": "B",
+      "plate": "screened",
+      "sha256": "d44e8e77f182bea5c130a493da847f1d01afb89060ac3fae23d586de3a545728"
+    },
+    {
+      "fixture": "C",
+      "plate": "plate",
+      "sha256": "4ac95036d2acd3fbbe3e7016468da1fa16181bf4bd06488984d2d05a63c41e04"
+    },
+    {
+      "fixture": "C",
+      "plate": "screened",
+      "sha256": "57d7a875ab1173788a06c6314a1d1711a2b5a11c81e4495a3d722eb754b634ea"
+    }
+  ]
+}

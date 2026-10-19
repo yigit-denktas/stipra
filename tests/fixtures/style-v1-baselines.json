@@ -32,6 +32,16 @@
       "id": "editorial-halftone",
       "variant": "warm-third",
       "sha256": "e8f0668aef14d1f81620dc93ada44dcf9d1ce8380bda4976e930e8114b5a10df"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "forest-balanced",
+      "sha256": "9c398c0e09f370cbc9c918d5848d3a8af827297c37ae21d3a98ff3cd27c5d986"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "coast-tonal",
+      "sha256": "c7d69bb21e15c46c115bef39afb6b253e59cc5f4365b8b92ecc7962c065599aa"
     }
   ]
 }

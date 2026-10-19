@@ -147,7 +147,7 @@ test('real package CLI preserves default and new variant recipes, source and bro
     ctx.fillStyle='#2876bc';ctx.fillRect(0,0,24,48);
     const original=Buffer.from(await c.toBuffer('png')),file=path.join(dir,'input.png'),out=path.join(dir,'result.zip');fs.writeFileSync(file,original);
     const pixels=ctx.getImageData(0,0,48,48).data;
-    for(const [id,variant] of [['editorial-halftone','warm-third'],['editorial-halftone','forest-depth'],['editorial-halftone','coast-duotone'],['portrait-duotone','blue-pink'],['bold-spot-poster','process-cmyk']]){
+    for(const [id,variant] of [['editorial-halftone','warm-third'],['editorial-halftone','forest-depth'],['editorial-halftone','coast-duotone'],['editorial-halftone','forest-balanced'],['editorial-halftone','coast-tonal'],['portrait-duotone','blue-pink'],['bold-spot-poster','process-cmyk']]){
     cp.execFileSync(process.execPath,[path.join(ROOT,'bin/stipra.js'),'package','--input',file,'--style',id,'--style-variant',variant,'--dpi','600','--lpi','50','--seed','42','--out',out]);
     const zip=await JSZip.loadAsync(fs.readFileSync(out)),manifest=JSON.parse(await zip.file('manifest.json').async('string'));
     const style=Styles.resolve(id,{variant,dpi:600,lpi:50,seed:42});
@@ -185,7 +185,7 @@ test('attributed variants retain versioned identity and agree in full browser an
       }
     }
   }
-  assert.equal(count,9);
+  assert.equal(count,11);
 });
 
 test('four defaults and earlier editorial variants retain their saved ink and screen recipes',()=>{
@@ -210,4 +210,30 @@ test('focused photo variants avoid clipped keys and restrict warm density in a c
   assert.ok(coast.masks[0].coverage[2]>100);
   assert.ok(coast.masks[1].coverage[2]<10);
   assert.ok(coast.masks.every(p=>p.coverage[3]===0));
+});
+
+
+test('detail variants retain shadow steps and separate dark silhouettes from saturated water',()=>{
+  const ramp={width:256,height:1,rgba:Uint8Array.from(Array.from({length:256},(_,v)=>[v,v,v,255]).flat())};
+  const resolve=variant=>Styles.resolve('editorial-halftone',{variant,dpi:300,seed:42});
+  const oldForest=resolve('forest-contrast'),forest=resolve('forest-balanced');
+  const oldMask=Sep.separate(ramp,oldForest.inkRecipe).masks[0].coverage;
+  const newMask=Sep.separate(ramp,forest.inkRecipe).masks[0].coverage;
+  assert.equal(oldMask[8],oldMask[16]);
+  assert.ok(newMask[8]>newMask[16],'different dark source tones must remain different');
+  assert.equal(newMask[0],255);assert.equal(newMask[255],0);
+  for(let i=1;i<256;i++)assert.ok(newMask[i]<=newMask[i-1]);
+  assert.ok(newMask.filter(v=>v===255).length<oldMask.filter(v=>v===255).length);
+  const scene={width:3,height:1,rgba:Uint8Array.from([10,15,20,255,15,100,140,255,90,150,220,255])};
+  const oldCoast=resolve('coast-duotone'),coast=resolve('coast-tonal');
+  const oldBlue=Sep.separate(scene,oldCoast.inkRecipe).masks[0].coverage;
+  const newBlue=Sep.separate(scene,coast.inkRecipe).masks[0].coverage;
+  assert.ok(newBlue[0]-newBlue[1]>3*(oldBlue[0]-oldBlue[1]),'tonal key must distinguish dark marks from low-red blue water');
+  assert.ok(newBlue[2]>60,'pale cool atmosphere must retain blue coverage');
+  for(const [before,after] of [[oldForest,forest],[oldCoast,coast]]){
+    assert.deepEqual(after.inkRecipe.inks[1],before.inkRecipe.inks[1]);
+    assert.deepEqual(after.screenRecipe,before.screenRecipe);
+    assert.equal(after.inkRecipe.paper,before.inkRecipe.paper);
+    assert.deepEqual(Sep.separate(scene,after.inkRecipe).masks[1].coverage,Sep.separate(scene,before.inkRecipe).masks[1].coverage);
+  }
 });

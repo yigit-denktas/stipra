@@ -1,6 +1,6 @@
 # Forest pass contribution and contrast review
 
-Digital designer review, 17 October 2026. Owner and physical acceptance remain pending (#43/#47/#34). All photo-bearing outputs stay private. The committed evidence is [numeric metadata and recipes only](evidence/forest-ink-contribution-2026-10-17.json).
+Digital designer review, 17 October 2026. A [19 October tonal-detail follow-up](TONAL-DETAIL-REVIEW.md) adds a separately versioned forest-balanced candidate without changing these earlier results. Owner and physical acceptance remain pending (#43/#47/#34). All photo-bearing outputs stay private. The committed evidence is [numeric metadata and recipes only](evidence/forest-ink-contribution-2026-10-17.json).
 
 The original forest SHA-256 matches fixture B. All treatments use the complete 2048 × 1365 canonical source, 300 DPI, the same paper, seed 42 and 50 LPI screened accents. Inspection contact sheets are downscaled; the artwork and master grid are not cropped or resampled. The two common `tonal-key` / `warm-third` plates are asserted byte-identical, making the third-pass comparison controlled.
 

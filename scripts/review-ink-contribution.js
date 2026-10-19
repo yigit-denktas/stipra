@@ -23,7 +23,7 @@ async function run(argv){
   const original=fs.readFileSync(source);assert.equal(hash(original),fixture.sha256,'Owner forest fingerprint mismatch');
   const asset=await ingestLocalBytes(original,fixture.originalFile),{width:w,height:h}=asset.metadata.oriented;assert.equal(w,2048);assert.equal(h,1365);
   fs.mkdirSync(out);const records=[],cases=[{id:'source',bytes:await png(asset.rgba,w,h)}];let baseline;
-  for(const variant of ['tonal-key','warm-third','forest-depth','forest-contrast']){
+  for(const variant of ['tonal-key','warm-third','forest-depth','forest-contrast','forest-balanced']){
     const style=Styles.resolve('editorial-halftone',{variant,dpi:300,seed:42}),separated=Sep.separate({width:w,height:h,rgba:asset.rgba},style.inkRecipe),result=Screen.apply(separated,style.screenRecipe);
     if(variant==='tonal-key')baseline=result;
     if(variant==='warm-third')for(let i=0;i<2;i++)assert.deepEqual(result.masks[i].coverage,baseline.masks[i].coverage,'Two common plates must remain identical');

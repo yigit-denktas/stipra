@@ -803,6 +803,24 @@
       "capabilityId": "STU-01",
       "title": "Open matching ink controls directly from each plate",
       "sourceTitle": "Open matching ink controls directly from each plate"
+    },
+    {
+      "id": "DEV-026",
+      "date": "2026-10-19",
+      "type": "improved",
+      "stage": "development",
+      "capabilityId": "STY-01",
+      "title": "Retain forest shadow steps and separate beach silhouettes",
+      "sourceTitle": "Retain forest shadow steps and separate beach silhouettes"
+    },
+    {
+      "id": "DEV-027",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "STY-02",
+      "title": "Compare shadow clipping and fixed ink passes on the original artwork",
+      "sourceTitle": "Retain forest shadow steps and separate beach silhouettes"
     }
   ],
   "libraryCapabilityIds": [
