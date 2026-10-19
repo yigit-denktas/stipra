@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Retain forest shadow steps and separate beach silhouettes",
+      "status": "Development",
+      "issues": [
+        43,
+        47,
+        34
+      ],
+      "changes": [
+        "Add opt-in forest-balanced and coast-tonal shared recipes, preserving every earlier recipe and the comparison accent plates.",
+        "Verify all three original hashes, compare continuous and screened plates, record source-aware full-coverage measurements and validate private canonical print packages. Human and physical acceptance remain open."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Open matching ink controls directly from each plate",
       "status": "Development",
       "issues": [

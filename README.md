@@ -46,7 +46,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 ## Where we are
 
-**Implemented:** local import, spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md) and opt-in forest contrast, LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean core, Canvas/p5 integration and authored-ink replay. [Prehnite](examples/prehnite-v8/) and native vector scenes remain separate paths.
+**Implemented:** import, spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md) and opt-in [tonal recipes](docs/TONAL-DETAIL-REVIEW.md), LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean core, Canvas/p5 integration and authored-ink replay. [Prehnite](examples/prehnite-v8/) and native vector scenes remain separate paths.
 
 **Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts.
 

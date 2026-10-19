@@ -66,13 +66,13 @@ Named-style packages now retain their authored substrate by default, matching th
 
 ## Attributed recipe variants and photographic controls
 
-The four family defaults remain stable. Seven further opt-in variants add published channel-separation approaches and focused photographic treatments. See [sources, formulas and limitations](references/SEPARATION-RECIPES.md).
+The four family defaults remain stable. Further opt-in variants add published channel-separation approaches and focused photographic treatments. See [sources, formulas and limitations](references/SEPARATION-RECIPES.md).
 
 | Family | Added variant | Passes |
 | --- | --- | --- |
 | Portrait Duotone | `blue-pink`, `teal-orange` | 2 |
 | Bold Spot Poster | `process-cmy`, `process-cmyk` | 3 / 4 |
-| Editorial Halftone | `forest-depth`, `forest-contrast`, `coast-duotone` | 2 |
+| Editorial Halftone | `forest-depth`, `forest-contrast`, `forest-balanced`, `coast-duotone`, `coast-tonal` | 2 |
 
 `styles explain FAMILY` lists all variant settings. The browser's Recipe variant selector uses the same catalog. `styles resolve FAMILY --variant VARIANT` records the version, references, actual masks' channel formulas and physical screens. Recipes remain editable: the lab exposes photographic tone, complementary channel density, gray removal and gamma alongside existing controls. Original recipes are unchanged; choosing a variant is explicit.
 
@@ -86,6 +86,12 @@ node bin/stipra.js package --input photo.jpg --style editorial-halftone \
 
 The package diagnostics also record source suitability measurements, with the same guidance shown in the browser: dark source density, pale tone area and mostly neutral content. These are explicit alpha-weighted RGB measurements, not a scene classifier. Browser diagnostics now show warning text and affected inks, rather than only a warning count. Guide/lab layout alignment is deferred.
 
-Reproduce private same-input reviews with `node scripts/review-shared-styles.js --sources /private/originals --out /private/new-study`. It verifies all three owner hashes before rendering, writes 52 native proofs (four defaults and nine variants on three original photos plus authored linework), corresponding grayscale plates, normalized settings and coverage/suitability diagnostics. Source and outputs must stay outside the repository. Screen pitch is calculated at 300 DPI; no artwork is cropped or resampled. Contact sheets are downscaled previews; inspect native proofs and detail crops for quality.
+Reproduce private same-input reviews with `node scripts/review-shared-styles.js --sources /private/originals --out /private/new-study`. It verifies all three owner hashes before rendering, writes every current default and variant on three original photos plus authored linework, corresponding grayscale plates, normalized settings and coverage/suitability diagnostics. Source and outputs must stay outside the repository. Screen pitch is calculated at 300 DPI; no artwork is cropped or resampled. Contact sheets are downscaled previews; inspect native proofs and detail crops for quality.
 
 `forest-contrast` v1 is an additional opt-in candidate, not a replacement for `forest-depth` v1: its green photographic key uses gain 1.1 / gamma 1.3, with the same gray-removed yellow chroma pass and 50 LPI accent. The private forest review favors its stronger background anchor over the flatter open-shadow treatment. It clips more deep-key pixels, so inspect bark and foliage rather than treating contrast as a universal improvement. Four defaults and all earlier variants retain their exact settings. See [the pass-contribution study](FOREST-PASS-REVIEW.md).
+
+## Tonal detail variants
+
+`forest-balanced` v1 keeps the green photographic key at unit gain / gamma 1.3. It preserves dark tonal steps that `forest-contrast` clips while holding the yellow pass and screens fixed. `coast-tonal` v1 replaces the red-channel-density blue key with photographic tone at unit gain / gamma 0.9; its coral pass and screens are unchanged. This improves dark silhouette separation from saturated water at the cost of a slightly paler sky. These remain opt-in recipes; all earlier recipes retain their exact bytes.
+
+Use these as starting points when shadow texture or small dark marks matter. They do not identify objects, recover missing source detail or guarantee fine detail survives a particular printer. The [controlled review](TONAL-DETAIL-REVIEW.md) records numeric evidence, native crops, fixed comparison settings and private reproduction commands.

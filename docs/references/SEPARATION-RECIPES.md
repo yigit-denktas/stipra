@@ -24,3 +24,7 @@ For complementary channel density `D = 1 - channel` and common gray `K = 1 - max
 The new forest key caps coverage below full ink through gain rather than a clipped black hold. This preserves distinctions in dark texture. The coast recipe gives pale blue atmosphere a real plate contribution while reserving most neutral shadow structure for blue. Neither recipe detects foliage, sky, bark or people.
 
 The suitability measurements use alpha-weighted encoded tone, source tonal range and near-neutral area. Their thresholds are disclosed in JSON. The resulting advice tells a reader what to inspect; it never certifies a style or infers image semantics. Coverage and overlap remain separate diagnostics. Digital inspection and physical print acceptance are distinct gates.
+
+## Stiprā tonal-detail follow-up, 19 October 2026
+
+`forest-balanced` and `coast-tonal` are independently authored refinements of the existing photographic-tone strategy. No additional external algorithm, profile or library is introduced. The forest key uses `tone`, gain 1, gamma 1.3; the coast key uses `tone`, gain 1, gamma 0.9. Their yellow/coral passes and screen recipes remain identical to `forest-contrast` / `coast-duotone`. Existing source references describe channel and gray-removal principles, not these settings or an endorsement. See [the controlled evidence and tradeoffs](../TONAL-DETAIL-REVIEW.md).

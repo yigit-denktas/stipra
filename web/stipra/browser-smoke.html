@@ -185,7 +185,7 @@
     el('style-variant').value='tonal-key';el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
     await until(()=>canvases().length===4,'two-ink style applied');
     if(el('error').hidden!==true)throw Error('Style application failed: '+el('error').textContent);
-    for(const [family,variant,count] of [['portrait-duotone','blue-pink',4],['portrait-duotone','teal-orange',4],['bold-spot-poster','process-cmy',5],['bold-spot-poster','process-cmyk',6],['editorial-halftone','forest-depth',4],['editorial-halftone','coast-duotone',4]]){
+    for(const [family,variant,count] of [['portrait-duotone','blue-pink',4],['portrait-duotone','teal-orange',4],['bold-spot-poster','process-cmy',5],['bold-spot-poster','process-cmyk',6],['editorial-halftone','forest-depth',4],['editorial-halftone','coast-duotone',4],['editorial-halftone','forest-balanced',4],['editorial-halftone','coast-tonal',4]]){
       el('style').value=family;el('style').dispatchEvent(new Event('change',{bubbles:true}));
       el('style-variant').value=variant;el('style-variant').dispatchEvent(new Event('change',{bubbles:true}));
       await until(()=>canvases().length===count,variant+' applied');

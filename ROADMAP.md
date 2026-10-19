@@ -15,7 +15,7 @@ Named-region mapping (#83) and opt-in inert source projects (#84) are implemente
 
 Physical-print evidence gates print-quality claims, not evaluation of the experimental digital effect. Additional vector formats, branding and paper realism remain separate. These workstreams are planning targets. Native v0.9 tracking is linked below; #17 records the native configuration.
 
-The [19 October acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) records the merged #98, public-text fixes, reproducible private quality comparisons and the exact outstanding human/physical records. No style defaults or print-quality claims are promoted.
+The [19 October acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) records the merged #98, public-text fixes, reproducible private quality comparisons and the exact outstanding human/physical records. No style defaults or print-quality claims are promoted. The [tonal-detail study](docs/TONAL-DETAIL-REVIEW.md) adds opt-in forest/beach keys with controlled accent plates; owner and physical acceptance remain open.
 
 ## v0.9 user experience — one browser workflow
 
