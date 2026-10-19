@@ -1,6 +1,6 @@
 {
   "contract": "stipra-delivery-ledger-v1",
-  "updatedAt": "2026-10-18",
+  "updatedAt": "2026-10-19",
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
@@ -114,10 +114,10 @@
     }
   ],
   "nextSequence": [
-    "Collect independent artist usefulness feedback for the registry-verified alpha.1 release (#70); physical and human accessibility acceptance remain separate (#13).",
-    "Send the approved #14 native inventory request using an authorized browser fallback: the GitHub connector rejected creation with HTTP 403. Obtain attributable component/notices evidence before bundling native Skia.",
-    "Collect actual operator print measurements and independent artist/human accessibility observations (#13/#70); review forest/beach quality separately (#43/#47).",
-    "Keep optional Java, analytic vector screens and identity/paper extensions separate; PR #98 is the existing roadmap/design proposal."
+    "Collect independent artist, human accessibility and actual operator print records using the prepared acceptance kit (#13/#70); blank records are not completed acceptance.",
+    "Await the compiled-component/notices response to samizdatco/skia-canvas#309, posted on 19 October 2026; native bundles remain blocked (#14).",
+    "Review the private same-frame forest two-/three-ink and beach 50/75-LPI comparisons at intended size; preserve existing recipe versions until accepted (#43/#47/#34).",
+    "PR #98 is merged; verify the bounded public-text legibility follow-up. Keep optional Java, analytic vector screens and identity extensions separate."
   ],
   "tasks": [
     {
@@ -292,7 +292,7 @@
         12,
         22
       ],
-      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Nine-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open.",
+      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed.",
       "sourceUpdatedAt": "2026-10-17T20:17:26Z"
     },
     {
@@ -305,7 +305,7 @@
       "dependsOn": [
         1
       ],
-      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. Owner authorized upstream follow-up; connector creation returned HTTP 403, so the prepared request remains unsent pending browser fallback. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail.",
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. The approved upstream request was posted via browser on 19 October 2026: https://github.com/samizdatco/skia-canvas/issues/309. No maintainer response or native clearance is claimed. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail.",
       "sourceUpdatedAt": "2026-10-17T18:21:32Z"
     },
     {
@@ -426,7 +426,7 @@
         7,
         5
       ],
-      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
+      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed.",
       "sourceUpdatedAt": "2026-10-17T10:04:55Z"
     },
     {
@@ -473,7 +473,7 @@
         7,
         56
       ],
-      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
+      "note": "Two-/three-ink forest variants and detail studies exist; owner/print acceptance of depth is still pending. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed.",
       "sourceUpdatedAt": "2026-10-17T12:48:54Z"
     },
     {
@@ -529,7 +529,7 @@
         43,
         56
       ],
-      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open.",
+      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Owner/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed.",
       "sourceUpdatedAt": "2026-10-17T12:48:53Z"
     },
     {

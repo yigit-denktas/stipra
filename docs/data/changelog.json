@@ -3,6 +3,26 @@
   "releaseStatus": "Lean JavaScript packages 0.1.0-alpha.1 are published and registry-verified. Studio development and human/native acceptance remain separate; no GitHub release tag is implied.",
   "entries": [
     {
+      "date": "2026-10-19",
+      "title": "Prepare actual acceptance and improve public-text legibility",
+      "status": "Development",
+      "prs": [
+        98
+      ],
+      "issues": [
+        13,
+        14,
+        70,
+        43,
+        47
+      ],
+      "changes": [
+        "Increase secondary text sizes and constrain long document paragraphs while keeping the original palette and lowercase wordmark.",
+        "Post the native notice inventory request as samizdatco/skia-canvas#309; native bundles remain blocked.",
+        "Reproduce private forest evidence and add controlled forest/shoreline comparison plans; physical prints and independent human trials remain unperformed."
+      ]
+    },
+    {
       "date": "2026-10-18",
       "title": "Reconcile public history and release automation",
       "status": "Unreleased",

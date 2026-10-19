@@ -12,12 +12,14 @@
 | --- | --- |
 | What is Stiprā for, and which interaction choices remain open? | [Product design principles](../DESIGN.md) |
 | What must the public pages communicate, and how should they look and behave? | [Public experience contract](CONTRACT.md) |
-| What patterns and page-flow behaviors should code follow? | [Interface patterns](PATTERNS.md) |\n| What was accepted or rejected, and why? | [Design decisions](DECISIONS.md) |
+| What patterns and page-flow behaviors should code follow? | [Interface patterns](PATTERNS.md) |
+| What was accepted or rejected, and why? | [Design decisions](DECISIONS.md) |
 | How do we judge the design before approving it? | [Critical user journeys and review protocol](REVIEW.md) |
 | How is development/release history represented? | [Product-history rules](../docs/PRODUCT-HISTORY.md) and [source data](../docs/data/product-history.json) |
 | What color and font values does the browser actually use? | [Shared stylesheet](../web/stipra/shared.css) and [roadmap stylesheet](../web/stipra/roadmap.css) |
 | What governs CSS refactors and visual regressions? | [Good CSS consolidation report](../docs/ROADMAP-CSS-CONSOLIDATION-2026-10-18.md) and [pinned CSS skill](../.agents/skills/good-css/README-STIPRA.md) |
-| How should we apply Impeccable's Read/Operate modes and follow up? | [Impeccable audit and reproducible tests](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md) |\n| What has the latest public-page critique actually observed? | [Taste-skill review](../docs/DESIGN-TASTE-REVIEW-2026-10-18.md) |
+| How should we apply Impeccable's Read/Operate modes and follow up? | [Impeccable audit and reproducible tests](../docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md) |
+| What has the latest public-page critique actually observed? | [Taste-skill review](../docs/DESIGN-TASTE-REVIEW-2026-10-18.md) |
 | What can the reviewer run? | [Pinned Taste Skill](../.agents/skills/design-taste-frontend/README-STIPRA.md) and [design inspection workflow](../.github/workflows/design-taste-audit.yml) |
 
 The **implementation sources remain authoritative**. Do not copy CSS tokens into a second system of truth or mark a capability shipped because its issue or PR was closed. This folder states intent, semantics, review boundaries and edit decisions.

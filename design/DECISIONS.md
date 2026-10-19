@@ -120,3 +120,7 @@ Revisit when:
 ```
 
 **Do not automatically convert this document into a list of “approved” solutions.** The important institutional memory is *why a proposal was chosen, deferred or rejected*, and what observable evidence could overturn it. This is more useful across coding agents than an aesthetic score or an isolated screenshot.
+
+## 19 October owner-authorized landing and legibility follow-up
+
+PR #98 merged as `e4f7ee6` after the owner requested all five follow-ups and the exact head passed 75 CI steps and 16 pixel comparisons. This authorizes landing the reviewed design; independent user/assistive-technology and physical acceptance remain open. Small auxiliary text now has explicit 13/14/16px roles and running paragraphs a 70ch maximum. The roadmap stylesheet and its original comparison fixture are unchanged. Paper, ink palette, Plex, sharp rules and lowercase wordmark are retained. Reopen based on observed reading or reflow failures, not a generic marketing score.

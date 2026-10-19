@@ -56,11 +56,11 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Acceptance:** [Scoped release gates](docs/RELEASE-CANDIDATE.md) run in CI; native bundles remain blocked on [missing notices](docs/DEPENDENCY-AUDIT.md). Physical/artist review remains open. Previews are **digital approximations**; branding is provisional.
+**Acceptance:** [Scoped release gates](docs/RELEASE-CANDIDATE.md) run in CI; native bundles remain blocked on [missing notices](docs/DEPENDENCY-AUDIT.md). [Acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) has ready-to-run trials; physical/artist review remains open. Previews are **digital approximations**; branding is provisional.
 
 ## Follow the work
 
-The [roadmap](ROADMAP.md), [alpha tracker #70](https://github.com/yigit-denktas/stipra/issues/70) and [issues](https://github.com/yigit-denktas/stipra/issues) distinguish implementation, validation and publication. Keep original photographs and image-bearing packages private unless redistribution is authorized.
+The [roadmap](ROADMAP.md) and [alpha tracker #70](https://github.com/yigit-denktas/stipra/issues/70) distinguish implementation, validation and publication. Keep original photographs and image-bearing packages private unless redistribution is authorized.
 
 [Design principles](DESIGN.md) · [Printmaking rules](docs/PRINT-DESIGN-RULES.md) · [Reference library](docs/references/README.md) · [Architecture](docs/ARCHITECTURE.md)
 
