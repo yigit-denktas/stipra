@@ -1,6 +1,6 @@
 # Stiprā backlog audit handoff — 2026-10-20
 
-Base: `d033ce7c923507c607786ca141fb532500964c60` (main, PR #119 merge). Read-only backlog audit, cloud reconciliation and A/B maintenance branches. No merges, PRs or issue-state changes.
+Base: `d033ce7c923507c607786ca141fb532500964c60` (main, PR #119 merge). Read-only backlog audit, cloud reconciliation, A/B maintenance and the C documentation reconciliation. No merges, PRs or issue-state changes.
 
 ## Branches
 
@@ -8,7 +8,9 @@ Base: `d033ce7c923507c607786ca141fb532500964c60` (main, PR #119 merge). Read-onl
 |---|---|---|
 | `fix/windows-portability-audit-2026-10-20` | `90abb56ec92675f677a30fa1ec1b1f0c756a740a` | Windows test/build portability; tests plus `scripts/build-core.js` atomic concurrency |
 | `chore/reconstruction-test-requirements-2026-10-20` | `aa5e4242840fe2422c809227365ba8c0a92a79ad` | Self-contained reconstruction test requirements and future archive `.txt` inclusion |
+| `docs/backlog-reconciliation-2026-10-20` | `ff1befa640563d2c78ae9fef3e184ba4d39a3b7b` | C ledger/documentation reconciliation and #13 owner-photo acceptance child proposal; no issue created |
 | `audit/backlog-2026-10-20` | this branch | Audit reports, patches, logs and package |
+
 
 ## Windows results
 
@@ -20,9 +22,10 @@ Base: `d033ce7c923507c607786ca141fb532500964c60` (main, PR #119 merge). Read-onl
 
 ## C and #75
 
-- Retain #8/#9/#12 as completed implementation records; propose one #13 acceptance child covering G01–G11 plus A1–C5 with private PASS/FAIL/NOT RUN fields. No acceptance passes implied.
+- C branch `docs/backlog-reconciliation-2026-10-20` @ `ff1befa640563d2c78ae9fef3e184ba4d39a3b7b` prepares the delivery-ledger refresh (17 source timestamps, A/B review branches, next sequence, stale-doc corrections) and the owner-photo acceptance child proposal.
+- Retain #8/#9/#12 as completed implementation records; propose one #13 acceptance child covering G01–G11 plus A1–C5 with private PASS/FAIL/NOT RUN fields. No acceptance passes implied and no issue created.
 - Record #75's usefulness dependency as a soft gate.
-- Reconcile verified drift separately: 17 closed unchecked-box records, 17 `sourceUpdatedAt` mismatches, stale ROADMAP/RELEASE-CANDIDATE prose; no auto-reopen or auto-tick.
+- Reconcile verified drift separately: 17 closed unchecked-box records, 17 `sourceUpdatedAt` mismatches, stale ROADMAP/RELEASE-CANDIDATE prose; no auto-reopen or auto-tick. Targeted C tests: 16/16 pass.
 
 ## Files
 
@@ -37,4 +40,4 @@ Base: `d033ce7c923507c607786ca141fb532500964c60` (main, PR #119 merge). Read-onl
 
 ## Message for the cloud agent (GitHub-accessible)
 
-Cloud audit received and reconciled; no merge/issue-state changes. A/B maintenance branches are pushed at the heads above. Windows results and remaining host restrictions are in `maintenance-a-b.md`; the revised A branch keeps committed-blob verification and adds working-tree vendor verification (text LF/CRLF-only, binary exact) with regressions for both inventories. B is unchanged. C is as agreed: retain #8/#9/#12 completed implementation records and propose one #13 acceptance child covering G01–G11 + A1–C5; record #75 usefulness as a soft gate. Please review A/B on Linux against the file scopes and leave #13/#14/#70/#109 acceptance parents open. No Experiment 2 or new research started.
+Cloud audit received and reconciled; no merge/issue-state changes. A/B maintenance branches are pushed at the heads above. Windows results and remaining host restrictions are in `maintenance-a-b.md`; the revised A branch keeps committed-blob verification and adds working-tree vendor verification (text LF/CRLF-only, binary exact) with regressions for both inventories. B is unchanged. C is prepared on `docs/backlog-reconciliation-2026-10-20` @ `ff1befa`: ledger/documentation reconciliation plus one proposed #13 owner-photo acceptance child covering G01–G11 + A1–C5; no issue created and no acceptance pass implied. #75 usefulness is recorded as a soft gate. Please review A/B/C on GitHub and leave #13/#14/#70/#109 acceptance parents open. No Experiment 2 or new research started.
