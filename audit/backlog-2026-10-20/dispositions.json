@@ -1,0 +1,387 @@
+{
+  "1": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "2": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "5": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "6": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "7": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "11": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "17": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=Configured and verified; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "18": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "21": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "22": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "24": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "29": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "32": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "35": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "37": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "44": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "45": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "52": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "54": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "56": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "60": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "62": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "65": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "71": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "72": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "73": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "74": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "81": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "82": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "83": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=implemented; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "84": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=implemented; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "85": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=research-complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "86": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=research-complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "90": {
+    "disposition": "keep closed; implementation/research record complete",
+    "remaining": "none shown in scope",
+    "evidence": "ledger delivery=complete; issue closure record; supporting docs/tests present",
+    "confidence": "high",
+    "note": ""
+  },
+  "39": {
+    "disposition": "keep closed; it deliberately closed on the acceptance specification",
+    "remaining": "owner-photo package execution remains under #13/new acceptance child",
+    "evidence": "body states closes on specification not engine or three-photo pass; fixture/acceptance docs present",
+    "confidence": "high",
+    "note": ""
+  },
+  "8": {
+    "disposition": "keep closed implementation; open one owner-photo G01-G06 acceptance child under #13; annotate closure scope",
+    "remaining": "owner-photo G01-G06 package verification; visual/physical quality belongs #13",
+    "evidence": "PR #93 delivered software; docs/PRINT-PACKAGE-ACCEPTANCE.md says NOT YET RUN / 0 of 3; tests/fixtures/owner-photo-fixtures.json status=SPECIFICATION_ONLY_NOT_EVALUATED; #8 comment said keep open until real fixtures verify",
+    "confidence": "medium-high",
+    "note": "needs owner/cloud agreement; do not silently treat closed as acceptance"
+  },
+  "9": {
+    "disposition": "keep closed implementation; route owner-photo G07-G08 to the same #13 acceptance child; annotate closure scope",
+    "remaining": "owner-photo G07-G08 verification and intended-size human review; physical remains #13",
+    "evidence": "#9 reconciliation records report-generation acceptance; acceptance doc still NOT RUN/0 of 3; private owner report review recorded in #63 but no G07-G08 matrix",
+    "confidence": "medium",
+    "note": "needs owner/cloud agreement; implementation is real"
+  },
+  "12": {
+    "disposition": "keep closed implementation; route owner-photo G09-G11 to the same #13 acceptance child; annotate closure scope",
+    "remaining": "owner-photo G09-G11 package/replay verification; physical remains #13",
+    "evidence": "#93 closes format/ZIP implementation; acceptance doc still NOT RUN/0 of 3; #12 comment said keep open for owner-photo canonical QA",
+    "confidence": "medium-high",
+    "note": "needs owner/cloud agreement"
+  },
+  "3": {
+    "disposition": "keep open as parked optional case-study polish; no release blocker",
+    "remaining": "facet seam/contour/gem criteria unchanged",
+    "evidence": "issue scope decision 2026-10-16; ledger planned/optional",
+    "confidence": "high",
+    "note": ""
+  },
+  "4": {
+    "disposition": "keep open as parked optional style extension; no release blocker",
+    "remaining": "paper fiber/debris realism criteria unchanged",
+    "evidence": "scope decision says optional, nonblocking; ledger planned/optional",
+    "confidence": "high",
+    "note": ""
+  },
+  "10": {
+    "disposition": "keep open narrowed to optional advanced reference diagnostics; basic diagnostics already #56",
+    "remaining": "HSL/CIELAB reference segmentation, overlays, IoU/anchor metrics; optional",
+    "evidence": "scope decision nonblocking; #56 delivered shared diagnostics; ledger planned",
+    "confidence": "high",
+    "note": ""
+  },
+  "13": {
+    "disposition": "keep open as acceptance parent; split children for owner-photo G01-G11, Windows portability, human accessibility and physical operator record",
+    "remaining": "actual human accessibility; physical-print observations; owner-photo acceptance; Windows portability",
+    "evidence": "docs/PHYSICAL-PRINT-CHECK.md status not performed; docs/ARTIST-TRIAL.md no submitted trial; issue comments record deferred human/physical; acceptance matrix not run",
+    "confidence": "high",
+    "note": ""
+  },
+  "14": {
+    "disposition": "keep open for the single native Skia compiled-component notice inventory",
+    "remaining": "attributable native notices/review; native bundle release gate",
+    "evidence": "upstream samizdatco/skia-canvas#309 open with 0 comments (retrieved read-only); docs/DEPENDENCY-AUDIT.md; ledger partial",
+    "confidence": "high",
+    "note": ""
+  },
+  "28": {
+    "disposition": "keep open as planned optional vector extension",
+    "remaining": "true analytic vector facet/screen geometry and parity criteria; no raster-vector claim",
+    "evidence": "ledger planned/optional; no analytic vector implementation found in src; #5 scope explicitly excludes it",
+    "confidence": "high",
+    "note": ""
+  },
+  "31": {
+    "disposition": "keep open for remaining owner-directed workspace/identity design; split identity decisions to #57",
+    "remaining": "workspace hierarchy/visual direction, mobile/accessibility interaction review; owner sign-off",
+    "evidence": "ledger review; many bounded studio follow-ups merged (#111/#115) but broader design undecided",
+    "confidence": "high",
+    "note": ""
+  },
+  "34": {
+    "disposition": "propose close as superseded by #47 + #13 after owner confirmation; account for future-family ideas in #47 or a new research note",
+    "remaining": "family-wide aesthetic/physical suitability; faux-CMYK/photocopy later ideas not promised",
+    "evidence": "stock contract and four families shipped through #47; ledger keeps #34 partial and #47 is acceptance owner; owner approved only digital forest/beach specimens",
+    "confidence": "medium",
+    "note": "needs owner decision; do not close a design proposal unilaterally"
+  },
+  "43": {
+    "disposition": "propose close after owner confirmation: digital forest/beach recipe approval is recorded; physical/independent evidence transfers to #13/#70",
+    "remaining": "physical/operator and independent artist evidence; broader family suitability stays #47",
+    "evidence": "docs/OWNER-VISUAL-APPROVAL-2026-10-19.md approves supplied digital forest-balanced/coast-tonal specimens; physical/artist explicitly deferred",
+    "confidence": "medium",
+    "note": "needs owner decision; closure is not a physical pass"
+  },
+  "46": {
+    "disposition": "propose close as superseded by #57 wordmark identity study; preserve parked #46 artifacts as historical, no adoption",
+    "remaining": "final owner identity choice and small-size/physical review remain #57",
+    "evidence": "ledger review; #46 branch parked; current identity focus documented in #57/BRAND-IDENTITY-STUDY-v2; owner has not selected",
+    "confidence": "medium",
+    "note": "needs owner decision"
+  },
+  "47": {
+    "disposition": "keep open for family-wide style suitability and any remaining owner/artist review; do not claim all families artistically proven",
+    "remaining": "four-family quality/suitability; physical/independent artist evidence #13/#70",
+    "evidence": "issue comments; ledger review; owner approval is scoped to digital forest/beach specimens",
+    "confidence": "high",
+    "note": ""
+  },
+  "57": {
+    "disposition": "keep open; owner must select final identity / small-print judgment",
+    "remaining": "owner visual choice, small-size/physical review, adoption decision; README logo remains unchanged",
+    "evidence": "ledger review; BRAND-IDENTITY-STUDY-v2; issue comments",
+    "confidence": "high",
+    "note": ""
+  },
+  "70": {
+    "disposition": "keep open for independent artist usefulness; publication and software acceptance are already complete",
+    "remaining": "at least one genuine independent artist trial/record; human/physical separate #13",
+    "evidence": "alpha.1 published and registry-verified; docs/ARTIST-TRIAL.md status prepared-not-performed; issue comments",
+    "confidence": "high",
+    "note": ""
+  },
+  "75": {
+    "disposition": "keep open as deferred optional Processing Java feasibility",
+    "remaining": "feasibility note and handoff only if prioritized; no Java rewrite",
+    "evidence": "ledger planned/optional; no implementation found",
+    "confidence": "high",
+    "note": ""
+  },
+  "109": {
+    "disposition": "keep open; Study 01 is bounded evidence, not adapter/human acceptance; no rerun or Experiment 2",
+    "remaining": "independent usefulness/adoption; Windows portability; human/physical acceptance; Experiment 2 decision separate",
+    "evidence": "PR #119 merged at d033ce7; docs/RECONSTRUCTION-STUDY-01.md; issue comments; owner instruction",
+    "confidence": "high",
+    "note": ""
+  },
+  "113": {
+    "disposition": "keep open as proposed optional operator proof kit; scope with #8/#9 contracts",
+    "remaining": "annotations/registrations/test sheets criteria; physical acceptance #13; no implementation yet",
+    "evidence": "body proposal; ledger planned; no implementation found",
+    "confidence": "high",
+    "note": ""
+  },
+  "114": {
+    "disposition": "keep open as deferred process research; no implementation/version promised",
+    "remaining": "process taxonomy, shortlist spikes, adopt/defer/reject; physical workshop evidence if later",
+    "evidence": "body proposal; ledger planned; no implementation found",
+    "confidence": "high",
+    "note": ""
+  }
+}
