@@ -35,7 +35,7 @@
   function controls(){
     const host=$('inks');host.replaceChildren();
     for(const ink of config.inks){
-      const box=document.createElement('details');box.className='ink';box.dataset.ink=ink.id;
+      const box=document.createElement('details');box.className='ink';box.dataset.ink=ink.id;box.id='ink-settings-'+ink.id;
       box.open=ink===config.inks[0];
       const summary=document.createElement('summary');summary.className='ink-title';
       const swatch=document.createElement('span');swatch.className='swatch';swatch.style.backgroundColor=ink.color;
@@ -138,7 +138,15 @@
     const ctx=c.getContext('2d'),data=ctx.createImageData(width,height);
     data.data.set(rgba);ctx.putImageData(data,0,0);return c;
   }
-  function show(name,raw,detail,target){
+  function adjustInk(id){
+    const box=$('ink-settings-'+id);
+    if(!box)return;
+    box.open=true;
+    const summary=box.querySelector('summary');
+    summary.focus({preventScroll:true});
+    summary.scrollIntoView({block:'nearest'});
+  }
+  function show(name,raw,detail,target,ink=null){
     const figure=document.createElement('figure');figure.tabIndex=0;figure.className=target==='plates'?'view view--plate':'view view--hero';
     const img=canvas(asset.metadata.oriented.width,asset.metadata.oriented.height,raw);
     img.setAttribute('aria-label',name);figure.appendChild(img);
@@ -146,6 +154,11 @@
     strong.textContent=name;caption.appendChild(strong);
     if(detail){
       const small=document.createElement('small');small.className='muted';small.textContent=detail;caption.appendChild(small);
+    }
+    if(ink){
+      const adjust=document.createElement('button');adjust.type='button';adjust.className='plate-adjust';
+      adjust.textContent='Adjust '+ink.name;adjust.setAttribute('aria-controls','ink-settings-'+ink.id);
+      adjust.addEventListener('click',()=>adjustInk(ink.id));caption.appendChild(adjust);
     }
     figure.appendChild(caption);
     $(target==='plates'?'plates':'hero').appendChild(figure);
@@ -175,7 +188,7 @@
       for(const ink of result.masks){
         const grayscale=StipraSeparation.plateRGBA(ink.coverage);
         const percent=result.stats.inks.find(x=>x.id===ink.id).meanCoverage*100;
-        views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates'));
+        views.push(show(ink.name+' plate',grayscale,percent.toFixed(1)+'% mean coverage','plates',ink));
       }
       $('status').textContent=config.mode.toUpperCase()+' · '+w+' × '+h+' px · '+result.masks.length+' physical ink passes';
       const diagnostics=StipraDiagnostics.inspect(result,{dpi:Number($('style-dpi').value),input:{width:w,height:h,rgba:asset.rgba}});
