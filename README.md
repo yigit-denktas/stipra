@@ -56,9 +56,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
 
-**Studio candidate:** [v0.9-rc.1 scope and review record](docs/STUDIO-RC-0.9-rc.1.md) is prepared for experimental digital evaluation; no Studio release tag or new npm version is implied.
-
-**Acceptance:** [Scoped release gates](docs/RELEASE-CANDIDATE.md) run in CI; native bundles remain blocked on [missing notices](docs/DEPENDENCY-AUDIT.md). [Acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) has ready-to-run trials; physical/artist review remains open. Previews are **digital approximations**; branding is provisional.
+**Acceptance:** [Prepared Studio v0.9-rc.1](docs/STUDIO-RC-0.9-rc.1.md) · [Scoped CI gates](docs/RELEASE-CANDIDATE.md). Native bundles await [component notices](docs/DEPENDENCY-AUDIT.md). Human accessibility remains open; physical/artist trials are deferred. Previews are **digital approximations**; branding is provisional.
 
 ## Follow the work
 
