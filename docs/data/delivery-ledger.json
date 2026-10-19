@@ -50,8 +50,8 @@
     },
     {
       "id": "studio-rc",
-      "version": "Studio v0.9-rc.1 (prepared candidate)",
-      "state": "prepared",
+      "version": "Studio v0.9.0-rc.1",
+      "state": "published",
       "tasks": [
         8,
         9,
@@ -59,7 +59,7 @@
         12,
         22
       ],
-      "exit": "Prepared experimental digital browser candidate. Review the exact successful run and retained public-site artifact for import, controlled recipe comparison, editable masks, aligned masters and reports. No GitHub release/tag or new npm publication is implied. Human accessibility remains open; physical and independent artist trials are owner-deferred. Native notices block native bundles only. See docs/STUDIO-RC-0.9-rc.1.md."
+      "exit": "Experimental prerelease published 19 October 2026 at source aec0c23. Attached browser build size and digest match the verified archive. The owner-supplied live print export passes digital checks and two-page visual inspection. Human accessibility remains open; physical and independent artist trials are owner-deferred. Native notices block native bundles only. See docs/CREATIVE-USE-2026-10-19.md."
     },
     {
       "id": "studio-v09",
@@ -114,7 +114,7 @@
     }
   ],
   "nextSequence": [
-    "The main Studio v0.9-rc.1 candidate archive at aec0c23 is verified, including all site-file hashes. Prepared prerelease notes target those exact bytes. Publication and the remaining live-host interaction require a functioning browser transfer/release surface; do not invent publication or completion.",
+    "Studio v0.9.0-rc.1 is published at exact source aec0c23 with the verified browser archive attached. Live-host download is digitally verified from the owner-supplied package; human/physical acceptance remains open. Release-history commit 401aeef exists; mirror deployment completion is not yet verified.",
     "Complete human keyboard/screen-reader observations (#13). Physical prints and independent artist trials (#13/#70) are owner-deferred, not passed.",
     "Await the compiled-component/notices response to samizdatco/skia-canvas#309, posted on 19 October 2026; native bundles remain blocked (#14).",
     "Retain owner-approved digital forest/beach specimens and frozen recipes; broader Style and physical acceptance remains open (#43/#47/#34). Keep optional Java, analytic vector screens and identity extensions separate."

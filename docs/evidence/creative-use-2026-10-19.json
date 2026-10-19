@@ -1,0 +1,101 @@
+{
+  "contract": "stipra-creative-use-v1",
+  "artwork": "Morning window",
+  "authorship": "Original procedural editorial illustration; no owner photographs or third-party artwork",
+  "coreEntry": "explicit published-package consumer",
+  "pixels": [
+    1440,
+    1800
+  ],
+  "dpi": 300,
+  "seed": 193,
+  "renderMs": 283.49616000000003,
+  "repeatMasksIdentical": true,
+  "coreMatchesExporter": true,
+  "packageSha256": "530abd00e16dcc493e6142514f2536ab6e543d9bddfd915483509325dcce6108",
+  "plates": [
+    {
+      "id": "green",
+      "coverageSha256": "8ec18465e46ef56315d74bdc1c53876fe726c30ef7eed3775bfc1f0ceec51bda",
+      "screenedSha256": "8ec18465e46ef56315d74bdc1c53876fe726c30ef7eed3775bfc1f0ceec51bda"
+    },
+    {
+      "id": "coral",
+      "coverageSha256": "b258c9fb8f8b4b9c99ca2a30780f4b7789c7849392daf4b4ea3fc5a49a2e67de",
+      "screenedSha256": "a178a553942cd0ee6f0bde286a20c8ed0e43ab8aaada1495c5c70e29aa93db55"
+    }
+  ],
+  "diagnostics": {
+    "contract": "stipra-plate-diagnostics-v1",
+    "width": 1440,
+    "height": 1800,
+    "dpi": 300,
+    "measurement": "nominal raster coverage, additive and uncalibrated",
+    "thresholds": {
+      "activeThreshold": 0.25,
+      "littleUsedMean": 0.025,
+      "denseMean": 0.7,
+      "overlapFraction": 0.35,
+      "heavyCombinedCoverage": 1.8,
+      "solidPlateCoverage": 0.8509803921568627
+    },
+    "overall": {
+      "inkedFraction": 0.138743,
+      "meanAdditiveCoverage": 0.138245,
+      "overlapTwoPlusFraction": 0.00416,
+      "overlapThreePlusFraction": 0,
+      "heavyCombinedFraction": 0.003641
+    },
+    "plates": [
+      {
+        "id": "green",
+        "name": "Window / plant / newspaper",
+        "meanCoverage": 0.063823,
+        "occupiedFraction": 0.068843,
+        "veryDenseFraction": 0.060364,
+        "meanWhereOccupied": 0.927083,
+        "additiveInkShare": 0.461664,
+        "screen": {
+          "mode": "solid",
+          "pitchPx": 12,
+          "angleDeg": 0,
+          "effectiveLpi": null
+        }
+      },
+      {
+        "id": "coral",
+        "name": "Morning light / cup",
+        "meanCoverage": 0.074422,
+        "occupiedFraction": 0.074427,
+        "veryDenseFraction": 0.074427,
+        "meanWhereOccupied": 0.999938,
+        "additiveInkShare": 0.538336,
+        "screen": {
+          "mode": "hybrid",
+          "pitchPx": 7.5,
+          "angleDeg": 22,
+          "effectiveLpi": 40
+        }
+      }
+    ],
+    "pairs": [
+      {
+        "inks": [
+          "green",
+          "coral"
+        ],
+        "overlapFraction": 0.00416
+      }
+    ],
+    "warnings": []
+  },
+  "acceptance": "Agent-authored digital trial; owner, independent artist and physical acceptance not established",
+  "coreVersion": "0.1.0-alpha.1",
+  "replayDecodedProofAndPlatesIdentical": true,
+  "sourceScriptSha256": "2ec5793af65af7f20cf30bb8b3163c27708f5df57d0b9bd46bb1215425e0b9c1",
+  "screenChoice": {
+    "first": "dots",
+    "kept": "hybrid",
+    "reason": "Keep fully inked sun and cup contours solid while screening the pale light beam; green linework remains unscreened. No shared default changed."
+  }
+}
