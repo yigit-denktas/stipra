@@ -115,7 +115,7 @@ async function run(){
            if(page==='web/stipra/browser-smoke.html'){
              if(externalRequests.length)throw Error('Unexpected external processing request');
              const dir=path.join(root,'out/workflow-validation');fs.mkdirSync(dir,{recursive:true});
-             fs.writeFileSync(path.join(dir,'browser-checks.json'),JSON.stringify({contract:'stipra-workflow-browser-v1',externalRequests:externalRequests.length,checks:['import and color policy','mask edits','solo/mute/paper/native zoom','2–8 ink setup','keyboard focus and labels','responsive workspace and information pages','marked export pixels, hashes, density and PDF recipes']},null,2)+'\n');
+             fs.writeFileSync(path.join(dir,'browser-checks.json'),JSON.stringify({contract:'stipra-workflow-browser-v1',externalRequests:externalRequests.length,checks:['import and color policy','mask edits','solo/mute/paper/native zoom','2–8 ink setup','non-destructive recipe comparison, stale-preview rejection and explicit adoption','keyboard focus and labels','responsive workspace and information pages','marked export pixels, hashes, density and PDF recipes']},null,2)+'\n');
              for(const [name,route]of [['studio','index.html'],['roadmap','roadmap/index.html'],['changelog','changelog/index.html'],['delivery','delivery/index.html'],['sitemap','sitemap/index.html']]){
                await call('Emulation.setDeviceMetricsOverride',{width:1280,height:1000,deviceScaleFactor:1,mobile:false},sessionId);
                await call('Page.navigate',{url:url.replace('/web/stipra/browser-smoke.html','/dist/stipra/'+route)},sessionId);
@@ -125,6 +125,13 @@ async function run(){
                for(const width of [1280,390]){
                  await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width===390},sessionId);await new Promise(resolve=>setTimeout(resolve,150));
                  const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,name+'-'+width+'.png'),Buffer.from(shot.data,'base64'));
+               }
+               if(name==='studio'){
+                 await call('Runtime.evaluate',{expression:`(async()=>{document.getElementById('recipe-comparison').open=true;document.getElementById('comparison-preview').click();for(let i=0;i<100&&document.getElementById('comparison-results').hidden;i++)await new Promise(r=>setTimeout(r,50));if(document.getElementById('comparison-results').hidden)throw Error('Comparison screenshot not ready');})()`,awaitPromise:true},sessionId);
+                 for(const width of [1280,390]){
+                   await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width===390},sessionId);await new Promise(resolve=>setTimeout(resolve,150));
+                   const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);fs.writeFileSync(path.join(dir,'studio-comparison-'+width+'.png'),Buffer.from(shot.data,'base64'));
+                 }
                }
              }
            }

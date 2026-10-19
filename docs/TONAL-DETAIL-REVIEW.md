@@ -1,6 +1,6 @@
 # Tonal-detail comparison, 19 October 2026
 
-The opt-in `forest-balanced` and `coast-tonal` recipes improve two specific digital separation failures. They use the existing shared resolver and separation engine. All earlier recipes and family defaults are unchanged. This is an agent visual review and automated evidence for #43/#47/#34; owner, independent artist and physical-print acceptance remain open.
+The opt-in `forest-balanced` and `coast-tonal` recipes improve two specific digital separation failures. They use the existing shared resolver and separation engine. All earlier recipes and family defaults are unchanged. This is an agent visual review and automated evidence for #43/#47/#34; the owner approved these supplied digital forest/beach specimens on 19 October 2026. Independent artist and physical-print testing are deferred. See [the scoped approval record](OWNER-VISUAL-APPROVAL-2026-10-19.md).
 
 All three original SHA-256 values match `tests/fixtures/owner-photo-fixtures.json`. Source photographs, image-bearing reports, crops and packages remain private. Public [evidence](evidence/tonal-detail-2026-10-19.json) contains settings, source metadata, hashes and numeric measurements only.
 

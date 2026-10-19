@@ -13,7 +13,8 @@
   ]});
   let asset=null,result=null,original=null,config=spot(),views=[],styleResolution=null,renderValid=false,loadVersion=0;
   const freshScreen=()=>({version:1,seed:142,default:{mode:'solid',pitch:12,angle:0,jitter:0,dotScale:1,solidThreshold:0.9},plates:{}});
-  let screenConfig=freshScreen(),exportBusy=false;
+  let screenConfig=freshScreen(),exportBusy=false,importBusy=false;
+  let comparisonVersion=0,pendingCandidate=null;
   const inspection={solo:null,muted:new Set()};
   const field=(where,label,value,type,callback,options)=>{
     const div=document.createElement('div');div.className='field';
@@ -170,6 +171,10 @@
     Promise.resolve().then(()=>{scheduled=false;render();});
   }
   function render(){
+    clearComparison('Settings changed. Preview again to compare.');
+    $('comparison-preview').disabled=true;
+    $('recipe-comparison').hidden=!asset;
+    $('style-summary').textContent=styleResolution?.style.description||'Manual treatment. Adjust each ink, or compare a candidate before replacing your settings.';
     $('paper').value=config.paper;
     $('error').hidden=true;renderValid=false;
     $('save-preview').disabled=true;$('save-plates').disabled=true;
@@ -203,7 +208,7 @@
       $('diagnostics').hidden=false;
       $('meta').textContent=result.warning+' · Screen seed '+result.recipe.seed+'.';
       inspectionControls();inspectProof();$('inspection').disabled=false;
-      renderValid=true;$('save-preview').disabled=false;$('save-plates').disabled=exportBusy;
+      renderValid=true;$('comparison-preview').disabled=importBusy;$('save-preview').disabled=false;$('save-plates').disabled=exportBusy;
     }catch(error){
       $('diagnostics').hidden=true;
       $('error').textContent=error.message;$('error').hidden=false;
@@ -223,7 +228,7 @@
   }
   async function load(file){
     if(!file)return;
-    const version=++loadVersion;
+    const version=++loadVersion;importBusy=true;clearComparison('Artwork is loading. Preview again when it is ready.');$('comparison-preview').disabled=true;
     $('status').textContent='Loading your image locally…';$('error').hidden=true;$('drop').setAttribute('aria-busy','true');
     try{
       if(file.size>StipraImportProbe.MAX_BYTES)throw Error('16 MiB file limit exceeded');
@@ -239,7 +244,7 @@
       if(version!==loadVersion)return;
       $('error').textContent=error.message;$('error').hidden=false;
       $('status').textContent='Import rejected; existing separation retained.';
-    }finally{if(version===loadVersion)$('drop').setAttribute('aria-busy','false');}
+    }finally{if(version===loadVersion){importBusy=false;$('drop').setAttribute('aria-busy','false');$('comparison-preview').disabled=!renderValid;}}
   }
   function save(blob,filename){
     if(!blob)return;
@@ -256,16 +261,75 @@
     $('screen-seed').value=String(screenConfig.seed);
     $('screen-dot-scale').value=String(screenConfig.default.dotScale);$('screen-solid-threshold').value=String(screenConfig.default.solidThreshold);
   }
+  function styleGuidance(style){
+    return style.style.description+' Suitable: '+style.style.goodFor.join(', ')+'. Avoid: '+style.style.avoid.join('; ')+'. '+style.physicalScreens.map(p=>p.id+': '+(p.effectiveLpi===null?'unscreened':p.effectiveLpi+' LPI')).join(' · ')+' at '+style.dpi+' DPI. '+style.warnings.join(' ');
+  }
+  function variantsFor(id){
+    const variants=id?StipraStyles.explain(id).variants:{},select=$('style-variant');select.replaceChildren();
+    for(const [value,name] of [['default','Original starting recipe'],...Object.entries(variants).map(([key,v])=>[key,v.name])]){
+      const option=document.createElement('option');option.value=value;option.textContent=name;select.appendChild(option);
+    }
+    select.disabled=Object.keys(variants).length===0;
+  }
+  function clearComparison(message=''){
+    comparisonVersion++;pendingCandidate=null;
+    const hadPreview=!$('comparison-results').hidden||$('comparison-results').getAttribute('aria-busy')==='true';
+    $('comparison-results').hidden=true;$('comparison-results').setAttribute('aria-busy','false');
+    $('comparison-current').replaceChildren();$('comparison-candidate').replaceChildren();$('comparison-use').disabled=true;
+    $('comparison-status').textContent=hadPreview?message:'';
+  }
+  function candidateDescription(){
+    const [id,variant]=$('comparison-recipe').value.split('/'),base=StipraStyles.explain(id);
+    return {id,variant,description:variant==='default'?base.description:base.variants[variant].description};
+  }
+  for(const family of StipraStyles.list()){
+    const group=document.createElement('optgroup');group.label=family.name;
+    for(const [variant,name] of [['default','Original starting recipe'],...family.variants.map(v=>[v.id,v.name])]){
+      const option=document.createElement('option');option.value=family.id+'/'+variant;option.textContent=name;group.appendChild(option);
+    }
+    $('comparison-recipe').appendChild(group);
+  }
+  $('comparison-recipe').value='editorial-halftone/forest-balanced';
+  $('comparison-note').textContent=candidateDescription().description;
+  $('comparison-recipe').addEventListener('change',()=>{clearComparison('Candidate changed. Preview again.');$('comparison-preview').disabled=!renderValid||importBusy;$('comparison-note').textContent=candidateDescription().description;});
+  $('comparison-preview').addEventListener('click',async()=>{
+    if(!asset||!renderValid||importBusy)return;
+    clearComparison();const version=comparisonVersion;
+    $('comparison-status').textContent='Preparing full-proof comparison…';$('comparison-results').setAttribute('aria-busy','true');$('comparison-preview').disabled=true;
+    await new Promise(requestAnimationFrame);
+    if(version!==comparisonVersion)return;
+    try{
+      const {id,variant}=candidateDescription(),dpi=Number($('style-dpi').value);
+      const candidate=StipraStyles.resolve(id,{variant,dpi,paper:config.paper,seed:screenConfig.seed,screening:$('style-screening').value,...($('style-lpi').value?{lpi:Number($('style-lpi').value)}:{})});
+      const {width,height}=result,trial=StipraScreen.apply(StipraSeparation.separate({width,height,rgba:asset.rgba},candidate.inkRecipe),candidate.screenRecipe);
+      const current=canvas(width,height,result.preview),proposed=canvas(width,height,trial.preview);
+      current.setAttribute('aria-label','Current full proof');proposed.setAttribute('aria-label','Candidate full proof');
+      $('comparison-current').replaceChildren(current);$('comparison-candidate').replaceChildren(proposed);
+      $('comparison-current-name').textContent=styleResolution?styleResolution.style.name:'Manual edits';$('comparison-candidate-name').textContent=candidate.style.name;
+      const frequencies=candidate.physicalScreens.map(p=>p.id+': '+(p.effectiveLpi===null?'unscreened':p.effectiveLpi+' LPI')).join(' · ');
+      $('comparison-settings').textContent=width+' × '+height+' px · '+dpi+' DPI · paper '+config.paper+' · seed '+screenConfig.seed+'. Candidate: '+candidate.inkRecipe.inks.length+' inks · '+frequencies+'.';
+      pendingCandidate=candidate;$('comparison-results').hidden=false;$('comparison-use').disabled=false;
+      $('comparison-status').textContent='Comparison ready. Exports still use your current treatment.';
+    }catch(error){$('comparison-status').textContent='Comparison unavailable: '+error.message;}
+    finally{if(version===comparisonVersion){$('comparison-preview').disabled=!renderValid||importBusy;$('comparison-results').setAttribute('aria-busy','false');}}
+  });
+  $('comparison-keep').addEventListener('click',()=>{clearComparison();$('comparison-status').textContent='Current treatment kept. Your edits and exports are unchanged.';$('recipe-comparison').querySelector('summary').focus();});
+  $('comparison-use').addEventListener('click',()=>{
+    if(!pendingCandidate||!renderValid||importBusy)return;
+    const candidate=pendingCandidate;
+    config=candidate.inkRecipe;screenConfig=candidate.screenRecipe;styleResolution=candidate;
+    $('style').value=candidate.style.id;variantsFor(candidate.style.id);$('style-variant').value=candidate.style.variant;
+    $('mode').value=config.mode;$('paper').value=config.paper;
+    $('style-note').textContent=styleGuidance(candidate);
+    inspection.solo=null;inspection.muted.clear();$('proof-paper').checked=true;$('paper-only').checked=false;
+    controls();screenControls();syncScreenFields();render();
+    $('comparison-status').textContent='Candidate applied. All inks are shown; exports now use this treatment.';$('recipe-comparison').querySelector('summary').focus();
+  });
+  document.querySelector('a[href="#recipe-comparison"]').addEventListener('click',event=>{if(!asset){event.preventDefault();$('file').focus();$('status').textContent='Import artwork before comparing recipes.';return;}$('recipe-comparison').open=true;});
+  if(location.hash==='#recipe-comparison')$('recipe-comparison').open=true;
   function applyStyle(event){
     const id=$('style').value;
-    if(event?.target.id==='style') {
-      const variants=id?StipraStyles.explain(id).variants:{};
-      const select=$('style-variant');select.replaceChildren();
-      for(const [value,name] of [['default','Original starting recipe'],...Object.entries(variants).map(([key,v])=>[key,v.name])]){
-        const option=document.createElement('option');option.value=value;option.textContent=name;select.appendChild(option);
-      }
-      select.disabled=Object.keys(variants).length===0;
-    }
+    if(event?.target.id==='style')variantsFor(id);
     if(!id){
       styleResolution=null;$('style-note').textContent='Manual adjustments remain available for every ink.';
       render();return;
@@ -274,10 +338,11 @@
       const style=StipraStyles.resolve(id,{dpi:Number($('style-dpi').value),variant:$('style-variant').value,screening:$('style-screening').value,...($('style-lpi').value?{lpi:Number($('style-lpi').value)}:{})});
       config=style.inkRecipe;screenConfig=style.screenRecipe;styleResolution=style;
       $('mode').value=config.mode;$('paper').value=config.paper;
-      $('style-note').textContent=style.style.description+' Suitable: '+style.style.goodFor.join(', ')+'. Avoid: '+style.style.avoid.join('; ')+'. '+style.physicalScreens.map(p=>p.id+': '+(p.effectiveLpi===null?'unscreened':p.effectiveLpi+' LPI')).join(' · ')+' at '+style.dpi+' DPI. '+style.warnings.join(' ');
+      $('style-note').textContent=styleGuidance(style);
       controls();screenControls();syncScreenFields();render();
     }catch(error){
       $('error').textContent=error.message;$('error').hidden=false;
+      clearComparison('Resolve invalid settings before comparing.');$('comparison-preview').disabled=true;
       $('style').value='';renderValid=false;$('save-preview').disabled=true;$('save-plates').disabled=true;
     }
   }
