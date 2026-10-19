@@ -962,6 +962,15 @@
       "capabilityId": "OPS-01",
       "title": "Rerun reconstruction research with coverage controls and scoped evidence",
       "sourceTitle": "Correct reconstruction study coverage and evidence controls"
+    },
+    {
+      "id": "DEV-036",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Validate and integrate independent study evidence and replay fixes",
+      "sourceTitle": "Integrate independent study review and make replay evidence deliverable"
     }
   ],
   "libraryCapabilityIds": [

@@ -829,7 +829,7 @@
         73,
         83
       ],
-      "note": "Coverage-controlled two-frame six-method pilot rerun after independent review: measured budgets, all four VTracer tone bands, single-ink reference and decoded-pixel evidence. See docs/RECONSTRUCTION-STUDY-01.md. Human blind usefulness/adoption remains open; no production mode or date promised."
+      "note": "Independent review integrated with corrected metric definitions, fail-closed 32-artifact replay, UTF-8/LF and POSIX delivery paths. Expanded Linux evidence preserves original recording separately. Local-tone/spatial residuals remain visible; no Experiment 2, adapter approval or human acceptance."
     },
     {
       "issue": 113,

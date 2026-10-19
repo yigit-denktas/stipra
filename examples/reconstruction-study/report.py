@@ -32,7 +32,7 @@ for name,title,credit in [('portrait','Portrait / organic detail','NASA / Eileen
   key=f.removesuffix('.png');metric=fixture['metrics'].get(key)
   if metric:
    pdf.drawString(x,y+7*mm,f"ink {metric['coverage']*100:.1f}% / block RMSE {metric['blockRmse8bit']:.1f} / {metric.get('elements','raster')} marks")
-   pdf.drawString(x,y+3*mm,f"SVG {metric.get('svgBytes',0)/1024:.1f} KiB / generation {metric['generationMilliseconds']:.1f} ms")
+   pdf.drawString(x,y+3*mm,f"SVG {metric.get('svgBytes',0)/1024:.1f} KiB / gen "+(f"{metric['generationMilliseconds']:.1f} ms"if key!='baseline'else'n/a'))
   else:pdf.drawString(x,y+7*mm,'Color source; metrics use its Pillow L luminance.')
   pdf.drawString(x,y-1*mm,f"{w} x {h} px / {fixture['physicalComparison']['dpi']:.1f} DPI / no crop")
   thumb=image.copy();thumb.thumbnail((370,410));tx=(i%4)*400+(400-thumb.width)//2;ty=(i//4)*500+55+(420-thumb.height)//2
@@ -51,13 +51,13 @@ pdf.setFont('Plex',10);pdf.drawString(12*mm,273*mm,'Coverage is matched for mark
 for source_index,fixture in enumerate(evidence['fixtures']):
  y=(257-source_index*119)*mm
  pdf.setFont('PlexBold',12);pdf.drawString(12*mm,y,fixture['id']+' / target '+f"{fixture['targetDarkness']*100:.2f}%"+' / 16 x 16 block tone comparison')
- columns=[12,68,90,114,140,165,188,223,251,286,322]
- heads=['Method','Ink %','Error pp','RMSE','Elements','Segments','Length px','SVG KiB','PNG KiB','Gen ms','Render ms']
+ columns=[12,68,90,114,140,165,188,223,251,286,322,356]
+ heads=['Method','Ink %','Error pp','RMSE','Elements','Segments','Length px','SVG KiB','PNG KiB','Gen ms','Cal ms','Raster ms']
  pdf.setFont('PlexBold',9)
  for x,label in zip(columns,heads):pdf.drawString(x*mm,y-9*mm,label)
  for row,(key,m)in enumerate(fixture['metrics'].items()):
   yy=y-(18+row*8)*mm
-  values=[key.replace('01-weighted-stipple','Stipple').replace('02-directional-hatch','Hatch').replace('03-continuous-route','Route').replace('04-vector-regions','Regions').replace('05-dither','Dither').replace('06-hybrid','Hybrid'),f"{m['coverage']*100:.2f}",f"{m['coverageError']*100:+.2f}",f"{m['blockRmse8bit']:.2f}",str(m.get('elements','raster')),str(m.get('lineSegments','-')),f"{m['pathLengthSourcePx']:.0f}"if 'pathLengthSourcePx'in m else '-',f"{m.get('svgBytes',0)/1024:.1f}",f"{m['encodedBytes']/1024:.1f}",f"{m['generationMilliseconds']:.1f}",f"{m.get('renderMilliseconds',0):.1f}"]
+  values=[key.replace('01-weighted-stipple','Stipple').replace('02-directional-hatch','Hatch').replace('03-continuous-route','Route').replace('04-vector-regions','Regions').replace('05-dither','Dither').replace('06-hybrid','Hybrid'),f"{m['coverage']*100:.2f}",f"{m['coverageError']*100:+.2f}",f"{m['blockRmse8bit']:.2f}",str(m.get('elements','raster')),str(m.get('lineSegments','-')),f"{m['pathLengthSourcePx']:.0f}"if 'pathLengthSourcePx'in m else '-',f"{m.get('svgBytes',0)/1024:.1f}",f"{m['encodedBytes']/1024:.1f}",f"{m['generationMilliseconds']:.1f}"if key!='baseline'else'n/a',f"{m['calibrationMilliseconds']:.1f}"if m.get('calibrationSteps')else'n/a',f"{m['finalRasterMilliseconds']:.1f}"if m.get('finalRasterMilliseconds')is not None else'n/a']
   pdf.setFont('Plex',9)
   for x,value in zip(columns,values):pdf.drawString(x*mm,yy,value)
  v=fixture['vtracer'];pdf.setFont('Plex',9)
@@ -67,11 +67,13 @@ for source_index,fixture in enumerate(evidence['fixtures']):
  spatial=v.get('spatialBandAgreement')
  if spatial:
   pdf.drawString(12*mm,y-103*mm,f"VTracer spatial band agreement {spatial['pixelBandAgreement']*100:.2f}% / boundary mismatch {spatial['boundaryBandMismatchRate']*100:.2f}% / per-band IoU "+', '.join(f"{k}:{x:.2f}"for k,x in spatial['perBandIoU'].items()))
-  worst=max(fixture['metrics'][m]['localTone']['blockSignedErrorPp']['p95']for m in ['01-weighted-stipple','02-directional-hatch','06-hybrid'])
-  pdf.drawString(12*mm,y-110*mm,'Local tone residual after global calibration (stipple/hatch/hybrid): 16 x 16 signed block error p05/p95 reported in evidence; the global factor does not guarantee local tone.')
-  _ = worst
+  parts=[]
+  for method,label in [('01-weighted-stipple','Stipple'),('02-directional-hatch','Hatch'),('06-hybrid','Hybrid')]:
+   residual=fixture['metrics'][method]['localTone']['blockSignedErrorPp'];parts.append(f"{label} {residual['p05']:+.1f}/{residual['p95']:+.1f}")
+  engine=fixture['metrics']['baseline'].get('engineMilliseconds',0)
+  pdf.drawString(12*mm,y-110*mm,'Local block p05/p95 pp: '+ ' / '.join(parts)+f' | baseline setup + engine {engine:.1f} ms. Global control is not local tone fidelity.')
 pdf.setFont('Plex',9);pdf.drawString(12*mm,23*mm,'Baseline: continuous Pillow L darkness through Core.renderLayers, solid/no halftone. Dither: unconstrained raster reference, not an equal-complexity competitor.')
-pdf.drawString(12*mm,17*mm,'Length sums M/L/Z polylines, including closes; circles counted separately. Gen excludes render calibration; Render includes calibration and is not a speed comparison.')
+pdf.drawString(12*mm,17*mm,'Length sums M/L/Z polylines, including closes; circles counted separately. Gen / Cal / Raster are separate; engine time includes baseline setup. One-run observations are not speed benchmarks.')
 if replay:pdf.drawString(12*mm,11*mm,f"Same-environment replay: {replay.get('matchedArtifacts',0)}/{replay.get('comparedArtifacts',32)} SVG/decoded-pixel checks matched; see replay-check.json.")
 else:pdf.drawString(12*mm,11*mm,'Same-environment replay: not run for this report; no replay-check.json recorded.')
 pdf.drawString(12*mm,7*mm,'No human blind rankings or physical prints. Frozen-point replay does not resample sites; cross-build geometry is not claimed identical.')

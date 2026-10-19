@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np,scipy,PIL,reportlab
 from PIL import Image
 from scipy.spatial import cKDTree
+from replay import validate_record
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'out/reconstruction-study';EVIDENCE=ROOT/'docs/evidence/reconstruction-study-01.json'
 STUDY_PATHS=['examples/reconstruction-study','docs/evidence/reconstruction-study-01.json','docs/RECONSTRUCTION-STUDY-01.md']
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -21,10 +22,10 @@ def tone_metrics(rendered,source):
  target=1-source/255;dark=1-rendered/255;tgt_blocks=block_grid(target);err=block_grid(dark)-tgt_blocks;flat=err.ravel()
  dec=np.quantile(tgt_blocks.ravel(),np.linspace(0,1,11));dec_err=[]
  for i in range(10):
-  mask=(tgt_blocks.ravel()>=dec[i])&(tgt_blocks.ravel()<=dec[i+1])
+  mask=(tgt_blocks.ravel()>=dec[i])&((tgt_blocks.ravel()<dec[i+1])if i<9 else(tgt_blocks.ravel()<=dec[i+1]))
   dec_err.append(round(float(err.ravel()[mask].mean()*100),3)if mask.any() else None)
  hsl=histogram(source);hrl=histogram(rendered)
- return {'coverage':round(float(dark.mean()),6),'coverageError':round(float(target.mean()-dark.mean()),6),
+ return {'coverage':round(float(dark.mean()),6),'coverageError':round(float(dark.mean()-target.mean()),6),
   'blockRmse8bit':round(float(np.sqrt(np.mean((block_grid(dark)-tgt_blocks)**2))*255),4),
   'inkedPixelsBelow128':int((rendered<128).sum()),'pixelCount':int(rendered.size),
   'localTone':{'blockSignedErrorPp':{'mean':round(float(flat.mean()*100),3),'p05':round(float(np.percentile(flat,5)*100),3),'p50':round(float(np.percentile(flat,50)*100),3),'p95':round(float(np.percentile(flat,95)*100),3)},
@@ -65,7 +66,7 @@ def geometry(p):
    clipped=int(sum(1 for(x,y),r in zip(centers,radii)if x-r<0 or y-r<0 or x+r>w or y+r>h));out['clippedCircleFraction']=round(clipped/len(radii),5)
    if len(radii)<=5000:
     pts=np.array(centers);pairs=cKDTree(pts).query_pairs(r=float(radii.max()*2+1))
-    overlap=sum(1 for i,j in pairs if float(np.hypot(*(pts[i]-pts[j])))<radii[i]+radii[j]);out['overlapPairFraction']=round(overlap/len(radii),5)
+    overlaps=[(i,j)for i,j in pairs if float(np.hypot(*(pts[i]-pts[j])))<radii[i]+radii[j]];touched={i for pair in overlaps for i in pair};out['overlappingCircleFraction']=round(len(touched)/len(radii),5);out['overlappingPairsPerCircle']=round(len(overlaps)/len(radii),5);out['overlapDefinition']='fraction of circles touching at least one other circle; separate pair count per circle is not an area fraction'
  if widths:
   wd=np.array(widths);out['strokeWidthPx']={'min':round(float(wd.min()),4),'median':round(float(np.median(wd)),4),'max':round(float(wd.max()),4),'count':len(widths)}
  return out
@@ -75,10 +76,11 @@ def vtracer_spatial(folder,palette,rendered_path):
  ious={}
  for i in range(len(pal)):
   qi,ri=qm==i,rm==i;union=int((qi|ri).sum());ious[str(int(pal[i]))]=round(float((qi&ri).sum()/union),5)if union else None
- bnd=np.zeros_like(qm,dtype=bool);bnd[:,1:]|=qm[:,1:]!=qm[:,:-1];bnd[1:,:]|=qm[1:,:]!=qm[:-1,:]
+ bnd=np.zeros_like(qm,dtype=bool);horizontal=qm[:,1:]!=qm[:,:-1];vertical=qm[1:,:]!=qm[:-1,:];bnd[:,1:]|=horizontal;bnd[:,:-1]|=horizontal;bnd[1:,:]|=vertical;bnd[:-1,:]|=vertical
  changed=qm!=rm
  return {'pixelBandAgreement':round(float((qm==rm).mean()),5),'perBandIoU':ious,
-  'boundaryBandMismatchRate':round(float((changed&bnd).sum()/max(1,int(bnd.sum()))),5),
+  'boundaryDefinition':'input pixels with any in-frame four-neighbour in another quantized band; rate denominator is this boundary set',
+  'boundaryPixelCount':int(bnd.sum()),'boundaryBandMismatchRate':round(float((changed&bnd).sum()/max(1,int(bnd.sum()))),5),
   'quantizedBandFractions':[round(float((qm==i).mean()),5)for i in range(len(pal))],
   'renderedBandFractions':[round(float((rm==i).mean()),5)for i in range(len(pal))],
   'scope':'nearest-palette band map of quantized input versus rendered PNG; measures spatial structure, not only histogram'}
@@ -96,18 +98,19 @@ def git_state():
 def main():
  old=json.loads(EVIDENCE.read_text(encoding='utf-8'));data=json.loads((OUT/'generation.json').read_text(encoding='utf-8'));render=json.loads((OUT/'render-metrics.json').read_text(encoding='utf-8'))
  head,dirty=git_state()
- data['revision']='coverage-controlled-v2+review-metrics';data['rights']=old['rights']
+ data['revision']='coverage-controlled-v2+review-metrics';data['previousEvidence']={'path':'docs/evidence/reconstruction-study-01-v2-original.json','sha256':sha(ROOT/'docs/evidence/reconstruction-study-01-v2-original.json'),'scope':'Original 1ddd32e recording preserved byte-for-byte; current evidence is independently regenerated on Linux, not substituted Windows evidence.'};data['rights']=old['rights']
  data['environment']={'python':platform.python_version(),'platform':platform.platform(),'zlibRuntime':zlib.ZLIB_RUNTIME_VERSION,'numpy':np.__version__,'scipy':scipy.__version__,'Pillow':PIL.__version__,'ReportLab':reportlab.Version,'vtracerBinding':'0.6.15','node':render['node'],'skiaCanvas':render['skiaCanvas'],'sourceBaselineCommit':old.get('environment',{}).get('sourceBaselineCommit'),'generationCommit':head,'generationTreeDirty':dirty,'scriptsSha256':{p.name:digest_text(p)for p in sorted((ROOT/'examples/reconstruction-study').glob('*'))if p.is_file()and p.suffix in ['.py','.cjs']}}
  data['reproducibility']={'scope':'Same frozen points and same-environment replay checked by examples/reconstruction-study/replay.py; cross-build exact geometry is not independently verified. Encoder byte identity is not pixel identity. Runtime measurements vary.',
   'decodedPixelHash':'SHA-256 of UTF-8 WIDTHxHEIGHT:RGBA8 + newline followed by Pillow-converted row-major RGBA8 bytes',
   'frozenPoints':'Committed rounded five-decimal points bypass floating CDF/RNG sampling differences during replay. Cell assignment still uses the recorded SciPy build; fixture and script hashes are line-ending independent.',
   'textPortability':'Text artifacts are written with explicit UTF-8 and LF; .gitattributes keeps the study tree LF on Windows checkouts.','priorRepeatClaim':'v1 repeatGeometryAndRasterHashesIdentical meant same-machine/build only; superseded by this scoped record.'}
  replay=OUT/'replay-check.json'
+ if not replay.exists():raise ValueError('Run replay.py before recording evidence')
  if replay.exists():
-  check=json.loads(replay.read_text(encoding='utf-8'))
+  check=json.loads(replay.read_text(encoding='utf-8'));validate_record(check)
   for name,item in check['artifacts'].items():
    p=OUT/name;assert (decoded(p)['sha256']if p.suffix=='.png'else sha(p))==item,'Stale replay evidence: '+name
-  data['reproducibility']['sameEnvironmentReplay']={'matchedArtifacts':check.get('matched',0),'comparedArtifacts':check.get('compared',len(check['artifacts'])),'allEqual':bool(check.get('allEqual')),'scope':'SVG bytes (CRLF-normalized) and canonical decoded RGBA8 hashes only; encoder bytes, timings and PDF bytes excluded.','procedure':'examples/reconstruction-study/replay.py'}
+  data['reproducibility']['sameEnvironmentReplay']={'matchedArtifacts':check.get('matched',0),'comparedArtifacts':check.get('compared',len(check['artifacts'])),'allEqual':bool(check.get('allEqual')),'scope':'Exact generated LF SVG bytes and canonical decoded RGBA8 hashes only; encoder bytes, timings and PDF bytes excluded.','procedure':'examples/reconstruction-study/replay.py'}
  data['acceptance']={'coverageToleranceAbsolute':.005,'humanBlindRankings':0,'physicalPrints':False,'independentCrossBuildReplay':False,'decisionGrade':False,'note':'Coverage controlled, geometry complexity disclosed rather than matched, local tone residuals reported. Digital tone metrics do not measure artistic usefulness.'}
  for fixture in data['fixtures']:
   folder=OUT/fixture['id'];src_rgb=np.asarray(Image.open(folder/'source.png').convert('RGB'));source=np.asarray(Image.open(folder/'source-luminance.png'),dtype=float)
@@ -125,6 +128,7 @@ def main():
   before=[float((q==p).mean())for p in fixture['vtracer']['palette']];after=[float((nearest==i).mean())for i in range(len(fixture['vtracer']['palette']))]
   fills=sorted(set(int(x[0:2],16)for x in re.findall(r'fill="#([0-9a-fA-F]{6})"',(folder/'04-vector-regions.svg').read_text(encoding='utf-8'))))
   fixture['vtracer'].update({'upstreamTagCommit':'fd9cdb08e622f237eb05be553a020ddc9e4c47a1','rustCrateVersion':'0.6.12','bannerSource':'cmdapp/src/svg.rs uses CARGO_PKG_VERSION; crate/package version split verified at upstream tag','svgFillLevels':fills,'inputBandFractions':before,'renderedNearestBandFractions':after,'bandFractionL1':sum(abs(x-y)for x,y in zip(before,after)),'allFourBandsRetained':len(fills)==4 and all(x>.01 for x in after),'antialiasing':'Rendered edges may add intermediate values; SVG fills exactly match the input palette.'})
+  if not fixture['vtracer']['allFourBandsRetained']:raise ValueError('VTracer lost a tone band: '+fixture['id'])
   fixture['vtracer']['spatialBandAgreement']=vtracer_spatial(folder,fixture['vtracer']['palette'],folder/'04-vector-regions.png')
   fixture['artifacts']={p.relative_to(OUT).as_posix():{'sha256':sha(p),**({'decodedPixels':decoded(p)}if p.suffix=='.png'else{})}for p in sorted(folder.iterdir())if p.suffix in ['.png','.svg','.json']}
   # VTracer spatial structure is recorded, not silently treated as preserved by band count alone.
@@ -133,5 +137,5 @@ def main():
    if abs(fixture['metrics'][method]['coverageError'])>.005:raise ValueError('Coverage budget failed: '+method)
  data['reportArtifacts']={p.name:{'sha256':sha(p),'bytes':p.stat().st_size,**({'decodedPixels':decoded(p)}if p.suffix=='.png'else{})}for p in sorted(OUT.iterdir())if p.name in ['reconstruction-study-01.pdf','portrait-comparison.png','architecture-comparison.png','replay-check.json']}
  data['contextOnly']='baseline-two-ink-context.png retains the v1 solid green/coral proof and its full recipe; excluded from monochrome metrics and main comparison.'
- EVIDENCE.write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8',newline='\n');print('Canonical evidence, coverage / four-band / local-tone / spatial guards passed.')
+ EVIDENCE.write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8',newline='\n');print('Evidence: replay / global coverage / four-band guards passed; local-tone and spatial diagnostics recorded.')
 if __name__=='__main__':main()

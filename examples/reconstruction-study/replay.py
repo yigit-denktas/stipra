@@ -1,68 +1,36 @@
-﻿"""Same-environment replay check for the reconstruction study.
-
-Snapshots the current `out/reconstruction-study` artifacts, re-runs the Python
-generation and Node raster calibration, then compares the same 32 geometry /
-decoded-pixel identities that the evaluation claims (5 SVG + 11 PNG per
-fixture). Encoder bytes, timings and PDF bytes are excluded by design; the
-result is written to `out/reconstruction-study/replay-check.json` and is
-consumed by `measure.py`. This is a reproducibility check, not independent
-platform validation.
-"""
+"""Fail-closed same-environment replay of a fixed 32-artifact study inventory."""
 import hashlib,json,platform,shutil,subprocess,sys
 from pathlib import Path
 from PIL import Image
-
-ROOT=Path(__file__).resolve().parents[2]
-HERE=ROOT/'examples/reconstruction-study'
-OUT=ROOT/'out/reconstruction-study'
-REF=OUT.parent/'reconstruction-study-reference'
-EVIDENCE=ROOT/'docs/evidence/reconstruction-study-01.json'
-SVG='.svg';PNG='.png'
-
+ROOT=Path(__file__).resolve().parents[2];HERE=ROOT/'examples/reconstruction-study';OUT=ROOT/'out/reconstruction-study';REF=OUT.parent/'reconstruction-study-reference'
+METHODS=['01-weighted-stipple','02-directional-hatch','03-continuous-route','04-vector-regions','06-hybrid']
+PNG_NAMES=[m+'.png'for m in METHODS]+['05-dither.png','baseline.png','baseline-two-ink-context.png','source.png','source-luminance.png','quantized.png']
+EXPECTED={f'{source}/{name}'for source in ['portrait','architecture']for name in PNG_NAMES+[m+'.svg'for m in METHODS]}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-def canonical(p):return p.read_bytes().replace(b'\r\n',b'\n')
 def decoded(p):
- im=Image.open(p).convert('RGBA')
- return hashlib.sha256(f'{im.width}x{im.height}:RGBA8\n'.encode()+im.tobytes()).hexdigest()
-
-def snapshot():
+ im=Image.open(p).convert('RGBA');return hashlib.sha256(f'{im.width}x{im.height}:RGBA8\n'.encode()+im.tobytes()).hexdigest()
+def identity(p):return decoded(p)if p.suffix=='.png'else sha(p)
+def validate_record(check):
+ if check.get('allEqual')is not True or check.get('mismatches')!=[]:raise ValueError('Replay did not pass')
+ if check.get('matched')!=32 or check.get('compared')!=32 or set(check.get('artifacts',{}))!=EXPECTED:raise ValueError('Replay inventory must contain exactly 32 expected artifacts')
+ if any(not isinstance(v,str)or len(v)!=64 or any(c not in '0123456789abcdef'for c in v)for v in check['artifacts'].values()):raise ValueError('Invalid replay digest')
+def main():
+ record=OUT/'replay-check.json';record.unlink(missing_ok=True)
+ for name in EXPECTED:
+  if not(OUT/name).is_file():raise SystemExit('Missing reference artifact: '+name)
  if REF.exists():shutil.rmtree(REF)
- shutil.copytree(OUT,REF,ignore=shutil.ignore_patterns('replay-check.json'))
-
-def rerun():
+ REF.mkdir(parents=True)
+ for name in EXPECTED:
+  target=REF/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(OUT/name,target)
  subprocess.run([sys.executable,str(HERE/'study.py')],cwd=ROOT,check=True)
  subprocess.run(['node',str(HERE/'render.cjs')],cwd=ROOT,check=True)
-
-def main():
- if not (OUT/'generation.json').exists() or not (OUT/'render-metrics.json').exists():
-  raise SystemExit('Run study.py and render.cjs once before replay.py')
- evidence=json.loads(EVIDENCE.read_text(encoding='utf-8'))
- snapshot();rerun()
- compared=[];mismatches=[]
- for fixture in evidence['fixtures']:
-  folder=fixture['id']
-  for ext,kind in ((SVG,'svg-bytes'),(PNG,'decoded-pixels')):
-   names=sorted(p.name for p in (REF/folder).glob('*'+ext))
-   for name in names:
-    rel=f'{folder}/{name}';ref=REF/rel;cur=OUT/rel
-    if not cur.exists():mismatches.append({'artifact':rel,'reason':'missing after replay'});continue
-    if ext==SVG:
-     equal=canonical(ref)==canonical(cur);current=sha(cur)
-    else:
-     equal=decoded(ref)==decoded(cur);current=decoded(cur)
-    compared.append(rel)
-    if not equal:mismatches.append({'artifact':rel,'reason':'value changed during replay'})
-    # Values below are the current (regenerated) identities; measure.py re-checks them.
- check={'contract':'stipra-reconstruction-study-01-replay-v1','scope':'Same-environment replay: SVG bytes (CRLF-normalized) and decoded RGBA8 pixels only. Encoder bytes, timings and PDF bytes excluded. Not independent platform validation.',
-  'referenceDirectory':str(REF.relative_to(ROOT)),'compared':len(compared),'matched':len(compared)-len(mismatches),'allEqual':not mismatches,'mismatches':mismatches,
-  'artifacts':{},'environment':{'python':platform.python_version(),'platform':platform.platform()}}
- for rel in compared:
-  p=OUT/rel;check['artifacts'][rel]=decoded(p)if p.suffix==PNG else sha(p)
- (OUT/'replay-check.json').write_text(json.dumps(check,indent=2)+'\n',encoding='utf-8',newline='\n')
- print(f"Replay {check['matched']}/{check['compared']} artifacts match; check written to out/reconstruction-study/replay-check.json")
- if mismatches:
-  for item in mismatches[:10]:print(' mismatch:',item)
-  raise SystemExit(1)
-
+ mismatches=[];artifacts={}
+ for name in sorted(EXPECTED):
+  p=OUT/name
+  if not p.exists():mismatches.append({'artifact':name,'reason':'missing after replay'});continue
+  artifacts[name]=identity(p)
+  if artifacts[name]!=identity(REF/name):mismatches.append({'artifact':name,'reason':'changed'})
+ check={'contract':'stipra-reconstruction-study-01-replay-v2','scope':'Same-environment exact SVG bytes and decoded RGBA8 identities. LF writers normalize generated text. Encoding-only PNG, timings and PDF bytes excluded; no cross-platform equality claim.','referenceDirectory':REF.relative_to(ROOT).as_posix(),'compared':32,'matched':32-len(mismatches),'allEqual':not mismatches,'mismatches':mismatches,'artifacts':artifacts,'environment':{'python':platform.python_version(),'platform':platform.platform()}}
+ record.write_text(json.dumps(check,indent=2)+'\n',encoding='utf-8',newline='\n');validate_record(check)
+ print('Replay 32/32 exact SVG / decoded-pixel identities passed')
 if __name__=='__main__':main()
-

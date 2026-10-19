@@ -4,6 +4,19 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Integrate independent study review and make replay evidence deliverable",
+      "status": "Development",
+      "issues": [
+        109,
+        13
+      ],
+      "changes": [
+        "Review and integrate 3deeab8 with corrected overlap/boundary definitions, error polarity and fail-closed replay; preserve the original recording and regenerate expanded Linux evidence.",
+        "Ship local-tone/spatial diagnostics, separated timings and actual replay record; record remaining Windows portability concerns. No Experiment 2, production change or acceptance closure."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Correct reconstruction study coverage and evidence controls",
       "status": "Development",
       "issues": [
