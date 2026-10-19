@@ -5,6 +5,9 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'out/reconstruction-study'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def posix(p):return p.relative_to(ROOT).as_posix()
+def study_source_files():
+ # Self-testing archives carry the study's intended requirement files too.
+ return [p for p in (ROOT/'examples/reconstruction-study').rglob('*')if p.is_file()and p.suffix in ['.md','.py','.cjs','.json','.txt']]
 def main():
  evidence=json.loads((ROOT/'docs/evidence/reconstruction-study-01.json').read_text(encoding='utf-8'));files=set()
  for fixture in evidence['fixtures']:
@@ -18,7 +21,7 @@ def main():
   p=OUT/name;assert sha(p)==entry['sha256'],name;files.add(p)
  for name in ['docs/RECONSTRUCTION-STUDY-01.md','docs/evidence/reconstruction-study-01.json','docs/evidence/reconstruction-study-01-v2-original.json','docs/evidence/reconstruction-study-01-delivery.json']:
   files.add(ROOT/name)
- files.update(p for p in (ROOT/'examples/reconstruction-study').rglob('*')if p.is_file()and p.suffix in ['.md','.py','.cjs','.json'])
+ files.update(study_source_files())
  # Validate direct relative Markdown links in the study evaluation; the archive keeps repository layout.
  for match in re.findall(r'\]\(([^)]+)\)',(ROOT/'docs/RECONSTRUCTION-STUDY-01.md').read_text(encoding='utf-8')):
   if not re.match(r'[a-z]+://',match):assert (ROOT/'docs'/match.split('#')[0]).exists(),match
