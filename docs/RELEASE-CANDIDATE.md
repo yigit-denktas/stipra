@@ -1,6 +1,6 @@
 # Digital acceptance and release candidates
 
-[Studio v0.9-rc.1](STUDIO-RC-0.9-rc.1.md) is a prepared experimental browser candidate with its own scope, exact-run build artifact and bounded hosted review. It is separate from the already published library alpha.1 and final human/physical acceptance.
+[Studio v0.9-rc.1](STUDIO-RC-0.9-rc.1.md) was published as experimental prerelease [v0.9.0-rc.1](https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1), with its exact-run browser build attached and the owner-supplied live print package digitally verified. It is separate from the already published library alpha.1 and final human/physical acceptance.
 
 The three packages `@yigit-denktas/stipra-core`, `@yigit-denktas/stipra-canvas` and `@yigit-denktas/stipra-inputs` are published at `0.1.0-alpha.1`. On 18 October 2026 a fresh registry download verified their byte counts, SHA-256 and SHA-512 against the original [upload record](evidence/npm-alpha-upload-2026-10-18.json). A consumer with an initially empty npm cache installed exactly those three packages and passed runtime replay/ESM/CJS and strict TypeScript checks. See [registry evidence](evidence/npm-alpha-registry-2026-10-18.json). This is an experimental digital release, not print-quality or independent artist approval.
 

@@ -935,6 +935,15 @@
       "capabilityId": "OPS-01",
       "title": "Verify the retained browser archive and every listed site file against their recorded SHA-256 values.",
       "releaseTag": "v0.9.0-rc.1"
+    },
+    {
+      "id": "DEV-033",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "LIB-02",
+      "title": "Exercise original editorial ink layers through the published core and shared exporter",
+      "sourceTitle": "Record the Studio prerelease and exercise original editorial artwork"
     }
   ],
   "libraryCapabilityIds": [

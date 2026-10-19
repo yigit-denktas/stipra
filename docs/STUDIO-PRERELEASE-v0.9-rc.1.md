@@ -1,6 +1,6 @@
 # Studio v0.9-rc.1 — prepared prerelease notes
 
-Status: prepared, not published. Target the exact verified commit `aec0c23d6cc538e4e00352c66ee9543eba7694cd`, not a moving branch. Set GitHub's prerelease flag and do not mark this as a stable/latest release. This does not change the three published npm alpha.1 packages.
+Historical preparation notes; superseded by the [published release](https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1) and [current follow-up](CREATIVE-USE-2026-10-19.md). The notes below preserve the preparation-time instructions. Target the exact verified commit `aec0c23d6cc538e4e00352c66ee9543eba7694cd`, not a moving branch. Set GitHub's prerelease flag and do not mark this as a stable/latest release. This does not change the three published npm alpha.1 packages.
 
 The GitHub tag must be **`v0.9.0-rc.1`**. The earlier `v0.9-rc.1` name is a Studio planning label; it omits the patch component and is not accepted by the release-history SemVer contract. Keep the already verified archive and its manifest unchanged; use the full tag when publishing.
 

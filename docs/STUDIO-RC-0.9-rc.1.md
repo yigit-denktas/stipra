@@ -1,6 +1,6 @@
 # Studio v0.9-rc.1 — experimental digital candidate
 
-Prepared 19 October 2026. This is a browser Studio candidate, not a published GitHub release, a new npm version, final identity approval or calibrated print acceptance. The existing three npm libraries remain at their immutable, registry-verified `0.1.0-alpha.1`.
+Published 19 October 2026 as experimental prerelease [v0.9.0-rc.1](https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1), exact source `aec0c23d6cc538e4e00352c66ee9543eba7694cd`. The attached browser build matches the independently verified archive. The owner-supplied live print package passes the digital verifier and two-page visual inspection. This does not establish a new npm version, final identity approval or calibrated print acceptance. Earlier incomplete observations below are historical; see [current release and creative-use evidence](CREATIVE-USE-2026-10-19.md). The existing three npm libraries remain at their immutable, registry-verified `0.1.0-alpha.1`.
 
 ## Included workflow
 

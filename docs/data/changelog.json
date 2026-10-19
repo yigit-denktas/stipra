@@ -1,7 +1,20 @@
 {
   "contract": "stipra-changelog-v1",
-  "releaseStatus": "Lean JavaScript packages 0.1.0-alpha.1 are published and registry-verified. Studio development and human/native acceptance remain separate; no GitHub release tag is implied.",
+  "releaseStatus": "Studio v0.9.0-rc.1 is published as an experimental GitHub prerelease. Lean JavaScript packages 0.1.0-alpha.1 remain published and registry-verified. Human/physical acceptance and native bundle notices remain separate.",
   "entries": [
+    {
+      "date": "2026-10-19",
+      "title": "Record the Studio prerelease and exercise original editorial artwork",
+      "status": "Development",
+      "issues": [
+        13,
+        70
+      ],
+      "changes": [
+        "Reconcile published Studio status and verify the owner-supplied live download without closing human/physical gates.",
+        "Exercise the published core with original authored green/coral ink layers, export aligned masters and verify frozen-source replay. No new package or defaults."
+      ]
+    },
     {
       "date": "2026-10-19",
       "title": "Verify the main Studio candidate and prepare prerelease notes",
