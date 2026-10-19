@@ -1,0 +1,112 @@
+{
+  "contract": "stipra-reconstruction-study-01",
+  "fixtures": [
+    {
+      "id": "portrait",
+      "sourceBytes": 791555,
+      "sourceSha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+      "originalPixels": [
+        512,
+        512
+      ],
+      "studyPixels": [
+        512,
+        512
+      ],
+      "normalization": "full frame, longest edge 600 px; research resampling declared; no cropping",
+      "seed": 109,
+      "weightedSites": 3000,
+      "lloydIterations": 9,
+      "methodSeconds": 0.2501520010000604,
+      "files": {
+        "01-weighted-stipple.svg": "415a46aa60d2fbef4071c06275f49e34ec12d315237cecf99ec459fdbeb3c6b8",
+        "02-directional-hatch.svg": "34dbbb1ca6e458eadab307bdd31597b10f96063e2d222c59f3a1dfeb5d2b271d",
+        "03-continuous-route.svg": "6dd228320c5dde310f352b37482b0b44f74292d5d8d315fbac8e4e4102b5c264",
+        "04-vector-regions.svg": "4569e69f040860d983ce5fd54d5f6d1bf3664060ece7e82215f0b949ae17a5a7",
+        "05-dither.png": "f871ee459a467fe8a457b83d5ee2b58329359a56f1e3648632eaab1f0903a825",
+        "06-hybrid.svg": "74863f4a80df2519a0f77a3f20e201d758ebcb6f590d99e0f7dc933c64599b10",
+        "quantized.png": "436d493991a93da6de42c07e12e6cdfac8b655d35d57d97f57724c47b33b6331",
+        "source.png": "5056b05608d58b1fb791eb4070748a49f08d9ab57e9c950ca48fe7baf33db515"
+      },
+      "physicalComparison": "each panel longest edge 90 mm",
+      "representations": [
+        "circle geometry",
+        "oriented line paths",
+        "greedy continuous path, NOT optimized TSP",
+        "VTracer polygon regions, 4 grayscale levels",
+        "raster only",
+        "mixed circles and lines"
+      ],
+      "limits": [
+        "Agent study only; no independent human/artist or physical print evidence",
+        "No plotter path optimization or machine-ready stencil claim",
+        "All source normalization and parameters fixed across methods"
+      ]
+    },
+    {
+      "id": "architecture",
+      "sourceBytes": 10391947,
+      "sourceSha256": "5b9e5283332ecb1f3261d0731651674ed60005d7768f419a212c3140cbee06df",
+      "originalPixels": [
+        7168,
+        3072
+      ],
+      "studyPixels": [
+        600,
+        257
+      ],
+      "normalization": "full frame, longest edge 600 px; research resampling declared; no cropping",
+      "seed": 109,
+      "weightedSites": 3000,
+      "lloydIterations": 9,
+      "methodSeconds": 0.1252325989999008,
+      "files": {
+        "01-weighted-stipple.svg": "8a3aac04180c6bf977c73d3377d922e507c265ce709fffd12119c6bab8319410",
+        "02-directional-hatch.svg": "9d308fde1a54a470b0a7a0ee1a578ddb26b8b80cf092eefd3da1e5e341e5975f",
+        "03-continuous-route.svg": "44dcf4ba00a1c928620bf26ed1fb4f6ac7eda5c817bf97f94f8fce0c912825d2",
+        "04-vector-regions.svg": "8dd573cd76f130ce7c40d06f0e6c52a8dd3a2abeed07920db46369d9dadce5d9",
+        "05-dither.png": "3c06698263af5b079b2ec3db57e967f2170ec74cdd837803b54dc71e1308ba9b",
+        "06-hybrid.svg": "b1189bfac012273abfc63abbf648a458a51658bbd496c5f21f1867563df465db",
+        "quantized.png": "e66d8fd1038ba5cec639b82d3313b6a7159e6c4d148708ad184b4e7b561751a6",
+        "source.png": "9ef07672cd174a31ee37db92b32ec61e690c81d4cc2448528943fe4f940e32c7"
+      },
+      "physicalComparison": "each panel longest edge 90 mm",
+      "representations": [
+        "circle geometry",
+        "oriented line paths",
+        "greedy continuous path, NOT optimized TSP",
+        "VTracer polygon regions, 4 grayscale levels",
+        "raster only",
+        "mixed circles and lines"
+      ],
+      "limits": [
+        "Agent study only; no independent human/artist or physical print evidence",
+        "No plotter path optimization or machine-ready stencil claim",
+        "All source normalization and parameters fixed across methods"
+      ]
+    }
+  ],
+  "vtracerVersion": "0.6.15",
+  "rights": {
+    "portrait": {
+      "credit": "NASA / Eileen Collins",
+      "status": "Public domain per scikit-image dataset documentation",
+      "page": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut",
+      "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.21.0/skimage/data/astronaut.png"
+    },
+    "architecture": {
+      "credit": "Noclip",
+      "status": "Released worldwide into the public domain by author",
+      "page": "https://commons.wikimedia.org/wiki/File:Capitol_Building_Full_View.jpg",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/2/27/Capitol_Building_Full_View.jpg"
+    }
+  },
+  "repeatGeometryAndRasterHashesIdentical": true,
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "Pillow": "12.3.0",
+    "vtracer": "0.6.15"
+  }
+}

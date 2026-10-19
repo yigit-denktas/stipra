@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Compare reconstruction methods and reconcile research delivery",
+      "status": "Development",
+      "issues": [
+        109,
+        113,
+        114
+      ],
+      "changes": [
+        "Execute a two-source six-method reconstruction pilot without adding production modes or dependencies.",
+        "Record proposed research separately in the delivery map; install pinned juliobsz review skills and repair missing route descriptions/canonicals. Browser performance and independent review remain unverified."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Record the Studio prerelease and exercise original editorial artwork",
       "status": "Development",
       "issues": [
@@ -219,7 +233,7 @@
       "changes": [
         "Trace pinned Rust Skia, Skia and 13 external source revisions; record the 318-entry Cargo lockfile superset without calling it a compiled inventory.",
         "Identify the Linux static Fontconfig patch and distinguish its bootstrap FreeType from Skia embedded FreeType.",
-        "Record the owner’s personal npm-scope choice; account identity and authenticated publication remain pending."
+        "Record the owner\u2019s personal npm-scope choice; account identity and authenticated publication remain pending."
       ]
     },
     {
@@ -339,7 +353,7 @@
         90
       ],
       "changes": [
-        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]

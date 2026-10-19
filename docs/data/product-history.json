@@ -12,7 +12,7 @@
       "tag": "v0.9.0-rc.1",
       "publishedAt": "2026-10-19T15:57:16Z",
       "url": "https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1",
-      "summary": "Stiprā Studio v0.9.0-rc.1 — experimental digital candidate",
+      "summary": "Stipr\u0101 Studio v0.9.0-rc.1 \u2014 experimental digital candidate",
       "capabilityIds": [
         "ART-01",
         "STU-01",
@@ -37,7 +37,7 @@
     },
     {
       "id": "ARTIST-LIBRARY",
-      "title": "Put the creative library in artists’ hands",
+      "title": "Put the creative library in artists\u2019 hands",
       "description": "Ask an independent artist to install the published Canvas/p5.js alpha, make a proof and export plates. Record and fix first-use obstacles.",
       "capabilities": [
         "LIB-05",
@@ -68,7 +68,7 @@
     },
     {
       "id": "DESIGN",
-      "title": "Develop the studio’s own visual language",
+      "title": "Develop the studio\u2019s own visual language",
       "description": "Resolve the public identity and revisit paper simulation and optional case-study details.",
       "capabilities": [
         "ID-01",
@@ -92,7 +92,7 @@
       "id": "ART-01",
       "area": "Artwork",
       "title": "Import images and safe SVG artwork without changing their layout.",
-      "detail": "PNG, JPEG, WebP and restricted SVG input retain the artwork’s original geometry and explicit print dimensions.",
+      "detail": "PNG, JPEG, WebP and restricted SVG input retain the artwork\u2019s original geometry and explicit print dimensions.",
       "issues": [
         6
       ],
@@ -486,7 +486,7 @@
     {
       "id": "ID-01",
       "area": "Identity",
-      "title": "Finish the Stiprā identity through owner review.",
+      "title": "Finish the Stipr\u0101 identity through owner review.",
       "detail": "Typographic studies and engine-generated marks exist; the final wordmark/workspace direction is not approved.",
       "issues": [
         31,
@@ -672,7 +672,7 @@
       "type": "improved",
       "stage": "development",
       "capabilityId": "STU-01",
-      "title": "Add manual 2–8 ink inspection and native pixel zoom",
+      "title": "Add manual 2\u20138 ink inspection and native pixel zoom",
       "sourceTitle": "Studio inspection and delivery map"
     },
     {
@@ -944,6 +944,15 @@
       "capabilityId": "LIB-02",
       "title": "Exercise original editorial ink layers through the published core and shared exporter",
       "sourceTitle": "Record the Studio prerelease and exercise original editorial artwork"
+    },
+    {
+      "id": "DEV-034",
+      "date": "2026-10-19",
+      "type": "research",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Execute bounded reconstruction research and reconcile its delivery record",
+      "sourceTitle": "Compare reconstruction methods and reconcile research delivery"
     }
   ],
   "libraryCapabilityIds": [

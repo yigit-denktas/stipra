@@ -94,6 +94,17 @@
         31
       ],
       "exit": "Each extension needs a concrete workflow, appropriate evidence and its own approval. Identity experiments, Java hosting, vector geometry and cosmetic work do not block the small JS alpha."
+    },
+    {
+      "id": "reconstruction-research",
+      "version": "Reconstruction / process research (no version promised)",
+      "state": "optional",
+      "tasks": [
+        109,
+        113,
+        114
+      ],
+      "exit": "Complete controlled comparisons, representation and dependency review, then adopt/defer/reject each candidate. Research completion is not production implementation or print validation."
     }
   ],
   "branches": [
@@ -114,10 +125,11 @@
     }
   ],
   "nextSequence": [
-    "Studio v0.9.0-rc.1 is published at exact source aec0c23 with the verified browser archive attached. Live-host download is digitally verified from the owner-supplied package; human/physical acceptance remains open. Release-history commit 401aeef exists; mirror deployment completion is not yet verified.",
+    "Studio v0.9.0-rc.1 is published at exact source aec0c23 with the verified browser archive attached. Live-host download is digitally verified from the owner-supplied package; human/physical acceptance remains open. Release-history commit 401aeef exists; mirror deployment run 39281801339 succeeded.",
     "Complete human keyboard/screen-reader observations (#13). Physical prints and independent artist trials (#13/#70) are owner-deferred, not passed.",
     "Await the compiled-component/notices response to samizdatco/skia-canvas#309, posted on 19 October 2026; native bundles remain blocked (#14).",
-    "Retain owner-approved digital forest/beach specimens and frozen recipes; broader Style and physical acceptance remains open (#43/#47/#34). Keep optional Java, analytic vector screens and identity extensions separate."
+    "Retain owner-approved digital forest/beach specimens and frozen recipes; broader Style and physical acceptance remains open (#43/#47/#34). Keep optional Java, analytic vector screens and identity extensions separate.",
+    "Run authorized Reconstruction Study 01 (#109); operator proofs (#113) and process research (#114) remain proposals. Preserve the original v0.9 denominator."
   ],
   "tasks": [
     {
@@ -316,7 +328,7 @@
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1–#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
+      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1\u2013#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
       "sourceUpdatedAt": "2026-10-16T20:38:00Z"
     },
     {
@@ -353,7 +365,7 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
+      "note": "Image workflow implements 2\u20138 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
     },
     {
       "issue": 24,
@@ -453,7 +465,7 @@
     },
     {
       "issue": 39,
-      "title": "Owner photographs A/B/C — first complete print package validation",
+      "title": "Owner photographs A/B/C \u2014 first complete print package validation",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "studio",
@@ -505,7 +517,7 @@
     },
     {
       "issue": 46,
-      "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
+      "title": "Generate a reproducible layered Stipr\u0101 mark using its own separation and screening engine",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "identity",
@@ -545,7 +557,7 @@
     },
     {
       "issue": 54,
-      "title": "Real Stiprā palette + four authentic wordmarks + three owner-photo comparison PDFs",
+      "title": "Real Stipr\u0101 palette + four authentic wordmarks + three owner-photo comparison PDFs",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "identity",
@@ -624,7 +636,7 @@
     },
     {
       "issue": 70,
-      "title": "Creative coding alpha: sketch → ink proof → reproducible plates",
+      "title": "Creative coding alpha: sketch \u2192 ink proof \u2192 reproducible plates",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "library",
@@ -654,7 +666,7 @@
     },
     {
       "issue": 72,
-      "title": "Apply Stiprā treatments inside existing Canvas and p5.js sketches",
+      "title": "Apply Stipr\u0101 treatments inside existing Canvas and p5.js sketches",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "library",
@@ -804,6 +816,46 @@
         86
       ],
       "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot."
+    },
+    {
+      "issue": 109,
+      "title": "Reconstruction Study 01",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "research",
+      "optional": true,
+      "dependsOn": [
+        71,
+        73,
+        83
+      ],
+      "note": "Two-source six-method pilot executed; deterministic geometry/raster replay verified. See docs/RECONSTRUCTION-STUDY-01.md. Independent usefulness review and adoption decision remain open; no production mode or release date promised."
+    },
+    {
+      "issue": 113,
+      "title": "Operator proof annotations and test sheets",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "research",
+      "optional": true,
+      "dependsOn": [
+        8,
+        9
+      ],
+      "note": "Proposed opt-in operator proof kit reusing existing aligned export. Physical acceptance remains #13; no release date."
+    },
+    {
+      "issue": 114,
+      "title": "Printmaking processes beyond Risograph",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "research",
+      "optional": true,
+      "dependsOn": [
+        7,
+        8
+      ],
+      "note": "Proposed process research coordinated with #109/#113. Photocopy, screenprint and relief shortlist; no production implementation or version promised."
     }
   ],
   "nativeTracking": {

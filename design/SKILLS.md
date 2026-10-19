@@ -9,6 +9,8 @@
 | `good-css` | [vojtaholik/good-css](https://github.com/vojtaholik/good-css) | Existing pinned local copy with eight references/LICENSE | Pure agent guidance |
 | `impeccable` | [pbakaus/impeccable](https://github.com/pbakaus/impeccable), revision `ab524607fdea` | **All 62 upstream skill files** plus root Apache-2.0 license; exact upstream hashes in [`skills.lock.json`](skills.lock.json) | Launcher installed; external engine binary **not** bundled, fetches pinned binary on first run when network and permissions permit. Not executed here. Hooks disabled. |
 
+| `awwwards` / `jury` | [juliobsz/skills](https://github.com/juliobsz/skills), revision `f193f6745aae738e9d54a0ca28792822e4777a63` | Both complete upstream skill folders, MIT license; [hash inventory](juliobsz-skills.lock.json) | Jury static audit executed; browser measurement runner blocked by Chromium download failure. No motion engine, hooks or global install. |
+
 These are project files committed to the review branch; none is installed globally on the user's machine. The project-local installation works for future agents that read Agent Skills at these paths. The first Impeccable engine invocation requires network access (or a separately preinstalled matching binary) and must be tested on a trusted machine.
 
 ## Selection and precedence
@@ -27,7 +29,7 @@ node --test tests/design-skills.test.js
 npm test
 ```
 
-The targeted test resolves every installed skill, verifies the four Claude discovery shims, verifies Impeccable's upstream Git SHA-1 blobs, and verifies direct Markdown links inside the skills. The Impeccable binary download/engine runtime is outside this file-integrity check.
+The targeted test resolves every installed skill, verifies the six Claude discovery shims, verifies Impeccable's upstream Git SHA-1 blobs, and verifies direct Markdown links inside the skills. The Impeccable binary download/engine runtime is outside this file-integrity check.
 
 ## Update policy
 
@@ -35,3 +37,7 @@ The targeted test resolves every installed skill, verifies the four Claude disco
 - Never install repo-wide agent hooks automatically; review their file-modification and execution behavior with the owner.
 - Keep the uploaded Design Maturity Review file verbatim. The locally authored companion references must not be mistaken for missing original source documents.
 - Existing design audit decisions and rejected alternatives remain in `design/DECISIONS.md`.
+
+## Jury review boundary
+
+Use `/jury` to inspect the existing site; `/awwwards` is an optional building workflow, not permission to replace the Studio. Product requirements take precedence over generic motion, imagery and award-scoring prescriptions. The [19 October bounded review](../docs/DESIGN-JURY-REVIEW-2026-10-19.md) records findings and unmeasured areas. Independent scoring was unavailable; no award score is claimed.

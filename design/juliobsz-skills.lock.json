@@ -1,0 +1,168 @@
+{
+  "source": "https://github.com/juliobsz/skills",
+  "revision": "f193f6745aae738e9d54a0ca28792822e4777a63",
+  "license": "MIT",
+  "installation": "project-local canonical copies plus Claude discovery shims; no hooks/global install",
+  "files": [
+    {
+      "path": ".agents/skills/awwwards/LICENSE",
+      "bytes": 1073,
+      "sha256": "26577196d8f396c81c0b17c1ba71800f957a0af72b3681cecfc832800bfa4a06"
+    },
+    {
+      "path": ".agents/skills/awwwards/SKILL.md",
+      "bytes": 22566,
+      "sha256": "87f9e001615cbe13188025c1c7f534ed797ea48be86335cf809ee5cbc34bf9aa"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/anatomy.md",
+      "bytes": 5495,
+      "sha256": "89e60c7581bc0b664589c1d4411b9c3a9a9ea5424e61687d112831e3c06d982e"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/art-direction.md",
+      "bytes": 8396,
+      "sha256": "646266e21e3b656cbf31a8ca89bc810d9644c1eb6538b0933c529d50d5f78ca0"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/astro.md",
+      "bytes": 8957,
+      "sha256": "aeeaf41c3152876f6d5da37f5b36468a1781af752ea7f87fb62f1c8c755d43d3"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/concepts.md",
+      "bytes": 8409,
+      "sha256": "af5b3b401cbde5af858670fc7160409cecccc49f27058e0f66c11c8cf0a82099"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/content.md",
+      "bytes": 4447,
+      "sha256": "eefb2bf14948e7cf3c21b8875bb0827723095968a4d6067b25864ecaf7bc2c32"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/engine.md",
+      "bytes": 32066,
+      "sha256": "dc5b1b6704cb797afe9a08e76cf1bd4dec46e56ae25084715b0377146ae1faf8"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/layout.md",
+      "bytes": 4702,
+      "sha256": "d5528281738cfa34f4b7b2fc6f317aae85448c35e0876a12f081311a49a48b80"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/motion.md",
+      "bytes": 25276,
+      "sha256": "c0485886f69b4dc19a67e38dbfd3b3c4ae0816593d4228071d9c2d0da2b07a0f"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/nextjs.md",
+      "bytes": 17042,
+      "sha256": "2a6598eb48617ffac934c2556875da6cf75fa19c3a4a0510b5888d2f4406baaf"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/patterns.md",
+      "bytes": 6266,
+      "sha256": "ba09fd0cbf2898bd06349d7ac4779ec8ad3f5ae0265815755b0d0d83c29cd169"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/quality-bar.md",
+      "bytes": 10831,
+      "sha256": "cdc6de8aa3d5869c827dd894ad49d594e9d60a03154f5949297ffafd857eb523"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/quality.md",
+      "bytes": 7766,
+      "sha256": "fadd5d7124004d35a73ae67856ad9023a389e3886696a3c54fb83cfda186ee00"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/ship.md",
+      "bytes": 1683,
+      "sha256": "c05a1c10ae396745e220edf391de214dbf3a2ff7e0a2260fb59c7d7028c41e15"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/typography.md",
+      "bytes": 7591,
+      "sha256": "270286daae65407bd8953c9fae68a1632c42e9af4b0493f0397d4b8c46ac34ed"
+    },
+    {
+      "path": ".agents/skills/awwwards/references/webgl.md",
+      "bytes": 19247,
+      "sha256": "37815f066dac2d3ca9115fb88912e6ea4aed442ce07660d786baeadb05b396e8"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/audit.mjs",
+      "bytes": 13582,
+      "sha256": "6cc274074d1089deffbd8ce80b5d784961642191feb612dcf14f177adef66c22"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/browser.mjs",
+      "bytes": 2375,
+      "sha256": "929964a5877af03964bacecf41c8778445454efed2c646e0efb6432233727c6c"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/font.mjs",
+      "bytes": 5720,
+      "sha256": "46c50b5a57a0c2517f5149b3e372d27f041430ed91edd88ce5dca0a8bc51a1de"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/og.mjs",
+      "bytes": 1180,
+      "sha256": "180676b62a480a1c5d4385ba724ce9764b8204ce58727a63e67a25209ea7f65c"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/photos.mjs",
+      "bytes": 3518,
+      "sha256": "3512275dc8b1ccfba378961425a6867ac14396772d522002b5745886365698d0"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/serve.mjs",
+      "bytes": 2585,
+      "sha256": "9750897e412f15fdb2062b097460627719659dd0ecb05801036f872caaea58fd"
+    },
+    {
+      "path": ".agents/skills/awwwards/scripts/shoot.mjs",
+      "bytes": 37090,
+      "sha256": "b30e485207b05774f7505e918ab086a521979724daab198ede7d4890e7b748fd"
+    },
+    {
+      "path": ".agents/skills/jury/LICENSE",
+      "bytes": 1073,
+      "sha256": "26577196d8f396c81c0b17c1ba71800f957a0af72b3681cecfc832800bfa4a06"
+    },
+    {
+      "path": ".agents/skills/jury/SKILL.md",
+      "bytes": 8030,
+      "sha256": "0ea2ac4bad26cb0803d284c60941429e659e8d0619415b1718987b0b16f23aab"
+    },
+    {
+      "path": ".agents/skills/jury/references/calibration.md",
+      "bytes": 3622,
+      "sha256": "86c268316f53cdecfbd7c4904dff124e198c802e0ee850e789fb22b5b324a139"
+    },
+    {
+      "path": ".agents/skills/jury/references/quality-bar.md",
+      "bytes": 10730,
+      "sha256": "ec90fe4e421ba478e3825dd7125e2157561a4b77bf5e019705f3b0763816ce0c"
+    },
+    {
+      "path": ".agents/skills/jury/scripts/audit.mjs",
+      "bytes": 13495,
+      "sha256": "061adcb6ca4b08739acd8a87fb5a38eb1c3dffef4792b4c992607bcf5a9e47df"
+    },
+    {
+      "path": ".agents/skills/jury/scripts/browser.mjs",
+      "bytes": 2286,
+      "sha256": "ecb818906044378083c3d77081d8fdf783165852f12eecfbaa4303cb2c00b619"
+    },
+    {
+      "path": ".agents/skills/jury/scripts/serve.mjs",
+      "bytes": 2498,
+      "sha256": "4d4f3654693aab20e9369e096211efc2b72aff1bf5d107eb10ade982872ab9e6"
+    },
+    {
+      "path": ".agents/skills/jury/scripts/shoot.mjs",
+      "bytes": 37003,
+      "sha256": "7c29e9f7ea1bbb467a835de7d42a284325186e5a087f9a4392d7d3e956ea8301"
+    }
+  ]
+}

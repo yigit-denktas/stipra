@@ -48,21 +48,23 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Implemented:** import, spot/CMYK masks, raster screening, [shared Styles](docs/STYLES-v1.md) and opt-in [tonal recipes](docs/TONAL-DETAIL-REVIEW.md), LPI/DPI settings, ink diagnostics, browser/CLI packages, a lean core, Canvas/p5 integration and authored-ink replay.
 
-**Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous; cache proofs and use bounded drafts.
+**Digital evidence:** [the alpha evaluation](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility, bundle sizes and six browser/Node/CLI export-parity cases. Large renders are synchronous.
 
 **Delivery:** [Roadmap](https://apps.yigitdenktas.com/stipra/roadmap/) · [Delivery map](https://apps.yigitdenktas.com/stipra/delivery/) · [Changelog](https://apps.yigitdenktas.com/stipra/changelog/) · [Site map](https://apps.yigitdenktas.com/stipra/sitemap/). [Studio workflow](docs/STUDIO-WORKFLOW.md): 2–8 inks, recipe comparison and editable plates.
 
 **Structured inputs:** named regions → inks and frozen source projects (#83/#84). [Try the region example](https://apps.yigitdenktas.com/stipra/regions/). [Contracts and evidence](docs/STRUCTURED-INPUTS.md) cover replay, OpenRaster and C2PA pilots; Apple/EXR and browser credentials are deferred.
 
-**CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results, optional proof formats and sampled-path SVG plates.
+**CLI:** [Compare, batch, export and verify](docs/CLI-WORKFLOWS.md), with JSON results and optional proof formats.
 
 **Release:** [Studio v0.9.0-rc.1](https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1) is an experimental prerelease. [Editorial drawing trial](docs/CREATIVE-USE-2026-10-19.md).
 
 **Acceptance:** [Studio scope and evidence](docs/STUDIO-RC-0.9-rc.1.md) · [Scoped CI gates](docs/RELEASE-CANDIDATE.md). Native bundles await [component notices](docs/DEPENDENCY-AUDIT.md). Human accessibility remains open; physical/artist trials are deferred. Previews are **digital approximations**; branding is provisional.
 
+**Research:** [Six-method reconstruction pilot](docs/RECONSTRUCTION-STUDY-01.md); #109 remains open. #113/#114 are proposed.
+
 ## Follow the work
 
-The [roadmap](ROADMAP.md) and [alpha tracker #70](https://github.com/yigit-denktas/stipra/issues/70) distinguish implementation, validation and publication. Keep original photographs and image-bearing packages private unless redistribution is authorized.
+[Roadmap](ROADMAP.md) · [Alpha tracker #70](https://github.com/yigit-denktas/stipra/issues/70). Keep original photographs and image-bearing packages private unless redistribution is authorized.
 
 [Design principles](DESIGN.md) · [Printmaking rules](docs/PRINT-DESIGN-RULES.md) · [Reference library](docs/references/README.md) · [Architecture](docs/ARCHITECTURE.md)
 

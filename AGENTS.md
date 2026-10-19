@@ -60,4 +60,4 @@ The project-scoped [Good CSS skill](.agents/skills/good-css/README-STIPRA.md) is
 
 ## Installed design skills
 
-Use [the four-skill installation guide](design/SKILLS.md) for selection, precedence and verification. Canonical skills live in `.agents/skills/`; Claude Code discovery shims live in `.claude/skills/`. Preserve upstream/vendor files; keep product-specific rules in `design/`. `node --test tests/design-skills.test.js` verifies discovery and pinned Impeccable integrity.
+Use [the installed-skill guide](design/SKILLS.md) for selection, precedence and verification. Canonical skills live in `.agents/skills/`; Claude Code discovery shims live in `.claude/skills/`. Preserve upstream/vendor files; keep product-specific rules in `design/`. `node --test tests/design-skills.test.js` verifies discovery and pinned Impeccable integrity.
