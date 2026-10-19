@@ -25,7 +25,7 @@
 | `fix/windows-portability-audit-2026-10-20` | `90abb56ec92675f677a30fa1ec1b1f0c756a740a` | Test/build portability only: npm CLI invocation, committed-blob plus working-tree vendor checks (text LF/CRLF-only, binary exact), CRLF-insensitive README and ambient-@types isolation, core build atomic concurrency |
 | `chore/reconstruction-test-requirements-2026-10-20` | `aa5e4242840fe2422c809227365ba8c0a92a79ad` | Self-contained `requirements-test.txt`, `.txt` archive inclusion, fifth membership test |
 
-Windows: baseline 193/180/11/2; after A with writable TEMP/TMP 193/190/1/2, sole failure the symlink privilege test. Default `%TEMP%` still blocks four esbuild/browser tests with Access denied; that is a host ACL restriction, not a proven application defect. No import/runtime/evidence/golden changes. B: 5 Python tests OK; #119 evidence/archive identities untouched.
+Windows: baseline 193/180/11/2; after A with writable TEMP/TMP 194/191/1/2, sole failure the symlink privilege test. Default `%TEMP%` still blocks four esbuild/browser tests with Access denied; that is a host ACL restriction, not a proven application defect. No import/runtime/evidence/golden changes. B: 5 Python tests OK; #119 evidence/archive identities untouched.
 
 ## Proposed C and owner decisions
 
