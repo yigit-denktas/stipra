@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "dpi": 300,
+  "marksMm": 0,
+  "paper": "rag",
+  "exports": {
+    "formats": [
+      "png"
+    ],
+    "scale": 1,
+    "alpha": "paper",
+    "vectorPlates": false
+  },
+  "variants": [
+    {
+      "id": "two-ink-tonal",
+      "style": "editorial-halftone",
+      "styleVariant": "tonal-key",
+      "seed": 42
+    },
+    {
+      "id": "three-ink-warm",
+      "style": "editorial-halftone",
+      "styleVariant": "warm-third",
+      "seed": 42
+    },
+    {
+      "id": "two-ink-contrast",
+      "style": "editorial-halftone",
+      "styleVariant": "forest-contrast",
+      "seed": 42
+    }
+  ]
+}

@@ -9,11 +9,13 @@ Stipra is **not** a new p5.js, a p5.riso relicense, a general image generator, a
 
 The [library direction](docs/CREATIVE-CODING-LIBRARY.md) now has an implemented local alpha. The lean core (#71), Canvas/p5 adapter (#72), authored-ink export (#73) and measured engineering evaluation (#74) are merged in #78/#79/#80. [Alpha evidence](docs/CREATIVE-CODING-ALPHA.md) records performance, compatibility and browser/Node/CLI parity. The delivery milestone records alpha.1 as published, with registry archives and clean install verified; [tracker #70](https://github.com/yigit-denktas/stipra/issues/70) remains open for independent artist usefulness feedback.
 
-The normalized color contract/reference tests (#44) and bounded PNG interpretation fix (#82) are implemented. The audit now has one native Skia provenance finding (#14); the browser exporter uses a source-mapped Fontkit replacement and fonteditor is removed. The supported digital master/CLI/export scope (#8/#11/#12) is delivered in #93; physical and broader QA acceptance remain #13. The essential studio workflow (#22) is implemented.
+The normalized color contract/reference tests (#44) and bounded PNG interpretation fix (#82) are implemented. The native notice request is posted as [skia-canvas #309](https://github.com/samizdatco/skia-canvas/issues/309); its answer/review remains open (#14). The audit has one native Skia provenance finding (#14); the browser exporter uses a source-mapped Fontkit replacement and fonteditor is removed. The supported digital master/CLI/export scope (#8/#11/#12) is delivered in #93; physical and broader QA acceptance remain #13. The essential studio workflow (#22) is implemented.
 
 Named-region mapping (#83) and opt-in inert source projects (#84) are implemented locally, with a public procedural example and browser/CLI replay checks. [Structured-input contracts](docs/STRUCTURED-INPUTS.md) record local C2PA feasibility (#85) and OpenRaster/auxiliary pilots (#86), including justified native/browser deferrals. This is additional post-alpha scope; alpha.1 is published and its registry bytes/clean install are verified. The Processing Java bridge (#75) remains a separate feasibility task. Do not build another drawing framework.
 
 Physical-print evidence gates print-quality claims, not evaluation of the experimental digital effect. Additional vector formats, branding and paper realism remain separate. These workstreams are planning targets. Native v0.9 tracking is linked below; #17 records the native configuration.
+
+The [19 October acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) records the merged #98, public-text fixes, reproducible private quality comparisons and the exact outstanding human/physical records. No style defaults or print-quality claims are promoted.
 
 ## v0.9 user experience — one browser workflow
 

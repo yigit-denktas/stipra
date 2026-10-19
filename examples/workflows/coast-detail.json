@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "dpi": 300,
+  "marksMm": 0,
+  "paper": "rag",
+  "exports": {
+    "formats": [
+      "png"
+    ],
+    "scale": 1,
+    "alpha": "paper",
+    "vectorPlates": false
+  },
+  "variants": [
+    {
+      "id": "coast-50-lpi",
+      "style": "editorial-halftone",
+      "styleVariant": "coast-duotone",
+      "lpi": 50,
+      "seed": 42
+    },
+    {
+      "id": "coast-75-lpi",
+      "style": "editorial-halftone",
+      "styleVariant": "coast-duotone",
+      "lpi": 75,
+      "seed": 42
+    }
+  ]
+}

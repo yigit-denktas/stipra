@@ -1,0 +1,399 @@
+{
+  "contract": "stipra-acceptance-quality-v1",
+  "date": "2026-10-19",
+  "nativeRequest": "https://github.com/samizdatco/skia-canvas/issues/309",
+  "pr98Merge": "e4f7ee6ff6b7129765736fa44f77298e8da81681",
+  "sourceHashes": {
+    "A": "0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd",
+    "B": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+    "C": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273"
+  },
+  "physicalPrintVerified": false,
+  "independentArtistTrial": "not-performed",
+  "humanAccessibilityReview": "not-performed",
+  "comparisons": [
+    {
+      "status": "ok",
+      "controls": {
+        "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+        "frame": {
+          "width": 2048,
+          "height": 1365
+        },
+        "dpi": 300,
+        "marksMm": 0,
+        "paper": "rag",
+        "framing": "complete oriented source, no crop or scale"
+      },
+      "environment": {
+        "node": "v24.19.0",
+        "platform": "linux",
+        "arch": "x64",
+        "skiaCanvas": "3.0.8"
+      },
+      "jobs": [
+        {
+          "id": "two-ink-tonal",
+          "status": "ok",
+          "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+          "frame": {
+            "width": 2048,
+            "height": 1365,
+            "origin": {
+              "x": 0,
+              "y": 0
+            },
+            "dpi": 300
+          },
+          "inks": 2,
+          "recipes": {
+            "inks": "e31c8ba6891a9b6baaff55747afecddf46e454fdd77a28d802281dbadd4480eb",
+            "screens": "79031948a4936f2b277da475da1231fd98fdfc87d7151cbf53c99f36fd337ad3"
+          },
+          "coverage": [
+            {
+              "id": "key",
+              "name": "Green tonal key",
+              "color": "#006043",
+              "continuous": 0.5863577704517096,
+              "screened": 0.5863577704719708
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow",
+              "color": "#e2a523",
+              "continuous": 0.16585917299790703,
+              "screened": 0.2581637763278388
+            }
+          ],
+          "style": {
+            "id": "editorial-halftone",
+            "version": 1,
+            "variant": "tonal-key",
+            "variantVersion": 1,
+            "physicalScreens": [
+              {
+                "id": "key",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "accent",
+                "mode": "dots",
+                "targetLpi": 50,
+                "effectiveLpi": 50,
+                "pitchPx": 6
+              }
+            ],
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ],
+            "recipe": "recipe/style.json"
+          },
+          "packageSha256": "5e0607c6b5e7c821d59baf71b41a3e75d22a62d77d75c3692c5fdba129b63946"
+        },
+        {
+          "id": "three-ink-warm",
+          "status": "ok",
+          "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+          "frame": {
+            "width": 2048,
+            "height": 1365,
+            "origin": {
+              "x": 0,
+              "y": 0
+            },
+            "dpi": 300
+          },
+          "inks": 3,
+          "recipes": {
+            "inks": "93ebd18fd276a5f3d087a9b2dbabb801a623228cdeb3a75dad477dd143825dce",
+            "screens": "a1af3567e871be8cdeda53cc5dce7b146bc60ff422b8cfc0d5a0367e1d614a86"
+          },
+          "coverage": [
+            {
+              "id": "key",
+              "name": "Green tonal key",
+              "color": "#006043",
+              "continuous": 0.5863577704517096,
+              "screened": 0.5863577704719708
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow",
+              "color": "#e2a523",
+              "continuous": 0.16585917299790703,
+              "screened": 0.2581637763278388
+            },
+            {
+              "id": "warm",
+              "name": "Coral neutral-material accent",
+              "color": "#ff665d",
+              "continuous": 0.01096366371069238,
+              "screened": 0.012416294642857142
+            }
+          ],
+          "style": {
+            "id": "editorial-halftone",
+            "version": 1,
+            "variant": "warm-third",
+            "variantVersion": 1,
+            "physicalScreens": [
+              {
+                "id": "key",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "accent",
+                "mode": "dots",
+                "targetLpi": 50,
+                "effectiveLpi": 50,
+                "pitchPx": 6
+              },
+              {
+                "id": "warm",
+                "mode": "dots",
+                "targetLpi": 50,
+                "effectiveLpi": 50,
+                "pitchPx": 6
+              }
+            ],
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ],
+            "recipe": "recipe/style.json"
+          },
+          "packageSha256": "ee803d9db50bc6ccccc51607e3000c001a41488f92f7925290c085325c1a9590"
+        },
+        {
+          "id": "two-ink-contrast",
+          "status": "ok",
+          "sourceSha256": "e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f",
+          "frame": {
+            "width": 2048,
+            "height": 1365,
+            "origin": {
+              "x": 0,
+              "y": 0
+            },
+            "dpi": 300
+          },
+          "inks": 2,
+          "recipes": {
+            "inks": "605b8947d8c5c3894583639b4cf301ac8d051383d60f9b518bbccdae86494d91",
+            "screens": "79031948a4936f2b277da475da1231fd98fdfc87d7151cbf53c99f36fd337ad3"
+          },
+          "coverage": [
+            {
+              "id": "key",
+              "name": "Green contrast key",
+              "color": "#006043",
+              "continuous": 0.5586122207090912,
+              "screened": 0.558612220729638
+            },
+            {
+              "id": "accent",
+              "name": "Golden yellow chroma",
+              "color": "#e2a523",
+              "continuous": 0.10662381378916241,
+              "screened": 0.166879149496337
+            }
+          ],
+          "style": {
+            "id": "editorial-halftone",
+            "version": 1,
+            "variant": "forest-contrast",
+            "variantVersion": 1,
+            "physicalScreens": [
+              {
+                "id": "key",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "accent",
+                "mode": "dots",
+                "targetLpi": 50,
+                "effectiveLpi": 50,
+                "pitchPx": 6
+              }
+            ],
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ],
+            "recipe": "recipe/style.json"
+          },
+          "packageSha256": "d48857246f8df1cf4dcdbe845216547a8eda2c52a33114869a380f6a406e5f75"
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "controls": {
+        "sourceSha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+        "frame": {
+          "width": 1152,
+          "height": 2048
+        },
+        "dpi": 300,
+        "marksMm": 0,
+        "paper": "rag",
+        "framing": "complete oriented source, no crop or scale"
+      },
+      "environment": {
+        "node": "v24.19.0",
+        "platform": "linux",
+        "arch": "x64",
+        "skiaCanvas": "3.0.8"
+      },
+      "jobs": [
+        {
+          "id": "coast-50-lpi",
+          "status": "ok",
+          "sourceSha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+          "frame": {
+            "width": 1152,
+            "height": 2048,
+            "origin": {
+              "x": 0,
+              "y": 0
+            },
+            "dpi": 300
+          },
+          "inks": 2,
+          "recipes": {
+            "inks": "e9570fcb978876b3d4ad18826303d3499476e5d684c6f2f5fa0a7e52d51722d9",
+            "screens": "bafbb70cbccfda27defb7dda51b95bf0a665bfc4f339c3e3c4c199762e571252"
+          },
+          "coverage": [
+            {
+              "id": "blue",
+              "name": "Stipr\u0101 blue atmosphere",
+              "color": "#0d4dad",
+              "continuous": 0.4415295486654262,
+              "screened": 0.4415295486616413
+            },
+            {
+              "id": "warm",
+              "name": "Stipr\u0101 coral chroma",
+              "color": "#ff665d",
+              "continuous": 0.04429281563037284,
+              "screened": 0.0692888895670573
+            }
+          ],
+          "style": {
+            "id": "editorial-halftone",
+            "version": 1,
+            "variant": "coast-duotone",
+            "variantVersion": 1,
+            "physicalScreens": [
+              {
+                "id": "blue",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "warm",
+                "mode": "dots",
+                "targetLpi": 50,
+                "effectiveLpi": 50,
+                "pitchPx": 6
+              }
+            ],
+            "targetLpi": 50,
+            "effectiveLpi": 50,
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ],
+            "recipe": "recipe/style.json"
+          },
+          "packageSha256": "dbce57dcfc411a9bb316b78fe7e669d237124a9d145e55182568567f19fb35ba"
+        },
+        {
+          "id": "coast-75-lpi",
+          "status": "ok",
+          "sourceSha256": "f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273",
+          "frame": {
+            "width": 1152,
+            "height": 2048,
+            "origin": {
+              "x": 0,
+              "y": 0
+            },
+            "dpi": 300
+          },
+          "inks": 2,
+          "recipes": {
+            "inks": "e9570fcb978876b3d4ad18826303d3499476e5d684c6f2f5fa0a7e52d51722d9",
+            "screens": "c5bd1f994b1d753a42969faa9c9c24d66f4da1d54bd6e135297ea172e746a27b"
+          },
+          "coverage": [
+            {
+              "id": "blue",
+              "name": "Stipr\u0101 blue atmosphere",
+              "color": "#0d4dad",
+              "continuous": 0.4415295486654262,
+              "screened": 0.4415295486616413
+            },
+            {
+              "id": "warm",
+              "name": "Stipr\u0101 coral chroma",
+              "color": "#ff665d",
+              "continuous": 0.04429281563037284,
+              "screened": 0.06937026977539062
+            }
+          ],
+          "style": {
+            "id": "editorial-halftone",
+            "version": 1,
+            "variant": "coast-duotone",
+            "variantVersion": 1,
+            "physicalScreens": [
+              {
+                "id": "blue",
+                "mode": "solid",
+                "targetLpi": null,
+                "effectiveLpi": null,
+                "pitchPx": null
+              },
+              {
+                "id": "warm",
+                "mode": "dots",
+                "targetLpi": 75,
+                "effectiveLpi": 75,
+                "pitchPx": 4
+              }
+            ],
+            "targetLpi": 75,
+            "effectiveLpi": 75,
+            "warnings": [
+              "Digital spot-color overprint is not spectrally calibrated; printing may differ.",
+              "This is an experimental art-directed default. Check your actual plate detail and ink overlap before printing."
+            ],
+            "recipe": "recipe/style.json"
+          },
+          "packageSha256": "64eac712d30c0d4a55907a46f3f95e53ba948a8fbecab50b47e0a3f98e22febc"
+        }
+      ]
+    }
+  ]
+}

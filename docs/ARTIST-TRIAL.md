@@ -30,3 +30,5 @@ An artist other than the implementer should follow the task above without agent 
 For a first physical check, follow [the operator procedure](PHYSICAL-PRINT-CHECK.md): print the photo-free scale/legibility sheet at 100%, measure both 100 mm rules and the 101.6 × 76.2 mm master, and record the actual printer, stock and observed text/registration behavior. Keep evidence private and run the record checker. This home-printer check does not validate Riso color or dot gain.
 
 Return the actual records before closing #13 or the independent-usefulness portion of #70. Forest/beach artistic acceptance remains separate under #43/#47; the operator kit uses original procedural artwork, not the private owner photographs.
+
+Current handoff: [19 October acceptance package](ACCEPTANCE-2026-10-19.md). Use the exact published alpha.1 versions; provide a genuine independent record before closing #70.
