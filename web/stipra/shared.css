@@ -49,4 +49,4 @@ body.lab{max-width:1580px}.lab .page-header{border-bottom:2px solid var(--green)
   .change-entry h2{margin-top:5px}
   .doc-page .lead{font-size:1.3rem}
 }
-@media(max-width:360px){.site-nav-primary{gap:0 11px}.site-nav-primary a{font-size:13px}.site-nav-more>summary{font-size:13px}}
+@media(max-width:360px){.site-nav-primary{flex:1;gap:0 11px}.site-nav-primary a{font-size:13px}.site-nav-more>summary{font-size:13px}}
