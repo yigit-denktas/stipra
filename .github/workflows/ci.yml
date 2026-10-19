@@ -122,6 +122,10 @@ jobs:
       - run: python -m pip install -r scripts/type-comparison-requirements.txt
       - run: python scripts/verify-color-reference.py
       - run: python -m unittest discover -s tests -p type_comparison_test.py -v
+      - name: Install reconstruction metric test dependencies
+        run: python -m pip install -r examples/reconstruction-study/requirements-test.txt
+      - name: Verify reconstruction metric and replay semantics
+        run: python examples/reconstruction-study/test_metrics.py
       - run: python -m pip install zxing-cpp==2.3.0
       - run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - run: node scripts/review-qr.js /tmp/stipra-qr-review

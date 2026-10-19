@@ -971,6 +971,15 @@
       "capabilityId": "OPS-01",
       "title": "Validate and integrate independent study evidence and replay fixes",
       "sourceTitle": "Integrate independent study review and make replay evidence deliverable"
+    },
+    {
+      "id": "DEV-037",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Gate study metric regressions and verify PDF delivery identity",
+      "sourceTitle": "Gate study metric regressions and clarify delivered PDF identity"
     }
   ],
   "libraryCapabilityIds": [

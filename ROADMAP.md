@@ -113,3 +113,5 @@ Stipra-original code is MIT, with individual third-party notices retained. [p5.r
 **Reconstruction research:** [Study 01](docs/RECONSTRUCTION-STUDY-01.md) reruns the bounded #109 pilot across two public-domain photographs and six methods with matched monochrome mark coverage, measured complexity and verified four-tone regions. Independent usefulness/adoption remains open. #113 operator proofs and #114 wider print processes are proposed research in the delivery ledger, with no promised version/date. The original fourteen-issue denominator is unchanged.
 
 **Study review integration:** #109 now records local-tone/spatial errors, separate calibration timing and a deliverable fail-closed replay procedure. The original evidence remains preserved. Windows portability concerns are tracked separately from host restrictions; Experiment 2 and adapter adoption remain undecided.
+
+**Study delivery:** #109 metric/replay regressions now have a CI gate. Original ZIP PDF identity and the standalone C2PA-appended delivery identity are separately verified; prior evidence is unchanged.

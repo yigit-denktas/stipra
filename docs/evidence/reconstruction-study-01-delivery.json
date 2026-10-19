@@ -1,0 +1,34 @@
+{
+  "contract": "stipra-study-delivery-identity-v1",
+  "checkedAt": "2026-10-19",
+  "canonicalEvidence": "docs/evidence/reconstruction-study-01.json",
+  "packagePdf": {
+    "path": "out/reconstruction-study/reconstruction-study-01.pdf",
+    "bytes": 2934943,
+    "sha256": "535352b1ba153ce76a29b42d8b030bfdb2a94f291520d60556891c6971d19624",
+    "matchesCanonicalEvidence": true
+  },
+  "standaloneDownloadedPdf": {
+    "bytes": 2959918,
+    "sha256": "beefb39b3306eb678910c53262f53b86989ecabdd1e8bff84d3b5e43f9b619ee",
+    "originalPdfIsExactBytePrefix": true,
+    "appendedBytes": 24975,
+    "appendedC2paMarker": true,
+    "pages": 3,
+    "interpretation": "Standalone delivery appends C2PA provenance as an incremental PDF update; the original PDF and ZIP-member identity are unchanged. This is not a report regeneration or an encoder change. C2PA signature validity was not evaluated in this byte-identity check."
+  },
+  "sourceResolution": {
+    "commit": "944127260e46f43c391ffa0fdb62d0370eee049a",
+    "allRecordedScriptHashesMatch": true,
+    "scripts": [
+      "measure.py",
+      "package.py",
+      "render.cjs",
+      "replay.py",
+      "report.py",
+      "study.py",
+      "test_metrics.py"
+    ],
+    "note": "Supplemental resolution of the prior generationCommit=3deeab8/dirty=true recording; the prior evidence is not rewritten."
+  }
+}

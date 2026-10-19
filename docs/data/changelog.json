@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Gate study metric regressions and clarify delivered PDF identity",
+      "status": "Development",
+      "issues": [
+        109,
+        13
+      ],
+      "changes": [
+        "Run four synthetic reconstruction metric/replay tests in CI with pinned numerical test dependencies.",
+        "Verify original/ZIP PDF hash and exact-prefix C2PA standalone delivery update; record both identities and resolve all seven script hashes to 9441272 without rewriting prior evidence.",
+        "Replace a truncated saved archive; verify the actual downloaded replacement, all 59 manifested members and the evidence-matching PDF."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Integrate independent study review and make replay evidence deliverable",
       "status": "Development",
       "issues": [

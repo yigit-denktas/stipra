@@ -16,7 +16,7 @@ def main():
   source=OUT/'sources'/('astronaut.png'if fixture['id']=='portrait'else'capitol.jpg');assert sha(source)==fixture['sourceSha256'];files.add(source)
  for name,entry in evidence['reportArtifacts'].items():
   p=OUT/name;assert sha(p)==entry['sha256'],name;files.add(p)
- for name in ['docs/RECONSTRUCTION-STUDY-01.md','docs/evidence/reconstruction-study-01.json','docs/evidence/reconstruction-study-01-v2-original.json']:
+ for name in ['docs/RECONSTRUCTION-STUDY-01.md','docs/evidence/reconstruction-study-01.json','docs/evidence/reconstruction-study-01-v2-original.json','docs/evidence/reconstruction-study-01-delivery.json']:
   files.add(ROOT/name)
  files.update(p for p in (ROOT/'examples/reconstruction-study').rglob('*')if p.is_file()and p.suffix in ['.md','.py','.cjs','.json'])
  # Validate direct relative Markdown links in the study evaluation; the archive keeps repository layout.
