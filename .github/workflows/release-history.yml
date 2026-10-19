@@ -1,0 +1,48 @@
+name: Record published Stiprā release
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: stipra-release-history
+  cancel-in-progress: false
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect published releases for replay and missed-event recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/releases?per_page=100" > "$RUNNER_TEMP/stipra-releases.json"
+      - name: Append publication to product history
+        run: node scripts/sync-release-history.js "$GITHUB_EVENT_PATH" docs/data/product-history.json "$RUNNER_TEMP/stipra-releases.json"
+      - name: Validate recorded release and render contract
+        run: |
+          node scripts/sync-release-history.js --check
+          node --test tests/roadmap-history.test.js tests/release-history.test.js
+      - name: Commit source-of-truth update
+        id: source
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if ! git diff --quiet -- docs/data/product-history.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add docs/data/product-history.json
+            git commit -m "docs: record published release $RELEASE_TAG"
+            git push origin HEAD:main
+          fi
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Dispatch the Pages build for the recorded source revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECORDED_REVISION: ${{ steps.source.outputs.revision }}
+        run: gh workflow run pages.yml --ref main -f revision="$RECORDED_REVISION"

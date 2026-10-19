@@ -1,0 +1,60 @@
+name: Taste Skill public-page review
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.agents/skills/design-taste-frontend/**'
+      - 'web/stipra/**'
+      - 'scripts/build-site-info.js'
+      - 'scripts/build-roadmap-page.js'
+      - 'docs/data/product-history.json'
+      - 'docs/data/changelog.json'
+      - 'docs/DESIGN-TASTE-REVIEW-2026-10-18.md'
+      - '.github/workflows/design-taste-audit.yml'
+permissions:
+  contents: read
+jobs:
+  editorial-inspection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build:pages
+      - name: Verify product-history and page navigation contracts
+        run: node --test tests/roadmap-history.test.js tests/site-info.test.js
+      - name: Review text and built pages with pinned Taste Skill
+        shell: bash
+        run: |
+          mkdir -p .taste-skill/reports
+          node .agents/skills/design-taste-frontend/scripts/lint.mjs \
+            web/stipra/roadmap.css web/stipra/shared.css scripts/build-roadmap-page.js \
+            > .taste-skill/reports/lint.txt 2>&1 || true
+          for route in roadmap changelog delivery sitemap guide sketches regions; do
+            if node .agents/skills/design-taste-frontend/scripts/inspect.mjs \
+              "dist/stipra/$route/index.html" --out ".taste-skill/$route" \
+              > ".taste-skill/reports/$route.txt" 2>&1; then
+              echo "$route: inspector reports no blocking findings"
+            else
+              echo "$route: inspect the recorded findings and route-specific constraints"
+            fi
+          done
+          if node .agents/skills/design-taste-frontend/scripts/inspect.mjs \
+            dist/stipra/index.html --out .taste-skill/studio-shell \
+            > .taste-skill/reports/studio-shell.txt 2>&1; then
+            echo 'Studio shell: no inspector failures'
+          else
+            echo 'Studio shell: inspect findings, not a replacement for application usability checks'
+          fi
+      - name: Upload raw Taste reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stipra-taste-skill-public-pages
+          path: .taste-skill/
+          include-hidden-files: true
+          if-no-files-found: error

@@ -4,6 +4,36 @@
   "entries": [
     {
       "date": "2026-10-18",
+      "title": "Reconcile public history and release automation",
+      "status": "Unreleased",
+      "issues": [
+        70,
+        14,
+        17,
+        13
+      ],
+      "prs": [
+        98
+      ],
+      "changes": [
+        "Show the registry-verified library separately from repository GitHub releases and restore the delivery map, version gates and directed dependencies.",
+        "Use state-independent publication fixtures, collision-safe event IDs, atomic release-snapshot recovery and explicit Pages dispatch for the recorded commit.",
+        "Reconcile current main, retain artifact-specific release gates and extend accessibility/navigation coverage to the delivery page; first live release-action and human acceptance remain pending."
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Capability history and searchable roadmap",
+      "status": "Unreleased",
+      "issues": [],
+      "changes": [
+        "Classify product capabilities, validation, operations and research separately while retaining permanent identifiers.",
+        "Record typed, dated improvements against existing capabilities without asserting that development work is published.",
+        "Search release titles, changes and capabilities through one generated index; keep full evidence one level deeper."
+      ]
+    },
+    {
+      "date": "2026-10-18",
       "title": "Artifact-specific release gates and portable pinned notices",
       "status": "Unreleased",
       "issues": [

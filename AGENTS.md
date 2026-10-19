@@ -20,6 +20,10 @@ Use branch names like feat/123-separation-sheet or fix/456-plate-offset. PR body
 
 When a change alters capabilities, setup, examples, limitations or the next priority, update README.md in the same PR and reconcile the relevant ROADMAP.md status. Keep the README short and link detailed contracts/evidence. Distinguish implemented behavior, verified checks, proposed work and publication/physical-print acceptance. Do not retain stale fixed issue counts or claim unsupported readiness.
 
+## Maintain the public product history
+
+When a change materially affects a capability, add a dated, typed event to `docs/data/product-history.json` and reconcile `docs/data/changelog.json`. Reuse its permanent capability ID; do not create a new feature merely because an old capability was improved. Classify features, validation, operations and research separately. Never infer publication or physical acceptance from a merged PR or closed issue. Release mappings require explicit typed changes in GitHub release notes. See [product-history rules](docs/PRODUCT-HISTORY.md). Run `node --test tests/roadmap-history.test.js tests/site-info.test.js` after edits.
+
 ## Before changing defaults or the studio UI
 
 Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.md](docs/STYLES-v1.md) for the four implemented, unvalidated starting recipes, [docs/PRINT-DESIGN-RULES.md](docs/PRINT-DESIGN-RULES.md) for proposed printmaking constraints, and [docs/references/README.md](docs/references/README.md) for attributed real-world references. Distinguish approved UI behavior from open design choices in #31. Keep the README short; add new technical detail to the appropriate documentation.
@@ -38,3 +42,22 @@ Read [DESIGN.md](DESIGN.md) for Stipra's product principles and [docs/STYLES-v1.
 ## First milestone
 
 Complete the documented v0.9 backlog: paper contamination/geometry, generic image input, editable spot+CMYK separations, full-size plates, A4 HTML/PDF inspection sheet, diagnostics, CLI, QA.
+## Intent-first design handoff
+
+Before generating or revising a public interface, read [the Stiprā design entry point](design/README.md), [its public experience contract](design/CONTRACT.md), [implementation pattern contracts](design/PATTERNS.md) and the [accepted/rejected decision log](design/DECISIONS.md). Work from a specific reader task rather than the most probable AI layout. Use the [critical journeys and evidence protocol](design/REVIEW.md) to document behavior, screenshot review, rejection rationale and owner acceptance. **Follow these design rules as product-specific requirements, not as a generic component aesthetic to apply to other repos.**
+
+## Public page design reviews
+
+For public page improvements, also read the [Impeccable v4.6 audit](docs/DESIGN-IMPECCABLE-AUDIT-2026-10-18.md): these pages use Read/Operate modes according to the actual task. Preserve the existing system rather than applying persuasive landing-page heuristics to technical documentation. Impeccable's agent skill is now installed under `.agents/skills/impeccable/`; its separate engine binary and detector have **not** been executed or validated in this environment. Hooks are off by default.
+
+The pinned upstream Taste Skill v2 lives in [`.agents/skills/design-taste-frontend/`](.agents/skills/design-taste-frontend/README-STIPRA.md). Before changing a public roadmap, changelog, guide, sitemap, sketches or regions page, read its `SKILL.md`, `references/critique.md` and the latest [page-by-page Stiprā review](docs/DESIGN-TASTE-REVIEW-2026-10-18.md). Verify the rendered page on desktop and phone, not just the CSS. Run its local `lint.mjs` and `inspect.mjs` if the environment supports Node 22 and Chrome. Keep the output and state any intentional exceptions.
+
+**Do not** apply marketing-page image-count, stock imagery or motion rules mechanically to a source-backed software changelog, and do not redesign the interactive Studio purely for aesthetic conformity. Protect the original print engine, IBM Plex type, Stiprā paper/ink palette, identity assets, keyboard access and honest release/acceptance claims. CI's `design-taste-audit.yml` retains its raw findings; it does not replace product functionality, real-reader or assistive-technology acceptance.
+
+## CSS simplification and visual baselines
+
+The project-scoped [Good CSS skill](.agents/skills/good-css/README-STIPRA.md) is pinned with its MIT license. Read its `SKILL.md` and relevant reference entries before revising styles, but do not replace Stiprā's tokens or product layout merely to comply with an opinionated example. The [CSS consolidation report](docs/ROADMAP-CSS-CONSOLIDATION-2026-10-18.md) explains the previous v3/v4 cascade and preserved behaviors. For changes to `web/stipra/roadmap.css`, run `npm run build:pages && npm run check:roadmap-visual` in a trusted checkout with Chromium available; the dedicated workflow archives before/after browser screenshots. Never silently update its reference fixture on an unrelated PR.
+
+## Installed design skills
+
+Use [the four-skill installation guide](design/SKILLS.md) for selection, precedence and verification. Canonical skills live in `.agents/skills/`; Claude Code discovery shims live in `.claude/skills/`. Preserve upstream/vendor files; keep product-specific rules in `design/`. `node --test tests/design-skills.test.js` verifies discovery and pinned Impeccable integrity.

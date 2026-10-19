@@ -22,7 +22,7 @@ A studio should open around the image and its resulting print, not an endless fo
 
 A portrait needs different tonal care than a poster, diagram or newspaper illustration. A **Stipra Style** is a deliberate strategy: what the work is for, which inks to use, where their coverage comes from, what to protect, how to screen the masks, and when *not* to use that style.
 
-Start with four compelling, evidence-tested directions: **Portrait Duotone, Editorial Halftone, Bold Spot Poster, Clean Linework**. These are **proposed**, not four ready-to-use presets. Show a neutral/original baseline and a preview of each candidate using the *same input image*. Don't generate a library of lookalike slider snapshots. [#34 — Styles](https://github.com/yigit-denktas/stipra/issues/34).
+The four starter recipe families — **Portrait Duotone, Editorial Halftone, Bold Spot Poster, Clean Linework** — are implemented as a shared browser/CLI **technical baseline**, but they are **not yet approved as artistically suitable or physically validated presets**. Show a neutral/original baseline and a preview of each candidate using the *same input image*. Don't generate a library of lookalike slider snapshots. [#34 — Styles](https://github.com/yigit-denktas/stipra/issues/34).
 
 ### 3. Separate color from coverage
 
@@ -63,6 +63,12 @@ A rule without supporting measurements is a **design suggestion**, not a passed 
 The [Dizzy Ink Risograph Guide](https://www.dizzyink.co.uk/guide-to-risograph) is an excellent reminder that teaching the printing process can be beautiful. Its diagrams are not Stipra design assets. The four particularly relevant visual studies are documented with links and original attribution in [our Dizzy Ink image notes](docs/references/DIZZY-INK-VISUALS.md).
 
 The lessons are ours to apply, but we don't copy their photos, diagrams, swatch artwork, page layout or code. The original website remains the place to experience them.
+
+## Design system, public pages and agent editing
+
+The principles above are the authority for the printmaking experience. The public roadmap/changelog/guide system has its own [experience contract](design/CONTRACT.md), [interface patterns](design/PATTERNS.md), [decision and rejection log](design/DECISIONS.md), and [three-task review protocol](design/REVIEW.md). The [design index](design/README.md) identifies which file governs intent, actual CSS, product-history facts and evidence.
+
+Our design system is **more than colors and components**: it includes the objects the user manipulates (original, masks, proof, recipe, print package), source-backed communication, information relationships, interaction semantics and review decisions. Agents should extend the existing system only when they can show an improvement in an actual user task; a completed rendering is not automatic design approval. Treat the user's 2026 Katie Dill/Stripe discussion as inspiration, not a claim of using Stripe's private tooling.
 
 ## What belongs where
 
