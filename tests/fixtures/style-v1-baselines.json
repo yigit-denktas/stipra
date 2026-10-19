@@ -42,6 +42,41 @@
       "id": "editorial-halftone",
       "variant": "coast-tonal",
       "sha256": "c7d69bb21e15c46c115bef39afb6b253e59cc5f4365b8b92ecc7962c065599aa"
+    },
+    {
+      "id": "portrait-duotone",
+      "variant": "blue-pink",
+      "sha256": "e8aefeef932d322d43581c438db61253e7ecb5ef6f84c6cbfe206aa16d6e9717"
+    },
+    {
+      "id": "portrait-duotone",
+      "variant": "teal-orange",
+      "sha256": "267721b39a1ae3c35dd3f89e5622a280be81b34cb517358a7276232330617768"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "forest-depth",
+      "sha256": "c23e5c733fd70ce0088b10a6725c0376a52e6a40e07bc314928fdcde32b1f1c0"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "forest-contrast",
+      "sha256": "9716d009bfca2847a0ac7d7fbca0169a852d3ac180598a3ebf36f281e72b5699"
+    },
+    {
+      "id": "editorial-halftone",
+      "variant": "coast-duotone",
+      "sha256": "f212e420ea2358ebf65b4eef2aff17ea2af27be817dceacfb9bc534ff8506d25"
+    },
+    {
+      "id": "bold-spot-poster",
+      "variant": "process-cmy",
+      "sha256": "50b1f6feb3c5534e9f506cdf869ee2e7f337e2921606314223ffd19f49785dc3"
+    },
+    {
+      "id": "bold-spot-poster",
+      "variant": "process-cmyk",
+      "sha256": "e7360999cbe1205ca62f33704d9fad8e107325b2311ddd9928f420d97686f9ab"
     }
   ]
 }
