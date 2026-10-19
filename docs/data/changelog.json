@@ -4,6 +4,59 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Gate study metric regressions and clarify delivered PDF identity",
+      "status": "Development",
+      "issues": [
+        109,
+        13
+      ],
+      "changes": [
+        "Run four synthetic reconstruction metric/replay tests in CI with pinned numerical test dependencies.",
+        "Verify original/ZIP PDF hash and exact-prefix C2PA standalone delivery update; record both identities and resolve all seven script hashes to 9441272 without rewriting prior evidence.",
+        "Replace a truncated saved archive; verify the actual downloaded replacement, all 59 manifested members and the evidence-matching PDF."
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "title": "Integrate independent study review and make replay evidence deliverable",
+      "status": "Development",
+      "issues": [
+        109,
+        13
+      ],
+      "changes": [
+        "Review and integrate 3deeab8 with corrected overlap/boundary definitions, error polarity and fail-closed replay; preserve the original recording and regenerate expanded Linux evidence.",
+        "Ship local-tone/spatial diagnostics, separated timings and actual replay record; record remaining Windows portability concerns. No Experiment 2, production change or acceptance closure."
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "title": "Correct reconstruction study coverage and evidence controls",
+      "status": "Development",
+      "issues": [
+        109
+      ],
+      "changes": [
+        "Withdraw sparse-mark rankings; rerun tone-normalized stipple/hatch/route/hybrid and verify four-band VTracer output. No production modes or defaults change.",
+        "Add single-ink solid reference, complexity/tone tables, frozen points, decoded-pixel hashes and complete delivery manifest. Human blind ranking remains unperformed."
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "title": "Compare reconstruction methods and reconcile research delivery",
+      "status": "Development",
+      "issues": [
+        109,
+        113,
+        114
+      ],
+      "changes": [
+        "Execute a two-source six-method reconstruction pilot without adding production modes or dependencies.",
+        "Record proposed research separately in the delivery map; install pinned juliobsz review skills and repair missing route descriptions/canonicals. Browser performance and independent review remain unverified."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Record the Studio prerelease and exercise original editorial artwork",
       "status": "Development",
       "issues": [
@@ -219,7 +272,7 @@
       "changes": [
         "Trace pinned Rust Skia, Skia and 13 external source revisions; record the 318-entry Cargo lockfile superset without calling it a compiled inventory.",
         "Identify the Linux static Fontconfig patch and distinguish its bootstrap FreeType from Skia embedded FreeType.",
-        "Record the owner’s personal npm-scope choice; account identity and authenticated publication remain pending."
+        "Record the owner\u2019s personal npm-scope choice; account identity and authenticated publication remain pending."
       ]
     },
     {
@@ -339,7 +392,7 @@
         90
       ],
       "changes": [
-        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]

@@ -12,7 +12,7 @@ test('delivery ledger preserves original denominator and rejects dependency gaps
 test('information pages and all navigation use valid relative destinations on either host',()=>{
   const stage=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-site-info-'));
   try{
-    for(const [route]of Info.ROUTES){if(['roadmap/','changelog/','delivery/','sitemap/'].includes(route))continue;const file=path.join(stage,route.endsWith('.html')?route:route+'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'<!doctype html><html><body><main><h1>Destination</h1></main></body></html>');}
+    for(const [route]of Info.ROUTES){if(['roadmap/','changelog/','delivery/','sitemap/'].includes(route))continue;const file=path.join(stage,route.endsWith('.html')?route:route+'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'<!doctype html><html><head></head><body><main><h1>Destination</h1></main></body></html>');}
     Info.build(stage);Info.build(stage);
     for(const [route]of Info.ROUTES){const file=path.join(stage,route.endsWith('.html')?route:route+'index.html'),html=fs.readFileSync(file,'utf8');assert.equal((html.match(/class="site-nav"/g)||[]).length,1);assert.equal((html.match(/class="skip-link"/g)||[]).length,1);assert.match(html,/<main id="main-content" tabindex="-1"/);
       for(const [,href]of html.matchAll(/href="([^"]+)"/g)){if(/^(?:https:|#)/.test(href)||href.endsWith('shared.css'))continue;const resolved=path.resolve(path.dirname(file),href),target=href.endsWith('/')?path.join(resolved,'index.html'):resolved;assert.ok(fs.existsSync(target),'Broken destination '+route+' → '+href);assert.ok(target.startsWith(stage+path.sep));}
@@ -31,6 +31,13 @@ test('information pages and all navigation use valid relative destinations on ei
     assert.match(roadmap,/href="\.\.\/delivery\/"/);assert.match(roadmap,/Published JavaScript library/);assert.match(roadmap,/Latest GitHub release/);
     const delivery=fs.readFileSync(path.join(stage,'delivery/index.html'),'utf8');
     assert.match(delivery,/Opens:/);assert.match(delivery,/Needs:/);assert.match(delivery,/9\/14/);
+    assert.match(delivery,/<h2>Research tasks<\/h2>/);
+    for(const id of [109,113,114])assert.match(delivery,new RegExp('id="task-'+id+'"'));
+    for(const [route]of Info.ROUTES){const file=path.join(stage,route.endsWith('.html')?route:route+'index.html'),html=fs.readFileSync(file,'utf8');
+      assert.equal((html.match(/<meta name="description"/g)||[]).length,1);
+      assert.equal((html.match(/rel="canonical"/g)||[]).length,1);
+      assert.ok(html.includes('href="'+ledger.primary+route+'"'));
+    }
     assert.match(delivery,/<p class="eyebrow">published<\/p><h2>Library 0\.1\.0-alpha\.1<\/h2>/);
     assert.match(delivery,/Studio v0\.9/);assert.match(delivery,/milestone\/1/);assert.match(delivery,/delivery-ledger\.json/);
 

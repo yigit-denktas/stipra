@@ -1,0 +1,2341 @@
+{
+  "contract": "stipra-reconstruction-study-01-v2",
+  "fixtures": [
+    {
+      "id": "portrait",
+      "sourceBytes": 791555,
+      "sourceSha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+      "originalPixels": [
+        512,
+        512
+      ],
+      "studyPixels": [
+        512,
+        512
+      ],
+      "normalization": "full frame; longest edge capped at 600 px; no upscale/crop/stretch",
+      "physicalComparison": {
+        "longestEdgeMm": 90,
+        "widthMm": 90,
+        "heightMm": 90.0,
+        "dpi": 144.49777777777777
+      },
+      "targetDarkness": 0.5474342046999463,
+      "seed": 109,
+      "weightedSites": 3000,
+      "lloydIterations": 9,
+      "pointFixtureSha256": "d2105c24415d6e1353e9416792b60fe8bf52466917fa3029da9342e9e895fa75",
+      "generationSeconds": 0.3904049440002382,
+      "methodGenerationSeconds": {
+        "01-weighted-stipple": 0.09844829999974536,
+        "02-directional-hatch": 0.028914810000060243,
+        "03-continuous-route": 0.009780040999885387,
+        "04-vector-regions": 0.11677256399980251,
+        "05-dither": 0.020019205999687983,
+        "06-hybrid": 0.0034033739998449164
+      },
+      "vtracer": {
+        "bindingPackageVersion": "0.6.15",
+        "embeddedGeneratorBanner": "visioncortex VTracer 0.6.12 -->",
+        "flags": {
+          "colormode": "color",
+          "mode": "polygon",
+          "filter_speckle": 4,
+          "color_precision": 8,
+          "layer_difference": 1
+        },
+        "palette": [
+          10,
+          89,
+          154,
+          205
+        ],
+        "fillSnap": "nearest input grayscale palette; no alpha/gradient conversion",
+        "upstreamTagCommit": "fd9cdb08e622f237eb05be553a020ddc9e4c47a1",
+        "rustCrateVersion": "0.6.12",
+        "bannerSource": "cmdapp/src/svg.rs uses CARGO_PKG_VERSION; crate/package version split verified at upstream tag",
+        "svgFillLevels": [
+          10,
+          89,
+          154,
+          205
+        ],
+        "inputBandFractions": [
+          0.2727813720703125,
+          0.1894073486328125,
+          0.2825050354003906,
+          0.2553062438964844
+        ],
+        "renderedNearestBandFractions": [
+          0.2701606750488281,
+          0.19398117065429688,
+          0.2778053283691406,
+          0.2580528259277344
+        ],
+        "bandFractionL1": 0.01464080810546875,
+        "allFourBandsRetained": true,
+        "antialiasing": "Rendered edges may add intermediate values; SVG fills exactly match the input palette.",
+        "spatialBandAgreement": {
+          "pixelBandAgreement": 0.93479,
+          "perBandIoU": {
+            "10": 0.93782,
+            "89": 0.7813,
+            "154": 0.84565,
+            "205": 0.92835
+          },
+          "boundaryDefinition": "input pixels with any in-frame four-neighbour in another quantized band; rate denominator is this boundary set",
+          "boundaryPixelCount": 59127,
+          "boundaryBandMismatchRate": 0.28309,
+          "quantizedBandFractions": [
+            0.27278,
+            0.18941,
+            0.28251,
+            0.25531
+          ],
+          "renderedBandFractions": [
+            0.27016,
+            0.19398,
+            0.27781,
+            0.25805
+          ],
+          "scope": "nearest-palette band map of quantized input versus rendered PNG; measures spatial structure, not only histogram"
+        }
+      },
+      "hybrid": "actual method-01 circles selected above gray .45 plus actual method-02 directional paths selected at/below gray .45; final shared scale calibrated to target coverage",
+      "budget": "same source darkness target, not equal geometry complexity; see measured elements/segments/length/bytes/runtime",
+      "pointConstruction": "weighted Lloyd sampling on 144-px luminance grid; frozen rounded point fixture for cross-build replay",
+      "toneConventionSensitivity": {
+        "itu601Gamma": 0.54743,
+        "rec709Gamma": 0.55804,
+        "simpleRgbMean": 0.55059
+      },
+      "metrics": {
+        "baseline": {
+          "coverage": 0.547434,
+          "coverageError": 0.0,
+          "blockRmse8bit": 0.0,
+          "inkedPixelsBelow128": 128949,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.0,
+              "p05": 0.0,
+              "p50": 0.0,
+              "p95": 0.0
+            },
+            "blockAbsErrorGt5ppFraction": 0.0,
+            "blockAbsErrorGt10ppFraction": 0.0,
+            "toneDecileSignedErrorPp": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 0.0
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 259215,
+          "renderMilliseconds": 111.17208200000002,
+          "engineMilliseconds": 51.412902,
+          "finalRasterMilliseconds": null,
+          "calibrationMilliseconds": 0,
+          "mode": "solid; one black darkness ink on white; continuous-tone context, not halftone",
+          "generationMilliseconds": 0,
+          "role": "single black authored Pillow-L darkness mask through existing Core.renderLayers; solid, continuous-tone reference"
+        },
+        "01-weighted-stipple": {
+          "coverage": 0.547457,
+          "coverageError": 2.3e-05,
+          "blockRmse8bit": 10.4099,
+          "inkedPixelsBelow128": 144136,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.002,
+              "p05": -9.017,
+              "p50": 0.878,
+              "p95": 4.958
+            },
+            "blockAbsErrorGt5ppFraction": 0.19141,
+            "blockAbsErrorGt10ppFraction": 0.02344,
+            "toneDecileSignedErrorPp": [
+              1.158,
+              1.946,
+              1.371,
+              2.498,
+              2.45,
+              2.742,
+              0.976,
+              -0.444,
+              -3.428,
+              -8.987
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.2942
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.444168,
+              0.014561,
+              0.009605,
+              0.008438,
+              0.007458,
+              0.006397,
+              0.006676,
+              0.005379,
+              0.006397,
+              0.007275,
+              0.005653,
+              0.006104,
+              0.005589,
+              0.005516,
+              0.00518,
+              0.00544,
+              0.005108,
+              0.006886,
+              0.005222,
+              0.005581,
+              0.005459,
+              0.004883,
+              0.004791,
+              0.005249,
+              0.005325,
+              0.007069,
+              0.005814,
+              0.006161,
+              0.007164,
+              0.007271,
+              0.008656,
+              0.359528
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 189568,
+          "elements": 3000,
+          "circles": 3000,
+          "paths": 0,
+          "lineSegments": 0,
+          "pathLengthSourcePx": 0,
+          "svgBytes": 194090,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "circleRadiusPx": {
+            "min": 1.8585,
+            "median": 3.9802,
+            "max": 6.0935,
+            "mean": 3.9824
+          },
+          "sumCircleAreaFraction": 0.58149,
+          "clippedCircleFraction": 0.03,
+          "overlappingCircleFraction": 0.7,
+          "overlappingPairsPerCircle": 0.92233,
+          "overlapDefinition": "fraction of circles touching at least one other circle; separate pair count per circle is not an area fraction",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 1.0306396484375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 420.37150299999996,
+          "calibrationMilliseconds": 384.44444,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 12.459817000000044,
+          "generationMilliseconds": 98.44829999974536
+        },
+        "02-directional-hatch": {
+          "coverage": 0.547439,
+          "coverageError": 5e-06,
+          "blockRmse8bit": 10.5324,
+          "inkedPixelsBelow128": 143229,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.001,
+              "p05": -10.205,
+              "p50": 0.751,
+              "p95": 4.907
+            },
+            "blockAbsErrorGt5ppFraction": 0.15234,
+            "blockAbsErrorGt10ppFraction": 0.05078,
+            "toneDecileSignedErrorPp": [
+              -0.45,
+              0.113,
+              1.061,
+              1.929,
+              2.227,
+              3.103,
+              1.733,
+              1.194,
+              -0.848,
+              -9.813
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.15001
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.408482,
+              0.01474,
+              0.011017,
+              0.009647,
+              0.009064,
+              0.00803,
+              0.007893,
+              0.009167,
+              0.008278,
+              0.008492,
+              0.00806,
+              0.008038,
+              0.010796,
+              0.007423,
+              0.006378,
+              0.010872,
+              0.008633,
+              0.007462,
+              0.019028,
+              0.006893,
+              0.006889,
+              0.007397,
+              0.007999,
+              0.007618,
+              0.007595,
+              0.007771,
+              0.007835,
+              0.008255,
+              0.009525,
+              0.009823,
+              0.012794,
+              0.318108
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 263756,
+          "elements": 4096,
+          "circles": 0,
+          "paths": 4096,
+          "lineSegments": 4096,
+          "pathLengthSourcePx": 32767.999,
+          "svgBytes": 353000,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "strokeWidthPx": {
+            "min": 0.0218,
+            "median": 3.4127,
+            "max": 6.8408,
+            "count": 4096
+          },
+          "target": 0.5474342046999463,
+          "globalMarkScale": 0.8551025390625,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 513.934535,
+          "calibrationMilliseconds": 467.02896899999996,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 19.82825099999991,
+          "generationMilliseconds": 28.914810000060243
+        },
+        "03-continuous-route": {
+          "coverage": 0.547431,
+          "coverageError": -4e-06,
+          "blockRmse8bit": 59.1478,
+          "inkedPixelsBelow128": 143544,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": -0.0,
+              "p05": -38.472,
+              "p50": -0.849,
+              "p95": 39.42
+            },
+            "blockAbsErrorGt5ppFraction": 0.81641,
+            "blockAbsErrorGt10ppFraction": 0.66406,
+            "toneDecileSignedErrorPp": [
+              18.879,
+              18.459,
+              9.392,
+              2.58,
+              -6.919,
+              -0.499,
+              -0.667,
+              -1.884,
+              -17.014,
+              -21.613
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.56558
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.518742,
+              0.002998,
+              0.002644,
+              0.002224,
+              0.002163,
+              0.001968,
+              0.00182,
+              0.001953,
+              0.001469,
+              0.001614,
+              0.001698,
+              0.001587,
+              0.001701,
+              0.001617,
+              0.001572,
+              0.001808,
+              0.001602,
+              0.001541,
+              0.001606,
+              0.001854,
+              0.001568,
+              0.001438,
+              0.001709,
+              0.001957,
+              0.001762,
+              0.00172,
+              0.001846,
+              0.001991,
+              0.002201,
+              0.002377,
+              0.002941,
+              0.424309
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 71674,
+          "elements": 1,
+          "circles": 0,
+          "paths": 1,
+          "lineSegments": 599,
+          "pathLengthSourcePx": 10926.517,
+          "svgBytes": 11989,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "strokeWidthPx": {
+            "min": 15.2123,
+            "median": 15.2123,
+            "max": 15.2123,
+            "count": 1
+          },
+          "target": 0.5474342046999463,
+          "globalMarkScale": 15.2122802734375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 85.87269100000003,
+          "calibrationMilliseconds": 66.58697800000004,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 3.905140000000074,
+          "generationMilliseconds": 9.780040999885387
+        },
+        "04-vector-regions": {
+          "coverage": 0.546169,
+          "coverageError": -0.001265,
+          "blockRmse8bit": 7.6232,
+          "inkedPixelsBelow128": 122288,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": -0.127,
+              "p05": -3.944,
+              "p50": -0.45,
+              "p95": 4.949
+            },
+            "blockAbsErrorGt5ppFraction": 0.0625,
+            "blockAbsErrorGt10ppFraction": 0.00391,
+            "toneDecileSignedErrorPp": [
+              -0.562,
+              -0.362,
+              1.715,
+              -0.105,
+              -1.415,
+              -0.163,
+              1.039,
+              0.943,
+              0.925,
+              -3.251
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.63247
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.0,
+              0.259983,
+              0.002621,
+              0.00227,
+              0.002163,
+              0.001614,
+              0.002571,
+              0.00201,
+              0.002274,
+              0.002525,
+              0.003212,
+              0.168736,
+              0.004299,
+              0.004314,
+              0.003475,
+              0.004425,
+              0.003525,
+              0.004536,
+              0.004536,
+              0.255512,
+              0.003403,
+              0.002571,
+              0.003105,
+              0.002506,
+              0.003471,
+              0.250343,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 99560,
+          "elements": 458,
+          "circles": 0,
+          "paths": 458,
+          "lineSegments": 9165,
+          "pathLengthSourcePx": 65096.245,
+          "svgBytes": 90972,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 1,
+          "normalization": "no global normalization: input palette geometry evaluated separately",
+          "renderMilliseconds": 22.84943599999997,
+          "calibrationMilliseconds": 0,
+          "calibrationSteps": 0,
+          "finalRasterMilliseconds": 5.222941000000219,
+          "generationMilliseconds": 116.77256399980251
+        },
+        "05-dither": {
+          "coverage": 0.547775,
+          "coverageError": 0.000341,
+          "blockRmse8bit": 0.8216,
+          "inkedPixelsBelow128": 143596,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.034,
+              "p05": -0.446,
+              "p50": 0.012,
+              "p95": 0.612
+            },
+            "blockAbsErrorGt5ppFraction": 0.0,
+            "blockAbsErrorGt10ppFraction": 0.0,
+            "toneDecileSignedErrorPp": [
+              -0.123,
+              -0.097,
+              0.015,
+              0.076,
+              -0.071,
+              0.094,
+              0.055,
+              0.035,
+              0.282,
+              0.073
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.67948
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.547775,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.452225
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 44103,
+          "generationMilliseconds": 20.019205999687983,
+          "role": "unconstrained raster tonal reference; complexity not matched"
+        },
+        "06-hybrid": {
+          "coverage": 0.547392,
+          "coverageError": -4.2e-05,
+          "blockRmse8bit": 12.5636,
+          "inkedPixelsBelow128": 143977,
+          "pixelCount": 262144,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": -0.004,
+              "p05": -7.471,
+              "p50": -0.288,
+              "p95": 8.465
+            },
+            "blockAbsErrorGt5ppFraction": 0.22656,
+            "blockAbsErrorGt10ppFraction": 0.05469,
+            "toneDecileSignedErrorPp": [
+              -0.736,
+              -0.785,
+              -1.026,
+              -1.574,
+              -2.916,
+              -1.223,
+              1.855,
+              1.839,
+              4.829,
+              -0.371
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.37238
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.149769,
+              0.023632,
+              0.020309,
+              0.01741,
+              0.021149,
+              0.032883,
+              0.02335,
+              0.016949,
+              0.017479,
+              0.017544,
+              0.020298,
+              0.019009,
+              0.019352,
+              0.022743,
+              0.031288,
+              0.038738,
+              0.03875,
+              0.04134,
+              0.0429,
+              0.033813,
+              0.032875,
+              0.039536,
+              0.044952,
+              0.043179,
+              0.054562,
+              0.041885,
+              0.039982,
+              0.019501,
+              0.010391,
+              0.008953,
+              0.004986,
+              0.010494
+            ],
+            "rendered": [
+              0.463081,
+              0.012718,
+              0.014576,
+              0.006222,
+              0.004951,
+              0.004688,
+              0.004444,
+              0.004383,
+              0.004566,
+              0.005283,
+              0.003994,
+              0.004433,
+              0.003933,
+              0.00399,
+              0.003788,
+              0.004177,
+              0.003784,
+              0.004753,
+              0.003803,
+              0.004128,
+              0.003754,
+              0.004105,
+              0.003834,
+              0.004704,
+              0.004025,
+              0.005146,
+              0.004261,
+              0.004978,
+              0.005211,
+              0.005928,
+              0.00684,
+              0.381519
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 157440,
+          "elements": 2706,
+          "circles": 929,
+          "paths": 1777,
+          "lineSegments": 1777,
+          "pathLengthSourcePx": 14216.0,
+          "svgBytes": 213511,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "circleRadiusPx": {
+            "min": 1.7687,
+            "median": 3.8155,
+            "max": 5.3237,
+            "mean": 3.7952
+          },
+          "sumCircleAreaFraction": 0.16336,
+          "clippedCircleFraction": 0.00431,
+          "overlappingCircleFraction": 0.03122,
+          "overlappingPairsPerCircle": 0.01615,
+          "overlapDefinition": "fraction of circles touching at least one other circle; separate pair count per circle is not an area fraction",
+          "strokeWidthPx": {
+            "min": 1.8232,
+            "median": 6.5668,
+            "max": 7.8467,
+            "count": 1777
+          },
+          "target": 0.5474342046999463,
+          "globalMarkScale": 0.9808349609375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 371.1194700000001,
+          "calibrationMilliseconds": 337.5438059999999,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 13.345816000000013,
+          "generationMilliseconds": 3.4033739998449164
+        }
+      },
+      "artifacts": {
+        "portrait/01-weighted-stipple.png": {
+          "sha256": "74dea0a2a504507039c906d2c6c35a793cd471c5ad387d488a01172fb2797d5c",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "d5a1b0151f25fe0db0e45967e781236ef56a2d7c631e4da97904db7720df22a7"
+          }
+        },
+        "portrait/01-weighted-stipple.svg": {
+          "sha256": "9545880ba3a42e1e0a639445a55c0064d6a9a72a644535111d59f6bfc7a91ad0"
+        },
+        "portrait/02-directional-hatch.png": {
+          "sha256": "8042ddd3421a886e8c2c404dac48bd7d515cf623df8f6441dcd6870c30726f48",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "c1bc286aacb0fb6517fe2f387d23f3bd7be69e7ac74d1507b8ca2f374bbd3cf8"
+          }
+        },
+        "portrait/02-directional-hatch.svg": {
+          "sha256": "24ec995198d6d6d6cd375cc7271dd4ee763ddab20541e5c073bcbc3f7c7252f5"
+        },
+        "portrait/03-continuous-route.png": {
+          "sha256": "e9d06596488bff112e8281b220562617f53a42565b3d010f4ec1ead13c2a2304",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "9d1b7e9b79412a92b0b53f6941621a471553c5a66fc2d63344c29c00d39754c7"
+          }
+        },
+        "portrait/03-continuous-route.svg": {
+          "sha256": "1f7f8a04f5f3fe5bf56c0ecc61c8974c3b4ba6e9750c3d971baf2243c9c3fdb5"
+        },
+        "portrait/04-vector-regions.png": {
+          "sha256": "805308e332672583848b5ae71455ec3d411e0cf261ae1b3a71263bf018b5f32c",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "5cf066a476cb48c3d0189962b296df0c3eb9ecaf4f6a10f418ef5b0d383b1559"
+          }
+        },
+        "portrait/04-vector-regions.svg": {
+          "sha256": "0aaeed3f50534de0046e012401d2e3ab39a00ef1050ffc617960591176032a0b"
+        },
+        "portrait/05-dither.png": {
+          "sha256": "f871ee459a467fe8a457b83d5ee2b58329359a56f1e3648632eaab1f0903a825",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "49f8783ce0046ae7b4d82094f2bb504e5a156b6c0eb05991eca2d4f8838c226b"
+          }
+        },
+        "portrait/06-hybrid.png": {
+          "sha256": "a563a55554c2b424745a6d26d00c3ef2ab74d306df4d39c11e16dd9c45d42c30",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "067a35c7a76548f29ec241c07e47b7c2ff53e69a33b110574b89bd61be94d736"
+          }
+        },
+        "portrait/06-hybrid.svg": {
+          "sha256": "7daf9e05c387f3085522d5b60629ba489c554938b6b1bc130d9f7d8de7700cf6"
+        },
+        "portrait/baseline-recipe.json": {
+          "sha256": "9bff2b4395d7d30b9aeef05357be79f8c176b20572cb0ff7f3c2ab5a9c18aab4"
+        },
+        "portrait/baseline-two-ink-context-recipe.json": {
+          "sha256": "20af31cb1b6672c9261d65138b3d611c1c911e0938c4f9c45f65111ca818092c"
+        },
+        "portrait/baseline-two-ink-context.png": {
+          "sha256": "d8c6af8ee9b13ed617c972451658b16261ad7b0511ccec71d05a771fab17ac7f",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "d5c9fa311e9473f41d9644a51eb16ed1491ad47beaaaa75204cbb48f66af92db"
+          }
+        },
+        "portrait/baseline.png": {
+          "sha256": "d9b9c8e4e77e4aa2765ec743fbda5d37a6de909bf37d6457b04fae64cb879f6d",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "a8ff984b887bb438ec515baa722617d80459948d601be6eef47b0ae713c2c7ce"
+          }
+        },
+        "portrait/points.json": {
+          "sha256": "d2105c24415d6e1353e9416792b60fe8bf52466917fa3029da9342e9e895fa75"
+        },
+        "portrait/quantized.png": {
+          "sha256": "436d493991a93da6de42c07e12e6cdfac8b655d35d57d97f57724c47b33b6331",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "bc407ef3dded36398b358c326589e1f9df2fa854623ee56ed33899c5db6cd883"
+          }
+        },
+        "portrait/source-luminance.png": {
+          "sha256": "fc9a97ac5e61250811c61332f71fbf2edef48d238508358d48c6dc5e42d9fa8b",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "a8ff984b887bb438ec515baa722617d80459948d601be6eef47b0ae713c2c7ce"
+          }
+        },
+        "portrait/source.png": {
+          "sha256": "5056b05608d58b1fb791eb4070748a49f08d9ab57e9c950ca48fe7baf33db515",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "01a09a89e89c38465df0647801b8694fc920237c19c364434710d2d91e0d0ccf"
+          }
+        }
+      }
+    },
+    {
+      "id": "architecture",
+      "sourceBytes": 10391947,
+      "sourceSha256": "5b9e5283332ecb1f3261d0731651674ed60005d7768f419a212c3140cbee06df",
+      "originalPixels": [
+        7168,
+        3072
+      ],
+      "studyPixels": [
+        600,
+        257
+      ],
+      "normalization": "full frame; longest edge capped at 600 px; no upscale/crop/stretch",
+      "physicalComparison": {
+        "longestEdgeMm": 90,
+        "widthMm": 90,
+        "heightMm": 38.55,
+        "dpi": 169.33333333333334
+      },
+      "targetDarkness": 0.60952928460619,
+      "seed": 109,
+      "weightedSites": 3000,
+      "lloydIterations": 9,
+      "pointFixtureSha256": "e9e8d2ecab6cdf66c125251e1d17d061f32e30120d8664a9d6cfbf70a10448a2",
+      "generationSeconds": 0.6260082839999086,
+      "methodGenerationSeconds": {
+        "01-weighted-stipple": 0.06499111399989488,
+        "02-directional-hatch": 0.013486557000305766,
+        "03-continuous-route": 0.009903292999752011,
+        "04-vector-regions": 0.05380507999961992,
+        "05-dither": 0.012519306999820401,
+        "06-hybrid": 0.0034643740000319667
+      },
+      "vtracer": {
+        "bindingPackageVersion": "0.6.15",
+        "embeddedGeneratorBanner": "visioncortex VTracer 0.6.12 -->",
+        "flags": {
+          "colormode": "color",
+          "mode": "polygon",
+          "filter_speckle": 4,
+          "color_precision": 8,
+          "layer_difference": 1
+        },
+        "palette": [
+          52,
+          78,
+          97,
+          168
+        ],
+        "fillSnap": "nearest input grayscale palette; no alpha/gradient conversion",
+        "upstreamTagCommit": "fd9cdb08e622f237eb05be553a020ddc9e4c47a1",
+        "rustCrateVersion": "0.6.12",
+        "bannerSource": "cmdapp/src/svg.rs uses CARGO_PKG_VERSION; crate/package version split verified at upstream tag",
+        "svgFillLevels": [
+          52,
+          78,
+          97,
+          168
+        ],
+        "inputBandFractions": [
+          0.17875486381322958,
+          0.35588197146562905,
+          0.2811154345006485,
+          0.18424773022049287
+        ],
+        "renderedNearestBandFractions": [
+          0.1730998702983139,
+          0.36636186770428014,
+          0.2802658884565499,
+          0.18027237354085604
+        ],
+        "bandFractionL1": 0.020959792477302203,
+        "allFourBandsRetained": true,
+        "antialiasing": "Rendered edges may add intermediate values; SVG fills exactly match the input palette.",
+        "spatialBandAgreement": {
+          "pixelBandAgreement": 0.92847,
+          "perBandIoU": {
+            "52": 0.85168,
+            "78": 0.87258,
+            "97": 0.85547,
+            "168": 0.88614
+          },
+          "boundaryDefinition": "input pixels with any in-frame four-neighbour in another quantized band; rate denominator is this boundary set",
+          "boundaryPixelCount": 30689,
+          "boundaryBandMismatchRate": 0.35146,
+          "quantizedBandFractions": [
+            0.17875,
+            0.35588,
+            0.28112,
+            0.18425
+          ],
+          "renderedBandFractions": [
+            0.1731,
+            0.36636,
+            0.28027,
+            0.18027
+          ],
+          "scope": "nearest-palette band map of quantized input versus rendered PNG; measures spatial structure, not only histogram"
+        }
+      },
+      "hybrid": "actual method-01 circles selected above gray .45 plus actual method-02 directional paths selected at/below gray .45; final shared scale calibrated to target coverage",
+      "budget": "same source darkness target, not equal geometry complexity; see measured elements/segments/length/bytes/runtime",
+      "pointConstruction": "weighted Lloyd sampling on 144-px luminance grid; frozen rounded point fixture for cross-build replay",
+      "toneConventionSensitivity": {
+        "itu601Gamma": 0.60952,
+        "rec709Gamma": 0.60006,
+        "simpleRgbMean": 0.5831
+      },
+      "metrics": {
+        "baseline": {
+          "coverage": 0.609529,
+          "coverageError": 0.0,
+          "blockRmse8bit": 0.0,
+          "inkedPixelsBelow128": 124814,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.0,
+              "p05": 0.0,
+              "p50": 0.0,
+              "p95": 0.0
+            },
+            "blockAbsErrorGt5ppFraction": 0.0,
+            "blockAbsErrorGt10ppFraction": 0.0,
+            "toneDecileSignedErrorPp": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 0.0
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 133686,
+          "renderMilliseconds": 73.66195400000015,
+          "engineMilliseconds": 38.68560700000012,
+          "finalRasterMilliseconds": null,
+          "calibrationMilliseconds": 0,
+          "mode": "solid; one black darkness ink on white; continuous-tone context, not halftone",
+          "generationMilliseconds": 0,
+          "role": "single black authored Pillow-L darkness mask through existing Core.renderLayers; solid, continuous-tone reference"
+        },
+        "01-weighted-stipple": {
+          "coverage": 0.609541,
+          "coverageError": 1.2e-05,
+          "blockRmse8bit": 7.7537,
+          "inkedPixelsBelow128": 94587,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.021,
+              "p05": -5.257,
+              "p50": 0.093,
+              "p95": 4.547
+            },
+            "blockAbsErrorGt5ppFraction": 0.07422,
+            "blockAbsErrorGt10ppFraction": 0.0,
+            "toneDecileSignedErrorPp": [
+              1.341,
+              1.255,
+              2.018,
+              1.323,
+              1.264,
+              0.275,
+              -0.797,
+              0.176,
+              -2.213,
+              -4.361
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.51191
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.457601,
+              0.020045,
+              0.012588,
+              0.012315,
+              0.009222,
+              0.010337,
+              0.008599,
+              0.010078,
+              0.008625,
+              0.012341,
+              0.00821,
+              0.009838,
+              0.00762,
+              0.00915,
+              0.00727,
+              0.009565,
+              0.006842,
+              0.01179,
+              0.007296,
+              0.009215,
+              0.006757,
+              0.008664,
+              0.007458,
+              0.00915,
+              0.00666,
+              0.011271,
+              0.008333,
+              0.00976,
+              0.00893,
+              0.01094,
+              0.011232,
+              0.252296
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 153341,
+          "elements": 3000,
+          "circles": 3000,
+          "paths": 0,
+          "lineSegments": 0,
+          "pathLengthSourcePx": 0,
+          "svgBytes": 193104,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "circleRadiusPx": {
+            "min": 1.8357,
+            "median": 3.1523,
+            "max": 5.1858,
+            "mean": 3.1586
+          },
+          "sumCircleAreaFraction": 0.62285,
+          "clippedCircleFraction": 0.04833,
+          "overlappingCircleFraction": 0.771,
+          "overlappingPairsPerCircle": 0.67433,
+          "overlapDefinition": "fraction of circles touching at least one other circle; separate pair count per circle is not an area fraction",
+          "target": 0.60952928460619,
+          "globalMarkScale": 1.0108642578125,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 296.42139999999995,
+          "calibrationMilliseconds": 267.0589100000002,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 11.350120999999945,
+          "generationMilliseconds": 64.99111399989488
+        },
+        "02-directional-hatch": {
+          "coverage": 0.609523,
+          "coverageError": -6e-06,
+          "blockRmse8bit": 7.2303,
+          "inkedPixelsBelow128": 94067,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.026,
+              "p05": -4.875,
+              "p50": 0.145,
+              "p95": 3.819
+            },
+            "blockAbsErrorGt5ppFraction": 0.05469,
+            "blockAbsErrorGt10ppFraction": 0.01562,
+            "toneDecileSignedErrorPp": [
+              -1.196,
+              -0.567,
+              0.41,
+              1.105,
+              1.353,
+              1.195,
+              1.597,
+              0.685,
+              -1.534,
+              -2.683
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.54341
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.470422,
+              0.015713,
+              0.011252,
+              0.010104,
+              0.00978,
+              0.008204,
+              0.008314,
+              0.012075,
+              0.010687,
+              0.010233,
+              0.009877,
+              0.006868,
+              0.006699,
+              0.006466,
+              0.00559,
+              0.00775,
+              0.00644,
+              0.00666,
+              0.007023,
+              0.006693,
+              0.008359,
+              0.009611,
+              0.009034,
+              0.016498,
+              0.007724,
+              0.007147,
+              0.006732,
+              0.007639,
+              0.010908,
+              0.008891,
+              0.015467,
+              0.255143
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 142749,
+          "elements": 2400,
+          "circles": 0,
+          "paths": 2400,
+          "lineSegments": 2400,
+          "pathLengthSourcePx": 19200.0,
+          "svgBytes": 206017,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "strokeWidthPx": {
+            "min": 0.9776,
+            "median": 4.3249,
+            "max": 6.236,
+            "count": 2400
+          },
+          "target": 0.60952928460619,
+          "globalMarkScale": 0.8179931640625,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 317.3119370000004,
+          "calibrationMilliseconds": 289.44597699999986,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 11.855328999999983,
+          "generationMilliseconds": 13.486557000305766
+        },
+        "03-continuous-route": {
+          "coverage": 0.609528,
+          "coverageError": -1e-06,
+          "blockRmse8bit": 58.2083,
+          "inkedPixelsBelow128": 94028,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.068,
+              "p05": -38.095,
+              "p50": 0.513,
+              "p95": 37.617
+            },
+            "blockAbsErrorGt5ppFraction": 0.78906,
+            "blockAbsErrorGt10ppFraction": 0.63672,
+            "toneDecileSignedErrorPp": [
+              16.019,
+              13.261,
+              4.382,
+              -0.305,
+              -0.439,
+              -1.099,
+              -9.588,
+              2.229,
+              -7.491,
+              -16.082
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.86512
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.572004,
+              0.004053,
+              0.003502,
+              0.002808,
+              0.002665,
+              0.002412,
+              0.002309,
+              0.002802,
+              0.002166,
+              0.002205,
+              0.002244,
+              0.002276,
+              0.001868,
+              0.002043,
+              0.002101,
+              0.002322,
+              0.002147,
+              0.001991,
+              0.001958,
+              0.002108,
+              0.001796,
+              0.002173,
+              0.001907,
+              0.003106,
+              0.002549,
+              0.002399,
+              0.002205,
+              0.002575,
+              0.002691,
+              0.00334,
+              0.004416,
+              0.35286
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 49028,
+          "elements": 1,
+          "circles": 0,
+          "paths": 1,
+          "lineSegments": 599,
+          "pathLengthSourcePx": 8896.239,
+          "svgBytes": 11789,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "strokeWidthPx": {
+            "min": 12.4708,
+            "median": 12.4708,
+            "max": 12.4708,
+            "count": 1
+          },
+          "target": 0.60952928460619,
+          "globalMarkScale": 12.4708251953125,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 70.88856699999997,
+          "calibrationMilliseconds": 58.815664999999626,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 2.6400979999998526,
+          "generationMilliseconds": 9.903292999752011
+        },
+        "04-vector-regions": {
+          "coverage": 0.627142,
+          "coverageError": 0.017613,
+          "blockRmse8bit": 11.9749,
+          "inkedPixelsBelow128": 126211,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 1.773,
+              "p05": -3.78,
+              "p50": 1.063,
+              "p95": 9.388
+            },
+            "blockAbsErrorGt5ppFraction": 0.25781,
+            "blockAbsErrorGt10ppFraction": 0.05078,
+            "toneDecileSignedErrorPp": [
+              9.019,
+              6.673,
+              5.12,
+              2.291,
+              -0.712,
+              1.317,
+              0.428,
+              -1.755,
+              -0.77,
+              -3.854
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.40003
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.167892,
+              0.003794,
+              0.004442,
+              0.356712,
+              0.006621,
+              0.006064,
+              0.268106,
+              0.00177,
+              0.001505,
+              0.001582,
+              0.001641,
+              0.001427,
+              0.001783,
+              0.001712,
+              0.001167,
+              0.173781,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 28708,
+          "elements": 350,
+          "circles": 0,
+          "paths": 350,
+          "lineSegments": 5587,
+          "pathLengthSourcePx": 31295.613,
+          "svgBytes": 58482,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 1,
+          "normalization": "no global normalization: input palette geometry evaluated separately",
+          "renderMilliseconds": 11.989668000000165,
+          "calibrationMilliseconds": 0,
+          "calibrationSteps": 0,
+          "finalRasterMilliseconds": 3.5360109999996894,
+          "generationMilliseconds": 53.80507999961992
+        },
+        "05-dither": {
+          "coverage": 0.610409,
+          "coverageError": 0.000879,
+          "blockRmse8bit": 0.92,
+          "inkedPixelsBelow128": 94125,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.088,
+              "p05": -0.429,
+              "p50": 0.079,
+              "p95": 0.647
+            },
+            "blockAbsErrorGt5ppFraction": 0.0,
+            "blockAbsErrorGt10ppFraction": 0.0,
+            "toneDecileSignedErrorPp": [
+              -0.069,
+              -0.039,
+              0.099,
+              0.022,
+              0.044,
+              0.086,
+              0.1,
+              0.152,
+              0.25,
+              0.227
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.99725
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.610409,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.389591
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 21444,
+          "generationMilliseconds": 12.519306999820401,
+          "role": "unconstrained raster tonal reference; complexity not matched"
+        },
+        "06-hybrid": {
+          "coverage": 0.6095,
+          "coverageError": -2.9e-05,
+          "blockRmse8bit": 16.3999,
+          "inkedPixelsBelow128": 94158,
+          "pixelCount": 154200,
+          "localTone": {
+            "blockSignedErrorPp": {
+              "mean": 0.02,
+              "p05": -13.093,
+              "p50": 2.292,
+              "p95": 6.816
+            },
+            "blockAbsErrorGt5ppFraction": 0.45703,
+            "blockAbsErrorGt10ppFraction": 0.09375,
+            "toneDecileSignedErrorPp": [
+              -6.615,
+              -6.682,
+              -5.59,
+              2.403,
+              4.167,
+              2.862,
+              4.214,
+              4.517,
+              0.88,
+              0.214
+            ],
+            "toneDecileOrder": "lightest to darkest 16x16 source blocks",
+            "histogramL1_32Bins": 1.6027
+          },
+          "toneHistogram": {
+            "bins": 32,
+            "range8bit": [
+              0,
+              255
+            ],
+            "source": [
+              0.001375,
+              0.005973,
+              0.009339,
+              0.014235,
+              0.023521,
+              0.031213,
+              0.031634,
+              0.049844,
+              0.073197,
+              0.163599,
+              0.130707,
+              0.079481,
+              0.060337,
+              0.06083,
+              0.061829,
+              0.012315,
+              0.010006,
+              0.011407,
+              0.01107,
+              0.010655,
+              0.010175,
+              0.010908,
+              0.011518,
+              0.014527,
+              0.018385,
+              0.023664,
+              0.040266,
+              0.016615,
+              0.001323,
+              4.5e-05,
+              6e-06,
+              0.0
+            ],
+            "rendered": [
+              0.488742,
+              0.01561,
+              0.009501,
+              0.009708,
+              0.008424,
+              0.006323,
+              0.007127,
+              0.008606,
+              0.007918,
+              0.00832,
+              0.008294,
+              0.005396,
+              0.005078,
+              0.005428,
+              0.005078,
+              0.01107,
+              0.006427,
+              0.00618,
+              0.007789,
+              0.006958,
+              0.006952,
+              0.007776,
+              0.007036,
+              0.012244,
+              0.00548,
+              0.005123,
+              0.005584,
+              0.006271,
+              0.008411,
+              0.008405,
+              0.014715,
+              0.274027
+            ]
+          },
+          "coverageSemantics": "coverage = mean(1-Pillow L/255) of the rendered white-paper PNG; target = mean(1-Pillow L/255) of source-luminance.png; gamma-encoded, no linearization",
+          "encodedBytes": 127758,
+          "elements": 2250,
+          "circles": 391,
+          "paths": 1859,
+          "lineSegments": 1859,
+          "pathLengthSourcePx": 14872.0,
+          "svgBytes": 184441,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "circleRadiusPx": {
+            "min": 1.6331,
+            "median": 2.6353,
+            "max": 3.9616,
+            "mean": 2.6406
+          },
+          "sumCircleAreaFraction": 0.05669,
+          "clippedCircleFraction": 0.00767,
+          "overlappingCircleFraction": 0.03325,
+          "overlappingPairsPerCircle": 0.0179,
+          "overlapDefinition": "fraction of circles touching at least one other circle; separate pair count per circle is not an area fraction",
+          "strokeWidthPx": {
+            "min": 1.5769,
+            "median": 4.7215,
+            "max": 6.5468,
+            "count": 1859
+          },
+          "target": 0.60952928460619,
+          "globalMarkScale": 0.8587646484375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 279.53643299999976,
+          "calibrationMilliseconds": 246.5210430000002,
+          "calibrationSteps": 18,
+          "finalRasterMilliseconds": 14.689555999999811,
+          "generationMilliseconds": 3.4643740000319667
+        }
+      },
+      "artifacts": {
+        "architecture/01-weighted-stipple.png": {
+          "sha256": "2673af00ed22713f51bcfb106d1e20d31130cff135d835daa9ad1a6e32b50677",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "1ad5cf731b91f124ac747a1b486ec5f455888d903c961816705fb83718f4a2e9"
+          }
+        },
+        "architecture/01-weighted-stipple.svg": {
+          "sha256": "8bc199a63661008faea926fcfd9a2b89a3ae1597c85b6062b23374ab0da19866"
+        },
+        "architecture/02-directional-hatch.png": {
+          "sha256": "03c4d464a19b5c42cac3e175bc6e47ecc8a5aa5dfe5bf3191d0f68af81e23bf0",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "29e117ca09f4918c5ec1626f47cbebf90b41ad75fbe3cd70a3264d51927e38b6"
+          }
+        },
+        "architecture/02-directional-hatch.svg": {
+          "sha256": "ceb3d484b2b61496acb57bbfcde0393eb079baae92c33a98c02fbba8129ac847"
+        },
+        "architecture/03-continuous-route.png": {
+          "sha256": "d7af49f5a8259940a4fa42e95e98cf8b671e9ab291628f768d86a4bbde5e3c74",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "df740a4e4d65473779d9e0f30f943aad70a7639bc3654b7241c9caf80e3f7ede"
+          }
+        },
+        "architecture/03-continuous-route.svg": {
+          "sha256": "ed419c5ac910ab55b506210df7e182215eed5a83f8bd4b49a49a6a0bedf88eab"
+        },
+        "architecture/04-vector-regions.png": {
+          "sha256": "c0b83bfbd0008c07b6dab9c2d35d5284127961b14c6f8fe4c3d3d5bf40606b0c",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a60f0e229eacb3b7652826a48437b7e652e4f721ea7d176a85af1575c2871431"
+          }
+        },
+        "architecture/04-vector-regions.svg": {
+          "sha256": "c570918780f1ba5086c2961513591ecb8058180965d2439d7bef01bf16c2851b"
+        },
+        "architecture/05-dither.png": {
+          "sha256": "3c06698263af5b079b2ec3db57e967f2170ec74cdd837803b54dc71e1308ba9b",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a39170df777c4e5d09ae1e4389af16f6e3effbdb03f579fe18b40dc0d8718aaf"
+          }
+        },
+        "architecture/06-hybrid.png": {
+          "sha256": "fd85fe3f5fab7f2757f5bc89cd95d751815770e334c1829c93830b2786a199c4",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "6649a3750fc9739c1434e5f0db2ebf377114d53abc5593313a10344a1f2b9a9c"
+          }
+        },
+        "architecture/06-hybrid.svg": {
+          "sha256": "204ba53a7944f235f972c9f070d91dba709d2094ad804b745d2682c3cf083113"
+        },
+        "architecture/baseline-recipe.json": {
+          "sha256": "52fcfb56893cebae4b73c154ce177bceb1cb4833625eac7ba2983d356d31c732"
+        },
+        "architecture/baseline-two-ink-context-recipe.json": {
+          "sha256": "bbae123dcf40be2fe7d3c8eb172257086fe5ba5481c6c47e9966e29c411c1044"
+        },
+        "architecture/baseline-two-ink-context.png": {
+          "sha256": "91e0c03c79e3523a82fa8a5d43eaa0b6be4703336635e293a08bf62756284846",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "bff0117ceb6fff502ab79fa010f64e795e1d32ab93f4a25e7ddce8bd93d7541d"
+          }
+        },
+        "architecture/baseline.png": {
+          "sha256": "859e35ccfbfdf0ec4f8e69fa7de7c20792c9145df1cc5d0ba99cddad71b57538",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "e766af524358f8c38885cb0b364c96c673551677a01af6b92b28e28b13c57c3d"
+          }
+        },
+        "architecture/points.json": {
+          "sha256": "e9e8d2ecab6cdf66c125251e1d17d061f32e30120d8664a9d6cfbf70a10448a2"
+        },
+        "architecture/quantized.png": {
+          "sha256": "e66d8fd1038ba5cec639b82d3313b6a7159e6c4d148708ad184b4e7b561751a6",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a0d9db1e694b14e40867dec6a7d72477ce8dc3b5a5700eb169768c3308ac2f58"
+          }
+        },
+        "architecture/source-luminance.png": {
+          "sha256": "3aec4729d3b0dc1e38002aa94e20f221b4e76dfc384f3cfe2b1ae27b6f14e9b0",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "e766af524358f8c38885cb0b364c96c673551677a01af6b92b28e28b13c57c3d"
+          }
+        },
+        "architecture/source.png": {
+          "sha256": "9ef07672cd174a31ee37db92b32ec61e690c81d4cc2448528943fe4f940e32c7",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "15afe8f3e0ddf872baaefdacdf38c0e101552bac4f89e4240d239d6d17069725"
+          }
+        }
+      }
+    }
+  ],
+  "revision": "coverage-controlled-v2+review-metrics",
+  "previousEvidence": {
+    "path": "docs/evidence/reconstruction-study-01-v2-original.json",
+    "sha256": "cc2a9b4178a08f6d0d487844422f79bad69b73e7eaf21d4b9f3d4d703e3a683e",
+    "scope": "Original 1ddd32e recording preserved byte-for-byte; current evidence is independently regenerated on Linux, not substituted Windows evidence."
+  },
+  "rights": {
+    "portrait": {
+      "credit": "NASA / Eileen Collins",
+      "status": "Public domain per scikit-image dataset documentation",
+      "page": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut",
+      "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.21.0/skimage/data/astronaut.png"
+    },
+    "architecture": {
+      "credit": "Noclip",
+      "status": "Released worldwide into the public domain by author",
+      "page": "https://commons.wikimedia.org/wiki/File:Capitol_Building_Full_View.jpg",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/2/27/Capitol_Building_Full_View.jpg"
+    }
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "zlibRuntime": "1.3.2",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "Pillow": "12.3.0",
+    "ReportLab": "4.4.9",
+    "vtracerBinding": "0.6.15",
+    "node": "v24.19.0",
+    "skiaCanvas": "3.0.8",
+    "sourceBaselineCommit": "29cb4fe1132c07adf1f5c0f67ab3d11596af2561",
+    "generationCommit": "3deeab829678e10ebe8953b459723f4c68f674d9",
+    "generationTreeDirty": true,
+    "scriptsSha256": {
+      "measure.py": "37b5e7f56326b178701cc52d0fdccdc24864de675eb8351fc289d86f960bc459",
+      "package.py": "423212313c1ef6ab35c917aaeeabe6bbd724d67d3578ac53a6df0a4a9627c0bd",
+      "render.cjs": "6f2216d66e76fbb188d970c4f9b17c22a59909dfff0b1eb4c5fc2db033f9e34f",
+      "replay.py": "8622a2f6d49fe4d6133e561a841e0a87cfa85d01363069788d80d8eeecf98378",
+      "report.py": "d91c555aa677446c5ff84c49dd55195308935ac8440995ab8e6f7a3e977e90b1",
+      "study.py": "339ae295b46e43e3be9c1cb2294e750fe0cbcad8ff3b3d764c3485753d898dae",
+      "test_metrics.py": "1f4ee894647f88cf0b39c57ca3457965473b06a7967ebbec0cece149aa02a8c6"
+    }
+  },
+  "reproducibility": {
+    "scope": "Same frozen points and same-environment replay checked by examples/reconstruction-study/replay.py; cross-build exact geometry is not independently verified. Encoder byte identity is not pixel identity. Runtime measurements vary.",
+    "decodedPixelHash": "SHA-256 of UTF-8 WIDTHxHEIGHT:RGBA8 + newline followed by Pillow-converted row-major RGBA8 bytes",
+    "frozenPoints": "Committed rounded five-decimal points bypass floating CDF/RNG sampling differences during replay. Cell assignment still uses the recorded SciPy build; fixture and script hashes are line-ending independent.",
+    "textPortability": "Text artifacts are written with explicit UTF-8 and LF; .gitattributes keeps the study tree LF on Windows checkouts.",
+    "priorRepeatClaim": "v1 repeatGeometryAndRasterHashesIdentical meant same-machine/build only; superseded by this scoped record.",
+    "sameEnvironmentReplay": {
+      "matchedArtifacts": 32,
+      "comparedArtifacts": 32,
+      "allEqual": true,
+      "scope": "Exact generated LF SVG bytes and canonical decoded RGBA8 hashes only; encoder bytes, timings and PDF bytes excluded.",
+      "procedure": "examples/reconstruction-study/replay.py"
+    }
+  },
+  "acceptance": {
+    "coverageToleranceAbsolute": 0.005,
+    "humanBlindRankings": 0,
+    "physicalPrints": false,
+    "independentCrossBuildReplay": false,
+    "decisionGrade": false,
+    "note": "Coverage controlled, geometry complexity disclosed rather than matched, local tone residuals reported. Digital tone metrics do not measure artistic usefulness."
+  },
+  "toneConvention": {
+    "sourceLuma": "Pillow L (ITU-R 601-2, gamma-encoded 8-bit)",
+    "target": "mean(1 - Pillow L/255) over the full frame",
+    "rendered": "black ink on white paper; coverage = mean(1 - Pillow L/255)",
+    "linearization": "none; density is gamma-encoded, not linear-light",
+    "note": "Target-relevant differences exceed the 0.5 pp coverage guard; this record fixes the convention to Pillow L."
+  },
+  "reportArtifacts": {
+    "architecture-comparison.png": {
+      "sha256": "33777601455c28628f0bf02e74c6e6d5d777f186dec575f65a57977c7d09880a",
+      "bytes": 748948,
+      "decodedPixels": {
+        "width": 1600,
+        "height": 1000,
+        "mode": "RGBA8",
+        "sha256": "13ff02e5e2d0ae74c4d820c81872c6259464e14e044bdbe5087951c70929f8a3"
+      }
+    },
+    "portrait-comparison.png": {
+      "sha256": "9c8bd0b3ec6b9fff199dd03e8424ba0bd6230876f37468f91c5f229ea5afae41",
+      "bytes": 1552429,
+      "decodedPixels": {
+        "width": 1600,
+        "height": 1000,
+        "mode": "RGBA8",
+        "sha256": "e548430346081615327182bc95b33ba62babef69394d6fc89d3f54e87572cdfb"
+      }
+    },
+    "reconstruction-study-01.pdf": {
+      "sha256": "535352b1ba153ce76a29b42d8b030bfdb2a94f291520d60556891c6971d19624",
+      "bytes": 2934943
+    },
+    "replay-check.json": {
+      "sha256": "11f38ee2294bf94e3cd7700e90ba43e449ed811932b1c71d71199842d0c70027",
+      "bytes": 3913
+    }
+  },
+  "contextOnly": "baseline-two-ink-context.png retains the v1 solid green/coral proof and its full recipe; excluded from monochrome metrics and main comparison."
+}

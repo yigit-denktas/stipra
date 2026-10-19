@@ -27,7 +27,8 @@ function roadmap(){return page('Roadmap','roadmap/',ProductRoadmap.render(produc
 function delivery(){
   const counts=validate(),milestones=ledger.milestones.map(m=>`<section><p class="eyebrow">${escape(m.state)}</p><h2>${escape(m.version)}</h2><p>${escape(m.exit)}</p><p>Relevant gates: ${m.tasks.map(issue).join(' · ')}</p></section>`).join('');
   function task(t){return `<details id="task-${t.issue}"><summary>#${t.issue} ${escape(t.title)} <span class="task-status">${escape(t.deliveryState)}${t.optional?' / optional':''}</span></summary><p>${issue(t.issue)} · ${escape(t.note)}</p><p>Needs: ${t.dependsOn.length?t.dependsOn.map(issue).join(' · '):'No unfinished prerequisite recorded.'}</p><p>Opens: ${ledger.tasks.filter(x=>x.dependsOn.includes(t.issue)).map(x=>issue(x.issue)).join(' · ')||'Acceptance or optional end of this track.'}</p><p class="small">Tracker snapshot: ${escape(t.trackerState)} · ${t.sourceUpdatedAt?'source updated '+escape(t.sourceUpdatedAt.slice(0,10)):'closure delivered by integration'}</p></details>`;}
-  const groups=['studio','library','identity','delivery'].map(track=>{
+  const tracks=[...new Set(['studio','library','identity','delivery',...ledger.tasks.map(t=>t.track)])];
+  const groups=tracks.map(track=>{
     const tasks=ledger.tasks.filter(t=>t.track===track),open=tasks.filter(t=>t.trackerState==='open'),closed=tasks.filter(t=>t.trackerState==='closed');
     return `<section><h2>${escape(track[0].toUpperCase()+track.slice(1))} tasks</h2>${open.map(task).join('')}${closed.length?`<details class="foundation"><summary>Implemented foundation / ${closed.length} closed records</summary>${closed.map(task).join('')}</details>`:''}</section>`;
   }).join('');
@@ -50,7 +51,11 @@ function build(stage){
   fs.copyFileSync(path.join(ROOT,'web/stipra/roadmap-search.js'),path.join(stage,'roadmap/roadmap-search.js'));
   const pageFile=path.join(stage,'roadmap/index.html');
   fs.writeFileSync(pageFile,fs.readFileSync(pageFile,'utf8').replace('</body>','<script defer src="./search-index.js"></script><script defer src="./roadmap-search.js"></script></body>'));
-  for(const route of ROUTES){const file=path.join(stage,route[0].endsWith('.html')?route[0]:route[0]+'index.html');if(!fs.existsSync(file))throw Error('Missing public destination '+file);let html=fs.readFileSync(file,'utf8');if(!html.includes('class="site-nav"')){const prefix=path.relative(path.dirname(file),stage).split(path.sep).join('/')||'.',nav=navigation(prefix+'/',route[0]);html=html.replace(/(<body\b[^>]*>)/i,'$1'+nav);}
+  for(const route of ROUTES){const file=path.join(stage,route[0].endsWith('.html')?route[0]:route[0]+'index.html');if(!fs.existsSync(file))throw Error('Missing public destination '+file);let html=fs.readFileSync(file,'utf8');
+    const description=route[2]+' Local-first printmaking; experimental digital proofs.';
+    if(!/<meta\s+name=["']description["']/i.test(html))html=html.replace('</head>','<meta name="description" content="'+escape(description)+'"></head>');
+    if(!/<link\s+rel=["']canonical["']/i.test(html))html=html.replace('</head>','<link rel="canonical" href="'+escape(ledger.primary+route[0])+'"></head>');
+    if(!html.includes('class="site-nav"')){const prefix=path.relative(path.dirname(file),stage).split(path.sep).join('/')||'.',nav=navigation(prefix+'/',route[0]);html=html.replace(/(<body\b[^>]*>)/i,'$1'+nav);}
     if(!html.includes('class="skip-link"')){if(!/<main\b/.test(html))throw Error('Missing main destination '+file);html=html.replace(/<main\b/,'<main id="main-content" tabindex="-1"');html=html.replace(/(<body\b[^>]*>)/i,'$1<a class="skip-link" href="#main-content">Skip to content</a>');}fs.writeFileSync(file,html);}
   fs.writeFileSync(path.join(stage,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+ROUTES.map(([route])=>'<url><loc>'+escape(ledger.primary+route)+'</loc></url>').join('')+'</urlset>\n');
   return {routes:ROUTES.map(x=>x[0]),tasks:ledger.tasks.length};
