@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Verify the main Studio candidate and prepare prerelease notes",
+      "status": "Development",
+      "issues": [
+        13,
+        14,
+        70
+      ],
+      "changes": [
+        "Verify the main-build archive against its GitHub digest and every manifest file; record successful main CI/Pages and local release-history checks.",
+        "Prepare exact-commit prerelease notes without creating a tag, release or npm publication. Record browser transfer/extension blockers and retain all human/native gates."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Prepare the experimental Studio release candidate",
       "status": "Development",
       "issues": [

@@ -857,6 +857,15 @@
       "capabilityId": "OPS-01",
       "title": "Prepare a scoped digital Studio candidate and retain its exact-run browser build",
       "sourceTitle": "Prepare the experimental Studio release candidate"
+    },
+    {
+      "id": "DEV-032",
+      "date": "2026-10-19",
+      "type": "verified",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Verify the main Studio archive and prepare exact-commit prerelease notes",
+      "sourceTitle": "Verify the main Studio candidate and prepare prerelease notes"
     }
   ],
   "libraryCapabilityIds": [
