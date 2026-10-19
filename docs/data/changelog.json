@@ -4,6 +4,18 @@
   "entries": [
     {
       "date": "2026-10-19",
+      "title": "Correct reconstruction study coverage and evidence controls",
+      "status": "Development",
+      "issues": [
+        109
+      ],
+      "changes": [
+        "Withdraw sparse-mark rankings; rerun tone-normalized stipple/hatch/route/hybrid and verify four-band VTracer output. No production modes or defaults change.",
+        "Add single-ink solid reference, complexity/tone tables, frozen points, decoded-pixel hashes and complete delivery manifest. Human blind ranking remains unperformed."
+      ]
+    },
+    {
+      "date": "2026-10-19",
       "title": "Compare reconstruction methods and reconcile research delivery",
       "status": "Development",
       "issues": [

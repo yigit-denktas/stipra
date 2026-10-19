@@ -1,5 +1,5 @@
 {
-  "contract": "stipra-reconstruction-study-01",
+  "contract": "stipra-reconstruction-study-01-v2",
   "fixtures": [
     {
       "id": "portrait",
@@ -13,35 +13,321 @@
         512,
         512
       ],
-      "normalization": "full frame, longest edge 600 px; research resampling declared; no cropping",
+      "normalization": "full frame; longest edge capped at 600 px; no upscale/crop/stretch",
+      "physicalComparison": {
+        "longestEdgeMm": 90,
+        "widthMm": 90,
+        "heightMm": 90.0,
+        "dpi": 144.49777777777777
+      },
+      "targetDarkness": 0.5474342046999463,
       "seed": 109,
       "weightedSites": 3000,
       "lloydIterations": 9,
-      "methodSeconds": 0.2501520010000604,
-      "files": {
-        "01-weighted-stipple.svg": "415a46aa60d2fbef4071c06275f49e34ec12d315237cecf99ec459fdbeb3c6b8",
-        "02-directional-hatch.svg": "34dbbb1ca6e458eadab307bdd31597b10f96063e2d222c59f3a1dfeb5d2b271d",
-        "03-continuous-route.svg": "6dd228320c5dde310f352b37482b0b44f74292d5d8d315fbac8e4e4102b5c264",
-        "04-vector-regions.svg": "4569e69f040860d983ce5fd54d5f6d1bf3664060ece7e82215f0b949ae17a5a7",
-        "05-dither.png": "f871ee459a467fe8a457b83d5ee2b58329359a56f1e3648632eaab1f0903a825",
-        "06-hybrid.svg": "74863f4a80df2519a0f77a3f20e201d758ebcb6f590d99e0f7dc933c64599b10",
-        "quantized.png": "436d493991a93da6de42c07e12e6cdfac8b655d35d57d97f57724c47b33b6331",
-        "source.png": "5056b05608d58b1fb791eb4070748a49f08d9ab57e9c950ca48fe7baf33db515"
+      "pointFixtureSha256": "d2105c24415d6e1353e9416792b60fe8bf52466917fa3029da9342e9e895fa75",
+      "generationSeconds": 0.3694494040000791,
+      "methodGenerationSeconds": {
+        "01-weighted-stipple": 0.08928885599993919,
+        "02-directional-hatch": 0.027035992000037368,
+        "03-continuous-route": 0.009170702999881541,
+        "04-vector-regions": 0.11258058799990067,
+        "05-dither": 0.019752615000015794,
+        "06-hybrid": 0.003429363000122976
       },
-      "physicalComparison": "each panel longest edge 90 mm",
-      "representations": [
-        "circle geometry",
-        "oriented line paths",
-        "greedy continuous path, NOT optimized TSP",
-        "VTracer polygon regions, 4 grayscale levels",
-        "raster only",
-        "mixed circles and lines"
-      ],
-      "limits": [
-        "Agent study only; no independent human/artist or physical print evidence",
-        "No plotter path optimization or machine-ready stencil claim",
-        "All source normalization and parameters fixed across methods"
-      ]
+      "vtracer": {
+        "bindingPackageVersion": "0.6.15",
+        "embeddedGeneratorBanner": "visioncortex VTracer 0.6.12 -->",
+        "flags": {
+          "colormode": "color",
+          "mode": "polygon",
+          "filter_speckle": 4,
+          "color_precision": 8,
+          "layer_difference": 1
+        },
+        "palette": [
+          10,
+          89,
+          154,
+          205
+        ],
+        "fillSnap": "nearest input grayscale palette; no alpha/gradient conversion",
+        "upstreamTagCommit": "fd9cdb08e622f237eb05be553a020ddc9e4c47a1",
+        "rustCrateVersion": "0.6.12",
+        "bannerSource": "cmdapp/src/svg.rs uses CARGO_PKG_VERSION; crate/package version split verified at upstream tag",
+        "svgFillLevels": [
+          10,
+          89,
+          154,
+          205
+        ],
+        "inputBandFractions": [
+          0.2727813720703125,
+          0.1894073486328125,
+          0.2825050354003906,
+          0.2553062438964844
+        ],
+        "renderedNearestBandFractions": [
+          0.2701606750488281,
+          0.19398117065429688,
+          0.2778053283691406,
+          0.2580528259277344
+        ],
+        "bandFractionL1": 0.01464080810546875,
+        "allFourBandsRetained": true,
+        "antialiasing": "Rendered edges may add intermediate values; SVG fills exactly match the input palette."
+      },
+      "hybrid": "actual method-01 circles selected above gray .45 plus actual method-02 directional paths selected at/below gray .45; final shared scale calibrated to target coverage",
+      "budget": "same source darkness target, not equal geometry complexity; see measured elements/segments/length/bytes/runtime",
+      "pointConstruction": "weighted Lloyd sampling on 144-px luminance grid; frozen rounded point fixture for cross-build replay",
+      "metrics": {
+        "baseline": {
+          "coverage": 0.5474342046999463,
+          "coverageError": 0.0,
+          "blockRmse8bit": 0.0,
+          "inkedPixelsBelow128": 128949,
+          "pixelCount": 262144,
+          "encodedBytes": 259215,
+          "renderMilliseconds": 114.085713,
+          "mode": "solid; one black darkness ink on white; continuous-tone context, not halftone",
+          "generationMilliseconds": 0,
+          "role": "single black authored Pillow-L darkness mask through existing Core.renderLayers; solid, continuous-tone reference"
+        },
+        "01-weighted-stipple": {
+          "coverage": 0.5474572723987056,
+          "coverageError": 2.3067698759191176e-05,
+          "blockRmse8bit": 10.409894660110753,
+          "inkedPixelsBelow128": 144136,
+          "pixelCount": 262144,
+          "encodedBytes": 189568,
+          "elements": 3000,
+          "circles": 3000,
+          "paths": 0,
+          "lineSegments": 0,
+          "pathLengthSourcePx": 0,
+          "svgBytes": 194090,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 1.0306396484375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 400.984665,
+          "generationMilliseconds": 89.28885599993919
+        },
+        "02-directional-hatch": {
+          "coverage": 0.5474393508013558,
+          "coverageError": 5.146101409313726e-06,
+          "blockRmse8bit": 10.532353762166705,
+          "inkedPixelsBelow128": 143229,
+          "pixelCount": 262144,
+          "encodedBytes": 263756,
+          "elements": 4096,
+          "circles": 0,
+          "paths": 4096,
+          "lineSegments": 4096,
+          "pathLengthSourcePx": 32767.998765286953,
+          "svgBytes": 353000,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 0.8551025390625,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 537.17921,
+          "generationMilliseconds": 27.035992000037368
+        },
+        "03-continuous-route": {
+          "coverage": 0.5474306143966376,
+          "coverageError": -3.5903033088235294e-06,
+          "blockRmse8bit": 59.14777234104896,
+          "inkedPixelsBelow128": 143544,
+          "pixelCount": 262144,
+          "encodedBytes": 71674,
+          "elements": 1,
+          "circles": 0,
+          "paths": 1,
+          "lineSegments": 599,
+          "pathLengthSourcePx": 10926.516810477293,
+          "svgBytes": 11989,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 15.2122802734375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 91.3914749999999,
+          "generationMilliseconds": 9.170702999881541
+        },
+        "04-vector-regions": {
+          "coverage": 0.5461689967735142,
+          "coverageError": -0.0012652079264322917,
+          "blockRmse8bit": 7.623209489274973,
+          "inkedPixelsBelow128": 122288,
+          "pixelCount": 262144,
+          "encodedBytes": 99560,
+          "elements": 458,
+          "circles": 0,
+          "paths": 458,
+          "lineSegments": 9165,
+          "pathLengthSourcePx": 65096.24495003688,
+          "svgBytes": 90972,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 1,
+          "normalization": "no global normalization: input palette geometry evaluated separately",
+          "renderMilliseconds": 24.81789200000003,
+          "generationMilliseconds": 112.58058799990067
+        },
+        "05-dither": {
+          "coverage": 0.5477752685546875,
+          "coverageError": 0.0003410638547411152,
+          "blockRmse8bit": 0.8216170904400394,
+          "inkedPixelsBelow128": 143596,
+          "pixelCount": 262144,
+          "encodedBytes": 44103,
+          "generationMilliseconds": 19.752615000015794,
+          "role": "unconstrained raster tonal reference; complexity not matched"
+        },
+        "06-hybrid": {
+          "coverage": 0.5473919139188879,
+          "coverageError": -4.2290781058517156e-05,
+          "blockRmse8bit": 12.563631079324393,
+          "inkedPixelsBelow128": 143977,
+          "pixelCount": 262144,
+          "encodedBytes": 157440,
+          "elements": 2706,
+          "circles": 929,
+          "paths": 1777,
+          "lineSegments": 1777,
+          "pathLengthSourcePx": 14215.999564893622,
+          "svgBytes": 213511,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.5474342046999463,
+          "globalMarkScale": 0.9808349609375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 341.675524,
+          "generationMilliseconds": 3.429363000122976
+        }
+      },
+      "artifacts": {
+        "portrait/01-weighted-stipple.png": {
+          "sha256": "74dea0a2a504507039c906d2c6c35a793cd471c5ad387d488a01172fb2797d5c",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "d5a1b0151f25fe0db0e45967e781236ef56a2d7c631e4da97904db7720df22a7"
+          }
+        },
+        "portrait/01-weighted-stipple.svg": {
+          "sha256": "9545880ba3a42e1e0a639445a55c0064d6a9a72a644535111d59f6bfc7a91ad0"
+        },
+        "portrait/02-directional-hatch.png": {
+          "sha256": "8042ddd3421a886e8c2c404dac48bd7d515cf623df8f6441dcd6870c30726f48",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "c1bc286aacb0fb6517fe2f387d23f3bd7be69e7ac74d1507b8ca2f374bbd3cf8"
+          }
+        },
+        "portrait/02-directional-hatch.svg": {
+          "sha256": "24ec995198d6d6d6cd375cc7271dd4ee763ddab20541e5c073bcbc3f7c7252f5"
+        },
+        "portrait/03-continuous-route.png": {
+          "sha256": "e9d06596488bff112e8281b220562617f53a42565b3d010f4ec1ead13c2a2304",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "9d1b7e9b79412a92b0b53f6941621a471553c5a66fc2d63344c29c00d39754c7"
+          }
+        },
+        "portrait/03-continuous-route.svg": {
+          "sha256": "1f7f8a04f5f3fe5bf56c0ecc61c8974c3b4ba6e9750c3d971baf2243c9c3fdb5"
+        },
+        "portrait/04-vector-regions.png": {
+          "sha256": "805308e332672583848b5ae71455ec3d411e0cf261ae1b3a71263bf018b5f32c",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "5cf066a476cb48c3d0189962b296df0c3eb9ecaf4f6a10f418ef5b0d383b1559"
+          }
+        },
+        "portrait/04-vector-regions.svg": {
+          "sha256": "0aaeed3f50534de0046e012401d2e3ab39a00ef1050ffc617960591176032a0b"
+        },
+        "portrait/05-dither.png": {
+          "sha256": "f871ee459a467fe8a457b83d5ee2b58329359a56f1e3648632eaab1f0903a825",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "49f8783ce0046ae7b4d82094f2bb504e5a156b6c0eb05991eca2d4f8838c226b"
+          }
+        },
+        "portrait/06-hybrid.png": {
+          "sha256": "a563a55554c2b424745a6d26d00c3ef2ab74d306df4d39c11e16dd9c45d42c30",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "067a35c7a76548f29ec241c07e47b7c2ff53e69a33b110574b89bd61be94d736"
+          }
+        },
+        "portrait/06-hybrid.svg": {
+          "sha256": "7daf9e05c387f3085522d5b60629ba489c554938b6b1bc130d9f7d8de7700cf6"
+        },
+        "portrait/baseline-recipe.json": {
+          "sha256": "9bff2b4395d7d30b9aeef05357be79f8c176b20572cb0ff7f3c2ab5a9c18aab4"
+        },
+        "portrait/baseline-two-ink-context-recipe.json": {
+          "sha256": "20af31cb1b6672c9261d65138b3d611c1c911e0938c4f9c45f65111ca818092c"
+        },
+        "portrait/baseline-two-ink-context.png": {
+          "sha256": "d8c6af8ee9b13ed617c972451658b16261ad7b0511ccec71d05a771fab17ac7f",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "d5c9fa311e9473f41d9644a51eb16ed1491ad47beaaaa75204cbb48f66af92db"
+          }
+        },
+        "portrait/baseline.png": {
+          "sha256": "d9b9c8e4e77e4aa2765ec743fbda5d37a6de909bf37d6457b04fae64cb879f6d",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "a8ff984b887bb438ec515baa722617d80459948d601be6eef47b0ae713c2c7ce"
+          }
+        },
+        "portrait/points.json": {
+          "sha256": "d2105c24415d6e1353e9416792b60fe8bf52466917fa3029da9342e9e895fa75"
+        },
+        "portrait/quantized.png": {
+          "sha256": "436d493991a93da6de42c07e12e6cdfac8b655d35d57d97f57724c47b33b6331",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "bc407ef3dded36398b358c326589e1f9df2fa854623ee56ed33899c5db6cd883"
+          }
+        },
+        "portrait/source-luminance.png": {
+          "sha256": "fc9a97ac5e61250811c61332f71fbf2edef48d238508358d48c6dc5e42d9fa8b",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "a8ff984b887bb438ec515baa722617d80459948d601be6eef47b0ae713c2c7ce"
+          }
+        },
+        "portrait/source.png": {
+          "sha256": "5056b05608d58b1fb791eb4070748a49f08d9ab57e9c950ca48fe7baf33db515",
+          "decodedPixels": {
+            "width": 512,
+            "height": 512,
+            "mode": "RGBA8",
+            "sha256": "01a09a89e89c38465df0647801b8694fc920237c19c364434710d2d91e0d0ccf"
+          }
+        }
+      }
     },
     {
       "id": "architecture",
@@ -55,38 +341,324 @@
         600,
         257
       ],
-      "normalization": "full frame, longest edge 600 px; research resampling declared; no cropping",
+      "normalization": "full frame; longest edge capped at 600 px; no upscale/crop/stretch",
+      "physicalComparison": {
+        "longestEdgeMm": 90,
+        "widthMm": 90,
+        "heightMm": 38.55,
+        "dpi": 169.33333333333334
+      },
+      "targetDarkness": 0.60952928460619,
       "seed": 109,
       "weightedSites": 3000,
       "lloydIterations": 9,
-      "methodSeconds": 0.1252325989999008,
-      "files": {
-        "01-weighted-stipple.svg": "8a3aac04180c6bf977c73d3377d922e507c265ce709fffd12119c6bab8319410",
-        "02-directional-hatch.svg": "9d308fde1a54a470b0a7a0ee1a578ddb26b8b80cf092eefd3da1e5e341e5975f",
-        "03-continuous-route.svg": "44dcf4ba00a1c928620bf26ed1fb4f6ac7eda5c817bf97f94f8fce0c912825d2",
-        "04-vector-regions.svg": "8dd573cd76f130ce7c40d06f0e6c52a8dd3a2abeed07920db46369d9dadce5d9",
-        "05-dither.png": "3c06698263af5b079b2ec3db57e967f2170ec74cdd837803b54dc71e1308ba9b",
-        "06-hybrid.svg": "b1189bfac012273abfc63abbf648a458a51658bbd496c5f21f1867563df465db",
-        "quantized.png": "e66d8fd1038ba5cec639b82d3313b6a7159e6c4d148708ad184b4e7b561751a6",
-        "source.png": "9ef07672cd174a31ee37db92b32ec61e690c81d4cc2448528943fe4f940e32c7"
+      "pointFixtureSha256": "e9e8d2ecab6cdf66c125251e1d17d061f32e30120d8664a9d6cfbf70a10448a2",
+      "generationSeconds": 0.4593913389999216,
+      "methodGenerationSeconds": {
+        "01-weighted-stipple": 0.05988026499994703,
+        "02-directional-hatch": 0.01303003499992883,
+        "03-continuous-route": 0.009348086999807492,
+        "04-vector-regions": 0.052821068999946874,
+        "05-dither": 0.012156205000110276,
+        "06-hybrid": 0.0031849289998717722
       },
-      "physicalComparison": "each panel longest edge 90 mm",
-      "representations": [
-        "circle geometry",
-        "oriented line paths",
-        "greedy continuous path, NOT optimized TSP",
-        "VTracer polygon regions, 4 grayscale levels",
-        "raster only",
-        "mixed circles and lines"
-      ],
-      "limits": [
-        "Agent study only; no independent human/artist or physical print evidence",
-        "No plotter path optimization or machine-ready stencil claim",
-        "All source normalization and parameters fixed across methods"
-      ]
+      "vtracer": {
+        "bindingPackageVersion": "0.6.15",
+        "embeddedGeneratorBanner": "visioncortex VTracer 0.6.12 -->",
+        "flags": {
+          "colormode": "color",
+          "mode": "polygon",
+          "filter_speckle": 4,
+          "color_precision": 8,
+          "layer_difference": 1
+        },
+        "palette": [
+          52,
+          78,
+          97,
+          168
+        ],
+        "fillSnap": "nearest input grayscale palette; no alpha/gradient conversion",
+        "upstreamTagCommit": "fd9cdb08e622f237eb05be553a020ddc9e4c47a1",
+        "rustCrateVersion": "0.6.12",
+        "bannerSource": "cmdapp/src/svg.rs uses CARGO_PKG_VERSION; crate/package version split verified at upstream tag",
+        "svgFillLevels": [
+          52,
+          78,
+          97,
+          168
+        ],
+        "inputBandFractions": [
+          0.17875486381322958,
+          0.35588197146562905,
+          0.2811154345006485,
+          0.18424773022049287
+        ],
+        "renderedNearestBandFractions": [
+          0.1730998702983139,
+          0.36636186770428014,
+          0.2802658884565499,
+          0.18027237354085604
+        ],
+        "bandFractionL1": 0.020959792477302203,
+        "allFourBandsRetained": true,
+        "antialiasing": "Rendered edges may add intermediate values; SVG fills exactly match the input palette."
+      },
+      "hybrid": "actual method-01 circles selected above gray .45 plus actual method-02 directional paths selected at/below gray .45; final shared scale calibrated to target coverage",
+      "budget": "same source darkness target, not equal geometry complexity; see measured elements/segments/length/bytes/runtime",
+      "pointConstruction": "weighted Lloyd sampling on 144-px luminance grid; frozen rounded point fixture for cross-build replay",
+      "metrics": {
+        "baseline": {
+          "coverage": 0.60952928460619,
+          "coverageError": 0.0,
+          "blockRmse8bit": 0.0,
+          "inkedPixelsBelow128": 124814,
+          "pixelCount": 154200,
+          "encodedBytes": 133686,
+          "renderMilliseconds": 70.0566789999998,
+          "mode": "solid; one black darkness ink on white; continuous-tone context, not halftone",
+          "generationMilliseconds": 0,
+          "role": "single black authored Pillow-L darkness mask through existing Core.renderLayers; solid, continuous-tone reference"
+        },
+        "01-weighted-stipple": {
+          "coverage": 0.6095410086213474,
+          "coverageError": 1.1724015157273795e-05,
+          "blockRmse8bit": 7.753674037913905,
+          "inkedPixelsBelow128": 94587,
+          "pixelCount": 154200,
+          "encodedBytes": 153341,
+          "elements": 3000,
+          "circles": 3000,
+          "paths": 0,
+          "lineSegments": 0,
+          "pathLengthSourcePx": 0,
+          "svgBytes": 193104,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 1.0108642578125,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 297.0113900000001,
+          "generationMilliseconds": 59.88026499994703
+        },
+        "02-directional-hatch": {
+          "coverage": 0.6095230284072125,
+          "coverageError": -6.256198977671285e-06,
+          "blockRmse8bit": 7.230263104371211,
+          "inkedPixelsBelow128": 94067,
+          "pixelCount": 154200,
+          "encodedBytes": 142749,
+          "elements": 2400,
+          "circles": 0,
+          "paths": 2400,
+          "lineSegments": 2400,
+          "pathLengthSourcePx": 19200.00025014529,
+          "svgBytes": 206017,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 0.8179931640625,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 299.45183099999986,
+          "generationMilliseconds": 13.03003499992883
+        },
+        "03-continuous-route": {
+          "coverage": 0.6095281401795478,
+          "coverageError": -1.1444266422644181e-06,
+          "blockRmse8bit": 58.20828740199104,
+          "inkedPixelsBelow128": 94028,
+          "pixelCount": 154200,
+          "encodedBytes": 49028,
+          "elements": 1,
+          "circles": 0,
+          "paths": 1,
+          "lineSegments": 599,
+          "pathLengthSourcePx": 8896.2386230581,
+          "svgBytes": 11789,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 12.4708251953125,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 59.30374800000027,
+          "generationMilliseconds": 9.348086999807492
+        },
+        "04-vector-regions": {
+          "coverage": 0.6271422903791868,
+          "coverageError": 0.01761300577299661,
+          "blockRmse8bit": 11.974859641645809,
+          "inkedPixelsBelow128": 126211,
+          "pixelCount": 154200,
+          "encodedBytes": 28708,
+          "elements": 350,
+          "circles": 0,
+          "paths": 350,
+          "lineSegments": 5587,
+          "pathLengthSourcePx": 31295.612558934397,
+          "svgBytes": 58482,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 1,
+          "normalization": "no global normalization: input palette geometry evaluated separately",
+          "renderMilliseconds": 20.0516419999999,
+          "generationMilliseconds": 52.821068999946874
+        },
+        "05-dither": {
+          "coverage": 0.6104085603112841,
+          "coverageError": 0.0008792757050939622,
+          "blockRmse8bit": 0.9200459402461689,
+          "inkedPixelsBelow128": 94125,
+          "pixelCount": 154200,
+          "encodedBytes": 21444,
+          "generationMilliseconds": 12.156205000110276,
+          "role": "unconstrained raster tonal reference; complexity not matched"
+        },
+        "06-hybrid": {
+          "coverage": 0.6095000127158515,
+          "coverageError": -2.9271890338512932e-05,
+          "blockRmse8bit": 16.399871126875166,
+          "inkedPixelsBelow128": 94158,
+          "pixelCount": 154200,
+          "encodedBytes": 127758,
+          "elements": 2250,
+          "circles": 391,
+          "paths": 1859,
+          "lineSegments": 1859,
+          "pathLengthSourcePx": 14872.00019238602,
+          "svgBytes": 184441,
+          "lengthScope": "M/L/Z polylines including closes; circles reported separately, no circumference added",
+          "target": 0.60952928460619,
+          "globalMarkScale": 0.8587646484375,
+          "normalization": "18-iteration bisection of circle radius / stroke width at final decoded resolution; overlap and clipping included",
+          "renderMilliseconds": 307.8895339999999,
+          "generationMilliseconds": 3.1849289998717722
+        }
+      },
+      "artifacts": {
+        "architecture/01-weighted-stipple.png": {
+          "sha256": "2673af00ed22713f51bcfb106d1e20d31130cff135d835daa9ad1a6e32b50677",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "1ad5cf731b91f124ac747a1b486ec5f455888d903c961816705fb83718f4a2e9"
+          }
+        },
+        "architecture/01-weighted-stipple.svg": {
+          "sha256": "8bc199a63661008faea926fcfd9a2b89a3ae1597c85b6062b23374ab0da19866"
+        },
+        "architecture/02-directional-hatch.png": {
+          "sha256": "03c4d464a19b5c42cac3e175bc6e47ecc8a5aa5dfe5bf3191d0f68af81e23bf0",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "29e117ca09f4918c5ec1626f47cbebf90b41ad75fbe3cd70a3264d51927e38b6"
+          }
+        },
+        "architecture/02-directional-hatch.svg": {
+          "sha256": "ceb3d484b2b61496acb57bbfcde0393eb079baae92c33a98c02fbba8129ac847"
+        },
+        "architecture/03-continuous-route.png": {
+          "sha256": "d7af49f5a8259940a4fa42e95e98cf8b671e9ab291628f768d86a4bbde5e3c74",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "df740a4e4d65473779d9e0f30f943aad70a7639bc3654b7241c9caf80e3f7ede"
+          }
+        },
+        "architecture/03-continuous-route.svg": {
+          "sha256": "ed419c5ac910ab55b506210df7e182215eed5a83f8bd4b49a49a6a0bedf88eab"
+        },
+        "architecture/04-vector-regions.png": {
+          "sha256": "c0b83bfbd0008c07b6dab9c2d35d5284127961b14c6f8fe4c3d3d5bf40606b0c",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a60f0e229eacb3b7652826a48437b7e652e4f721ea7d176a85af1575c2871431"
+          }
+        },
+        "architecture/04-vector-regions.svg": {
+          "sha256": "c570918780f1ba5086c2961513591ecb8058180965d2439d7bef01bf16c2851b"
+        },
+        "architecture/05-dither.png": {
+          "sha256": "3c06698263af5b079b2ec3db57e967f2170ec74cdd837803b54dc71e1308ba9b",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a39170df777c4e5d09ae1e4389af16f6e3effbdb03f579fe18b40dc0d8718aaf"
+          }
+        },
+        "architecture/06-hybrid.png": {
+          "sha256": "fd85fe3f5fab7f2757f5bc89cd95d751815770e334c1829c93830b2786a199c4",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "6649a3750fc9739c1434e5f0db2ebf377114d53abc5593313a10344a1f2b9a9c"
+          }
+        },
+        "architecture/06-hybrid.svg": {
+          "sha256": "204ba53a7944f235f972c9f070d91dba709d2094ad804b745d2682c3cf083113"
+        },
+        "architecture/baseline-recipe.json": {
+          "sha256": "52fcfb56893cebae4b73c154ce177bceb1cb4833625eac7ba2983d356d31c732"
+        },
+        "architecture/baseline-two-ink-context-recipe.json": {
+          "sha256": "bbae123dcf40be2fe7d3c8eb172257086fe5ba5481c6c47e9966e29c411c1044"
+        },
+        "architecture/baseline-two-ink-context.png": {
+          "sha256": "91e0c03c79e3523a82fa8a5d43eaa0b6be4703336635e293a08bf62756284846",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "bff0117ceb6fff502ab79fa010f64e795e1d32ab93f4a25e7ddce8bd93d7541d"
+          }
+        },
+        "architecture/baseline.png": {
+          "sha256": "859e35ccfbfdf0ec4f8e69fa7de7c20792c9145df1cc5d0ba99cddad71b57538",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "e766af524358f8c38885cb0b364c96c673551677a01af6b92b28e28b13c57c3d"
+          }
+        },
+        "architecture/points.json": {
+          "sha256": "e9e8d2ecab6cdf66c125251e1d17d061f32e30120d8664a9d6cfbf70a10448a2"
+        },
+        "architecture/quantized.png": {
+          "sha256": "e66d8fd1038ba5cec639b82d3313b6a7159e6c4d148708ad184b4e7b561751a6",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "a0d9db1e694b14e40867dec6a7d72477ce8dc3b5a5700eb169768c3308ac2f58"
+          }
+        },
+        "architecture/source-luminance.png": {
+          "sha256": "3aec4729d3b0dc1e38002aa94e20f221b4e76dfc384f3cfe2b1ae27b6f14e9b0",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "e766af524358f8c38885cb0b364c96c673551677a01af6b92b28e28b13c57c3d"
+          }
+        },
+        "architecture/source.png": {
+          "sha256": "9ef07672cd174a31ee37db92b32ec61e690c81d4cc2448528943fe4f940e32c7",
+          "decodedPixels": {
+            "width": 600,
+            "height": 257,
+            "mode": "RGBA8",
+            "sha256": "15afe8f3e0ddf872baaefdacdf38c0e101552bac4f89e4240d239d6d17069725"
+          }
+        }
+      }
     }
   ],
-  "vtracerVersion": "0.6.15",
+  "revision": "coverage-controlled-v2",
   "rights": {
     "portrait": {
       "credit": "NASA / Eileen Collins",
@@ -101,12 +673,70 @@
       "source": "https://upload.wikimedia.org/wikipedia/commons/2/27/Capitol_Building_Full_View.jpg"
     }
   },
-  "repeatGeometryAndRasterHashesIdentical": true,
   "environment": {
     "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "zlibRuntime": "1.3.2",
     "numpy": "2.3.5",
     "scipy": "1.17.0",
     "Pillow": "12.3.0",
-    "vtracer": "0.6.15"
-  }
+    "ReportLab": "4.4.9",
+    "vtracerBinding": "0.6.15",
+    "node": "v24.19.0",
+    "skiaCanvas": "3.0.8",
+    "sourceBaselineCommit": "29cb4fe1132c07adf1f5c0f67ab3d11596af2561",
+    "scriptsSha256": {
+      "measure.py": "18f422c4e96484ddbd2f4b62c8b25f2688e5698b16201667a640be362a76635e",
+      "package.py": "ed1579efc96276f7085b48891fcdd6ca5b5454f782fa45d68ec113fc80197f6a",
+      "render.cjs": "5e7ed6d4f08c065f85c825631a5876981b145b048ab3d6e3ea12d49cd02cdb21",
+      "report.py": "1012e4f04dd0a6776898f84b149f1c65f111256776d06ddc1c314d7fbce0b286",
+      "study.py": "03c5fea488e6893460d5c8c4b1860347215f268730466457596e8c6f2ee7735b"
+    }
+  },
+  "reproducibility": {
+    "scope": "Same frozen points and environment checked; cross-build exact geometry is not independently verified. Encoder byte identity is not pixel identity. Runtime measurements vary.",
+    "decodedPixelHash": "SHA-256 of UTF-8 WIDTHxHEIGHT:RGBA8 + newline followed by Pillow-converted row-major RGBA8 bytes",
+    "frozenPoints": "Committed rounded five-decimal points bypass floating CDF/RNG sampling differences during replay. Cell assignment still uses the recorded SciPy build.",
+    "priorRepeatClaim": "v1 repeatGeometryAndRasterHashesIdentical meant same-machine/build only; superseded by this scoped record.",
+    "sameEnvironmentReplay": {
+      "matchedArtifacts": 32,
+      "allEqual": true,
+      "scope": "SVG bytes and canonical decoded RGBA8 hashes only; encoder bytes, timings and PDF bytes excluded."
+    }
+  },
+  "acceptance": {
+    "coverageToleranceAbsolute": 0.005,
+    "humanBlindRankings": 0,
+    "physicalPrints": false,
+    "independentCrossBuildReplay": false,
+    "decisionGrade": false,
+    "note": "Coverage controlled, geometry complexity disclosed rather than matched. Digital tone metrics do not measure artistic usefulness."
+  },
+  "reportArtifacts": {
+    "architecture-comparison.png": {
+      "sha256": "33777601455c28628f0bf02e74c6e6d5d777f186dec575f65a57977c7d09880a",
+      "bytes": 748948,
+      "decodedPixels": {
+        "width": 1600,
+        "height": 1000,
+        "mode": "RGBA8",
+        "sha256": "13ff02e5e2d0ae74c4d820c81872c6259464e14e044bdbe5087951c70929f8a3"
+      }
+    },
+    "portrait-comparison.png": {
+      "sha256": "9c8bd0b3ec6b9fff199dd03e8424ba0bd6230876f37468f91c5f229ea5afae41",
+      "bytes": 1552429,
+      "decodedPixels": {
+        "width": 1600,
+        "height": 1000,
+        "mode": "RGBA8",
+        "sha256": "e548430346081615327182bc95b33ba62babef69394d6fc89d3f54e87572cdfb"
+      }
+    },
+    "reconstruction-study-01.pdf": {
+      "sha256": "dc4e34a6f95c25688d219b879c599856cacdc9778d23f6d1331af7258261307a",
+      "bytes": 2934419
+    }
+  },
+  "contextOnly": "baseline-two-ink-context.png retains the v1 solid green/coral proof and its full recipe; excluded from monochrome metrics and main comparison."
 }

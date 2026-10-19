@@ -953,6 +953,15 @@
       "capabilityId": "OPS-01",
       "title": "Execute bounded reconstruction research and reconcile its delivery record",
       "sourceTitle": "Compare reconstruction methods and reconcile research delivery"
+    },
+    {
+      "id": "DEV-035",
+      "date": "2026-10-19",
+      "type": "research",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Rerun reconstruction research with coverage controls and scoped evidence",
+      "sourceTitle": "Correct reconstruction study coverage and evidence controls"
     }
   ],
   "libraryCapabilityIds": [

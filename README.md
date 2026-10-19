@@ -60,7 +60,7 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Acceptance:** [Studio scope and evidence](docs/STUDIO-RC-0.9-rc.1.md) · [Scoped CI gates](docs/RELEASE-CANDIDATE.md). Native bundles await [component notices](docs/DEPENDENCY-AUDIT.md). Human accessibility remains open; physical/artist trials are deferred. Previews are **digital approximations**; branding is provisional.
 
-**Research:** [Six-method reconstruction pilot](docs/RECONSTRUCTION-STUDY-01.md); #109 remains open. #113/#114 are proposed.
+**Research:** [Coverage-controlled reconstruction study](docs/RECONSTRUCTION-STUDY-01.md); #109 remains open. #113/#114 are proposed.
 
 ## Follow the work
 
