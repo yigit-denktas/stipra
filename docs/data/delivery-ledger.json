@@ -325,7 +325,7 @@
         22
       ],
       "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed. Acceptance parent. Open child #123 covers owner-photo G01–G11 plus A1–A5/B1–B5/C1–C5 with private PASS/FAIL/NOT RUN evidence; no package-pass or physical result claimed. Human accessibility, physical and independent-artist gates remain open.",
-      "sourceUpdatedAt": "2026-10-20T03:57:26Z"
+      "sourceUpdatedAt": "2026-10-20T04:17:27Z"
     },
     {
       "issue": 14,
@@ -563,7 +563,7 @@
         56
       ],
       "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Tests and owner-approved digital specimens exist; family-wide artistic/physical acceptance remains open. The audit does not promote two specimens into universal approval.",
-      "sourceUpdatedAt": "2026-10-20T03:57:25Z"
+      "sourceUpdatedAt": "2026-10-20T04:17:28Z"
     },
     {
       "issue": 52,
@@ -892,7 +892,9 @@
       "dependsOn": [
         8,
         9,
-        12
+        12,
+        124,
+        125
       ],
       "note": "Private execution begun at f59c8d9: three original hashes match; three 300-DPI canonical packages verify and repeat member-for-member. Agent PDF/native-crop review records failures; 0 of 3 packages accepted. #124 owns legacy G07 orientation/G08 substrate-content mismatch; #125 owns legacy recipe detail/depth/figure failures. Human accessibility remains open; physical/independent artist trials deferred.",
       "sourceUpdatedAt": "2026-10-20T04:14:26Z"
@@ -918,10 +920,9 @@
       "track": "studio",
       "optional": false,
       "dependsOn": [
-        7,
-        47
+        7
       ],
-      "note": "Open negative acceptance findings from #123: legacy owner-A/B/C recipes lose sculpture ridges, forest depth/display and beach figures. Earlier approved opt-in specimens and frozen recipes remain unchanged; no new algorithm/research authorized.",
+      "note": "Open negative acceptance findings from #123: legacy owner-A/B/C recipes lose sculpture ridges, forest depth/display and beach figures. Earlier approved opt-in specimens and frozen recipes remain unchanged; no new algorithm/research authorized. #47 is the continuing quality owner, not a prerequisite that all family acceptance must close before this defect can be addressed.",
       "sourceUpdatedAt": "2026-10-20T04:12:20Z"
     }
   ],
@@ -988,3 +989,4 @@
     }
   }
 }
+
