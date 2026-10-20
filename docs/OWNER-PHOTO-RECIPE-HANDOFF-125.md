@@ -1,6 +1,6 @@
 # #125 — Legacy owner-photo batch recipe review
 
-**Status:** candidate branch for Linux review. No merge, issue closure, acceptance pass, production default change, report-layout change or Experiment 2. Owner photos and image-bearing outputs remain private.
+**Status:** merged as #128 from reviewed head `cbdd295db1bfd2f50aade7d39ec69ed3d71e9c2b` (merge `71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2`). Implementation complete; no acceptance pass, production default change, report-layout change or Experiment 2. Owner photos and image-bearing outputs remain private.
 
 **Branch:** `fix/125-owner-photo-recipes`  
 **Base:** `e0aeac82cf84a095da628216df8051641b0b08b3` (`origin/main` when started; baseline recipe content matches #125's `f59c8d9`)  
@@ -167,5 +167,5 @@ Agent visual review: DeepSeek Harness local coding agent, 20 October 2026. This 
 - **A:** the solid continuous-tone key is a deliberate screen-semantics change; owner/print process must decide whether an unscreened key is acceptable for the intended production path.
 - **B:** the selective Earth pass is deliberately sparse (1.1835% screened full-frame; 2.462% screened display; 3.338% screened near-trunk); it now supplies localized material information instead of broad texture, but named human review of the display/silhouette crops is still required. The two-ink alternative must not silently replace the three-ink acceptance scope.
 - **C:** figures are materially improved in local crops but are still tiny; the intended A4/native inspection review is still required. The prior scoped coast-tonal approval is not retracted or expanded.
-- **All:** no G01–G11, A/B/C image-specific criteria or physical-pass claim is made. #123 remains **PARTIAL EXECUTION / 0 of 3 accepted**; this branch does not close #123, #125 or #13/#14/#70/#109.
-- **#124:** report layout, orientation and substrate parity remain owned by ChatGPT Work. This branch does not edit report-layout code, acceptance specifications, README, ROADMAP, changelog or the delivery ledger; the G07/G08 discrepancies recorded in #124 remain open and are not inferred to pass here.
+- **All:** no G01–G11, A/B/C image-specific criteria or physical-pass claim is made. #123 remains **PARTIAL EXECUTION / 0 of 3 accepted**; this merged implementation does not close #123 or the #13/#14/#70/#109 acceptance parents.
+- **#124:** the report layout/orientation/substrate work was merged as #127 from reviewed `63f2572`; its implementation findings are closed, but #123's G07/G08 acceptance and all human/physical gates remain open and are not inferred to pass here.

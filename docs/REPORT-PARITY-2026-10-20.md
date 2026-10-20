@@ -1,6 +1,6 @@
 # Report parity review - 20 October 2026
 
-Scope: #124, report layout v8 and [owner-report contract v2](OWNER-REPORT-CONTRACT-v2.md). Base: `e0aeac82cf84a095da628216df8051641b0b08b3`. Recipe work belongs to #125; combined package acceptance remains #123.
+Scope: #124, report layout v8 and [owner-report contract v2](OWNER-REPORT-CONTRACT-v2.md). Base: `e0aeac82cf84a095da628216df8051641b0b08b3`. **Integration status:** merged as #127 from reviewed head `63f2572ec898ff11c01bd7abf60b5edf339c06a7` (merge `48c4d40ea5e39f450ce62f30a11e2057d331b805`). Recipe work belongs to #125; combined package acceptance remains #123.
 
 ## Change and decision
 
@@ -30,12 +30,12 @@ node --test tests/report-layout.test.js tests/owner-print-acceptance.test.js
 
 ## Boundaries
 
-No Chromium executable is available locally, so a rendered desktop/phone HTML inspection and assistive-technology review are **NOT RUN**. Structural HTML/PDF checks and the browser bundle build do not replace those observations. CI browser workflow results must be recorded separately after publication of the branch.
+No Chromium executable is available locally, so a rendered desktop/phone HTML inspection and assistive-technology review are **NOT RUN**. Structural HTML/PDF checks and the browser bundle build do not replace those observations. CI checks at the reviewed head passed; they do not replace human review.
 
-The legacy sculpture/forest/beach proof defects remain visible and are not fixed or accepted by this report change. #123 stays **0 of 3 accepted** pending #125 and a combined rerun. Human accessibility remains open; physical prints and independent artist trials remain owner-deferred. No merge, release, Experiment 2 or new identity is implied.
+The legacy sculpture/forest/beach proof defects remain visible and are not fixed or accepted by this report change. #123 stays **0 of 3 accepted**; the #125 recipe implementation is complete via #128, but a combined package rerun remains pending. Human accessibility remains open; physical prints and independent artist trials remain owner-deferred. The report work was merged as #127; no release, Experiment 2 or new identity is implied.
 
 ## CI follow-up: compact four-ink reports
 
 The first PR-head CI run reached `check:exports` and exposed a missing case in the initial unit matrix: substrate plus four inks spilled onto an extra page, violating the existing two-page compact-procedural acceptance check. The 197-test local pass did not cover that separate script. Keep its two-page assertion unchanged.
 
-For exactly four inks, layout v8 now fits substrate plus four plates in a five-column row, with existing caption/footer reservations. Other counts retain the reviewed four-column continuation behavior. Unit coverage now includes 2/3/4/8 inks and a dedicated two-page four-ink regression. `npm run check:exports` passes on Linux after the fix. The three private owner-photo cases have two/three/two inks, so this correction does not alter their previously reviewed layouts. New-head CI remains a separate verification.
+For exactly four inks, layout v8 now fits substrate plus four plates in a five-column row, with existing caption/footer reservations. Other counts retain the reviewed four-column continuation behavior. Unit coverage now includes 2/3/4/8 inks and a dedicated two-page four-ink regression. `npm run check:exports` passes on Linux after the fix. The three private owner-photo cases have two/three/two inks, so this correction does not alter their previously reviewed layouts. New-head CI passed at `63f2572`; merged as #127.
