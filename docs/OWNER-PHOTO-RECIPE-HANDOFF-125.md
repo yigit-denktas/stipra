@@ -65,9 +65,9 @@ Baseline packages were generated from the unmodified `f59c8d9` recipes before ed
 | B | `7b68961ec3b49fd432a931346fe0ae7e73542f6c0d5a861402b5abff8fd1b343` | `dbaebbffeb0e385b5b660e8563b03bc970435b970ff902f742f25764e5aeb9cb` |
 | C | `911643734c9775530d4c30761604eadf0dbfeaa9db573b6ee0372988a8420552` | `eea341cd9e64c82731b654ed571f6968571896bfd38c68535e46d80432ec1bd4` |
 
-Coverage is nominal raster coverage, not press calibration. Every metric below comes from the private candidate package plus native-pixel crops; coverage alone was not used as proof of quality.
+Coverage is nominal raster coverage, not press calibration. The table above uses the package's screened/diagnostic coverage; ROI material coverage below distinguishes continuous (`plates/`) from screened (`screened/`) coverage. Every metric comes from the private candidate package plus native-pixel crops; coverage alone was not used as proof of quality.
 
-| Fixture | Legacy ink coverage | Candidate ink coverage | Legacy additive / 2+ overlap | Candidate additive / 2+ overlap |
+| Fixture | Legacy screened diagnostics | Candidate screened diagnostics | Legacy additive / 2+ overlap | Candidate additive / 2+ overlap |
 |---|---|---|---|---|
 | A | slate 88.1662%, ivory 11.6485% | slate 64.8018%, ivory 5.1742% | .9983 / 8.2155% | .6998 / 0% |
 | B | shadow 63.877%, fern 36.0988%, earth 14.5183% | key 51.3896%, accent 16.6903%, earth 1.1835% | 1.1449 / 26.7742% | .6926 / 11.9750% |
@@ -91,7 +91,11 @@ Definitions in the generated JSON and code:
 - **gradient:** `mean((I[y+1,x]-I[y,x])^2) + mean((I[y,x+1]-I[y,x])^2)` in tone units.
 - **raw correlation:** Pearson r between source tone and proof tone inside the native-pixel ROI.
 - **low-pass correlation:** the same r after a 3-pixel-radius separable Gaussian (`sigma=1`) applied to RGB before gray conversion. This limits the raw metric's reward for halftone texture.
+- **continuous coverage:** `mean(1 - plateGray/255)` over the ROI using `plates/`.
+- **screened coverage:** the same formula using `screened/`.
 - **ROI coordinates:** `[x, y, width, height]` in native source pixels.
+
+The helper's tone/gradient fields use the corrected declared units; raw and low-pass Pearson correlations are unchanged by that correction.
 
 | ROI | Native coordinates | Raw legacy → candidate | Low-pass legacy → candidate |
 |---|---|---|---|
@@ -99,12 +103,22 @@ Definitions in the generated JSON and code:
 | B distant display | (650, 220) 600 × 430 | .1044 → .9013 | .2241 → .9580 |
 | C seated figures | (470, 1250) 240 × 200 | .0437 → .6757 | .2112 → .8590 |
 
+Selective Earth coverage in the declared ROIs (from the generated JSON; continuous / screened):
+
+| ROI | Native coordinates | Earth continuous | Earth screened |
+|---|---|---|---|
+| B display | (650, 220) 600 × 430 | 2.085% | 2.462% |
+| B near trunks | (1000, 650) 700 × 600 | 3.079% | 3.338% |
+| B tall trunk | (1500, 250) 400 × 950 | 3.124% | 3.432% |
+
+The earlier `0.16%` display figure came from a different, unpublished rectangle and is superseded by these declared ROIs. The full-frame screened Earth coverage is `1.1835%` in the package diagnostics (independently reported as `1.18418%`).
+
 The source/proof means, standard deviations and gradient values are in the generated JSON. These numbers are evidence of local alignment/separation improvement, not an acceptance decision.
 
 Private visual checks at 100% native crops:
 
 - **A:** ridges and recess are continuous and legible; the legacy halftone grid is gone. The key is now an unscreened continuous-tone pass, so print-process screening remains an open decision.
-- **B:** near grass/trunks, mid path and far foliage separate; the distant display is readable; antler/trunk silhouettes are retained. The selective Earth pass is concentrated on neutral material: 0.16% coverage in the display ROI, 3.08% in the trunks ROI, 1.18% overall. It is not a raw-red screen over the whole scene; the two-ink comparison remains visually cleaner but would change the required ink count.
+- **B:** near grass/trunks, mid path and far foliage separate; the distant display is readable; antler/trunk silhouettes are retained. The selective Earth pass is concentrated on neutral material: **2.085% continuous / 2.462% screened** in the declared display ROI, **3.079% / 3.338%** in the near-trunk ROI and **1.1835% screened** full-frame. It is not a raw-red screen over the whole scene; the two-ink comparison remains visually cleaner but would change the required ink count.
 - **C:** both seated figures are visible against the water, the horizon is continuous, and water/beach tone remains ordered. The warm pass is deliberately small (7.88% in the figure crop, 3.12% at the horizon).
 
 The two-ink `forest-balanced` comparison remains visually cleaner on B but has only two inks and is **not** a compliant owner-B candidate. It is recorded only as an alternative; no acceptance requirement was changed.
@@ -124,7 +138,7 @@ node --test tests/print-package.test.js tests/report-layout.test.js
 node scripts/owner-recipe-review.js --baseline "$STIPRA_125_PRIVATE/baseline" --candidate "$STIPRA_125_PRIVATE/candidate-selective" --out "$STIPRA_125_PRIVATE/metrics.json"
 ```
 
-Focused result: **6/6 owner-recipe/metric tests pass**, including the runner fingerprint-rejection and metric-definition tests. Package/report result: **16/16 pass**; combined **22/22 pass**. The metric helper writes numbers only and never writes or publishes owner imagery. No Linux full-suite result is claimed here; the branch is for Linux review.
+Focused result: **8/8 owner-recipe/metric tests pass**, including the runner fingerprint-rejection, declared-unit and coverage tests. Package/report result: **16/16 pass**; combined **24/24 pass**. The metric helper writes numbers only and never writes or publishes owner imagery. No Linux full-suite result is claimed here; the branch is for Linux review.
 
 ## Private artifacts
 
@@ -135,7 +149,7 @@ Private only, outside the repository under a private root such as `$STIPRA_125_P
 - `$STIPRA_125_PRIVATE/candidate-selective-repeat/` — byte-identical repeatability run
 - `$STIPRA_125_PRIVATE/baseline-recipes/` — frozen recipe copies
 - `$STIPRA_125_PRIVATE/final-views/` and `$STIPRA_125_PRIVATE/crops2/` — source/legacy/candidate native crops
-- `$STIPRA_125_PRIVATE/metrics.json` — reproducible ROI/raw/low-pass record; `final-summary.json` retains the earlier source/geometry record
+- `$STIPRA_125_PRIVATE/metrics.json` — reproducible ROI/raw/low-pass plus continuous/screened coverage record; `final-summary.json` retains the earlier source/geometry record
 
 Reproduction form (private sources and targets; never commit their contents):
 
@@ -151,7 +165,7 @@ Agent visual review: DeepSeek Harness local coding agent, 20 October 2026. This 
 ## Unresolved findings / handoff
 
 - **A:** the solid continuous-tone key is a deliberate screen-semantics change; owner/print process must decide whether an unscreened key is acceptable for the intended production path.
-- **B:** the selective Earth pass is deliberately sparse (1.18% overall; 3.08% on trunks; 0.16% on the display); it now supplies localized material information instead of broad texture, but named human review of the display/silhouette crops is still required. The two-ink alternative must not silently replace the three-ink acceptance scope.
+- **B:** the selective Earth pass is deliberately sparse (1.1835% screened full-frame; 2.462% screened display; 3.338% screened near-trunk); it now supplies localized material information instead of broad texture, but named human review of the display/silhouette crops is still required. The two-ink alternative must not silently replace the three-ink acceptance scope.
 - **C:** figures are materially improved in local crops but are still tiny; the intended A4/native inspection review is still required. The prior scoped coast-tonal approval is not retracted or expanded.
 - **All:** no G01–G11, A/B/C image-specific criteria or physical-pass claim is made. #123 remains **PARTIAL EXECUTION / 0 of 3 accepted**; this branch does not close #123, #125 or #13/#14/#70/#109.
 - **#124:** report layout, orientation and substrate parity remain owned by ChatGPT Work. This branch does not edit report-layout code, acceptance specifications, README, ROADMAP, changelog or the delivery ledger; the G07/G08 discrepancies recorded in #124 remain open and are not inferred to pass here.

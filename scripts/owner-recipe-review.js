@@ -6,7 +6,7 @@ const {ingestLocalBytes}=require('../src/import/node.js');
 const dataset=require('../tests/fixtures/owner-photo-fixtures.json');
 const ROIS={
   A:{ridges:[250,150,300,300]},
-  B:{display:[650,220,600,430]},
+  B:{display:[650,220,600,430],trunks:[1000,650,700,600],tallTrunk:[1500,250,400,950]},
   C:{figures:[470,1250,240,200]},
 };
 const DEFINITIONS={
@@ -16,7 +16,9 @@ const DEFINITIONS={
   standardDeviation:'population standard deviation of encoded-sRGB gray, in 0..255 gray levels',
   correlation:'Pearson r between source tone and proof tone in the native-pixel ROI',
   blur:'3-pixel-radius separable Gaussian, sigma=1, applied to RGB channels before gray/ROI metrics',
-  coverage:'mean(1 - plateGray/255) over the ROI; diagnostics summary is read from report/diagnostics.json',
+  continuousCoverage:'mean(1 - plateGray/255) over the ROI, using unscreened plates/',
+  screenedCoverage:'mean(1 - plateGray/255) over the ROI, using screened/',
+  coverage:'both continuous and screened per-ink ROI coverage; full-frame diagnostics are read from report/diagnostics.json',
   roi:'[x, y, width, height] in native source pixels',
 };
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -93,15 +95,34 @@ async function readPng(zip,entry){
   const bytes=await zip.file(entry).async('nodebuffer'),asset=await ingestLocalBytes(bytes,entry.split('/').pop());
   return {width:asset.metadata.oriented.width,height:asset.metadata.oriented.height,rgba:asset.rgba};
 }
+async function readPlates(zip,prefix){
+  const out={};
+  for(const entry of Object.keys(zip.files)){
+    if(!entry.startsWith(prefix)||!entry.endsWith('.png'))continue;
+    const match=/^ink-\d+-(.+)\.png$/.exec(entry.split('/').pop());
+    if(!match)throw Error('Unexpected plate name '+entry);
+    out[match[1]]=await readPng(zip,entry);
+  }
+  return out;
+}
 async function loadPackage(file,fid){
   const bytes=fs.readFileSync(file),zip=await JSZip.loadAsync(bytes);
   const original=await zip.file('source/original.jpg').async('nodebuffer');
   const diagnostics=JSON.parse(await zip.file('report/diagnostics.json').async('string'));
   const source=await readPng(zip,'source/normalized.png'),proof=await readPng(zip,'proof/composite.png');
+  const plates=await readPlates(zip,'plates/'),screened=await readPlates(zip,'screened/');
   const fixture=dataset.fixtures.find(f=>f.id===fid);
   if(sha(original)!==fixture.sha256)throw Error(fid+': source original does not match fixture');
   if(source.width!==fixture.widthPx||source.height!==fixture.heightPx)throw Error(fid+': native frame mismatch');
-  return {file,sha256:sha(bytes),originalSha:sha(original),diagnostics,source,proof};
+  return {file,sha256:sha(bytes),originalSha:sha(original),diagnostics,source,proof,plates,screened};
+}
+function coverage(img,box){
+  const r=region(img.rgba,img.width,img.height,box);
+  let sum=0;for(const v of r.g)sum+=1-v/255;
+  return round(sum/r.g.length,5);
+}
+function coverageMap(images,box){
+  return Object.fromEntries(Object.entries(images).map(([id,img])=>[id,coverage(img,box)]));
 }
 async function measureFixture(fid,baselineFile,candidateFile){
   const baseline=await loadPackage(baselineFile,fid),candidate=await loadPackage(candidateFile,fid);
@@ -112,8 +133,8 @@ async function measureFixture(fid,baselineFile,candidateFile){
   const candidateProofBlur={width:candidate.proof.width,height:candidate.proof.height,rgba:blurRgba(candidate.proof.rgba,candidate.proof.width,candidate.proof.height)};
   const rois={};
   for(const [name,box] of Object.entries(ROIS[fid]))rois[name]={
-    baseline:stats(baseline.source,baseline.proof,box,baselineBlur,baselineProofBlur),
-    candidate:stats(candidate.source,candidate.proof,box,candidateBlur,candidateProofBlur),
+    baseline:{...stats(baseline.source,baseline.proof,box,baselineBlur,baselineProofBlur),continuousCoverage:coverageMap(baseline.plates,box),screenedCoverage:coverageMap(baseline.screened,box)},
+    candidate:{...stats(candidate.source,candidate.proof,box,candidateBlur,candidateProofBlur),continuousCoverage:coverageMap(candidate.plates,box),screenedCoverage:coverageMap(candidate.screened,box)},
   };
   return {
     source:{sha256:baseline.originalSha,width:baseline.source.width,height:baseline.source.height},
@@ -139,4 +160,4 @@ async function main(argv){
   process.stdout.write(JSON.stringify({contract:result.contract,out:opts['--out'],fixtures:Object.keys(result.fixtures)})+'\n');
 }
 if(require.main===module)main(process.argv.slice(2)).catch(e=>{console.error('owner-recipe-review: '+e.message);process.exitCode=1;});
-module.exports={ROIS,DEFINITIONS,gray,blurRgba,pearson,region,stats,measureFixture};
+module.exports={ROIS,DEFINITIONS,gray,blurRgba,pearson,region,stats,coverage,coverageMap,measureFixture};

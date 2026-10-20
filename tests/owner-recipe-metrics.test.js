@@ -5,7 +5,7 @@ const M=require('../scripts/owner-recipe-review');
 test('metric definitions and ROI coordinates are explicit',()=>{
   assert.deepEqual(M.ROIS,{
     A:{ridges:[250,150,300,300]},
-    B:{display:[650,220,600,430]},
+    B:{display:[650,220,600,430],trunks:[1000,650,700,600],tallTrunk:[1500,250,400,950]},
     C:{figures:[470,1250,240,200]},
   });
   assert.match(M.DEFINITIONS.gray,/\.2126 R/);
@@ -30,4 +30,13 @@ test('tone means and gradients use declared units, including singleton ROIs',()=
   const singleton=M.stats(white,white,[0,0,1,1]);
   assert.equal(singleton.sourceGradient,0);assert.equal(singleton.proofGradient,0);
   assert.equal(singleton.rawCorrelation,null,'a constant ROI has no defined Pearson r');
+});
+
+test('continuous and screened coverage are measured over the declared ROI',()=>{
+  const image=values=>({width:2,height:2,rgba:Uint8Array.from(values.flatMap(v=>[v,v,v,255]))});
+  const black=image([0,0,0,0]),white=image([255,255,255,255]);
+  assert.equal(M.coverage(black,[0,0,2,2]),1);
+  assert.equal(M.coverage(white,[0,0,2,2]),0);
+  assert.deepEqual(M.coverageMap({key:black},[0,0,2,2]),{key:1});
+  assert.throws(()=>M.coverage(black,[0,0,3,2]),/ROI outside/);
 });
