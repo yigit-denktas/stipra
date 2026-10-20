@@ -40,6 +40,8 @@ Substrate fields and the runner's default `--paper auto` behaviour are unchanged
 
 B remains **three inks**; the three-ink requirement was not changed. A two-ink `forest-balanced` comparison was generated privately but is not the selected compliant candidate.
 
+The shared `forest-balanced` / `coast-tonal` style variants in `src/styles.js` and their bytes were not changed. The owner-batch JSON recipes are a separate contract; #125's distinction between the two remains intact.
+
 ### Recipe identities
 
 Baseline (`f59c8d9` content) → candidate:
