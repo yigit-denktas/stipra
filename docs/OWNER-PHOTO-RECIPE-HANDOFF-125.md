@@ -84,7 +84,7 @@ Native-pixel regional comparisons (tone correlation is between source and proof 
 | B far | .0458 | .8314 | 71.17 / 11831.36 | 31.80 / 967.93 |
 | B near | .0936 | .5322 | 75.04 / 12303.42 | 42.65 / 2548.14 |
 | B silhouette | .0790 | .8655 | 72.17 / 12107.22 | 39.40 / 1099.99 |
-| C figures | −.0156 | .4604 | 78.90 / 16260.06 | 20.00 / 945.59 |
+| C figures | .0434 | .6737 | 80.63 / 16393.51 | 28.84 / 1462.01 |
 | C horizon | .2003 | .9314 | 69.34 / 11606.15 | 38.06 / 639.42 |
 | C water | .0325 | .6287 | 78.81 / 16268.19 | 22.68 / 916.51 |
 
@@ -92,7 +92,7 @@ Private visual checks at 100% native crops:
 
 - **A:** ridges and recess are continuous and legible; the legacy halftone grid is gone. The key is now an unscreened continuous-tone pass, so print-process screening remains an open decision.
 - **B:** near grass/trunks, mid path and far foliage separate; the distant display is readable; antler/trunk silhouettes are retained. Accent and earth passes are low-coverage but non-zero in every selected region (for example display coverage: key 74.04%, accent 4.97%, earth 2.90%).
-- **C:** both seated figures are visible against the water, the horizon is continuous, and water/beach tone remains ordered. The warm pass is deliberately small (5.99% in the figure crop, 3.12% at the horizon).
+- **C:** both seated figures are visible against the water, the horizon is continuous, and water/beach tone remains ordered. The warm pass is deliberately small (7.88% in the figure crop, 3.12% at the horizon).
 
 The two-ink `forest-balanced` comparison was visually cleaner on B (display corr .9404) but has only two inks and is **not** a compliant owner-B candidate. It is recorded only as an alternative; no acceptance requirement was changed.
 
