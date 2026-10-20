@@ -3,6 +3,29 @@
   "releaseStatus": "Studio v0.9.0-rc.1 is published as an experimental GitHub prerelease. Lean JavaScript packages 0.1.0-alpha.1 remain published and registry-verified. Human/physical acceptance and native bundle notices remain separate.",
   "entries": [
     {
+      "date": "2026-10-20",
+      "title": "Reconcile merged maintenance, consolidated issues and private acceptance",
+      "status": "Development",
+      "issues": [
+        13,
+        34,
+        43,
+        46,
+        47,
+        57,
+        70,
+        109,
+        123,
+        124,
+        125
+      ],
+      "changes": [
+        "Record separately merged #120/#121/#122 and the owner-authorized #34/#43/#46 scope consolidations, preserving remaining acceptance owners.",
+        "Add open #123 to the delivery map without changing the original fourteen-issue denominator; begin private original-photo verification and canonical package checks.",
+        "Keep zero of three complete package-pass results, human accessibility open and physical/independent artist trials deferred; expose the legacy landscape-only report criterion conflict rather than silently changing it."
+      ]
+    },
+    {
       "date": "2026-10-19",
       "title": "Gate study metric regressions and clarify delivered PDF identity",
       "status": "Development",
@@ -272,7 +295,7 @@
       "changes": [
         "Trace pinned Rust Skia, Skia and 13 external source revisions; record the 318-entry Cargo lockfile superset without calling it a compiled inventory.",
         "Identify the Linux static Fontconfig patch and distinguish its bootstrap FreeType from Skia embedded FreeType.",
-        "Record the owner\u2019s personal npm-scope choice; account identity and authenticated publication remain pending."
+        "Record the owner’s personal npm-scope choice; account identity and authenticated publication remain pending."
       ]
     },
     {
@@ -392,7 +415,7 @@
         90
       ],
       "changes": [
-        "Manual 2\u20138 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
+        "Manual 2–8 ink setup, solo/mute/paper inspection, native pixel zoom and explicit print/mark geometry.",
         "Two incomplete MIT notices supplemented; fontkit block notices and full Apache terms retained. Three distribution provenance findings remain open.",
         "One dependency/version ledger, public changelog, sitemap and shared site navigation."
       ]

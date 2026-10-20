@@ -67,7 +67,8 @@
       "state": "target",
       "tasks": [
         13,
-        14
+        14,
+        123
       ],
       "exit": "Close the RC acceptance plus representative physical-print observations and notices/provenance for the shipped export artifacts. Do not call an untested effect press-calibrated. #3/#4/#10 remain optional case-study/expanded diagnostics; they still count in the original 14-issue backlog."
     },
@@ -76,11 +77,9 @@
       "version": "Style recipe revisions (independent versions)",
       "state": "target",
       "tasks": [
-        43,
-        47,
-        34
+        47
       ],
-      "exit": "Owner/artist reviews and intended-size physical tests justify each changed mask recipe. Increment the affected family/variant version; do not silently alter saved recipes."
+      "exit": "Retain #34/#43 as delivered historical records; #47 owns broader family suitability, #123 private owner-photo package acceptance, #13 physical/accessibility and #70 independent artist evidence. Two digital specimens do not approve every family or physical output."
     },
     {
       "id": "extensions",
@@ -89,7 +88,6 @@
       "tasks": [
         28,
         75,
-        46,
         57,
         31
       ],
@@ -111,7 +109,7 @@
     {
       "name": "main",
       "status": "integration",
-      "note": "Canonical reviewed history. #89 merged at 40968a16858694836740929c3583da3f430695e7; #91 consolidates studio/audit/site work into this same history."
+      "note": "Reviewed A/B/C integrated separately as #120/#121/#122; baseline f59c8d9fb144294e41209bc76d8d1c83701005ee. This ledger refresh records later authorized issue consolidation without changing rendering."
     },
     {
       "name": "feat/22-studio-and-release-map",
@@ -125,26 +123,30 @@
     },
     {
       "name": "fix/windows-portability-audit-2026-10-20",
-      "status": "review",
-      "note": "Head 90abb56ec92675f677a30fa1ec1b1f0c756a740a. Windows portability tests/build fixes; cloud Linux review accepted; no merge authorized."
+      "status": "integration-record",
+      "note": "Merged #120 after owner authorization and successful CI; exact reviewed head 90abb56, merge fd75d6df06e252fc71b86aab5a00be20032c1ee5. No acceptance pass implied."
     },
     {
       "name": "chore/reconstruction-test-requirements-2026-10-20",
-      "status": "review",
-      "note": "Head aa5e4242840fe2422c809227365ba8c0a92a79ad. Self-contained test requirements and future archive .txt inclusion; cloud review accepted; no merge authorized."
+      "status": "integration-record",
+      "note": "Merged #121 after owner authorization and successful CI; exact reviewed head aa5e424, merge cc7dd0f92d11affeff090398f3382ab98794dcaf. No acceptance pass implied."
     },
     {
       "name": "audit/backlog-2026-10-20",
-      "status": "review",
-      "note": "Read-only audit handoff, reconciliation and review documents. No product code, evidence or archive change."
+      "status": "historical-record",
+      "note": "Independent audit/review, authorized integration and issue-consolidation records; preserves source/evidence history."
+    },
+    {
+      "name": "docs/backlog-reconciliation-2026-10-20",
+      "status": "integration-record",
+      "note": "Merged #122 at reviewed b1538b3, merge f59c8d9fb144294e41209bc76d8d1c83701005ee. Later #34/#43/#46 consolidation is authorized; private acceptance remains separate."
     }
   ],
   "nextSequence": [
-    "A/B maintenance branches passed independent review at unchanged heads (A: Windows portability @ 90abb56; B: reconstruction test requirements @ aa5e424); no merge is authorized.",
-    "After owner authorization, merge A/B separately, then land this coordinated C ledger/documentation reconciliation. Keep #13/#14/#70/#109 acceptance parents open.",
-    "Execute the proposed #13 owner-photo acceptance child for G01–G11 plus A1–A5/B1–B5/C1–C5 with private evidence; status remains NOT YET RUN / 0 of 3 until real results exist.",
-    "Human keyboard/screen-reader observations remain open and not performed. Physical prints and independent artist trials are owner-deferred, not passed; keep those statuses distinct (#13/#70). Do not infer any of them from CI.",
-    "Await native-component notices (#14) and keep #109 Study 01/adapter decisions separate; Experiment 2, #113 and #114 remain proposals with no authorization."
+    "A/B/C merged separately as #120/#121/#122 at their reviewed heads after owner authorization; #34/#43 delivered scopes and #46 superseded direction are closed with residuals transferred.",
+    "Continue #123 private owner-photo acceptance: source hashes, package verification and same-environment replay pass; visual/contract failures #124/#125 keep 0 of 3 packages accepted. Resolve findings explicitly before any package-pass claim.",
+    "Keep #13/#14/#47/#57/#70/#109/#123 open for their remaining scopes. Human accessibility is open/not performed; physical and independent artist trials are owner-deferred.",
+    "Await native component notices in #14. Reconstruction Experiment 2, operator proof kit #113 and process research #114 remain separate proposed scopes; no new feature or recipe adoption authorized."
   ],
   "tasks": [
     {
@@ -247,7 +249,8 @@
         7,
         5
       ],
-      "note": "Native grayscale PNG masters and optional pure sampled-run SVG paths have verified frame, DPI, coverage and zero registration. Marked PNGs preserve trim pixels; bleed is explicitly zero. Analytic screen geometry remains the separate optional #28. Closure is delivered by the CLI/export integration merge. Implementation is complete for the delivered digital scope; owner-photo G01–G06 acceptance remains unexecuted and is proposed in a #13 child. Closure is not an acceptance pass."
+      "note": "Native grayscale PNG masters and optional pure sampled-run SVG paths have verified frame, DPI, coverage and zero registration. Marked PNGs preserve trim pixels; bleed is explicitly zero. Analytic screen geometry remains the separate optional #28. Closure is delivered by the CLI/export integration merge. Implementation is complete for the delivered digital scope; owner-photo G01–G06 acceptance remains incomplete under #123. Closure is not an acceptance pass.",
+      "sourceUpdatedAt": "2026-10-17T22:28:29Z"
     },
     {
       "issue": 9,
@@ -259,7 +262,7 @@
       "dependsOn": [
         8
       ],
-      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12. Implementation/report delivery is complete; owner-photo G07–G08 acceptance remains unexecuted and is proposed in a #13 child. Physical observations remain #13.",
+      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12. Implementation/report delivery is complete; owner-photo G07–G08 acceptance remains incomplete under #123. Physical observations remain #13.",
       "sourceUpdatedAt": "2026-10-17T22:28:30Z"
     },
     {
@@ -288,7 +291,8 @@
         8,
         9
       ],
-      "note": "Local compare/batch/verify/sheet and existing commands share the writer and versioned JSON results/errors. Inert bounded plans, reproducible packages, explicit partial failures and fresh output paths are covered by CLI tests. Closure is delivered by the CLI/export integration merge."
+      "note": "Local compare/batch/verify/sheet and existing commands share the writer and versioned JSON results/errors. Inert bounded plans, reproducible packages, explicit partial failures and fresh output paths are covered by CLI tests. Closure is delivered by the CLI/export integration merge.",
+      "sourceUpdatedAt": "2026-10-17T22:28:32Z"
     },
     {
       "issue": 12,
@@ -301,7 +305,8 @@
         8,
         9
       ],
-      "note": "PNG/JPG/WebP proof exports at scales 1/2/3, sampled-path SVG proofs/plates, A4 PDF reports and ZIPs are verified with 2/3/4 inks and odd frames. Lossy encoder bytes may vary; native masters remain unchanged. Closure is delivered by the CLI/export integration merge. Format/ZIP implementation is complete; owner-photo G09–G11 acceptance remains unexecuted and is proposed in a #13 child. Physical observations remain #13."
+      "note": "PNG/JPG/WebP proof exports at scales 1/2/3, sampled-path SVG proofs/plates, A4 PDF reports and ZIPs are verified with 2/3/4 inks and odd frames. Lossy encoder bytes may vary; native masters remain unchanged. Closure is delivered by the CLI/export integration merge. Format/ZIP implementation is complete; owner-photo G09–G11 acceptance remains incomplete under #123. Physical observations remain #13.",
+      "sourceUpdatedAt": "2026-10-17T22:28:33Z"
     },
     {
       "issue": 13,
@@ -319,8 +324,8 @@
         12,
         22
       ],
-      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed. Acceptance parent. Proposed child covers owner-photo G01–G11 plus A1–A5/B1–B5/C1–C5 with private PASS/FAIL/NOT RUN evidence; no child created or result claimed. Human accessibility, physical and independent-artist gates remain open.",
-      "sourceUpdatedAt": "2026-10-19T21:40:14Z"
+      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed. Acceptance parent. Open child #123 covers owner-photo G01–G11 plus A1–A5/B1–B5/C1–C5 with private PASS/FAIL/NOT RUN evidence; no package-pass or physical result claimed. Human accessibility, physical and independent-artist gates remain open.",
+      "sourceUpdatedAt": "2026-10-20T03:57:26Z"
     },
     {
       "issue": 14,
@@ -380,7 +385,8 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
+      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels.",
+      "sourceUpdatedAt": "2026-10-17T16:22:28Z"
     },
     {
       "issue": 24,
@@ -445,16 +451,16 @@
     {
       "issue": 34,
       "title": "Opinionated, input-aware Risograph presets for browser and agent CLI",
-      "trackerState": "open",
-      "deliveryState": "partial",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         7,
         5
       ],
-      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Audit disposition is a conditional proposal to consolidate into #47 after owner authorization; no closure applied. Physical/independent evidence remains with #13/#70.",
-      "sourceUpdatedAt": "2026-10-19T08:28:48Z"
+      "note": "Closed by owner-authorized consolidation on 20 October: delivered four-family/shared-recipe proposal and implementation. Residual family suitability stays #47; private package acceptance #123; physical/accessibility #13; independent artist #70. Later families remain proposals. Closure is not acceptance.",
+      "sourceUpdatedAt": "2026-10-20T03:57:49Z"
     },
     {
       "issue": 35,
@@ -492,16 +498,16 @@
     {
       "issue": 43,
       "title": "Preserve forest depth and justify each ink pass",
-      "trackerState": "open",
-      "deliveryState": "review",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         7,
         56
       ],
-      "note": "Two-/three-ink forest variants and detail studies exist; owner approved the supplied digital forest/beach specimens; physical acceptance is deferred. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Audit disposition is a conditional proposal to close the bounded digital forest comparison after owner authorization, transferring physical/independent evidence to #13/#70/#47; no closure applied.",
-      "sourceUpdatedAt": "2026-10-19T10:31:00Z"
+      "note": "Closed for the delivered canonical digital forest comparison and scoped owner specimen approval. Broader depth/pass usefulness and family suitability stay #47; private package matrix #123; physical/operator #13; independent artist #70. No universal or physical acceptance.",
+      "sourceUpdatedAt": "2026-10-20T03:57:50Z"
     },
     {
       "issue": 44,
@@ -533,16 +539,16 @@
     {
       "issue": 46,
       "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
-      "trackerState": "open",
-      "deliveryState": "review",
+      "trackerState": "closed",
+      "deliveryState": "superseded",
       "track": "identity",
       "optional": true,
       "dependsOn": [
         2,
         5
       ],
-      "note": "Generated candidates exist; the historical branch is parked. Cloud review records four unique commits in that branch; do not bulk-merge or delete unapproved work. Audit disposition is a conditional proposal to close as superseded by #57; no closure applied.",
-      "sourceUpdatedAt": "2026-10-17T10:06:47Z"
+      "note": "Closed as not planned/superseded by #57 wordmark identity study. Original SVG, scripts, historical specimens and parked branch preserved; no logo adoption or branch deletion.",
+      "sourceUpdatedAt": "2026-10-20T03:57:52Z"
     },
     {
       "issue": 47,
@@ -557,7 +563,7 @@
         56
       ],
       "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Tests and owner-approved digital specimens exist; family-wide artistic/physical acceptance remains open. The audit does not promote two specimens into universal approval.",
-      "sourceUpdatedAt": "2026-10-19T10:31:01Z"
+      "sourceUpdatedAt": "2026-10-20T03:57:25Z"
     },
     {
       "issue": 52,
@@ -608,7 +614,7 @@
         54
       ],
       "note": "Genuine shaped wordmark study exists; owner chooses the final identity. Original README SVG unchanged.",
-      "sourceUpdatedAt": "2026-10-17T10:06:45Z"
+      "sourceUpdatedAt": "2026-10-20T03:57:29Z"
     },
     {
       "issue": 60,
@@ -663,7 +669,7 @@
         74
       ],
       "note": "Published @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs alpha.1: fresh registry download SHA-256/SHA-512/bytes match the committed upload record; an empty-cache consumer installs exactly three packages and passes runtime/types/replay checks. Alpha/latest tags and public 0.0.0-stage placeholders are observed, not changed. Independent artist and physical/human acceptance remain open. Publication and software acceptance are complete; independent artist usefulness remains owner-deferred. Owner-photo/physical gates remain in #13.",
-      "sourceUpdatedAt": "2026-10-19T16:14:51Z"
+      "sourceUpdatedAt": "2026-10-20T03:57:28Z"
     },
     {
       "issue": 71,
@@ -830,7 +836,8 @@
         85,
         86
       ],
-      "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot."
+      "note": "Dependency/version ledger, changelog and sitemap with shared navigation. Delivered through PR #91 with integrated browser/visual evidence; tracker state below is the pre-merge source snapshot.",
+      "sourceUpdatedAt": "2026-10-17T16:22:29Z"
     },
     {
       "issue": 109,
@@ -844,7 +851,8 @@
         73,
         83
       ],
-      "note": "Independent review integrated with corrected metric definitions, fail-closed 32-artifact replay, UTF-8/LF and POSIX delivery paths. Expanded Linux evidence preserves original recording separately. Local-tone/spatial residuals remain visible; no Experiment 2, adapter approval or human acceptance. Study 01 delivery/review/CI is complete and evidence is preserved; A/B maintenance is reviewed but unmerged. Windows portability and the requirements follow-up are ordinary maintenance; no rerun, adapter approval or Experiment 2."
+      "note": "Independent review integrated with corrected metric definitions, fail-closed 32-artifact replay, UTF-8/LF and POSIX delivery paths. Expanded Linux evidence preserves original recording separately. Local-tone/spatial residuals remain visible; no Experiment 2, adapter approval or human acceptance. Study 01 delivery/review/CI is complete and evidence is preserved; A/B maintenance merged as #120/#121 at the exact reviewed heads. Windows portability and the requirements follow-up are ordinary maintenance; no rerun, adapter approval or Experiment 2.",
+      "sourceUpdatedAt": "2026-10-19T22:03:19Z"
     },
     {
       "issue": 113,
@@ -857,7 +865,8 @@
         8,
         9
       ],
-      "note": "Proposed opt-in operator proof kit reusing existing aligned export. Physical acceptance remains #13; no release date."
+      "note": "Proposed opt-in operator proof kit reusing existing aligned export. Physical acceptance remains #13; no release date.",
+      "sourceUpdatedAt": "2026-10-19T09:58:11Z"
     },
     {
       "issue": 114,
@@ -870,7 +879,50 @@
         7,
         8
       ],
-      "note": "Proposed process research coordinated with #109/#113. Photocopy, screenprint and relief shortlist; no production implementation or version promised."
+      "note": "Proposed process research coordinated with #109/#113. Photocopy, screenprint and relief shortlist; no production implementation or version promised.",
+      "sourceUpdatedAt": "2026-10-19T09:58:06Z"
+    },
+    {
+      "issue": 123,
+      "title": "Owner-photo package acceptance — private evidence",
+      "trackerState": "open",
+      "deliveryState": "partial",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        8,
+        9,
+        12
+      ],
+      "note": "Private execution begun at f59c8d9: three original hashes match; three 300-DPI canonical packages verify and repeat member-for-member. Agent PDF/native-crop review records failures; 0 of 3 packages accepted. #124 owns legacy G07 orientation/G08 substrate-content mismatch; #125 owns legacy recipe detail/depth/figure failures. Human accessibility remains open; physical/independent artist trials deferred.",
+      "sourceUpdatedAt": "2026-10-20T04:14:26Z"
+    },
+    {
+      "issue": 124,
+      "title": "Reconcile owner-photo report acceptance contract",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        9
+      ],
+      "note": "Open QA contract discrepancy from #123: unchanged G07 requires landscape for C while current report is portrait; G08 substrate-panel content differs. No acceptance expectation silently weakened.",
+      "sourceUpdatedAt": "2026-10-20T04:12:18Z"
+    },
+    {
+      "issue": 125,
+      "title": "Correct legacy owner-photo acceptance recipe failures",
+      "trackerState": "open",
+      "deliveryState": "planned",
+      "track": "studio",
+      "optional": false,
+      "dependsOn": [
+        7,
+        47
+      ],
+      "note": "Open negative acceptance findings from #123: legacy owner-A/B/C recipes lose sculpture ridges, forest depth/display and beach figures. Earlier approved opt-in specimens and frozen recipes remain unchanged; no new algorithm/research authorized.",
+      "sourceUpdatedAt": "2026-10-20T04:12:20Z"
     }
   ],
   "nativeTracking": {
