@@ -1,6 +1,6 @@
 {
   "contract": "stipra-delivery-ledger-v1",
-  "updatedAt": "2026-10-19",
+  "updatedAt": "2026-10-20",
   "repository": "https://github.com/yigit-denktas/stipra",
   "primary": "https://apps.yigitdenktas.com/stipra/",
   "mirror": "https://yigit-denktas.github.io/stipra/",
@@ -116,20 +116,35 @@
     {
       "name": "feat/22-studio-and-release-map",
       "status": "integration-record",
-      "note": "PR #91 carries #22, the #14 notice fixes and #90 to main after review. This is one integration record, not a separate ongoing product roadmap."
+      "note": "PR #91 carries #22 and the #14 notice fixes to main after review. One integration record, not a separate ongoing roadmap."
     },
     {
       "name": "feat/46-stipra-engine-generated-mark",
       "status": "parked",
-      "note": "Four unique commits, 49 behind main at commit 40968a1 (#89). Historical inkmark assets/build script remain for #46 owner review; do not bulk merge or delete unapproved work."
+      "note": "Historical inkmark assets/build script; cloud review records four unique commits. Do not bulk merge or delete unapproved work."
+    },
+    {
+      "name": "fix/windows-portability-audit-2026-10-20",
+      "status": "review",
+      "note": "Head 90abb56ec92675f677a30fa1ec1b1f0c756a740a. Windows portability tests/build fixes; cloud Linux review accepted; no merge authorized."
+    },
+    {
+      "name": "chore/reconstruction-test-requirements-2026-10-20",
+      "status": "review",
+      "note": "Head aa5e4242840fe2422c809227365ba8c0a92a79ad. Self-contained test requirements and future archive .txt inclusion; cloud review accepted; no merge authorized."
+    },
+    {
+      "name": "audit/backlog-2026-10-20",
+      "status": "review",
+      "note": "Read-only audit handoff, reconciliation and review documents. No product code, evidence or archive change."
     }
   ],
   "nextSequence": [
-    "Studio v0.9.0-rc.1 is published at exact source aec0c23 with the verified browser archive attached. Live-host download is digitally verified from the owner-supplied package; human/physical acceptance remains open. Release-history commit 401aeef exists; mirror deployment run 39281801339 succeeded.",
-    "Complete human keyboard/screen-reader observations (#13). Physical prints and independent artist trials (#13/#70) are owner-deferred, not passed.",
-    "Await the compiled-component/notices response to samizdatco/skia-canvas#309, posted on 19 October 2026; native bundles remain blocked (#14).",
-    "Retain owner-approved digital forest/beach specimens and frozen recipes; broader Style and physical acceptance remains open (#43/#47/#34). Keep optional Java, analytic vector screens and identity extensions separate.",
-    "Run authorized Reconstruction Study 01 (#109); operator proofs (#113) and process research (#114) remain proposals. Preserve the original v0.9 denominator."
+    "A/B maintenance branches passed independent review at unchanged heads (A: Windows portability @ 90abb56; B: reconstruction test requirements @ aa5e424); no merge is authorized.",
+    "After owner authorization, merge A/B separately, then land this coordinated C ledger/documentation reconciliation. Keep #13/#14/#70/#109 acceptance parents open.",
+    "Execute the proposed #13 owner-photo acceptance child for G01–G11 plus A1–A5/B1–B5/C1–C5 with private evidence; status remains NOT YET RUN / 0 of 3 until real results exist.",
+    "Human keyboard/screen-reader observations remain open and not performed. Physical prints and independent artist trials are owner-deferred, not passed; keep those statuses distinct (#13/#70). Do not infer any of them from CI.",
+    "Await native-component notices (#14) and keep #109 Study 01/adapter decisions separate; Experiment 2, #113 and #114 remain proposals with no authorization."
   ],
   "tasks": [
     {
@@ -141,7 +156,7 @@
       "optional": false,
       "dependsOn": [],
       "note": "Closed implementation/research record; see the linked issue for exact scope.",
-      "sourceUpdatedAt": "2026-10-16T20:18:34Z"
+      "sourceUpdatedAt": "2026-10-17T21:51:50Z"
     },
     {
       "issue": 2,
@@ -154,7 +169,7 @@
         1
       ],
       "note": "Closed implementation/research record; see the linked issue for exact scope.",
-      "sourceUpdatedAt": "2026-10-16T20:35:35Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:24Z"
     },
     {
       "issue": 3,
@@ -167,7 +182,7 @@
         2
       ],
       "note": "Optional case-study geometry; does not block the image studio.",
-      "sourceUpdatedAt": "2026-10-16T21:41:56Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:25Z"
     },
     {
       "issue": 4,
@@ -180,7 +195,7 @@
         2
       ],
       "note": "Optional paper realism; current report speckle is a simulation, not scanned stock.",
-      "sourceUpdatedAt": "2026-10-16T21:42:04Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:26Z"
     },
     {
       "issue": 5,
@@ -193,7 +208,7 @@
         2
       ],
       "note": "Closed implementation/research record; see the linked issue for exact scope.",
-      "sourceUpdatedAt": "2026-10-16T22:25:07Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:26Z"
     },
     {
       "issue": 6,
@@ -206,7 +221,7 @@
         1
       ],
       "note": "Closed implementation/research record; see the linked issue for exact scope.",
-      "sourceUpdatedAt": "2026-10-16T21:10:53Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:27Z"
     },
     {
       "issue": 7,
@@ -219,7 +234,7 @@
         6
       ],
       "note": "Closed implementation/research record; see the linked issue for exact scope.",
-      "sourceUpdatedAt": "2026-10-16T22:05:01Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:28Z"
     },
     {
       "issue": 8,
@@ -232,7 +247,7 @@
         7,
         5
       ],
-      "note": "Native grayscale PNG masters and optional pure sampled-run SVG paths have verified frame, DPI, coverage and zero registration. Marked PNGs preserve trim pixels; bleed is explicitly zero. Analytic screen geometry remains the separate optional #28. Closure is delivered by the CLI/export integration merge."
+      "note": "Native grayscale PNG masters and optional pure sampled-run SVG paths have verified frame, DPI, coverage and zero registration. Marked PNGs preserve trim pixels; bleed is explicitly zero. Analytic screen geometry remains the separate optional #28. Closure is delivered by the CLI/export integration merge. Implementation is complete for the delivered digital scope; owner-photo G01–G06 acceptance remains unexecuted and is proposed in a #13 child. Closure is not an acceptance pass."
     },
     {
       "issue": 9,
@@ -244,8 +259,8 @@
       "dependsOn": [
         8
       ],
-      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12.",
-      "sourceUpdatedAt": "2026-10-17T16:18:17Z"
+      "note": "Report acceptance reconciled in #91: approved editorial layout, real 2/3/8-ink pagination, physical labels, byte-stable frames and shared report/master packages. Physical checks remain #13; generic/vector exports remain #8/#12. Implementation/report delivery is complete; owner-photo G07–G08 acceptance remains unexecuted and is proposed in a #13 child. Physical observations remain #13.",
+      "sourceUpdatedAt": "2026-10-17T22:28:30Z"
     },
     {
       "issue": 10,
@@ -258,7 +273,7 @@
         8
       ],
       "note": "Advanced reference segmentation/overlays are optional, explicitly nonblocking for CLI and exports.",
-      "sourceUpdatedAt": "2026-10-16T21:42:00Z"
+      "sourceUpdatedAt": "2026-10-17T22:28:31Z"
     },
     {
       "issue": 11,
@@ -286,7 +301,7 @@
         8,
         9
       ],
-      "note": "PNG/JPG/WebP proof exports at scales 1/2/3, sampled-path SVG proofs/plates, A4 PDF reports and ZIPs are verified with 2/3/4 inks and odd frames. Lossy encoder bytes may vary; native masters remain unchanged. Closure is delivered by the CLI/export integration merge."
+      "note": "PNG/JPG/WebP proof exports at scales 1/2/3, sampled-path SVG proofs/plates, A4 PDF reports and ZIPs are verified with 2/3/4 inks and odd frames. Lossy encoder bytes may vary; native masters remain unchanged. Closure is delivered by the CLI/export integration merge. Format/ZIP implementation is complete; owner-photo G09–G11 acceptance remains unexecuted and is proposed in a #13 child. Physical observations remain #13."
     },
     {
       "issue": 13,
@@ -304,8 +319,8 @@
         12,
         22
       ],
-      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed.",
-      "sourceUpdatedAt": "2026-10-17T20:17:26Z"
+      "note": "Saved vector/plate and generic mask goldens; opt-in independent Prehnite paper seed and shared straight-edge checks preserve existing defaults. Ten-route Chromium axe and real Tab/Enter skip-link audit adds scoped automated accessibility evidence and records incomplete checks; actual printing and human keyboard/screen-reader/artist acceptance remain open. Fresh photo-free operator kit generated and digitally verified on 19 October; blank observations correctly rejected. Human records remain not performed. Acceptance parent. Proposed child covers owner-photo G01–G11 plus A1–A5/B1–B5/C1–C5 with private PASS/FAIL/NOT RUN evidence; no child created or result claimed. Human accessibility, physical and independent-artist gates remain open.",
+      "sourceUpdatedAt": "2026-10-19T21:40:14Z"
     },
     {
       "issue": 14,
@@ -317,8 +332,8 @@
       "dependsOn": [
         1
       ],
-      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. The approved upstream request was posted via browser on 19 October 2026: https://github.com/samizdatco/skia-canvas/issues/309. No maintainer response or native clearance is claimed. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail.",
-      "sourceUpdatedAt": "2026-10-17T18:21:32Z"
+      "note": "Opaque @pdf-lib/fontkit replaced by source-mapped Fontkit 2.0.4 with external dependency inventory and retained terms. Fonteditor/WASM removed; pinned original TTFs used directly. Browser exporter checked; one native Skia binary provenance finding remains. The approved upstream request was posted via browser on 19 October 2026: https://github.com/samizdatco/skia-canvas/issues/309. No maintainer response or native clearance is claimed. Fresh artifact-specific gates now check lean archives/offline consumers and IIFE/ESM browser exporters in CI; native CLI/executable/container delivery stays blocked. A narrow LF checkout rule preserves hash-pinned MIT notice bytes; changed notices still fail. Only the attributable compiled native Skia component/notice inventory remains; the upstream request is posted with no response/clearance. Native bundle remains blocked; no refusal/permission claim.",
+      "sourceUpdatedAt": "2026-10-19T08:29:49Z"
     },
     {
       "issue": 17,
@@ -328,8 +343,8 @@
       "track": "delivery",
       "optional": true,
       "dependsOn": [],
-      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1\u2013#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
-      "sourceUpdatedAt": "2026-10-16T20:38:00Z"
+      "note": "Native milestone #1, saved priority table #6 and status board #7 contain original issues #1–#14. Priority/Area and all 11 workflow configurations inspected; seven enabled. Existing private Project has one collaborator, the owner with Admin access; unchanged. Done automatically closes issues, so physical/artist gates stay In review until accepted. See docs/PROJECT-TRACKING.md.",
+      "sourceUpdatedAt": "2026-10-18T02:14:20Z"
     },
     {
       "issue": 18,
@@ -365,7 +380,7 @@
         7,
         5
       ],
-      "note": "Image workflow implements 2\u20138 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
+      "note": "Image workflow implements 2–8 inks, solo/mute/paper inspection, native pixel zoom, print geometry and marked exports. Real browser interactions/export pass in PR #91; no authored-layer import UI or calibration claim. Studio recipe comparison previews current/candidate full proofs with matching framing and explicit Keep current / Use candidate; edits and new imports invalidate old previews. The guide uses the same labels."
     },
     {
       "issue": 24,
@@ -414,7 +429,7 @@
         22
       ],
       "note": "Existing workspace and guide share tokens. Final workspace art direction remains owner-reviewed; not a blocker for the lean API.",
-      "sourceUpdatedAt": "2026-10-17T13:15:49Z"
+      "sourceUpdatedAt": "2026-10-19T10:37:27Z"
     },
     {
       "issue": 32,
@@ -438,8 +453,8 @@
         7,
         5
       ],
-      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md.",
-      "sourceUpdatedAt": "2026-10-17T10:04:55Z"
+      "note": "Four families and attributed variants implemented. Artistic usefulness and physical acceptance remain with #47/#43/#13. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Audit disposition is a conditional proposal to consolidate into #47 after owner authorization; no closure applied. Physical/independent evidence remains with #13/#70.",
+      "sourceUpdatedAt": "2026-10-19T08:28:48Z"
     },
     {
       "issue": 35,
@@ -465,7 +480,7 @@
     },
     {
       "issue": 39,
-      "title": "Owner photographs A/B/C \u2014 first complete print package validation",
+      "title": "Owner photographs A/B/C — first complete print package validation",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "studio",
@@ -485,8 +500,8 @@
         7,
         56
       ],
-      "note": "Two-/three-ink forest variants and detail studies exist; owner approved the supplied digital forest/beach specimens; physical acceptance is deferred. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md.",
-      "sourceUpdatedAt": "2026-10-17T12:48:54Z"
+      "note": "Two-/three-ink forest variants and detail studies exist; owner approved the supplied digital forest/beach specimens; physical acceptance is deferred. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Audit disposition is a conditional proposal to close the bounded digital forest comparison after owner authorization, transferring physical/independent evidence to #13/#70/#47; no closure applied.",
+      "sourceUpdatedAt": "2026-10-19T10:31:00Z"
     },
     {
       "issue": 44,
@@ -517,7 +532,7 @@
     },
     {
       "issue": 46,
-      "title": "Generate a reproducible layered Stipr\u0101 mark using its own separation and screening engine",
+      "title": "Generate a reproducible layered Stiprā mark using its own separation and screening engine",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "identity",
@@ -526,7 +541,7 @@
         2,
         5
       ],
-      "note": "Generated candidates exist. Historical branch is parked, diverged from main; do not bulk-merge it as an identity approval.",
+      "note": "Generated candidates exist; the historical branch is parked. Cloud review records four unique commits in that branch; do not bulk-merge or delete unapproved work. Audit disposition is a conditional proposal to close as superseded by #57; no closure applied.",
       "sourceUpdatedAt": "2026-10-17T10:06:47Z"
     },
     {
@@ -541,8 +556,8 @@
         43,
         56
       ],
-      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md.",
-      "sourceUpdatedAt": "2026-10-17T12:48:53Z"
+      "note": "Versioned browser/CLI resolver, physical LPI, diagnostics and suitability implemented. Four families are not all artistically/physically proven. Current forest pass-removal study supports an additional opt-in forest-contrast v1; two shared plates match exactly in the two-/three-pass comparison. Broader family/physical acceptance remains open. Same-frame forest review reproduced on 19 October; controlled beach 50/75-LPI and forest package plans added for intended-size review. No existing style or golden changed. Tonal-detail follow-up: opt-in forest-balanced retains dark steps and coast-tonal distinguishes silhouettes from blue water. Controlled accents match byte-for-byte; 60 treatments and four canonical packages were checked. Earlier recipes remain unchanged; the owner approved the supplied digital forest/beach specimens on 19 October. Physical prints and independent artist testing are deferred. See docs/TONAL-DETAIL-REVIEW.md. Tests and owner-approved digital specimens exist; family-wide artistic/physical acceptance remains open. The audit does not promote two specimens into universal approval.",
+      "sourceUpdatedAt": "2026-10-19T10:31:01Z"
     },
     {
       "issue": 52,
@@ -557,7 +572,7 @@
     },
     {
       "issue": 54,
-      "title": "Real Stipr\u0101 palette + four authentic wordmarks + three owner-photo comparison PDFs",
+      "title": "Real Stiprā palette + four authentic wordmarks + three owner-photo comparison PDFs",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "identity",
@@ -636,7 +651,7 @@
     },
     {
       "issue": 70,
-      "title": "Creative coding alpha: sketch \u2192 ink proof \u2192 reproducible plates",
+      "title": "Creative coding alpha: sketch → ink proof → reproducible plates",
       "trackerState": "open",
       "deliveryState": "review",
       "track": "library",
@@ -647,8 +662,8 @@
         73,
         74
       ],
-      "note": "Published @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs alpha.1: fresh registry download SHA-256/SHA-512/bytes match the committed upload record; an empty-cache consumer installs exactly three packages and passes runtime/types/replay checks. Alpha/latest tags and public 0.0.0-stage placeholders are observed, not changed. Independent artist and physical/human acceptance remain open.",
-      "sourceUpdatedAt": "2026-10-17T16:19:29Z"
+      "note": "Published @yigit-denktas/stipra-core, stipra-canvas and stipra-inputs alpha.1: fresh registry download SHA-256/SHA-512/bytes match the committed upload record; an empty-cache consumer installs exactly three packages and passes runtime/types/replay checks. Alpha/latest tags and public 0.0.0-stage placeholders are observed, not changed. Independent artist and physical/human acceptance remain open. Publication and software acceptance are complete; independent artist usefulness remains owner-deferred. Owner-photo/physical gates remain in #13.",
+      "sourceUpdatedAt": "2026-10-19T16:14:51Z"
     },
     {
       "issue": 71,
@@ -666,7 +681,7 @@
     },
     {
       "issue": 72,
-      "title": "Apply Stipr\u0101 treatments inside existing Canvas and p5.js sketches",
+      "title": "Apply Stiprā treatments inside existing Canvas and p5.js sketches",
       "trackerState": "closed",
       "deliveryState": "complete",
       "track": "library",
@@ -716,7 +731,7 @@
       "dependsOn": [
         74
       ],
-      "note": "Optional Processing Java host feasibility after useful JS integration; no alpha prerequisite.",
+      "note": "Optional Processing Java host feasibility after useful JS integration; no alpha prerequisite. Soft usefulness gate: #70 independent-artist evidence (not a hard prerequisite). #74 is the completed engineering dependency; Java is not an alpha prerequisite.",
       "sourceUpdatedAt": "2026-10-17T13:22:37Z"
     },
     {
@@ -829,7 +844,7 @@
         73,
         83
       ],
-      "note": "Independent review integrated with corrected metric definitions, fail-closed 32-artifact replay, UTF-8/LF and POSIX delivery paths. Expanded Linux evidence preserves original recording separately. Local-tone/spatial residuals remain visible; no Experiment 2, adapter approval or human acceptance."
+      "note": "Independent review integrated with corrected metric definitions, fail-closed 32-artifact replay, UTF-8/LF and POSIX delivery paths. Expanded Linux evidence preserves original recording separately. Local-tone/spatial residuals remain visible; no Experiment 2, adapter approval or human acceptance. Study 01 delivery/review/CI is complete and evidence is preserved; A/B maintenance is reviewed but unmerged. Windows portability and the requirements follow-up are ordinary maintenance; no rerun, adapter approval or Experiment 2."
     },
     {
       "issue": 113,
