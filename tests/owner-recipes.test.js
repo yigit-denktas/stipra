@@ -26,7 +26,12 @@ test('B keeps a compliant three-ink forest-balanced key plus chromatic and earth
   assert.equal(inks.inks[0].gamma,1.3);
   assert.equal(inks.inks[1].source,'yellow-density');
   assert.equal(inks.inks[1].grayRemoval,1);
-  assert.equal(inks.inks[2].source,'red');
+  assert.equal(inks.inks[2].source,'match');
+  assert.equal(inks.inks[2].target,'#a3a3a3');
+  assert.equal(inks.inks[2].tolerance,.14);
+  assert.equal(inks.inks[2].threshold,.3);
+  assert.equal(inks.inks[2].gain,.5);
+  assert.equal(inks.inks[2].gamma,1.4);
   assert.equal(screens.plates.key.mode,'solid');
   assert.equal(screens.plates.accent.mode,'dots');
   assert.equal(screens.plates.earth.mode,'dots');

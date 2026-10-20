@@ -24,9 +24,12 @@
       "id": "earth",
       "name": "Earth",
       "color": "#aa7959",
-      "source": "red",
-      "gain": 0.2,
-      "gamma": 1.2
+      "source": "match",
+      "target": "#a3a3a3",
+      "tolerance": 0.14,
+      "threshold": 0.3,
+      "gain": 0.5,
+      "gamma": 1.4
     }
   ]
 }
