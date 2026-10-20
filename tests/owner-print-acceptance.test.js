@@ -38,7 +38,9 @@ test('acceptance matrix records all 11 common and 15 image-specific checks as un
   for(let i=1;i<=11;i++)assert.ok(doc.includes('- [ ] **G'+String(i).padStart(2,'0')),'Missing G'+i);
   for(const id of ['A','B','C'])for(let i=1;i<=5;i++)
     assert.ok(doc.includes('- [ ] **'+id+i),'Missing '+id+i);
-  assert.match(doc,/NOT YET RUN/);
+  assert.match(doc,/Historical specification baseline: NOT YET RUN/);
+  assert.match(doc,/Current execution: PARTIAL EXECUTION/);
+  assert.match(doc,/0 of 3 packages accepted/);
   assert.match(doc,/0 of 3 owner-photo packages/);
   assert.match(doc,/PDF.+landscape A4|landscape A4.+PDF/);
   assert.match(doc,/source.*SHA-256/i);
