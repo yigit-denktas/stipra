@@ -58,9 +58,9 @@ This creates grayscale plates, previews, recipes and provenance without changing
 
 **Release:** [Studio v0.9.0-rc.1](https://github.com/yigit-denktas/stipra/releases/tag/v0.9.0-rc.1) is an experimental prerelease. [Editorial drawing trial](docs/CREATIVE-USE-2026-10-19.md).
 
-**Acceptance:** [Studio scope and evidence](docs/STUDIO-RC-0.9-rc.1.md) · [Scoped CI gates](docs/RELEASE-CANDIDATE.md). Native bundles await [component notices](docs/DEPENDENCY-AUDIT.md). Human accessibility open; photo checks active; physical/artist trials deferred. Previews are digital approximations; branding provisional.
+**Acceptance:** [Studio scope and evidence](docs/STUDIO-RC-0.9-rc.1.md) · [Scoped CI gates](docs/RELEASE-CANDIDATE.md). Native bundles await [notices](docs/DEPENDENCY-AUDIT.md). Human accessibility open; [report contract](docs/OWNER-REPORT-CONTRACT-v2.md); photo checks pending; physical/artist trials deferred. Previews are digital approximations; branding provisional.
 
-**Research:** [Reconstruction study, review and CI checks](docs/RECONSTRUCTION-STUDY-01.md); #109 remains open. #113/#114 are proposed.
+**Research:** [Study #109](docs/RECONSTRUCTION-STUDY-01.md) open; #113/#114 proposed.
 
 ## Follow the work
 

@@ -903,13 +903,13 @@
       "issue": 124,
       "title": "Reconcile owner-photo report acceptance contract",
       "trackerState": "open",
-      "deliveryState": "planned",
+      "deliveryState": "in-progress",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         9
       ],
-      "note": "Open QA contract discrepancy from #123: unchanged G07 requires landscape for C while current report is portrait; G08 substrate-panel content differs. No acceptance expectation silently weakened.",
+      "note": "Isolated #124 report branch implements explicit owner-report contract v2, preserving historical orientation clauses/results, and layout-v8 substrate/caption parity. Review and integration pending; #123 remains 0/3 accepted and #125 recipe work is separate.",
       "sourceUpdatedAt": "2026-10-20T04:12:18Z"
     },
     {
@@ -989,4 +989,3 @@
     }
   }
 }
-

@@ -38,7 +38,9 @@ test('acceptance matrix records all 11 common and 15 image-specific checks as un
   for(let i=1;i<=11;i++)assert.ok(doc.includes('- [ ] **G'+String(i).padStart(2,'0')),'Missing G'+i);
   for(const id of ['A','B','C'])for(let i=1;i<=5;i++)
     assert.ok(doc.includes('- [ ] **'+id+i),'Missing '+id+i);
-  assert.match(doc,/NOT YET RUN/);
+  assert.match(doc,/Historical specification baseline: NOT YET RUN/);
+  assert.match(doc,/Current execution: PARTIAL EXECUTION/);
+  assert.match(doc,/0 of 3 packages accepted/);
   assert.match(doc,/0 of 3 owner-photo packages/);
   assert.match(doc,/PDF.+landscape A4|landscape A4.+PDF/);
   assert.match(doc,/source.*SHA-256/i);
@@ -52,4 +54,16 @@ test('references resolve and no raw owner photo is published in documented catal
     assert.ok(fs.existsSync(resolved),'broken local link: '+target);
   }
   assert.doesNotMatch(doc,/<img\b|!\[[^\]]+\]\((?:https?:\/\/|\/mnt\/data)/i);
+});
+
+test('report contract v2 explicitly supersedes historical orientation without implying owner acceptance',()=>{
+  const Report=require('../src/report-layout.js');
+  const revision=fs.readFileSync(path.join(ROOT,'docs/OWNER-REPORT-CONTRACT-v2.md'),'utf8');
+  assert.equal(Report.LAYOUT_VERSION,8);
+  assert.deepEqual(spec.fixtures.map(f=>Report.orientation(f.widthPx,f.heightPx)),['landscape','landscape','portrait']);
+  assert.equal(spec.target.inspectionSheet.orientation,'landscape','historical catalog is not silently rewritten');
+  assert.match(doc,/OWNER-REPORT-CONTRACT-v2.md/);
+  assert.match(revision,/supersedes only the report-orientation clauses in G07 and C5/);
+  assert.match(revision,/Do not relabel the old execution as PASS/);
+  assert.match(revision,/not a physical ink/);
 });
