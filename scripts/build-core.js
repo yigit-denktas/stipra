@@ -2,7 +2,20 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),crypto=require('node:crypto');
 const esbuild=require('esbuild'),ROOT=path.resolve(__dirname,'..');
-function atomic(file,bytes){const temp=file+'.'+process.pid+'.tmp';fs.writeFileSync(temp,bytes);fs.renameSync(temp,file);}
+function atomic(file,bytes){
+  const temp=file+'.'+process.pid+'.'+Date.now().toString(36)+'.tmp';
+  fs.writeFileSync(temp,bytes);
+  try{fs.renameSync(temp,file);}
+  catch(error){
+    // Parallel test/build processes may already have produced the same artifact;
+    // Windows can reject replacing a file another process is reading.
+    if((error.code==='EPERM'||error.code==='EACCES')&&fs.existsSync(file)){
+      let same=false;try{same=fs.readFileSync(file).equals(bytes);}catch{}
+      if(same){try{fs.rmSync(temp,{force:true});}catch{}return;}
+    }
+    throw error;
+  }
+}
 async function build(){
   const root=path.join(ROOT,'packages/core'),out=path.join(root,'dist');fs.mkdirSync(out,{recursive:true});
   const builds=[];

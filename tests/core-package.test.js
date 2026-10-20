@@ -1,10 +1,10 @@
 'use strict';
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process');
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process'),{runNpm}=require('./npm-cli');
 const ROOT=path.resolve(__dirname,'..');
 test('packed core installs offline with no runtime dependencies and works without browser globals',async()=>{
   const report=await require('../scripts/build-core').build();
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'stipra-core-install-'));
-  const npm=(...args)=>cp.execFileSync('npm',args,{cwd:temp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
+  const npm=(...args)=>runNpm(args,{cwd:temp,encoding:'utf8',stdio:['ignore','pipe','pipe']});
   try{
     const [pack]=JSON.parse(npm('pack',path.join(ROOT,'packages/core'),'--json','--pack-destination',temp));
     assert.deepEqual(pack.files.map(x=>x.path).sort(),['LICENSE','README.md','package.json','dist/index.cjs','dist/index.mjs','dist/index.d.cts','dist/index.d.mts'].sort());
@@ -42,7 +42,8 @@ const mode:'spot'|'cmyk'=resolved.inkRecipe.mode;
     fs.writeFileSync(path.join(temp,'valid.cts'),`import core = require('@yigit-denktas/stipra-core');
 const v:string=core.VERSION; const styles=core.listStyles();`);
     const tsc=require.resolve('typescript/bin/tsc');
-    const args=['--strict','--noEmit','--target','ES2020','--module','NodeNext','--moduleResolution','NodeNext','--lib','ES2020'];
+    const typeRoots=path.join(temp,'empty-types');fs.mkdirSync(typeRoots);
+    const args=['--strict','--noEmit','--target','ES2020','--module','NodeNext','--moduleResolution','NodeNext','--lib','ES2020','--typeRoots',typeRoots];
     cp.execFileSync(process.execPath,[tsc,...args,'valid.mts','valid.cts'],{cwd:temp,stdio:'pipe'});
     fs.writeFileSync(path.join(temp,'invalid.mts'),`import {renderImage,renderLayers} from '@yigit-denktas/stipra-core';
 renderImage({width:1,height:1,colorSpace:'display-p3',rgba:new Uint8Array(4)},{style:{id:'clean-linework'}});
