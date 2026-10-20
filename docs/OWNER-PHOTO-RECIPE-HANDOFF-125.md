@@ -1,0 +1,141 @@
+# #125 — Legacy owner-photo batch recipe review
+
+**Status:** candidate branch for Linux review. No merge, issue closure, acceptance pass, production default change, report-layout change or Experiment 2. Owner photos and image-bearing outputs remain private.
+
+**Branch:** `fix/125-owner-photo-recipes`  
+**Base:** `e0aeac82cf84a095da628216df8051641b0b08b3` (`origin/main` when started; baseline recipe content matches #125's `f59c8d9`)  
+**Scope:** six `examples/recipes/owner-*.json` files, one focused test file and this handoff. The runner was not changed because the existing three fixture names and recipe selection still apply.
+
+## Source identity
+
+All three originals were available privately and their bytes matched `tests/fixtures/owner-photo-fixtures.json`:
+
+| Fixture | SHA-256 | Bytes | Pixels | Native print at 300 DPI |
+|---|---|---|---|---|
+| A | `0d3eeb51fc22aca97dadbf5bc1cad506418376f788c6b6c8a295558908c037cd` | 33,492 | 805 × 644 | 68.1567 × 54.5253 mm |
+| B | `e46a4c774794d4c111df7021427492d37d51987a30b9f60e874c307a951ca55f` | 880,248 | 2048 × 1365 | 173.3973 × 115.57 mm |
+| C | `f8a9b2f7eaaa18d62f4908456f8e8a47c84e0edb5c0172e57dabfd166dd3f273` | 898,480 | 1152 × 2048 | 97.536 × 173.3973 mm |
+
+C was taken from the private 19 October tonal-detail archive; the similarly named file on the desktop was a different byte stream and was not used. Nothing from any source was committed.
+
+## Why the legacy batch differs
+
+The legacy recipes use **linear-light `darkness`** and raw channel sources with dense hybrid/dot screens. They therefore build a broad, high-coverage key before the chromatic passes:
+
+- **A:** `darkness` slate at 50 LPI covers **88.1662%** screened / **73.4773%** continuous; the dot grid competes with the concentric ridges and recess shading.
+- **B:** `darkness` hybrid key plus green/red dot passes produce additive coverage **1.1449**, with **26.7742%** two-plus overlap and **3.5332%** three-plus overlap; forest depth, the distant display and antler/trunk silhouettes become one texture.
+- **C:** channel-blue solid sky plus a `darkness` hybrid key produce **27.2698%** overlap; the two figures and horizon lose local separation.
+
+The approved opt-in treatments solve a different problem with **gamma-encoded `tone` keys** and much smaller chromatic passes: `forest-balanced` uses a unit-gain solid green key plus a yellow-density accent; `coast-tonal` uses a unit-gain solid blue key plus a low-gain yellow-density warm pass. Those treatments remain separate style variants. This branch translates their controls into the owner batch recipes rather than claiming they are the same feature.
+
+## Candidate recipes
+
+Substrate fields and the runner's default `--paper auto` behaviour are unchanged. No new algorithm or new source type was introduced.
+
+| Fixture | Key candidates | Other passes | Screens |
+|---|---|---|---|
+| A | `slate`, `tone`, gain .8, gamma 1.1 | `ivory`, `luminance`, gain .4 | both **solid**; removes the 50 LPI dot grid from the key |
+| B | `key`, `tone`, gain 1, gamma 1.3 (forest-balanced values) | `accent`, `yellow-density`, grayRemoval 1, gain .65, gamma 1.05; `earth`, `red`, gain .2, gamma 1.2 | key solid; accent 50 LPI at −15°; earth 37.5 LPI at 65° |
+| C | `blue`, `tone`, gain 1, gamma .9 (coast-tonal values) | `warm`, `yellow-density`, grayRemoval .65, gain .65, gamma 1.2 | blue solid; warm 50 LPI at 75° |
+
+B remains **three inks**; the three-ink requirement was not changed. A two-ink `forest-balanced` comparison was generated privately but is not the selected compliant candidate.
+
+### Recipe identities
+
+Baseline (`f59c8d9` content) → candidate:
+
+| Recipe | Baseline SHA-256 | Candidate SHA-256 |
+|---|---|---|
+| A inks | `7367ef55ca1531313b4089fb14bd9122254eb32c23e60a07c8ff37cdde692b2e` | `d8900b9bc4bb632bc490e165bb091b28d6ef827e8a685fe494b244ca0448107b` |
+| A screens | `12c49047d13c33beb8d71704557492de72bb6ec3a4ef3852ecae5b757d9d1cea` | `c30c53c327edb1a3209c0db6732a7a81d571dea7d6e3c432ff50d6c8b0163265` |
+| B inks | `4394316e7c431c12d415d8457841eb1104b162a985f0143a13a7188debcf396a` | `e83349eb4a1ee3ad4041c8af5dff9c9f73b4538d7fcf2b2407dc8f2b079743d5` |
+| B screens | `771ddc7e7dc4705af15d3376e36e636bd087b97e49e0f8123f5a2bd459c3981f` | `1423a7563be1430f6ed9ea2fc82d0566e0426328b6854af1fc79ed66e1e5e748` |
+| C inks | `58203fa99d989e01961c250dcf82bedafb188790980d837c3b0a8aedcf505546` | `7b47acee29b6969d31b13becbc6495ca7625e18267c6d943abf85b6a5383546f` |
+| C screens | `79a99f07ebda81ad4ca24f5731f0672f6b34b8dbefb2021f78f549e8725df008` | `367a95a81bb4165f0f3bffd2afad20331e0660ae7e1d58f36e7d1e0e67f970e6` |
+
+## Private comparison
+
+Baseline packages were generated from the unmodified `f59c8d9` recipes before editing. Candidate packages were generated through `scripts/owner-photo-batch.js` with the verified private sources at 300 DPI, zero marks, into fresh private directories. ZIP SHA-256:
+
+| Fixture | Baseline ZIP | Candidate ZIP |
+|---|---|---|
+| A | `f5212d08ecd15b92379a86f2ece8086050559c7f4bf41d69f3fe8ad9c76e1baf` | `7db11848b0d6d77961429a7451e615943fc80dd90bbddb044947a42d59194fa3` |
+| B | `7b68961ec3b49fd432a931346fe0ae7e73542f6c0d5a861402b5abff8fd1b343` | `160bd073afe9a7574270afc38ac6d3fd50fefb65d552ad95666f169dd4aab94b` |
+| C | `911643734c9775530d4c30761604eadf0dbfeaa9db573b6ee0372988a8420552` | `eea341cd9e64c82731b654ed571f6968571896bfd38c68535e46d80432ec1bd4` |
+
+Coverage is nominal raster coverage, not press calibration. Every metric below comes from the private candidate package plus native-pixel crops; coverage alone was not used as proof of quality.
+
+| Fixture | Legacy ink coverage | Candidate ink coverage | Legacy additive / 2+ overlap | Candidate additive / 2+ overlap |
+|---|---|---|---|---|
+| A | slate 88.1662%, ivory 11.6485% | slate 64.8018%, ivory 5.1742% | .9983 / 8.2155% | .6998 / 0% |
+| B | shadow 63.877%, fern 36.0988%, earth 14.5183% | key 51.3896%, accent 16.6903%, earth 10.3146% | 1.1449 / 26.7742% | .7839 / 17.2123% |
+| C | sky 39.3343%, key 34.229% | blue 38.088%, warm 6.9334% | .7356 / 27.2698% | .4502 / 5.8653% |
+
+Native-pixel regional comparisons (tone correlation is between source and proof luminance; edge energy is a local gradient measure; lower can be better when the legacy dots were the only “detail”):
+
+| Fixture / region | Legacy corr | Candidate corr | Legacy proof std / grad | Candidate proof std / grad |
+|---|---|---|---|---|
+| A ridges | .4949 | .9956 | 78.28 / 9605.27 | 35.68 / 63.00 |
+| A recess | .5288 | .9966 | 71.00 / 8038.36 | 43.10 / 89.78 |
+| A highlight | .2082 | .9949 | 74.37 / 10710.71 | 5.84 / 15.90 |
+| B display | .0492 | .8602 | 70.99 / 11697.79 | 33.02 / 719.72 |
+| B far | .0458 | .8314 | 71.17 / 11831.36 | 31.80 / 967.93 |
+| B near | .0936 | .5322 | 75.04 / 12303.42 | 42.65 / 2548.14 |
+| B silhouette | .0790 | .8655 | 72.17 / 12107.22 | 39.40 / 1099.99 |
+| C figures | −.0156 | .4604 | 78.90 / 16260.06 | 20.00 / 945.59 |
+| C horizon | .2003 | .9314 | 69.34 / 11606.15 | 38.06 / 639.42 |
+| C water | .0325 | .6287 | 78.81 / 16268.19 | 22.68 / 916.51 |
+
+Private visual checks at 100% native crops:
+
+- **A:** ridges and recess are continuous and legible; the legacy halftone grid is gone. The key is now an unscreened continuous-tone pass, so print-process screening remains an open decision.
+- **B:** near grass/trunks, mid path and far foliage separate; the distant display is readable; antler/trunk silhouettes are retained. Accent and earth passes are low-coverage but non-zero in every selected region (for example display coverage: key 74.04%, accent 4.97%, earth 2.90%).
+- **C:** both seated figures are visible against the water, the horizon is continuous, and water/beach tone remains ordered. The warm pass is deliberately small (5.99% in the figure crop, 3.12% at the horizon).
+
+The two-ink `forest-balanced` comparison was visually cleaner on B (display corr .9404) but has only two inks and is **not** a compliant owner-B candidate. It is recorded only as an alternative; no acceptance requirement was changed.
+
+## Repeatability and geometry
+
+- Candidate ZIPs generated twice from the same source, recipes and seed were **byte-identical** for A, B and C; all entry bytes matched.
+- Source originals inside every candidate ZIP are byte-identical to the verified private inputs.
+- Every candidate `plates/` and `screened/` PNG has the exact source pixel dimensions; candidate `trimMm`, origin and `resampled:false` match baseline.
+- No image was resampled or cropped independently.
+
+## Tests
+
+```sh
+node --test tests/owner-recipes.test.js
+node --test tests/print-package.test.js tests/report-layout.test.js
+```
+
+Focused result: **4/4 owner-recipe tests pass**, including the runner fingerprint-rejection test. Package/report result: **20/20 pass**. Full Windows suite (198 tests) was also run with a writable `TEMP`/`TMP`: **187 pass, 9 fail, 2 skipped**. All nine failures are host-specific and outside this patch’s code paths: EPERM renames while concurrent tests rebuild `packages/core/dist`, TEMP output ACLs in page/export tests, and the known Windows symlink privilege failure. No Linux result is claimed here; the branch is for Linux review.
+
+## Private artifacts
+
+Private only, outside the repository under a private root such as `$STIPRA_125_PRIVATE`:
+
+- `$STIPRA_125_PRIVATE/baseline/` — frozen legacy ZIPs
+- `$STIPRA_125_PRIVATE/candidate-final/` — candidate ZIPs and report pages
+- `$STIPRA_125_PRIVATE/candidate-repeat/` — byte-identical repeatability run
+- `$STIPRA_125_PRIVATE/baseline-recipes/` — frozen recipe copies
+- `$STIPRA_125_PRIVATE/final-views/` and `$STIPRA_125_PRIVATE/crops2/` — source/legacy/candidate native crops
+- `$STIPRA_125_PRIVATE/final-summary.json` — source, recipe, ZIP, coverage, regional and repeatability record
+
+Reproduction form (private sources and targets; never commit their contents):
+
+```sh
+node scripts/owner-photo-batch.js \
+  --sources "$STIPRA_125_PRIVATE/sources" \
+  --out "$STIPRA_125_PRIVATE/candidate-final" \
+  --dpi 300 --marks-mm 0
+```
+
+Agent visual review: DeepSeek Harness local coding agent, 20 October 2026. This is private agent review evidence only, not a human/owner review, physical print result or package-pass claim.
+
+## Unresolved findings / handoff
+
+- **A:** the solid continuous-tone key is a deliberate screen-semantics change; owner/print process must decide whether an unscreened key is acceptable for the intended production path.
+- **B:** the compliant three-ink candidate keeps earth at a low 10.31% coverage; named human visual review of the display/silhouette crops is still required. The two-ink alternative must not silently replace the three-ink acceptance scope.
+- **C:** figures are materially improved in local crops but are still tiny; the intended A4/native inspection review is still required. The prior scoped coast-tonal approval is not retracted or expanded.
+- **All:** no G01–G11, A/B/C image-specific criteria or physical-pass claim is made. #123 remains **NOT RUN / 0 of 3**; this branch does not close #123, #125 or #13/#14/#70/#109.
+- **#124:** report layout, orientation and substrate parity remain owned by ChatGPT Work. This branch does not edit report-layout code, acceptance specifications, README, ROADMAP, changelog or the delivery ledger; the G07/G08 discrepancies recorded in #124 remain open and are not inferred to pass here.

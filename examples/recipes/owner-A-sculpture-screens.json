@@ -2,16 +2,15 @@
   "version": 1,
   "seed": 42,
   "default": {
-    "mode": "dots",
+    "mode": "solid",
     "pitch": 6,
-    "angle": 24,
+    "angle": 0,
     "jitter": 0,
     "dotScale": 1
   },
   "plates": {
     "slate": {
-      "mode": "dots",
-      "angle": 22
+      "mode": "solid"
     },
     "ivory": {
       "mode": "solid"

@@ -4,28 +4,29 @@
   "paper": "#faf5e5",
   "inks": [
     {
-      "id": "shadow",
-      "name": "Pine black",
-      "color": "#17332d",
-      "source": "darkness",
-      "gain": 0.57,
-      "gamma": 1.4
+      "id": "key",
+      "name": "Green detailed-shadow key",
+      "color": "#006043",
+      "source": "tone",
+      "gain": 1,
+      "gamma": 1.3
     },
     {
-      "id": "fern",
-      "name": "Fern",
-      "color": "#4e8a51",
-      "source": "green",
-      "gain": 0.6,
-      "gamma": 1.25
+      "id": "accent",
+      "name": "Golden yellow chroma",
+      "color": "#e2a523",
+      "source": "yellow-density",
+      "grayRemoval": 1,
+      "gain": 0.65,
+      "gamma": 1.05
     },
     {
       "id": "earth",
       "name": "Earth",
       "color": "#aa7959",
       "source": "red",
-      "gain": 0.32,
-      "gamma": 1.4
+      "gain": 0.2,
+      "gamma": 1.2
     }
   ]
 }

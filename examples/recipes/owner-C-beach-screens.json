@@ -2,20 +2,20 @@
   "version": 1,
   "seed": 42,
   "default": {
-    "mode": "solid",
+    "mode": "dots",
     "pitch": 6,
-    "angle": 0,
-    "jitter": 0
+    "angle": 15,
+    "jitter": 0,
+    "dotScale": 1
   },
   "plates": {
-    "sky": {
+    "blue": {
       "mode": "solid"
     },
-    "key": {
-      "mode": "hybrid",
-      "pitch": 5,
-      "angle": 30,
-      "solidThreshold": 0.65
+    "warm": {
+      "mode": "dots",
+      "pitch": 6,
+      "angle": 75
     }
   }
 }

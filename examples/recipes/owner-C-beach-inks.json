@@ -4,19 +4,20 @@
   "paper": "#fbf8ed",
   "inks": [
     {
-      "id": "sky",
-      "name": "Marine blue",
-      "color": "#3185b3",
-      "source": "blue",
-      "gain": 0.52,
-      "gamma": 1.15
+      "id": "blue",
+      "name": "Stiprā blue tonal key",
+      "color": "#0d4dad",
+      "source": "tone",
+      "gain": 1,
+      "gamma": 0.9
     },
     {
-      "id": "key",
-      "name": "Deep ink",
-      "color": "#27374c",
-      "source": "darkness",
-      "gain": 0.42,
+      "id": "warm",
+      "name": "Stiprā coral chroma",
+      "color": "#ff665d",
+      "source": "yellow-density",
+      "grayRemoval": 0.65,
+      "gain": 0.65,
       "gamma": 1.2
     }
   ]
