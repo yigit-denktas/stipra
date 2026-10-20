@@ -1007,6 +1007,24 @@
       "capabilityId": "STY-03",
       "title": "Preserve owner-photo detail with revised batch recipes and reproducible metrics",
       "sourceTitle": "Preserve owner-photo detail with revised batch recipes and reproducible metrics"
+    },
+    {
+      "id": "DEV-041",
+      "date": "2026-10-20",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OUT-02",
+      "title": "Contain report plate images and expose complete settings on phones",
+      "sourceTitle": "Restore primary Studio routing and contain HTML report plates"
+    },
+    {
+      "id": "DEV-042",
+      "date": "2026-10-20",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Restore the Studio path on the shared apps hostname",
+      "sourceTitle": "Restore primary Studio routing and contain HTML report plates"
     }
   ],
   "libraryCapabilityIds": [

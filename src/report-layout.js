@@ -28,19 +28,19 @@ function htmlReport(cards,m){
     '@font-face{font-family:Plex;src:url(data:font/ttf;base64,'+font+')}@font-face{font-family:Mono;src:url(data:font/ttf;base64,'+mono+')}'+
     '@font-face{font-family:Plex;font-weight:700;src:url(data:font/ttf;base64,'+bold+')}'+
     '*{box-sizing:border-box}body{margin:0;background:'+m.paper.hex+';color:'+theme.key+';background-image:'+background+';background-size:100% auto;font:15px Plex,sans-serif}main{max-width:1180px;padding:26px;margin:auto}'+
-    'header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid currentColor;padding-bottom:12px}'+
+    'header{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;border-bottom:2px solid currentColor;padding-bottom:12px}'+
     'header strong{font-size:38px;letter-spacing:-.06em}header span{font:13px Mono,monospace;text-align:right}h2{font:13px Mono,monospace;text-transform:uppercase;letter-spacing:.12em;margin:20px 0 9px}'+
     '.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.plates{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}'+
     'figure{break-inside:avoid;margin:0;min-width:0;border-bottom:1px solid currentColor;padding-bottom:6px}.image{display:grid;place-items:center;height:'+(m.orientation==='portrait'?'420px':'290px')+'}'+
-    'figure img{max-width:100%;max-height:100%;object-fit:contain}.plates .image{height:148px}figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font:13px Mono,monospace}'+
-    'small{color:#565e57}table{border-collapse:collapse;width:100%;font:13px Mono,monospace}td,th{border-top:1px solid currentColor;text-align:left;padding:8px}'+
+    'figure img{display:block;inline-size:100%;block-size:100%;min-inline-size:0;min-block-size:0;object-fit:contain}.plates .image{height:148px}figcaption{display:flex;flex-wrap:wrap;overflow-wrap:break-word;justify-content:space-between;gap:8px;margin-top:6px;font:13px Mono,monospace}'+
+    'small{color:#565e57;flex-basis:100%}.settings{overflow-x:auto}table{min-inline-size:600px;border-collapse:collapse;width:100%;font:13px Mono,monospace}td,th{border-top:1px solid currentColor;text-align:left;padding:8px}'+
     'footer{border-top:2px solid currentColor;margin-top:24px;padding-top:10px;font:12px Mono,monospace;overflow-wrap:anywhere}'+
     '@media(max-width:560px){main{padding:13px}.hero{grid-template-columns:1fr}.image{height:300px}header strong{font-size:26px}}'+
     '@page{size:A4 '+m.orientation+';margin:12mm}'+
     '</style></head><body><main><header><strong>stiprā / ink study</strong><span>'+m.width+'×'+m.height+'px · '+m.dpi+' dpi<br>'+esc(m.paper.name)+' / '+m.orientation+'</span></header>'+
     '<h2>01 / original and proof</h2><section class="hero">'+cards.slice(0,2).map(image).join('')+'</section>'+
     '<h2>02 / physical ink layers + substrate</h2><section class="plates">'+cards.slice(2).map(image).join('')+'</section>'+
-    '<h2>03 / exact settings</h2><table><thead><tr><th>#</th><th>Ink</th><th>Preview HEX</th><th>Channel</th><th>Screen</th><th>Coverage</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<h2>03 / exact settings</h2><div class="settings" role="region" aria-label="Exact ink settings" tabindex="0"><table><thead><tr><th>#</th><th>Ink</th><th>Preview HEX</th><th>Channel</th><th>Screen</th><th>Coverage</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
     diagnostic+'<footer>Source SHA-256 '+m.sha+' · '+m.trim.width+' × '+m.trim.height+'mm · seed '+m.seed+
     '<p>Digital approximation; not press calibrated. Exact recipe files are in the ZIP and embedded in the PDF. Replay uses the archived source snapshot; private artwork requires authorization.</p></footer></main></body></html>');
 }
