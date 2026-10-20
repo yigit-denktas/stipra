@@ -32,7 +32,7 @@ node --test tests/report-layout.test.js tests/owner-print-acceptance.test.js
 
 No Chromium executable is available locally, so a rendered desktop/phone HTML inspection and assistive-technology review are **NOT RUN**. Structural HTML/PDF checks and the browser bundle build do not replace those observations. CI checks at the reviewed head passed; they do not replace human review.
 
-The legacy sculpture/forest/beach proof defects remain visible and are not fixed or accepted by this report change. #123 stays **0 of 3 accepted**; the #125 recipe implementation is complete via #128, but a combined package rerun remains pending. Human accessibility remains open; physical prints and independent artist trials remain owner-deferred. The report work was merged as #127; no release, Experiment 2 or new identity is implied.
+The initial `f59c8d9` execution and its legacy failures remain recorded unchanged. Combined digital package generation, generic verification, byte-for-byte repeatability and agent review of all six PDF pages are complete. Final combined build/export checks and 206 tests pass. #123 remains **PARTIAL EXECUTION / 0 of 3 accepted**: named human package acceptance and rendered HTML/browser review remain pending. Physical prints and independent artist trials remain owner-deferred. The report work was merged as #127; no release, Experiment 2 or new identity is implied.
 
 ## CI follow-up: compact four-ink reports
 

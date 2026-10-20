@@ -35,7 +35,7 @@
       "changes": [
         "Replace legacy owner-A/B/C source mappings and screens with approved forest-balanced/coast-tonal controls; retain 2/3/2 inks, original source bytes and native geometry.",
         "Keep a compliant three-ink forest candidate with a selective Earth material pass; add reproducible encoded-sRGB ROI, low-pass and continuous/screened coverage metrics.",
-        "Merged as PR #128 from reviewed cbdd295 (merge 71bbb0b); #123 remains PARTIAL EXECUTION / 0 of 3 accepted and human/physical gates stay open."
+        "Merged as PR #128 from reviewed cbdd295 (merge 71bbb0b). Combined digital package generation, generic verification, byte-for-byte repeatability and review of all six PDF pages are complete; final combined build/export checks and 206 tests pass. #123 remains PARTIAL EXECUTION / 0 of 3 accepted, with named human package acceptance and rendered HTML/browser review pending; physical and independent artist trials stay owner-deferred."
       ]
     },
     {

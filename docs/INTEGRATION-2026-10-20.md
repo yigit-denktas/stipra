@@ -1,6 +1,6 @@
 # Integration record — 20 October 2026
 
-**Main before/after:** `71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2`  
+**Main baseline:** `71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2`
 **Scope:** docs-only reconciliation of the two owner-photo integration PRs. No product code, acceptance promotion, artifact regeneration, branch deletion, release publication or merge.
 
 ## Merged work
@@ -14,10 +14,10 @@
 
 ## Remaining gates
 
-- **#123:** PARTIAL EXECUTION / **0 of 3 accepted**. Named human review, remaining G01–G11 evidence and physical/independent-artist observations remain pending.
+- **#123:** PARTIAL EXECUTION / **0 of 3 accepted**. Combined digital package generation, generic verification, byte-for-byte repeatability and agent review of all six PDF pages are complete; final combined build/export checks and 206 tests pass. Named human package acceptance and rendered HTML/browser review remain pending.
 - **#13/#14/#70/#109:** open.
 - Human accessibility remains open/not performed.
 - Physical prints and independent artist trials remain owner-deferred.
-- Historical landscape-only failures, prior packages, evidence and archive identities are preserved; no previous FAIL or NOT RUN result became PASS.
+- Historical landscape-only failures, prior packages, evidence and archive identities are preserved; the initial `f59c8d9` execution remains recorded and no previous FAIL or NOT RUN result became PASS.
 
 Main CI at `71bbb0b`: deploy, build and test runs all succeeded when checked on 20 October 2026. This record does not infer publication or physical acceptance from the merges.
