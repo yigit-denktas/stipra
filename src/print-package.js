@@ -133,7 +133,7 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
     project={path:'source/project.json',sha256:digest(bytes),artifacts:artifacts.length};
   }
   const manifest={...(project?{sourceProject:project}:{}),contract:'stipra-print-package-v1',displayName:'Stiprā',
-    software:{name:Build.name,version:Build.version,commit:Build.commit},
+    software:{name:Build.name,version:Build.version,commit:Build.commit,commitSource:Build.commitSource,verified:Build.verified,dirty:Build.dirty},
     source:{...asset.metadata,sha256:info.sha},output:print,
     ...(derivatives?{exports:{settings:derivatives.settings,proofs:derivatives.metadata,masters:'native-frame, zero registration; no derivative scale applied'}}:{}),
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,

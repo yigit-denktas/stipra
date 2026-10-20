@@ -59,6 +59,16 @@ recipe/proof-screens.json       optional simulated offsets in proof only
 manifest.json                   physical print intent, original hash, per-file hashes, and software name/version/exact build commit
 ```
 
+The manifest's additive `software` object records:
+
+- `name` and `version` of the generating software;
+- `commit`: the full 40-character source revision, or `null` when no attributable Git metadata exists;
+- `commitSource`: `git` for a verified source-root checkout/worktree, `environment` for an explicit build override, or `unknown`;
+- `verified`: `true` only when the commit came from that verified source-root Git checkout; supplied overrides are explicit but unverified claims;
+- `dirty`: `true` when tracked source differs from the recorded commit; ignored/untracked generated files do not set it, and `null` applies when dirtiness cannot be inspected.
+
+A package copied under an unrelated parent Git repository reports `commit: null` / `commitSource: "unknown"` rather than borrowing the consumer repository's HEAD. The fields are source attribution, not reproducible-build or authenticity attestation.
+
 Repeat the per-ink paths for each real physical pass; the ZIP always includes a **separate** raster plate for every ink, and no “paper plate.” All source-frame plates share the exact native pixel width, height, origin and trim. An exported plate value **white means zero coverage**, **black means full ink**. A colored or paper image is only a preview.
 
 ### Size, marks and physical honesty

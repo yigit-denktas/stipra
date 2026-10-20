@@ -1025,6 +1025,15 @@
       "capabilityId": "OPS-01",
       "title": "Restore the Studio path on the shared apps hostname",
       "sourceTitle": "Restore primary Studio routing and contain HTML report plates"
+    },
+    {
+      "id": "DEV-043",
+      "date": "2026-10-20",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OPS-01",
+      "title": "Record exact software version and build commit in print-package manifests",
+      "sourceTitle": "Record exact software and build identity in print-package manifests"
     }
   ],
   "libraryCapabilityIds": [

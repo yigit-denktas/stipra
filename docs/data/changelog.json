@@ -14,8 +14,12 @@
       ],
       "changes": [
         "Add a software object to every print-package manifest with the package version and exact build commit.",
-        "Inject the git commit into the browser exporter at build time and resolve the checked-out commit for Node-generated packages.",
-        "Document the additive manifest field; source bytes, recipes, plates, reports, PDFs and acceptance status are unchanged."
+        "Record whether the commit came from a verified source-root Git checkout or a supplied environment/build value; mark tracked-source dirtiness and never borrow a parent repository's commit.",
+        "Inject one frozen build identity into the browser exporter for both the bundle and its audit, validate override SHA format, and resolve the checked-out commit for Node-generated packages.",
+        "Document the additive manifest fields; source bytes, recipes, plates, reports, PDFs and acceptance status are unchanged."
+      ],
+      "prs": [
+        131
       ]
     },
     {
