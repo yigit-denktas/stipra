@@ -4,6 +4,20 @@
   "entries": [
     {
       "date": "2026-10-20",
+      "title": "Restore primary Studio routing and contain HTML report plates",
+      "status": "Development",
+      "issues": [
+        13,
+        123
+      ],
+      "changes": [
+        "Restore only the Stiprā path on the shared apps hostname through a bounded static Pages proxy; retain LINK and its API.",
+        "Contain tall HTML plate images, wrap complete captions and keep exact settings in a keyboard-focusable horizontal region on phones. PDF bytes and artwork remain unchanged.",
+        "Exercise the live p5 instance demo and rerun the authored Morning window core/export trial. Generic report browser review is separate from private owner-photo, human and physical acceptance."
+      ]
+    },
+    {
+      "date": "2026-10-20",
       "title": "Match substrate inspection and captions across HTML and PDF",
       "status": "Merged development",
       "issues": [
