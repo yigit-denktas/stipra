@@ -2,13 +2,15 @@
 'use strict';
 const path=require('node:path'),fs=require('node:fs'),esbuild=require('esbuild');
 const ROOT=path.resolve(__dirname,'..');
+const {resolveIdentity}=require('../src/build-info.js');
 async function build(outfile,{format='iife'}={}){
   fs.rmSync(outfile+'.audit.json',{force:true});
+  const identity=resolveIdentity(ROOT);
   const {truetype,license}=require('../src/report-fonts.js');
   const fonts={};for(const [family,weight] of [['ibm-plex-sans',400],['ibm-plex-sans',700],['ibm-plex-mono',400]])fonts[family+weight]=truetype(family,weight).toString('base64');
   const svg=fs.readFileSync(path.join(ROOT,'logo_for_Readme.svg'),'utf8');
   const result=await esbuild.build({absWorkingDir:ROOT,metafile:true,legalComments:'linked',entryPoints:[path.join(ROOT,format==='esm'?'src/browser/export-entry.mjs':'src/browser/export.js')],outfile,bundle:true,platform:'browser',format,...(format==='iife'?{globalName:'StipraExport'}:{}),minify:true,
-    inject:[path.join(ROOT,'src/browser/buffer.js')],define:{__dirname:'"/"'},plugins:[{name:'export-platform',setup(api){
+    inject:[path.join(ROOT,'src/browser/buffer.js')],define:{__dirname:'"/"',__STIPRA_BUILD_IDENTITY__:JSON.stringify(identity)},plugins:[{name:'export-platform',setup(api){
       api.onResolve({filter:/^(?:node:(?:fs|path|crypto)|skia-canvas|\.\/report-fonts\.js)$/},args=>({path:args.path,namespace:'export-platform'}));
       api.onLoad({filter:/.*/,namespace:'export-platform'},args=>{
         if(args.path==='node:crypto')return {contents:"module.exports={createHash:require('./src/browser/adapters.js').createHash};",resolveDir:ROOT};
@@ -50,7 +52,7 @@ async function build(outfile,{format='iife'}={}){
   if(inputs.some(x=>/node_modules\/brotli\/(?:enc|build|compress)/.test(x.path)))throw Error('Unused compiled Brotli encoder entered the browser exporter');
   const outputs=[...Object.keys(result.metafile.outputs).map(name=>path.resolve(ROOT,name)),path.join(path.dirname(outfile),'export-dependency-notices.txt')]
     .map(file=>{const bytes=fs.readFileSync(file);return {path:path.basename(file),bytes:bytes.length,sha256:hash(bytes)};});
-  const evidence={contract:'stipra-browser-export-audit-v1',status:included.length?'review-required':'checked',buildTool:'esbuild/'+esbuild.version,
+  const evidence={contract:'stipra-browser-export-audit-v1',status:included.length?'review-required':'checked',buildTool:'esbuild/'+esbuild.version,build:identity,
     packages:[...roots].sort().map(dir=>{const pkg=JSON.parse(fs.readFileSync(path.join(dir,'package.json')));return {name:pkg.name,version:pkg.version};}),
     inputs,outputs,artifactEvidence:included,fontkitSource,findings:included.map(x=>({package:x.package,kind:'prebundled-review'})),
     scope:'Browser PDF/ZIP exporter only; excludes host p5, site fonts, native CLI, unused Brotli encoder and owner artwork. Own Fontkit sources/maps and actual resolved module notices checked.'};

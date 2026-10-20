@@ -34,6 +34,9 @@ test('2-ink ZIP contains original bytes, two unique aligned grayscale masters, r
   const bytes=sample(),out=await prepare(bytes,recipe('A'),screen('A'));
   assert.equal(out.manifest.inkCount,undefined,'ink count is in ink array');
   assert.equal(out.manifest.inks.length,2);
+  assert.equal(out.manifest.software.name,'stipra');
+  assert.equal(out.manifest.software.version,require('../package.json').version);
+  assert.match(out.manifest.software.commit,/^[a-f0-9]{40}$/,'manifest records the exact source commit');
   const zip=await JSZip.loadAsync(out.zip),names=Object.keys(zip.files).sort();
   assert.equal(names.length,out.manifest.files.length+1);
   for(const item of out.manifest.files){
