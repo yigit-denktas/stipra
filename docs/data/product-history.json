@@ -1,6 +1,6 @@
 {
   "contract": "stipra-product-history-v2",
-  "asOf": "2026-10-19",
+  "asOf": "2026-10-20",
   "workingBuild": {
     "label": "v0.8.0",
     "kind": "user-reported-working-build",
@@ -998,6 +998,15 @@
       "capabilityId": "OUT-02",
       "title": "Include substrate inspection and complete captions in both report formats",
       "sourceTitle": "Match substrate inspection and captions across HTML and PDF"
+    },
+    {
+      "id": "DEV-040",
+      "date": "2026-10-20",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "STY-03",
+      "title": "Preserve owner-photo detail with revised batch recipes and reproducible metrics",
+      "sourceTitle": "Preserve owner-photo detail with revised batch recipes and reproducible metrics"
     }
   ],
   "libraryCapabilityIds": [

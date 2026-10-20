@@ -5,7 +5,7 @@
     {
       "date": "2026-10-20",
       "title": "Match substrate inspection and captions across HTML and PDF",
-      "status": "Development",
+      "status": "Merged development",
       "issues": [
         9,
         123,
@@ -14,7 +14,28 @@
       "changes": [
         "Add the existing substrate image to the PDF inspection sequence, retaining full card captions and recipe order in both formats.",
         "Version the ratio-aware A4 owner-report contract explicitly; retain the historical specification and prior failed execution records.",
-        "Bump report layout to v8; recipe quality, complete photo acceptance and human/physical validation remain separate."
+        "Bump report layout to v8; recipe quality, complete photo acceptance and human/physical validation remain separate.",
+        "Merged as PR #127 from reviewed 63f2572 (merge 48c4d40); #123 still records PARTIAL EXECUTION / 0 of 3 accepted."
+      ],
+      "prs": [
+        127
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "title": "Preserve owner-photo detail with revised batch recipes and reproducible metrics",
+      "status": "Merged development",
+      "prs": [
+        128
+      ],
+      "issues": [
+        123,
+        125
+      ],
+      "changes": [
+        "Replace legacy owner-A/B/C source mappings and screens with approved forest-balanced/coast-tonal controls; retain 2/3/2 inks, original source bytes and native geometry.",
+        "Keep a compliant three-ink forest candidate with a selective Earth material pass; add reproducible encoded-sRGB ROI, low-pass and continuous/screened coverage metrics.",
+        "Merged as PR #128 from reviewed cbdd295 (merge 71bbb0b); #123 remains PARTIAL EXECUTION / 0 of 3 accepted and human/physical gates stay open."
       ]
     },
     {
