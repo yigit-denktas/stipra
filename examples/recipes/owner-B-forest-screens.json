@@ -3,21 +3,23 @@
   "seed": 42,
   "default": {
     "mode": "dots",
-    "pitch": 8,
+    "pitch": 6,
     "angle": 22,
-    "jitter": 0.01
+    "jitter": 0,
+    "dotScale": 1
   },
   "plates": {
-    "shadow": {
-      "mode": "hybrid",
-      "pitch": 6,
-      "angle": 45,
-      "solidThreshold": 0.8
+    "key": {
+      "mode": "solid"
     },
-    "fern": {
+    "accent": {
+      "mode": "dots",
+      "pitch": 6,
       "angle": -15
     },
     "earth": {
+      "mode": "dots",
+      "pitch": 8,
       "angle": 65
     }
   }

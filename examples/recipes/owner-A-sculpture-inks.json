@@ -7,8 +7,8 @@
       "id": "slate",
       "name": "Midnight slate",
       "color": "#263849",
-      "source": "darkness",
-      "gain": 0.85,
+      "source": "tone",
+      "gain": 0.8,
       "gamma": 1.1
     },
     {
@@ -16,7 +16,7 @@
       "name": "Ivory",
       "color": "#d4bca1",
       "source": "luminance",
-      "gain": 0.9,
+      "gain": 0.4,
       "gamma": 1
     }
   ]
