@@ -150,9 +150,9 @@ async function pdfReport(cards,m){
   for(let i=0;i<2;i++)for(let j=0;j<heroCaptions[i].length;j++)
     put(heroCaptions[i][j],margin+i*(half+gap),y-j*11,9,label);
   y-=Math.max(...heroCaptions.map(c=>c.length))*11+12;
-  const panels=cards.slice(2);
-  for(let offset=0;offset<panels.length;offset+=4){
-    const row=panels.slice(offset,offset+4),columns=Math.min(4,panels.length),g=14,w=(cw-(columns-1)*g)/columns;
+  const panels=cards.slice(2),columns=panels.length===5?5:Math.min(4,panels.length);
+  for(let offset=0;offset<panels.length;offset+=columns){
+    const row=panels.slice(offset,offset+columns),g=14,w=(cw-(columns-1)*g)/columns;
     const captions=row.map(c=>captionLines(c,w-(c.ink?15:0)));
     const captionHeight=Math.max(...captions.map(c=>c.length))*11+14;
     // Reserve every caption line above the footer; never truncate long ink names.

@@ -21,8 +21,8 @@ function setup(count,portrait=false){
   const info={width:portrait?50:100,height:portrait?100:50,dpi:300,trim:{width:50,height:100},orientation:portrait?'portrait':'landscape',paper:{name:'warm rag',hex:'#f5eee2'},seed:42,name:'a long owner photograph source filename to retain in the reproduction metadata.png',sha:'abcdef0123456789'.repeat(4),settings,inkRecipe:{version:1,inks:settings.map((s,i)=>({id:'ink'+i,gain:.5,gamma:1}))},screenRecipe:{version:1,seed:42},proofRecipe:{version:1,seed:42}};
   return {cards,info};
 }
-test('real 2/3/8-ink PDFs paginate every plate and setting with readable font sizes and bounded geometry',async()=>{
-  for(const count of [2,3,8])for(const portrait of [false,true]){
+test('real 2/3/4/8-ink PDFs paginate every plate and setting with readable font sizes and bounded geometry',async()=>{
+  for(const count of [2,3,4,8])for(const portrait of [false,true]){
     const {cards,info}=setup(count,portrait),pdf=await PDFDocument.load(await Report.pdfReport(cards,info));
     const embedded=attachments(pdf),audit=embedded['report-layout.json'];
     assert.equal(audit.pages.length,pdf.getPageCount());
@@ -111,4 +111,18 @@ test('HTML and PDF retain identical inspection image identities, order and compl
 test('ratio-aware A4 contract uses portrait only beyond the existing 1.08 height ratio',()=>{
   for(const [w,h,expected] of [[805,644,'landscape'],[2048,1365,'landscape'],[1152,2048,'portrait'],[100,100,'landscape'],[100,108,'landscape'],[100,109,'portrait']])
     assert.equal(Report.orientation(w,h),expected);
+});
+
+test('compact four-ink inspection keeps substrate and every caption on two pages',async()=>{
+  for(const portrait of [false,true]){
+    const {cards,info}=setup(4,portrait);
+    info.settings[3].name='Black';cards[6].name='Black';
+    for(const c of cards.filter(c=>c.ink))c.note='35.0% coverage; dots 6px @ 22deg';
+    const pdf=await PDFDocument.load(await Report.pdfReport(cards,info));
+    assert.equal(pdf.getPageCount(),2,'do not orphan plates or diagnostics onto an extra page');
+    const audit=attachments(pdf)['report-layout.json'];
+    assert.equal(audit.pages[0].images.length,7);
+    assert.ok(audit.pages[0].images.some(im=>im.name==='Paper / substrate'));
+    assert.ok(audit.pages[0].text.some(t=>t.text==='Black'));
+  }
 });

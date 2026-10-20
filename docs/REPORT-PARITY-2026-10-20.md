@@ -33,3 +33,9 @@ node --test tests/report-layout.test.js tests/owner-print-acceptance.test.js
 No Chromium executable is available locally, so a rendered desktop/phone HTML inspection and assistive-technology review are **NOT RUN**. Structural HTML/PDF checks and the browser bundle build do not replace those observations. CI browser workflow results must be recorded separately after publication of the branch.
 
 The legacy sculpture/forest/beach proof defects remain visible and are not fixed or accepted by this report change. #123 stays **0 of 3 accepted** pending #125 and a combined rerun. Human accessibility remains open; physical prints and independent artist trials remain owner-deferred. No merge, release, Experiment 2 or new identity is implied.
+
+## CI follow-up: compact four-ink reports
+
+The first PR-head CI run reached `check:exports` and exposed a missing case in the initial unit matrix: substrate plus four inks spilled onto an extra page, violating the existing two-page compact-procedural acceptance check. The 197-test local pass did not cover that separate script. Keep its two-page assertion unchanged.
+
+For exactly four inks, layout v8 now fits substrate plus four plates in a five-column row, with existing caption/footer reservations. Other counts retain the reviewed four-column continuation behavior. Unit coverage now includes 2/3/4/8 inks and a dedicated two-page four-ink regression. `npm run check:exports` passes on Linux after the fix. The three private owner-photo cases have two/three/two inks, so this correction does not alter their previously reviewed layouts. New-head CI remains a separate verification.
