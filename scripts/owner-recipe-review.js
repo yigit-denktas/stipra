@@ -12,7 +12,8 @@ const ROIS={
 const DEFINITIONS={
   gray:'encoded-sRGB luma: .2126 R + .7152 G + .0722 B (8-bit channels; alpha ignored)',
   tone:'1 - gray / 255',
-  gradient:'mean((I[y+1,x]-I[y,x])^2) + mean((I[y,x+1]-I[y,x])^2), tone units',
+  gradient:'mean((I[y+1,x]-I[y,x])^2) + mean((I[y,x+1]-I[y,x])^2), squared tone units; I = 1 - gray/255; missing neighbor axes contribute zero',
+  standardDeviation:'population standard deviation of encoded-sRGB gray, in 0..255 gray levels',
   correlation:'Pearson r between source tone and proof tone in the native-pixel ROI',
   blur:'3-pixel-radius separable Gaussian, sigma=1, applied to RGB channels before gray/ROI metrics',
   coverage:'mean(1 - plateGray/255) over the ROI; diagnostics summary is read from report/diagnostics.json',
@@ -69,7 +70,7 @@ function stats(source,proof,box,blurredSource=null,blurredProof=null){
       if(x+1<arr.width){const d=arr.g[y*arr.width+x+1]-arr.g[y*arr.width+x];gx+=d*d;cx++;}
       if(y+1<arr.height){const d=arr.g[(y+1)*arr.width+x]-arr.g[y*arr.width+x];gy+=d*d;cy++;}
     }
-    return {mean:mean/255,std:Math.sqrt(variance),gradient:(gx/cx+gy/cy)};
+    return {mean:mean/255,std:Math.sqrt(variance),gradient:((cx?gx/cx:0)+(cy?gy/cy:0))/(255*255)};
   };
   const sourceStats=st(s),proofStats=st(p);
   let blurredCorrelation=null;
@@ -80,9 +81,9 @@ function stats(source,proof,box,blurredSource=null,blurredProof=null){
   }
   return {
     roi:box,
-    sourceTone:round(sourceStats.mean,4),proofTone:round(proofStats.mean,4),
+    sourceTone:round(1-sourceStats.mean,4),proofTone:round(1-proofStats.mean,4),
     sourceStd:round(sourceStats.std,2),proofStd:round(proofStats.std,2),
-    sourceGradient:round(sourceStats.gradient,2),proofGradient:round(proofStats.gradient,2),
+    sourceGradient:round(sourceStats.gradient,8),proofGradient:round(proofStats.gradient,8),
     rawCorrelation:round(pearson(s.g,p.g),4),
     blurredCorrelation:round(blurredCorrelation,4),
   };
