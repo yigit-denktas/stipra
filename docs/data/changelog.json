@@ -4,6 +4,22 @@
   "entries": [
     {
       "date": "2026-10-20",
+      "title": "Record exact software and build identity in print-package manifests",
+      "status": "Development",
+      "issues": [
+        8,
+        9,
+        12,
+        123
+      ],
+      "changes": [
+        "Add a software object to every print-package manifest with the package version and exact build commit.",
+        "Inject the git commit into the browser exporter at build time and resolve the checked-out commit for Node-generated packages.",
+        "Document the additive manifest field; source bytes, recipes, plates, reports, PDFs and acceptance status are unchanged."
+      ]
+    },
+    {
+      "date": "2026-10-20",
       "title": "Restore primary Studio routing and contain HTML report plates",
       "status": "Development",
       "issues": [

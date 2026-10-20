@@ -56,7 +56,7 @@ report/separation-sheet.pdf      A4; portrait for tall sources, landscape otherw
 recipe/inks.json                normalized spot or CMYK separation
 recipe/screens.json             nominally aligned production-screening recipe
 recipe/proof-screens.json       optional simulated offsets in proof only
-manifest.json                   physical print intent, original hash, per-file hashes
+manifest.json                   physical print intent, original hash, per-file hashes, and software name/version/exact build commit
 ```
 
 Repeat the per-ink paths for each real physical pass; the ZIP always includes a **separate** raster plate for every ink, and no “paper plate.” All source-frame plates share the exact native pixel width, height, origin and trim. An exported plate value **white means zero coverage**, **black means full ink**. A colored or paper image is only a preview.

@@ -5,6 +5,7 @@ const JSZip=require('jszip');
 const {freezeProject}=require('./source-project');
 const Report=require('./report-layout.js'),Paper=require('./report-paper.js'),Diagnostics=require('./plate-diagnostics.js'),QR=require('./report-qr.js');
 const Sep=require('./separation.js'),Screen=require('./screening.js');
+const Build=require('./build-info.js');
 const A4=[841.88976,595.27559],FIXED=new Date('2000-01-01T00:00:00Z');
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const json=x=>Buffer.from(JSON.stringify(x,null,2)+'\n');
@@ -132,6 +133,7 @@ async function build({originalBytes,asset,inkRecipe,screenRecipe=null,dpi=300,ma
     project={path:'source/project.json',sha256:digest(bytes),artifacts:artifacts.length};
   }
   const manifest={...(project?{sourceProject:project}:{}),contract:'stipra-print-package-v1',displayName:'Stiprā',
+    software:{name:Build.name,version:Build.version,commit:Build.commit},
     source:{...asset.metadata,sha256:info.sha},output:print,
     ...(derivatives?{exports:{settings:derivatives.settings,proofs:derivatives.metadata,masters:'native-frame, zero registration; no derivative scale applied'}}:{}),
     mode:sep.recipe.mode,paper:sep.recipe.paper,paperSelection:stock,inks,
