@@ -17,6 +17,8 @@ Physical-print evidence gates print-quality claims, not evaluation of the experi
 
 The [19 October acceptance handoff](docs/ACCEPTANCE-2026-10-19.md) records the merged #98, public-text fixes, reproducible private quality comparisons and the exact outstanding human/physical records. No style defaults or print-quality claims are promoted. The [tonal-detail study](docs/TONAL-DETAIL-REVIEW.md) adds opt-in forest/beach keys with controlled accent plates; owner approved those digital specimens on 19 October; physical prints and independent artist testing are deferred. Studio recipe comparison preserves current edits until explicit adoption.
 
+The #124 report revision keeps ratio-aware A4 orientation and adds matching labeled substrate/captions to HTML/PDF; see [owner-report contract v2](docs/OWNER-REPORT-CONTRACT-v2.md). This does not accept the photo packages: #125 recipe quality and the combined #123 rerun remain pending.
+
 ## v0.9 user experience — one browser workflow
 
 1. **Input:** drag/drop a raster or supported safe vector, or choose an existing vector/procedural example. Preserve original bytes, alpha, pixel origin, aspect, explicit trim and DPI.
@@ -45,7 +47,7 @@ The attached sample showing alternative Riso color separations is the visual ben
 | Raster dot, reverse, line and hybrid screens of masks | [#5](https://github.com/yigit-denktas/stipra/issues/5) | **Implemented — Node/Chromium screen masks, real CLI and browser controls** | Done |
 | Native vector facet screening (SVG) | [#28](https://github.com/yigit-denktas/stipra/issues/28) | Planned — separate from raster screens | P1 |
 | Full-frame raster plates, native scale and optional external registration marks | [#8](https://github.com/yigit-denktas/stipra/issues/8) | **Native PNG and sampled-path SVG masters verified for frame, DPI, coverage and zero registration; physical observations remain #13** | P0 verification |
-| A4 landscape HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Complete digital report acceptance, reconciled in #91: ink-linked annotations, texture, recipes, ink-dot QR and shared browser writer. Physical observations remain #13** | P0 verification |
+| Ratio-aware A4 HTML/PDF separation inspection sheet | [#9](https://github.com/yigit-denktas/stipra/issues/9) | **Complete digital report acceptance, reconciled in #91: ink-linked annotations, texture, recipes, ink-dot QR and shared browser writer. Physical observations remain #13** | P0 verification |
 | CLI and reproducible agent/batch jobs | [#11](https://github.com/yigit-denktas/stipra/issues/11) | Implemented import/separate/package/scene/render plus compare/batch/verify/sheet; versioned JSON results and per-job evidence | P0 |
 | Browser separation studio and edit/solo/overprint controls | [#22](https://github.com/yigit-denktas/stipra/issues/22) | Image workflow implemented with 2–8 passes, solo/mute/paper inspection, native pixel zoom, print geometry and shared marked export; see docs/STUDIO-WORKFLOW.md for acceptance | P0 |
 | Input-aware, print-guided **style defaults** | [#34](https://github.com/yigit-denktas/stipra/issues/34) · [#47](https://github.com/yigit-denktas/stipra/issues/47) | **Four shared families plus attributed variants and forest/coast refinements merged in #64/#68; physical validation open** | P1 evidence |

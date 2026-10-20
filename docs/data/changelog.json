@@ -4,6 +4,21 @@
   "entries": [
     {
       "date": "2026-10-20",
+      "title": "Match substrate inspection and captions across HTML and PDF",
+      "status": "Development",
+      "issues": [
+        9,
+        123,
+        124
+      ],
+      "changes": [
+        "Add the existing substrate image to the PDF inspection sequence, retaining full card captions and recipe order in both formats.",
+        "Version the ratio-aware A4 owner-report contract explicitly; retain the historical specification and prior failed execution records.",
+        "Bump report layout to v8; recipe quality, complete photo acceptance and human/physical validation remain separate."
+      ]
+    },
+    {
+      "date": "2026-10-20",
       "title": "Reconcile merged maintenance, consolidated issues and private acceptance",
       "status": "Development",
       "issues": [

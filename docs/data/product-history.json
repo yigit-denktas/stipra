@@ -989,6 +989,15 @@
       "capabilityId": "OPS-01",
       "title": "Reconcile merged maintenance and retain private acceptance gates",
       "sourceTitle": "Reconcile merged maintenance, consolidated issues and private acceptance"
+    },
+    {
+      "id": "DEV-039",
+      "date": "2026-10-20",
+      "type": "fixed",
+      "stage": "development",
+      "capabilityId": "OUT-02",
+      "title": "Include substrate inspection and complete captions in both report formats",
+      "sourceTitle": "Match substrate inspection and captions across HTML and PDF"
     }
   ],
   "libraryCapabilityIds": [

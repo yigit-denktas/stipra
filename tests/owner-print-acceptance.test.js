@@ -53,3 +53,15 @@ test('references resolve and no raw owner photo is published in documented catal
   }
   assert.doesNotMatch(doc,/<img\b|!\[[^\]]+\]\((?:https?:\/\/|\/mnt\/data)/i);
 });
+
+test('report contract v2 explicitly supersedes historical orientation without implying owner acceptance',()=>{
+  const Report=require('../src/report-layout.js');
+  const revision=fs.readFileSync(path.join(ROOT,'docs/OWNER-REPORT-CONTRACT-v2.md'),'utf8');
+  assert.equal(Report.LAYOUT_VERSION,8);
+  assert.deepEqual(spec.fixtures.map(f=>Report.orientation(f.widthPx,f.heightPx)),['landscape','landscape','portrait']);
+  assert.equal(spec.target.inspectionSheet.orientation,'landscape','historical catalog is not silently rewritten');
+  assert.match(doc,/OWNER-REPORT-CONTRACT-v2.md/);
+  assert.match(revision,/supersedes only the report-orientation clauses in G07 and C5/);
+  assert.match(revision,/Do not relabel the old execution as PASS/);
+  assert.match(revision,/not a physical ink/);
+});
