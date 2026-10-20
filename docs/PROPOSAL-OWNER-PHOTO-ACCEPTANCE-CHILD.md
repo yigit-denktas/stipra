@@ -37,4 +37,4 @@ For each fixture and each criterion, record exactly one of **PASS / FAIL / NOT R
 
 ## Completion condition
 
-All three private packages, every G and A/B/C criterion, have an explicit status and evidence record; the owner has reviewed the summary; any FAIL has a linked defect issue. A completed digital record does **not** claim physical or independent-artist acceptance.
+Closure requires all three fixtures to meet the existing package-pass gate in PRINT-PACKAGE-ACCEPTANCE.md: G01–G11 PASS or narrowly justified NOT APPLICABLE where the specification permits, all five image-specific criteria PASS by a named reviewer, and source rights/evidence requirements met. Recording FAIL or NOT RUN, or completing the inventory/summary, does **not** satisfy acceptance; FAIL needs a linked defect and NOT RUN remains pending. An explicit owner decision to defer or abandon is recorded as such and never as accepted. Physical prints and independent artist trials remain separate and are not hidden digital child requirements.

@@ -143,7 +143,7 @@
     "A/B maintenance branches passed independent review at unchanged heads (A: Windows portability @ 90abb56; B: reconstruction test requirements @ aa5e424); no merge is authorized.",
     "After owner authorization, merge A/B separately, then land this coordinated C ledger/documentation reconciliation. Keep #13/#14/#70/#109 acceptance parents open.",
     "Execute the proposed #13 owner-photo acceptance child for G01–G11 plus A1–A5/B1–B5/C1–C5 with private evidence; status remains NOT YET RUN / 0 of 3 until real results exist.",
-    "Complete human keyboard/screen-reader observations and physical/independent-artist trials as separate owner-deferred records (#13/#70). Do not infer them from CI.",
+    "Human keyboard/screen-reader observations remain open and not performed. Physical prints and independent artist trials are owner-deferred, not passed; keep those statuses distinct (#13/#70). Do not infer any of them from CI.",
     "Await native-component notices (#14) and keep #109 Study 01/adapter decisions separate; Experiment 2, #113 and #114 remain proposals with no authorization."
   ],
   "tasks": [
