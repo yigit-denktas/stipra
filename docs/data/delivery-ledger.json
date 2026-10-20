@@ -109,7 +109,7 @@
     {
       "name": "main",
       "status": "integration",
-      "note": "Reviewed A/B/C integrated separately as #120/#121/#122; baseline f59c8d9fb144294e41209bc76d8d1c83701005ee. This ledger refresh records later authorized issue consolidation without changing rendering."
+      "note": "Post-merge main at 71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2. Reviewed A/B/C integrated as #120/#121/#122; report parity #127 and owner-photo recipes/metrics #128 integrated at 48c4d40/71bbb0b. This ledger refresh records the integrations without changing acceptance."
     },
     {
       "name": "feat/22-studio-and-release-map",
@@ -140,13 +140,23 @@
       "name": "docs/backlog-reconciliation-2026-10-20",
       "status": "integration-record",
       "note": "Merged #122 at reviewed b1538b3, merge f59c8d9fb144294e41209bc76d8d1c83701005ee. Later #34/#43/#46 consolidation is authorized; private acceptance remains separate."
+    },
+    {
+      "name": "fix/124-report-parity",
+      "status": "integration-record",
+      "note": "Merged #127 after review at 63f2572, merge 48c4d40ea5e39f450ce62f30a11e2057d331b805. Report contract v2 and layout-v8 parity; #123 remains 0/3 accepted."
+    },
+    {
+      "name": "fix/125-owner-photo-recipes",
+      "status": "integration-record",
+      "note": "Merged #128 after review at cbdd295, merge 71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2. Revised owner batch recipes and reproducible metrics; #123 remains 0/3 accepted."
     }
   ],
   "nextSequence": [
-    "A/B/C merged separately as #120/#121/#122 at their reviewed heads after owner authorization; #34/#43 delivered scopes and #46 superseded direction are closed with residuals transferred.",
-    "Continue #123 private owner-photo acceptance: source hashes, package verification and same-environment replay pass; visual/contract failures #124/#125 keep 0 of 3 packages accepted. Resolve findings explicitly before any package-pass claim.",
-    "Keep #13/#14/#47/#57/#70/#109/#123 open for their remaining scopes. Human accessibility is open/not performed; physical and independent artist trials are owner-deferred.",
-    "Await native component notices in #14. Reconstruction Experiment 2, operator proof kit #113 and process research #114 remain separate proposed scopes; no new feature or recipe adoption authorized."
+    "A/B/C merged as #120/#121/#122; report-contract #127 (reviewed 63f2572, merge 48c4d40) and owner-photo recipe/metrics #128 (reviewed cbdd295, merge 71bbb0b) are merged. No acceptance is promoted by these integrations.",
+    "Continue #123 at PARTIAL EXECUTION / 0 of 3 accepted. The report and recipe implementation findings are resolved; combined digital generation, generic verification, byte-for-byte repeatability and all six PDF page reviews are complete, with final combined build/export checks and 206 tests passing. Named human package acceptance and rendered HTML/browser review remain pending; physical prints and independent artist trials are owner-deferred.",
+    "Keep #13/#14/#47/#57/#70/#109/#123 open for their remaining scopes. Human accessibility is open/not performed; physical prints and independent artist trials are owner-deferred.",
+    "Await native component notices in #14. Reconstruction Experiment 2, operator proof kit #113 and process research #114 remain separate proposed scopes; no new feature or recipe adoption is authorized."
   ],
   "tasks": [
     {
@@ -896,34 +906,34 @@
         124,
         125
       ],
-      "note": "Private execution begun at f59c8d9: three original hashes match; three 300-DPI canonical packages verify and repeat member-for-member. Agent PDF/native-crop review records failures; 0 of 3 packages accepted. #124 owns legacy G07 orientation/G08 substrate-content mismatch; #125 owns legacy recipe detail/depth/figure failures. Human accessibility remains open; physical/independent artist trials deferred.",
-      "sourceUpdatedAt": "2026-10-20T04:14:26Z"
+      "note": "Private execution begun at f59c8d9: three original hashes match; three 300-DPI canonical packages verify and repeat member-for-member. #124 report-contract and #125 legacy-recipe implementation findings are closed through merged #127/#128 at their reviewed heads. Combined digital package generation, generic verification, byte-for-byte repeatability and agent review of all six PDF pages are complete; final combined build/export checks and 206 tests pass. Package acceptance remains PARTIAL EXECUTION / 0 of 3 accepted: named human package acceptance and rendered HTML/browser review remain pending. Physical prints and independent artist trials are owner-deferred.",
+      "sourceUpdatedAt": "2026-10-20T13:07:56Z"
     },
     {
       "issue": 124,
       "title": "Reconcile owner-photo report acceptance contract",
-      "trackerState": "open",
-      "deliveryState": "in-progress",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         9
       ],
-      "note": "Isolated #124 report branch implements explicit owner-report contract v2, preserving historical orientation clauses/results, and layout-v8 substrate/caption parity. Review and integration pending; #123 remains 0/3 accepted and #125 recipe work is separate.",
-      "sourceUpdatedAt": "2026-10-20T04:12:18Z"
+      "note": "Complete implementation: explicit owner-report contract v2 and layout-v8 HTML/PDF substrate/caption parity merged as #127 from reviewed head 63f2572ec898ff11c01bd7abf60b5edf339c06a7 (merge 48c4d40ea5e39f450ce62f30a11e2057d331b805). Preserves historical landscape-only failures and prior artifacts; #123 remains 0 of 3 accepted; no physical/human claim.",
+      "sourceUpdatedAt": "2026-10-20T13:07:53Z"
     },
     {
       "issue": 125,
       "title": "Correct legacy owner-photo acceptance recipe failures",
-      "trackerState": "open",
-      "deliveryState": "planned",
+      "trackerState": "closed",
+      "deliveryState": "complete",
       "track": "studio",
       "optional": false,
       "dependsOn": [
         7
       ],
-      "note": "Open negative acceptance findings from #123: legacy owner-A/B/C recipes lose sculpture ridges, forest depth/display and beach figures. Earlier approved opt-in specimens and frozen recipes remain unchanged; no new algorithm/research authorized. #47 is the continuing quality owner, not a prerequisite that all family acceptance must close before this defect can be addressed.",
-      "sourceUpdatedAt": "2026-10-20T04:12:20Z"
+      "note": "Complete implementation: revised owner-A/B/C recipes with approved forest-balanced/coast-tonal controls, selective forest third pass, corrected metric units and per-ROI coverage helper merged as #128 from reviewed head cbdd295db1bfd2f50aade7d39ec69ed3d71e9c2b (merge 71bbb0b3cc1a6a784fcec153b5eab1bc4ce90fe2). Retains 2/3/2 inks and source geometry; #123 remains 0 of 3 accepted; no acceptance promotion.",
+      "sourceUpdatedAt": "2026-10-20T13:07:54Z"
     }
   ],
   "nativeTracking": {
