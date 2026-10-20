@@ -5,6 +5,8 @@ import numpy as np
 from PIL import Image
 from measure import tone_metrics,geometry,vtracer_spatial
 from replay import EXPECTED,validate_record
+import package as study_package
+ROOT=Path(__file__).resolve().parents[2]
 class EvidenceTests(unittest.TestCase):
  def test_coverage_error_positive_means_over_inked(self):
   m=tone_metrics(np.zeros((16,16)),np.full((16,16),128.));self.assertGreater(m['coverageError'],0);self.assertGreater(m['localTone']['blockSignedErrorPp']['mean'],0)
@@ -22,4 +24,10 @@ class EvidenceTests(unittest.TestCase):
   for field,value in [('allEqual',False),('matched',31),('compared',31),('artifacts',{})]:
    case={**valid,field:value}
    with self.assertRaises(ValueError):validate_record(case)
+ def test_self_testing_requirements_are_pinned_and_archived(self):
+  requirements=(ROOT/'examples/reconstruction-study/requirements-test.txt').read_text(encoding='utf-8').splitlines()
+  for pin in ('numpy==2.3.5','scipy==1.17.0','Pillow==12.3.0','reportlab==4.4.9'):
+   self.assertIn(pin,requirements)
+  archived={p.resolve() for p in study_package.study_source_files()}
+  self.assertIn((ROOT/'examples/reconstruction-study/requirements-test.txt').resolve(),archived)
 if __name__=='__main__':unittest.main()
